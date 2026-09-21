@@ -25,7 +25,7 @@ public class DashboardTest {
             onView(withText("Got it")).check(matches(isDisplayed())).perform(click());
             onView(withText("Privacy & data")).perform(scrollTo(),click());
             onView(withSubstring("Readings stay in this app’s memory")).check(matches(isDisplayed()));
-            pressBack();
+            androidx.test.espresso.Espresso.pressBack();
             onView(withText("Choose data source")).perform(scrollTo(),click());
             onView(withText("No shared sources yet")).check(matches(isDisplayed()));
         }
