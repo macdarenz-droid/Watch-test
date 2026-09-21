@@ -133,7 +133,14 @@ public final class MainActivity extends Activity {
     }
     private void renderLive() {
         if(connection==null)return;
-        if(service==null){connection.setText("Ready to connect");connectionDetail.setText("Connect a broadcasting watch to receive readings.");connectButton.setText("Connect watch");freshness.setText("NOT CONNECTED");bpm.setText("—");age.setText("Waiting for your first reading");chart.show(null,false);return;}
+        if(service==null){
+            connection.setText("Ready to connect");connectionDetail.setText("Connect a broadcasting watch to receive readings.");connectButton.setText("Connect watch");
+            freshness.setText("NOT CONNECTED");bpm.setText("—");age.setText("Waiting for your first reading");chart.show(null,false);
+            sessionStats.setText("MIN  —       AVG  —       MAX  —");watchName.setText("No watch connected");
+            batteryValue.setText("—");rrValue.setText("—");energyValue.setText("—");
+            batteryNote.setText("Not shared by this connection");rrNote.setText("Not shared by this connection");
+            energyNote.setText("Not included in a heart-rate packet yet.");packetNote.setText("Each point comes from a received watch reading.");return;
+        }
         connection.setText(service.status);connectionDetail.setText(service.detail);connectButton.setText(service.running?"Disconnect":"Connect watch");
         LiveSession s=service.session;long now=SystemClock.elapsedRealtime();String state=s.freshness(service.subscribed,now);
         boolean isLive="LIVE".equals(state);
