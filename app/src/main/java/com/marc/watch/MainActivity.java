@@ -219,7 +219,7 @@ public final class MainActivity extends Activity {
             +"Heart rate is the live route. Steps, sleep, calories and SpO₂ only appear below when a companion app shares them with Health Connect. Bluetooth pairing alone does not expose all watch readings. Other brands work here if they broadcast standard Bluetooth heart rate.");
     }
     private void chooseSource() {
-        if(health.sources.isEmpty()){info("No shared sources yet","Connect health data first. If no records appear, check your watch companion app’s Health Connect sharing settings. This app cannot unlock a vendor’s private data by pairing Bluetooth.");return;}
+        if(health.sources.isEmpty() && health.source.isEmpty()){info("No shared sources yet","Connect health data first. If no records appear, check your watch companion app’s Health Connect sharing settings. This app cannot unlock a vendor’s private data by pairing Bluetooth.");return;}
         List<String> names=new ArrayList<>();names.add("All shared sources");names.addAll(health.sources);
         new AlertDialog.Builder(this).setTitle("Health Connect source").setItems(names.toArray(new String[0]),(d,index)->health.selectSource(index==0?"":names.get(index))).setNegativeButton("Cancel",null).show();
     }
