@@ -1,6 +1,7 @@
 package com.mrcdrnzz.dailytracker;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -37,6 +38,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 @CapacitorPlugin(name = "HealthConnectNative")
+@SuppressLint("NewApi")
 public class HealthConnectNativePlugin extends Plugin {
     private final Executor executor = Executors.newSingleThreadExecutor();
 
