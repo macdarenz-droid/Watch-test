@@ -223,8 +223,8 @@ public final class HeartRateService extends Service {
         JSArray rr = new JSArray();
         try {
             for (double value : measurement.rrMillis) rr.put(value);
-        } catch (org.json.JSONException error) {
-            Log.w(TAG, "Unable to serialize RR interval", error);
+        } catch (org.json.JSONException ignored) {
+            // Every RR value is a finite primitive produced by HeartRateMeasurement.
         }
         sample.put("rrMillis", rr);
                 if (listener != null) listener.onSample(sample);
