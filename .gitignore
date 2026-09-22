@@ -6,3 +6,8 @@ local.properties
 *.jks
 *.keystore
 .DS_Store
+marc-app/node_modules/
+marc-app/www/
+marc-app/android/
+marc-app/release-output/
+marc-app/screenshots/
