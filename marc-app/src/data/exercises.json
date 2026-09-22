@@ -1,0 +1,2265 @@
+[
+ {
+  "id": "lib_machine_chest_press",
+  "name": "Machine Chest Press",
+  "equipment": "Machine",
+  "primary": [
+   "chest"
+  ],
+  "secondary": [
+   "front_delts",
+   "triceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "chest press machine",
+   "machine press",
+   "seated chest press"
+  ],
+  "pattern": "horizontal_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_dumbbell_bench_press",
+  "name": "Dumbbell Bench Press",
+  "equipment": "Dumbbells",
+  "primary": [
+   "chest"
+  ],
+  "secondary": [
+   "front_delts",
+   "triceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "db bench",
+   "dumbbell press",
+   "flat dumbbell press"
+  ],
+  "pattern": "horizontal_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_barbell_bench_press",
+  "name": "Barbell Bench Press",
+  "equipment": "Barbell",
+  "primary": [
+   "chest"
+  ],
+  "secondary": [
+   "front_delts",
+   "triceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "bench press",
+   "flat bench",
+   "bb bench"
+  ],
+  "pattern": "horizontal_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_smith_machine_bench_press",
+  "name": "Smith Machine Bench Press",
+  "equipment": "Smith Machine",
+  "primary": [
+   "chest"
+  ],
+  "secondary": [
+   "front_delts",
+   "triceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "smith bench",
+   "smith chest press"
+  ],
+  "pattern": "horizontal_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_incline_machine_press",
+  "name": "Incline Machine Press",
+  "equipment": "Machine",
+  "primary": [
+   "upper_chest"
+  ],
+  "secondary": [
+   "front_delts",
+   "triceps",
+   "chest"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "incline chest press machine"
+  ],
+  "pattern": "incline_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_incline_dumbbell_press",
+  "name": "Incline Dumbbell Press",
+  "equipment": "Dumbbells",
+  "primary": [
+   "upper_chest"
+  ],
+  "secondary": [
+   "front_delts",
+   "triceps",
+   "chest"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "incline db press",
+   "incline dumbbell bench"
+  ],
+  "pattern": "incline_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_incline_barbell_bench_press",
+  "name": "Incline Barbell Bench Press",
+  "equipment": "Barbell",
+  "primary": [
+   "upper_chest"
+  ],
+  "secondary": [
+   "front_delts",
+   "triceps",
+   "chest"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "incline bench",
+   "incline barbell press"
+  ],
+  "pattern": "incline_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_smith_machine_incline_press",
+  "name": "Smith Machine Incline Press",
+  "equipment": "Smith Machine",
+  "primary": [
+   "upper_chest"
+  ],
+  "secondary": [
+   "front_delts",
+   "triceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "smith incline bench",
+   "smith incline press"
+  ],
+  "pattern": "incline_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_decline_bench_press",
+  "name": "Decline Bench Press",
+  "equipment": "Barbell",
+  "primary": [
+   "chest"
+  ],
+  "secondary": [
+   "triceps",
+   "front_delts"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "decline press"
+  ],
+  "pattern": "horizontal_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_cable_chest_press",
+  "name": "Cable Chest Press",
+  "equipment": "Cable",
+  "primary": [
+   "chest"
+  ],
+  "secondary": [
+   "front_delts",
+   "triceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "standing cable chest press"
+  ],
+  "pattern": "horizontal_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_pec_fly",
+  "name": "Pec Fly",
+  "equipment": "Machine",
+  "primary": [
+   "chest"
+  ],
+  "secondary": [
+   "front_delts"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "pec deck",
+   "machine fly",
+   "chest fly machine"
+  ],
+  "pattern": "chest_adduction",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_cable_fly",
+  "name": "Cable Fly",
+  "equipment": "Cable",
+  "primary": [
+   "chest"
+  ],
+  "secondary": [
+   "front_delts"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "cable chest fly",
+   "standing cable fly"
+  ],
+  "pattern": "chest_adduction",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_low_to_high_cable_fly",
+  "name": "Low-to-High Cable Fly",
+  "equipment": "Cable",
+  "primary": [
+   "upper_chest"
+  ],
+  "secondary": [
+   "front_delts",
+   "chest"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "low high cable fly",
+   "upper chest cable fly"
+  ],
+  "pattern": "chest_adduction",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_high_to_low_cable_fly",
+  "name": "High-to-Low Cable Fly",
+  "equipment": "Cable",
+  "primary": [
+   "chest"
+  ],
+  "secondary": [
+   "front_delts"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "high low cable fly"
+  ],
+  "pattern": "chest_adduction",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_dumbbell_fly",
+  "name": "Dumbbell Fly",
+  "equipment": "Dumbbells",
+  "primary": [
+   "chest"
+  ],
+  "secondary": [
+   "front_delts"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "db fly",
+   "dumbbell chest fly"
+  ],
+  "pattern": "chest_adduction",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_push_up",
+  "name": "Push-Up",
+  "equipment": "Bodyweight",
+  "primary": [
+   "chest"
+  ],
+  "secondary": [
+   "triceps",
+   "front_delts"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "pushup",
+   "press up"
+  ],
+  "pattern": "horizontal_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_incline_push_up",
+  "name": "Incline Push-Up",
+  "equipment": "Bodyweight",
+  "primary": [
+   "chest"
+  ],
+  "secondary": [
+   "triceps",
+   "front_delts"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "incline pushup"
+  ],
+  "pattern": "horizontal_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_weighted_dip",
+  "name": "Weighted Dip",
+  "equipment": "Dip Station",
+  "primary": [
+   "chest",
+   "triceps"
+  ],
+  "secondary": [
+   "front_delts"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "weighted dips",
+   "dip"
+  ],
+  "pattern": "vertical_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_shoulder_press",
+  "name": "Shoulder Press",
+  "equipment": "Machine",
+  "primary": [
+   "front_delts",
+   "side_delts"
+  ],
+  "secondary": [
+   "triceps",
+   "upper_chest"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "machine shoulder press",
+   "overhead press machine"
+  ],
+  "pattern": "vertical_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_dumbbell_shoulder_press",
+  "name": "Dumbbell Shoulder Press",
+  "equipment": "Dumbbells",
+  "primary": [
+   "front_delts",
+   "side_delts"
+  ],
+  "secondary": [
+   "triceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "db shoulder press",
+   "dumbbell overhead press"
+  ],
+  "pattern": "vertical_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_barbell_overhead_press",
+  "name": "Barbell Overhead Press",
+  "equipment": "Barbell",
+  "primary": [
+   "front_delts",
+   "side_delts"
+  ],
+  "secondary": [
+   "triceps",
+   "upper_chest"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "ohp",
+   "military press",
+   "barbell shoulder press"
+  ],
+  "pattern": "vertical_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_smith_machine_shoulder_press",
+  "name": "Smith Machine Shoulder Press",
+  "equipment": "Smith Machine",
+  "primary": [
+   "front_delts",
+   "side_delts"
+  ],
+  "secondary": [
+   "triceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "smith shoulder press"
+  ],
+  "pattern": "vertical_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_arnold_press",
+  "name": "Arnold Press",
+  "equipment": "Dumbbells",
+  "primary": [
+   "front_delts",
+   "side_delts"
+  ],
+  "secondary": [
+   "triceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "arnold shoulder press"
+  ],
+  "pattern": "vertical_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_dumbbell_lateral_raise",
+  "name": "Dumbbell Lateral Raise",
+  "equipment": "Dumbbells",
+  "primary": [
+   "side_delts"
+  ],
+  "secondary": [
+   "upper_traps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "lateral raise",
+   "side raise",
+   "db lateral raise"
+  ],
+  "pattern": "shoulder_abduction",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_cable_lateral_raise",
+  "name": "Cable Lateral Raise",
+  "equipment": "Cable",
+  "primary": [
+   "side_delts"
+  ],
+  "secondary": [
+   "upper_traps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "single arm cable lateral raise"
+  ],
+  "pattern": "shoulder_abduction",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_machine_lateral_raise",
+  "name": "Machine Lateral Raise",
+  "equipment": "Machine",
+  "primary": [
+   "side_delts"
+  ],
+  "secondary": [
+   "upper_traps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "lateral raise machine"
+  ],
+  "pattern": "shoulder_abduction",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_dumbbell_front_raise",
+  "name": "Dumbbell Front Raise",
+  "equipment": "Dumbbells",
+  "primary": [
+   "front_delts"
+  ],
+  "secondary": [
+   "upper_chest"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "front raise",
+   "db front raise"
+  ],
+  "pattern": "shoulder_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_rear_delt_fly",
+  "name": "Rear Delt Fly",
+  "equipment": "Machine",
+  "primary": [
+   "rear_delts"
+  ],
+  "secondary": [
+   "mid_back"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "reverse pec deck",
+   "rear delt machine fly"
+  ],
+  "pattern": "horizontal_abduction",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_cable_rear_delt_fly",
+  "name": "Cable Rear Delt Fly",
+  "equipment": "Cable",
+  "primary": [
+   "rear_delts"
+  ],
+  "secondary": [
+   "mid_back"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "rear delt cable fly"
+  ],
+  "pattern": "horizontal_abduction",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_bent_over_dumbbell_rear_delt_fly",
+  "name": "Bent-Over Dumbbell Rear Delt Fly",
+  "equipment": "Dumbbells",
+  "primary": [
+   "rear_delts"
+  ],
+  "secondary": [
+   "mid_back"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "bent over rear delt fly",
+   "reverse fly"
+  ],
+  "pattern": "horizontal_abduction",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_face_pull",
+  "name": "Face Pull",
+  "equipment": "Cable",
+  "primary": [
+   "rear_delts"
+  ],
+  "secondary": [
+   "mid_back",
+   "rotator_cuff"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "rope face pull"
+  ],
+  "pattern": "horizontal_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_cable_external_rotation",
+  "name": "Cable External Rotation",
+  "equipment": "Cable",
+  "primary": [
+   "rotator_cuff"
+  ],
+  "secondary": [
+   "rear_delts"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "shoulder external rotation",
+   "cable shoulder external rotation",
+   "external rotation"
+  ],
+  "pattern": "shoulder_external_rotation",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_upright_row",
+  "name": "Upright Row",
+  "equipment": "Cable / Barbell",
+  "primary": [
+   "side_delts",
+   "upper_traps"
+  ],
+  "secondary": [
+   "biceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "upright cable row",
+   "barbell upright row"
+  ],
+  "pattern": "vertical_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_triceps_pushdown",
+  "name": "Triceps Pushdown",
+  "equipment": "Cable",
+  "primary": [
+   "triceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "tricep pushdown",
+   "cable pushdown",
+   "pressdown"
+  ],
+  "pattern": "elbow_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_rope_triceps_pushdown",
+  "name": "Rope Triceps Pushdown",
+  "equipment": "Cable",
+  "primary": [
+   "triceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "rope pushdown",
+   "rope pressdown"
+  ],
+  "pattern": "elbow_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_straight_bar_triceps_pushdown",
+  "name": "Straight-Bar Triceps Pushdown",
+  "equipment": "Cable",
+  "primary": [
+   "triceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "bar pushdown",
+   "straight bar pressdown"
+  ],
+  "pattern": "elbow_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_single_arm_triceps_pushdown",
+  "name": "Single-Arm Triceps Pushdown",
+  "equipment": "Cable",
+  "primary": [
+   "triceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "unilateral pushdown",
+   "one arm pushdown"
+  ],
+  "pattern": "elbow_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_overhead_cable_triceps_extension",
+  "name": "Overhead Cable Triceps Extension",
+  "equipment": "Cable",
+  "primary": [
+   "triceps"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "overhead tricep extension",
+   "cable overhead extension"
+  ],
+  "pattern": "elbow_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_dumbbell_overhead_triceps_extension",
+  "name": "Dumbbell Overhead Triceps Extension",
+  "equipment": "Dumbbell",
+  "primary": [
+   "triceps"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "db overhead extension",
+   "dumbbell tricep extension"
+  ],
+  "pattern": "elbow_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_skull_crusher",
+  "name": "Skull Crusher",
+  "equipment": "EZ Bar / Barbell",
+  "primary": [
+   "triceps"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "lying tricep extension",
+   "ez bar skullcrusher"
+  ],
+  "pattern": "elbow_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_close_grip_bench_press",
+  "name": "Close-Grip Bench Press",
+  "equipment": "Barbell",
+  "primary": [
+   "triceps"
+  ],
+  "secondary": [
+   "chest",
+   "front_delts"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "close grip bench",
+   "cgbp"
+  ],
+  "pattern": "horizontal_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_bench_dip",
+  "name": "Bench Dip",
+  "equipment": "Bodyweight",
+  "primary": [
+   "triceps"
+  ],
+  "secondary": [
+   "front_delts",
+   "chest"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "bench dips"
+  ],
+  "pattern": "vertical_push",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_lat_pulldown",
+  "name": "Lat Pulldown",
+  "equipment": "Cable / Machine",
+  "primary": [
+   "lats"
+  ],
+  "secondary": [
+   "biceps",
+   "mid_back"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "wide grip pulldown",
+   "lat pull down"
+  ],
+  "pattern": "vertical_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_close_grip_pulldown",
+  "name": "Close-Grip Pulldown",
+  "equipment": "Cable / Machine",
+  "primary": [
+   "lats"
+  ],
+  "secondary": [
+   "biceps",
+   "mid_back"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "neutral grip pulldown",
+   "close grip lat pulldown"
+  ],
+  "pattern": "vertical_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_underhand_lat_pulldown",
+  "name": "Underhand Lat Pulldown",
+  "equipment": "Cable / Machine",
+  "primary": [
+   "lats"
+  ],
+  "secondary": [
+   "biceps",
+   "mid_back"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "reverse grip pulldown"
+  ],
+  "pattern": "vertical_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_single_arm_lat_pulldown",
+  "name": "Single-Arm Lat Pulldown",
+  "equipment": "Cable",
+  "primary": [
+   "lats"
+  ],
+  "secondary": [
+   "biceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "one arm lat pulldown",
+   "unilateral pulldown"
+  ],
+  "pattern": "vertical_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_pull_up",
+  "name": "Pull-Up",
+  "equipment": "Bodyweight",
+  "primary": [
+   "lats"
+  ],
+  "secondary": [
+   "biceps",
+   "mid_back"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "pullup",
+   "wide grip pull up"
+  ],
+  "pattern": "vertical_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_chin_up",
+  "name": "Chin-Up",
+  "equipment": "Bodyweight",
+  "primary": [
+   "lats",
+   "biceps"
+  ],
+  "secondary": [
+   "mid_back"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "chinup"
+  ],
+  "pattern": "vertical_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_assisted_pull_up",
+  "name": "Assisted Pull-Up",
+  "equipment": "Machine",
+  "primary": [
+   "lats"
+  ],
+  "secondary": [
+   "biceps",
+   "mid_back"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "assisted pullup"
+  ],
+  "pattern": "vertical_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_chest_supported_row",
+  "name": "Chest-Supported Row",
+  "equipment": "Machine",
+  "primary": [
+   "mid_back"
+  ],
+  "secondary": [
+   "lats",
+   "biceps",
+   "rear_delts"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "chest supported row machine",
+   "machine row"
+  ],
+  "pattern": "horizontal_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_seated_cable_row",
+  "name": "Seated Cable Row",
+  "equipment": "Cable",
+  "primary": [
+   "mid_back"
+  ],
+  "secondary": [
+   "lats",
+   "biceps",
+   "rear_delts"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "cable row",
+   "seated row"
+  ],
+  "pattern": "horizontal_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_barbell_row",
+  "name": "Barbell Row",
+  "equipment": "Barbell",
+  "primary": [
+   "mid_back"
+  ],
+  "secondary": [
+   "lats",
+   "biceps",
+   "rear_delts"
+  ],
+  "stabilizers": [
+   "lower_back",
+   "core"
+  ],
+  "aliases": [
+   "bent over row",
+   "bb row"
+  ],
+  "pattern": "horizontal_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_pendlay_row",
+  "name": "Pendlay Row",
+  "equipment": "Barbell",
+  "primary": [
+   "mid_back"
+  ],
+  "secondary": [
+   "lats",
+   "biceps",
+   "rear_delts"
+  ],
+  "stabilizers": [
+   "lower_back"
+  ],
+  "aliases": [
+   "pendlay"
+  ],
+  "pattern": "horizontal_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_one_arm_dumbbell_row",
+  "name": "One-Arm Dumbbell Row",
+  "equipment": "Dumbbell",
+  "primary": [
+   "lats"
+  ],
+  "secondary": [
+   "mid_back",
+   "biceps"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "one arm row",
+   "single arm dumbbell row",
+   "db row"
+  ],
+  "pattern": "horizontal_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_t_bar_row",
+  "name": "T-Bar Row",
+  "equipment": "T-Bar / Machine",
+  "primary": [
+   "mid_back"
+  ],
+  "secondary": [
+   "lats",
+   "biceps",
+   "rear_delts"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "tbar row"
+  ],
+  "pattern": "horizontal_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_landmine_row",
+  "name": "Landmine Row",
+  "equipment": "Landmine",
+  "primary": [
+   "mid_back"
+  ],
+  "secondary": [
+   "lats",
+   "biceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "landmine t bar row"
+  ],
+  "pattern": "horizontal_pull",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_straight_arm_pulldown",
+  "name": "Straight-Arm Pulldown",
+  "equipment": "Cable",
+  "primary": [
+   "lats"
+  ],
+  "secondary": [
+   "triceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "straight arm lat pulldown",
+   "cable pullover"
+  ],
+  "pattern": "shoulder_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_machine_pullover",
+  "name": "Machine Pullover",
+  "equipment": "Machine",
+  "primary": [
+   "lats"
+  ],
+  "secondary": [
+   "triceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "pullover machine"
+  ],
+  "pattern": "shoulder_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_dumbbell_pullover",
+  "name": "Dumbbell Pullover",
+  "equipment": "Dumbbell",
+  "primary": [
+   "lats",
+   "chest"
+  ],
+  "secondary": [
+   "triceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "db pullover"
+  ],
+  "pattern": "shoulder_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_dumbbell_shrug",
+  "name": "Dumbbell Shrug",
+  "equipment": "Dumbbells",
+  "primary": [
+   "upper_traps"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "db shrugs",
+   "dumbbell shrugs"
+  ],
+  "pattern": "scapular_elevation",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_barbell_shrug",
+  "name": "Barbell Shrug",
+  "equipment": "Barbell",
+  "primary": [
+   "upper_traps"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "bb shrug",
+   "barbell shrugs"
+  ],
+  "pattern": "scapular_elevation",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_smith_machine_shrug",
+  "name": "Smith Machine Shrug",
+  "equipment": "Smith Machine",
+  "primary": [
+   "upper_traps"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "smith shrug"
+  ],
+  "pattern": "scapular_elevation",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_cable_shrug",
+  "name": "Cable Shrug",
+  "equipment": "Cable",
+  "primary": [
+   "upper_traps"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "cable shrugs"
+  ],
+  "pattern": "scapular_elevation",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_back_extension",
+  "name": "Back Extension",
+  "equipment": "Bodyweight / Machine",
+  "primary": [
+   "lower_back"
+  ],
+  "secondary": [
+   "glutes",
+   "hamstrings"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "hyperextension",
+   "45 degree back extension"
+  ],
+  "pattern": "hip_hinge",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_dumbbell_biceps_curl",
+  "name": "Dumbbell Biceps Curl",
+  "equipment": "Dumbbells",
+  "primary": [
+   "biceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "db biceps curl",
+   "dumbbell curl",
+   "db curl"
+  ],
+  "pattern": "elbow_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_alternating_dumbbell_curl",
+  "name": "Alternating Dumbbell Curl",
+  "equipment": "Dumbbells",
+  "primary": [
+   "biceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "alternating curl"
+  ],
+  "pattern": "elbow_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_barbell_curl",
+  "name": "Barbell Curl",
+  "equipment": "Barbell",
+  "primary": [
+   "biceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "bb curl"
+  ],
+  "pattern": "elbow_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_ez_bar_curl",
+  "name": "EZ-Bar Curl",
+  "equipment": "EZ Bar",
+  "primary": [
+   "biceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "ez curl",
+   "ezbar curl"
+  ],
+  "pattern": "elbow_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_hammer_curl",
+  "name": "Hammer Curl",
+  "equipment": "Dumbbells",
+  "primary": [
+   "brachialis",
+   "biceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "db hammer curl"
+  ],
+  "pattern": "elbow_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_cross_body_hammer_curl",
+  "name": "Cross-Body Hammer Curl",
+  "equipment": "Dumbbells",
+  "primary": [
+   "brachialis",
+   "biceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "cross body curl"
+  ],
+  "pattern": "elbow_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_cable_curl",
+  "name": "Cable Curl",
+  "equipment": "Cable",
+  "primary": [
+   "biceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "cable biceps curl"
+  ],
+  "pattern": "elbow_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_bayesian_cable_curl",
+  "name": "Bayesian Cable Curl",
+  "equipment": "Cable",
+  "primary": [
+   "biceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "bayesian curl"
+  ],
+  "pattern": "elbow_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_preacher_curl",
+  "name": "Preacher Curl",
+  "equipment": "Machine / EZ Bar",
+  "primary": [
+   "biceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "preacher bicep curl"
+  ],
+  "pattern": "elbow_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_incline_dumbbell_curl",
+  "name": "Incline Dumbbell Curl",
+  "equipment": "Dumbbells",
+  "primary": [
+   "biceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "incline curl"
+  ],
+  "pattern": "elbow_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_concentration_curl",
+  "name": "Concentration Curl",
+  "equipment": "Dumbbell",
+  "primary": [
+   "biceps"
+  ],
+  "secondary": [
+   "forearms"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "concentration biceps curl"
+  ],
+  "pattern": "elbow_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_reverse_curl",
+  "name": "Reverse Curl",
+  "equipment": "EZ Bar / Barbell",
+  "primary": [
+   "forearms",
+   "brachialis"
+  ],
+  "secondary": [
+   "biceps"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "reverse biceps curl"
+  ],
+  "pattern": "elbow_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_wrist_curl",
+  "name": "Wrist Curl",
+  "equipment": "Dumbbell / Barbell",
+  "primary": [
+   "forearms"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "forearm wrist curl"
+  ],
+  "pattern": "wrist_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_leg_extension",
+  "name": "Leg Extension",
+  "equipment": "Machine",
+  "primary": [
+   "quads"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "leg extensions",
+   "quad extension"
+  ],
+  "pattern": "knee_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_seated_leg_curl",
+  "name": "Seated Leg Curl",
+  "equipment": "Machine",
+  "primary": [
+   "hamstrings"
+  ],
+  "secondary": [
+   "calves"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "seated hamstring curl",
+   "hamstring curl seated"
+  ],
+  "pattern": "knee_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_lying_leg_curl",
+  "name": "Lying Leg Curl",
+  "equipment": "Machine",
+  "primary": [
+   "hamstrings"
+  ],
+  "secondary": [
+   "calves"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "lying hamstring curl",
+   "prone leg curl"
+  ],
+  "pattern": "knee_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_standing_leg_curl",
+  "name": "Standing Leg Curl",
+  "equipment": "Machine",
+  "primary": [
+   "hamstrings"
+  ],
+  "secondary": [
+   "calves"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "standing hamstring curl"
+  ],
+  "pattern": "knee_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_leg_press",
+  "name": "Leg Press",
+  "equipment": "Plate-Loaded / Machine",
+  "primary": [
+   "quads",
+   "glutes"
+  ],
+  "secondary": [
+   "hamstrings",
+   "calves"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "plate loaded leg press",
+   "45 degree leg press"
+  ],
+  "pattern": "squat",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_horizontal_leg_press",
+  "name": "Horizontal Leg Press",
+  "equipment": "Machine",
+  "primary": [
+   "quads",
+   "glutes"
+  ],
+  "secondary": [
+   "hamstrings"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "seated leg press"
+  ],
+  "pattern": "squat",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_hack_squat",
+  "name": "Hack Squat",
+  "equipment": "Machine",
+  "primary": [
+   "quads"
+  ],
+  "secondary": [
+   "glutes",
+   "hamstrings"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "hack squat machine"
+  ],
+  "pattern": "squat",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_pendulum_squat",
+  "name": "Pendulum Squat",
+  "equipment": "Machine",
+  "primary": [
+   "quads"
+  ],
+  "secondary": [
+   "glutes",
+   "hamstrings"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "pendulum"
+  ],
+  "pattern": "squat",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_barbell_back_squat",
+  "name": "Barbell Back Squat",
+  "equipment": "Barbell",
+  "primary": [
+   "quads"
+  ],
+  "secondary": [
+   "glutes",
+   "hamstrings"
+  ],
+  "stabilizers": [
+   "core",
+   "lower_back"
+  ],
+  "aliases": [
+   "back squat",
+   "squat"
+  ],
+  "pattern": "squat",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_front_squat",
+  "name": "Front Squat",
+  "equipment": "Barbell",
+  "primary": [
+   "quads"
+  ],
+  "secondary": [
+   "glutes"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "barbell front squat"
+  ],
+  "pattern": "squat",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_goblet_squat",
+  "name": "Goblet Squat",
+  "equipment": "Dumbbell / Kettlebell",
+  "primary": [
+   "quads"
+  ],
+  "secondary": [
+   "glutes"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "goblet"
+  ],
+  "pattern": "squat",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_smith_machine_squat",
+  "name": "Smith Machine Squat",
+  "equipment": "Smith Machine",
+  "primary": [
+   "quads"
+  ],
+  "secondary": [
+   "glutes",
+   "hamstrings"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "smith squat"
+  ],
+  "pattern": "squat",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_bulgarian_split_squat",
+  "name": "Bulgarian Split Squat",
+  "equipment": "Dumbbells / Barbell",
+  "primary": [
+   "quads",
+   "glutes"
+  ],
+  "secondary": [
+   "hamstrings"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "bss",
+   "bulgarian squat",
+   "split squat"
+  ],
+  "pattern": "single_leg_squat",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_walking_lunge",
+  "name": "Walking Lunge",
+  "equipment": "Dumbbells / Barbell",
+  "primary": [
+   "quads",
+   "glutes"
+  ],
+  "secondary": [
+   "hamstrings",
+   "calves"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "walking lunges"
+  ],
+  "pattern": "lunge",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_reverse_lunge",
+  "name": "Reverse Lunge",
+  "equipment": "Dumbbells / Barbell",
+  "primary": [
+   "quads",
+   "glutes"
+  ],
+  "secondary": [
+   "hamstrings"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "backward lunge"
+  ],
+  "pattern": "lunge",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_forward_lunge",
+  "name": "Forward Lunge",
+  "equipment": "Dumbbells / Barbell",
+  "primary": [
+   "quads",
+   "glutes"
+  ],
+  "secondary": [
+   "hamstrings"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "front lunge"
+  ],
+  "pattern": "lunge",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_step_up",
+  "name": "Step-Up",
+  "equipment": "Dumbbells / Bodyweight",
+  "primary": [
+   "quads",
+   "glutes"
+  ],
+  "secondary": [
+   "hamstrings",
+   "calves"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "step up"
+  ],
+  "pattern": "single_leg_squat",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_romanian_deadlift",
+  "name": "Romanian Deadlift",
+  "equipment": "Barbell",
+  "primary": [
+   "hamstrings"
+  ],
+  "secondary": [
+   "glutes",
+   "lower_back"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "rdl",
+   "barbell rdl"
+  ],
+  "pattern": "hip_hinge",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_dumbbell_romanian_deadlift",
+  "name": "Dumbbell Romanian Deadlift",
+  "equipment": "Dumbbells",
+  "primary": [
+   "hamstrings"
+  ],
+  "secondary": [
+   "glutes",
+   "lower_back"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "db rdl",
+   "dumbbell rdl"
+  ],
+  "pattern": "hip_hinge",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_single_leg_romanian_deadlift",
+  "name": "Single-Leg Romanian Deadlift",
+  "equipment": "Dumbbell / Bodyweight",
+  "primary": [
+   "hamstrings"
+  ],
+  "secondary": [
+   "glutes"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "single leg rdl"
+  ],
+  "pattern": "hip_hinge",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_conventional_deadlift",
+  "name": "Conventional Deadlift",
+  "equipment": "Barbell",
+  "primary": [
+   "hamstrings",
+   "glutes",
+   "lower_back"
+  ],
+  "secondary": [
+   "quads",
+   "lats",
+   "upper_traps"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "deadlift",
+   "conventional dl"
+  ],
+  "pattern": "hip_hinge",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_sumo_deadlift",
+  "name": "Sumo Deadlift",
+  "equipment": "Barbell",
+  "primary": [
+   "glutes",
+   "adductors"
+  ],
+  "secondary": [
+   "quads",
+   "hamstrings",
+   "lower_back"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "sumo dl"
+  ],
+  "pattern": "hip_hinge",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_hip_thrust",
+  "name": "Hip Thrust",
+  "equipment": "Barbell / Machine",
+  "primary": [
+   "glutes"
+  ],
+  "secondary": [
+   "hamstrings"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "barbell hip thrust",
+   "machine hip thrust"
+  ],
+  "pattern": "hip_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_glute_bridge",
+  "name": "Glute Bridge",
+  "equipment": "Bodyweight / Barbell",
+  "primary": [
+   "glutes"
+  ],
+  "secondary": [
+   "hamstrings"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "bridge"
+  ],
+  "pattern": "hip_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_cable_kickback",
+  "name": "Cable Kickback",
+  "equipment": "Cable",
+  "primary": [
+   "glutes"
+  ],
+  "secondary": [
+   "hamstrings"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "glute kickback",
+   "cable glute kickback"
+  ],
+  "pattern": "hip_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_hip_abduction",
+  "name": "Hip Abduction",
+  "equipment": "Machine",
+  "primary": [
+   "glutes",
+   "abductors"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "abductor machine",
+   "hip abductor"
+  ],
+  "pattern": "hip_abduction",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_hip_adduction",
+  "name": "Hip Adduction",
+  "equipment": "Machine",
+  "primary": [
+   "adductors"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "adductor machine",
+   "hip adductor"
+  ],
+  "pattern": "hip_adduction",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_seated_calf_raise",
+  "name": "Seated Calf Raise",
+  "equipment": "Machine",
+  "primary": [
+   "calves"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "seated calves",
+   "calf raise seated"
+  ],
+  "pattern": "plantar_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_standing_calf_raise",
+  "name": "Standing Calf Raise",
+  "equipment": "Machine",
+  "primary": [
+   "calves"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "standing calves",
+   "calf raises"
+  ],
+  "pattern": "plantar_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_leg_press_calf_raise",
+  "name": "Leg Press Calf Raise",
+  "equipment": "Leg Press",
+  "primary": [
+   "calves"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "calf press",
+   "leg press calves"
+  ],
+  "pattern": "plantar_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_crunch",
+  "name": "Crunch",
+  "equipment": "Bodyweight",
+  "primary": [
+   "abs"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "ab crunch"
+  ],
+  "pattern": "spinal_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_cable_crunch",
+  "name": "Cable Crunch",
+  "equipment": "Cable",
+  "primary": [
+   "abs"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "kneeling cable crunch"
+  ],
+  "pattern": "spinal_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_machine_crunch",
+  "name": "Machine Crunch",
+  "equipment": "Machine",
+  "primary": [
+   "abs"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "ab crunch machine"
+  ],
+  "pattern": "spinal_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_resisted_hip_flexion",
+  "name": "Resisted Hip Flexion",
+  "equipment": "Cable / Resistance Band",
+  "primary": [
+   "hip_flexors"
+  ],
+  "secondary": [
+   "quads"
+  ],
+  "stabilizers": [
+   "core"
+  ],
+  "aliases": [
+   "cable hip flexion",
+   "band hip flexion",
+   "standing resisted hip flexion"
+  ],
+  "pattern": "hip_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_hanging_leg_raise",
+  "name": "Hanging Leg Raise",
+  "equipment": "Bodyweight",
+  "primary": [
+   "abs"
+  ],
+  "secondary": [
+   "hip_flexors"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "hanging leg raises"
+  ],
+  "pattern": "hip_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_hanging_knee_raise",
+  "name": "Hanging Knee Raise",
+  "equipment": "Bodyweight",
+  "primary": [
+   "abs"
+  ],
+  "secondary": [
+   "hip_flexors"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "hanging knee raises"
+  ],
+  "pattern": "hip_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_reverse_crunch",
+  "name": "Reverse Crunch",
+  "equipment": "Bodyweight",
+  "primary": [
+   "abs"
+  ],
+  "secondary": [
+   "hip_flexors"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "reverse ab crunch"
+  ],
+  "pattern": "spinal_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_plank",
+  "name": "Plank",
+  "equipment": "Bodyweight",
+  "primary": [
+   "core"
+  ],
+  "secondary": [
+   "abs"
+  ],
+  "stabilizers": [
+   "glutes",
+   "front_delts"
+  ],
+  "aliases": [
+   "front plank"
+  ],
+  "pattern": "anti_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_side_plank",
+  "name": "Side Plank",
+  "equipment": "Bodyweight",
+  "primary": [
+   "obliques"
+  ],
+  "secondary": [
+   "core"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "side plank hold"
+  ],
+  "pattern": "anti_lateral_flexion",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_ab_wheel_rollout",
+  "name": "Ab Wheel Rollout",
+  "equipment": "Ab Wheel",
+  "primary": [
+   "core",
+   "abs"
+  ],
+  "secondary": [
+   "lats"
+  ],
+  "stabilizers": [
+   "front_delts"
+  ],
+  "aliases": [
+   "ab rollout",
+   "wheel rollout"
+  ],
+  "pattern": "anti_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_russian_twist",
+  "name": "Russian Twist",
+  "equipment": "Bodyweight / Weight",
+  "primary": [
+   "obliques"
+  ],
+  "secondary": [
+   "abs"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "russian twists"
+  ],
+  "pattern": "rotation",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_pallof_press",
+  "name": "Pallof Press",
+  "equipment": "Cable",
+  "primary": [
+   "core",
+   "obliques"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "pallof"
+  ],
+  "pattern": "anti_rotation",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_dead_bug",
+  "name": "Dead Bug",
+  "equipment": "Bodyweight",
+  "primary": [
+   "core",
+   "abs"
+  ],
+  "secondary": [],
+  "stabilizers": [],
+  "aliases": [
+   "deadbug"
+  ],
+  "pattern": "anti_extension",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_sled_push",
+  "name": "Sled Push",
+  "equipment": "Sled",
+  "primary": [
+   "quads",
+   "glutes"
+  ],
+  "secondary": [
+   "calves",
+   "core"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "prowler push"
+  ],
+  "pattern": "conditioning",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_sled_pull",
+  "name": "Sled Pull",
+  "equipment": "Sled",
+  "primary": [
+   "quads",
+   "glutes"
+  ],
+  "secondary": [
+   "mid_back",
+   "core"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "prowler pull"
+  ],
+  "pattern": "conditioning",
+  "defaultSets": 3
+ },
+ {
+  "id": "lib_farmer_s_carry",
+  "name": "Farmer's Carry",
+  "equipment": "Dumbbells / Trap Bar",
+  "primary": [
+   "forearms",
+   "upper_traps"
+  ],
+  "secondary": [
+   "core",
+   "glutes"
+  ],
+  "stabilizers": [],
+  "aliases": [
+   "farmers walk",
+   "farmer carry"
+  ],
+  "pattern": "carry",
+  "defaultSets": 3
+ }
+]
