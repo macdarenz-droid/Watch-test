@@ -44,7 +44,12 @@ final class HeartRateDatabase extends SQLiteOpenHelper {
         values.put("session_id", sessionId); values.put("bpm", measurement.bpm); values.put("received_epoch", epoch); values.put("received_elapsed", elapsed);
         if (measurement.contactDetected == null) values.putNull("contact"); else values.put("contact", measurement.contactDetected ? 1 : 0);
         if (measurement.energyKj == null) values.putNull("energy"); else values.put("energy", measurement.energyKj);
-        JSONArray rr = new JSONArray(); for (double value : measurement.rrMillis) rr.put(value);
+        JSONArray rr = new JSONArray();
+        try {
+            for (double value : measurement.rrMillis) rr.put(value);
+        } catch (JSONException ignored) {
+            // Every RR value is a finite primitive produced by HeartRateMeasurement.
+        }
         values.put("rr_json", rr.toString());
         getWritableDatabase().insertOrThrow("samples", null, values);
     }
