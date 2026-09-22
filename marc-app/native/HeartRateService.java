@@ -220,7 +220,13 @@ public final class HeartRateService extends Service {
                 JSObject sample = new JSObject(); sample.put("bpm", measurement.bpm); sample.put("receivedAtEpochMs", epoch); sample.put("receivedAtElapsedMs", elapsed); sample.put("source", "ble-heart-rate");
                 if (measurement.contactDetected != null) sample.put("contactDetected", measurement.contactDetected);
                 if (measurement.energyKj != null) sample.put("energyKj", measurement.energyKj);
-                JSArray rr = new JSArray(); for (double value : measurement.rrMillis) rr.put(value); sample.put("rrMillis", rr);
+        JSArray rr = new JSArray();
+        try {
+            for (double value : measurement.rrMillis) rr.put(value);
+        } catch (org.json.JSONException error) {
+            Log.w(TAG, "Unable to serialize RR interval", error);
+        }
+        sample.put("rrMillis", rr);
                 if (listener != null) listener.onSample(sample);
             } catch (IllegalArgumentException ignored) { }
         } else if (BATTERY.equals(characteristic) && bytes.length == 1 && (bytes[0] & 255) <= 100) { battery = bytes[0] & 255; changed(); }
