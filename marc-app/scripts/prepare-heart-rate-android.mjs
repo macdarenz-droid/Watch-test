@@ -6,6 +6,12 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const android = join(root, 'android');
 const packageDir = join(android, 'app', 'src', 'main', 'java', 'com', 'mrcdrnzz', 'dailytracker');
 const nativeDir = join(root, 'native');
+const metadata = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
+const appGradlePath = join(android, 'app', 'build.gradle');
+let appGradle = await readFile(appGradlePath, 'utf8');
+appGradle = appGradle.replace(/versionCode\s+\d+/, 'versionCode 39')
+  .replace(/versionName\s+"[^"]+"/, `versionName "${metadata.version}"`);
+await writeFile(appGradlePath, appGradle);
 
 const variables = join(android, 'variables.gradle');
 let gradle = await readFile(variables, 'utf8');
@@ -16,7 +22,7 @@ await writeFile(variables, updated);
 await mkdir(packageDir, { recursive: true });
 for (const name of [
   'MainActivity.java', 'HealthConnectNativePlugin.java', 'PermissionsRationaleActivity.java',
-  'HeartRateMeasurement.java', 'HeartRateDatabase.java', 'HeartRateDeviceScanner.java',
+  'HeartRateMeasurement.java', 'HeartRateMetrics.java', 'HeartRateDatabase.java', 'HeartRateDeviceScanner.java',
   'HeartRateService.java', 'HeartRateNativePlugin.java',
 ]) await copyFile(join(nativeDir, name), join(packageDir, basename(name)));
 

@@ -1,6 +1,6 @@
 {
   "name": "marc-tracker",
-  "version": "38.0.0",
+  "version": "39.0.0",
   "private": true,
   "description": "M/ARC workout, recovery and coaching tracker (Android/PWA)",
   "type": "module",
@@ -17,6 +17,7 @@
     "cap:copy": "cap copy android",
     "cap:prepare": "node scripts/prepare-heart-rate-android.mjs",
     "gate": "node scripts/screenshot-gate.mjs",
+    "gate:watch": "node scripts/watch-coach-gate.mjs",
     "convert-backup": "esbuild scripts/convert-legacy-backup.ts --bundle --platform=node --format=esm --alias:@=./src --log-level=warning --outfile=node_modules/.cache/convert-backup.mjs && node node_modules/.cache/convert-backup.mjs",
     "logo": "esbuild src/theme/themes.ts --bundle --format=esm --outfile=node_modules/.cache/logo-themes.mjs --log-level=warning && esbuild src/svg/logo.ts --bundle --format=esm --outfile=node_modules/.cache/logo-svg.mjs --log-level=warning && node scripts/render-logo.mjs"
   },

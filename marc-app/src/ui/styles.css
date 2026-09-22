@@ -192,6 +192,24 @@ svg { display: block; }
 .hr-chart path { fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
 .hr-chart-empty { min-height: 56px; margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--border-subtle); color: var(--text-3); font-size: 12px; }
 .hr-session-summary { margin-top: 10px; }
+.watch-insights { overflow: hidden; }
+.watch-comparison { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+.watch-comparison > div { display: grid; align-content: start; gap: 4px; }
+.watch-comparison b { font-size: 24px; letter-spacing: -.03em; }
+.watch-comparison span { font-size: 12px; color: var(--text-2); }
+.watch-history-chart, .watch-trace svg { display: block; width: 100%; height: auto; margin-top: 8px; }
+.watch-history-chart text, .watch-trace text { fill: var(--text-2); font-size: 12px; }
+.chart-grid { stroke: var(--border); stroke-width: 1; }
+.watch-session-picker { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 10px; }
+.watch-session-picker button { min-height: 56px; padding: 6px 2px; border-radius: var(--radius-sm); border: 1px solid var(--border); display: grid; gap: 4px; }
+.watch-session-picker button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+.watch-session-picker span, .watch-session-picker small { font-size: 11px; color: var(--text-2); }
+.watch-method { margin-top: 16px; font-size: 12px; color: var(--text-2); }
+.watch-method summary { cursor: pointer; min-height: 32px; }
+.watch-method p { margin-top: 8px; }
+.watch-trace input[type="range"] { width: 100%; min-height: 32px; padding: 0; accent-color: var(--accent); }
+.watch-capture { height: 6px; border-radius: 3px; overflow: hidden; background: var(--surface-3); margin: 10px 0; }
+.watch-capture i { display: block; height: 100%; background: var(--accent); }
 .danger-text { color: var(--negative); }
 .positive-text { color: var(--positive); }
 .warning-text { color: var(--warning); }

@@ -59,6 +59,10 @@ export interface Session {
 }
 
 export interface HeartRateSummary {
+  /** Version 2 uses bounded intervals and preserves missing signal time. */
+  metricsVersion?: 2;
+  capturedMs?: number;
+  durationMs?: number;
   sampleCount: number;
   averageBpm?: number;
   recordedPeakBpm?: number;

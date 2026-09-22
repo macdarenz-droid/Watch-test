@@ -7,14 +7,15 @@ import { showToast } from './app/toast';
 import { resyncReminders } from './slices/settings/reminders';
 import { onNotificationTap } from './native/notifications';
 import { go } from './app/router';
-import { beginHeartRateSession, initializeHeartRate } from './heart-rate/store';
+import { beginHeartRateSession, initializeHeartRate, refreshHeartRateSummaries } from './heart-rate/store';
 import './ui/styles.css';
 
 installThemeEngine();
 initStore();
-void initializeHeartRate().then(() => {
+void initializeHeartRate().then(async () => {
   const active = state.value.active;
-  if (active) return beginHeartRateSession(active.id, active.startedAt);
+  if (active) await beginHeartRateSession(active.id, active.startedAt);
+  await refreshHeartRateSummaries();
 }).catch(() => undefined);
 setHapticsEnabled(state.value.preferences.haptics);
 
@@ -28,7 +29,7 @@ if (bootSource.value === 'legacy') {
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSave(); });
 window.addEventListener('pagehide', flushSave);
 // Android may drop scheduled reminders; check and repair when we come back.
-window.addEventListener('pageshow', () => { void resyncReminders(); });
+window.addEventListener('pageshow', () => { void resyncReminders(); void refreshHeartRateSummaries(); });
 void resyncReminders();
 
 // Notification taps: rest done → Train, training day → Train.

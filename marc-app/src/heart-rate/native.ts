@@ -17,8 +17,9 @@ interface HeartRateNativePlugin {
   discardSession(options: { sessionId: string }): Promise<void>;
   deleteSession(options: { sessionId: string }): Promise<void>;
   getSessionTrace(options: { sessionId: string }): Promise<HeartRateTrace>;
+  getSessionSummary(options: { sessionId: string; startedAtEpochMs: number; endedAtEpochMs: number }): Promise<{ summary: HeartRateSummary }>;
   exportAll(): Promise<{ version: 1; traces: HeartRateTrace[] }>;
-  importAll(options: { payload: { version: 1; traces: HeartRateTrace[] } }): Promise<{ imported: number }>;
+  importAll(options: { payload: { version: 1; traces: HeartRateTrace[]; replace?: boolean } }): Promise<{ imported: number }>;
   resetAll(): Promise<void>;
   addListener(eventName: 'heartRateSample', listener: (sample: HeartRateSample) => void): Promise<PluginListenerHandle>;
   addListener(eventName: 'heartRateStatus', listener: (status: HeartRateStatus) => void): Promise<PluginListenerHandle>;

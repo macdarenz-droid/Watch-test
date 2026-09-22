@@ -19,6 +19,7 @@ import { showToast } from '@/app/toast';
 import { MuscleMap } from '@/ui/MuscleMap';
 import { GOALS } from '@/data/goals';
 import { HeartRateCard } from '@/heart-rate/HeartRateCard';
+import { SessionHeartRate } from '@/heart-rate/SessionHeartRate';
 
 const EFFORTS: Array<{ v: 'easy' | 'ideal' | 'max'; l: string; title: string }> = [
   { v: 'easy', l: 'E', title: 'Easy: 3 or more reps left' },
@@ -287,7 +288,7 @@ function EntryCard({ index, entry, open, onToggle, onDone }: { index: number; en
 }
 
 function FinishScreen({ summary, onClose }: { summary: FinishSummary; onClose: () => void }) {
-  const { session } = summary;
+  const session = state.value.sessions.find(s => s.id === summary.session.id) ?? summary.session;
   const emphasis = sessionEmphasis(session.exercises, state.value.customExercises).percents;
   const top = (Object.entries(emphasis) as Array<[string, number]>).sort((a, b) => b[1] - a[1]).slice(0, 5);
   const sets = session.exercises.reduce((a, e) => a + e.sets.length, 0);
@@ -297,6 +298,7 @@ function FinishScreen({ summary, onClose }: { summary: FinishSummary; onClose: (
       <Card class="card-accent">
         <div class="grid-3"><div class="stat"><b class="num">{formatClock(session.durationSec)}</b><span>duration</span></div><div class="stat"><b>{session.exercises.length}</b><span>exercises</span></div><div class="stat"><b>{sets}</b><span>sets</span></div></div>
       </Card>
+      <SessionHeartRate session={session} />
       <Section title="Muscles worked today">
         <Card>
           <MuscleMap values={emphasis as never} mode="emphasis" />

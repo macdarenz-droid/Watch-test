@@ -14,6 +14,7 @@ import { muscleLabel } from '@/data/muscles';
 import { findExercise } from '@/core/exercises';
 import { showToast } from '@/app/toast';
 import { SessionHeartRate } from '@/heart-rate/SessionHeartRate';
+import { WatchInsights } from '@/heart-rate/WatchInsights';
 import { deleteHeartRateSession, getHeartRateTrace, importAllHeartRate } from '@/heart-rate/store';
 
 export function History() {
@@ -118,12 +119,19 @@ function SessionEditor({ session, onClose }: { session: Session; onClose: () => 
   };
   const remove = async () => {
     const removed = session;
-    const trace = await getHeartRateTrace(session.id).catch(() => null);
-    await deleteHeartRateSession(session.id).catch(() => undefined);
+    let trace;
+    try {
+      trace = await getHeartRateTrace(session.id);
+      await deleteHeartRateSession(session.id);
+    } catch { showToast('Delete failed. Your session was kept.'); return; }
     update(s => ({ ...s, sessions: s.sessions.filter(x => x.id !== session.id) }));
     showToast('Session deleted', 'Undo', () => {
-      update(s => ({ ...s, sessions: [...s.sessions, removed].sort((a, b) => a.startedAt.localeCompare(b.startedAt)) }));
-      if (trace) void importAllHeartRate({ version: 1, traces: [trace] });
+      void (async () => {
+        try {
+          if (trace) await importAllHeartRate({ version: 1, traces: [trace] });
+          update(s => ({ ...s, sessions: [...s.sessions.filter(x => x.id !== removed.id), removed].sort((a, b) => a.startedAt.localeCompare(b.startedAt)) }));
+        } catch { showToast('Could not undo. Try restoring your backup.'); }
+      })();
     });
     onClose();
   };
@@ -182,6 +190,7 @@ function Stats() {
         )}
       </Card>
 
+      <WatchInsights />
       <Section title="Exercise progress">
         {!exerciseIds.length ? <Card class="card-quiet"><p class="small muted">Log two sessions of an exercise to see its trend.</p></Card> : (
           <Card>

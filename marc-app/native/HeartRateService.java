@@ -88,9 +88,16 @@ public final class HeartRateService extends Service {
     void setListener(Listener value) { listener = value; if (value != null) value.onStatus(status()); }
     boolean permitted() { return Build.VERSION.SDK_INT < 31 || checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED; }
 
-    void beginSession(String sessionId, long startedAt) { activeSessionId = sessionId; database.begin(sessionId, startedAt); }
-    JSObject finishSession(String sessionId, long endedAt) { if (sessionId.equals(activeSessionId)) activeSessionId = null; return database.finish(sessionId, endedAt); }
-    void discardSession(String sessionId) { if (sessionId.equals(activeSessionId)) activeSessionId = null; database.discard(sessionId); }
+    synchronized void beginSession(String sessionId, long startedAt) { database.begin(sessionId, startedAt); activeSessionId = sessionId; }
+    synchronized JSObject finishSession(String sessionId, long endedAt) { if (sessionId.equals(activeSessionId)) activeSessionId = null; return database.finish(sessionId, endedAt); }
+    synchronized void discardSession(String sessionId) { if (sessionId.equals(activeSessionId)) activeSessionId = null; database.discard(sessionId); }
+    synchronized void resetSessions() { activeSessionId = null; database.reset(); }
+    synchronized int importSessions(JSObject payload) throws org.json.JSONException {
+        // Do not let an incoming packet race with a full database replacement.
+        int imported = database.importAll(payload);
+        if (payload.optBoolean("replace", false)) activeSessionId = null;
+        return imported;
+    }
     HeartRateDatabase database() { return database; }
 
     void connect(BluetoothDevice selected) {
@@ -211,7 +218,7 @@ public final class HeartRateService extends Service {
     }
     private void receive(BluetoothGatt value, UUID characteristic, byte[] bytes) { handler.post(() -> { if (value == gatt) handle(characteristic, bytes); }); }
 
-    private void handle(UUID characteristic, byte[] bytes) {
+    private synchronized void handle(UUID characteristic, byte[] bytes) {
         if (HR.equals(characteristic)) {
             try {
                 HeartRateMeasurement measurement = HeartRateMeasurement.parse(bytes); long elapsed = SystemClock.elapsedRealtime(); long epoch = System.currentTimeMillis();

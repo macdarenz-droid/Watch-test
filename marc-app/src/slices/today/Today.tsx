@@ -14,6 +14,7 @@ import { INSIGHT_COLOR } from '../coach/Coach';
 import { MuscleMap } from '@/ui/MuscleMap';
 import { LogoMark } from '@/ui/Logo';
 import { HeartRateCard } from '@/heart-rate/HeartRateCard';
+import { WatchInsights } from '@/heart-rate/WatchInsights';
 
 function greeting(): string {
   const h = new Date().getHours();
@@ -85,6 +86,7 @@ export function Today() {
       </Card>
 
       <HeartRateCard compact={!live} />
+      <WatchInsights compact />
 
       <Section title="This week" aside={<span class="small muted">{w.grade.title}</span>}>
         <Card>

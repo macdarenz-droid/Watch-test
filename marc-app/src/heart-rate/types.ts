@@ -33,6 +33,8 @@ export interface HeartRateStatus {
 export interface HeartRateTrace {
   sessionId: string;
   version: 1;
+  startedAtEpochMs?: number;
+  endedAtEpochMs?: number;
   samples: HeartRateSample[];
   summary: HeartRateSummary;
 }

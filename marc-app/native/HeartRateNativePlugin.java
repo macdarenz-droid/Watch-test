@@ -111,18 +111,36 @@ public final class HeartRateNativePlugin extends Plugin implements HeartRateServ
     }
 
     @PluginMethod public void discardSession(PluginCall call) { if (!ready(call)) return; String id = call.getString("sessionId"); if (id == null) { call.reject("sessionId is required"); return; } service.discardSession(id); call.resolve(); }
-    @PluginMethod public void deleteSession(PluginCall call) { if (!ready(call)) return; String id = call.getString("sessionId"); if (id == null) { call.reject("sessionId is required"); return; } service.database().delete(id); call.resolve(); }
+    @PluginMethod public void deleteSession(PluginCall call) { if (!ready(call)) return; String id = call.getString("sessionId"); if (id == null) { call.reject("sessionId is required"); return; } service.discardSession(id); call.resolve(); }
     @PluginMethod public void getSessionTrace(PluginCall call) { if (!ready(call)) return; String id = call.getString("sessionId"); if (id == null) { call.reject("sessionId is required"); return; } call.resolve(service.database().trace(id)); }
+    @PluginMethod public void getSessionSummary(PluginCall call) {
+        if (!ready(call)) return;
+        String id = call.getString("sessionId"); if (id == null) { call.reject("sessionId is required"); return; }
+        try {
+            JSObject summary;
+            if (call.getData().has("startedAtEpochMs") || call.getData().has("endedAtEpochMs")) {
+                summary = service.database().summary(id, epoch(call, "startedAtEpochMs"), epoch(call, "endedAtEpochMs"));
+            } else summary = service.database().summary(id);
+            JSObject out = new JSObject(); out.put("summary", summary); call.resolve(out);
+        } catch (IllegalArgumentException error) { call.reject("Valid workout start and end times are required.", error); }
+    }
+    private static long epoch(PluginCall call, String key) {
+        Object raw = call.getData().opt(key);
+        if (!(raw instanceof Number)) throw new IllegalArgumentException("Invalid " + key);
+        double value = ((Number) raw).doubleValue();
+        if (!Double.isFinite(value) || value < 0 || value > HeartRateMetrics.MAX_EPOCH_MS || value != Math.floor(value)) throw new IllegalArgumentException("Invalid " + key);
+        return ((Number) raw).longValue();
+    }
     @PluginMethod public void exportAll(PluginCall call) { if (!ready(call)) return; call.resolve(service.database().exportAll()); }
 
     @PluginMethod public void importAll(PluginCall call) {
         if (!ready(call)) return;
         JSObject payload = call.getObject("payload"); if (payload == null) { call.reject("payload is required"); return; }
-        try { JSObject out = new JSObject(); out.put("imported", service.database().importAll(payload)); call.resolve(out); }
+        try { JSObject out = new JSObject(); out.put("imported", service.importSessions(payload)); call.resolve(out); }
         catch (JSONException | RuntimeException error) { call.reject("Invalid heart-rate backup.", error); }
     }
 
-    @PluginMethod public void resetAll(PluginCall call) { if (!ready(call)) return; service.database().reset(); call.resolve(); }
+    @PluginMethod public void resetAll(PluginCall call) { if (!ready(call)) return; service.resetSessions(); call.resolve(); }
 
     private void devicesChanged() {
         JSObject out = new JSObject(); out.put("devices", scanner == null ? new com.getcapacitor.JSArray() : scanner.json()); notifyListeners("heartRateDevices", out);

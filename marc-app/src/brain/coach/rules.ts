@@ -16,8 +16,9 @@ import { trainingBalance } from '../balance';
 import { weekSummary, daysSinceLastSession } from '../weekly';
 import { weeklyMuscleSets } from '../exposure';
 import { findExercise } from '@/core/exercises';
+import { heartRateCoachInsights } from '../heart-rate';
 
-export type Category = 'recovery' | 'progress' | 'readiness' | 'balance' | 'focus' | 'consistency' | 'data';
+export type Category = 'recovery' | 'progress' | 'readiness' | 'balance' | 'focus' | 'consistency' | 'data' | 'heart-rate';
 
 export interface Insight {
   id: string;
@@ -29,6 +30,7 @@ export interface Insight {
   action: string;
   /** Optional link to an exercise or muscle for the UI. */
   exerciseId?: string;
+  sessionId?: string;
   muscle?: MuscleId;
 }
 
@@ -63,11 +65,13 @@ export const CATEGORY_LABEL: Record<Category, string> = {
   focus: 'Focus muscle',
   consistency: 'Consistency',
   data: 'Training data',
+  'heart-rate': 'Watch insights',
 };
 
 type Rule = { id: string; run: (ctx: CoachContext, d: Derived) => Insight[] };
 
 export const RULES: Rule[] = [
+  { id: 'heart-rate.context', run: ctx => heartRateCoachInsights(ctx.sessions, ctx.now) },
   {
     id: 'recovery.still-recovering',
     run: (ctx, d) => {

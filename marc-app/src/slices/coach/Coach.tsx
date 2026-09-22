@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'preact/hooks';
 import { state, update } from '@/core/store';
-import { insights, today, week } from '@/app/selectors';
+import { allInsights, today, week } from '@/app/selectors';
+import { WatchInsights } from '@/heart-rate/WatchInsights';
+import { SessionHeartRate } from '@/heart-rate/SessionHeartRate';
 import { Button, Card, Chip, Row, Section, Sheet } from '@/ui/primitives';
 import { IconChevron, IconInfo } from '@/ui/icons';
 import { CATEGORY_LABEL, type Category, type Insight } from '@/brain/coach/rules';
@@ -15,12 +17,12 @@ import { formatLoad } from '@/core/units';
 import { resyncReminders } from '../settings/reminders';
 
 export const INSIGHT_COLOR: Record<Category, string> = {
-  recovery: 'var(--positive)', progress: 'var(--warning)', readiness: 'var(--info)', balance: 'var(--accent)', focus: 'var(--accent)', consistency: 'var(--warning)', data: 'var(--text-3)',
+  recovery: 'var(--positive)', progress: 'var(--warning)', readiness: 'var(--info)', balance: 'var(--accent)', focus: 'var(--accent)', consistency: 'var(--warning)', data: 'var(--text-3)', 'heart-rate': 'var(--info)',
 };
 
 export function Coach() {
   const s = state.value;
-  const list = insights.value;
+  const list = allInsights.value;
   const [openInsight, setOpenInsight] = useState<Insight | null>(null);
   const [goalOpen, setGoalOpen] = useState(false);
   const w = week.value;
@@ -51,6 +53,8 @@ export function Coach() {
         </div>
       </Section>
 
+      <WatchInsights />
+
       <Section title="Training goal" aside={<Button variant="quiet" size="sm" onClick={() => setGoalOpen(true)}>Change</Button>}>
         <Card class="card-press" onClick={() => setGoalOpen(true)}>
           <b>{goal.name}</b><div class="hint">{goal.tagline} · {goal.reps[0]}–{goal.reps[1]} reps{goal.accessoryReps ? ` (accessories ${goal.accessoryReps[0]}–${goal.accessoryReps[1]})` : ''}</div>
@@ -72,6 +76,7 @@ export function Coach() {
             <p>Two sessions under the range at max effort means one step down. More than four weeks away means repeat your last load once.</p>
             <p>Recovery windows are 24, 48 or 72 hours depending on effort, and they only ever widen when your own history shows you need it.</p>
             <p>Missing effort ratings never count as easy or max. They lower confidence instead.</p>
+            <p>Watch comparisons use usable recordings from similar workouts. Heart rate adds context alongside effort; it does not independently change your weights or recovery estimate.</p>
           </div>
         </Card>
       </Section>
@@ -91,6 +96,7 @@ export function Coach() {
 
 function InsightSheet({ insight, onClose }: { insight: Insight; onClose: () => void }) {
   const s = state.value;
+  const watchSession = s.sessions.find(session => session.id === insight.sessionId);
   const ex = insight.exerciseId ? findExercise(insight.exerciseId, s.customExercises) : undefined;
   const next = ex ? suggestNext(s.sessions, ex.id, s.goal, today.value, 3, s.customExercises) : null;
   const hist = ex ? exerciseHistory(s.sessions, ex.id, s.customExercises).slice(-5).reverse() : [];
@@ -103,6 +109,7 @@ function InsightSheet({ insight, onClose }: { insight: Insight; onClose: () => v
           <div><span>Means</span><span>{insight.means}</span></div>
           <div><span>Do next</span><span>{insight.action}</span></div>
         </div>
+        {watchSession && <SessionHeartRate session={watchSession} />}
         {next && <Card class="card-quiet"><div class="eyebrow">Next session</div><b>{next.target}</b><p class="small muted" style={{ marginTop: 4 }}>{next.reason}</p></Card>}
         {hist.length > 0 && <div><div class="eyebrow" style={{ marginBottom: 4 }}>Recent sessions</div><div class="list">{hist.map(h => <Row key={h.sessionId} trailing={<span class="hint num">{h.topKg ? `${formatLoad(h.topKg, s.preferences.weightUnit)} × ${h.topReps}` : `${h.bestReps} reps`}</span>}><span class="small">{h.day}</span></Row>)}</div></div>}
       </div>

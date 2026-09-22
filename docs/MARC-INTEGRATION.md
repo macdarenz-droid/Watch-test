@@ -12,6 +12,9 @@ The integrated app:
 - adds session average, recorded peak, coverage and gap counts to History;
 - includes traces in backup/restore and cascades delete/reset to the native store;
 - keeps live sensor data separate from daily Health Connect data.
+- feeds quality-checked session evidence into Coach, Today and History, with matched-workout comparisons and interactive recording review.
+
+See [watch coaching architecture](WATCH-COACH-ARCHITECTURE.md) for measurement rules, insights, visualisations, persistence and validation.
 
 No demo readings, BPM-derived recovery claims, HRV score, calories, exact set detection, or automatic load/rest changes are included.
 

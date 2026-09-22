@@ -4,6 +4,7 @@ import { IconHeart } from '@/ui/icons';
 import { connectHeartRateDevice, disconnectHeartRate, heartRateDevices, heartRateNativeAvailable, heartRateStatus, latestHeartRate, recentHeartRate, requestHeartRatePermissions, scanHeartRateDevices } from './store';
 import type { HeartRateSample } from './types';
 import { freshness } from './metrics';
+import { tracePoints } from './chart';
 
 const LABEL = { unavailable: 'Unavailable', connecting: 'Connecting', live: 'Live', delayed: 'Delayed', lost: 'Signal lost' } as const;
 
@@ -13,7 +14,7 @@ export function HeartRateCard({ compact = false }: { compact?: boolean }) {
   useEffect(() => { const timer = setInterval(() => setClock(Date.now()), 1_000); return () => clearInterval(timer); }, []);
   const status = heartRateStatus.value;
   const latest = latestHeartRate.value;
-  const fresh = status.state === 'unavailable' || status.state === 'connecting' ? status.state : freshness(latest, clock);
+  const fresh = status.state === 'unavailable' || status.state === 'connecting' || status.state === 'lost' ? status.state : freshness(latest, clock);
   const tone = fresh === 'live' ? 'positive' : fresh === 'delayed' ? 'warning' : fresh === 'lost' ? 'negative' : 'info';
 
   return (
@@ -31,6 +32,7 @@ export function HeartRateCard({ compact = false }: { compact?: boolean }) {
           </div>
         </div>
         {!compact && <HeartRateTrend samples={recentHeartRate.value} />}
+        {!compact && <p class="hint" style={{ marginTop: 8 }}>{fresh === 'live' ? 'Log how each set felt. Coach reviews your pulse alongside comparable workouts after saving.' : fresh === 'lost' ? 'Check watch fit and broadcast if you want to keep recording. Your workout log still saves.' : 'Record throughout the workout to give Coach more context.'}</p>}
       </Card>
       {setup && <HeartRateSetup onClose={() => setSetup(false)} />}
     </>
@@ -41,11 +43,11 @@ function HeartRateTrend({ samples }: { samples: HeartRateSample[] }) {
   const path = useMemo(() => {
     if (samples.length < 2) return '';
     const now = samples[samples.length - 1]!.receivedAtEpochMs;
-    const min = Math.min(...samples.map(x => x.bpm));
-    const max = Math.max(...samples.map(x => x.bpm));
-    return samples.map((sample, index) => {
-      const previous = samples[index - 1];
-      const command = !previous || sample.receivedAtEpochMs - previous.receivedAtEpochMs > 15_000 ? 'M' : 'L';
+    const points = tracePoints(samples, now - 120_000, now + 1);
+    const min = points.reduce((v, p) => Math.min(v, p.bpm), 260);
+    const max = points.reduce((v, p) => Math.max(v, p.bpm), 20);
+    return points.map(sample => {
+      const command = sample.startsSegment ? 'M' : 'L';
       const x = Math.max(0, Math.min(300, 300 - (now - sample.receivedAtEpochMs) / 120_000 * 300));
       const y = 52 - (sample.bpm - min) / Math.max(1, max - min) * 44;
       return `${command}${x.toFixed(1)} ${y.toFixed(1)}`;

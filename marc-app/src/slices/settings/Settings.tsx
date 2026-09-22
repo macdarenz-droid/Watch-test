@@ -11,10 +11,11 @@ import { reminderHealth, resyncReminders } from './reminders';
 import { healthAvailable, readHealth } from '@/native/health';
 import { asLegacyRoot, convertLegacy } from '@/core/migrate';
 import { Logo } from '@/ui/Logo';
-import { exportAllHeartRate, importAllHeartRate, resetAllHeartRate } from '@/heart-rate/store';
+import { beginHeartRateSession, exportAllHeartRate, importAllHeartRate, refreshHeartRateSummaries, resetAllHeartRate } from '@/heart-rate/store';
+import { prepareHeartRateRestore } from '@/heart-rate/backup';
 import type { HeartRateTrace } from '@/heart-rate/types';
 
-export const APP_VERSION = '38.0.0';
+export const APP_VERSION = '39.0.0';
 
 export function Settings({ onClose }: { onClose: () => void }) {
   const s = state.value;
@@ -39,16 +40,20 @@ export function Settings({ onClose }: { onClose: () => void }) {
       if (legacy) {
         // A backup from the previous version of the app: convert it on the way in.
         const converted = convertLegacy(legacy);
+        await importAllHeartRate({ version: 1, traces: [], replace: true });
         replaceState(converted);
         showToast(`Imported ${converted.sessions.length} sessions from the old backup`);
         return;
       }
       const next = 'state' in parsed && parsed.state ? parsed.state : (parsed as AppState);
       if (next.version !== 1 || !Array.isArray(next.sessions)) throw new Error('bad');
-      replaceState({ ...next, health: { connected: false } });
-      if ('heartRate' in parsed && parsed.heartRate) await importAllHeartRate(parsed.heartRate);
+      const restored = prepareHeartRateRestore(next.sessions, 'heartRate' in parsed && parsed.heartRate ? parsed.heartRate : undefined, next.active);
+      await importAllHeartRate(restored.payload);
+      replaceState({ ...next, sessions: restored.sessions, health: { connected: false } });
+      if (state.value.active) await beginHeartRateSession(state.value.active.id, state.value.active.startedAt).catch(() => undefined);
+      await refreshHeartRateSummaries();
       showToast(`Restored ${next.sessions.length} sessions`);
-    } catch { showToast('That file is not an M/ARC backup'); }
+    } catch { showToast('Restore failed. Check the backup and try again.'); }
   };
 
   return (
@@ -111,7 +116,7 @@ export function Settings({ onClose }: { onClose: () => void }) {
             <div class="grid-2"><Button onClick={backup}>Export backup</Button><Button onClick={restore}>Restore backup</Button></div>
             <p class="hint">Everything stays on this device. {s.legacyImportedAt ? 'Your history from the previous version was imported automatically.' : ''} Loaded from: {bootSource.value}.</p>
             {!confirmReset ? <Button variant="danger" onClick={() => setConfirmReset(true)}>Reset workout data</Button> : (
-              <Card class="card-quiet"><p class="small">Delete all sessions, heart-rate samples, splits and settings on this device? Export a backup first if unsure.</p><div class="row" style={{ marginTop: 10 }}><Button variant="quiet" onClick={() => setConfirmReset(false)}>Keep</Button><Button variant="danger" onClick={() => { void resetAllHeartRate().finally(() => { replaceState(freshState()); setConfirmReset(false); showToast('Workout and heart-rate data reset'); void haptic.warning(); }); }}>Reset everything</Button></div></Card>
+              <Card class="card-quiet"><p class="small">Delete all sessions, heart-rate samples, splits and settings on this device? Export a backup first if unsure.</p><div class="row" style={{ marginTop: 10 }}><Button variant="quiet" onClick={() => setConfirmReset(false)}>Keep</Button><Button variant="danger" onClick={() => { void resetAllHeartRate().then(() => { replaceState(freshState()); setConfirmReset(false); showToast('Workout and heart-rate data reset'); void haptic.warning(); }).catch(() => showToast('Reset failed. Your workout history was kept.')); }}>Reset everything</Button></div></Card>
             )}
           </Card>
         </Section>
