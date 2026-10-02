@@ -1,0 +1,511 @@
+{
+ "feature_inventory": [
+  "Train: splits/templates (colour, up to 2 focus muscles), weekly schedule weekday->split, live session persisted across restarts, log past session, custom exercises, 24-muscle exercise library with aliases/patterns, 5 resistance modes (weighted/bodyweight/assisted/duration/conditioning)",
+  "Set logging: kg/reps/effort (easy/ideal/max = 3-level RIR proxy), duration, distance, per-set timestamp/restSec/fidelity (live/delayed/retro/edited) and plausibility flags (implausible load/reps, unit suspect, duplicate, future time)",
+  "Progression engine (suggestNext): start-light, re-entry after 28d, hold/step-down/step-up (capped 10%), goal policy with main/accessory rep ranges + RIR band, deload mode, readiness hold, loadFactor; autoregulation suggestion in-session",
+  "Plate Sense: kg/lb per gym, equipment profiles, loadable-value snapping, plate breakdown sheet, gym chip + inferGym, unit-slip detection",
+  "Warm-up ramp (50/70/85% of e1RM, snapped to plates), in-session coaching cue (422 cues), exercise substitution sheet, 'still recovering' hint",
+  "Rest timer: time-based with exact allow-while-idle notification, per-goal default rest, HR-guided rest mode (Karvonen/pre-set baseline) when watch streams",
+  "Records: load, e1RM (Epley + RIR from effort, <=10 reps, 7-10 reps half weight, 2x typical error gate), reps at load, most reps, longest hold, furthest carry; live record badges",
+  "History: calendar, session log with edit/delete, weekly stats, weekly volume history, exercise trend (recency-weighted regression) + plateau detection, records list, exercise-stats panel",
+  "Body: themed vector muscle map (89 parts), views recovery / this-week volume (with volume-landmark band overlay) / levels, fully-recovered list, muscle detail sheet, Navy-method body-fat estimate from neck/waist/hip",
+  "Recovery v2: per-muscle impulse-response model (effort impulse, rep factor, damage factors, novelty, training-age/age priors, per-muscle recoveryFactor, tau personal calibration via soreness check-ins), systemic modifier from multi-day sleep/RHR/load",
+  "Readiness: 0-100 green/amber/red from check-in (soreness/sleep/mood), sleep, target-muscle recovery, resting HR, HRV (RR-capable devices only), acute load; readiness -> plan; optional morning readiness notification",
+  "Watch/health: Health Connect (platform API) read of HR, resting HR, sleep, steps, active calories with daily healthDays history + auto-sync; custom WatchBridge BLE Heart Rate Profile plugin with connectedDevice foreground service; session HR series, per-set peak/HRR60, zones, Keytel kcal range, HRmax (Tanaka/observed)",
+  "Coach (rules-as-data): insights across recovery, progress, balance (push/pull, upper/lower), focus, consistency, data quality, volume landmarks, scheduled-split conflict, HR effort-mismatch/drift; insight feedback + 7-day snooze + log; deload trigger/offer/active week; weekly review panel",
+  "Goal as policy object (growth/strength/etc.) with starter templates; onboarding sheet, profile dashboard, profile change history, weight log",
+  "Escobar AI coach: chat sheet (dock, hall, ask-about), Cloudflare Worker relay to Anthropic (SSE, quotas), tool catalogue (read/calc/plan evaluator/show components/action proposals with apply/memory), palace registry of 69 in-app places with navigate+spotlight, fact ledger + numeric grounding check, knowledge cards (47) and method explanations, memory items, today override, daily brief, photo input, offline palace answers",
+  "Today: scheduled session card, readiness card, this-week summary + grade, recovery snapshot, top insight, streak, daily quote/spark",
+  "Settings: 5 themes (no-flash), units, gyms, auto-rest/rest length, reminders (training-day notifications 8 weeks ahead, styles), haptics, profile, health/watch, Escobar settings, JSON backup/restore via share sheet, legacy v36 auto-import",
+  "Platform: Preact+signals+TS+Vite, Capacitor 8.5 Android (minSdk patched to 26, targetSdk from Capacitor 8 default 36), PWA with cache-first service worker, CI builds debug/release APK and deploys worker, 5-theme screenshot gate"
+ ],
+ "competitor_matrix": [
+  {
+   "feature": "Supersets / circuits / giant sets (grouped exercises, shared rest)",
+   "who_has_it": "Hevy, Strong, JEFIT, Liftosaur, Boostcamp, Fitbod",
+   "marc_status": "missing",
+   "value": "high",
+   "effort": "M",
+   "notes": "No superset concept in models (grep: zero hits). Needs LoggedExercise.groupId, rest after last exercise of group, recovery/volume unaffected. Hevy CSV even carries superset_id."
+  },
+  {
+   "feature": "Set types (warm-up, drop set, failure, myo-reps) tagging",
+   "who_has_it": "Strong, Hevy, Liftosaur",
+   "marc_status": "missing",
+   "value": "high",
+   "effort": "S",
+   "notes": "Warm-up rows are shown but not logged as a typed set; logged warm-ups would pollute volume/e1RM. Add LoggedSet.kind excluded from effective sets and records."
+  },
+  {
+   "feature": "Warm-up calculator",
+   "who_has_it": "Strong (Pro), Liftosaur, Hevy (warm-up sets)",
+   "marc_status": "has",
+   "value": "medium",
+   "effort": "S",
+   "notes": "50/70/85% ramp snapped to plates; could add configurable ramp per exercise."
+  },
+  {
+   "feature": "Plate calculator",
+   "who_has_it": "Strong (Pro), Liftosaur, Hevy, JEFIT",
+   "marc_status": "better",
+   "value": "medium",
+   "effort": "S",
+   "notes": "Plate Sense: per-gym equipment profiles, kg/lb mixed, unit-slip detection is ahead of competitors."
+  },
+  {
+   "feature": "RPE / RIR per set",
+   "who_has_it": "Strong, Hevy, Liftosaur, RP, Alpha Progression",
+   "marc_status": "partial",
+   "value": "medium",
+   "effort": "S",
+   "notes": "3-level effort (easy 3+, ideal 1-3, max 0). Simpler UX; optional numeric RIR 0-4 would sharpen e1RM and progression for experienced users."
+  },
+  {
+   "feature": "Per-set progression recommendations (weight/reps each set)",
+   "who_has_it": "Alpha Progression, Hevy Trainer, Fitbod, Gravl, Hypro",
+   "marc_status": "has",
+   "value": "high",
+   "effort": "S",
+   "notes": "suggestNext + in-session autoregulation; explained reasons are a differentiator."
+  },
+  {
+   "feature": "Mesocycle / periodisation (multi-week blocks, planned volume ramp, scheduled deload)",
+   "who_has_it": "RP Hypertrophy, Alpha Progression, Liftosaur, Boostcamp programs",
+   "marc_status": "partial",
+   "value": "high",
+   "effort": "L",
+   "notes": "Only reactive deload offer and volume bands; no block object with week index, planned +1-2 sets/week ramp or end-of-block review."
+  },
+  {
+   "feature": "Deload automation",
+   "who_has_it": "RP Hypertrophy, Alpha Progression",
+   "marc_status": "has",
+   "value": "medium",
+   "effort": "S",
+   "notes": "Trigger rules + 7-day deload with set x0.6, load x0.9; evidence suggests making it optional/soft (see science)."
+  },
+  {
+   "feature": "Per-muscle session feedback (pump, soreness, joint pain, workload) driving next week's sets",
+   "who_has_it": "RP Hypertrophy",
+   "marc_status": "partial",
+   "value": "medium",
+   "effort": "M",
+   "notes": "Soreness check-in calibrates recovery tau; no joint-pain flag or volume adjustment per muscle from feedback."
+  },
+  {
+   "feature": "Exercise videos / animations",
+   "who_has_it": "Fitbod, JEFIT, Hevy, RP (250+ videos), Boostcamp",
+   "marc_status": "missing",
+   "value": "medium",
+   "effort": "L",
+   "notes": "Text cues only. For local-first solo dev, link-out to curated external demo URL per library exercise is S effort; bundling media is L and bloats APK."
+  },
+  {
+   "feature": "Exercise notes (per exercise, per session, sticky notes like seat height)",
+   "who_has_it": "Strong, Hevy, Liftosaur",
+   "marc_status": "missing",
+   "value": "high",
+   "effort": "S",
+   "notes": "No note field on Session/LoggedExercise (only CheckIn.note). Sticky per-exercise setup note is a top-requested gym feature."
+  },
+  {
+   "feature": "Body measurements (multi-site) and progress photos",
+   "who_has_it": "Strong, Hevy, JEFIT, Liftosaur",
+   "marc_status": "partial",
+   "value": "medium",
+   "effort": "M",
+   "notes": "Weight log + neck/waist/hip for body-fat only. Add arms/chest/thigh and optional local-only progress photos (Filesystem)."
+  },
+  {
+   "feature": "Muscle recovery heatmap",
+   "who_has_it": "Fitbod, Boostcamp Pro (volume heatmap), StrengthLog",
+   "marc_status": "better",
+   "value": "high",
+   "effort": "S",
+   "notes": "Impulse-response model with personal calibration and systemic modifier is more rigorous than Fitbod's."
+  },
+  {
+   "feature": "Home-screen widget",
+   "who_has_it": "Hevy, Strong (iOS), Fitbod",
+   "marc_status": "missing",
+   "value": "medium",
+   "effort": "M",
+   "notes": "Native AppWidget reading a small JSON snapshot written by the web layer (today's split, readiness band, streak)."
+  },
+  {
+   "feature": "Lock-screen live workout / rest-timer notification",
+   "who_has_it": "Hevy (Live Activity on iOS and Android)",
+   "marc_status": "missing",
+   "value": "high",
+   "effort": "M",
+   "notes": "Only a one-shot rest-complete alarm. Android 16 Live Updates (promoted ongoing notification with chronometer) fit exactly."
+  },
+  {
+   "feature": "Wear OS companion app",
+   "who_has_it": "Hevy, Strong (Apple Watch), Fitbod, JEFIT",
+   "marc_status": "partial",
+   "value": "medium",
+   "effort": "L",
+   "notes": "M/ARC reads BLE HR broadcast from the watch but has no watch UI to log sets. Large effort for solo dev; defer."
+  },
+  {
+   "feature": "CSV import from Strong / Hevy",
+   "who_has_it": "Hevy, Liftosaur, Reps, Gript, Arvo, RepStack",
+   "marc_status": "missing",
+   "value": "high",
+   "effort": "M",
+   "notes": "Biggest switching barrier. Header-sniffing parser (Strong 'Set Order' W = warm-up; Hevy set_type, rpe, superset_id, weight_lbs) mapping names to library via aliases, dedupe via isDuplicateSession, stamped fidelity 'retro'."
+  },
+  {
+   "feature": "CSV export (open format)",
+   "who_has_it": "Strong, Hevy, JEFIT",
+   "marc_status": "partial",
+   "value": "medium",
+   "effort": "S",
+   "notes": "Full JSON backup exists; a flat sets CSV aids spreadsheets and portability."
+  },
+  {
+   "feature": "Cloud backup / multi-device sync",
+   "who_has_it": "Hevy, Strong, Fitbod, JEFIT, Liftosaur",
+   "marc_status": "missing",
+   "value": "medium",
+   "effort": "M",
+   "notes": "Manual JSON only; single localStorage key is a data-loss risk on uninstall. Local-first-compatible option: scheduled auto-export to user-chosen folder (SAF) or Android Auto Backup of app data."
+  },
+  {
+   "feature": "Write workouts to Health Connect (ExerciseSession, calories)",
+   "who_has_it": "Hevy, Strong, Fitbod, JEFIT",
+   "marc_status": "missing",
+   "value": "medium",
+   "effort": "S",
+   "notes": "Plugin is read-only. Writing ExerciseSessionRecord (strength training) makes sessions show in Fit/Samsung Health; small native addition."
+  },
+  {
+   "feature": "Social feed / sharing workouts",
+   "who_has_it": "Hevy (core), Boostcamp, JEFIT",
+   "marc_status": "partial",
+   "value": "low",
+   "effort": "M",
+   "notes": "Share sheet exists for backups; a session summary image/text share is S. Social feed contradicts local-first; skip."
+  },
+  {
+   "feature": "Streaks / gamification",
+   "who_has_it": "Hevy, Fitbod, JEFIT",
+   "marc_status": "has",
+   "value": "low",
+   "effort": "S",
+   "notes": "Streak + levels + records badges; plan item to switch to 28-day adherence rate is already specified."
+  },
+  {
+   "feature": "Program library (community/coach programs)",
+   "who_has_it": "Boostcamp (11k+), Liftosaur, JEFIT, RP (45+ templates)",
+   "marc_status": "partial",
+   "value": "medium",
+   "effort": "M",
+   "notes": "Starter templates per goal only. A handful of well-known public-domain programs (PPL, Upper/Lower, 5/3/1-style %) as data would help onboarding."
+  },
+  {
+   "feature": "AI coach (conversational, grounded in user data, can propose plan changes)",
+   "who_has_it": "Fitbod/Gravl (AI generation), Hevy Trainer (algorithmic), various AI chat apps",
+   "marc_status": "better",
+   "value": "high",
+   "effort": "S",
+   "notes": "Escobar with tool calls, fact ledger, numeric grounding and in-app navigation exceeds competitors; cost/quota and offline fallback are the risks."
+  },
+  {
+   "feature": "Live heart rate + HR-guided rest from any BLE watch/strap",
+   "who_has_it": "Hevy (Wear OS HR), few others",
+   "marc_status": "better",
+   "value": "medium",
+   "effort": "S",
+   "notes": "Unique: works with any standard BLE HR broadcaster, HRR60, zones, HR-guided rest."
+  },
+  {
+   "feature": "Readiness score from sleep/RHR/check-in",
+   "who_has_it": "Whoop/Garmin-style; rare in lifting apps",
+   "marc_status": "better",
+   "value": "medium",
+   "effort": "S",
+   "notes": "Differentiator; needs History read beyond 30 days permission to build baselines on first install."
+  }
+ ],
+ "platform_changes": [
+  {
+   "topic": "Play target API deadline",
+   "what_changed": "From 31 Aug 2026 new apps and updates on Google Play must target Android 16 (API 36); existing apps must target >= API 35 to stay visible to new users on newer OS; extension possible to 1 Nov 2026.",
+   "impact_on_marc": "Capacitor 8 already sets compile/targetSdk 36, so CI output complies, but every API-36 behaviour change below now applies. CI only patches minSdk; target is implicit from the Capacitor template.",
+   "action": "Add a CI assertion that android/variables.gradle targetSdkVersion >= 36 so a template change cannot silently regress. If ever published to Play, this is mandatory.",
+   "source": "https://support.google.com/googleplay/android-developer/answer/11926878 ; https://developer.android.com/google/play/requirements/target-sdk"
+  },
+  {
+   "topic": "Edge-to-edge enforcement (Android 15/16)",
+   "what_changed": "Apps targeting 36 on Android 16 cannot opt out of edge-to-edge (windowOptOutEdgeToEdgeEnforcement disabled). Capacitor 8 removed adjustMarginsForEdgeToEdge and added the SystemBars core plugin, which injects --safe-area-inset-* CSS variables because Android WebView < 140 reports wrong env(safe-area-inset-*).",
+   "impact_on_marc": "styles.css uses only env(safe-area-inset-*) for .app, .nav, .sheet-panel, .toast, .rest. On devices with WebView < 140 the bottom nav and rest banner can sit under the gesture/nav bar and the header under the status bar.",
+   "action": "Use var(--safe-area-inset-X, env(safe-area-inset-X, 0px)) everywhere; set SystemBars style per theme (light/dark icons) from the theme engine; verify on device with 3-button and gesture nav.",
+   "source": "https://developer.android.com/about/versions/16/behavior-changes-16 ; https://capacitorjs.com/docs/apis/system-bars ; https://capacitorjs.com/docs/updating/8-0"
+  },
+  {
+   "topic": "Predictive back / back button",
+   "what_changed": "Apps targeting 36 get predictive back by default; onBackPressed and KEYCODE_BACK are no longer dispatched; back must go through OnBackPressedDispatcher.",
+   "impact_on_marc": "No back handling exists (no @capacitor/app, no popstate listener); router uses history.replaceState so WebView has no history. Hardware/gesture back with a sheet (settings, Escobar, plate sheet) open exits the app instead of closing the sheet, and can drop an unsaved in-flight edit.",
+   "action": "Add @capacitor/app backButton listener (Capacitor routes it through the dispatcher): close openPanel / top sheet first, then go to Today, then minimizeApp. Optionally pushState per sheet so PWA back behaves the same.",
+   "source": "https://developer.android.com/about/versions/16/behavior-changes-16"
+  },
+  {
+   "topic": "Exact alarms",
+   "what_changed": "SCHEDULE_EXACT_ALARM is denied by default for new installs targeting 33+ (Android 14+); USE_EXACT_ALARM is a restricted Play permission only for apps whose core function is alarm/timer/calendar.",
+   "impact_on_marc": "Manifest declares SCHEDULE_EXACT_ALARM; rest-complete alert is scheduled exact allow-while-idle. Without user grant it silently degrades to inexact (can fire minutes late). ARCHITECTURE notes scheduling health is reported, good.",
+   "action": "Keep SCHEDULE_EXACT_ALARM (do not switch to USE_EXACT_ALARM). Better: drive the rest timer from an ongoing chronometer notification (Live Update) which needs no alarm permission while the app is foreground/recent; keep the exact alarm only as the 'done' ping, with an in-app prompt to grant it.",
+   "source": "https://developer.android.com/about/versions/14/changes/schedule-exact-alarms ; https://support.google.com/googleplay/android-developer/answer/16558241"
+  },
+  {
+   "topic": "Android 16 Live Updates",
+   "what_changed": "Ongoing notifications can be promoted to lock screen and status-bar chip (POST_PROMOTED_NOTIFICATIONS, setRequestPromotedOngoing, standard style or ProgressStyle, no custom views, not colorized). Timer use case = promoted ongoing notification with chronometer countdown. androidx.core 1.16+.",
+   "impact_on_marc": "Opportunity: live session + rest countdown on lock screen (parity with Hevy Live Activity) without a Wear app.",
+   "action": "Small native plugin or extend WatchBridge service notification: show current exercise, next target, rest chronometer; action button 'Set done'.",
+   "source": "https://developer.android.com/develop/ui/views/notifications/live-update"
+  },
+  {
+   "topic": "Foreground service types / BLE",
+   "what_changed": "Since Android 14 every FGS needs a type and its matching permission at start time (connectedDevice requires BLUETOOTH_CONNECT granted), else SecurityException; 'health' type exists for sensor-based fitness tracking. Starting FGS from background is restricted.",
+   "impact_on_marc": "Watch service declares connectedDevice and FOREGROUND_SERVICE_CONNECTED_DEVICE; manifest correctly scopes legacy BLUETOOTH/ADMIN/FINE_LOCATION to maxSdk 30 and BLUETOOTH_SCAN neverForLocation. Risk: starting the service after the user revokes Bluetooth permission or from a background resume.",
+   "action": "Guard service start with a BLUETOOTH_CONNECT check and catch SecurityException/ForegroundServiceStartNotAllowedException, surface 'watch paused' state. Consider adding 'health' type (FOREGROUND_SERVICE_HEALTH) since it is HR tracking during a workout.",
+   "source": "https://developer.android.com/develop/background-work/services/fgs/service-types ; https://developer.android.com/about/versions/14/changes/fgs-types-required"
+  },
+  {
+   "topic": "Health Connect history and background read",
+   "what_changed": "Default read window is 30 days before first grant; PERMISSION_READ_HEALTH_DATA_HISTORY unlocks older data; PERMISSION_READ_HEALTH_DATA_IN_BACKGROUND is required to read while backgrounded. Reinstall resets to 30 days.",
+   "impact_on_marc": "Plugin requests only READ_HEART_RATE/RESTING_HEART_RATE/SLEEP/STEPS/ACTIVE_CALORIES. Readiness baselines (28-day RHR, 60-day HRV SD, 14-night sleep) cannot be seeded beyond 30 days on first connect; morning readiness notification cannot refresh health data in background.",
+   "action": "Request READ_HEALTH_DATA_HISTORY (optional, explained) to seed baselines; do not request background read unless a background sync is added. Consider WRITE_EXERCISE to write sessions back.",
+   "source": "https://developer.android.com/health-and-fitness/health-connect/read-data ; https://android-developers.googleblog.com/2025/03/health-connect-jetpack-sdk-now-in-beta.html"
+  },
+  {
+   "topic": "Android 17 (released June 2026)",
+   "what_changed": "All apps: RAM-based per-app memory limits. Target 37: activities no longer recreated for most config changes by default; stricter bitmap/icon memory limits; custom notification view restrictions.",
+   "impact_on_marc": "Large single localStorage state + Escobar conversation images in memory could hit memory limits on low-RAM devices; not urgent since target 37 is not required until ~Aug 2027.",
+   "action": "Keep Escobar image pruning; avoid RemoteViews in any new notification/widget work (use standard styles).",
+   "source": "https://developer.android.com/about/versions/17/behavior-changes-all ; https://developer.android.com/about/versions/17/behavior-changes-17"
+  },
+  {
+   "topic": "Adaptive launcher icon",
+   "what_changed": "Adaptive icons crop foreground to the inner 66% safe zone; Android 13+ themed icons use a monochrome layer.",
+   "impact_on_marc": "CI copies the same full-bleed icon-512.png into ic_launcher, ic_launcher_round and ic_launcher_foreground, so the adaptive icon is cropped/zoomed; no monochrome layer.",
+   "action": "Generate a padded foreground (108dp canvas, 72dp content) and a monochrome layer; commit res files instead of copying the PWA icon.",
+   "source": "https://developer.android.com/develop/ui/views/launch/icon_design_adaptive"
+  },
+  {
+   "topic": "PWA service worker strategy",
+   "what_changed": "No platform change; internal finding. Current sw.js is cache-first for every same-origin GET including navigations, and falls back to index.html for any failed request (including JS/CSS).",
+   "impact_on_marc": "PWA users see the previous build until a second reload after an update; a missing hashed asset gets HTML back (MIME error, blank screen). Cache is unbounded within a version.",
+   "action": "Network-first (with timeout) for navigations/index.html, cache-first for hashed /assets/*, fall back to index.html only for request.mode === 'navigate'; show an 'update ready, reload' toast on controllerchange.",
+   "source": "public/sw.js (repo)"
+  }
+ ],
+ "science": [
+  {
+   "topic": "e1RM formula",
+   "marc_now": "Epley kg*(1+(reps+RIR)/30) with RIR from effort (easy 3, ideal 2, max 0), only sets of 1-10 reps, 7-10 reps weighted 0.5, changes under 2x typical error (4%) reported as 'about the same'.",
+   "evidence": "Classical equations (Epley, Brzycki) were fit on small single-lift samples; accuracy degrades above ~10 reps and differs by exercise (deadlift/lower-body underestimated). Nuzzo et al. 2024 meta-regression (952 RTF tests, 269 studies): exercise type is the only meaningful moderator of the reps-%1RM relation; relationship is non-linear. A 2026 preprint fit on 303k near-failure sets proposes a weight-dependent equation.",
+   "recommendation": "Current design is well supported (cap at 10 reps, down-weighting, noise gate). Optional refinement: per-pattern correction (e.g. hinge/lower-body +3-5%) or a per-user calibration from occasional true top sets; not a priority.",
+   "source": "https://arxiv.org/pdf/2603.17495 (reviews LeSuer 1997, Mayhew 2008, Nuzzo 2024)"
+  },
+  {
+   "topic": "RIR/effort self-report accuracy",
+   "marc_now": "3-level effort label mapped to RIR 3/2/0 with an effort-calibration method and optional rirBias; HR effort-mismatch insight.",
+   "evidence": "Halperin et al. 2022 (12 studies, 414 participants): people underpredict reps to failure by ~1 rep on average; accuracy improves with heavier loads, later sets and closer to failure; no significant accuracy loss when sets are under ~12 reps.",
+   "recommendation": "Supports a default rirBias of about +1 for 'easy' and early sets on high-rep accessories, and trusting 'max' most. Keep 3 levels for UX; optionally allow numeric RIR 0-4 for experienced users. Consider occasional AMRAP calibration set prompts to personalise rirBias.",
+   "source": "https://pubmed.ncbi.nlm.nih.gov/34542869/"
+  },
+  {
+   "topic": "Weekly set volume per muscle",
+   "marc_now": "Effective sets: main 1.0, helper 0.5 (fractional); level-based bands New 4-8 up to Advanced 12-20, offsets for lower back/side delts/calves; insight when far under/over; deload trigger if over band 2 weeks.",
+   "evidence": "Pelland et al. 2025/2026 (67 studies, 2058 participants): hypertrophy and strength increase with volume with diminishing returns, no clear upper plateau in the data range; fractional counting (indirect = 0.5) fit best. Frequency has negligible effect on hypertrophy when volume is equated but improves strength.",
+   "recommendation": "Fractional counting is validated, keep it. Treat the band's upper end as 'diminishing returns / recovery cost', not a harm threshold: soften 'over band' wording and drop 'over band 2 weeks' as a standalone deload trigger unless paired with performance decline. For strength goal, recommend spreading sets over >=2 sessions per week per lift.",
+   "source": "https://sportrxiv.org/index.php/server/preprint/view/460 ; https://pubmed.ncbi.nlm.nih.gov/41343037/"
+  },
+  {
+   "topic": "Proximity to failure",
+   "marc_now": "Goal policy RIR bands (e.g. growth rir [0,2], strength [1,3]); increases blocked after max-effort sets; readiness amber targets 'ideal'.",
+   "evidence": "Robinson et al. 2024 (55 studies): hypertrophy increases as sets approach failure; strength gains show a negligible relationship with RIR.",
+   "recommendation": "Consistent with current goals. For strength goal, allow more conservative efforts (RIR 2-3) without flagging 'not hard enough'; for hypertrophy, the coach can encourage last-set 'max' on isolation lifts. No model change needed.",
+   "source": "https://pubmed.ncbi.nlm.nih.gov/38970765/"
+  },
+  {
+   "topic": "Rest intervals",
+   "marc_now": "Goal default rest 90 s (growth), 120 s, 150 s (strength); HR-guided rest floor 60/90/120 s by effort; short-rest penalty widens recovery window.",
+   "evidence": "Singer et al. 2024 Bayesian meta-analysis: small hypertrophy benefit for rest >60 s, no appreciable difference beyond ~90 s. A 2025 medRxiv meta-analysis in trained males addresses <60 vs >60 s similarly.",
+   "recommendation": "Defaults are supported. Raise the HR-guided rest minimum for 'ideal/max' main lifts to at least 60-90 s regardless of HR recovery (HR can recover faster than local muscle), and flag sessions where median rest < 60 s on hypertrophy goal.",
+   "source": "https://www.frontiersin.org/journals/sports-and-active-living/articles/10.3389/fspor.2024.1429789/full"
+  },
+  {
+   "topic": "Recovery time course",
+   "marc_now": "Per-muscle impulse-response with tau_base 18 h, fast tau 6 h, effort impulse 0.55/1/2, damage factors, per-muscle recoveryFactor (hamstrings/adductors 1.2, calves/abs 0.8), 'ready for hard work' at 90%, systemic modifier cap 1.25x.",
+   "evidence": "Performance and perceptual outcomes typically return to baseline within 72-120 h after damaging sessions (biochemical markers longer); multi-joint lifts (bench, deadlift) need >48 h vs single-joint; trained status shortens recovery. Evidence is heterogeneous and mostly group-level.",
+   "recommendation": "Model structure is appropriate. Keep personal calibration from soreness check-ins as the main correction; add a performance-based calibration signal (next-session rep drop at same load) since soreness correlates weakly with strength recovery. Keep copy non-prohibitive ('lowered readiness', never 'blocked').",
+   "source": "https://sportrxiv.org/index.php/server/preprint/view/1070 ; https://www.researchgate.net/publication/271135793"
+  },
+  {
+   "topic": "Deload practice",
+   "marc_now": "Reactive deload: triggers on 2+ plateaued lifts, effort drift + rising volume, over-band 2 weeks, or readiness red 3/5 days; 7 days at sets x0.6, load x0.9.",
+   "evidence": "Coleman et al. 2024 RCT (39 trained, 9 weeks): a 1-week training cessation at midpoint gave no extra hypertrophy/power/endurance and slightly less lower-body strength gain. Bell et al. Delphi/survey: practitioners deload every ~5-6 weeks for ~6-7 days mainly for fatigue management, typically by reducing volume and intensity of effort rather than stopping. 2026 Sci Rep within-subject trial in untrained men also examined deloads.",
+   "recommendation": "Keep deload reactive and optional (not calendar-forced), reduce effort (target easy/RIR 3-4) and volume rather than stopping; current x0.6 sets / x0.9 load is in line. Add an 'end-of-block' soft offer after ~5-6 hard weeks only if a mesocycle feature is built.",
+   "source": "https://peerj.com/articles/16777/ ; https://link.springer.com/article/10.1186/s40798-024-00691-y ; https://shura.shu.ac.uk/35313/3/Bell-APracticalApproach(AM).pdf"
+  },
+  {
+   "topic": "Autoregulation",
+   "marc_now": "Double-progression + effort-based step up/down, readiness-based hold/reduce, in-session autoregulation suggestion.",
+   "evidence": "Network meta-analysis 2025: APRE, VBT and RPE-based autoregulation outperform fixed percentage-based training for maximal strength, APRE ranking first. Zhang/Larsen reviews: load and volume autoregulation at least as effective as fixed loading.",
+   "recommendation": "Supports current approach. An APRE-style rule (last set AMRAP at the target load sets next session's load) is a natural optional mode for the strength goal and fits existing e1RM machinery.",
+   "source": "https://pubmed.ncbi.nlm.nih.gov/40791980/ ; https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8762534/"
+  },
+  {
+   "topic": "Training frequency",
+   "marc_now": "Balance rules and schedule; no explicit per-muscle frequency guidance.",
+   "evidence": "Pelland et al.: frequency negligible for hypertrophy at equated volume, positive (diminishing) for strength.",
+   "recommendation": "Do not nag about hitting a muscle 2x/week for hypertrophy goal; for strength goal suggest practicing the main lift >=2x/week.",
+   "source": "https://sportrxiv.org/index.php/server/preprint/view/460"
+  }
+ ],
+ "recommendations": [
+  {
+   "title": "Android back button/predictive back: close top sheet/panel, then return to Today, then minimise",
+   "kind": "add",
+   "rationale": "targetSdk 36 (Capacitor 8) enables predictive back; there is no back handling and the router uses replaceState, so back exits the app from any sheet including Escobar and the live session editor.",
+   "priority": "P0",
+   "size": "S"
+  },
+  {
+   "title": "Safe-area insets via Capacitor SystemBars CSS variables with env() fallback; theme-aware bar icon colour",
+   "kind": "improve",
+   "rationale": "Edge-to-edge is enforced on Android 16 and WebView < 140 reports wrong env(safe-area-inset-*); nav bar, rest banner and sheets can sit under system bars.",
+   "priority": "P0",
+   "size": "S"
+  },
+  {
+   "title": "Fix service worker: network-first navigations, cache-first hashed assets, navigate-only HTML fallback, update toast",
+   "kind": "improve",
+   "rationale": "Current cache-first index.html serves stale builds and returns HTML for failed JS/CSS requests (blank screen risk).",
+   "priority": "P1",
+   "size": "S"
+  },
+  {
+   "title": "Automatic local backup (rolling auto-export to a user-chosen folder or Android Auto Backup) plus restore preview",
+   "kind": "add",
+   "rationale": "All data lives in one localStorage key; uninstall or WebView data clear loses everything. Competitors all have cloud backup; this keeps local-first.",
+   "priority": "P1",
+   "size": "M"
+  },
+  {
+   "title": "CSV import from Strong and Hevy (header sniffing, alias matching, dedupe, fidelity 'retro', warm-up rows excluded)",
+   "kind": "add",
+   "rationale": "Largest switching barrier; formats are documented (Strong 'Set Order' W, Hevy set_type/rpe/superset_id/weight_lbs). Coach models need history to be useful.",
+   "priority": "P1",
+   "size": "M"
+  },
+  {
+   "title": "Supersets/circuits (LoggedExercise.groupId, rest after last in group, UI grouping)",
+   "kind": "add",
+   "rationale": "Present in every major competitor; common for accessories and time-limited sessions.",
+   "priority": "P1",
+   "size": "M"
+  },
+  {
+   "title": "Set types (warm-up, drop, failure) excluded from effective sets, e1RM and records as appropriate; log the warm-up ramp as warm-up sets",
+   "kind": "add",
+   "rationale": "Warm-ups are shown but cannot be logged without polluting volume/e1RM; drop sets are common hypertrophy technique.",
+   "priority": "P1",
+   "size": "S"
+  },
+  {
+   "title": "Exercise and session notes, including sticky per-exercise setup note",
+   "kind": "add",
+   "rationale": "No note fields on Session/LoggedExercise; high-frequency need (seat height, grip, pain notes) and useful context for Escobar memory.",
+   "priority": "P1",
+   "size": "S"
+  },
+  {
+   "title": "Live Update ongoing notification for active session and rest countdown (lock screen/status chip), with 'set done' action",
+   "kind": "add",
+   "rationale": "Android 16 promoted notifications give Hevy-style Live Activity parity; reduces reliance on exact alarms for rest.",
+   "priority": "P2",
+   "size": "M"
+  },
+  {
+   "title": "Guard WatchBridge foreground service start (permission check, catch start exceptions); consider 'health' FGS type",
+   "kind": "improve",
+   "rationale": "Android 14+ throws SecurityException when connectedDevice FGS starts without BLUETOOTH_CONNECT or from background.",
+   "priority": "P1",
+   "size": "S"
+  },
+  {
+   "title": "Request Health Connect READ_HEALTH_DATA_HISTORY (optional) to seed readiness baselines; add WRITE_EXERCISE to write sessions back",
+   "kind": "add",
+   "rationale": "Default 30-day window starves 28/60-day baselines on first connect; writing sessions matches competitor behaviour for Fit/Samsung Health users.",
+   "priority": "P2",
+   "size": "S"
+  },
+  {
+   "title": "Volume-band copy and deload trigger: treat band top as diminishing returns, require performance decline before over-band triggers deload",
+   "kind": "improve",
+   "rationale": "Pelland 2025/26 shows continued (diminishing) gains with volume and no harm threshold; current over-band-2-weeks trigger can offer unneeded deloads.",
+   "priority": "P2",
+   "size": "S"
+  },
+  {
+   "title": "RIR calibration: default +1 rirBias for easy/early high-rep sets, optional numeric RIR 0-4, occasional AMRAP calibration prompt",
+   "kind": "improve",
+   "rationale": "Halperin 2022: lifters underpredict RIR by ~1 rep, less so near failure and on heavier loads.",
+   "priority": "P2",
+   "size": "S"
+  },
+  {
+   "title": "HR-guided rest minimum raised to 60-90 s for ideal/max main-lift sets; flag median rest < 60 s on hypertrophy goal",
+   "kind": "improve",
+   "rationale": "Singer 2024: small hypertrophy benefit from >60 s rest, plateau past ~90 s; cardiovascular recovery can precede local muscle recovery.",
+   "priority": "P2",
+   "size": "S"
+  },
+  {
+   "title": "Mesocycle/block object (length, week index, planned +1-2 sets/week ramp per focus muscle, end-of-block review and optional deload)",
+   "kind": "add",
+   "rationale": "RP/Alpha Progression core feature; M/ARC already has bands, deload and weekly review to build on.",
+   "priority": "P3",
+   "size": "L"
+  },
+  {
+   "title": "Additional body measurements (arm, chest, thigh, hips) and optional local progress photos",
+   "kind": "improve",
+   "rationale": "Only neck/waist/hip for body fat today; standard in Strong/Hevy/JEFIT.",
+   "priority": "P3",
+   "size": "M"
+  },
+  {
+   "title": "Home-screen widget (today's split, readiness band, streak, start button)",
+   "kind": "add",
+   "rationale": "Competitor parity; cheap if the web layer writes a small snapshot JSON for a native AppWidget.",
+   "priority": "P3",
+   "size": "M"
+  },
+  {
+   "title": "Proper adaptive launcher icon (padded foreground + monochrome layer) committed as resources",
+   "kind": "improve",
+   "rationale": "CI copies a full-bleed PNG into ic_launcher_foreground, so the adaptive icon is cropped; no themed icon.",
+   "priority": "P3",
+   "size": "S"
+  },
+  {
+   "title": "CI assertion that targetSdkVersion >= 36 and compileSdk >= 36",
+   "kind": "add",
+   "rationale": "Play deadline passed 31 Aug 2026; target is implicit from the Capacitor template and could regress unnoticed.",
+   "priority": "P3",
+   "size": "S"
+  },
+  {
+   "title": "Remove legacy/v36 from the shipped repo tree (keep in a tag) and drop legacy BLUETOOTH/ADMIN if minSdk moves to 31",
+   "kind": "remove",
+   "rationale": "legacy/v36 is reference-only and not built; migration code already carries the import path. Reduces noise for the implementing agent.",
+   "priority": "P3",
+   "size": "S"
+  }
+ ]
+}

@@ -1,0 +1,155 @@
+diff --git a/src/app/ErrorBoundary.tsx b/src/app/ErrorBoundary.tsx
+index d3f0de7..a41cf02 100644
+--- a/src/app/ErrorBoundary.tsx
++++ b/src/app/ErrorBoundary.tsx
+@@ -7,14 +7,19 @@
+ import { Component, type ComponentChildren } from 'preact';
+ import { buildRescueJson, saveRescueFile } from '@/core/rescue';
+ import { exportText } from '@/native/share';
++import { stopSaving } from '@/core/store';
+ 
+ export async function saveRescueCopy(): Promise<void> {
+   const text = buildRescueJson();
+   try { await exportText('marc-rescue.json', text); } catch { await saveRescueFile(text); }
+ }
+ 
+-/** The same wipe as the start-up crash screen in index.html: every stored key and the photo database. */
++/**
++ * The same wipe as the start-up crash screen in index.html: every stored key and the photo database.
++ * Saving stops first, so the save on unload cannot write the crashing state back (QA2-FB-1).
++ */
+ export function resetAppData(storage: Pick<Storage, 'clear'> = localStorage, idb: Pick<IDBFactory, 'databases' | 'deleteDatabase'> | undefined = globalThis.indexedDB): void {
++  stopSaving();
+   try { storage.clear(); } catch { /* storage unavailable */ }
+   try { void idb?.databases?.().then(dbs => dbs.forEach(d => { if (d.name) idb.deleteDatabase(d.name); })).catch(() => {}); } catch { /* no IndexedDB */ }
+ }
+diff --git a/src/core/store.ts b/src/core/store.ts
+index 821006b..566189d 100644
+--- a/src/core/store.ts
++++ b/src/core/store.ts
+@@ -363,3 +363,12 @@ export function flushSave(): void {
+   persistNow();
+ }
+ 
++/**
++ * QA2-FB-1: the error card's reset wipes storage and reloads. No save may follow, not even the
++ * one on unload (pagehide, visibilitychange), or the state that crashed is written straight back.
++ */
++export function stopSaving(): void {
++  if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
++  storageRef = null;
++}
++
+diff --git a/src/escobar/apply.ts b/src/escobar/apply.ts
+index 0fb8efa..faa2d92 100644
+--- a/src/escobar/apply.ts
++++ b/src/escobar/apply.ts
+@@ -181,7 +181,8 @@ const APPLIERS: Record<string, Applier> = {
+   propose_reminder: input => {
+     const before = state.value.preferences.reminders;
+     update(s => ({ ...s, preferences: { ...s.preferences, reminders: { ...s.preferences.reminders, enabled: input.enabled === true, time: String(input.time), style: input.style as AppState['preferences']['reminders']['style'], readinessSummary: input.readinessSummary === true } } }));
+-    syncReminders();
++    // QA2-FB-2: Apply is the person's own tap, like the Settings reminder toggle, so it may ask for notification permission.
++    void resyncReminders({ prompt: true });
+     return { message: 'Reminders updated', undo: () => { update(s => ({ ...s, preferences: { ...s.preferences, reminders: before } })); syncReminders(); } };
+   },
+   propose_setting: input => {
+diff --git a/tests/error-boundary.test.ts b/tests/error-boundary.test.ts
+index b30cad8..239fbc3 100644
+--- a/tests/error-boundary.test.ts
++++ b/tests/error-boundary.test.ts
+@@ -1,6 +1,20 @@
+ import { describe, it, expect, vi } from 'vitest';
+ import type { VNode } from 'preact';
+ import { ErrorBoundary, resetAppData } from '@/app/ErrorBoundary';
++import { BACKUP_DAY_KEY, BACKUP_KEY, STATE_KEY, flushSave, initStore, update } from '@/core/store';
++import { freshState } from '@/core/models';
++
++function memoryStorage(): Storage {
++  const map = new Map<string, string>();
++  return {
++    getItem: (k: string) => map.get(k) ?? null,
++    setItem: (k: string, v: string) => { map.set(k, v); },
++    removeItem: (k: string) => { map.delete(k); },
++    clear: () => map.clear(),
++    key: (i: number) => [...map.keys()][i] ?? null,
++    get length() { return map.size; },
++  } as Storage;
++}
+ 
+ const texts = (n: unknown): string[] => {
+   if (n == null || typeof n === 'boolean') return [];
+@@ -27,4 +41,20 @@ describe('the error card (QA-R1-8)', () => {
+     expect(clear).toHaveBeenCalled();
+     expect(deleteDatabase).toHaveBeenCalledWith('marc-escobar-img');
+   });
++  it('QA2-FB-1: the save on unload does not write the crashing state back after the reset', () => {
++    vi.useFakeTimers();
++    try {
++      const st = memoryStorage();
++      st.setItem(STATE_KEY, JSON.stringify({ ...freshState(), profile: { ...freshState().profile, name: 'crash' } }));
++      initStore(st);
++      update(s => ({ ...s, profile: { ...s.profile, name: 'crash again' } }));
++      resetAppData(st, undefined);
++      vi.advanceTimersByTime(1000); // a save that was pending when the reset ran
++      flushSave(); // pagehide / visibilitychange while location.reload() unloads the page
++      expect(st.getItem(STATE_KEY)).toBeNull();
++      expect(st.getItem(BACKUP_KEY)).toBeNull();
++      expect(st.getItem(BACKUP_DAY_KEY)).toBeNull();
++      expect(st.length).toBe(0);
++    } finally { vi.useRealTimers(); }
++  });
+ });
+diff --git a/tests/escobar/apply-reminders.test.ts b/tests/escobar/apply-reminders.test.ts
+new file mode 100644
+index 0000000..d0c43d9
+--- /dev/null
++++ b/tests/escobar/apply-reminders.test.ts
+@@ -0,0 +1,47 @@
++import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
++
++const plugin = vi.hoisted(() => {
++  let pending: Array<{ id: number }> = [];
++  return {
++    schedule: vi.fn(async ({ notifications }: { notifications: Array<{ id: number }> }) => { pending = notifications.map(n => ({ id: n.id })); return { notifications: [] }; }),
++    cancel: vi.fn(async () => { pending = []; }),
++    getPending: vi.fn(async () => ({ notifications: pending })),
++    createChannel: vi.fn(async () => undefined),
++    checkPermissions: vi.fn(async () => ({ display: 'prompt' })),
++    requestPermissions: vi.fn(async () => ({ display: 'granted' })),
++    checkExactNotificationSetting: vi.fn(async () => ({ exact_alarm: 'denied' })),
++    changeExactNotificationSetting: vi.fn(async () => ({ exact_alarm: 'granted' })),
++    addListener: vi.fn(),
++  };
++});
++vi.mock('@capacitor/local-notifications', () => ({ LocalNotifications: plugin }));
++vi.mock('@/native/capacitor', () => ({ isNative: () => true }));
++
++import { replaceState, state } from '@/core/store';
++import { decide } from '@/escobar/apply';
++import { buildProposal } from '@/escobar/tools/actions';
++import { memoryStorage, newConversation, setEscobarStorage } from '@/escobar/store';
++import { reminderHealth } from '@/slices/settings/reminders';
++import type { Conversation } from '@/escobar/types';
++import { NOW, ctxOf, twoWeeksState } from './fixtures';
++
++const proposal = (name: string, input: Record<string, unknown>, id = 'p1'): Conversation => {
++  const p = buildProposal(name, input, ctxOf(state.value), id);
++  return { ...newConversation('test', 'chat'), proposals: [{ ...p, status: 'awaiting', messageIndex: 1 }] };
++};
++
++beforeEach(() => { vi.clearAllMocks(); vi.useFakeTimers({ now: NOW, toFake: ['Date'] }); replaceState(twoWeeksState()); setEscobarStorage(memoryStorage()); });
++afterEach(() => { vi.useRealTimers(); });
++
++describe('reminders turned on through Escobar (QA2-FB-2)', () => {
++  it('Apply is the person\'s tap: it asks for notification permission and schedules the reminders', async () => {
++    expect(state.value.preferences.reminders.enabled).toBe(false);
++    const a = decide(proposal('propose_reminder', { enabled: true, time: '23:59' }), 'p1', 'apply');
++    expect(a.result).toMatchObject({ ok: true, status: 'applied', message: 'Reminders updated' });
++    expect(state.value.preferences.reminders.enabled).toBe(true);
++    await vi.waitFor(() => expect(reminderHealth.value.queued).toBeGreaterThan(0));
++    expect(plugin.requestPermissions).toHaveBeenCalledTimes(1);
++    expect(plugin.schedule).toHaveBeenCalledTimes(1);
++    expect(reminderHealth.value.ok).toBe(true);
++  });
++});

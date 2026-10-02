@@ -1,0 +1,7 @@
+# Builder gotchas
+
+One line per incident that a rule would have caught. Newest last.
+
+- **2026-09-29, V1-07 (#96), pinned-test clash.** An approved drawing change (the Midnight body lift and removing the dumbbell label) broke assertions in other tasks' blocks of shared add-only files: FG-6's block in `tests/theme.test.ts` (`bodyPal(t).base === accent`) and FG-4's probe in `scripts/screenshot-gate.mjs` (the drawn load label). Both were found mid-build. Before changing anything drawn or pinned, search the shared add-only files for assertions on it. If another task's block pins it, stop and report on the PR with options; never edit that block.
+- **2026-09-29, ~14:00 UTC, session-message outage.** One-shot Routines to builders failed while the service was down, so the supervisor posted the instruction on the PR instead (#96, 14:18). When you wait on the supervisor and nothing arrives, re-read your PR comments.
+- **2026-09-29, V1-08 (#95), probe sampled a static view.** Probe 1 sampled the joints after the Pictures tab was opened, where they do not move: all 17 joints read 0.00°, so "0 violations" came from flat data. The seeded failure also fired on an unchanged animation. A fresh reviewer caught it, not the self-check. A probe must fail when it sees nothing to measure (too few samples, no joint moving at least 10°, the bound V1-08's fix round used), and the mutation proof must include the same run without the mutation, showing 0.
