@@ -1,0 +1,359 @@
+diff --git a/.github/workflows/deploy-worker.yml b/.github/workflows/deploy-worker.yml
+index 45126ea..7d91b5a 100644
+--- a/.github/workflows/deploy-worker.yml
++++ b/.github/workflows/deploy-worker.yml
+@@ -41,12 +41,12 @@ jobs:
+           if [ -n "$ACCOUNT_ID" ]; then export CLOUDFLARE_ACCOUNT_ID="$ACCOUNT_ID"; fi
+           # wrangler is pinned in escobar-worker/package.json (installed by npm ci above).
+           npx --no-install wrangler deploy
+-      - name: Check /health answers protocol 2 with the key, quotas and US relay present
++      - name: Check /health answers protocol 2 with the key, quotas and US relay present and no model override ignored
+         run: |
+           for i in 1 2 3 4 5 6; do
+             body=$(curl -fsS https://marc-coach.mmarcdarenz.workers.dev/health || true)
+             echo "$body"
+-            if echo "$body" | grep -q '"protocol":2' && echo "$body" | grep -q '"key":true' && echo "$body" | grep -q '"quotas":true' && echo "$body" | grep -q '"relay":true'; then exit 0; fi
++            if echo "$body" | grep -q '"protocol":2' && echo "$body" | grep -q '"key":true' && echo "$body" | grep -q '"quotas":true' && echo "$body" | grep -q '"relay":true' && echo "$body" | grep -q '"ignoredModels":\[\]'; then exit 0; fi
+             sleep 5
+           done
+-          echo "::error::/health must show protocol 2, key:true, quotas:true (spend cap) and relay:true (US upstream, PL-20)"; exit 1
++          echo "::error::/health must show protocol 2, key:true, quotas:true (spend cap), relay:true (US upstream, PL-20) and ignoredModels:[] (every MODEL_<MODE> usable, QA2-F7-3)"; exit 1
+diff --git a/escobar-worker/README.md b/escobar-worker/README.md
+index bd41ee6..0149191 100644
+--- a/escobar-worker/README.md
++++ b/escobar-worker/README.md
+@@ -18,12 +18,12 @@ The app treats Escobar as online only when `GET /health` answers `protocol: 2`.
+ 
+ ## Routes
+ 
+-- `GET /health` → `{ok, protocol: 2, model, modes, quotas, relay, key}` (`quotas` is true when `QUOTA_DO` or `QUOTA` is bound; `relay` when `UPSTREAM` is bound)
++- `GET /health` → `{ok, protocol: 2, model, models, modes, quotas, relay, key, ignoredModels}` (`quotas` is true when `QUOTA_DO` or `QUOTA` is bound; `relay` when `UPSTREAM` is bound; `ignoredModels` names the modes whose `MODEL_<MODE>` is not a model the Worker can drive)
+ - `POST /v2/turn` (header `x-escobar-device: dev_<24 hex>`) → `text/event-stream` of `data: {t: …}` events: `start`, `text`, `thinking`, `tool`, `tool_input`, `final`, `refusal`, `error`; `: ping` every 10 s. Validation, quota and rate failures are plain 400/429 JSON before the stream.
+ 
+ ## Configure (wrangler.toml `[vars]`)
+ 
+-- `MODEL` (default `claude-opus-5`), `EFFORT_CHAT|PLAN|LIVE|BRIEF|MOMENT|SUMMARIZE`
++- `MODEL` (default `claude-opus-5`), `MODEL_CHAT|PLAN|LIVE|BRIEF|MOMENT|SUMMARIZE` (one of `MODE_MODELS` in `src/anthropic.ts`, else ignored), `EFFORT_CHAT|PLAN|LIVE|BRIEF|MOMENT|SUMMARIZE`
+ - `MAX_TURNS_PER_DEVICE` 80, `MAX_STEPS_PER_DEVICE` 400, `MAX_OUTPUT_PER_DEVICE` 400000, `MAX_TURNS_PER_IP` 300, `MAX_STEPS_TOTAL` 20000, `MAX_OUTPUT_TOTAL` 3000000
+ - `ALLOWED_ORIGINS` for the PWA; the Android app is always allowed
+ - `RATE` rate-limit binding: 30 steps a minute per device; `RATE_IP`: 60 requests a minute per client IP
+@@ -32,6 +32,8 @@ Quotas live in the `QUOTA_DO` Durable Object (`src/quotaDO.ts`, one SQLite-backe
+ 
+ The Anthropic call runs in the `UPSTREAM` Durable Object (`src/upstreamRelay.ts`), pinned to eastern North America with `locationHint: 'enam'`, so it always leaves from the US. Anthropic refuses some locations, and Cloudflare serves each network from its nearest location (a Philippine ISP was routed to Hong Kong). A 403 reaches the app as `upstream_region`; a 401 stays `upstream_auth`; both carry the API's text as `detail`.
+ 
++A step cut short before the API reports its usage (a hang-up, a timeout, a mid-stream error) is charged for the time it ran at `CUT_SHORT_TOKENS_PER_SEC` (200 output tokens a second, up to the step's `max_tokens`), or its streamed characters / 3 if more, because its thinking is billed but never streamed.
++
+ Every step logs one JSON line (`requestId, colo, mode, model, stop_reason, in, out, cacheRead, cacheWrite, steps, ms`), with no device id and no content; read it with `npx wrangler tail`.
+ 
+ ## Tools
+diff --git a/escobar-worker/src/anthropic.ts b/escobar-worker/src/anthropic.ts
+index 3f5494e..8906789 100644
+--- a/escobar-worker/src/anthropic.ts
++++ b/escobar-worker/src/anthropic.ts
+@@ -8,7 +8,7 @@ import type { MessageCreateParamsStreaming, BetaMessageParam, BetaRawMessageStre
+ import generated from './tools.generated.json';
+ import { WORKER_POLICY } from './prompt/policy';
+ import { renderManifest } from './prompt/manifest';
+-import type { Mode } from './prompt/modes';
++import { MODES, type Mode } from './prompt/modes';
+ import type { TurnBody } from './validate';
+ import type { QuotaCounter } from './quotaDO';
+ import type { UpstreamRelay } from './upstreamRelay';
+@@ -89,14 +89,28 @@ export function foldSystemMessages(messages: TurnBody['messages']): TurnBody['me
+   return out;
+ }
+ 
+-/** A model id as the API names them; anything else in an override is ignored. */
+-const MODEL_ID = /^claude-[a-z0-9.-]{2,60}$/;
+-/** F7: the model for one mode: MODEL_<MODE> when set and well-formed, else MODEL, else the default. */
+-export function modelFor(mode: TurnBody['mode'], env: Env): string {
++/**
++ * QA2-F7-3: the models a mode may be switched to. Each takes the request buildParams sends (adaptive
++ * thinking and output_config.effort from low to max). Anything else, a typo or a model such as Haiku
++ * 4.5 that rejects adaptive thinking, would fail every turn in that mode, so it is ignored. A dated
++ * snapshot of one of these (claude-opus-5-20260901) is accepted.
++ */
++const MODE_MODELS = new Set(['claude-opus-5-5', 'claude-opus-5', 'claude-opus-4-8', 'claude-opus-4-7', 'claude-sonnet-5', 'claude-fable-5-1', 'claude-fable-5', 'claude-mythos-5-1', 'claude-mythos-5']);
++const overrideFor = (mode: TurnBody['mode'], env: Env): string | undefined => {
+   const v = (env as Record<string, unknown>)[`MODEL_${mode.toUpperCase()}`];
+-  if (typeof v === 'string' && MODEL_ID.test(v.trim())) return v.trim();
++  return typeof v === 'string' && v.trim() ? v.trim() : undefined;
++};
++const usableOverride = (v: string): boolean => MODE_MODELS.has(v.replace(/-\d{8}$/, ''));
++/** F7: the model for one mode: MODEL_<MODE> when set to a model the Worker can drive, else MODEL, else the default. */
++export function modelFor(mode: TurnBody['mode'], env: Env): string {
++  const v = overrideFor(mode, env);
++  if (v && usableOverride(v)) return v;
+   return env.MODEL || DEFAULT_MODEL;
+ }
++/** QA2-F7-3: the modes whose MODEL_<MODE> is set but ignored, for /health and the deploy check. */
++export function ignoredModelOverrides(env: Env): Mode[] {
++  return MODES.filter(m => { const v = overrideFor(m, env); return !!v && !usableOverride(v); });
++}
+ 
+ export function buildParams(body: TurnBody, env: Env, opts: { foldSystem?: boolean } = {}): MessageCreateParamsStreaming {
+   const model = modelFor(body.mode, env);
+diff --git a/escobar-worker/src/handler.ts b/escobar-worker/src/handler.ts
+index 8338694..da912a6 100644
+--- a/escobar-worker/src/handler.ts
++++ b/escobar-worker/src/handler.ts
+@@ -3,7 +3,7 @@
+  * relayed as server-sent events (§12.2, §12.4–12.6). Pure over injected deps so tests can
+  * drive it with a scripted SDK stream.
+  */
+-import { buildParams, modelFor, noSystemRole, DEFAULT_MODEL, type ClientLike, type Env, type SseEvent, type ErrorCode } from './anthropic';
++import { buildParams, modelFor, ignoredModelOverrides, noSystemRole, DEFAULT_MODEL, type ClientLike, type Env, type SseEvent, type ErrorCode } from './anthropic';
+ import { localStep, relayStep, type StepResult } from './upstream';
+ import { validateTurn, stepsSinceUser, MAX_BODY_BYTES } from './validate';
+ import { checkQuota, recordStep } from './quota';
+@@ -44,6 +44,15 @@ const fail = (status: number, code: ErrorCode, message: string, cors: Record<str
+ /** Whether the API billed this step: it produced output, finished, refused, or was cut off after starting. */
+ export const billed = (r: StepResult): boolean => !!r.final || !!r.refused || r.emittedAny || !!r.aborted || !!r.timedOut;
+ 
++/**
++ * QA2-FA-1..4: output tokens per second a step is taken to produce while it runs, for a step cut
++ * short before the API reported its usage. Thinking is billed as output but never streamed (display
++ * "omitted" is the default, so a thinking block arrives empty), so how long the step ran is the only
++ * measure of it. Set above the output speed of every model a mode can use, so the estimate does not
++ * fall below the bill; it never passes the step's max_tokens.
++ */
++export const CUT_SHORT_TOKENS_PER_SEC = 200;
++
+ /**
+  * QA-R0-1: rate and daily limits key an IPv6 caller by its /64, the block one subscriber usually
+  * controls, so rotating addresses inside it gains nothing. IPv4 stays as is.
+@@ -83,7 +92,7 @@ export async function handle(req: Request, env: Env, deps: Deps): Promise<Respon
+   if (origin && !('Access-Control-Allow-Origin' in cors)) return new Response('forbidden origin', { status: 403 });
+   if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
+   if (url.pathname === '/health' && req.method === 'GET') {
+-    return json(200, { ok: true, protocol: PROTOCOL, model: env.MODEL || DEFAULT_MODEL, models: Object.fromEntries(MODES.map(m => [m, modelFor(m, env)])), modes: MODES, quotas: !!(env.QUOTA_DO || env.QUOTA), relay: !!env.UPSTREAM, key: !!env.ANTHROPIC_API_KEY }, cors);
++    return json(200, { ok: true, protocol: PROTOCOL, model: env.MODEL || DEFAULT_MODEL, models: Object.fromEntries(MODES.map(m => [m, modelFor(m, env)])), modes: MODES, quotas: !!(env.QUOTA_DO || env.QUOTA), relay: !!env.UPSTREAM, key: !!env.ANTHROPIC_API_KEY, ignoredModels: ignoredModelOverrides(env) }, cors);
+   }
+   if (url.pathname !== '/v2/turn') return json(404, { t: 'error', code: 'invalid', message: 'not found' }, cors);
+   if (req.method !== 'POST') return fail(405, 'invalid', 'use POST', cors);
+@@ -127,9 +136,12 @@ export async function handle(req: Request, env: Env, deps: Deps): Promise<Respon
+   const gone = () => { closed = true; upstream.abort(); };
+   writer.closed.catch(gone);
+   const write = (s: string) => { if (!closed) void writer.write(enc.encode(s)).catch(gone); };
+-  // Characters of model output sent so far: the billed-output estimate when a step has no final message.
++  // Characters of model output sent so far, and whether the model began its answer (thinking
++  // included): with the step's running time, the billed-output estimate when it has no final message.
+   let outChars = 0;
++  let modelOutput = false;
+   const emit = (e: SseEvent) => {
++    if (e.t === 'thinking' || e.t === 'text' || e.t === 'tool') modelOutput = true;
+     if (e.t === 'text') outChars += e.d.length;
+     else if (e.t === 'tool_input') outChars += JSON.stringify(e.input ?? '').length;
+     write(`data: ${JSON.stringify(e)}\n\n`);
+@@ -141,10 +153,14 @@ export async function handle(req: Request, env: Env, deps: Deps): Promise<Respon
+     emit({ t: 'start', requestId });
+     const model = modelFor(body.mode, env);
+     const turnSteps = stepsSinceUser(body.messages) + 1;
++    let stepStart = now;
+     // PL-20: with the relay bound, the Anthropic call leaves from the US, not from this edge.
+-    const step = (p: ReturnType<typeof buildParams>): Promise<StepResult> => env.UPSTREAM
+-      ? relayStep(env, p, emit, { idleMs: deps.idleMs, signal: upstream.signal, shardKey: device })
+-      : localStep(deps.makeClient(env), p, emit, { idleMs: deps.idleMs, signal: upstream.signal });
++    const step = (p: ReturnType<typeof buildParams>): Promise<StepResult> => {
++      stepStart = deps.now();
++      return env.UPSTREAM
++        ? relayStep(env, p, emit, { idleMs: deps.idleMs, signal: upstream.signal, shardKey: device })
++        : localStep(deps.makeClient(env), p, emit, { idleMs: deps.idleMs, signal: upstream.signal });
++    };
+     let params = buildParams(body, env);
+     let res = await step(params);
+     if (res.systemRole && !res.emittedAny) {
+@@ -161,8 +177,11 @@ export async function handle(req: Request, env: Env, deps: Deps): Promise<Respon
+     console.log(JSON.stringify({ requestId, colo, mode: body.mode, model: res.final?.model ?? model, stop_reason: res.final?.stop_reason ?? null, in: usage.input_tokens ?? 0, out: usage.output_tokens ?? 0, cacheRead: usage.cache_read_input_tokens ?? 0, cacheWrite: usage.cache_creation_input_tokens ?? 0, steps: turnSteps, ms: deps.now() - now }));
+     // QA-R0-1/2/3: every step the API bills is counted: a finished one, a refusal, and one cut short by
+     // a hang-up, a timeout or a mid-stream error. Only an error before any output (nothing billed) is not.
+-    if (billed(res)) {
+-      const outputTokens = res.final?.usage?.output_tokens ?? res.outputTokens ?? Math.ceil(outChars / 3);
++    if (billed(res) || modelOutput) {
++      // QA2-FA-1..4: a cut-short step is charged for the time it ran, which covers thinking the stream never shows.
++      const ranSec = Math.max(0, deps.now() - stepStart) / 1000;
++      const cutShort = Math.min(params.max_tokens, Math.max(Math.ceil(outChars / 3), Math.ceil(ranSec * CUT_SHORT_TOKENS_PER_SEC)));
++      const outputTokens = res.final?.usage?.output_tokens ?? res.outputTokens ?? cutShort;
+       const p = recordStep(env, keys, now, { turnEnded: res.final ? res.final.stop_reason !== 'tool_use' : true, outputTokens, turnSteps });
+       if (deps.waitUntil) deps.waitUntil(p); else await p;
+     }
+diff --git a/escobar-worker/test/anthropic.test.ts b/escobar-worker/test/anthropic.test.ts
+index 3395c31..7b3eb9f 100644
+--- a/escobar-worker/test/anthropic.test.ts
++++ b/escobar-worker/test/anthropic.test.ts
+@@ -120,7 +120,7 @@ describe('policy', () => {
+   });
+ });
+ 
+-import { modelFor } from '../src/anthropic';
++import { modelFor, ignoredModelOverrides } from '../src/anthropic';
+ describe('per-mode models (F7, D12)', () => {
+   it('MODEL_<MODE> overrides one mode; the rest keep MODEL', () => {
+     const env = baseEnv({ MODEL: 'claude-opus-5', MODEL_BRIEF: 'claude-sonnet-5' });
+@@ -133,6 +133,16 @@ describe('per-mode models (F7, D12)', () => {
+     expect(modelFor('chat', baseEnv({ MODEL: 'claude-opus-5', MODEL_CHAT: 'gpt-x; drop' }))).toBe('claude-opus-5');
+     expect(modelFor('chat', baseEnv({ MODEL_CHAT: ' claude-opus-5-5 ' }))).toBe('claude-opus-5-5');
+   });
++  it('QA2-F7-3: an override the Worker cannot drive (a typo, Haiku 4.5) is ignored, so that mode keeps MODEL', () => {
++    const env = baseEnv({ MODEL: 'claude-opus-5', MODEL_LIVE: 'claude-haiku-4-5', MODEL_PLAN: 'claude-sonet-5', MODEL_BRIEF: 'claude-sonnet-5', MODEL_CHAT: 'claude-opus-5-5-20261001' });
++    expect(modelFor('live', env)).toBe('claude-opus-5');
++    expect(modelFor('plan', env)).toBe('claude-opus-5');
++    expect(P(turn({ mode: 'live' }) as TurnBody, env).model).toBe('claude-opus-5');
++    expect(modelFor('brief', env)).toBe('claude-sonnet-5');
++    expect(modelFor('chat', env)).toBe('claude-opus-5-5-20261001'); // a dated snapshot of a known model
++    expect(ignoredModelOverrides(env)).toEqual(['plan', 'live']);
++    expect(ignoredModelOverrides(baseEnv({ MODEL_BRIEF: 'claude-sonnet-5' }))).toEqual([]);
++  });
+   it('a model without system messages gets them folded, per mode', () => {
+     const env = baseEnv({ MODEL: 'claude-opus-5', MODEL_LIVE: 'claude-sonnet-5' });
+     const live = P(turn({ mode: 'live' }) as TurnBody, env);
+diff --git a/escobar-worker/test/handler.test.ts b/escobar-worker/test/handler.test.ts
+index 9b848ad..e853fb8 100644
+--- a/escobar-worker/test/handler.test.ts
++++ b/escobar-worker/test/handler.test.ts
+@@ -12,7 +12,14 @@ const TEXT = [{ type: 'thinking', thinking: '', signature: 'sig' }, { type: 'tex
+ describe('routes, CORS and device', () => {
+   it('health answers protocol 2', async () => {
+     const r = await handle(new Request('https://x/health'), baseEnv(), deps(mockClient([])));
+-    expect(await r.json()).toEqual({ ok: true, protocol: 2, model: 'claude-opus-5', models: { chat: 'claude-opus-5', plan: 'claude-opus-5', live: 'claude-opus-5', brief: 'claude-opus-5', moment: 'claude-opus-5', summarize: 'claude-opus-5' }, modes: ['chat', 'plan', 'live', 'brief', 'moment', 'summarize'], quotas: false, relay: false, key: true }); // F7: /health lists each mode's model
++    expect(await r.json()).toEqual({ ok: true, protocol: 2, model: 'claude-opus-5', models: { chat: 'claude-opus-5', plan: 'claude-opus-5', live: 'claude-opus-5', brief: 'claude-opus-5', moment: 'claude-opus-5', summarize: 'claude-opus-5' }, modes: ['chat', 'plan', 'live', 'brief', 'moment', 'summarize'], quotas: false, relay: false, key: true, ignoredModels: [] }); // F7: /health lists each mode's model
++  });
++  it('health names the modes whose model override was ignored (QA2-F7-3), without echoing the value', async () => {
++    const r = await handle(new Request('https://x/health'), baseEnv({ MODEL_LIVE: 'claude-haiku-4-5', MODEL_BRIEF: 'claude-sonnet-5' }), deps(mockClient([])));
++    const body = (await r.json()) as { models: Record<string, string>; ignoredModels: string[] };
++    expect(body.ignoredModels).toEqual(['live']);
++    expect(body.models).toMatchObject({ live: 'claude-opus-5', brief: 'claude-sonnet-5' });
++    expect(JSON.stringify(body)).not.toContain('haiku');
+   });
+   it('allows the app origins and configured web origins, refuses others', async () => {
+     expect(corsHeaders('capacitor://localhost', baseEnv())['Access-Control-Allow-Origin']).toBe('capacitor://localhost');
+diff --git a/escobar-worker/test/quota.test.ts b/escobar-worker/test/quota.test.ts
+index c9fb405..9217bc1 100644
+--- a/escobar-worker/test/quota.test.ts
++++ b/escobar-worker/test/quota.test.ts
+@@ -1,8 +1,10 @@
+-import { describe, it, expect, vi, beforeEach } from 'vitest';
++import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
++import Anthropic from '@anthropic-ai/sdk';
+ import { QuotaCounter, type Limits } from '../src/quotaDO';
+-import { handle } from '../src/handler';
++import { handle, CUT_SHORT_TOKENS_PER_SEC } from '../src/handler';
+ import { checkQuota, recordStep } from '../src/quota';
+-import type { Env } from '../src/anthropic';
++import { UpstreamRelay } from '../src/upstreamRelay';
++import type { ClientLike, Env } from '../src/anthropic';
+ import { baseEnv, deps, eventsFor, finalMessage, mockClient, post, sse, turn, DEVICE } from './helpers';
+ 
+ /** In-memory Durable Object storage: `kv` is synchronous like SyncKvStorage; the alarm calls yield. */
+@@ -191,3 +193,98 @@ describe('billed steps are counted however they end (QA-R0-1, QA-R0-2, QA-R0-3)'
+     expect(statuses).toEqual([200, 200, 429, 429]);
+   });
+ });
++
++describe('thinking the caller never sees is counted when a step is cut short (QA2-FA-1..4)', () => {
++  const originalRelayClient = UpstreamRelay.makeClient;
++  afterEach(() => { UpstreamRelay.makeClient = originalRelayClient; });
++  const setup = (extra: Partial<Env> = {}) => { const ns = fakeNamespace(); return { ns, env: baseEnv({ QUOTA_DO: ns as never, ...extra }) }; };
++  const row = (ns: ReturnType<typeof fakeNamespace>) => ns.objects.get('2026-09-22')?.state.data.get(`d:${DEVICE}`);
++  const clock = () => ({ t: Date.parse('2026-09-22T12:00:00Z') });
++  const untilAbort = (signal?: AbortSignal) => new Promise((_, rej) => {
++    if (signal?.aborted) rej(new Anthropic.APIUserAbortError());
++    signal?.addEventListener('abort', () => rej(new Anthropic.APIUserAbortError()));
++  });
++  /**
++   * One step as the API streams it by default (thinking display "omitted"): the thinking block carries no
++   * text, `thinkMs` passes on the clock while the model thinks, then a short answer (or `fail`, or it keeps
++   * thinking until the caller goes away when `stopIn` is 'thinking').
++   */
++  function thinkingClient(c: { t: number }, o: { thinkMs: number; fail?: unknown; stopIn?: 'thinking' }): ClientLike {
++    return { beta: { messages: { stream(_p, opts) {
++      return {
++        async *[Symbol.asyncIterator]() {
++          yield { type: 'message_start', message: finalMessage([]) } as never;
++          yield { type: 'content_block_start', index: 0, content_block: { type: 'thinking', thinking: '', signature: '' } } as never;
++          yield { type: 'content_block_delta', index: 0, delta: { type: 'thinking_delta', thinking: '' } } as never;
++          c.t += o.thinkMs;
++          if (o.fail) throw o.fail;
++          if (o.stopIn === 'thinking') await untilAbort(opts?.signal);
++          yield { type: 'content_block_delta', index: 0, delta: { type: 'signature_delta', signature: 'sig' } } as never;
++          yield { type: 'content_block_stop', index: 0 } as never;
++          yield { type: 'content_block_start', index: 1, content_block: { type: 'text', text: '' } } as never;
++          yield { type: 'content_block_delta', index: 1, delta: { type: 'text_delta', text: 'Here is your plan.' } } as never;
++          await untilAbort(opts?.signal);
++        },
++        finalMessage: () => new Promise(() => {}),
++        abort() {},
++      };
++    } } } };
++  }
++  /** A UPSTREAM namespace backed by one real UpstreamRelay running `client`. */
++  function relayNs(client: ClientLike) {
++    UpstreamRelay.makeClient = () => client;
++    const relay = new UpstreamRelay({ waitUntil: () => {} } as never, {} as never);
++    return { idFromName: (n: string) => n, get: () => ({ fetch: (url: string, init: RequestInit) => relay.fetch(new Request(url, init)) }) };
++  }
++  /** Sends one turn and hangs up as soon as `marker` has arrived; resolves once the step is recorded. */
++  async function hangUpAfter(env: Env, client: ClientLike, c: { t: number }, mode: string, marker: string) {
++    const pending: Promise<unknown>[] = [];
++    const r = await handle(post(turn({ mode })), env, { ...deps(client), now: () => c.t, waitUntil: p => { pending.push(p); } });
++    if (r.status !== 200) return r.status;
++    const reader = r.body!.getReader();
++    const dec = new TextDecoder();
++    let seen = '';
++    while (!seen.includes(marker)) { const { value, done } = await reader.read(); if (done) break; seen += dec.decode(value, { stream: true }); }
++    await reader.cancel();
++    await Promise.all(pending);
++    return r.status;
++  }
++
++  it('a hang-up right after the answer starts counts the minute of hidden thinking, so the output cap trips', async () => {
++    const c = clock();
++    const { ns, env } = setup({ MAX_OUTPUT_PER_DEVICE: '1000' });
++    const client = thinkingClient(c, { thinkMs: 60_000 });
++    expect(await hangUpAfter(env, client, c, 'plan', '"t":"text"')).toBe(200);
++    expect(row(ns)).toEqual({ turns: 1, steps: 1, out: 60 * CUT_SHORT_TOKENS_PER_SEC });
++    expect(await hangUpAfter(env, client, c, 'plan', '"t":"text"')).toBe(429);
++  });
++  it('the same through the US relay', async () => {
++    const c = clock();
++    const client = thinkingClient(c, { thinkMs: 60_000 });
++    const { ns, env } = setup({ MAX_OUTPUT_PER_DEVICE: '1000', UPSTREAM: relayNs(client) as never });
++    expect(await hangUpAfter(env, mockClient([]), c, 'plan', '"t":"text"')).toBe(200);
++    expect(row(ns)).toEqual({ turns: 1, steps: 1, out: 60 * CUT_SHORT_TOKENS_PER_SEC });
++    expect(await hangUpAfter(env, mockClient([]), c, 'plan', '"t":"text"')).toBe(429);
++  });
++  it('a hang-up while the model is still thinking is counted by how long it thought', async () => {
++    const c = clock();
++    const { ns, env } = setup();
++    expect(await hangUpAfter(env, thinkingClient(c, { thinkMs: 45_000, stopIn: 'thinking' }), c, 'chat', '"t":"thinking"')).toBe(200);
++    expect(row(ns)).toEqual({ turns: 1, steps: 1, out: 45 * CUT_SHORT_TOKENS_PER_SEC });
++  });
++  it("the estimate never passes the step's max_tokens", async () => {
++    const c = clock();
++    const { ns, env } = setup();
++    expect(await hangUpAfter(env, thinkingClient(c, { thinkMs: 600_000 }), c, 'live', '"t":"text"')).toBe(200);
++    expect(row(ns)).toEqual({ turns: 1, steps: 1, out: 4000 });
++  });
++  it('an API error after a thinking-only phase is counted too (QA2-FA-3)', async () => {
++    const c = clock();
++    const { ns, env } = setup();
++    const boom = new Anthropic.InternalServerError(500, { type: 'error', error: { type: 'api_error', message: 'boom' } }, 'boom', new Headers());
++    vi.spyOn(console, 'error').mockImplementation(() => {});
++    const ev = await sse(await handle(post(turn()), env, { ...deps(thinkingClient(c, { thinkMs: 30_000, fail: boom })), now: () => c.t }));
++    expect(ev.map(e => e.t)).toEqual(['start', 'thinking', 'error']);
++    expect(row(ns)).toEqual({ turns: 1, steps: 1, out: 30 * CUT_SHORT_TOKENS_PER_SEC });
++  });
++});
+diff --git a/escobar-worker/wrangler.toml b/escobar-worker/wrangler.toml
+index 0319abb..ca01897 100644
+--- a/escobar-worker/wrangler.toml
++++ b/escobar-worker/wrangler.toml
+@@ -10,6 +10,8 @@ compatibility_flags = ["nodejs_compat", "enable_request_signal"]
+ # Default model and per-mode effort; change here without touching code.
+ MODEL = "claude-opus-5"
+ # F7: per-mode models, each falling back to MODEL. The owner picks; see docs/REMEDIATION-PROGRESS.md (F7) for verified prices.
++# Only models that take adaptive thinking and effort are used (MODE_MODELS in src/anthropic.ts; not Haiku 4.5).
++# Any other value is ignored, that mode keeps MODEL, and /health lists it under ignoredModels, which fails the deploy check.
+ # MODEL_CHAT = ""
+ # MODEL_PLAN = ""
+ # MODEL_LIVE = ""

@@ -1,0 +1,566 @@
+M•ARC V36.7 — MASTER CHAT TRANSFER / SELF-HANDOFF
+Date: 24 August 2026
+Purpose: Transfer the complete current M•ARC debugging/fix state into a fresh ChatGPT conversation without losing decisions, evidence, release lineage, or remaining work.
+
+======================================================================
+1. READ THIS FIRST — CURRENT SOURCE OF TRUTH
+======================================================================
+
+CURRENT WORKING RELEASE:
+MARC_V36_7_PHASE7_HAPTIC_REMINDER_HEALTH_APK_READY_SOURCE.zip
+
+Current release label:
+V36.7 / Phase 7 — Haptic + Reminder Health
+
+Current www/index.html SHA-256:
+5563acffb233fdfc69fce97d3d6eb0972fbcdfeda92c3d833fc209f8b2e7fe66
+
+Current ZIP SHA-256:
+a315fb43c1b2f7b69ab1d253004c874b54f59aabb40ccdf0ec7acf4f33ef4c23
+
+The V36.7 ZIP is the ONLY working base for the next phase unless Marc explicitly supplies a newer build.
+DO NOT restart from V36, J2, J3, V36.1, V36.2, etc.
+DO NOT overwrite the original locked V36 baseline.
+All future modifications must be made on a copied working package derived from V36.7.
+
+Original locked V36/J3 base that started this repair cycle:
+MARC_V36_DEBUGGER_J3_RETENTION_SIGNAL_APK_READY_SOURCE.zip
+
+Locked original J3 www/index.html SHA-256:
+006d7653b078e96db84b81d55cb742cb7b8098c44dd47d90abe7e132b55ba995
+
+The original V36/J3 base remains immutable.
+
+======================================================================
+2. PROJECT / USER WORKING RULES
+======================================================================
+
+App:
+M•ARC workout / health / training tracker.
+
+Primary platforms:
+- Android APK via GitHub Actions / Capacitor.
+- Netlify website / PWA.
+- Mobile-first UI.
+
+Marc expects a strict engineering workflow:
+1. Verify the exact base bytes.
+2. Investigate the reported problem.
+3. Use debugger/handoff evidence where available.
+4. Identify root cause before changing code.
+5. Apply narrow fixes rather than broad rewrites.
+6. Parse/check scripts after every phase.
+7. Regression-check previously fixed behavior.
+8. Check mobile behavior/width constraints.
+9. Keep website and APK source aligned.
+10. Package a new versioned ZIP.
+11. Never claim a test passed if the environment could not actually run it.
+12. Give concise visible progress notes during substantial work.
+
+Preferred progress-note style:
+- “Checking base.”
+- “One issue found.”
+- “Root cause confirmed.”
+- “Patch is in.”
+- “Regression clean.”
+- “Packaging.”
+
+Do not expose private chain-of-thought. Progress notes should state concrete checks/results only.
+
+IMPORTANT:
+Marc specifically asked that fixes include BOTH:
+A. findings from the J3 debugger bundle, AND
+B. bugs/features he personally reported in the handoff / previous chats.
+
+Do not reduce the project to debugger-only work.
+
+======================================================================
+3. MAIN EVIDENCE USED IN THIS REPAIR CYCLE
+======================================================================
+
+Latest real-device debugger evidence used:
+MARC_DEBUG_BUNDLE_2026-08-24T11-17-16-954Z.json
+
+Debugger build:
+36.0-debug-j3
+
+The J3 bundle proved:
+- Previous sessions could survive restart.
+- Thousands of events were captured.
+- There were genuine hit/occlusion mismatches.
+- Android visual-progress PNG export failed with EACCES when attempting direct shared Documents writes.
+- Several apparent “no visible response” controls needed separation into true failures vs debugger false positives.
+- Progress rendering had rapid rebuild activity near opening.
+- Old mutation instrumentation was still generating duplicate/noisy events.
+
+Important debugger interpretation:
+The Today workout Skip sequence was NOT actually broken. The debug sequence showed the remaining exercise rows decrementing 6 → 5 → 4 → 3 → 2 → 1. The debugger had classified successful DOM replacement as “no visible change.” Do not re-break Skip logic trying to fix a non-bug.
+
+The debugger also recorded 9 important hit/occlusion mismatches involving areas such as:
+- History week headers
+- Workout split tabs
+- exercise/muscle-detail names
+- exercise chevrons
+- Progress
+- Clear Debug Data
+- Today Skip
+- scheduled-workout control
+
+These were hardened in Phase 5.
+
+======================================================================
+4. USER-REPORTED BACKLOG THAT WAS CARRIED INTO THE FIX CYCLE
+======================================================================
+
+Marc’s own reported issues included:
+- Dashboard/recovery bars flickering or repeatedly animating.
+- Dashboard bar labels/percentages too small / hard to read.
+- Home/return button drifting or not staying in the expected position.
+- Dashboard vertical scrolling/clipping issues.
+- Workout split row / Add Split difficult to reach horizontally; strip could snap back.
+- Progress view flashing/disappearing or unstable.
+- Android visualization export problems.
+- Need a clear Fully Recovered muscle list.
+- Some controls needing multiple taps / appearing unresponsive.
+- History deletion/reset leaving Today/Training Body/Recovery values stale until refresh.
+- Coach vs Stats PR mismatch (example previously observed: Coach 0 vs Stats PR 1).
+- Rest notification behavior.
+- Haptic feedback toggle appeared enabled but haptics did not work.
+- Training reminder sometimes appeared to toggle itself OFF.
+
+Older endurance/mobile audit findings also considered:
+- Coach / weekly performance consistency.
+- Long-history scalability.
+- Historical split naming after custom split deletion.
+- Debug persistence cost.
+- Small mobile touch targets.
+- Today carousel discoverability.
+- Tiny 320px root-level Workout overflow.
+- Release/PWA cache integrity.
+- APK/source parity.
+
+======================================================================
+5. RELEASE LINEAGE / WHAT EACH PHASE FIXED
+======================================================================
+
+------------------------------
+PHASE 1 — V36.1
+------------------------------
+Package:
+MARC_V36_1_PHASE1_DEBUG_FIXES_APK_READY_SOURCE.zip
+
+Main work:
+- Fixed Android visual-progress export permission path.
+  Old behavior tried writing directly into shared /storage/emulated/0/Documents/MARC Exports/... and failed with EACCES.
+  New approach uses app cache + Android save/share sheet.
+- Removed the legacy dom_mutation_burst observer while retaining aggregated dom_mutation_summary telemetry.
+- Hardened exercise-chevron behavior and introduced explicit aria-expanded state.
+- Hardened Ask GPT collapsed/reveal behavior.
+- Increased/stabilized hit targets for exercise chevron, Progress, scheduled workout Go, Ask GPT handle.
+- Improved scheduled workout Go behavior.
+- Corrected debugger false-positive classification for successful DOM replacement/class-only controls including Skip.
+- Added a short Progress modal stabilization window to reduce initial render-growth flash.
+
+Important:
+Skip itself was preserved because evidence showed it worked.
+
+------------------------------
+PHASE 2 — V36.2
+------------------------------
+Package:
+MARC_V36_2_PHASE2_HANDOFF_LAYOUT_FIXES_APK_READY_SOURCE.zip
+
+Main work:
+- Root cause for Add Split snap-back confirmed:
+  renderTabs() rebuilt the horizontal tab row with innerHTML="", resetting scrollLeft.
+- Preserved/restored Workout split horizontal scroll position across renderTabs rebuilds.
+- Made Add Split sticky/reachable at the right edge.
+- Disabled split strip scroll snapping / automatic smooth scrolling that could fight user positioning.
+- Added ResizeObserver-based active Home pane height synchronization to prevent stale carousel height/clipping.
+- Hardened Home/return control behavior and overflow containment.
+- Made recovery/dashboard bars thinner and labels/percentages larger.
+- Removed width transitions on frequently rebuilt progress bars to reduce repeated flicker.
+- Added a dedicated Fully recovered muscle section while preserving existing recovery logic.
+
+Automated multi-width Chromium screenshot run was attempted but timed out in the environment.
+This was NOT falsely marked as passed.
+Real APK/device width verification remains important.
+
+------------------------------
+PHASE 3 — V36.3
+------------------------------
+Package:
+MARC_V36_3_PHASE3_RELIABILITY_FIXES_APK_READY_SOURCE.zip
+
+Main work:
+- Found two workout render layers.
+  The earlier layer had aria-expanded but the later authoritative renderer still used a bare class toggle.
+- Fixed the authoritative renderer so chevron expansion state is explicit/reliable.
+- Suppressed known false-positive for successful “Done with exercise” DOM replacement.
+- Improved debug export success/location clarity:
+  after native export the app explicitly indicates the Android save/share sheet opened and shows the exact filename.
+- Immediately resynchronized scheduled native reminders after a custom split is deleted or renamed, preventing stale reminder metadata.
+
+Important inherited endurance fixes verified rather than duplicated:
+- canonical completed-workout counting
+- scalable Show earlier weeks history
+- historical split/workout name snapshots
+- batched debug persistence
+- 44px touch-target layer
+- Today carousel discoverability support
+
+------------------------------
+PHASE 4 — V36.4
+------------------------------
+Package:
+MARC_V36_4_PHASE4_STATE_INTEGRITY_FIXES_APK_READY_SOURCE.zip
+
+Main work:
+- Verified existing history deletion reconciliation already refreshed major surfaces.
+- Extended live derived-state refresh contract so workout-history edits/deletes and workout reset refresh:
+  History
+  Today
+  Today workout result
+  Training Body
+  Recovery
+  Coach insights
+  active Stats
+  active Coach
+  in the same live session rather than waiting for navigation/refresh.
+- Reverified Coach vs Stats PR consistency uses the same weekly PR source.
+
+This specifically targeted the old bug where clearing history could leave Training Body/recovery values visible until page refresh.
+
+------------------------------
+PHASE 5 — V36.5
+------------------------------
+Package:
+MARC_V36_5_PHASE5_MOBILE_HIT_HARDENING_APK_READY_SOURCE.zip
+
+Main work:
+- Targeted the 9 real-device hit/occlusion mismatches from J3.
+- Added conservative Android touch recovery for known controls.
+- Recovery only fires when:
+  - finger movement is tiny
+  - original touch began on a known affected control
+  - normal/native click never arrived
+- Does NOT recover normal scrolling or successful taps, reducing double-fire risk.
+- Enlarged/hardened:
+  Today Skip
+  Workout tabs
+  muscle-detail exercise names
+  History week headers
+  scheduled workout
+  Progress
+  exercise chevrons
+  Clear Debug Data
+
+------------------------------
+PHASE 6 — V36.6
+------------------------------
+Package:
+MARC_V36_6_PHASE6_RELEASE_INTEGRITY_APK_READY_SOURCE.zip
+
+Important root cause:
+The app source had progressed, but release infrastructure still contained stale V36/J2/J3/PR-consistency markers.
+
+Fixed:
+- Service-worker cache namespace updated to current release instead of marc-v36-debug-j3.
+- GitHub upload/build instructions updated.
+- APK workflow marker guards updated.
+- APK workflow verifies exact current index bytes at FOUR stages:
+  1. source
+  2. synced Android asset
+  3. unsigned APK
+  4. signed APK
+- Old stale V36.0 / J2 / J3 / PR-consistency marker guards removed.
+- Added narrow 320px Workout root overflow clipping without breaking the intentional horizontal split scroller.
+- Added subtle SWIPE cue under the Home carousel pager.
+
+This phase matters because stale PWA cache or wrong APK validation could make fixed code appear unfixed.
+
+------------------------------
+PHASE 7 — V36.7 CURRENT
+------------------------------
+Package:
+MARC_V36_7_PHASE7_HAPTIC_REMINDER_HEALTH_APK_READY_SOURCE.zip
+
+This is the CURRENT BASE.
+
+User report that triggered Phase 7:
+- Haptic feedback did not work on previous versions.
+- Training reminders worked but sometimes appeared to toggle themselves OFF.
+
+HAPTIC ROOT CAUSE:
+The JavaScript supported Capacitor Haptics, but the APK workflow did NOT install @capacitor/haptics.
+Therefore the Settings Haptic toggle could be ON while no native Haptics plugin existed in the APK.
+
+V36.7 haptic fixes:
+- APK workflow explicitly installs @capacitor/haptics.
+- Build verifies Haptics appears in capacitor.plugins.json.
+- Build should fail rather than ship an APK missing Haptics.
+- Added Settings “Test haptic” / haptic health behavior so the installed build can report whether it has:
+  native Android haptics,
+  web vibration fallback,
+  or no available feedback API.
+
+TRAINING REMINDER ROOT CAUSES:
+1. Reminder resync treated anything other than Android permission “granted” as a reason to write trainingEnabled=false.
+   A transient prompt/unknown/plugin timing state could therefore visually switch the user’s preference OFF.
+2. Tapping the reminder toggle previously changed UI state but preference was not necessarily persisted until “Save reminder”.
+   Closing the sheet before Save could make it appear OFF again.
+
+V36.7 reminder fixes:
+- User ON/OFF preference persists immediately when the toggle is tapped.
+- Permission/scheduling health no longer rewrites the user preference to OFF.
+- User preference and Android scheduling health are separate concepts.
+- After scheduling, M•ARC checks Android’s pending notification queue.
+- On app resume/pageshow, M•ARC checks the pending queue again.
+- If Android silently dropped scheduled training reminders, M•ARC repairs/reschedules them while keeping the user preference ON.
+- Custom split rename/delete reminder resync from Phase 3 remains preserved.
+
+REST-COMPLETE NOTIFICATIONS:
+These were reviewed separately.
+Existing path was already stronger and was preserved:
+- allowWhileIdle:true
+- exact/precise scheduling when available
+- pending notification verification
+- 5-second test path
+
+Do not replace this stronger rest-notification path with the softer training-reminder path.
+
+V36.7 QA at packaging:
+- 76/76 inline scripts parse.
+- sw.js parses.
+- manifest JSON valid.
+- GitHub Actions YAML valid.
+- Haptics plugin build guard present.
+- Local Notifications build guard present.
+- ZIP integrity PASS.
+
+======================================================================
+6. CURRENT BEHAVIOR / ARCHITECTURE THAT MUST BE PRESERVED
+======================================================================
+
+Do not regress:
+- M•ARC branding and current mobile-first visual language.
+- Existing workout data/storage schema unless a migration is explicitly required.
+- Current recovery model and personalized recovery overrides.
+- Fully Recovered list added in Phase 2.
+- History incremental expansion / Show earlier weeks.
+- Historical workout/split name snapshots.
+- Coach/Stats shared PR calculation.
+- Live state refresh after history edits/deletes/reset.
+- Add Split sticky/reachable behavior and split scroll preservation.
+- Home dynamic-height synchronization.
+- Progress stabilization.
+- Android visual export through cache + save/share sheet.
+- Debug export filename/location clarity.
+- Batched J3 debug persistence.
+- dom_mutation_summary aggregation.
+- DO NOT restore legacy dom_mutation_burst recorder.
+- Conservative Android hit-recovery behavior.
+- Current 44px-ish mobile touch target hardening.
+- Service-worker release-specific cache namespace.
+- Four-stage APK/index byte parity validation.
+- Native Haptics installation/build assertion.
+- Reminder preference persistence separated from permission/scheduling health.
+- Reminder pending-queue repair on resume.
+- Rest-complete exact/allowWhileIdle behavior.
+
+======================================================================
+7. REGISTERED ANATOMY / MUSCLE VISUAL RULES
+======================================================================
+
+Locked master anatomy asset:
+assets/anatomy_master_neutral.png
+
+Dimensions:
+657 × 650 px
+RGBA
+x=0, y=0
+
+Rules:
+- No resize.
+- No crop.
+- No stretch.
+- No translation.
+- Preserve front/back spacing.
+- Registered masks/highlights must align to this exact master.
+- Existing anatomy architecture must not be casually rewritten during unrelated bug fixes.
+
+User has a strict anatomy approval gate:
+After technical/internal visual review, compare muscle highlights against trustworthy anatomical references for the specific muscle group before release.
+
+Do not alter anatomy masks merely because a UI phase is being modified.
+
+======================================================================
+8. DEBUGGER RULES / PRIVACY
+======================================================================
+
+Debugger exists to support real-device diagnosis.
+
+Current intended characteristics:
+- session IDs
+- retained previous sessions
+- larger event capacity than early J1/J2
+- aggregated mutation summaries
+- privacy-aware metadata
+- user can Mark Bug Now
+- Debug Bundle export
+
+Do not restore extremely noisy mutation logging.
+
+When interpreting no-response diagnostics:
+Distinguish between:
+- genuine failure
+- class/ARIA-only state change
+- successful DOM replacement
+- intentional navigation/render
+- touch hit mismatch
+
+Do not automatically patch every no-response event.
+
+======================================================================
+9. STILL OPEN / NOT FULLY VERIFIED
+======================================================================
+
+A. PHYSICAL ANDROID DEVICE VALIDATION
+This remains necessary after V36.7 because the coding environment cannot physically prove:
+- real vibration motor response
+- notification delivery while app is backgrounded/closed
+- exact alarm behavior across Android OEM battery management
+- Android permission dialogs
+- system back behavior
+- safe-area behavior on the actual device
+- real WebView hit testing after Phase 5
+- real PWA/APK cache update behavior
+
+Recommended next APK checks:
+1. Install APK built from V36.7.
+2. Settings → Haptic Feedback → Test haptic.
+3. Confirm a physical vibration is felt.
+4. Training reminder → turn ON.
+5. Close reminder sheet WITHOUT relying on Save.
+6. Reopen reminder sheet → must still show ON.
+7. Fully close/reopen app → must still show ON.
+8. Background/foreground app → toggle must remain ON.
+9. Check training reminder scheduling health/status.
+10. Test rest notification using Test 5s.
+11. Put app in background and verify rest notification arrives.
+12. Verify reminder/rest notification behavior after app restart.
+13. Re-test controls that previously needed repeated taps:
+    split tabs, chevrons, Progress, Skip, scheduled workout, History headers.
+14. Re-test Add Split horizontal reachability.
+15. Re-test Home dashboard vertical scroll and Home/return button position.
+16. Re-test Progress view for flash/disappearance.
+17. Re-test visual progress PNG export via Android save/share sheet.
+
+B. STREAK SEMANTICS
+Intentionally NOT automatically changed.
+
+Older audit found the current consecutive-calendar-day streak definition is a poor fit for a normal 3–4x/week training schedule.
+But this is a product-definition decision, not a simple code bug.
+
+Possible future definitions:
+- consecutive successful weeks
+- planned sessions completed
+- training-week adherence
+- another consistency metric
+
+Do not silently choose one.
+Ask Marc if/when he wants to redefine streak behavior.
+
+C. ANY NEW REAL-DEVICE BUGS
+If V36.7 testing reveals new issues:
+- use V36.7 as base
+- collect debugger evidence where useful
+- patch narrowly
+- preserve all earlier phases
+
+======================================================================
+10. NEXT CHAT — EXACT STARTING PROCEDURE
+======================================================================
+
+When Marc transfers this handoff into a new chat:
+
+1. Acknowledge V36.7 as current source of truth.
+2. Ask for / use the uploaded:
+   MARC_V36_7_PHASE7_HAPTIC_REMINDER_HEALTH_APK_READY_SOURCE.zip
+   if it is available.
+3. Verify:
+   www/index.html SHA-256 =
+   5563acffb233fdfc69fce97d3d6eb0972fbcdfeda92c3d833fc209f8b2e7fe66
+4. Never edit the original locked V36/J3 baseline.
+5. Continue from V36.7 only.
+6. If Marc has not tested V36.7 yet, the highest-value next action is APK build/install and real-device haptic/reminder validation.
+7. If Marc instead asks to continue coding without testing, perform another full source/regression audit for genuinely open issues; do not reapply already completed fixes.
+8. Keep the phase-by-phase workflow.
+9. Version the next package V36.8 or later.
+10. Update service-worker cache namespace and APK byte/hash guards whenever index bytes change.
+11. Re-run syntax/manifest/YAML/ZIP integrity checks before release.
+12. Preserve all Phase 1–7 behavior.
+
+======================================================================
+11. IMPORTANT FILES TO TRANSFER
+======================================================================
+
+Highest priority:
+- MARC_V36_7_PHASE7_HAPTIC_REMINDER_HEALTH_APK_READY_SOURCE.zip
+- This handoff TXT
+
+Useful evidence if available:
+- MARC_DEBUG_BUNDLE_2026-08-24T11-17-16-954Z.json
+- Earlier master handoff used to start this cycle
+- J3 implementation notes included in the package
+
+Older phase ZIPs are not required for normal continuation because V36.7 carries forward the accumulated fixes, but they may be useful for forensic diffing.
+
+======================================================================
+12. RELEASE HISTORY QUICK INDEX
+======================================================================
+
+V36/J3:
+Debugger retention/signal-quality baseline.
+Locked original base.
+
+V36.1:
+Debugger-confirmed interaction/export fixes.
+
+V36.2:
+Handoff layout/state fixes: Add Split, Home height, bars, Fully Recovered.
+
+V36.3:
+Reliability: authoritative chevrons, export clarity, reminder resync after split edits.
+
+V36.4:
+Cross-surface state integrity after history/reset; PR consistency preserved.
+
+V36.5:
+Real-device mobile hit/occlusion hardening.
+
+V36.6:
+PWA/service-worker/APK release-integrity and byte-parity repair.
+
+V36.7:
+Native Haptics plugin + haptic test/health; persistent reminder preference + pending queue reconciliation.
+
+======================================================================
+13. FINAL NON-NEGOTIABLES
+======================================================================
+
+- V36 original/J3 is immutable.
+- V36.7 is current working source.
+- Do not downgrade to an older phase.
+- Do not patch from memory if exact source is available.
+- Do not claim physical-device haptic/notification success without actual device testing.
+- Do not reintroduce dom_mutation_burst.
+- Do not alter streak semantics without Marc choosing the definition.
+- Do not rewrite anatomy assets/masks during unrelated work.
+- Keep APK and Netlify/PWA source aligned.
+- Any index change must be reflected in service-worker/release markers and APK byte/hash guards.
+- Preserve user preference when Android notification scheduling is temporarily unhealthy.
+- The Haptics native plugin must remain installed and build-verified.
+- Continue phase-by-phase with narrow root-cause fixes and regression checks.
+
+END OF HANDOFF

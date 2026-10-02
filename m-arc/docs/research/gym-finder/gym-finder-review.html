@@ -1,0 +1,238 @@
+<title>Gym Finder Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column with a verdict plate on top, labelled sections like stamped gym plates, tables for the hard numbers. */
+:root {
+  /* M/ARC Paper theme */
+  --bg: #ffffff;
+  --surface: #f7f6f3;
+  --surface-2: #efeeea;
+  --line: #e6e4df;
+  --fg: #37352f;
+  --fg-2: #5f5e5a;
+  --fg-3: #8a8985;
+  --accent: #2383e2;
+  --accent-soft: rgba(35,131,226,0.10);
+  --keep: #1f8a5b;
+  --keep-soft: rgba(31,138,91,0.10);
+  --change: #b7791f;
+  --change-soft: rgba(183,121,31,0.12);
+  --drop: #c4423a;
+  --drop-soft: rgba(196,66,58,0.10);
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* M/ARC Silent Black theme */
+    --bg: #08090a; --surface: #0f1011; --surface-2: #141516; --line: #23252a;
+    --fg: #f7f8f8; --fg-2: #a3a8b1; --fg-3: #6f747c;
+    --accent: #7c86e6; --accent-soft: rgba(124,134,230,0.16);
+    --keep: #4cc38a; --keep-soft: rgba(76,195,138,0.14);
+    --change: #e0a84e; --change-soft: rgba(224,168,78,0.14);
+    --drop: #f0716a; --drop-soft: rgba(240,113,106,0.14);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #08090a; --surface: #0f1011; --surface-2: #141516; --line: #23252a;
+  --fg: #f7f8f8; --fg-2: #a3a8b1; --fg-3: #6f747c;
+  --accent: #7c86e6; --accent-soft: rgba(124,134,230,0.16);
+  --keep: #4cc38a; --keep-soft: rgba(76,195,138,0.14);
+  --change: #e0a84e; --change-soft: rgba(224,168,78,0.14);
+  --drop: #f0716a; --drop-soft: rgba(240,113,106,0.14);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15.5px; line-height: 1.6; margin: 0; }
+.wrap { max-width: 860px; margin: 0 auto; padding-inline: 20px; padding-block: 36px 72px; display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: 0.01em; text-wrap: balance; margin: 0; line-height: 1.1; }
+h1 { font-size: clamp(2.4rem, 7vw, 3.6rem); text-transform: uppercase; }
+h2 { font-size: 1.9rem; text-transform: uppercase; }
+h3 { font-size: 1.25rem; font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+.eyebrow { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); }
+section { display: grid; gap: 16px; }
+.lede { font-size: 1.12rem; color: var(--fg-2); }
+.plate { border: 1px solid var(--line); background: var(--surface); border-radius: 14px; padding: 22px; display: grid; gap: 14px; }
+.verdict { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; }
+.disc { width: 104px; height: 104px; border-radius: 50%; border: 10px solid var(--fg); display: grid; place-items: center; font-family: var(--display); font-weight: 700; font-size: 2.1rem; line-height: 1; text-align: center; position: relative; }
+.disc small { display: block; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--fg-3); font-weight: 400; margin-top: 4px; }
+.disc::after { content: ""; position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 2px solid var(--fg); }
+.disc span { position: relative; top: -14px; }
+ul, ol { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; max-width: 70ch; }
+li::marker { color: var(--fg-3); }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.col { border-radius: 12px; padding: 16px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.col h3 { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+.col ul { padding-left: 1.05em; gap: 6px; font-size: 0.93rem; }
+.keep { background: var(--keep-soft); } .keep h3 { color: var(--keep); }
+.change { background: var(--change-soft); } .change h3 { color: var(--change); }
+.drop { background: var(--drop-soft); } .drop h3 { color: var(--drop); }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); font-weight: 500; background: var(--surface); }
+tr:last-child td { border-bottom: 0; }
+td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tag { display: inline-block; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.t-block { background: var(--drop-soft); color: var(--drop); }
+.t-high { background: var(--change-soft); color: var(--change); }
+.t-ok { background: var(--keep-soft); color: var(--keep); }
+.issue { display: grid; grid-template-columns: auto 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.issue:last-child { border-bottom: 0; }
+.issue p { font-size: 0.95rem; color: var(--fg-2); }
+.issue strong { color: var(--fg); }
+.idea { display: grid; gap: 6px; padding: 16px; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 10px 10px 0; }
+.ideas { display: grid; gap: 12px; }
+.advice { border: 2px solid var(--fg); border-radius: 14px; padding: 22px; display: grid; gap: 14px; }
+.advice p { max-width: 70ch; }
+.mono { font-family: var(--mono); font-size: 0.88em; }
+.src { font-size: 0.82rem; color: var(--fg-3); }
+.src a { color: var(--fg-2); }
+a { color: var(--accent); }
+.foot { font-size: 0.82rem; color: var(--fg-3); border-top: 1px solid var(--line); padding-top: 16px; }
+@media (max-width: 680px) {
+  .grid3 { grid-template-columns: 1fr; }
+  .verdict { grid-template-columns: 1fr; }
+}
+</style>
+
+<main class="wrap">
+  <header style="display:grid; gap:14px;">
+    <div class="eyebrow">M/ARC · Supervisor review · PR #158 · 1 Oct 2026</div>
+    <h1>Gym Finder Review</h1>
+    <p class="lede">A review of the Gym Finder package another session posted: a map of nearby gyms with rates, saving, "Train here", Escobar help and arrival reminders. I read every document and the prototype source. Three research agents checked the code, the providers' terms and Play policy, and a fourth (the red team) attacked my plan.</p>
+  </header>
+
+  <section class="plate verdict" aria-label="Verdict">
+    <div class="disc" role="img" aria-label="Proposal score 5 out of 10"><span>5<small>/ 10</small></span></div>
+    <div style="display:grid; gap:10px; min-width:0;">
+      <div class="eyebrow">Verdict</div>
+      <h2 style="font-size:1.7rem;">Keep the thinking. Cut the scope.</h2>
+      <p>The safety and honesty rules in the package are excellent. The build plan is four separate projects in one, and three of them can't be built the way they are written: they break Google's terms, Meta's terms or Play's location policy. A small first version costs about $0, needs no permission and touches no server.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">01</div>
+    <h2>The proposal</h2>
+    <p>From the Escobar tab you open a themed map. Pins and a list show gyms. A card shows the branch, hours, phone, day-pass and monthly rates, and photos. You can save a gym, link it to one of your training gyms, start a workout there, call it or get directions. Later, the app would notice when you arrive at a saved gym and ask "At [gym]?", and Escobar would suggest a gym for your budget and goal.</p>
+    <ul>
+      <li><strong>Data plan:</strong> Google Maps and Places for gyms; a server that reads gym websites and Facebook/Instagram posts (with OCR on posters) to collect prices; human review of unclear prices.</li>
+      <li><strong>The prototype</strong> is a working HTML mock with 3 made-up gyms on real Makati map data. It was built for ChatGPT's widget system (it saves through <span class="mono">window.openai.setWidgetState</span>), so it's a design reference, not code we can reuse.</li>
+      <li><strong>Size of the spec:</strong> 14 acceptance rows, about 30 test scenarios and 4,100 lines of docs and prototype.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="eyebrow">02</div>
+    <h2>Keep, change, drop</h2>
+    <div class="grid3">
+      <div class="col keep">
+        <h3>Keep</h3>
+        <ul>
+          <li>A found gym stays separate from your 8 training gyms until you link it. Nothing is ever evicted.</li>
+          <li>Browsing never changes training. "Train here" goes through the normal workout setup.</li>
+          <li>Honest unknowns: unknown hours never mean closed; a missing price never means free.</li>
+          <li>"Search this area" instead of searching on every map move.</li>
+          <li>A list that works as well as the map, and theme-aware colours.</li>
+        </ul>
+      </div>
+      <div class="col change">
+        <h3>Change</h3>
+        <ul>
+          <li>Google Places → open gym data (Overture), searched on the phone.</li>
+          <li>Prices from scraping → prices you curate for top chains, with a "checked" date.</li>
+          <li>Arrival reminders → reminders at your planned workout time.</li>
+          <li>Call and Website buttons → one "Open in Maps" handoff, if you allow it under LR-23.</li>
+          <li>Map first → list first; the map is an add-on.</li>
+        </ul>
+      </div>
+      <div class="col drop">
+        <h3>Drop</h3>
+        <ul>
+          <li>Automated reading of Facebook and Instagram pages.</li>
+          <li>OCR of price posters and a human review queue.</li>
+          <li>Background location and geofencing.</li>
+          <li>Google Places on a non-Google map.</li>
+          <li>Prototype code (ChatGPT widget APIs, <span class="mono">innerHTML</span> building).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">03</div>
+    <h2>Blocking problems</h2>
+    <div>
+      <div class="issue"><span class="tag t-block">Blocker</span><p><strong>Google data can't go on this map.</strong> Google's terms say Places content must not be used "in conjunction with a non-Google map". The design you liked is a custom themed map, so it can't show Google's gyms. It would have to become a Google map, which needs Google Play services and draws behind the app's screens.</p></div>
+      <div class="issue"><span class="tag t-block">Blocker</span><p><strong>Collecting prices from Facebook and Instagram is forbidden.</strong> Meta's terms ban automated collection "without our prior permission". The package admits this, then keeps social sourcing in scope anyway.</p></div>
+      <div class="issue"><span class="tag t-block">Blocker</span><p><strong>It clashes with your LR-23 rule.</strong> Call buttons, phone numbers, website links, "Rates / Sources" dialogs and even the map's credit line (a link to OpenStreetMap) are contacts, links or sources in the app. Each needs your explicit ruling. Any tapped link also leaves the app.</p></div>
+      <div class="issue"><span class="tag t-high">High</span><p><strong>Background location will likely be refused by Play.</strong> Play's policy names "convenience" as a minimal benefit that doesn't justify background location. It also needs a declaration form and a video. A large study of 61,000 gym members found that a planned workout time plus a reminder 30 minutes before (with small rewards) raised visits by 9%. No study was found showing that arrival alerts help.</p></div>
+      <div class="issue"><span class="tag t-high">High</span><p><strong>"Free hosting" isn't free.</strong> Cloudflare R2's free web address is for development only. A real one needs a domain you don't own yet, a card on file and no hard spending cap. A public map file could be reused by anyone, on your bill.</p></div>
+      <div class="issue"><span class="tag t-high">High</span><p><strong>A first version could lose to Google Maps.</strong> With open data there are no opening hours, and with LR-23 there's no phone or website. That leaves a gym list, and Google Maps already answers "gyms near me" better. A one-day "Open in Maps" button is the baseline anything bigger must beat.</p></div>
+      <div class="issue"><span class="tag t-high">High</span><p><strong>A heavy map can crash the app mid-workout.</strong> The map library is about 1 MB and runs on the phone's graphics chip. If the WebView runs out of memory, the whole app closes, including a live workout. The app doesn't handle that today.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">04</div>
+    <h2>Costs</h2>
+    <p>Rough monthly cost, assuming each user does 2 area searches and opens 3 gym cards a month. Google's free allowance is included.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Option</th><th>1k users</th><th>10k users</th><th>100k users</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td>Google Places</td><td class="num">≈ $40</td><td class="num">≈ $1,060</td><td class="num">≈ $10,780</td><td>Needs a server key and a Google map</td></tr>
+          <tr><td>Foursquare Places</td><td class="num">≈ $79</td><td class="num">≈ $855</td><td class="num">≈ $7,570</td><td>Key must be hidden on a server</td></tr>
+          <tr><td>Open data, bundled in the app</td><td class="num">$0</td><td class="num">$0</td><td class="num">$0</td><td>Overture or OpenStreetMap, rebuilt monthly</td></tr>
+          <tr><td>"Open in Maps" button</td><td class="num">$0</td><td class="num">$0</td><td class="num">$0</td><td>The phone's maps app does the search</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Sources: Google Maps Platform pricing and Service Terms §14.2; Foursquare pricing; Overture attribution docs. Gym coverage in the Philippines and Australia isn't benchmarked yet. OpenStreetMap lists 781 gyms for the whole Philippines and 2,683 for Australia, which looks thin for the Philippines.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">05</div>
+    <h2>Better ideas</h2>
+    <div class="ideas">
+      <div class="idea"><h3>Find in Maps, first</h3><p>One button, "Find a gym", opens the phone's maps app already searching for gyms. No permission, no data, no new library, no server. It ships in a day and shows whether people even use it.</p></div>
+      <div class="idea"><h3>Train here, with your plates</h3><p>This is the one thing no map app can do. When you pick a gym, M/ARC sets up that gym's equipment: its plates, dumbbell steps and kg or lb, so your targets fit what's actually on the rack. The finder becomes a fast way into a feature only we have.</p></div>
+      <div class="idea"><h3>Away session</h3><p>Training somewhere new? Escobar builds today's session around what's likely there (dumbbells, cables, bodyweight) and swaps exercises when equipment is missing. It uses the existing <span class="mono">propose_gym</span> and substitute tools, with no location needed.</p></div>
+      <div class="idea"><h3>Reminders that work</h3><p>Replace arrival detection with a reminder before your planned workout time. A planned time plus a reminder 30 minutes before (with small rewards) raised visits by 9% in the 24 Hour Fitness study, and it needs no background location.</p></div>
+      <div class="idea"><h3>Prices you can trust</h3><p>If prices matter to you, curate the top chains in the launch cities by hand, each with a "checked" date, and hide them before they go stale. Later, let gyms submit their own after a verified claim.</p></div>
+    </div>
+  </section>
+
+  <section class="advice">
+    <div class="eyebrow">06 · Supervisor advice</div>
+    <h2>My honest view</h2>
+    <p><strong>This isn't what will make M/ARC win.</strong> People choose a gym app for logging speed, smart targets and a coach that knows them. Most lifters train at one or two gyms they already know. Google Maps already finds gyms well, for free. A full gym finder with live prices is a separate business with a data team behind it, not a feature a solo owner can keep accurate.</p>
+    <p><strong>The valuable part is small:</strong> getting a new gym set up right, fast, with its equipment, so the targets fit. Plus help when you travel. Build that, and use the map only if real users ask for it.</p>
+    <p><strong>Order:</strong> launch on Google Play first. A new location permission and new data flows make a first Play review harder. Then ship "Find in Maps" (1 day) and "Train here" with equipment setup. Benchmark the open data. Build the list and map only if the benchmark and your users say it beats Google Maps.</p>
+    <p><strong>What I would not do:</strong> scrape prices, read social pages, use background location, or pay for Google Places at this stage. At 10,000 users Google alone costs about $1,060 a month for a free app.</p>
+    <p><strong>Effort, if you say yes to all stages:</strong> the "Find in Maps" button is about half a day. The full list, linking and map is roughly 2 to 3 weeks of agent work, plus checks on your phone. Curated prices need your own time every month.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">07</div>
+    <h2>Your decisions</h2>
+    <ol>
+      <li>Timing: after the Play launch (recommended), or before.</li>
+      <li>LR-23 for the finder: allow an "Open in Maps" handoff and a plain-text map credit (no link), or keep the rule fully strict.</li>
+      <li>New saved data: a link from your training gym to a catalogue gym (one optional field).</li>
+      <li>Map hosting: no map in the first version (recommended), OpenFreeMap (free, but it sees which area you view), or your own domain with spending limits.</li>
+      <li>New libraries: the map library and its tile reader, only if you choose a map.</li>
+      <li>Launch areas: for example Metro Manila, Cebu, Sydney and Melbourne.</li>
+      <li>Prices: none, or curated by you for top chains.</li>
+    </ol>
+    <p class="src">The build plan is in the second page, "Gym Finder Architecture".</p>
+  </section>
+
+  <p class="foot">Sources checked on 1 Oct 2026: Google Maps Platform Service Terms and pricing; Meta Terms §3.2 and Automated Data Collection Terms; Google Play background location policy (answer 9799150) and prominent disclosure policy; Android geofencing docs; Overture Places and OpenStreetMap licence pages; Cloudflare R2 public bucket docs; Milkman et al. 24 Hour Fitness megastudy (Wharton). Code checked at main f1e514a.</p>
+</main>

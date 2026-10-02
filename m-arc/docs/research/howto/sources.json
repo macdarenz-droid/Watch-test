@@ -1,0 +1,875 @@
+// GENERATED, do not edit. Written by tools/plates/generate.mjs (tools/plates/gen/content.mjs). inputsSha256=31b31323a81128aa314e1e98348079a17bbec22574feedeb047a07c21e32a1cd
+{
+  "ace-abs": {
+    "id": "ace-abs",
+    "cite": "ACE-sponsored study (Francis, San Diego State University): best and worst abdominal exercises (press release)",
+    "url": "https://www.acefitness.org/about-ace/press-room/press-releases/246/american-council-on-exercise-ace-sponsored-study-reveals-best-and-worst-abdominal-exercises/",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "ace-back-squat": {
+    "id": "ace-back-squat",
+    "cite": "ACE Exercise Library, Back Squat",
+    "url": "https://www.acefitness.org/resources/everyone/exercise-library/11/back-squat/",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "ace-chest-press": {
+    "id": "ace-chest-press",
+    "cite": "ACE Exercise Library, Seated Chest Press",
+    "url": "https://www.acefitness.org/resources/everyone/exercise-library/188/seated-chest-press/",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "ace-lat-pulldown": {
+    "id": "ace-lat-pulldown",
+    "cite": "ACE, Seated Lat Pulldown",
+    "url": "https://www.acefitness.org/resources/everyone/exercise-library/158/seated-lat-pulldown/",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "ace-lateral-raise": {
+    "id": "ace-lateral-raise",
+    "cite": "ACE Exercise Library, Lateral Raise",
+    "url": "https://www.acefitness.org/resources/everyone/exercise-library/26/lateral-raise/",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "ace-leg-press": {
+    "id": "ace-leg-press",
+    "cite": "ACE Exercise Library, Seated Leg Press",
+    "url": "https://www.acefitness.org/resources/everyone/exercise-library/154/seated-leg-press/",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "ace-seated-row": {
+    "id": "ace-seated-row",
+    "cite": "ACE, Seated Row (machine version with a chest pad; torso, elbow and wrist cues carried over)",
+    "url": "https://www.acefitness.org/resources/everyone/exercise-library/168/seated-row/",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "andersen2008": {
+    "id": "andersen2008",
+    "cite": "Andersen LL et al. (2008) Muscle activation during selected strength exercises in women with chronic neck muscle pain. Phys Ther 88(6):703-11",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/18339796/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "andersen2014": {
+    "id": "andersen2014",
+    "cite": "Andersen V et al. (2014) Effects of grip width on muscle strength and activation in the lat pull-down. J Strength Cond Res 28(4):1135-42",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/24662157/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "andersson1997": {
+    "id": "andersson1997",
+    "cite": "Andersson EA, Nilsson J, Ma Z, Thorstensson A (1997) Abdominal and hip flexor muscle activation during various training exercises. Eur J Appl Physiol 75(2):115-23",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/9118976/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "axler1997": {
+    "id": "axler1997",
+    "cite": "Axler CT, McGill SM (1997) Low back loads over a variety of abdominal exercises: searching for the safest abdominal challenge. Med Sci Sports Exerc 29(6):804-11",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/9219209/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "baechle-earle": {
+    "id": "baechle-earle",
+    "cite": "Baechle TR, Earle RW, Weight Training: Steps to Success (NSCA editors), grip selection and location",
+    "url": "https://us.humankinetics.com/blogs/excerpt/grip-selection-and-location",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "barbell-logic-grip": {
+    "id": "barbell-logic-grip",
+    "cite": "Barbell Logic, Bench Press Grip Tips",
+    "url": "https://barbell-logic.com/bench-press-grip-tips/",
+    "kind": "coach",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "barbell-logic-squat-grip": {
+    "id": "barbell-logic-squat-grip",
+    "cite": "Reynolds M. Elbow Pain While Squatting? Fix Your Squat Grip. Barbell Logic",
+    "url": "https://barbell-logic.com/?p=4521",
+    "kind": "coach",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "barnds2019": {
+    "id": "barnds2019",
+    "cite": "Barnds B et al. Simultaneous bilateral knee dislocation during weight training: a case report and review of the literature. JBJS Case Connect 2019;9(1):e5",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/30676343/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "bells-of-steel": {
+    "id": "bells-of-steel",
+    "cite": "Bells of Steel (manufacturer), How to use the leg press machine",
+    "url": "https://bellsofsteel.us/blogs/content/how-to-use-the-leg-press-machine",
+    "kind": "manufacturer",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "bloomquist2013": {
+    "id": "bloomquist2013",
+    "cite": "Bloomquist K et al. Effect of range of motion in heavy load squatting on muscle and tendon adaptations. Eur J Appl Physiol 2013;113(8):2133-42",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/23604798/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "bullbar-calluses": {
+    "id": "bullbar-calluses",
+    "cite": "Bullbar Fit, How to grip the bar without getting calluses",
+    "url": "https://bullbarfit.com/blogs/q-as/what-is-the-correct-way-to-grip-the-bar-to-avoid-calluses",
+    "kind": "manufacturer",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "buonsenso2025": {
+    "id": "buonsenso2025",
+    "cite": "Buonsenso A et al. (2025) Electromyographic analysis of back muscle activation during lat pulldown exercise: effects of grip variations and forearm orientation. J Funct Morphol Kinesiol 10(3):345",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/40981044/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "calatayud2016": {
+    "id": "calatayud2016",
+    "cite": "Calatayud J et al. Importance of mind-muscle connection during progressive resistance training. Eur J Appl Physiol 2016;116(3):527-33",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/26700744/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "callaghan2001": {
+    "id": "callaghan2001",
+    "cite": "Callaghan JP, McGill SM (2001) Intervertebral disc herniation: studies on a porcine model exposed to highly repetitive flexion/extension motion with compressive force. Clin Biomech 16(1):28-37",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/11114441/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "castonguay2022": {
+    "id": "castonguay2022",
+    "cite": "Castonguay-Siu V, Taylor WR. Optimizing backrest geometry to minimize interfacial pressure concentrations in the mid-to-lumbar region during leg press resistance training. J Biomech Eng 2022;144(3):035001",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/34864904/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "catalyst-hlr": {
+    "id": "catalyst-hlr",
+    "cite": "Catalyst Athletics, Hanging Leg Raise",
+    "url": "https://catalystathletics.com/exercise/45/Hanging-Leg-Raise/",
+    "kind": "coach",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "catalyst-neutral": {
+    "id": "catalyst-neutral",
+    "cite": "Catalyst Athletics, Neutral Grip Pull-Up",
+    "url": "https://catalystathletics.com/exercise/864/Neutral-Grip-Pull-Up",
+    "kind": "coach",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "catalyst-pullup": {
+    "id": "catalyst-pullup",
+    "cite": "Catalyst Athletics, Pull-up",
+    "url": "https://www.catalystathletics.com/exercise/39/Pull-up/",
+    "kind": "coach",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "catalyst-scap": {
+    "id": "catalyst-scap",
+    "cite": "Catalyst Athletics, Scap Pull-Up",
+    "url": "https://catalystathletics.com/exercise/918/Scap-Pull-Up/",
+    "kind": "coach",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "caterisano2002": {
+    "id": "caterisano2002",
+    "cite": "Caterisano A et al. The effect of back squat depth on the EMG activity of 4 superficial hip and thigh muscles. J Strength Cond Res 2002;16(3):428-32",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/12173958/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "clark2012": {
+    "id": "clark2012",
+    "cite": "Clark DR, Lambert MI, Hunter AM. Muscle activation in the loaded free barbell squat: a brief review. J Strength Cond Res 2012;26(4):1169-78",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/22373894/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "contreras2015": {
+    "id": "contreras2015",
+    "cite": "Contreras B et al. Gluteus maximus, biceps femoris and vastus lateralis EMG in the back squat and barbell hip thrust. J Appl Biomech 2015",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/26214739/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "coratella2020": {
+    "id": "coratella2020",
+    "cite": "Coratella G et al. (2020) An Electromyographic Analysis of Lateral Raise Variations and Frontal Raise in Competitive Bodybuilders. Int J Environ Res Public Health 17(17):6015",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7503819/",
+    "kind": "peer-reviewed",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "cronin2007": {
+    "id": "cronin2007",
+    "cite": "Cronin JB, Jones JV, Hagstrom JT (2007) Kinematics and kinetics of the seated row and implications for conditioning. J Strength Cond Res 21(4):1265-70",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/18076253/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "dasilva2008": {
+    "id": "dasilva2008",
+    "cite": "Da Silva EM et al. Analysis of muscle activation during different leg press exercises at submaximum effort levels. J Strength Cond Res 2008;22(4):1059-65",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/18545207/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "deabreu2023": {
+    "id": "deabreu2023",
+    "cite": "de Abreu Vasconcelos CMW, Lopes CR, Almeida VM, Krause Neto W, Soares E (2023) Effect of different grip position and shoulder-abduction angle on muscle strength and activation during the seated cable row. Int J Strength Cond 3(1)",
+    "url": "https://doi.org/10.47206/ijsc.v3i1.190",
+    "kind": "peer-reviewed",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "dickie2017": {
+    "id": "dickie2017",
+    "cite": "Dickie JA et al. (2017) Electromyographic analysis of muscle activation during pull-up variations. J Electromyogr Kinesiol 32:30-36",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/28011412/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "difonza2026": {
+    "id": "difonza2026",
+    "cite": "Di Fonza D et al. (2026) EMG analysis of latissimus dorsi activation during common resistance training exercises: a narrative review. J Funct Morphol Kinesiol 11(3):315",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42647355/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "doma2013": {
+    "id": "doma2013",
+    "cite": "Doma K, Deakin GB, Ness KF (2013) Kinematic and electromyographic comparisons between chin-ups and lat-pull down exercises. Sports Biomech 12(3):302-13",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/24245055/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "dosanjos2024": {
+    "id": "dosanjos2024",
+    "cite": "Dos Anjos FV et al. (2024) Assessing the feasibility of EMG biofeedback to reduce the upper trapezius muscle excitation during a seated row exercise. Appl Psychophysiol Biofeedback 49(4):577-587",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/39177899/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "escamilla2001": {
+    "id": "escamilla2001",
+    "cite": "Escamilla RF et al. A three-dimensional biomechanical analysis of the squat during varying stance widths. Med Sci Sports Exerc 2001;33(6):984-98",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/11404665/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "escamilla2001lp": {
+    "id": "escamilla2001lp",
+    "cite": "Escamilla RF et al. Effects of technique variations on knee biomechanics during the squat and leg press. Med Sci Sports Exerc 2001;33(9):1552-66",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/11528346/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "escamilla2006": {
+    "id": "escamilla2006",
+    "cite": "Escamilla RF et al. (2006) Electromyographic analysis of traditional and nontraditional abdominal exercises: implications for rehabilitation and training. Phys Ther 86(5):656-71",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/16649890/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "fees1998": {
+    "id": "fees1998",
+    "cite": "Fees M, Decker T, Snyder-Mackler L, Axe MJ. Upper extremity weight-training modifications for the injured athlete. Am J Sports Med 1998;26(5):732-42",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/9784824/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "fenwick2009": {
+    "id": "fenwick2009",
+    "cite": "Fenwick CM, Brown SH, McGill SM (2009) Comparison of different rowing exercises: trunk muscle activation and lumbar spine motion, load, and stiffness. J Strength Cond Res 23(2):350-8",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/19197209/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "fry2003": {
+    "id": "fry2003",
+    "cite": "Fry AC, Smith JC, Schilling BK. Effect of knee position on hip and knee torques during the barbell squat. J Strength Cond Res 2003;17(4):629-33",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/14636100/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "fujita2020": {
+    "id": "fujita2020",
+    "cite": "Fujita RA et al. (2020) Mind-muscle connection: limited effect of verbal instructions on muscle activity in a seated row exercise. Percept Mot Skills 127(5):925-938",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/32448047/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "glassbrook2017": {
+    "id": "glassbrook2017",
+    "cite": "Glassbrook DJ et al. Biomechanical differences between the high-bar and low-bar back-squat. J Strength Cond Res 2017;31(9):2618-2634",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/28570490/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "graichen1999": {
+    "id": "graichen1999",
+    "cite": "Graichen H et al. (1999) Subacromial space width changes during abduction and rotation, a 3-D MR imaging study. Surg Radiol Anat 21(1):59-64",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/10370995/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "hackett2013": {
+    "id": "hackett2013",
+    "cite": "Hackett DA, Chow CM. The Valsalva maneuver: its effect on intra-abdominal pressure and safety issues during resistance exercise. J Strength Cond Res 2013;27(8):2338-45",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/23222073/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "hk-squat": {
+    "id": "hk-squat",
+    "cite": "Broussal-Derval A. Squat technique. Human Kinetics, 2019",
+    "url": "https://us.humankinetics.com/blogs/strength-conditioning-fitness/squat-technique",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "jakobsen2012": {
+    "id": "jakobsen2012",
+    "cite": "Jakobsen MD et al. (2012) Evaluation of muscle activity during a standardized shoulder resistance training bout in novice individuals. J Strength Cond Res 26(9):2515-22",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/22067242/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "juker1998": {
+    "id": "juker1998",
+    "cite": "Juker D, McGill S, Kropf P, Steffen T (1998) Quantitative intramuscular myoelectric activity of lumbar portions of psoas and the abdominal wall during a wide variety of tasks. Med Sci Sports Exerc 30(2):301-10",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/9502361/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "jukic2021": {
+    "id": "jukic2021",
+    "cite": "Jukic I et al. (2021) Ergogenic effects of lifting straps on movement velocity, grip strength, perceived exertion and grip security during the deadlift exercise. Physiol Behav 229:113283",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/33306977/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "kerr2010": {
+    "id": "kerr2010",
+    "cite": "Kerr ZY et al. Epidemiology of weight training-related injuries presenting to US emergency departments, 1990 to 2007. Am J Sports Med 2010;38(4):765-71",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/20139328/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "kinoshita2026": {
+    "id": "kinoshita2026",
+    "cite": "Kinoshita M et al. Hypertrophic effects of single- versus multi-joint exercise: a direct comparison between knee extension and leg press. Med Sci Sports Exerc 2026;58(7):1566-1580",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/41630124/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "kolber2010": {
+    "id": "kolber2010",
+    "cite": "Kolber MJ et al. (2010) Shoulder injuries attributed to resistance training: a brief review. J Strength Cond Res 24(6):1696-704",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/20508476/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "kolber2013": {
+    "id": "kolber2013",
+    "cite": "Kolber MJ, Corrao M, Hanney WJ (2013) Characteristics of anterior shoulder instability and hyperlaxity in the weight-training population. J Strength Cond Res 27(5):1333-9",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/22836608/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "kolber2014": {
+    "id": "kolber2014",
+    "cite": "Kolber MJ et al. (2014) Characteristics of shoulder impingement in the recreational weight-training population. J Strength Cond Res 28(4):1081-9",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/24077379/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "kubo2019": {
+    "id": "kubo2019",
+    "cite": "Kubo K, Ikebukuro T, Yata H. Effects of squat training with different depths on lower limb muscle volumes. Eur J Appl Physiol 2019;119(9):1933-1942",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/31230110/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "lander1992": {
+    "id": "lander1992",
+    "cite": "Lander JE, Hundley JR, Simonton RL. The effectiveness of weight-belts during multiple repetitions of the squat exercise. Med Sci Sports Exerc 1992;24(5):603-9",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/1533266/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "larsen2025": {
+    "id": "larsen2025",
+    "cite": "Larsen S et al. Knee flexion range of motion does not influence muscle hypertrophy of the quadriceps femoris during leg press training in resistance-trained individuals. J Sports Sci 2025;43(10):986-994",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/40113586/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "lehman2004": {
+    "id": "lehman2004",
+    "cite": "Lehman GJ et al. (2004) Variations in muscle activation levels during traditional latissimus dorsi weight training exercises: an experimental study. Dyn Med 3(1):4",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/15228624/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "lusk2010": {
+    "id": "lusk2010",
+    "cite": "Lusk SJ, Hale BD, Russell DM (2010) Grip width and forearm orientation effects on muscle activity during the lat pull-down. J Strength Cond Res 24(7):1895-900",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/20543740/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "macdougall1985": {
+    "id": "macdougall1985",
+    "cite": "MacDougall JD et al. Arterial blood pressure response to heavy resistance exercise. J Appl Physiol 1985;58(3):785-90",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/3980383/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "marchetti2023": {
+    "id": "marchetti2023",
+    "cite": "Marchetti PH et al. Backseat inclination affects the myoelectric activation during the inclined leg press exercise in recreationally trained men. J Strength Cond Res 2023;37(10):e541-e545",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/37184975/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "martinfuentes2020": {
+    "id": "martinfuentes2020",
+    "cite": "Martin-Fuentes I, Oliva-Lozano JM, Muyor JM. Muscle activation and kinematic analysis during the inclined leg press exercise in young females. Int J Environ Res Public Health 2020;17(22):8698",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/33238589/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "martinfuentes2022": {
+    "id": "martinfuentes2022",
+    "cite": "Martin-Fuentes I, Oliva-Lozano JM, Muyor JM. Influence of feet position and execution velocity on muscle activation and kinematic parameters during the inclined leg press exercise. Sports Health 2022;14(3):317-327",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/34085847/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "martins2026": {
+    "id": "martins2026",
+    "cite": "Martins R et al. (2026) Are lifting straps a game changer for resistance training or an overrated tool? Int J Sports Physiol Perform 21(3):342-9",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/41569827/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "mcgill2015": {
+    "id": "mcgill2015",
+    "cite": "McGill S, Andersen J, Cannon J (2015) Muscle activity and spine load during anterior chain whole body linkage exercises: the body saw, hanging leg raise and walkout from a push-up. J Sports Sci 33(4):419-26",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/25111163/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "muyor2023": {
+    "id": "muyor2023",
+    "cite": "Muyor JM, Rodriguez-Ridao D, Oliva-Lozano JM. Muscle activity, horizontal bench press vs seated chest press, several grips. J Hum Kinet 2023;87:23-34",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10203828/",
+    "kind": "peer-reviewed",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "nance2017": {
+    "id": "nance2017",
+    "cite": "Nance EM et al. Dorsal wrist pain in the extended wrist-loading position: an MRI study. J Wrist Surg 2017;6(4):276-279",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/29085728/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "nasm-chinup": {
+    "id": "nasm-chinup",
+    "cite": "NASM, Chin-ups vs pull-ups (H. Cherry)",
+    "url": "https://www.nasm.org/resource-center/blog/training/chin-ups-vs-pull-ups-the-difference-the-benefits-muscles-worked",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "nasm-leg-press": {
+    "id": "nasm-leg-press",
+    "cite": "NASM Exercise Library, Leg Press",
+    "url": "https://www.nasm.org/resource-center/exercise-library/leg-press",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "nhs-elbow-pain": {
+    "id": "nhs-elbow-pain",
+    "cite": "NHS, Elbow and arm pain",
+    "url": "https://www.nhs.uk/symptoms/elbow-and-arm-pain/",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "nhs-knee-pain": {
+    "id": "nhs-knee-pain",
+    "cite": "NHS, Knee pain",
+    "url": "https://www.nhs.uk/symptoms/knee-pain/",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "nhs-shoulder-pain": {
+    "id": "nhs-shoulder-pain",
+    "cite": "NHS, Shoulder pain",
+    "url": "https://www.nhs.uk/conditions/shoulder-pain/",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "nhs-wrist-pain": {
+    "id": "nhs-wrist-pain",
+    "cite": "NHS, Wrist pain",
+    "url": "https://www.nhs.uk/conditions/hand-pain/wrist-pain/",
+    "kind": "guideline",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "nsca-low-row": {
+    "id": "nsca-low-row",
+    "cite": "NSCA low-pulley seated row technique, via a study flashcard set (original NSCA text not free online)",
+    "url": "https://brainscape.com/flashcards/exercise-techniques-3136125/packs/4953113",
+    "kind": "secondary",
+    "access": "summary",
+    "checked": "2026-09-30"
+  },
+  "nsca-summary": {
+    "id": "nsca-summary",
+    "cite": "NSCA Essentials of Strength Training and Conditioning, exercise technique chapter (study summary)",
+    "url": "https://www.ptpioneer.com/personal-training/certifications/nsca-cscs/cscs-chapter-15/",
+    "kind": "secondary",
+    "access": "summary",
+    "checked": "2026-09-30"
+  },
+  "odriscoll1992": {
+    "id": "odriscoll1992",
+    "cite": "O'Driscoll SW et al. (1992) The relationship between wrist position, grasp size, and grip strength. J Hand Surg Am 17(1):169-77",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/1538102/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "oranchuk2022": {
+    "id": "oranchuk2022",
+    "cite": "Oranchuk DJ et al. (2022) Improved power clean performance with the hook-grip is not due to altered force-time or horizontal bar-path characteristics. J Sports Sci 40(2):226-35",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/34592911/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "padovan2024": {
+    "id": "padovan2024",
+    "cite": "Padovan R et al. (2024) High-density electromyography excitation in front vs. back lat pull-down prime movers. J Hum Kinet 91:47-60",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/38689585/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "padovan2025grip": {
+    "id": "padovan2025grip",
+    "cite": "Padovan R et al. (2025) High-density surface electromyography excitation of prime movers in the narrow vs. wide grip seated row exercise. J Hum Kinet",
+    "url": "https://doi.org/10.5114/jhk/209550",
+    "kind": "peer-reviewed",
+    "access": "summary",
+    "checked": "2026-09-30"
+  },
+  "padovan2025scap": {
+    "id": "padovan2025scap",
+    "cite": "Padovan R et al. (2025) High-density surface electromyography excitation of prime movers across scapular positions in the seated row. J Funct Morphol Kinesiol 11(1):6",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/41562724/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "paoli2009": {
+    "id": "paoli2009",
+    "cite": "Paoli A, Marcolin G, Petrone N. Stance width and thigh muscle EMG during the back squat. J Strength Cond Res 2009;23(1):246-50",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/19130646/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "prinold2016": {
+    "id": "prinold2016",
+    "cite": "Prinold JA, Bull AM (2016) Scapula kinematics of pull-up techniques: avoiding impingement risk with training changes. J Sci Med Sport 19(8):629-35",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/26383875/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "rogue-false-grip": {
+    "id": "rogue-false-grip",
+    "cite": "Rogue Fitness, False Grips",
+    "url": "https://www.rogueapo.com/false-grips",
+    "kind": "manufacturer",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "ronai2019": {
+    "id": "ronai2019",
+    "cite": "Ronai P (2019) Do it right: the seated cable row exercise. ACSM's Health Fit J 23(4):32-37",
+    "url": "https://digitalcommons.sacredheart.edu/pthms_exscifac/36",
+    "kind": "coach",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "saeterbakken2015": {
+    "id": "saeterbakken2015",
+    "cite": "Saeterbakken A et al. (2015) The effect of performing bi- and unilateral row exercises on core muscle activation. Int J Sports Med 36(11):900-5",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/26134664/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "schulz": {
+    "id": "schulz",
+    "cite": "Schulz DS. Low Bar Squat Wrist Pain: Reasons and Solutions. Torokhtiy",
+    "url": "https://store.torokhtiy.com/blogs/guides/low-bar-squat-wrist-pain",
+    "kind": "coach",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "signorile2002": {
+    "id": "signorile2002",
+    "cite": "Signorile JF, Zink AJ, Szwed SP (2002) A comparative electromyographical investigation of muscle utilization patterns using various hand positions during the lat pull-down. J Strength Cond Res 16(4):539-46",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/12423182/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "snarr2017": {
+    "id": "snarr2017",
+    "cite": "Snarr RL et al. (2017) Electromyographical comparison of a traditional, suspension device, and towel pull-up. J Hum Kinet 58:5-13",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/28828073/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "snyder2009": {
+    "id": "snyder2009",
+    "cite": "Snyder BJ, Leech JR (2009) Voluntary increase in latissimus dorsi muscle activity during the lat pull-down following expert instruction. J Strength Cond Res 23(8):2204-9",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/19826307/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "snyder2012": {
+    "id": "snyder2012",
+    "cite": "Snyder BJ, Fry WR. Effect of verbal instruction on muscle activity during the bench press. J Strength Cond Res 2012;26(9):2394-400",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/22076100/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "sperandei2009": {
+    "id": "sperandei2009",
+    "cite": "Sperandei S et al. (2009) Electromyographic analysis of three different types of lat pull-down. J Strength Cond Res 23(7):2033-8",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/19855327/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "sporrong1995": {
+    "id": "sporrong1995",
+    "cite": "Sporrong H et al. (1995) Influences of handgrip on shoulder muscle activity. Eur J Appl Physiol 71(6):485-92",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/8983914/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "sporrong1996": {
+    "id": "sporrong1996",
+    "cite": "Sporrong H et al. (1996) Hand grip increases shoulder muscle activity. Acta Orthop Scand 67(5):485-90",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/8948256/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "stien2021": {
+    "id": "stien2021",
+    "cite": "Stien N, Saeterbakken AH, Andersen V. Electromyographic comparison of five lower-limb muscles between single- and multi-joint exercises among trained men. J Sports Sci Med 2021;20(1):56-61",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/33707987/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "strengthlog-hlr": {
+    "id": "strengthlog-hlr",
+    "cite": "StrengthLog, Hanging Leg Raise",
+    "url": "https://www.strengthlog.com/hanging-leg-raise/",
+    "kind": "coach",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "unmc-cable-row": {
+    "id": "unmc-cable-row",
+    "cite": "University of Nebraska Medical Center, Center for Healthy Living, cable row video transcript",
+    "url": "https://www.unmc.edu/cfhl/_documents/cable_row_video_transcript.txt",
+    "kind": "coach",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "urbanczyk2020": {
+    "id": "urbanczyk2020",
+    "cite": "Urbanczyk CA et al. (2020) Avoiding high-risk rotator cuff loading: muscle force during three pull-up techniques. Scand J Med Sci Sports 30(11):2205-14",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/32715526/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "valerio2021": {
+    "id": "valerio2021",
+    "cite": "Valerio DF et al. (2021) The effects of lifting straps in maximum strength, number of repetitions and muscle activation during lat pull-down. Sports Biomech 20(7):858-65",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/31198105/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "weiss1995": {
+    "id": "weiss1995",
+    "cite": "Weiss ND et al. (1995) Position of the wrist associated with the lowest carpal-tunnel pressure. J Bone Joint Surg Am 77(11):1695-9",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/7593079/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "wiki-hook-grip": {
+    "id": "wiki-hook-grip",
+    "cite": "Hook grip, Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Hook_grip",
+    "kind": "secondary",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "wiki-leg-raise": {
+    "id": "wiki-leg-raise",
+    "cite": "Leg raise, Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Leg_raise",
+    "kind": "secondary",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "wiki-muscle-up": {
+    "id": "wiki-muscle-up",
+    "cite": "Muscle-up (false grip), Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Muscle-up",
+    "kind": "secondary",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "workman2008": {
+    "id": "workman2008",
+    "cite": "Workman JC, Docherty D, Parfrey KC, Behm DG (2008) Influence of pelvis position on the activation of abdominal and hip flexor muscles. J Strength Cond Res 22(5):1563-9",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/18714231/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "wretenberg1996": {
+    "id": "wretenberg1996",
+    "cite": "Wretenberg P, Feng Y, Arborelius UP. High- and low-bar squatting techniques during weight-training. Med Sci Sports Exerc 1996;28(2):218-24",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/8775157/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  },
+  "yessis": {
+    "id": "yessis",
+    "cite": "Yessis M. The Leg Press",
+    "url": "https://doctoryessis.com/?p=2700",
+    "kind": "coach",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "yessis-hlr": {
+    "id": "yessis-hlr",
+    "cite": "Yessis M, Hanging Leg Raise",
+    "url": "https://doctoryessis.com/2013/01/01/hanging-leg-raise/",
+    "kind": "coach",
+    "access": "full",
+    "checked": "2026-09-30"
+  },
+  "youdas2010": {
+    "id": "youdas2010",
+    "cite": "Youdas JW et al. (2010) Surface EMG activation patterns and elbow joint motion during a pull-up, chin-up, or Perfect-Pullup rotational exercise. J Strength Cond Res 24(12):3404-14",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/21068680/",
+    "kind": "peer-reviewed",
+    "access": "abstract",
+    "checked": "2026-09-30"
+  }
+}

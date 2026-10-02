@@ -1,0 +1,3114 @@
+{
+ "tools": [
+  {
+   "name": "get_overview",
+   "description": "Today at a glance: scheduled split, readiness, the least-recovered muscles, this week's counts, streak, an active lighter week or today's adjustment, days since the last session. Call it first when a question is about today or 'how am I doing'.",
+   "input_schema": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_sessions",
+   "description": "List logged sessions (newest first) with day, split, duration, set count and top lifts. Use it to find a session id or to see what was trained when.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "from": {
+      "type": "string",
+      "description": "A date, YYYY-MM-DD."
+     },
+     "to": {
+      "type": "string",
+      "description": "A date, YYYY-MM-DD."
+     },
+     "splitId": {
+      "type": "string",
+      "description": "Only this split."
+     },
+     "limit": {
+      "type": "integer",
+      "description": "1–20, default 10."
+     }
+    },
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_session",
+   "description": "Every set of one session (load, reps, effort, flags), its post-session notes, and a heart summary when health sharing is on. Use after get_sessions.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "sessionId": {
+      "type": "string",
+      "description": "From get_sessions."
+     }
+    },
+    "required": [
+     "sessionId"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_exercise_history",
+   "description": "Per-session history of one exercise, newest session first: top set, strength estimate (e1RM), effort mix; plus plateau status, trend, records and effort drift. Call it for any question about progress, stalls or a specific lift.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "exerciseId": {
+      "type": "string",
+      "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+     },
+     "weeks": {
+      "type": "integer",
+      "description": "1–52, default 12."
+     }
+    },
+    "required": [
+     "exerciseId"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_next_target",
+   "description": "The app's next-session target for an exercise (load, reps, reason, confidence), snapped to the equipment's loads, with a warm-up ramp and the primary muscles' recovery. Use for 'what should I lift'.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "exerciseId": {
+      "type": "string",
+      "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+     },
+     "plannedSets": {
+      "type": "integer",
+      "description": "1–6."
+     }
+    },
+    "required": [
+     "exerciseId"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_recovery",
+   "description": "Recovery per muscle: percent, hours until ready, when fully recovered, top drivers and confidence. Pass `at` (ISO, up to 7 days ahead) to project. `soreToday` marks a muscle that today's soreness rating alone is holding back, past what the model's clock would otherwise say; hoursLeft and fullInHours are null there rather than a misleading 0. Use for soreness, readiness to train a muscle, or scheduling.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "muscles": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "enum": [
+        "chest",
+        "upper_chest",
+        "front_delts",
+        "side_delts",
+        "rear_delts",
+        "rotator_cuff",
+        "biceps",
+        "triceps",
+        "brachialis",
+        "forearms",
+        "lats",
+        "mid_back",
+        "upper_traps",
+        "lower_back",
+        "abs",
+        "obliques",
+        "core",
+        "hip_flexors",
+        "quads",
+        "hamstrings",
+        "glutes",
+        "adductors",
+        "abductors",
+        "calves"
+       ]
+      }
+     },
+     "at": {
+      "type": "string",
+      "description": "Optional ISO time, up to 7 days ahead."
+     }
+    },
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_readiness",
+   "description": "Today's (or a past day's) readiness: score, band, drivers, load advice, confidence, the baselines it compares against, and optionally the band for recent days. Use for 'why am I amber/red' or 'should I train hard'.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "day": {
+      "type": "string",
+      "description": "A date, YYYY-MM-DD."
+     },
+     "historyDays": {
+      "type": "integer",
+      "description": "0–30, default 0."
+     }
+    },
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_volume",
+   "description": "Weekly effective sets per muscle against the person's volume band, with the 4-week median, plus weekly totals. Use for volume, balance or 'am I doing enough'.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "weeks": {
+      "type": "integer",
+      "description": "1–12, default 4."
+     },
+     "muscles": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "enum": [
+        "chest",
+        "upper_chest",
+        "front_delts",
+        "side_delts",
+        "rear_delts",
+        "rotator_cuff",
+        "biceps",
+        "triceps",
+        "brachialis",
+        "forearms",
+        "lats",
+        "mid_back",
+        "upper_traps",
+        "lower_back",
+        "abs",
+        "obliques",
+        "core",
+        "hip_flexors",
+        "quads",
+        "hamstrings",
+        "glutes",
+        "adductors",
+        "abductors",
+        "calves"
+       ]
+      }
+     }
+    },
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_records",
+   "description": "Personal records, newest first, optionally for one exercise.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "exerciseId": {
+      "type": "string",
+      "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+     },
+     "limit": {
+      "type": "integer",
+      "description": "1–20, default 10."
+     }
+    },
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_insights",
+   "description": "Every current coach insight (not just the top three) with id, category, priority, title, what was noticed, what it means, the action and its numbers; the weekly review; and whether a lighter week is due. Prefer this over guessing what matters.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "includeSnoozed": {
+      "type": "boolean",
+      "description": "Include insights the person snoozed."
+     }
+    },
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_plan",
+   "description": "The goal (rep ranges, effort target, rest), every split with exercises and sets, the weekly schedule, reminders, rest mode, an active lighter week and today’s adjustment. Call before proposing any change to splits or the schedule.",
+   "input_schema": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_body",
+   "description": "Weight trend (kg/week and % per week), latest weight, body-fat readings and BMI. Needs body sharing.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "weeks": {
+      "type": "integer",
+      "description": "4–52, default 12."
+     }
+    },
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_health",
+   "description": "Daily sleep, resting heart rate, steps and active calories from Health Connect. Needs health sharing.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "days": {
+      "type": "integer",
+      "description": "1–30, default 7."
+     }
+    },
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_heart_session",
+   "description": "One session's heart data: time in zones, per-set peaks, rest recovery, drift and effort mismatch. Needs health sharing.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "sessionId": {
+      "type": "string",
+      "description": "From get_sessions."
+     }
+    },
+    "required": [
+     "sessionId"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_live_session",
+   "description": "The session in progress: split, elapsed time, current exercise, sets done vs planned, rest timer, the in-session adjustment, and live heart-rate freshness. Call first in live mode.",
+   "input_schema": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "search_exercises",
+   "description": "Find exercises by name, muscle, equipment or movement pattern. Use to get exercise ids before proposing splits or swaps.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "query": {
+      "type": "string",
+      "description": "Name or alias."
+     },
+     "muscle": {
+      "type": "string",
+      "enum": [
+       "chest",
+       "upper_chest",
+       "front_delts",
+       "side_delts",
+       "rear_delts",
+       "rotator_cuff",
+       "biceps",
+       "triceps",
+       "brachialis",
+       "forearms",
+       "lats",
+       "mid_back",
+       "upper_traps",
+       "lower_back",
+       "abs",
+       "obliques",
+       "core",
+       "hip_flexors",
+       "quads",
+       "hamstrings",
+       "glutes",
+       "adductors",
+       "abductors",
+       "calves"
+      ]
+     },
+     "equipment": {
+      "type": "string",
+      "description": "e.g. Dumbbells, Cable, Barbell, Machine."
+     },
+     "pattern": {
+      "type": "string",
+      "description": "e.g. horizontal_push, squat, hinge."
+     },
+     "limit": {
+      "type": "integer",
+      "description": "1–12, default 8."
+     }
+    },
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_exercise",
+   "description": "Full details of one exercise: muscles, equipment, pattern, type, role, up to 6 substitutes and a coaching cue.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "exerciseId": {
+      "type": "string",
+      "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+     }
+    },
+    "required": [
+     "exerciseId"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "get_equipment",
+   "description": "The equipment profile for an exercise at a gym (entry unit, steps, dumbbell ladder, bar, plates), the active gym, and loadable neighbours of the current target. Use before talking about loads in lb or kg, plates or dumbbell jumps.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "exerciseId": {
+      "type": "string",
+      "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+     },
+     "gymId": {
+      "type": "string",
+      "description": "Default: the active gym."
+     }
+    },
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "find_in_app",
+   "description": "Search the app itself: returns the 5 best screens, panels or actions with where they are and how to use them. Use when unsure where something lives.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "query": {
+      "type": "string",
+      "description": "What the person wants to find or do."
+     }
+    },
+    "required": [
+     "query"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "explain_method",
+   "description": "How the app computes a number (recovery, readiness, progression, volume bands and more), its constants and this person's own calibration values. Use for any 'how is X calculated' or 'why does the app say'.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "topic": {
+      "type": "string",
+      "enum": [
+       "recovery",
+       "readiness",
+       "progression",
+       "volume_bands",
+       "deload_trigger",
+       "e1rm",
+       "plateau",
+       "effort_calibration",
+       "warmup",
+       "hr_rest",
+       "hr_zones",
+       "energy",
+       "fidelity",
+       "records",
+       "balance",
+       "weekly_review"
+      ]
+     }
+    },
+    "required": [
+     "topic"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "lookup_knowledge",
+   "description": "Evidence cards on training, recovery, sleep and nutrition basics, with key numbers. Required before stating any general number; cite the card as ⟦k:id⟧.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "query": {
+      "type": "string",
+      "description": "Topic words."
+     },
+     "ids": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "description": "Card ids, if known."
+     }
+    },
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "calculate",
+   "description": "Arithmetic on the person’s numbers. Never compute in your head: use this for BMI, e1RM, loads for reps, percent change, unit conversion, plates, weekly rate, protein range and days between dates.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "op": {
+      "type": "string",
+      "enum": [
+       "bmi",
+       "weight_for_bmi",
+       "e1rm",
+       "load_for_reps",
+       "percent_change",
+       "convert_load",
+       "plate_breakdown",
+       "weekly_rate",
+       "protein_range",
+       "days_between"
+      ]
+     },
+     "args": {
+      "anyOf": [
+       {
+        "type": "object",
+        "properties": {
+         "kg": {
+          "type": "number",
+          "description": "Body weight in kg."
+         },
+         "cm": {
+          "type": "number",
+          "description": "Height in cm."
+         }
+        },
+        "required": [
+         "kg",
+         "cm"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "bmi": {
+          "type": "number",
+          "description": "Target BMI."
+         },
+         "cm": {
+          "type": "number",
+          "description": "Height in cm."
+         }
+        },
+        "required": [
+         "bmi",
+         "cm"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "kg": {
+          "type": "number",
+          "description": "Load in kg."
+         },
+         "reps": {
+          "type": "integer",
+          "description": "1–10."
+         },
+         "effort": {
+          "type": "string",
+          "enum": [
+           "easy",
+           "ideal",
+           "max"
+          ]
+         }
+        },
+        "required": [
+         "kg",
+         "reps"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "e1rm": {
+          "type": "number",
+          "description": "Estimated one-rep max in kg."
+         },
+         "reps": {
+          "type": "integer",
+          "description": "1–15."
+         }
+        },
+        "required": [
+         "e1rm",
+         "reps"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "from": {
+          "type": "number",
+          "description": "Start value."
+         },
+         "to": {
+          "type": "number",
+          "description": "End value."
+         }
+        },
+        "required": [
+         "from",
+         "to"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "value": {
+          "type": "number",
+          "description": "The load."
+         },
+         "from": {
+          "type": "string",
+          "enum": [
+           "kg",
+           "lb"
+          ]
+         },
+         "to": {
+          "type": "string",
+          "enum": [
+           "kg",
+           "lb"
+          ]
+         }
+        },
+        "required": [
+         "value",
+         "from",
+         "to"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "kg": {
+          "type": "number",
+          "description": "Total bar load in kg."
+         },
+         "barKg": {
+          "type": "number",
+          "description": "Bar weight in kg; default from the gym."
+         },
+         "exerciseId": {
+          "type": "string",
+          "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+         }
+        },
+        "required": [
+         "kg"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "fromKg": {
+          "type": "number",
+          "description": "Start weight in kg."
+         },
+         "toKg": {
+          "type": "number",
+          "description": "End weight in kg."
+         },
+         "weeks": {
+          "type": "number",
+          "description": "Weeks between them."
+         }
+        },
+        "required": [
+         "fromKg",
+         "toKg",
+         "weeks"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "kg": {
+          "type": "number",
+          "description": "Body weight in kg."
+         },
+         "gPerKgLow": {
+          "type": "number",
+          "description": "Low end g/kg, e.g. 1.6."
+         },
+         "gPerKgHigh": {
+          "type": "number",
+          "description": "High end g/kg, e.g. 2.2."
+         }
+        },
+        "required": [
+         "kg",
+         "gPerKgLow",
+         "gPerKgHigh"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "from": {
+          "type": "string",
+          "description": "A date, YYYY-MM-DD."
+         },
+         "to": {
+          "type": "string",
+          "description": "A date, YYYY-MM-DD."
+         }
+        },
+        "required": [
+         "from",
+         "to"
+        ],
+        "additionalProperties": false
+       }
+      ]
+     }
+    },
+    "required": [
+     "op",
+     "args"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "evaluate_plan",
+   "description": "Grade a programme draft: weekly sets per muscle against this person’s bands, balance, back-to-back hard days, rep ranges and session length, with blocking issues. Call before propose_program and revise until no issue has severity \"block\".",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "draft": {
+      "type": "object",
+      "properties": {
+       "splits": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "ref": {
+           "type": "string",
+           "description": "A short id for this split inside the draft, e.g. \"push\"."
+          },
+          "name": {
+           "type": "string",
+           "description": "Split name, at most 28 characters."
+          },
+          "exercises": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "exerciseId": {
+              "type": "string",
+              "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+             },
+             "sets": {
+              "type": "integer",
+              "description": "Sets per session, 1–6."
+             }
+            },
+            "required": [
+             "exerciseId",
+             "sets"
+            ],
+            "additionalProperties": false
+           },
+           "description": "At most 14 exercises."
+          }
+         },
+         "required": [
+          "ref",
+          "name",
+          "exercises"
+         ],
+         "additionalProperties": false
+        },
+        "description": "At most 7 splits."
+       },
+       "schedule": {
+        "type": "object",
+        "properties": {
+         "sun": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         },
+         "mon": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         },
+         "tue": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         },
+         "wed": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         },
+         "thu": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         },
+         "fri": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         },
+         "sat": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         }
+        },
+        "required": [
+         "sun",
+         "mon",
+         "tue",
+         "wed",
+         "thu",
+         "fri",
+         "sat"
+        ],
+        "additionalProperties": false
+       }
+      },
+      "required": [
+       "splits",
+       "schedule"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "draft"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "show",
+   "description": "Draw a chart or card inline from the app’s own data. The result is the exact data drawn: talk about those numbers. Use when a picture is clearer than numbers.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "component": {
+      "type": "string",
+      "enum": [
+       "lift_trend",
+       "recovery_map",
+       "volume_bars",
+       "readiness_gauge",
+       "readiness_history",
+       "week_summary",
+       "session_summary",
+       "records_list",
+       "plan_week",
+       "plan_evaluation",
+       "exercise_card",
+       "heart_session",
+       "compare_periods",
+       "body_trend"
+      ]
+     },
+     "params": {
+      "anyOf": [
+       {
+        "type": "object",
+        "properties": {
+         "exerciseId": {
+          "type": "string",
+          "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+         },
+         "weeks": {
+          "type": "integer",
+          "description": "4–52, default 12."
+         },
+         "metric": {
+          "type": "string",
+          "enum": [
+           "e1rm",
+           "top_set",
+           "volume"
+          ],
+          "description": "Default e1rm."
+         }
+        },
+        "required": [
+         "exerciseId"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "at": {
+          "type": "string",
+          "description": "Optional ISO time up to 7 days ahead, to project recovery."
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "weeks": {
+          "type": "integer",
+          "description": "1–12, default 1."
+         },
+         "muscles": {
+          "type": "array",
+          "items": {
+           "type": "string",
+           "enum": [
+            "chest",
+            "upper_chest",
+            "front_delts",
+            "side_delts",
+            "rear_delts",
+            "rotator_cuff",
+            "biceps",
+            "triceps",
+            "brachialis",
+            "forearms",
+            "lats",
+            "mid_back",
+            "upper_traps",
+            "lower_back",
+            "abs",
+            "obliques",
+            "core",
+            "hip_flexors",
+            "quads",
+            "hamstrings",
+            "glutes",
+            "adductors",
+            "abductors",
+            "calves"
+           ]
+          }
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "day": {
+          "type": "string",
+          "description": "A date, YYYY-MM-DD."
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "days": {
+          "type": "integer",
+          "description": "7–30, default 14."
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "offsetWeeks": {
+          "type": "integer",
+          "description": "0 = this week, up to 8 weeks back."
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "sessionId": {
+          "type": "string",
+          "description": "From get_sessions."
+         }
+        },
+        "required": [
+         "sessionId"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "exerciseId": {
+          "type": "string",
+          "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+         },
+         "limit": {
+          "type": "integer",
+          "description": "1–10, default 5."
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "draft": {
+          "type": "object",
+          "properties": {
+           "splits": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "ref": {
+               "type": "string",
+               "description": "A short id for this split inside the draft, e.g. \"push\"."
+              },
+              "name": {
+               "type": "string",
+               "description": "Split name, at most 28 characters."
+              },
+              "exercises": {
+               "type": "array",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "exerciseId": {
+                  "type": "string",
+                  "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+                 },
+                 "sets": {
+                  "type": "integer",
+                  "description": "Sets per session, 1–6."
+                 }
+                },
+                "required": [
+                 "exerciseId",
+                 "sets"
+                ],
+                "additionalProperties": false
+               },
+               "description": "At most 14 exercises."
+              }
+             },
+             "required": [
+              "ref",
+              "name",
+              "exercises"
+             ],
+             "additionalProperties": false
+            },
+            "description": "At most 7 splits."
+           },
+           "schedule": {
+            "type": "object",
+            "properties": {
+             "sun": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "mon": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "tue": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "wed": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "thu": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "fri": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "sat": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             }
+            },
+            "required": [
+             "sun",
+             "mon",
+             "tue",
+             "wed",
+             "thu",
+             "fri",
+             "sat"
+            ],
+            "additionalProperties": false
+           }
+          },
+          "required": [
+           "splits",
+           "schedule"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "draft": {
+          "type": "object",
+          "properties": {
+           "splits": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "ref": {
+               "type": "string",
+               "description": "A short id for this split inside the draft, e.g. \"push\"."
+              },
+              "name": {
+               "type": "string",
+               "description": "Split name, at most 28 characters."
+              },
+              "exercises": {
+               "type": "array",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "exerciseId": {
+                  "type": "string",
+                  "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+                 },
+                 "sets": {
+                  "type": "integer",
+                  "description": "Sets per session, 1–6."
+                 }
+                },
+                "required": [
+                 "exerciseId",
+                 "sets"
+                ],
+                "additionalProperties": false
+               },
+               "description": "At most 14 exercises."
+              }
+             },
+             "required": [
+              "ref",
+              "name",
+              "exercises"
+             ],
+             "additionalProperties": false
+            },
+            "description": "At most 7 splits."
+           },
+           "schedule": {
+            "type": "object",
+            "properties": {
+             "sun": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "mon": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "tue": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "wed": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "thu": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "fri": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "sat": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             }
+            },
+            "required": [
+             "sun",
+             "mon",
+             "tue",
+             "wed",
+             "thu",
+             "fri",
+             "sat"
+            ],
+            "additionalProperties": false
+           }
+          },
+          "required": [
+           "splits",
+           "schedule"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "draft"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "exerciseId": {
+          "type": "string",
+          "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+         }
+        },
+        "required": [
+         "exerciseId"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "sessionId": {
+          "type": "string",
+          "description": "From get_sessions."
+         }
+        },
+        "required": [
+         "sessionId"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "metric": {
+          "type": "string",
+          "enum": [
+           "sets",
+           "volume",
+           "sessions",
+           "e1rm"
+          ]
+         },
+         "exerciseId": {
+          "type": "string",
+          "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+         },
+         "a": {
+          "type": "object",
+          "properties": {
+           "from": {
+            "type": "string",
+            "description": "A date, YYYY-MM-DD."
+           },
+           "to": {
+            "type": "string",
+            "description": "A date, YYYY-MM-DD."
+           }
+          },
+          "required": [
+           "from",
+           "to"
+          ],
+          "additionalProperties": false
+         },
+         "b": {
+          "type": "object",
+          "properties": {
+           "from": {
+            "type": "string",
+            "description": "A date, YYYY-MM-DD."
+           },
+           "to": {
+            "type": "string",
+            "description": "A date, YYYY-MM-DD."
+           }
+          },
+          "required": [
+           "from",
+           "to"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "metric",
+         "a",
+         "b"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "weeks": {
+          "type": "integer",
+          "description": "4–52, default 12."
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       }
+      ]
+     },
+     "caption": {
+      "type": "string",
+      "description": "One short line, optional."
+     }
+    },
+    "required": [
+     "component",
+     "params"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "navigate",
+   "description": "Offer a \"Take me there\" card for a place in the app (a palace id from the manifest). Set auto only when the person literally asked to be taken there.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "target": {
+      "type": "string",
+      "description": "A palace entry id from the manifest."
+     },
+     "params": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "key": {
+         "type": "string"
+        },
+        "value": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "key",
+        "value"
+       ],
+       "additionalProperties": false
+      }
+     },
+     "auto": {
+      "type": "boolean",
+      "description": "Go there right after the answer."
+     }
+    },
+    "required": [
+     "target"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "pin_card",
+   "description": "Propose pinning a component to the Today screen (the person taps to pin). Use when they want to keep an eye on something.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "component": {
+      "type": "string",
+      "enum": [
+       "lift_trend",
+       "recovery_map",
+       "volume_bars",
+       "readiness_gauge",
+       "readiness_history",
+       "week_summary",
+       "session_summary",
+       "records_list",
+       "plan_week",
+       "plan_evaluation",
+       "exercise_card",
+       "heart_session",
+       "compare_periods",
+       "body_trend"
+      ]
+     },
+     "params": {
+      "anyOf": [
+       {
+        "type": "object",
+        "properties": {
+         "exerciseId": {
+          "type": "string",
+          "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+         },
+         "weeks": {
+          "type": "integer",
+          "description": "4–52, default 12."
+         },
+         "metric": {
+          "type": "string",
+          "enum": [
+           "e1rm",
+           "top_set",
+           "volume"
+          ],
+          "description": "Default e1rm."
+         }
+        },
+        "required": [
+         "exerciseId"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "at": {
+          "type": "string",
+          "description": "Optional ISO time up to 7 days ahead, to project recovery."
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "weeks": {
+          "type": "integer",
+          "description": "1–12, default 1."
+         },
+         "muscles": {
+          "type": "array",
+          "items": {
+           "type": "string",
+           "enum": [
+            "chest",
+            "upper_chest",
+            "front_delts",
+            "side_delts",
+            "rear_delts",
+            "rotator_cuff",
+            "biceps",
+            "triceps",
+            "brachialis",
+            "forearms",
+            "lats",
+            "mid_back",
+            "upper_traps",
+            "lower_back",
+            "abs",
+            "obliques",
+            "core",
+            "hip_flexors",
+            "quads",
+            "hamstrings",
+            "glutes",
+            "adductors",
+            "abductors",
+            "calves"
+           ]
+          }
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "day": {
+          "type": "string",
+          "description": "A date, YYYY-MM-DD."
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "days": {
+          "type": "integer",
+          "description": "7–30, default 14."
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "offsetWeeks": {
+          "type": "integer",
+          "description": "0 = this week, up to 8 weeks back."
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "sessionId": {
+          "type": "string",
+          "description": "From get_sessions."
+         }
+        },
+        "required": [
+         "sessionId"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "exerciseId": {
+          "type": "string",
+          "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+         },
+         "limit": {
+          "type": "integer",
+          "description": "1–10, default 5."
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "draft": {
+          "type": "object",
+          "properties": {
+           "splits": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "ref": {
+               "type": "string",
+               "description": "A short id for this split inside the draft, e.g. \"push\"."
+              },
+              "name": {
+               "type": "string",
+               "description": "Split name, at most 28 characters."
+              },
+              "exercises": {
+               "type": "array",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "exerciseId": {
+                  "type": "string",
+                  "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+                 },
+                 "sets": {
+                  "type": "integer",
+                  "description": "Sets per session, 1–6."
+                 }
+                },
+                "required": [
+                 "exerciseId",
+                 "sets"
+                ],
+                "additionalProperties": false
+               },
+               "description": "At most 14 exercises."
+              }
+             },
+             "required": [
+              "ref",
+              "name",
+              "exercises"
+             ],
+             "additionalProperties": false
+            },
+            "description": "At most 7 splits."
+           },
+           "schedule": {
+            "type": "object",
+            "properties": {
+             "sun": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "mon": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "tue": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "wed": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "thu": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "fri": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "sat": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             }
+            },
+            "required": [
+             "sun",
+             "mon",
+             "tue",
+             "wed",
+             "thu",
+             "fri",
+             "sat"
+            ],
+            "additionalProperties": false
+           }
+          },
+          "required": [
+           "splits",
+           "schedule"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "draft": {
+          "type": "object",
+          "properties": {
+           "splits": {
+            "type": "array",
+            "items": {
+             "type": "object",
+             "properties": {
+              "ref": {
+               "type": "string",
+               "description": "A short id for this split inside the draft, e.g. \"push\"."
+              },
+              "name": {
+               "type": "string",
+               "description": "Split name, at most 28 characters."
+              },
+              "exercises": {
+               "type": "array",
+               "items": {
+                "type": "object",
+                "properties": {
+                 "exerciseId": {
+                  "type": "string",
+                  "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+                 },
+                 "sets": {
+                  "type": "integer",
+                  "description": "Sets per session, 1–6."
+                 }
+                },
+                "required": [
+                 "exerciseId",
+                 "sets"
+                ],
+                "additionalProperties": false
+               },
+               "description": "At most 14 exercises."
+              }
+             },
+             "required": [
+              "ref",
+              "name",
+              "exercises"
+             ],
+             "additionalProperties": false
+            },
+            "description": "At most 7 splits."
+           },
+           "schedule": {
+            "type": "object",
+            "properties": {
+             "sun": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "mon": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "tue": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "wed": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "thu": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "fri": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             },
+             "sat": {
+              "type": [
+               "string",
+               "null"
+              ],
+              "description": "A split ref from this draft, or null for rest."
+             }
+            },
+            "required": [
+             "sun",
+             "mon",
+             "tue",
+             "wed",
+             "thu",
+             "fri",
+             "sat"
+            ],
+            "additionalProperties": false
+           }
+          },
+          "required": [
+           "splits",
+           "schedule"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "draft"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "exerciseId": {
+          "type": "string",
+          "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+         }
+        },
+        "required": [
+         "exerciseId"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "sessionId": {
+          "type": "string",
+          "description": "From get_sessions."
+         }
+        },
+        "required": [
+         "sessionId"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "metric": {
+          "type": "string",
+          "enum": [
+           "sets",
+           "volume",
+           "sessions",
+           "e1rm"
+          ]
+         },
+         "exerciseId": {
+          "type": "string",
+          "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+         },
+         "a": {
+          "type": "object",
+          "properties": {
+           "from": {
+            "type": "string",
+            "description": "A date, YYYY-MM-DD."
+           },
+           "to": {
+            "type": "string",
+            "description": "A date, YYYY-MM-DD."
+           }
+          },
+          "required": [
+           "from",
+           "to"
+          ],
+          "additionalProperties": false
+         },
+         "b": {
+          "type": "object",
+          "properties": {
+           "from": {
+            "type": "string",
+            "description": "A date, YYYY-MM-DD."
+           },
+           "to": {
+            "type": "string",
+            "description": "A date, YYYY-MM-DD."
+           }
+          },
+          "required": [
+           "from",
+           "to"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "metric",
+         "a",
+         "b"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "weeks": {
+          "type": "integer",
+          "description": "4–52, default 12."
+         }
+        },
+        "required": [],
+        "additionalProperties": false
+       }
+      ]
+     },
+     "title": {
+      "type": "string",
+      "description": "At most 60 characters."
+     },
+     "days": {
+      "type": "integer",
+      "description": "1–42; default until unpinned."
+     }
+    },
+    "required": [
+     "component",
+     "params",
+     "title"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "propose_split",
+   "description": "Propose creating, changing or deleting one split. The person sees a card with the changes and taps Apply. Use exercise ids from search_exercises.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "action": {
+      "type": "string",
+      "enum": [
+       "create",
+       "modify",
+       "delete"
+      ]
+     },
+     "splitId": {
+      "type": "string",
+      "description": "Required for modify and delete."
+     },
+     "name": {
+      "type": "string",
+      "description": "At most 28 characters."
+     },
+     "focus": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "enum": [
+        "chest",
+        "upper_chest",
+        "front_delts",
+        "side_delts",
+        "rear_delts",
+        "rotator_cuff",
+        "biceps",
+        "triceps",
+        "brachialis",
+        "forearms",
+        "lats",
+        "mid_back",
+        "upper_traps",
+        "lower_back",
+        "abs",
+        "obliques",
+        "core",
+        "hip_flexors",
+        "quads",
+        "hamstrings",
+        "glutes",
+        "adductors",
+        "abductors",
+        "calves"
+       ]
+      },
+      "description": "Up to 2 muscles to bring up."
+     },
+     "exercises": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "exerciseId": {
+         "type": "string",
+         "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+        },
+        "sets": {
+         "type": "integer",
+         "description": "1–6."
+        }
+       },
+       "required": [
+        "exerciseId",
+        "sets"
+       ],
+       "additionalProperties": false
+      },
+      "description": "At most 14."
+     }
+    },
+    "required": [
+     "action",
+     "name",
+     "exercises"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "propose_program",
+   "description": "Propose a whole programme (splits plus weekly schedule). Only after evaluate_plan shows no blocking issues. replaceExisting swaps out the current splits.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "draft": {
+      "type": "object",
+      "properties": {
+       "splits": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "ref": {
+           "type": "string",
+           "description": "A short id for this split inside the draft, e.g. \"push\"."
+          },
+          "name": {
+           "type": "string",
+           "description": "Split name, at most 28 characters."
+          },
+          "exercises": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "exerciseId": {
+              "type": "string",
+              "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+             },
+             "sets": {
+              "type": "integer",
+              "description": "Sets per session, 1–6."
+             }
+            },
+            "required": [
+             "exerciseId",
+             "sets"
+            ],
+            "additionalProperties": false
+           },
+           "description": "At most 14 exercises."
+          }
+         },
+         "required": [
+          "ref",
+          "name",
+          "exercises"
+         ],
+         "additionalProperties": false
+        },
+        "description": "At most 7 splits."
+       },
+       "schedule": {
+        "type": "object",
+        "properties": {
+         "sun": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         },
+         "mon": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         },
+         "tue": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         },
+         "wed": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         },
+         "thu": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         },
+         "fri": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         },
+         "sat": {
+          "type": [
+           "string",
+           "null"
+          ],
+          "description": "A split ref from this draft, or null for rest."
+         }
+        },
+        "required": [
+         "sun",
+         "mon",
+         "tue",
+         "wed",
+         "thu",
+         "fri",
+         "sat"
+        ],
+        "additionalProperties": false
+       }
+      },
+      "required": [
+       "splits",
+       "schedule"
+      ],
+      "additionalProperties": false
+     },
+     "replaceExisting": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "draft",
+     "replaceExisting"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "propose_schedule",
+   "description": "Propose a new weekly schedule: a split id or null (rest) for each day.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "week": {
+      "type": "object",
+      "properties": {
+       "sun": {
+        "type": [
+         "string",
+         "null"
+        ]
+       },
+       "mon": {
+        "type": [
+         "string",
+         "null"
+        ]
+       },
+       "tue": {
+        "type": [
+         "string",
+         "null"
+        ]
+       },
+       "wed": {
+        "type": [
+         "string",
+         "null"
+        ]
+       },
+       "thu": {
+        "type": [
+         "string",
+         "null"
+        ]
+       },
+       "fri": {
+        "type": [
+         "string",
+         "null"
+        ]
+       },
+       "sat": {
+        "type": [
+         "string",
+         "null"
+        ]
+       }
+      },
+      "required": [
+       "sun",
+       "mon",
+       "tue",
+       "wed",
+       "thu",
+       "fri",
+       "sat"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "week"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "propose_goal",
+   "description": "Propose switching the training goal. Changes rep ranges, not exercises.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "goal": {
+      "type": "string",
+      "enum": [
+       "lean",
+       "growth",
+       "strength_muscle",
+       "strength"
+      ]
+     },
+     "applyGoalRest": {
+      "type": "boolean",
+      "description": "Also set the goal’s default rest."
+     }
+    },
+    "required": [
+     "goal"
+    ],
+    "additionalProperties": false
+   },
+   "strict": true
+  },
+  {
+   "name": "propose_today",
+   "description": "Propose changes to today's session only (swap, remove, add, sets, or a load factor), e.g. around soreness or time. Never changes the saved split.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "splitId": {
+      "type": "string",
+      "description": "Today’s scheduled split, or the one they will train."
+     },
+     "changes": {
+      "type": "array",
+      "items": {
+       "anyOf": [
+        {
+         "type": "object",
+         "properties": {
+          "kind": {
+           "type": "string",
+           "enum": [
+            "swap"
+           ]
+          },
+          "from": {
+           "type": "string",
+           "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+          },
+          "to": {
+           "type": "string",
+           "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+          }
+         },
+         "required": [
+          "kind",
+          "from",
+          "to"
+         ],
+         "additionalProperties": false
+        },
+        {
+         "type": "object",
+         "properties": {
+          "kind": {
+           "type": "string",
+           "enum": [
+            "remove"
+           ]
+          },
+          "exerciseId": {
+           "type": "string",
+           "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+          }
+         },
+         "required": [
+          "kind",
+          "exerciseId"
+         ],
+         "additionalProperties": false
+        },
+        {
+         "type": "object",
+         "properties": {
+          "kind": {
+           "type": "string",
+           "enum": [
+            "add"
+           ]
+          },
+          "exerciseId": {
+           "type": "string",
+           "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+          },
+          "sets": {
+           "type": "integer",
+           "description": "1–6."
+          }
+         },
+         "required": [
+          "kind",
+          "exerciseId",
+          "sets"
+         ],
+         "additionalProperties": false
+        },
+        {
+         "type": "object",
+         "properties": {
+          "kind": {
+           "type": "string",
+           "enum": [
+            "sets"
+           ]
+          },
+          "exerciseId": {
+           "type": "string",
+           "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+          },
+          "sets": {
+           "type": "integer",
+           "description": "1–6."
+          }
+         },
+         "required": [
+          "kind",
+          "exerciseId",
+          "sets"
+         ],
+         "additionalProperties": false
+        },
+        {
+         "type": "object",
+         "properties": {
+          "kind": {
+           "type": "string",
+           "enum": [
+            "load"
+           ]
+          },
+          "exerciseId": {
+           "type": "string",
+           "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+          },
+          "factor": {
+           "type": "number",
+           "description": "0.5–1.1 times the planned load."
+          }
+         },
+         "required": [
+          "kind",
+          "exerciseId",
+          "factor"
+         ],
+         "additionalProperties": false
+        }
+       ]
+      }
+     },
+     "reason": {
+      "type": "string",
+      "description": "One line the person will see."
+     }
+    },
+    "required": [
+     "splitId",
+     "changes",
+     "reason"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "propose_deload",
+   "description": "Propose a 7-day lighter week (fewer sets, lighter loads).",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "reason": {
+      "type": "string",
+      "description": "One line."
+     }
+    },
+    "required": [
+     "reason"
+    ],
+    "additionalProperties": false
+   },
+   "strict": true
+  },
+  {
+   "name": "propose_start_session",
+   "description": "Offer to start a session with a split now.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "splitId": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "splitId"
+    ],
+    "additionalProperties": false
+   },
+   "strict": true
+  },
+  {
+   "name": "propose_checkin",
+   "description": "Propose saving today's check-in from what the person told you (sleep quality, mood, soreness 1–5).",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "sleepQuality": {
+      "type": "string",
+      "enum": [
+       "1",
+       "2",
+       "3",
+       "4",
+       "5"
+      ]
+     },
+     "mood": {
+      "type": "string",
+      "enum": [
+       "1",
+       "2",
+       "3",
+       "4",
+       "5"
+      ]
+     },
+     "soreness": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "muscle": {
+         "type": "string",
+         "enum": [
+          "chest",
+          "upper_chest",
+          "front_delts",
+          "side_delts",
+          "rear_delts",
+          "rotator_cuff",
+          "biceps",
+          "triceps",
+          "brachialis",
+          "forearms",
+          "lats",
+          "mid_back",
+          "upper_traps",
+          "lower_back",
+          "abs",
+          "obliques",
+          "core",
+          "hip_flexors",
+          "quads",
+          "hamstrings",
+          "glutes",
+          "adductors",
+          "abductors",
+          "calves"
+         ]
+        },
+        "level": {
+         "type": "string",
+         "enum": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ]
+        }
+       },
+       "required": [
+        "muscle",
+        "level"
+       ],
+       "additionalProperties": false
+      }
+     }
+    },
+    "required": [],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "propose_profile",
+   "description": "Propose updating one profile field the person stated (weight in kg, height in cm, birth year, sex, training since YYYY-MM, planned days per week).",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "field": {
+      "type": "string",
+      "enum": [
+       "bodyWeightKg",
+       "heightCm",
+       "birthYear",
+       "sex",
+       "trainingSince",
+       "plannedDays"
+      ]
+     },
+     "value": {
+      "type": [
+       "string",
+       "number"
+      ]
+     }
+    },
+    "required": [
+     "field",
+     "value"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "propose_custom_exercise",
+   "description": "Propose adding an exercise that is not in the library.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": "At most 60 characters."
+     },
+     "equipment": {
+      "type": "string"
+     },
+     "primary": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "enum": [
+        "chest",
+        "upper_chest",
+        "front_delts",
+        "side_delts",
+        "rear_delts",
+        "rotator_cuff",
+        "biceps",
+        "triceps",
+        "brachialis",
+        "forearms",
+        "lats",
+        "mid_back",
+        "upper_traps",
+        "lower_back",
+        "abs",
+        "obliques",
+        "core",
+        "hip_flexors",
+        "quads",
+        "hamstrings",
+        "glutes",
+        "adductors",
+        "abductors",
+        "calves"
+       ]
+      },
+      "description": "1–2 muscles."
+     },
+     "secondary": {
+      "type": "array",
+      "items": {
+       "type": "string",
+       "enum": [
+        "chest",
+        "upper_chest",
+        "front_delts",
+        "side_delts",
+        "rear_delts",
+        "rotator_cuff",
+        "biceps",
+        "triceps",
+        "brachialis",
+        "forearms",
+        "lats",
+        "mid_back",
+        "upper_traps",
+        "lower_back",
+        "abs",
+        "obliques",
+        "core",
+        "hip_flexors",
+        "quads",
+        "hamstrings",
+        "glutes",
+        "adductors",
+        "abductors",
+        "calves"
+       ]
+      }
+     },
+     "mode": {
+      "type": "string",
+      "enum": [
+       "weighted",
+       "bodyweight",
+       "assisted",
+       "duration",
+       "conditioning"
+      ]
+     },
+     "role": {
+      "type": "string",
+      "enum": [
+       "main",
+       "accessory"
+      ]
+     }
+    },
+    "required": [
+     "name",
+     "equipment",
+     "primary",
+     "secondary",
+     "mode",
+     "role"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "propose_reminder",
+   "description": "Propose training-day reminder settings (on/off, time, style, readiness summary) when the person asks for reminders.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "enabled": {
+      "type": "boolean"
+     },
+     "time": {
+      "type": "string",
+      "description": "HH:MM, 24-hour."
+     },
+     "style": {
+      "type": "string",
+      "enum": [
+       "silent",
+       "vibrate",
+       "alert"
+      ]
+     },
+     "readinessSummary": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "enabled"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "propose_setting",
+   "description": "Propose changing one app setting: rest mode, automatic rest, rest length, display unit, the daily quote or haptics.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "setting": {
+      "anyOf": [
+       {
+        "type": "object",
+        "properties": {
+         "key": {
+          "type": "string",
+          "enum": [
+           "rest.mode"
+          ]
+         },
+         "value": {
+          "type": "string",
+          "enum": [
+           "time",
+           "heart"
+          ]
+         }
+        },
+        "required": [
+         "key",
+         "value"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "key": {
+          "type": "string",
+          "enum": [
+           "autoRest"
+          ]
+         },
+         "value": {
+          "type": "boolean"
+         }
+        },
+        "required": [
+         "key",
+         "value"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "key": {
+          "type": "string",
+          "enum": [
+           "restDefaultSec"
+          ]
+         },
+         "value": {
+          "type": "integer",
+          "description": "15–600 seconds, in steps of 15."
+         }
+        },
+        "required": [
+         "key",
+         "value"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "key": {
+          "type": "string",
+          "enum": [
+           "weightUnit"
+          ]
+         },
+         "value": {
+          "type": "string",
+          "enum": [
+           "kg",
+           "lb"
+          ]
+         }
+        },
+        "required": [
+         "key",
+         "value"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "key": {
+          "type": "string",
+          "enum": [
+           "showSpark"
+          ]
+         },
+         "value": {
+          "type": "boolean"
+         }
+        },
+        "required": [
+         "key",
+         "value"
+        ],
+        "additionalProperties": false
+       },
+       {
+        "type": "object",
+        "properties": {
+         "key": {
+          "type": "string",
+          "enum": [
+           "haptics"
+          ]
+         },
+         "value": {
+          "type": "boolean"
+         }
+        },
+        "required": [
+         "key",
+         "value"
+        ],
+        "additionalProperties": false
+       }
+      ]
+     }
+    },
+    "required": [
+     "setting"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "snooze_insight",
+   "description": "Mark an insight helpful or snooze it for 7 days, when the person says so. Applied at once with Undo.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "insightId": {
+      "type": "string",
+      "description": "From get_insights."
+     },
+     "verdict": {
+      "type": "string",
+      "enum": [
+       "snoozed",
+       "helpful"
+      ]
+     }
+    },
+    "required": [
+     "insightId",
+     "verdict"
+    ],
+    "additionalProperties": false
+   },
+   "strict": true
+  },
+  {
+   "name": "propose_equipment_profile",
+   "description": "Propose how a piece of equipment loads at a gym (unit, steps, dumbbell ladder, bar, plates), e.g. from a rack photo or \"the dumbbells here are in pounds\". If unsure of the unit, ask one question first.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "scope": {
+      "type": "string",
+      "enum": [
+       "exercise",
+       "equipment"
+      ]
+     },
+     "exerciseId": {
+      "type": "string",
+      "description": "An exercise id from search_exercises or get_plan, e.g. lib_barbell_bench_press."
+     },
+     "equipmentGroup": {
+      "type": "string",
+      "enum": [
+       "Barbell",
+       "Dumbbells",
+       "Machine",
+       "Cable",
+       "Smith Machine",
+       "Bodyweight",
+       "Sled",
+       "General"
+      ]
+     },
+     "gymId": {
+      "type": "string",
+      "description": "Default: the active gym."
+     },
+     "profile": {
+      "type": "object",
+      "properties": {
+       "unit": {
+        "type": "string",
+        "enum": [
+         "kg",
+         "lb"
+        ]
+       },
+       "step": {
+        "type": "number",
+        "description": "Smallest jump in the unit, above 0."
+       },
+       "ladder": {
+        "type": "array",
+        "items": {
+         "type": "number"
+        },
+        "description": "Available loads in the unit, ascending, at most 80."
+       },
+       "addOns": {
+        "type": "array",
+        "items": {
+         "type": "number"
+        },
+        "description": "Stack add-on weights in the unit."
+       },
+       "barKg": {
+        "type": "number",
+        "description": "Bar weight in kg, 5–30."
+       },
+       "plates": {
+        "type": "array",
+        "items": {
+         "type": "number"
+        },
+        "description": "Plate sizes per side, in the unit."
+       }
+      },
+      "required": [
+       "unit"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "scope",
+     "profile"
+    ],
+    "additionalProperties": false
+   }
+  },
+  {
+   "name": "propose_gym",
+   "description": "Propose adding a gym and making it the active one.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string",
+      "description": "At most 28 characters."
+     },
+     "defaultUnit": {
+      "type": "string",
+      "enum": [
+       "kg",
+       "lb"
+      ]
+     }
+    },
+    "required": [
+     "name",
+     "defaultUnit"
+    ],
+    "additionalProperties": false
+   },
+   "strict": true
+  },
+  {
+   "name": "escalate",
+   "description": "Show the app’s fixed safety card: pain (sharp, spreading, numb, or lasting past 48 h), medical (chest pain, fainting, dizziness), crisis, or disordered eating. Always use it in those situations.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "kind": {
+      "type": "string",
+      "enum": [
+       "pain",
+       "medical",
+       "crisis",
+       "disordered_eating"
+      ]
+     },
+     "note": {
+      "type": "string",
+      "description": "Optional, one line."
+     }
+    },
+    "required": [
+     "kind"
+    ],
+    "additionalProperties": false
+   },
+   "strict": true
+  },
+  {
+   "name": "remember",
+   "description": "Remember a durable fact the person stated (injury, equipment, preference, goal in their words, agreement). Written at once with Undo. Not for feelings or one-offs.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "kind": {
+      "type": "string",
+      "enum": [
+       "fact",
+       "injury",
+       "equipment",
+       "preference",
+       "goal",
+       "agreement"
+      ]
+     },
+     "text": {
+      "type": "string",
+      "description": "At most 200 characters, plain words."
+     },
+     "expiresInDays": {
+      "type": "integer",
+      "description": "Injuries default to 42."
+     }
+    },
+    "required": [
+     "kind",
+     "text"
+    ],
+    "additionalProperties": false
+   },
+   "strict": true
+  },
+  {
+   "name": "forget",
+   "description": "Forget one memory item when the person asks.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "memoryId": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "memoryId"
+    ],
+    "additionalProperties": false
+   },
+   "strict": true
+  },
+  {
+   "name": "recall",
+   "description": "Look up remembered items beyond the 12 in the brief.",
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "kind": {
+      "type": "string",
+      "enum": [
+       "fact",
+       "injury",
+       "equipment",
+       "preference",
+       "goal",
+       "agreement",
+       "episode"
+      ]
+     },
+     "query": {
+      "type": "string"
+     }
+    },
+    "required": [],
+    "additionalProperties": false
+   }
+  }
+ ],
+ "modes": {
+  "chat": "Conversation. At most 120 words unless they ask for depth.",
+  "plan": "Design mode. Ask at most 2 clarifying questions (days/week, session length, equipment, priorities) unless memory answers them. Draft → evaluate_plan → revise → show(plan_week) + show(plan_evaluation) → propose_program.",
+  "live": "They're mid-workout. At most 40 words. Use get_live_session first. Offer at most one adjustment via propose_today.",
+  "brief": "Write today's brief: one headline (at most 90 characters) and up to 3 priorities, each tied to an insight id from get_insights, in your words (at most 140 characters each). Use read tools if needed. Never invent insights.",
+  "moment": "Write one line (at most 140 characters) for this moment from the facts given, plus up to 2 follow-up chips. Numbers only from the facts.",
+  "summarize": "Summarise this conversation: a title (at most 40 characters), an episode (at most 200 characters, plain words, what was discussed and agreed), and up to 3 durable facts worth remembering (kind + text)."
+ }
+}

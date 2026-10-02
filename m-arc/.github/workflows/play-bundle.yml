@@ -1,0 +1,190 @@
+name: M/ARC Play bundle (unsigned)
+
+# REL-2: builds the Play-ready Android App Bundle the same way release-apk.yml builds its release,
+# stops before signing (the upload-key step is owner-only), and proves Play's technical requirements.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  # Validates changes to this pipeline itself before they reach main.
+  pull_request:
+    paths:
+      - '.github/workflows/play-bundle.yml'
+      - 'scripts/check-play-bundle.py'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: marc-play-bundle-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v6
+
+      - name: Resolve version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Same rule as release-apk.yml with blank inputs (PL-17): package.json is the version source,
+          # the run number makes each build unique and rising.
+          PKG_VERSION="$(node -p "require('./package.json').version")"
+          MAJOR="${PKG_VERSION%%.*}"
+          VERSION_NAME="${PKG_VERSION}.${GITHUB_RUN_NUMBER}"
+          VERSION_CODE="$((MAJOR * 1000000 + GITHUB_RUN_NUMBER))"
+          [[ "$VERSION_CODE" =~ ^[1-9][0-9]*$ ]] || { echo '::error::Invalid versionCode'; exit 1; }
+          echo "version_name=$VERSION_NAME" >> "$GITHUB_OUTPUT"
+          echo "version_code=$VERSION_CODE" >> "$GITHUB_OUTPUT"
+          echo "versionName=$VERSION_NAME versionCode=$VERSION_CODE"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build the web app
+        run: npm run build
+
+      - name: Validate built web source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY2'
+          from pathlib import Path
+          import hashlib
+          data=Path('www/index.html').read_bytes()
+          if not data: raise SystemExit('www/index.html is empty')
+          sw=Path('www/sw.js').read_text()
+          if '/*__ASSETS__*/' in sw or '__BUILD__' in sw: raise SystemExit('service worker was not stamped')
+          print('Built source SHA256:', hashlib.sha256(data).hexdigest())
+          PY2
+
+      - name: Generate Android project (includes the Capacitor sync)
+        shell: bash
+        run: bash scripts/prepare-android.sh
+
+      - name: Apply release version
+        shell: bash
+        env:
+          VERSION_NAME: ${{ steps.version.outputs.version_name }}
+          VERSION_CODE: ${{ steps.version.outputs.version_code }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import os,re
+          p=Path('android/app/build.gradle')
+          s=p.read_text(encoding='utf-8')
+          s,n1=re.subn(r'(?m)^(\s*versionCode\s+)\d+\s*$', rf'\g<1>{os.environ["VERSION_CODE"]}', s, count=1)
+          s,n2=re.subn(r'(?m)^(\s*versionName\s+)["\'][^"\']+["\']\s*$', rf'\g<1>"{os.environ["VERSION_NAME"]}"', s, count=1)
+          if n1 != 1 or n2 != 1: raise SystemExit('Could not set Android version')
+          p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Verify bundled bytes and plugins
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY2'
+          from pathlib import Path
+          source=Path('www/index.html').read_bytes()
+          bundled=Path('android/app/src/main/assets/public/index.html').read_bytes()
+          if bundled != source: raise SystemExit('::error::Android bundled index differs from current www/index.html')
+          PY2
+          PLUGINS='android/app/src/main/assets/capacitor.plugins.json'
+          for plugin in LocalNotifications Filesystem Share Haptics; do grep -qi "$plugin" "$PLUGINS" || { echo "::error::$plugin plugin missing"; exit 1; }; done
+
+      - name: Build unsigned release bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd android
+          chmod +x gradlew
+          ./gradlew --no-daemon bundleRelease
+
+      - name: Fetch bundletool
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSfL -o "$RUNNER_TEMP/bundletool.jar" https://github.com/google/bundletool/releases/download/1.18.1/bundletool-all-1.18.1.jar
+          echo '675786493983787ffa11550bdb7c0715679a44e1643f3ff980a529e9c822595c  '"$RUNNER_TEMP/bundletool.jar" | sha256sum -c -
+
+      - name: Prove Play's technical requirements
+        shell: bash
+        env:
+          VERSION_NAME: ${{ steps.version.outputs.version_name }}
+          VERSION_CODE: ${{ steps.version.outputs.version_code }}
+        run: |
+          set -euo pipefail
+          AAB='android/app/build/outputs/bundle/release/app-release.aab'
+          [ -s "$AAB" ] || { echo "::error::Play bundle check failed: the AAB $AAB does not exist"; exit 1; }
+          java -jar "$RUNNER_TEMP/bundletool.jar" dump manifest --bundle "$AAB" > "$RUNNER_TEMP/manifest.xml"
+          echo '--- bundletool dump manifest (head) ---'; head -n 5 "$RUNNER_TEMP/manifest.xml"
+          grep -n -E 'debuggable|targetSdkVersion' "$RUNNER_TEMP/manifest.xml" || echo '(no android:debuggable attribute: not debuggable)'
+          python3 scripts/check-play-bundle.py "$AAB" "$RUNNER_TEMP/manifest.xml" capacitor.config.json "$VERSION_CODE" "$VERSION_NAME"
+          mkdir -p play-output
+          OUT="play-output/MARC-v${VERSION_NAME}-unsigned.aab"
+          cp "$AAB" "$OUT"
+          sha256sum "$OUT" > "$OUT.sha256"
+          cat "$OUT.sha256"
+
+      - name: Self-test, the checks fail on broken bundles
+        shell: bash
+        env:
+          VERSION_NAME: ${{ steps.version.outputs.version_name }}
+          VERSION_CODE: ${{ steps.version.outputs.version_code }}
+        run: |
+          set -euo pipefail
+          # Each mutation of the real manifest or bundle must make the checker fail with its own message.
+          python3 - <<'PY'
+          import importlib.util, os, re, shutil, zipfile
+          spec = importlib.util.spec_from_file_location('c', 'scripts/check-play-bundle.py'); c = importlib.util.module_from_spec(spec); spec.loader.exec_module(c)
+          aab = 'android/app/build/outputs/bundle/release/app-release.aab'
+          tmp = os.environ['RUNNER_TEMP']
+          m = open(f'{tmp}/manifest.xml', encoding='utf-8').read()
+          vc, vn = os.environ['VERSION_CODE'], os.environ['VERSION_NAME']
+          pkg = c.PLAY_PACKAGE
+          assert c.check(aab, m, pkg, vc, vn) == [], 'real bundle must pass'
+          bad32 = f'{tmp}/bad32.aab'; shutil.copy(aab, bad32)
+          with zipfile.ZipFile(bad32, 'a') as z: z.writestr('base/lib/armeabi-v7a/libonly32.so', b'\0')
+          cases = {
+            'debuggable': (aab, re.sub(r'<application\b', '<application android:debuggable="true"', m, count=1), pkg, vc, vn),
+            'targetSdk': (aab, re.sub(r'android:targetSdkVersion="\d+"', 'android:targetSdkVersion="35"', m), pkg, vc, vn),
+            'package': (aab, re.sub(r'package="[^"]+"', 'package="com.example.wrong"', m, count=1), pkg, vc, vn),
+            'appId': (aab, m, pkg + '.drift', vc, vn),
+            'versionCode': (aab, m, pkg, str(int(vc) + 1), vn),
+            'versionName': (aab, m, pkg, vc, vn + '.x'),
+            '64-bit': (bad32, m, pkg, vc, vn),
+            'does not exist': (f'{tmp}/missing.aab', m, pkg, vc, vn),
+          }
+          for want, args in cases.items():
+            errs = c.check(*args)
+            assert len(errs) == 1 and want in errs[0], f'mutation {want!r} not caught alone: {errs}'
+            print(f'mutation {want!r} caught: {errs[0]}')
+          PY
+
+      - name: Upload unsigned bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: MARC-PLAY-AAB-UNSIGNED
+          path: |
+            play-output/*.aab
+            play-output/*.aab.sha256
+          if-no-files-found: error
+          retention-days: 90

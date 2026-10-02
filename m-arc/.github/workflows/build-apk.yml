@@ -1,0 +1,261 @@
+name: M/ARC gate
+
+on:
+  push:
+    branches: ['**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: marc-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-gate:
+    runs-on: ubuntu-latest
+    # D-SUP-CI-1 (10-01): 40 -> 60. The full gate took 30.7 min on main 1fcd9c8 and 38.2 min on HT-9's
+    # head; the HT lane, COPY-2 and BUG-37 add more. Every block still runs; this is a runaway limit, not a check.
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Escobar Worker typecheck and tests
+        run: npm --prefix escobar-worker ci && npm --prefix escobar-worker run check
+      - name: Relay typecheck and tests
+        run: npm --prefix relay ci && npm --prefix relay run check
+      - name: Typecheck, unit tests and production build
+        run: npm run check
+      - name: Unit tests in two more time zones
+        run: npm run test:tz
+      - name: Validate built web source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+          for f in ('package.json', 'capacitor.config.json', 'www/manifest.webmanifest'):
+              json.loads(Path(f).read_text(encoding='utf-8'))
+          data = Path('www/index.html').read_bytes()
+          if not data: raise SystemExit('www/index.html is empty')
+          sw = Path('www/sw.js').read_text()
+          if '__BUILD__' in sw: raise SystemExit('service worker cache name was not stamped')
+          if '/*__ASSETS__*/' in sw: raise SystemExit('service worker asset list was not stamped')
+          print('Built source SHA256:', hashlib.sha256(data).hexdigest())
+          PY
+      - name: Install Chromium for the visual gate
+        run: npx playwright install --with-deps chromium
+      - name: Visual and migration gate (five themes, legacy import)
+        run: npm run gate
+      - name: Upload gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MARC-gate-screenshots
+          path: screenshots/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload built web app
+        uses: actions/upload-artifact@v4
+        with:
+          name: MARC-www
+          path: www/
+          retention-days: 7
+
+  # RG-14's second visual gate (Pacific/Auckland) runs as its own job, in parallel with
+  # source-gate, instead of as a step after the first gate. Same command, same TZ, same
+  # build; android-gate still waits for both, so nothing ships unless both pass.
+  visual-gate-tz:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60  # D-SUP-CI-1, as source-gate
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Build the web app
+        run: npm run build
+      - name: Install Chromium for the visual gate
+        run: npx playwright install --with-deps chromium
+      - name: Visual gate once more in Pacific/Auckland (RG-14)
+        env:
+          TZ: Pacific/Auckland
+          MARC_GATE_PORT: '4174'
+        run: npm run gate
+      - name: Upload Auckland gate evidence on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MARC-gate-screenshots-auckland
+          path: screenshots/
+          if-no-files-found: ignore
+          retention-days: 30
+
+  android-gate:
+    needs: [source-gate, visual-gate-tz]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: npm ci
+      - name: Build the web app
+        run: npm run build
+
+      - name: Generate the Android project
+        shell: bash
+        run: bash scripts/prepare-android.sh
+
+      # CI-GRADLE-CACHE: reuse Gradle's downloaded dependencies between runs. Maven Central
+      # answered 403 and 429 (Too Many Requests) when many PR runs fetched them at once.
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v6
+        with:
+          path: |
+            ~/.gradle/caches/modules-2
+            ~/.gradle/wrapper/dists
+          key: gradle-${{ runner.os }}-${{ hashFiles('android/**/*.gradle', 'android/gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-${{ runner.os }}-
+
+      - name: Verify bundled source and native plugins
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          source=Path('www/index.html').read_bytes()
+          bundled=Path('android/app/src/main/assets/public/index.html').read_bytes()
+          if bundled != source: raise SystemExit('Capacitor bundled index differs from built www/index.html')
+          print('Android bundled index exact-byte PASS:', hashlib.sha256(bundled).hexdigest())
+          PY
+          PLUGINS='android/app/src/main/assets/capacitor.plugins.json'
+          for plugin in LocalNotifications Filesystem Share Haptics; do grep -qi "$plugin" "$PLUGINS" || { echo "::error::$plugin plugin missing from the APK"; exit 1; }; done
+          python3 - <<'PYSDK'
+          from pathlib import Path
+          import re
+          s = Path('android/variables.gradle').read_text(encoding='utf-8')
+          for key in ('targetSdkVersion', 'compileSdkVersion'):
+              m = re.search(key + r'\s*=\s*(\d+)', s)
+              if not m or int(m.group(1)) < 36: raise SystemExit(f'::error::{key} must be >= 36 (found {m.group(1) if m else "none"})')
+          PYSDK
+          grep -q '"@capacitor/app"' "$PLUGINS" || { echo '::error::@capacitor/app plugin missing from the APK (Android back button)'; exit 1; }
+          PKG='android/app/src/main/java/com/mrcdrnzz/dailytracker'
+          test -f "$PKG/HealthConnectNativePlugin.java" || { echo '::error::HealthConnectNativePlugin.java not copied into the Android project'; exit 1; }
+          test -f "$PKG/NativeUiPlugin.java" || { echo '::error::NativeUiPlugin.java not copied into the Android project'; exit 1; }
+          test -f "$PKG/watch/WatchBridgePlugin.java" || { echo '::error::WatchBridgePlugin.java not copied into the Android project'; exit 1; }
+          test -f "$PKG/watch/core/HeartRateMeasurement.java" || { echo '::error::watch/core sensor classes not copied into the Android project'; exit 1; }
+          grep -q 'android.permission.health.READ_HEART_RATE' android/app/src/main/AndroidManifest.xml || { echo '::error::health permissions not patched into the manifest'; exit 1; }
+          grep -q 'android.permission.health.READ_RESTING_HEART_RATE' android/app/src/main/AndroidManifest.xml || { echo '::error::resting heart rate permission missing: the plugin reads RestingHeartRateRecord'; exit 1; }
+          grep -q 'android.permission.BLUETOOTH_CONNECT' android/app/src/main/AndroidManifest.xml || { echo '::error::watch Bluetooth permissions not patched into the manifest'; exit 1; }
+          grep -q 'foregroundServiceType="connectedDevice"' android/app/src/main/AndroidManifest.xml || { echo '::error::WatchService foreground service type not patched into the manifest'; exit 1; }
+
+      - name: Decode the permanent signing key
+        shell: bash
+        env:
+          KS_B64: ${{ secrets.MARC_SIGNING_KEYSTORE_B64 }}
+        run: |
+          set -euo pipefail
+          # One permanent key for every build (plan R0.0, finding PL-19). Never rely on
+          # Gradle's default debug keystore: on the runner it made a new random key per build.
+          [ -n "$KS_B64" ] || { echo '::error::Secret MARC_SIGNING_KEYSTORE_B64 is missing.'; exit 1; }
+          umask 077
+          printf '%s' "$KS_B64" | base64 --decode > "$RUNNER_TEMP/marc-signing.p12"
+
+      - name: Build debug APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd android
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleDebug
+
+      - name: Verify native classes in the APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          # RG-20: sources can be copied and still miss the build; check the compiled classes.
+          APK="$(ls android/app/build/outputs/apk/debug/app-debug.apk | head -n 1)"
+          python3 - "$APK" <<'PYDEX'
+          import sys, zipfile
+          z = zipfile.ZipFile(sys.argv[1])
+          dex = b''.join(z.read(n) for n in z.namelist() if n.startswith('classes') and n.endswith('.dex'))
+          for cls in (b'Lcom/mrcdrnzz/dailytracker/HealthConnectNativePlugin;', b'Lcom/mrcdrnzz/dailytracker/NativeUiPlugin;', b'Lcom/mrcdrnzz/dailytracker/watch/WatchBridgePlugin;'):
+              if cls not in dex: raise SystemExit('::error::' + cls.decode() + ' is not in the APK dex')
+          print('native classes present in', sys.argv[1])
+          PYDEX
+
+      - name: Sign with the permanent key and verify the fingerprint
+        shell: bash
+        env:
+          PW: ${{ secrets.MARC_SIGNING_STORE_PASSWORD }}
+          # Public certificate fingerprint of the permanent key. Registered with Huawei (App ID 119100049).
+          EXPECTED_SHA256: '05:66:9A:D2:72:1C:6A:BA:F9:FD:D4:B9:B8:4E:2F:B7:94:48:44:B1:DE:F3:59:84:5F:01:5F:2B:67:CA:F1:F5'
+        run: |
+          set -euo pipefail
+          [ -n "$PW" ] || { echo '::error::Secret MARC_SIGNING_STORE_PASSWORD is missing.'; exit 1; }
+          SDK_ROOT="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-}}"
+          BUILD_TOOLS="$(find "$SDK_ROOT/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          APK='android/app/build/outputs/apk/debug/app-debug.apk'
+          "$BUILD_TOOLS/zipalign" -p -f 4 "$APK" "$RUNNER_TEMP/aligned.apk"
+          "$BUILD_TOOLS/apksigner" sign --ks "$RUNNER_TEMP/marc-signing.p12" --ks-key-alias marc --ks-pass env:PW --key-pass env:PW --out "$APK" "$RUNNER_TEMP/aligned.apk"
+          rm -f "$RUNNER_TEMP/marc-signing.p12" "$RUNNER_TEMP/aligned.apk"
+          CERTS="$("$BUILD_TOOLS/apksigner" verify --print-certs "$APK")"
+          # Every signer line must carry the expected digest (format differs between build-tools versions).
+          DIGESTS="$(printf '%s\n' "$CERTS" | grep -i 'certificate SHA-256 digest' | sed 's/.*: *//' | tr 'a-f' 'A-F' | sed 's/../&:/g; s/:$//' | sort -u)"
+          if [ "$DIGESTS" != "$EXPECTED_SHA256" ]; then
+            printf '%s\n' "$CERTS"
+            echo "::error::APK signer SHA-256 is '$DIGESTS', expected $EXPECTED_SHA256"
+            exit 1
+          fi
+          FP="$DIGESTS"
+          echo "APK signer SHA-256: $FP"
+
+      - name: No keystore may be committed in workflows
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -rEl 'MII[A-Za-z0-9+/]{100,}' .github/workflows; then echo '::error::A base64 keystore is committed in a workflow.'; exit 1; fi
+
+      - name: Verify APK contains the built app
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, zipfile
+          apk=Path('android/app/build/outputs/apk/debug/app-debug.apk')
+          source=Path('www/index.html').read_bytes()
+          with zipfile.ZipFile(apk) as z: bundled=z.read('assets/public/index.html')
+          if bundled != source: raise SystemExit('APK embedded index differs from built www/index.html')
+          print('Debug APK embedded source PASS:', hashlib.sha256(bundled).hexdigest())
+          PY
+          mkdir -p release-output
+          cp android/app/build/outputs/apk/debug/app-debug.apk release-output/MARC-debug.apk
+          sha256sum release-output/MARC-debug.apk > release-output/MARC-debug.apk.sha256
+
+      - name: Upload debug APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MARC-DEBUG-APK
+          path: |
+            release-output/MARC-debug.apk
+            release-output/MARC-debug.apk.sha256
+          if-no-files-found: error
+          retention-days: 30

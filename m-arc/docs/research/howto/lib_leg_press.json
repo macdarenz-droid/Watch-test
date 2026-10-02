@@ -1,0 +1,32 @@
+// GENERATED, do not edit. Written by tools/plates/generate.mjs (tools/plates/gen/content.mjs). inputsSha256=31b31323a81128aa314e1e98348079a17bbec22574feedeb047a07c21e32a1cd
+{
+  "id": "lib_leg_press",
+  "rev": 1,
+  "research": {
+    "card": "grip/research/leg_press.json",
+    "rev": 1
+  },
+  "sources": [
+    "ace-leg-press",
+    "nasm-leg-press",
+    "bells-of-steel",
+    "yessis",
+    "escamilla2001lp",
+    "dasilva2008",
+    "martinfuentes2022",
+    "martinfuentes2020",
+    "marchetti2023",
+    "kinoshita2026",
+    "stien2021",
+    "larsen2025",
+    "castonguay2022",
+    "barnds2019",
+    "macdougall1985",
+    "nhs-wrist-pain",
+    "nhs-knee-pain"
+  ],
+  "riskFlags": [
+    "wrist",
+    "knee"
+  ]
+}

@@ -1,0 +1,247 @@
+diff --git a/escobar-worker/src/anthropic.ts b/escobar-worker/src/anthropic.ts
+index 8906789..71adeb3 100644
+--- a/escobar-worker/src/anthropic.ts
++++ b/escobar-worker/src/anthropic.ts
+@@ -92,15 +92,15 @@ export function foldSystemMessages(messages: TurnBody['messages']): TurnBody['me
+ /**
+  * QA2-F7-3: the models a mode may be switched to. Each takes the request buildParams sends (adaptive
+  * thinking and output_config.effort from low to max). Anything else, a typo or a model such as Haiku
+- * 4.5 that rejects adaptive thinking, would fail every turn in that mode, so it is ignored. A dated
+- * snapshot of one of these (claude-opus-5-20260901) is accepted.
++ * 4.5 that rejects adaptive thinking, would fail every turn in that mode, so it is ignored. These ids
++ * have no dated snapshots, so an id with a date suffix is ignored like any other unknown id.
+  */
+ const MODE_MODELS = new Set(['claude-opus-5-5', 'claude-opus-5', 'claude-opus-4-8', 'claude-opus-4-7', 'claude-sonnet-5', 'claude-fable-5-1', 'claude-fable-5', 'claude-mythos-5-1', 'claude-mythos-5']);
+ const overrideFor = (mode: TurnBody['mode'], env: Env): string | undefined => {
+   const v = (env as Record<string, unknown>)[`MODEL_${mode.toUpperCase()}`];
+   return typeof v === 'string' && v.trim() ? v.trim() : undefined;
+ };
+-const usableOverride = (v: string): boolean => MODE_MODELS.has(v.replace(/-\d{8}$/, ''));
++const usableOverride = (v: string): boolean => MODE_MODELS.has(v);
+ /** F7: the model for one mode: MODEL_<MODE> when set to a model the Worker can drive, else MODEL, else the default. */
+ export function modelFor(mode: TurnBody['mode'], env: Env): string {
+   const v = overrideFor(mode, env);
+diff --git a/escobar-worker/test/anthropic.test.ts b/escobar-worker/test/anthropic.test.ts
+index 7b3eb9f..01d1b3f 100644
+--- a/escobar-worker/test/anthropic.test.ts
++++ b/escobar-worker/test/anthropic.test.ts
+@@ -133,14 +133,14 @@ describe('per-mode models (F7, D12)', () => {
+     expect(modelFor('chat', baseEnv({ MODEL: 'claude-opus-5', MODEL_CHAT: 'gpt-x; drop' }))).toBe('claude-opus-5');
+     expect(modelFor('chat', baseEnv({ MODEL_CHAT: ' claude-opus-5-5 ' }))).toBe('claude-opus-5-5');
+   });
+-  it('QA2-F7-3: an override the Worker cannot drive (a typo, Haiku 4.5) is ignored, so that mode keeps MODEL', () => {
++  it('QA2-F7-3: an override the Worker cannot drive (a typo, Haiku 4.5, a dated id) is ignored, so that mode keeps MODEL', () => {
+     const env = baseEnv({ MODEL: 'claude-opus-5', MODEL_LIVE: 'claude-haiku-4-5', MODEL_PLAN: 'claude-sonet-5', MODEL_BRIEF: 'claude-sonnet-5', MODEL_CHAT: 'claude-opus-5-5-20261001' });
+     expect(modelFor('live', env)).toBe('claude-opus-5');
+     expect(modelFor('plan', env)).toBe('claude-opus-5');
+     expect(P(turn({ mode: 'live' }) as TurnBody, env).model).toBe('claude-opus-5');
+     expect(modelFor('brief', env)).toBe('claude-sonnet-5');
+-    expect(modelFor('chat', env)).toBe('claude-opus-5-5-20261001'); // a dated snapshot of a known model
+-    expect(ignoredModelOverrides(env)).toEqual(['plan', 'live']);
++    expect(modelFor('chat', env)).toBe('claude-opus-5'); // these models have no dated ids; a date suffix would 404
++    expect(ignoredModelOverrides(env)).toEqual(['chat', 'plan', 'live']);
+     expect(ignoredModelOverrides(baseEnv({ MODEL_BRIEF: 'claude-sonnet-5' }))).toEqual([]);
+   });
+   it('a model without system messages gets them folded, per mode', () => {
+diff --git a/src/brain/coach/weeklyReview.ts b/src/brain/coach/weeklyReview.ts
+index 34f2a52..b8b9865 100644
+--- a/src/brain/coach/weeklyReview.ts
++++ b/src/brain/coach/weeklyReview.ts
+@@ -12,7 +12,7 @@ import { MUSCLE_IDS, muscleLabel, type MuscleId } from '@/data/muscles';
+ import { findExercise } from '@/core/exercises';
+ import { effectiveSetsByMuscle, isWorkingSet, ROLE_WEIGHT, rolesFor } from '../exposure';
+ import { exerciseHistory, isActive, modeOf, type ExerciseSessionSummary } from '../history';
+-import { trend } from '../trend';
++import { sinceLastBreak, trend } from '../trend';
+ import { weekStart, addDays, daysBetween, weekdayOf } from '@/core/dates';
+ import type { Insight } from './rules';
+ 
+@@ -236,7 +236,8 @@ export function weeklyReviewInsights(input: WeeklyReviewInput, limit = 6): Insig
+ 
+   // e1RM trend and progress vs training age, and staleness, per exercise the user actually does
+   for (const { id, name } of exerciseIds) {
+-    const hist = exerciseHistory(sessions, id, custom);
++    // QA2-FC-2: a comeback is judged only on the sessions since the break, as in plateauStatus.
++    const hist = sinceLastBreak(exerciseHistory(sessions, id, custom));
+     if (hist.length < 4 || !isActive(hist, today)) continue;
+     // e1RM says nothing for assisted, body-weight or timed work (BR-06).
+     if (modeOf(id, custom) !== 'weighted') continue;
+diff --git a/src/escobar/state.ts b/src/escobar/state.ts
+index 540e268..0d7785f 100644
+--- a/src/escobar/state.ts
++++ b/src/escobar/state.ts
+@@ -53,9 +53,12 @@ export const PRICES: Record<string, { input: number; output: number; cacheRead:
+ /** QA2-F7-1: an id missing from the table is priced at the dearest rates, so the estimate never reads below the bill. */
+ const UNKNOWN_PRICE = { input: 10, output: 50, cacheRead: 1 };
+ 
+-/** A dated id (claude-opus-5-20260901) uses its alias's price: the longest key it starts with. */
++/**
++ * An exact id, or a dated id (alias-YYYYMMDD, e.g. claude-haiku-4-5-20251001), uses that alias's price.
++ * Any other id is unknown, so a newer minor version (claude-sonnet-5-5) is never priced as its prefix.
++ */
+ function priceFor(model: string): { input: number; output: number; cacheRead: number } {
+-  const key = Object.keys(PRICES).filter(k => model === k || model.startsWith(`${k}-`)).sort((a, b) => b.length - a.length)[0];
++  const key = Object.keys(PRICES).find(k => model === k || (model.startsWith(`${k}-`) && /^\d{8}$/.test(model.slice(k.length + 1))));
+   return key ? PRICES[key]! : UNKNOWN_PRICE;
+ }
+ 
+diff --git a/src/slices/history/History.tsx b/src/slices/history/History.tsx
+index 11d4aac..4356692 100644
+--- a/src/slices/history/History.tsx
++++ b/src/slices/history/History.tsx
+@@ -14,7 +14,7 @@ import { allRecords, PR_LABEL } from '@/brain/prs';
+ import { exerciseHistory, modeOf } from '@/brain/history';
+ import { plannedThisWeek, weekSummary } from '@/brain/weekly';
+ import { volumeChartWeeks } from './volumeChart';
+-import { progressTrend } from './progressTrend';
++import { progressHint, progressTrend, progressValue } from './progressTrend';
+ import { muscleLabel } from '@/data/muscles';
+ import { showToast } from '@/app/toast';
+ import { Sparkline } from '@/ui/Sparkline';
+@@ -212,7 +212,8 @@ function Stats() {
+   const exercise = fromPanel && exerciseIds.some(([id]) => id === fromPanel) ? fromPanel : picked;
+   usePalaceFocus(exercise ? 'history.exercise-stats' : 'history.week', exercise ? { exerciseId: exercise } : undefined);
+   const hist = exercise ? exerciseHistory(s.sessions, exercise, s.customExercises) : [];
+-  const t = progressTrend(hist, modeOf(exercise, s.customExercises));
++  const mode = modeOf(exercise, s.customExercises);
++  const t = progressTrend(hist, mode);
+   const muscleRows = (Object.entries(w.muscleSets) as Array<[string, number]>).sort((a, b) => b[1] - a[1]).slice(0, 6);
+   const maxSets = muscleRows[0]?.[1] ?? 1;
+ 
+@@ -239,14 +240,14 @@ function Stats() {
+             <select value={exercise} onChange={e => { setExercise((e.target as HTMLSelectElement).value); if (fromPanel) closePanel('exercise-stats'); }}>{exerciseIds.map(([id, name]) => <option key={id} value={id}>{name}</option>)}</select>
+             {hist.length >= 2 ? (
+               <div class="stack-sm" style={{ marginTop: 12 }}>
+-                <Sparkline points={hist.slice(-12).map(h => h.bestE1rm || h.topKg || h.bestReps)} />
++                <Sparkline points={hist.slice(-12).map(h => progressValue(h, mode))} />
+                 <div class="grid-3">
+                   <Stat value={formatLoad(hist[hist.length - 1]!.topKg, u)} label="last top load" />
+                   <Stat value={`${hist[hist.length - 1]!.topReps}`} label="reps at top" />
+                   <Stat value={t.direction === 'up' ? 'Improving' : t.direction === 'down' ? 'Slipping' : t.direction === 'flat' ? 'Steady' : 'Early'} label={`trend · ${t.confidence}`} tone={t.direction === 'up' ? 'positive' : t.direction === 'down' ? 'warning' : undefined} />
+                 </div>
+                 <div class="list">{[...hist].reverse().slice(0, 5).map(h => <Row key={h.sessionId} trailing={<span class="hint num">{h.sets.map((st, i) => <span key={i}>{i ? ' · ' : ''}{setLabel(st, u)}<UnitTag st={st} u={u} /></span>)}</span>}><span class="small">{formatDay(h.day)}</span></Row>)}</div>
+-                <p class="hint">Trend uses an estimated one-rep strength score from sets of 10 reps or fewer. It is a guide, not a test.</p>
++                <p class="hint">{progressHint(mode)}</p>
+               </div>
+             ) : <p class="small muted" style={{ marginTop: 10 }}>One session so far. The trend line appears after the second.</p>}
+           </Card>
+diff --git a/src/slices/history/progressTrend.ts b/src/slices/history/progressTrend.ts
+index de26461..07251e4 100644
+--- a/src/slices/history/progressTrend.ts
++++ b/src/slices/history/progressTrend.ts
+@@ -11,3 +11,23 @@ export function progressTrend(hist: ExerciseSessionSummary[], mode: ResistanceMo
+   if (mode === 'assisted' || mode === 'bodyweight' || mode === 'duration') return liftTrend(hist, mode);
+   return trend(hist.map(h => ({ day: h.day, value: h.bestE1rm || h.volume })));
+ }
++
++/**
++ * The value the card's sparkline draws, in the same direction as the trend: up is progress. Assisted
++ * lifts plot the assistance negated (less help is higher), bodyweight lifts their best reps, holds
++ * their longest time. Weighted and conditioning keep the strength score (QA2-FC-1 follow-up).
++ */
++export function progressValue(h: ExerciseSessionSummary, mode: ResistanceMode): number {
++  if (mode === 'assisted') return -h.topKg;
++  if (mode === 'bodyweight') return h.bestReps;
++  if (mode === 'duration') return h.bestDurationSec;
++  return h.bestE1rm || h.topKg || h.bestReps;
++}
++
++/** The hint under the card, describing what the trend actually follows for this mode. */
++export function progressHint(mode: ResistanceMode): string {
++  if (mode === 'assisted') return 'Trend follows the assistance: less help is progress; with the same help, more reps.';
++  if (mode === 'bodyweight') return 'Trend follows your best reps.';
++  if (mode === 'duration') return 'Trend follows your longest hold.';
++  return 'Trend uses an estimated one-rep strength score from sets of 10 reps or fewer. It is a guide, not a test.';
++}
+diff --git a/src/ui/styles.css b/src/ui/styles.css
+index 28d0285..6a65ffd 100644
+--- a/src/ui/styles.css
++++ b/src/ui/styles.css
+@@ -160,7 +160,8 @@ svg { display: block; }
+ /* UI-30: a 44 px tall hit area. QA-R7-1: the row is 48 px tall, so the area stays inside it with
+    2 px to spare and a tap up to 8 px below a button still lands in its own row, even where rows
+    touch (the past-session list); sideways it stops at the gap to the next button. */
+-.effort button::before { content: ""; position: absolute; inset: -7px -2px; }
++/* The inset is measured from the 28 px padding box inside the 1 px border, so -8px gives 44 px. */
++.effort button::before { content: ""; position: absolute; inset: -8px -2px; }
+ .effort button[aria-pressed="true"].easy { background: var(--positive); color: #fff; border-color: transparent; }
+ .effort button[aria-pressed="true"].ideal { background: var(--info); color: #fff; border-color: transparent; }
+ .effort button[aria-pressed="true"].max { background: var(--negative); color: #fff; border-color: transparent; }
+diff --git a/tests/escobar/loop.test.ts b/tests/escobar/loop.test.ts
+index d6e177a..44d889d 100644
+--- a/tests/escobar/loop.test.ts
++++ b/tests/escobar/loop.test.ts
+@@ -379,6 +379,10 @@ describe('cost by the model that answered (F7)', () => {
+     expect(perMTok('claude-opus-4-6')).toEqual([5, 25]);
+     expect(perMTok('claude-opus-4-5-20251101')).toEqual([5, 25]);
+     expect(perMTok('claude-something-9')).toEqual([10, 50]);
++    // A newer minor version is unknown, not its prefix's price (QA2-F7-1 follow-up).
++    expect(perMTok('claude-sonnet-5-5')).toEqual([10, 50]);
++    expect(perMTok('claude-opus-5-6')).toEqual([10, 50]);
++    expect(perMTok('claude-haiku-4-5-20251001')).toEqual([1, 5]);
+     // Cache reads per MTok: 0.025x on Fable/Mythos 5.1, 0.05x on Opus 5.5, 0.1x elsewhere.
+     expect(estimateCost({ inputTokens: 0, outputTokens: 0, cacheReadTokens: 1_000_000 }, 'claude-mythos-5-1')).toBe(0.25);
+     expect(estimateCost({ inputTokens: 0, outputTokens: 0, cacheReadTokens: 1_000_000 }, 'claude-sonnet-4-6')).toBeCloseTo(0.3, 10);
+diff --git a/tests/progress-trend.test.ts b/tests/progress-trend.test.ts
+index ec84d59..efe5fa5 100644
+--- a/tests/progress-trend.test.ts
++++ b/tests/progress-trend.test.ts
+@@ -1,5 +1,5 @@
+ import { describe, it, expect } from 'vitest';
+-import { progressTrend } from '@/slices/history/progressTrend';
++import { progressHint, progressTrend, progressValue } from '@/slices/history/progressTrend';
+ import { exerciseHistory, modeOf } from '@/brain/history';
+ import { session, sets } from './helpers';
+ 
+@@ -24,3 +24,21 @@ describe('the Exercise progress card trend follows the lift mode (QA2-FC-1)', ()
+     expect(progressTrend(histOf('lib_barbell_bench_press', i => sets(20, 12 + (i >> 1), 'ideal', 3)), 'weighted').direction).toBe('up');
+   });
+ });
++
++describe('the card line and hint agree with the trend (QA2-FC-1 follow-up)', () => {
++  it('an assisted lift needing less help draws a rising line', () => {
++    const pts = histOf('lib_assisted_pull_up', i => sets(40 - i * 4, 8, 'ideal', 3)).map(h => progressValue(h, 'assisted'));
++    expect(pts[pts.length - 1]!).toBeGreaterThan(pts[0]!);
++    for (let i = 1; i < pts.length; i++) expect(pts[i]!).toBeGreaterThan(pts[i - 1]!);
++  });
++  it('a hold draws its time, a bodyweight lift its reps', () => {
++    expect(histOf('lib_plank', i => [{ durationSec: 30 + i * 10, effort: 'ideal' as const }]).map(h => progressValue(h, 'duration'))).toEqual([30, 40, 50, 60, 70, 80, 90, 100]);
++    expect(histOf('lib_pull_up', i => [{ reps: 5 + i, effort: 'ideal' as const }]).map(h => progressValue(h, 'bodyweight'))).toEqual([5, 6, 7, 8, 9, 10, 11, 12]);
++  });
++  it('the hint names what each mode follows', () => {
++    expect(progressHint('assisted')).toMatch(/assistance/);
++    expect(progressHint('bodyweight')).toMatch(/reps/);
++    expect(progressHint('duration')).toMatch(/hold/);
++    expect(progressHint('weighted')).toMatch(/one-rep/);
++  });
++});
+diff --git a/tests/weeklyReview.test.ts b/tests/weeklyReview.test.ts
+index 1690d4d..c1dc278 100644
+--- a/tests/weeklyReview.test.ts
++++ b/tests/weeklyReview.test.ts
+@@ -132,3 +132,25 @@ describe('weight trend and week grade (BR-14, BR-22)', () => {
+     expect(weekSummary(two, '2026-09-18', [], null).grade.title).toBe('Building momentum'); // QA-R6-10: no schedule is null; 0 now means every planned day was taken off
+   });
+ });
++
++describe('weekly e1RM review after a break (QA2-FC-2)', () => {
++  const profile: Profile = { name: 'Test' };
++  const review = (sessions: ReturnType<typeof session>[], today: string) => weeklyReviewInsights({
++    sessions, today, custom: [], schedule: emptySchedule(), goal: 'lean', profile,
++    weightLog: [], trainingAgeMonths: 24, exerciseIds: [{ id: bench, name: 'Barbell Bench Press' }],
++  }, 50).filter(i => i.id.startsWith('weekly:e1rm'));
++  it('sessions before a break do not make a comeback read as flat', () => {
++    const before = ['2026-07-29', '2026-07-31', '2026-08-03', '2026-08-05'].map(d => session(d, [{ id: bench, sets: sets(100, 5, 'ideal', 3) }]));
++    const after = ['2026-09-14', '2026-09-16', '2026-09-18'].map(d => session(d, [{ id: bench, sets: sets(100, 5, 'ideal', 3) }]));
++    expect(review([...before, ...after], '2026-09-19')).toEqual([]);
++  });
++  it('a rebuild after the break is judged on its own sessions: rising, not falling', async () => {
++    const { addDays } = await import('@/core/dates');
++    const before = ['2026-07-27', '2026-07-29', '2026-07-31', '2026-08-03', '2026-08-05', '2026-08-07'].map(d => session(d, [{ id: bench, sets: sets(100, 5, 'ideal', 3) }]));
++    const after = Array.from({ length: 10 }, (_, i) => session(addDays('2026-09-14', Math.round(i * 11 / 9)), [{ id: bench, sets: sets(85 + i, 5, 'ideal', 3) }]));
++    const e1rm = review([...before, ...after], '2026-09-26');
++    expect(e1rm.length).toBeGreaterThan(0);
++    expect(e1rm[0]!.title).not.toMatch(/falling/i);
++    expect(e1rm[0]!.title).toMatch(/rising/i);
++  });
++});
