@@ -1,0 +1,295 @@
+<title>Gym Finder Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a build sheet. A stage ladder (heaviest work last), then data, files, safety nets and approvals, each as its own labelled block. */
+:root {
+  /* M/ARC Paper theme */
+  --bg: #ffffff;
+  --surface: #f7f6f3;
+  --surface-2: #efeeea;
+  --line: #e6e4df;
+  --fg: #37352f;
+  --fg-2: #5f5e5a;
+  --fg-3: #8a8985;
+  --accent: #2383e2;
+  --accent-soft: rgba(35,131,226,0.10);
+  --ok: #1f8a5b;
+  --ok-soft: rgba(31,138,91,0.10);
+  --opt: #b7791f;
+  --opt-soft: rgba(183,121,31,0.12);
+  --no: #c4423a;
+  --no-soft: rgba(196,66,58,0.10);
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* M/ARC Silent Black theme */
+    --bg: #08090a; --surface: #0f1011; --surface-2: #141516; --line: #23252a;
+    --fg: #f7f8f8; --fg-2: #a3a8b1; --fg-3: #6f747c;
+    --accent: #7c86e6; --accent-soft: rgba(124,134,230,0.16);
+    --ok: #4cc38a; --ok-soft: rgba(76,195,138,0.14);
+    --opt: #e0a84e; --opt-soft: rgba(224,168,78,0.14);
+    --no: #f0716a; --no-soft: rgba(240,113,106,0.14);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #08090a; --surface: #0f1011; --surface-2: #141516; --line: #23252a;
+  --fg: #f7f8f8; --fg-2: #a3a8b1; --fg-3: #6f747c;
+  --accent: #7c86e6; --accent-soft: rgba(124,134,230,0.16);
+  --ok: #4cc38a; --ok-soft: rgba(76,195,138,0.14);
+  --opt: #e0a84e; --opt-soft: rgba(224,168,78,0.14);
+  --no: #f0716a; --no-soft: rgba(240,113,106,0.14);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15.5px; line-height: 1.6; margin: 0; }
+.wrap { max-width: 900px; margin: 0 auto; padding-inline: 20px; padding-block: 36px 72px; display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: 0.01em; text-wrap: balance; margin: 0; line-height: 1.1; }
+h1 { font-size: clamp(2.4rem, 7vw, 3.6rem); text-transform: uppercase; }
+h2 { font-size: 1.9rem; text-transform: uppercase; }
+h3 { font-size: 1.3rem; font-weight: 600; }
+p { margin: 0; max-width: 70ch; }
+.eyebrow { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); }
+section { display: grid; gap: 16px; }
+.lede { font-size: 1.12rem; color: var(--fg-2); }
+ul, ol { margin: 0; padding-left: 1.2em; display: grid; gap: 7px; max-width: 72ch; }
+li::marker { color: var(--fg-3); }
+.mono, code { font-family: var(--mono); font-size: 0.86em; }
+code { background: var(--surface-2); padding: 1px 5px; border-radius: 5px; }
+a { color: var(--accent); }
+.rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.rule { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 4px; background: var(--surface); min-width: 0; }
+.rule b { font-family: var(--display); font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.02em; }
+.rule span { font-size: 0.93rem; color: var(--fg-2); }
+.ladder { display: grid; gap: 0; border-left: 3px solid var(--line); margin-left: 14px; }
+.rung { position: relative; padding: 4px 0 22px 26px; display: grid; gap: 8px; }
+.rung::before { content: ""; position: absolute; left: -11px; top: 8px; width: 19px; height: 19px; border-radius: 50%; background: var(--bg); border: 3px solid var(--fg); }
+.rung.opt::before { border-color: var(--opt); }
+.rung.gate::before { border-color: var(--accent); border-style: dashed; }
+.rung-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; }
+.id { font-family: var(--mono); font-size: 0.8rem; color: var(--fg-3); }
+.pill { display: inline-block; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.p-core { background: var(--ok-soft); color: var(--ok); }
+.p-opt { background: var(--opt-soft); color: var(--opt); }
+.p-gate { background: var(--accent-soft); color: var(--accent); }
+.p-no { background: var(--no-soft); color: var(--no); }
+.rung p { font-size: 0.95rem; color: var(--fg-2); }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--mono); font-size: 0.76rem; color: var(--fg-3); }
+.meta span b { color: var(--fg-2); font-weight: 500; }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); font-weight: 500; background: var(--surface); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td code { white-space: nowrap; }
+pre.code { margin: 0; overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; font-family: var(--mono); font-size: 0.82rem; line-height: 1.55; color: var(--fg); }
+.diagram { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: var(--surface); }
+.dropped { border: 1px dashed var(--no); border-radius: 12px; padding: 16px; display: grid; gap: 8px; }
+.dropped h3 { color: var(--no); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+.foot { font-size: 0.82rem; color: var(--fg-3); border-top: 1px solid var(--line); padding-top: 16px; }
+@media (max-width: 680px) { .rules { grid-template-columns: 1fr; } }
+</style>
+
+<main class="wrap">
+  <header style="display:grid; gap:14px;">
+    <div class="eyebrow">M/ARC · Build plan · Gym Finder · checked against main f1e514a</div>
+    <h1>Gym Finder Architecture</h1>
+    <p class="lede">How to add the Gym Finder without breaking the app, a branch or a rule. It's built in small stages that each merge on their own, with the cheapest one first. Every stage after the first only starts if the one before it proves worth it. A red-team agent attacked an earlier draft; its findings are folded in.</p>
+  </header>
+
+  <section>
+    <div class="eyebrow">01</div>
+    <h2>Ground rules</h2>
+    <div class="rules">
+      <div class="rule"><b>Data stays on the phone</b><span>Search, sorting and distance run on the device. No location, query or gym choice is sent anywhere in the core stages.</span></div>
+      <div class="rule"><b>No server changes</b><span>No stage touches <code>escobar-worker/**</code>. No API keys, no paid provider, no new deploys.</span></div>
+      <div class="rule"><b>Own folder</b><span>New code lives in <code>src/slices/gymfinder/**</code> and <code>tools/gymfinder/**</code>. Shared files change only at the named lines below.</span></div>
+      <div class="rule"><b>Hidden until done</b><span>A build-time switch hides every entry point, including the in-app search entry and the coach's navigation, until linking passes review.</span></div>
+      <div class="rule"><b>List before map</b><span>A full list works on every phone and offline. The map is an optional layer and never the only way to choose a gym.</span></div>
+      <div class="rule"><b>Usual gates</b><span>Every stage goes builder → reviewer → CI, with new tests that fail before and pass after, and add-only gate blocks in all 5 themes.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">02</div>
+    <h2>Stages</h2>
+    <p>Card names are GYM-0 to GYM-6, so they don't clash with the proposal's test rows GF-01 to GF-14. Green is the core path; amber is optional and needs your yes. The blue step is a go/no-go check.</p>
+    <div class="ladder">
+      <div class="rung">
+        <div class="rung-head"><span class="id">GYM-0</span><h3>Find in Maps</h3><span class="pill p-core">core</span></div>
+        <p>A "Find a gym" button in the gym picker and in Settings › Gyms opens the phone's maps app already searching for gyms (<code>geo:0,0?q=gym</code>). The maps app handles location with its own permission. Linking stays the normal "Add a gym" step.</p>
+        <div class="meta"><span><b>Files</b> Train.tsx gym sheet, Gyms.tsx</span><span><b>Needs</b> your LR-23 ruling on a maps handoff</span><span><b>Effort</b> ½ day</span><span><b>Check</b> device: Google Maps and Huawei Petal Maps</span></div>
+      </div>
+      <div class="rung gate">
+        <div class="rung-head"><span class="id">GYM-1</span><h3>Coverage test</h3><span class="pill p-gate">go / no-go</span></div>
+        <p>Research only, no code. Compare open gym data (Overture, then OpenStreetMap) against a hand-checked gym list in Makati, BGC, Cebu City, Sydney CBD and Parramatta. Measure missing gyms, closed gyms and duplicates, how often IDs change between monthly releases, and file size. Go only if it clearly beats GYM-0 on what a lifter asks: near me, open now, day pass, kg or lb.</p>
+        <div class="meta"><span><b>Effort</b> 1 day</span><span><b>Output</b> a report and a go/no-go for GYM-2</span></div>
+      </div>
+      <div class="rung">
+        <div class="rung-head"><span class="id">GYM-2</span><h3>Gym catalogue</h3><span class="pill p-core">core if GYM-1 says go</span></div>
+        <p>A monthly script builds one compressed gym file per country from <strong>one</strong> open source, so licences never mix. It drops every phone, website and social field, and scans names and addresses for hidden contacts. Before publishing it checks a minimum count, a maximum change from last month and the schema, and waits for a manual approval. The file ships inside the app (<code>www/</code>) at a versioned path, so there's no hosting, no bill and nothing to go offline.</p>
+        <div class="meta"><span><b>Files</b> tools/gymfinder/**, a new workflow (supervisor)</span><span><b>Needs</b> DuckDB in CI (dependency OK)</span><span><b>Effort</b> 1–2 days</span></div>
+      </div>
+      <div class="rung">
+        <div class="rung-head"><span class="id">GYM-3</span><h3>Finder list</h3><span class="pill p-core">core</span></div>
+        <p>A new hidden panel with a lazy-loaded chunk. It has list and search, with an area-name helper so "BGC", "Ortigas" or "CBD" match, and gym cards that state unknowns plainly. Each card has an "Open in Maps" handoff (<code>geo:0,0?q=lat,lon(Name)</code>) and no phone, website or source. Older search results can never replace a newer search.</p>
+        <div class="meta"><span><b>Files</b> src/slices/gymfinder/**, router.ts, App.tsx (supervisor)</span><span><b>Effort</b> 2 days</span><span><b>Gate</b> block GYM-3 in 5 themes, 320–390 px</span></div>
+      </div>
+      <div class="rung">
+        <div class="rung-head"><span class="id">GYM-4</span><h3>Link and train</h3><span class="pill p-core">core</span></div>
+        <p>"Use as my gym" links a found gym to an existing training gym, or makes a new one within the 8-gym limit. It asks kg or lb, and <strong>does not</strong> switch your active gym as a side effect. "Train here" uses the existing setup. During a live workout it shows the workout instead of doing nothing. Fixes the gym-guess bug, where Train overrides a gym you just picked. Turns the switch on.</p>
+        <div class="meta"><span><b>Files</b> models.ts, escobarState.ts, units.ts, Train.tsx (named lines), palace registry</span><span><b>Needs</b> your yes on one saved field</span><span><b>Effort</b> 2 days</span></div>
+      </div>
+      <div class="rung opt">
+        <div class="rung-head"><span class="id">GYM-5</span><h3>Map view</h3><span class="pill p-opt">optional</span></div>
+        <p>A themed map layer built with MapLibre, loaded only when opened. Map colours come from the 5 existing themes, with no new theme fields. Credit is plain text, not a link. It falls back to the list during a live workout, without WebGL, or on phones with 2 GB of memory or less. It recovers if the graphics context is lost. Zoom buttons are 44 px.</p>
+        <div class="meta"><span><b>Needs</b> your yes: map host and new libraries</span><span><b>Effort</b> 3–4 days</span><span><b>Check</b> device: a 2 GB Android 8 phone</span></div>
+      </div>
+      <div class="rung opt">
+        <div class="rung-head"><span class="id">GYM-6</span><h3>Near me</h3><span class="pill p-opt">optional</span></div>
+        <p>Sorts the list by distance using approximate location only. It asks natively for coarse location, with a short notice first on every Android version. It never centres a map on you, so no area request reveals where you are. Needs privacy policy and Play Data safety updates, published by you.</p>
+        <div class="meta"><span><b>Files</b> patch_manifest.py (supervisor), privacy docs</span><span><b>Needs</b> your yes: new use of location</span><span><b>Effort</b> 1–2 days + your policy steps</span></div>
+      </div>
+      <div class="rung opt">
+        <div class="rung-head"><span class="id">later</span><h3>Prices</h3><span class="pill p-opt">optional</span></div>
+        <p>Prices you curate for the top chains in the launch cities: plan, amount, period, conditions and a "checked" date. They hide themselves before they go stale, with a reminder to you first. Gym-submitted prices come only after a verified claim, and that needs your yes on new stored data.</p>
+      </div>
+    </div>
+    <div class="dropped">
+      <h3>Not built</h3>
+      <ul>
+        <li>Google Places: its terms forbid showing it on a non-Google map, and it costs about $1,060 a month at 10,000 users.</li>
+        <li>Reading Facebook or Instagram for prices: Meta's terms forbid it. Website scraping, poster OCR and a review queue: too much ongoing cost and risk.</li>
+        <li>Background location and arrival geofences: high Play-rejection risk, weak evidence. Use reminders at your planned workout time instead.</li>
+        <li>Any prototype code: it was written for ChatGPT's widget system and builds HTML from strings.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">03</div>
+    <h2>How it fits</h2>
+    <div class="diagram">
+<pre class="mermaid">
+flowchart LR
+  subgraph Phone["Phone (all stages)"]
+    Entry["Entry buttons<br/>gym picker · Settings › Gyms"] --> Panel["Gym Finder panel<br/>(lazy chunk, hidden by switch)"]
+    Coach["Escobar<br/>palace entry · propose_gym"] --> Panel
+    Panel --> List["List + search<br/>area-name helper"]
+    Panel -. optional .-> Map["Map layer<br/>MapLibre, themed"]
+    Catalogue["Country gym file<br/>bundled in www/"] --> List
+    Catalogue --> Map
+    List --> Link["Link service<br/>linkGymPlace()"]
+    Link --> Units["Existing gyms<br/>8-gym limit, equipment"]
+    Units --> Train["Existing workout setup<br/>startSession"]
+    List --> Handoff["Open in Maps<br/>geo: handoff"]
+  end
+  Build["Monthly build script<br/>one open source, checks, approval"] --> Catalogue
+  Handoff --> MapsApp["Phone's maps app"]
+</pre>
+    </div>
+    <p>Nothing in this picture talks to the coach server or any paid service. With the optional map, tiles come from whichever host you approve. Bundling the gym file means even that is the only network call the finder makes.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">04</div>
+    <h2>Saved data</h2>
+    <p>One optional field on your existing gym record links it to a catalogue gym. No store version change: the loader and backup reader both require version 1, and an older app simply drops the field.</p>
+<pre class="code">// src/core/models.ts: additive, optional
+interface Gym {
+  id: string; name: string; defaultUnit: Unit; createdAt: string;
+  place?: { source: 'overture' | 'osm'; id: string; build: string };
+}</pre>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Item</th><th>Stored?</th><th>Rule</th></tr></thead>
+        <tbody>
+          <tr><td>Gym ↔ catalogue link</td><td>Yes, on the gym</td><td>Kept by <code>normalizeUnits</code>, travels in backups, follows the restore rules from AUD-4, wiped by reset, removed with the gym</td></tr>
+          <tr><td>Link that disappears after a monthly rebuild</td><td>—</td><td>Card shows "Not in the list"; "Relink" fixes it. The build carries an ID bridge from the source's change log</td></tr>
+          <tr><td>Gym name from a listing</td><td>Only after you edit it</td><td>Prefill the chain name only. The coach brief sends gym names, so a branch name would reveal a neighbourhood</td></tr>
+          <tr><td>Catalogue file</td><td>Ships with the app</td><td>Read-only, versioned path, never parsed by an older schema</td></tr>
+          <tr><td>Search, map view, location</td><td>No</td><td>Memory only</td></tr>
+          <tr><td>Visit history, coordinates, reminders</td><td>No</td><td>Not built</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">05</div>
+    <h2>Files touched</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>File</th><th>Stage</th><th>Change</th><th>Owner</th></tr></thead>
+        <tbody>
+          <tr><td><code>src/slices/gymfinder/**</code></td><td>3–6</td><td>New: panel, list, search, cards, link service, map layer</td><td>builder</td></tr>
+          <tr><td><code>tools/gymfinder/**</code>, a new workflow</td><td>2</td><td>New: catalogue build, checks, approval step</td><td>builder; workflow by supervisor</td></tr>
+          <tr><td><code>src/app/router.ts</code>, <code>App.tsx</code></td><td>3</td><td>One panel id, one lazy case</td><td>supervisor</td></tr>
+          <tr><td><code>Train.tsx</code></td><td>0, 4</td><td>One button in the gym sheet; the gym-guess fix</td><td>busiest file, sequenced</td></tr>
+          <tr><td><code>Gyms.tsx</code></td><td>0</td><td>One row</td><td>builder</td></tr>
+          <tr><td><code>models.ts</code>, <code>escobarState.ts</code></td><td>4</td><td>Optional <code>place</code> field, validated</td><td>you approve</td></tr>
+          <tr><td><code>units.ts</code></td><td>4</td><td>New <code>linkGymPlace()</code> that leaves the active gym alone</td><td>builder</td></tr>
+          <tr><td><code>src/escobar/palace/registry.ts</code></td><td>4</td><td>One entry, added only when the switch turns on</td><td>builder</td></tr>
+          <tr><td><code>tests/guards/no-contacts.ts</code></td><td>2</td><td>Extended to the catalogue and its fixture</td><td>add-only</td></tr>
+          <tr><td><code>package.json</code></td><td>2, 5</td><td>DuckDB (CI only); MapLibre and a tile reader if the map is chosen</td><td>supervisor</td></tr>
+          <tr><td><code>native/patch_manifest.py</code></td><td>6</td><td>Coarse location, with the old Bluetooth cap untouched</td><td>supervisor</td></tr>
+          <tr><td>Privacy policy, Data safety</td><td>5–6</td><td>New third party (map host) and location use</td><td>you publish</td></tr>
+          <tr><td><code>escobar-worker/**</code>, watch files, signing</td><td>—</td><td>Never touched</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">06</div>
+    <h2>Bug guards</h2>
+    <ul>
+      <li><strong>Switch off = invisible:</strong> a gate probe proves a switch-off build has no entry button, no search entry and no coach route to the panel.</li>
+      <li><strong>Failing tests first:</strong> the gym-guess override, linking at the 8-gym limit, "Train here" during a live workout, a vanished link, backup round trip, reset wiping links, and stale search results losing to newer ones. Each fails on main and passes after.</li>
+      <li><strong>Nothing heavy at start-up:</strong> a gate check that no map code lands in the main chunk, plus a size budget for the finder chunks. Start-up timing budgets stay as they are.</li>
+      <li><strong>Crash safety:</strong> list-only during a live workout and on weak phones; graphics context loss handled; a device check on a 2 GB phone before the map is enabled.</li>
+      <li><strong>Rule guards:</strong> no <code>&lt;a&gt;</code> renders inside the finder; no contact strings in the catalogue; the gym's place link never reaches the coach brief.</li>
+      <li><strong>Gate fit:</strong> 44 px touch targets, contrast checks, no sideways scroll at 320 px, all 5 themes. The network is stubbed with a fixture catalogue and a small tile file.</li>
+      <li><strong>Bad data can't ship:</strong> count, change and schema checks plus a manual approval before any new catalogue goes into the app. The app keeps the last good file.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="eyebrow">07</div>
+    <h2>Before it starts</h2>
+    <ol>
+      <li>Your finish line: How-to through HT-10 and the 32 first-audit findings.</li>
+      <li>The improvement audit's four gym bugs: wrong-gym loads during a workout (ENG-01), deleting a live workout's gym (UI-R06), stale suggestions writing into a deleted gym (IMP-E04) and notification races (IMP-N01).</li>
+      <li>AUD-4 (restore rules) merged, since the link field follows its pattern.</li>
+      <li>Recommended: the Google Play launch, so the first review doesn't include new location and data flows.</li>
+      <li>Your decisions from the review page: timing, LR-23 scope, the saved field, map host, libraries, launch areas, prices.</li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="eyebrow">08</div>
+    <h2>Risks</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Risk</th><th>Guard</th></tr></thead>
+        <tbody>
+          <tr><td>Open data misses gyms in the Philippines</td><td>GYM-1 go/no-go; GYM-0 stays as the fallback</td></tr>
+          <tr><td>Catalogue IDs change and links break</td><td>ID bridge, "Not in the list" state, relink, versioned file</td></tr>
+          <tr><td>Map crashes the app on low-end phones</td><td>List-only rules, context-loss handling, device check, map optional</td></tr>
+          <tr><td>Licence mix (ODbL share-alike)</td><td>One source per region, no enrichment, licence notices in the app package (not the UI)</td></tr>
+          <tr><td>A map host bills you or sees your users' areas</td><td>No map in v1, or a host you approve with a spending limit</td></tr>
+          <tr><td>Stale business facts</td><td>No hours or prices unless dated; curated prices hide before going stale</td></tr>
+          <tr><td>Merge collisions with busy files</td><td>Starts after the current lanes; one stage at a time; named lines only</td></tr>
+          <tr><td>No usage data to judge success</td><td>Your own use and feedback after GYM-0 decides whether GYM-2 starts</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <p class="foot">Effort, all core stages: about 1 to 1.5 weeks of agent work after the go/no-go, plus device checks. With the map and near me: about 2 to 3 weeks. GYM-0 alone: half a day. Checked on 1 Oct 2026 against main f1e514a and the providers' current terms.</p>
+</main>

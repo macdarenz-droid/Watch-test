@@ -1,0 +1,155 @@
+{
+  "schema": 1,
+  "note": "HT-1 golden lock. Every file is verbatim from its source; never edit a byte (golden update procedure: docs/howto/build-plan/HOWTO-BUILD-PLAN.md 2.8).",
+  "font": {
+    "path": "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+    "package": "@fontsource-variable/inter@5.3.0",
+    "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+    "md5": "260c81a4759baf163c025001c4f27872",
+    "mirrorAs": "engine/inter-latin-wght-normal.woff2"
+  },
+  "files": {
+    "artifact/build-page.mjs": {
+      "sha256": "bfea340fb486670c130fdd06a9bcf2a5c5cfb63f490474e16f35a082d6369e1a",
+      "source": "bc0f378:docs/howto/technical-plate/build-page.mjs",
+      "gitBlob": "fa7c6645385a0b10102ef51a7fae25287676a9df"
+    },
+    "engine/SPEC.md": {
+      "sha256": "af4b34331d256b9002db325a3714e9c4bdbc3306330a93ded128298aa466b5cb",
+      "source": "48153c4:docs/howto/technical-plate/engine/SPEC.md",
+      "gitBlob": "d5abe2e457a51fa0c29bd523576cf1091391c12f"
+    },
+    "engine/body.mjs": {
+      "sha256": "704b42d651bb5c30fccfcc4411679ee46858469146f02862c490fabcd721fcba",
+      "source": "f214700:docs/howto/technical-plate/engine/body.mjs",
+      "gitBlob": "c4b017075b7dbc7d3f3d980e36802213497a79fa"
+    },
+    "engine/equipment.mjs": {
+      "sha256": "d1f7d82a8962e411525ab29138a1b36eb444d10b04e1e75a14e9475b15eaa638",
+      "source": "48153c4:docs/howto/technical-plate/engine/equipment.mjs",
+      "gitBlob": "3288b69ec1a277ee26da38686d3f75e62f228bfa"
+    },
+    "engine/gallery.mjs": {
+      "sha256": "238b3df7bfe95b70e8f6f772406abb8a1b2d2234a108e14ac64185974d2a82a7",
+      "source": "bc0f378:docs/howto/technical-plate/engine/gallery.mjs",
+      "gitBlob": "e1aad96677b8bfa96c89644594a18defa058a3be"
+    },
+    "engine/geom.mjs": {
+      "sha256": "c2783668faaac66f6843d1bac7cd44f193a881d792b20809590255cc79f088fb",
+      "source": "bc0f378:docs/howto/technical-plate/engine/geom.mjs",
+      "gitBlob": "dcd603202499ebefe19e59aca615cfd289300b53"
+    },
+    "engine/index.mjs": {
+      "sha256": "b82df31f61127beef60314c2fb663fbbe3c8a8d5bf2e360fb5768e179fb8b80a",
+      "source": "bc0f378:docs/howto/technical-plate/engine/index.mjs",
+      "gitBlob": "1ba3ea9be5da0b29ab87b5cd18f912dbf000977c"
+    },
+    "engine/layout.mjs": {
+      "sha256": "d89d3c589047d40dc52f2bd803db9e6ee7a9b4b7f978efcd90afd5a37da0ae26",
+      "source": "bc0f378:docs/howto/technical-plate/engine/layout.mjs",
+      "gitBlob": "56ad4cd0aa59ad6b95f9261be2853715b24fbeef"
+    },
+    "engine/measure-chars.mjs": {
+      "sha256": "dcf47bded3f6baec0945fa928b857724fe38b8398d6511a68ec36aa9be6460cf",
+      "source": "bc0f378:docs/howto/technical-plate/engine/measure-chars.mjs",
+      "gitBlob": "769d3d8b2617be918a054ede241b69f42a51770f"
+    },
+    "engine/plate.mjs": {
+      "sha256": "984cd4783b4a5bc6c14ec1c32cba0678e72348d38397227ef01536f3eed1131a",
+      "source": "f214700:docs/howto/technical-plate/engine/plate.mjs",
+      "gitBlob": "6113e70e4e22230647c3fce71fcd3be82f2864f3"
+    },
+    "engine/render.mjs": {
+      "sha256": "eee26ec10e398a16afedc45b0ff763a088f4fb8efc5b90a161f57ca5a85ace47",
+      "source": "bc0f378:docs/howto/technical-plate/engine/render.mjs",
+      "gitBlob": "1683c8e8daefebc0dec857f0229b65819668ae3b"
+    },
+    "engine/sheet.mjs": {
+      "sha256": "20e49675882d90d598efa73999f1e3ee56a9b7f5d7946dfba90987ab7f2e1a0e",
+      "source": "bc0f378:docs/howto/technical-plate/engine/sheet.mjs",
+      "gitBlob": "c541612a5cb0c8a3267756e8f2d26788ab046ce6"
+    },
+    "engine/themes.mjs": {
+      "sha256": "0b6295e8bcb6c56a016d998a3c0cf49af323fde04032d43ef3319f405ade7d99",
+      "source": "bc0f378:docs/howto/technical-plate/engine/themes.mjs",
+      "gitBlob": "a427acaa5845ba9aa57e224d7012c0549cb4201d"
+    },
+    "engine/tokens.css": {
+      "sha256": "b1aa47369e703412d0d9a7f20bfa7691de477aaa724a722bdd203d0b636d96ad",
+      "source": "bc0f378:docs/howto/technical-plate/engine/tokens.css",
+      "gitBlob": "d9fbbdc0bec124eaa9a04911050314b6705285cb"
+    },
+    "engine/zoom.mjs": {
+      "sha256": "14ca398e413c336bd07bab585fc1b6b5f9a31a5e8c39050baad1b43a8c666f3e",
+      "source": "bc0f378:docs/howto/technical-plate/engine/zoom.mjs",
+      "gitBlob": "38b2d8af26fd4ad7a995ea5ddfbb20b00443d20a"
+    },
+    "exercises/_test_front.mjs": {
+      "sha256": "adaec2d6451926aabcfd6987d5cacbb19c9bc6f402c3a5b5669b47f5c6e0a227",
+      "source": "bc0f378:docs/howto/technical-plate/exercises/_test_front.mjs",
+      "gitBlob": "15c86aa8c4b6afe65b1642613025b09782788e70"
+    },
+    "exercises/_test_flat.mjs": {
+      "sha256": "b3914ac00eefd6a5653d53080a285add831737b966cb68cb84b7d2028d145744",
+      "source": "f214700:docs/howto/technical-plate/exercises/_test_flat.mjs",
+      "gitBlob": "eb478e46a9de42d2843427dc217f11a198ade62a"
+    },
+    "exercises/_test_poly.mjs": {
+      "sha256": "b93282cd2b69dcc7dfda88580063b3a3c54554f5777b2fb5417f6c83b9edac26",
+      "source": "de00174:docs/howto/technical-plate/exercises/_test_poly.mjs",
+      "gitBlob": "054bf91b06668cde2fed231041949e3d68355824"
+    },
+    "exercises/_test_side.mjs": {
+      "sha256": "5e9016862e4f145076d0a7ee1b0dba9c8b2d951692ff6aab79930f691cac17a9",
+      "source": "bc0f378:docs/howto/technical-plate/exercises/_test_side.mjs",
+      "gitBlob": "fb09b64f6802efe860114856b6a046c5a6061e42"
+    },
+    "exercises/barbell_back_squat.mjs": {
+      "sha256": "4edd909a013bf3d0209eadaf094610ba3ed6871fe47a47539b2af2c1dee6769c",
+      "source": "bc0f378:docs/howto/technical-plate/exercises/barbell_back_squat.mjs",
+      "gitBlob": "add0f07af9770ca9a63880d850ab53fd0b699afe"
+    },
+    "exercises/hanging_leg_raise.mjs": {
+      "sha256": "77524c64ae74710ee75b224564dfd38c6a620c573245d1295aed51de8cc150e2",
+      "source": "bc0f378:docs/howto/technical-plate/exercises/hanging_leg_raise.mjs",
+      "gitBlob": "fccf099df7f8c330a5aedec08a54b4b0a5404826"
+    },
+    "exercises/lat_pulldown.mjs": {
+      "sha256": "853d1665581a2bf985d565564b55cfa5c4e4e45a608d74a58d44fb272e50d401",
+      "source": "bc0f378:docs/howto/technical-plate/exercises/lat_pulldown.mjs",
+      "gitBlob": "9fe30824c67382719ce97152e658bae8335e8d04"
+    },
+    "exercises/leg_press.mjs": {
+      "sha256": "02f0d5721b9fbbaa27ce7e9070c1cf965a493af2febcf91ba324410c389bb0b2",
+      "source": "bc0f378:docs/howto/technical-plate/exercises/leg_press.mjs",
+      "gitBlob": "0e9e7a79b1e0b9127720781fbf205847f06906a8"
+    },
+    "exercises/machine_chest_press.mjs": {
+      "sha256": "540fc036c497ee024fb83c8a1f56167ed3bed1dec7114de9678fd65fb9f488ef",
+      "source": "bc0f378:docs/howto/technical-plate/exercises/machine_chest_press.mjs",
+      "gitBlob": "c0640fd212ae5a845bf48def20c2358792be53ae"
+    },
+    "exercises/pull_up.mjs": {
+      "sha256": "d8a8c650828e4947f010729ad3a1503b6a7ed063b2dc3178a91d33a94586997c",
+      "source": "bc0f378:docs/howto/technical-plate/exercises/pull_up.mjs",
+      "gitBlob": "49e230da249d9a4883279f627590c57d6cdd6cb7"
+    },
+    "exercises/seated_cable_row.mjs": {
+      "sha256": "302fae993de1456b54efa83cf286231f9fda694fa2eba7122975dff185b88ddb",
+      "source": "bc0f378:docs/howto/technical-plate/exercises/seated_cable_row.mjs",
+      "gitBlob": "2e902ec4928212cc8f1d1ea9959890b1e5069785"
+    },
+    "ref-src/plate.mjs": {
+      "sha256": "9bd75197232e4c336528e139383891abb97b369d022648425d73a6ebfd64ee52",
+      "source": "1a1e33b:docs/howto/technical-plate/ref-src/plate.mjs",
+      "gitBlob": "2fff9ba374363a3785a82def2d1f61791af90480",
+      "md5": "31e7bfe3555c0c456ed4417f503dc93f"
+    },
+    "ref-src/themes.mjs": {
+      "sha256": "0b6295e8bcb6c56a016d998a3c0cf49af323fde04032d43ef3319f405ade7d99",
+      "source": "1a1e33b:docs/howto/technical-plate/ref-src/themes.mjs",
+      "gitBlob": "a427acaa5845ba9aa57e224d7012c0549cb4201d",
+      "md5": "37495b3d37d1a6a284a380c9e517fb18"
+    }
+  }
+}

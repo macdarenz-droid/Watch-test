@@ -1,0 +1,35 @@
+// GENERATED, do not edit. Written by tools/plates/generate.mjs (tools/plates/gen/content.mjs). inputsSha256=31b31323a81128aa314e1e98348079a17bbec22574feedeb047a07c21e32a1cd
+{
+  "id": "lib_hanging_leg_raise",
+  "rev": 1,
+  "research": {
+    "card": "grip/research/hanging_leg_raise.json",
+    "rev": 1,
+    "related": [
+      "grip/research/GENERAL.md (G9)",
+      "grip/research/pull_up.json"
+    ]
+  },
+  "sources": [
+    "mcgill2015",
+    "escamilla2006",
+    "axler1997",
+    "workman2008",
+    "andersson1997",
+    "juker1998",
+    "jukic2021",
+    "valerio2021",
+    "martins2026",
+    "odriscoll1992",
+    "prinold2016",
+    "kolber2010",
+    "ace-abs",
+    "catalyst-hlr",
+    "catalyst-scap",
+    "yessis-hlr",
+    "strengthlog-hlr",
+    "baechle-earle",
+    "wiki-leg-raise",
+    "nhs-wrist-pain"
+  ]
+}

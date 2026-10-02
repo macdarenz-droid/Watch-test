@@ -1,0 +1,254 @@
+name: Build Signed M-ARC Release APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_name:
+        description: 'Version name (blank = current app build + run)'
+        required: false
+        type: string
+      version_code:
+        description: 'Android versionCode (blank = automatic)'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  # PL-17: read the "M/ARC gate" runs for this commit.
+  actions: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v6
+
+      - name: Resolve version
+        id: version
+        shell: bash
+        env:
+          INPUT_NAME: ${{ inputs.version_name }}
+          INPUT_CODE: ${{ inputs.version_code }}
+        run: |
+          set -euo pipefail
+          VERSION_NAME="${INPUT_NAME:-}"
+          VERSION_CODE="${INPUT_CODE:-}"
+          # PL-17: package.json is the version source; the run number makes each build unique.
+          PKG_VERSION="$(node -p "require('./package.json').version")"
+          MAJOR="${PKG_VERSION%%.*}"
+          [ -n "$VERSION_NAME" ] || VERSION_NAME="${PKG_VERSION}.${GITHUB_RUN_NUMBER}"
+          [ -n "$VERSION_CODE" ] || VERSION_CODE="$((MAJOR * 1000000 + GITHUB_RUN_NUMBER))"
+          [[ "$VERSION_CODE" =~ ^[1-9][0-9]*$ ]] || { echo 'Invalid versionCode'; exit 1; }
+          echo "version_name=$VERSION_NAME" >> "$GITHUB_OUTPUT"
+          echo "version_code=$VERSION_CODE" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Validate signing secrets
+        shell: bash
+        env:
+          KS: ${{ secrets.MARC_SIGNING_KEYSTORE_B64 }}
+          PW: ${{ secrets.MARC_SIGNING_STORE_PASSWORD }}
+        run: |
+          set -euo pipefail
+          # Release uses the same permanent key as every debug build (plan R0.0/R0.8, PL-19, PL-02).
+          [ -n "$KS" ] || { echo '::error::Secret MARC_SIGNING_KEYSTORE_B64 is missing.'; exit 1; }
+          [ -n "$PW" ] || { echo '::error::Secret MARC_SIGNING_STORE_PASSWORD is missing.'; exit 1; }
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Typecheck, test and build the web app
+        run: npm run check
+
+      - name: Unit tests in two more time zones
+        run: npm run test:tz
+
+      - name: Validate built web source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY2'
+          from pathlib import Path
+          import hashlib
+          data=Path('www/index.html').read_bytes()
+          if not data: raise SystemExit('www/index.html is empty')
+          sw=Path('www/sw.js').read_text()
+          if '/*__ASSETS__*/' in sw or '__BUILD__' in sw: raise SystemExit('service worker was not stamped')
+          print('Built source SHA256:', hashlib.sha256(data).hexdigest())
+          PY2
+
+      - name: Find a green "M/ARC gate" run on this commit
+        id: gate
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          N="$(gh run list --repo "$GITHUB_REPOSITORY" --workflow build-apk.yml --commit "$GITHUB_SHA" --status success --json databaseId --jq 'length' 2>/dev/null || echo 0)"
+          if [ "${N:-0}" -gt 0 ]; then echo "green=true" >> "$GITHUB_OUTPUT"; echo "M/ARC gate is green on $GITHUB_SHA"; else echo "green=false" >> "$GITHUB_OUTPUT"; echo "No green M/ARC gate on $GITHUB_SHA: running it here"; fi
+
+      - name: Run the gate here (no green gate run on this commit)
+        if: steps.gate.outputs.green != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx playwright install --with-deps chromium
+          npm run gate
+
+      - name: Generate Android project
+        shell: bash
+        run: bash scripts/prepare-android.sh
+
+      - name: Apply release version
+        shell: bash
+        env:
+          VERSION_NAME: ${{ steps.version.outputs.version_name }}
+          VERSION_CODE: ${{ steps.version.outputs.version_code }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import os,re
+          p=Path('android/app/build.gradle')
+          s=p.read_text(encoding='utf-8')
+          s,n1=re.subn(r'(?m)^(\s*versionCode\s+)\d+\s*$', rf'\g<1>{os.environ["VERSION_CODE"]}', s, count=1)
+          s,n2=re.subn(r'(?m)^(\s*versionName\s+)["\'][^"\']+["\']\s*$', rf'\g<1>"{os.environ["VERSION_NAME"]}"', s, count=1)
+          if n1 != 1 or n2 != 1: raise SystemExit('Could not set Android version')
+          p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Verify bundled bytes and plugins
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY2'
+          from pathlib import Path
+          import hashlib
+          source=Path('www/index.html').read_bytes()
+          bundled=Path('android/app/src/main/assets/public/index.html').read_bytes()
+          if bundled != source: raise SystemExit('Android bundled index differs from current www/index.html')
+          print('Release bundle current index exact-byte PASS:', hashlib.sha256(bundled).hexdigest())
+          PY2
+          test -f android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png || exit 1
+          PLUGINS='android/app/src/main/assets/capacitor.plugins.json'
+          for plugin in LocalNotifications Filesystem Share Haptics; do grep -qi "$plugin" "$PLUGINS" || exit 1; done
+          python3 - <<'PYSDK'
+          from pathlib import Path
+          import re
+          s = Path('android/variables.gradle').read_text(encoding='utf-8')
+          for key in ('targetSdkVersion', 'compileSdkVersion'):
+              m = re.search(key + r'\s*=\s*(\d+)', s)
+              if not m or int(m.group(1)) < 36: raise SystemExit(f'::error::{key} must be >= 36 (found {m.group(1) if m else "none"})')
+          PYSDK
+          grep -q '"@capacitor/app"' "$PLUGINS" || { echo '::error::@capacitor/app plugin missing from the APK (Android back button)'; exit 1; }
+          PKG='android/app/src/main/java/com/mrcdrnzz/dailytracker'
+          test -f "$PKG/HealthConnectNativePlugin.java" || exit 1
+          test -f "$PKG/NativeUiPlugin.java" || exit 1
+          test -f "$PKG/watch/WatchBridgePlugin.java" || exit 1
+          test -f "$PKG/watch/core/HeartRateMeasurement.java" || exit 1
+          grep -q 'android.permission.health.READ_HEART_RATE' android/app/src/main/AndroidManifest.xml || exit 1
+          grep -q 'android.permission.health.READ_RESTING_HEART_RATE' android/app/src/main/AndroidManifest.xml || exit 1
+          grep -q 'android.permission.BLUETOOTH_CONNECT' android/app/src/main/AndroidManifest.xml || exit 1
+          grep -q 'foregroundServiceType="connectedDevice"' android/app/src/main/AndroidManifest.xml || exit 1
+
+      - name: Build unsigned release APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd android
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleRelease
+
+      - name: Verify native classes in the APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          # RG-20: sources can be copied and still miss the build; check the compiled classes.
+          APK="$(ls android/app/build/outputs/apk/release/app-release*.apk | head -n 1)"
+          python3 - "$APK" <<'PYDEX'
+          import sys, zipfile
+          z = zipfile.ZipFile(sys.argv[1])
+          dex = b''.join(z.read(n) for n in z.namelist() if n.startswith('classes') and n.endswith('.dex'))
+          for cls in (b'Lcom/mrcdrnzz/dailytracker/HealthConnectNativePlugin;', b'Lcom/mrcdrnzz/dailytracker/watch/WatchBridgePlugin;'):
+              if cls not in dex: raise SystemExit('::error::' + cls.decode() + ' is not in the APK dex')
+          print('native classes present in', sys.argv[1])
+          PYDEX
+
+      - name: Decode the permanent signing key
+        shell: bash
+        env:
+          KS_B64: ${{ secrets.MARC_SIGNING_KEYSTORE_B64 }}
+        run: |
+          set -euo pipefail
+          umask 077
+          printf '%s' "$KS_B64" | base64 --decode > "$RUNNER_TEMP/marc-signing.p12"
+          test -s "$RUNNER_TEMP/marc-signing.p12"
+
+      - name: Sign with the permanent key and verify the fingerprint
+        id: sign
+        shell: bash
+        env:
+          PW: ${{ secrets.MARC_SIGNING_STORE_PASSWORD }}
+          VERSION_NAME: ${{ steps.version.outputs.version_name }}
+          # Public certificate fingerprint of the permanent key (same as build-apk.yml). Registered with Huawei (App ID 119100049).
+          EXPECTED_SHA256: '05:66:9A:D2:72:1C:6A:BA:F9:FD:D4:B9:B8:4E:2F:B7:94:48:44:B1:DE:F3:59:84:5F:01:5F:2B:67:CA:F1:F5'
+        run: |
+          set -euo pipefail
+          SDK_ROOT="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-}}"
+          BUILD_TOOLS="$(find "$SDK_ROOT/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          UNSIGNED='android/app/build/outputs/apk/release/app-release-unsigned.apk'
+          [ -f "$UNSIGNED" ] || UNSIGNED='android/app/build/outputs/apk/release/app-release.apk'
+          mkdir -p release-output
+          ALIGNED="release-output/MARC-v${VERSION_NAME}-aligned.apk"
+          SIGNED="release-output/MARC-v${VERSION_NAME}-signed.apk"
+          "$BUILD_TOOLS/zipalign" -p -f 4 "$UNSIGNED" "$ALIGNED"
+          "$BUILD_TOOLS/apksigner" sign --ks "$RUNNER_TEMP/marc-signing.p12" --ks-key-alias marc --ks-pass env:PW --key-pass env:PW --out "$SIGNED" "$ALIGNED"
+          rm -f "$RUNNER_TEMP/marc-signing.p12"
+          CERTS="$("$BUILD_TOOLS/apksigner" verify --verbose --print-certs "$SIGNED")"
+          printf '%s\n' "$CERTS"
+          # Every signer line must carry the expected digest (format differs between build-tools versions).
+          DIGESTS="$(printf '%s\n' "$CERTS" | grep -i 'certificate SHA-256 digest' | sed 's/.*: *//' | tr 'a-f' 'A-F' | sed 's/../&:/g; s/:$//' | sort -u)"
+          if [ "$DIGESTS" != "$EXPECTED_SHA256" ]; then
+            echo "::error::APK signer SHA-256 is '$DIGESTS', expected $EXPECTED_SHA256"
+            exit 1
+          fi
+          echo "APK signer SHA-256: $DIGESTS"
+          python3 - "$SIGNED" <<'PY'
+          from pathlib import Path
+          import hashlib,sys,zipfile
+          source=Path('www/index.html').read_bytes()
+          with zipfile.ZipFile(sys.argv[1]) as z: data=z.read('assets/public/index.html')
+          if data != source: raise SystemExit('Signed APK embedded source differs from current www/index.html')
+          print('Signed APK current embedded source PASS:',hashlib.sha256(data).hexdigest())
+          PY
+          sha256sum "$SIGNED" > "$SIGNED.sha256"
+          rm -f "$ALIGNED"
+
+      - name: No keystore may be committed in workflows
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -rEl 'MII[A-Za-z0-9+/]{100,}' .github/workflows; then echo '::error::A base64 keystore is committed in a workflow.'; exit 1; fi
+
+      - name: Upload signed release
+        uses: actions/upload-artifact@v4
+        with:
+          name: MARC-v${{ steps.version.outputs.version_name }}-SIGNED-RELEASE
+          path: |
+            release-output/MARC-v${{ steps.version.outputs.version_name }}-signed.apk
+            release-output/MARC-v${{ steps.version.outputs.version_name }}-signed.apk.sha256
+          if-no-files-found: error
+          retention-days: 90

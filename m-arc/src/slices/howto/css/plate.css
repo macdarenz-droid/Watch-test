@@ -1,0 +1,100 @@
+/* GENERATED, do not edit. Written by tools/plates/generate.mjs (tools/plates/gen/plates.mjs). inputsSha256=7109c87d306712ab5818ad9ba8ef92a700dd8ae03667ad362d7f04ada037633a */
+/* ht-tokens:start */
+.ht { --ht-arrow-at: 2.3s; --ht-arrow-dur: 160ms; --ht-ghost-step: 80ms; --ht-radius-tick: 1px; --ht-trace: 2.4s; }
+/* ht-tokens:end */
+.ht figure { margin: 0; }
+.ht .plate-callout:focus-visible { outline-offset: -2px; }
+.ht .ht-plate { position: relative; width: 100%; aspect-ratio: 1; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); background: var(--surface-2); overflow: hidden; }
+.ht .plate-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ht .ht-plate .dot { fill: var(--border-subtle); }
+.ht .ht-plate .u-stroke use { fill: none; stroke-width: 2; stroke-linejoin: round; }
+.ht .ht-plate .pose-end .u-stroke use { stroke: var(--text-2); }
+.ht .ht-plate .pose-end .u-fill use { fill: var(--surface-3); }
+.ht .ht-plate .pose-start .u-stroke use { stroke: var(--border-strong); stroke-dasharray: 3 3; }
+.ht .ht-plate .pose-start .u-fill use, .ht .ht-plate .ghost .u-fill use { fill: var(--surface-2); }
+.ht .ht-plate .ghost { opacity: var(--o); }
+.ht .ht-plate .ghost .u-stroke use { stroke: var(--text-3); }
+.ht .ht-plate .disc { fill: var(--surface-3); stroke: var(--text-2); stroke-width: 1; }
+.ht .ht-plate .disc-core { fill: none; stroke: var(--text-3); stroke-width: 1; }
+.ht .ht-plate .joint { fill: var(--surface-2); stroke: var(--text-2); stroke-width: 1; }
+.ht .ht-plate .datum { stroke: var(--text-3); stroke-width: .75; stroke-dasharray: 2 3; fill: none; }
+.ht .ht-plate .floorline { stroke: var(--border); stroke-width: 1; }
+.ht .ht-plate .trace { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.ht .ht-plate .arrow { fill: var(--accent); }
+.ht .ht-plate .arc { fill: color-mix(in srgb, var(--accent) 12%, transparent); }
+.ht .ht-plate .arc-line { fill: none; stroke: var(--accent); stroke-width: 1; }
+.ht .ht-plate .arc-ticks path { stroke: var(--accent); stroke-width: 1; }
+.ht .ht-plate .lead-guide { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+.ht .ht-plate .leader { fill: none; stroke: var(--text-3); stroke-width: .75; }
+.ht .ht-plate .leader.on { stroke: var(--accent); }
+.ht .ht-plate .anchor { fill: var(--text-3); }
+.ht .ht-plate .anchor.on { fill: var(--accent); }
+.ht .ht-plate .mistake-layer { fill: none; stroke: var(--mistake); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.ht .ht-plate .m-line { stroke-width: 1; stroke-dasharray: 3 3; }
+.ht .ht-plate .leader.m { stroke: var(--mistake); stroke-width: .75; }
+.ht .plate-meta, .ht .plate-callout, .ht .plate-arc-label b { font-size: var(--fs-cap); line-height: var(--lh-cap); letter-spacing: var(--ls-cap); text-transform: uppercase; font-weight: var(--fw-semibold); color: var(--text-2); }
+.ht .plate-meta { position: absolute; }
+.ht .plate-callout { position: absolute; display: flex; align-items: center; min-height: 44px; padding: 0 6px; text-align: left; white-space: nowrap; }
+.ht .plate-callout { isolation: isolate; }
+.ht .plate-callout::before { content: ''; position: absolute; inset: 11px 0; z-index: -1; border-radius: var(--radius-xs); background: var(--accent-soft); opacity: 0; transition: opacity var(--dur-fast) var(--ease-standard); }
+.ht .plate-callout.two::before { inset: 4px 0; }
+.ht .plate-callout[aria-pressed="true"] { color: var(--accent-text); }
+.ht .plate-callout[aria-pressed="true"]::before { opacity: 1; }
+.ht .plate-callout.m { color: var(--mistake); }
+.ht .plate-callout.m::before { background: color-mix(in srgb, var(--mistake) 16%, transparent); }
+.ht .plate-arc-label { position: absolute; display: grid; gap: 2px; }
+.ht .plate-arc-label span { font-size: var(--fs-meta); line-height: var(--lh-meta); font-variant-numeric: tabular-nums; color: var(--accent-text); font-weight: var(--fw-medium); }
+html:not([data-motion="reduce"]) .ht .ht-plate.tracing .trace { animation: plate-trace var(--ht-trace) var(--ease-standard) both; }
+html:not([data-motion="reduce"]) .ht .ht-plate.tracing .ghost { animation: plate-ghost var(--dur-enter) var(--ease-standard) both; animation-delay: calc(var(--i) * var(--ht-ghost-step)); }
+@keyframes plate-trace { from { stroke-dashoffset: 1; } }
+@keyframes plate-ghost { from { opacity: 0; } }
+.ht .ht-plate .pose-end .far .u-stroke use { stroke: var(--text-3); }
+.ht .ht-plate .eq { fill: var(--surface-2); stroke: var(--text-3); stroke-width: 1; stroke-linejoin: round; }
+.ht .ht-plate .eq-solid { fill: var(--surface-3); stroke: var(--text-2); stroke-width: 1; stroke-linejoin: round; }
+.ht .ht-plate .eq-line { fill: none; stroke: var(--text-3); stroke-width: 1; stroke-linecap: round; }
+.ht .ht-plate .eq-thin { fill: none; stroke: var(--border-strong); stroke-width: .75; }
+.ht .ht-plate .eq-cable { fill: none; stroke: var(--text-2); stroke-width: .75; stroke-linecap: round; }
+.ht .ht-plate .eq-pin { fill: var(--text-3); stroke: none; }
+.ht .ht-plate .pose-start .eq, .ht .ht-plate .pose-start .eq-solid { fill: var(--surface-2); stroke: var(--border-strong); stroke-dasharray: 3 3; }
+.ht .ht-plate .pose-start .eq-line, .ht .ht-plate .pose-start .eq-cable, .ht .ht-plate .pose-start .eq-thin { stroke: var(--border-strong); stroke-dasharray: 3 3; }
+.ht .ht-plate .pose-start .eq-pin { fill: var(--border-strong); }
+.ht .ht-plate .ghost .eq, .ht .ht-plate .ghost .eq-solid { fill: var(--surface-2); stroke: var(--text-3); }
+.ht .ht-plate .ghost .eq-line, .ht .ht-plate .ghost .eq-cable, .ht .ht-plate .ghost .eq-thin { stroke: var(--text-3); }
+.ht .ht-plate .ghost .eq-pin { fill: var(--text-3); }
+.ht .ht-plate .m-pose .u-stroke use { fill: none; stroke: var(--mistake); stroke-width: 2; stroke-linejoin: round; stroke-dasharray: 4 3; }
+.ht .ht-plate-fit { width: 100%; overflow: hidden; border-radius: var(--radius-lg); }
+.ht .ht-plate-fit .ht-plate { width: 358px; max-width: none; }
+@media (max-width: 349px) {
+  .ht .ht-plate-fit { width: calc(100% + 18px); margin-inline: -9px; }
+}
+.ht .plate-arc-label { pointer-events: none; }
+.ht .cue-line { margin-top: var(--sp-3); min-height: 22px; font-size: var(--fs-title); line-height: var(--lh-title); letter-spacing: var(--ls-title); font-weight: var(--fw-medium); color: var(--text); }
+.ht .cue-line.tell { display: flex; align-items: flex-start; gap: 8px; }
+.ht .cue-line.tell svg { color: var(--mistake); flex: none; margin-top: 2px; }
+.ht .tells { margin-top: var(--sp-3); display: grid; gap: 6px; }
+.ht .tells[hidden] { display: none; }
+.ht .tells .eyebrow { color: var(--mistake); }
+.ht .tells ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.ht .tells li { display: grid; grid-template-columns: 104px 1fr; column-gap: 8px; align-items: baseline; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text); }
+.ht .tells li b { font-size: var(--fs-cap); line-height: var(--lh-cap); letter-spacing: var(--ls-cap); text-transform: uppercase; font-weight: var(--fw-semibold); color: var(--mistake); }
+.ht .plate-controls { display: flex; align-items: center; gap: var(--sp-2); margin-top: var(--sp-3); }
+.ht .howto-pill { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px; border-radius: var(--radius-pill); border: 1px solid var(--border); color: var(--text-2); font-size: var(--fs-small); font-weight: var(--fw-medium); }
+.ht .howto-pill svg { color: var(--accent-text); }
+.ht .howto-pill[aria-pressed="true"]:not(.mistake) { color: var(--accent-text); border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+.ht .howto-pill.mistake[aria-pressed="true"] { background: color-mix(in srgb, var(--mistake) 14%, transparent); border-color: transparent; color: var(--mistake); }
+.ht .howto-offline { display: inline-flex; align-items: center; gap: 4px; color: var(--text-2); white-space: nowrap; }
+.ht .tempo { display: flex; gap: 2px; margin-top: var(--sp-4); }
+.ht .tempo-label > * { padding-right: 6px; }
+.ht .tempo-seg { min-width: max-content; }
+.ht .tempo-seg > i { display: block; height: 4px; border-radius: var(--ht-radius-tick); background: var(--text-3); }
+.ht .tempo-seg.move > i { background: var(--accent); }
+.ht .tempo-label { display: grid; margin-top: 6px; font-size: var(--fs-cap); line-height: var(--lh-cap); letter-spacing: var(--ls-cap); font-variant-numeric: tabular-nums; color: var(--text-2); white-space: nowrap; }
+.ht .tempo-label b { font-weight: var(--fw-semibold); text-transform: uppercase; }
+.ht .tempo-label span { letter-spacing: 0; color: var(--text); font-size: var(--fs-meta); line-height: var(--lh-meta); }
+html:not([data-motion="reduce"]) .ht .ht-plate.tracing .ghost { animation: plate-ghost var(--dur-enter) var(--ease-standard) both; animation-delay: var(--gd, calc(var(--i) * var(--ht-ghost-step))); }
+html:not([data-motion="reduce"]) .ht .ht-plate.tracing .arrow { animation: plate-fade var(--ht-arrow-dur) var(--ease-standard) var(--ht-arrow-at) both; }
+html:not([data-motion="reduce"]) .ht .ht-plate.tracing .measure, html:not([data-motion="reduce"]) .ht .ht-plate.tracing .plate-arc-label { animation: plate-fade var(--dur-enter) var(--ease-standard) var(--ht-trace) both; }
+@keyframes plate-fade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .ht .ht-plate .trace, .ht .ht-plate .ghost, .ht .ht-plate .arrow, .ht .ht-plate .measure, .ht .plate-arc-label { animation: none !important; }
+}

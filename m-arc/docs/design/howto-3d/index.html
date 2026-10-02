@@ -1,0 +1,900 @@
+<title>M/ARC 3D How-to</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one phone-width how-to sheet (the app's bottom sheet), stage on top, cue, transport, tempo, chips. */
+:root {
+  /* Silent Black, the app's default theme (src/theme/themes.ts) */
+  --bg: #08090a;
+  --surface-1: #0f1011;
+  --surface-2: #141516;
+  --surface-3: #1b1c1f;
+  --border-subtle: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.10);
+  --border-strong: rgba(255,255,255,0.18);
+  --text: #f7f8f8;
+  --text-2: #8a8f98;
+  --text-3: #62666d;
+  --accent: #5e6ad2;
+  --accent-soft: rgba(94,106,210,0.16);
+  --on-accent: #ffffff;
+  --mistake: #eb5757;
+  --mistake-soft: rgba(235,87,87,0.14);
+  --figure: #b4b7bf;
+  --rim: #8f98ff;
+  --dot: rgba(255,255,255,0.075);
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    /* Paper */
+    --bg: #ffffff; --surface-1: #f7f6f3; --surface-2: #efeeea; --surface-3: #e6e4df;
+    --border-subtle: rgba(55,53,47,0.08); --border: rgba(55,53,47,0.14); --border-strong: rgba(55,53,47,0.26);
+    --text: #37352f; --text-2: #5f5e5a; --text-3: #9b9a97;
+    --accent: #2383e2; --accent-soft: rgba(35,131,226,0.12); --on-accent: #ffffff;
+    --mistake: #c0392b; --mistake-soft: rgba(192,57,43,0.10);
+    --figure: #c9cbcf; --rim: #9fc6f2; --dot: rgba(55,53,47,0.10);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #ffffff; --surface-1: #f7f6f3; --surface-2: #efeeea; --surface-3: #e6e4df;
+  --border-subtle: rgba(55,53,47,0.08); --border: rgba(55,53,47,0.14); --border-strong: rgba(55,53,47,0.26);
+  --text: #37352f; --text-2: #5f5e5a; --text-3: #9b9a97;
+  --accent: #2383e2; --accent-soft: rgba(35,131,226,0.12); --on-accent: #ffffff;
+  --mistake: #c0392b; --mistake-soft: rgba(192,57,43,0.10);
+  --figure: #c9cbcf; --rim: #9fc6f2; --dot: rgba(55,53,47,0.10);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 15px/1.45 var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  max-width: 452px;
+  margin: 0 auto;
+  padding-inline: 16px;
+  padding-block: 20px 32px;
+  display: grid;
+  gap: 16px;
+}
+.brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.brand b { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+.brand b i { font-style: normal; color: var(--accent); }
+.brand span { color: var(--text-2); font-size: 15px; }
+
+.sheet {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 10px 16px 18px;
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+.grab { width: 36px; height: 4px; border-radius: 4px; background: var(--border-strong); justify-self: center; }
+.head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.eyebrow { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2); }
+.head h1 { margin: 2px 0 0; font-size: 20px; line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; }
+.icon-btn {
+  width: 44px; height: 44px; margin: -6px -10px 0 0;
+  border: 0; background: none; color: var(--text-2);
+  display: grid; place-items: center; border-radius: 50%; cursor: pointer;
+}
+.icon-btn:hover { color: var(--text); }
+
+/* Stage */
+.stage {
+  position: relative;
+  aspect-ratio: 1 / 1.02;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background-color: var(--surface-2);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.6px);
+  background-size: 16px 16px;
+  background-position: 8px 8px;
+  touch-action: pan-y;
+}
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; transition: opacity 160ms ease; }
+.stage canvas.fading { opacity: 0; }
+.stage svg.ov { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.view-label { position: absolute; left: 14px; top: 11px; font-size: 13px; font-weight: 500; color: var(--text-2); }
+.tag {
+  position: absolute; right: 10px; top: 32px; max-width: 38%;
+  font-size: 12px; font-weight: 600; line-height: 1.3;
+  color: var(--accent); padding: 5px 9px; border-radius: 8px;
+  background: color-mix(in srgb, var(--surface-2) 70%, transparent);
+}
+.tag.boxed { border: 1px solid currentColor; }
+.tag.m { color: var(--mistake); background: color-mix(in srgb, var(--mistake-soft) 60%, var(--surface-2)); }
+.bottom-ui { position: absolute; left: 0; right: 0; bottom: 10px; display: flex; justify-content: center; }
+.pill {
+  font-size: 13px; font-weight: 600; color: var(--accent);
+  border: 1px solid var(--accent); border-radius: 999px; padding: 4px 16px;
+  background: color-mix(in srgb, var(--surface-2) 80%, transparent);
+  min-width: 76px; text-align: center;
+}
+.seg { display: flex; padding: 3px; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--surface-2); }
+.seg button {
+  font: 600 13px/1 var(--font); color: var(--text-2);
+  min-height: 36px; min-width: 112px; padding: 0 18px;
+  border: 0; border-radius: 999px; background: none; cursor: pointer;
+}
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.seg button.m[aria-pressed="true"] { background: var(--mistake); }
+.locator { position: absolute; right: 12px; top: 12px; width: 64px; height: 108px; }
+.status {
+  position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center;
+  color: var(--text-2); font-size: 14px;
+}
+
+/* Cue */
+.cue { min-height: 50px; }
+.cue p { margin: 0; }
+.cue .line { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; }
+.cue .sub { color: var(--text-2); font-size: 14.5px; margin-top: 2px; }
+
+/* Transport */
+.transport { display: flex; align-items: center; gap: 12px; }
+.play {
+  width: 60px; height: 60px; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--accent); color: var(--on-accent); display: grid; place-items: center;
+}
+.round {
+  height: 46px; min-width: 64px; padding: 0 16px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--border-strong); background: none; color: var(--text);
+  font: 600 14px/1 var(--font); display: grid; place-items: center;
+  font-variant-numeric: tabular-nums;
+}
+.round:hover, .chip:hover { border-color: var(--text-3); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Tempo strip */
+.tempo { display: grid; gap: 8px; }
+.bar { position: relative; display: flex; gap: 6px; height: 22px; align-items: center; cursor: pointer; touch-action: none; }
+.bar .s { position: relative; height: 5px; border-radius: 4px; background: var(--border-strong); overflow: hidden; }
+.bar .s.move { background: color-mix(in srgb, var(--accent) 38%, var(--border)); }
+.bar .s i { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--accent); }
+.knob {
+  position: absolute; top: 50%; width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%;
+  background: var(--text); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent);
+  left: 0; pointer-events: none;
+}
+.labels { display: flex; gap: 6px; }
+.labels div { min-width: 0; font-variant-numeric: tabular-nums; }
+.labels b { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-2); }
+.labels span { font-size: 14px; color: var(--text); }
+.labels .on b { color: var(--accent); }
+
+/* Chips */
+.chips { display: flex; gap: 6px; }
+.chip {
+  flex: 1 1 auto; min-width: 0; min-height: 44px; padding: 0 10px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--border-strong); background: none; color: var(--text-2);
+  font: 600 13px/1 var(--font);
+}
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.chip.m[aria-pressed="true"] { background: var(--mistake); border-color: var(--mistake); }
+
+.note { margin: 0; color: var(--text-3); font-size: 12.5px; max-width: 60ch; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stage canvas { transition: none; }
+}
+</style>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+} }
+</script>
+
+<div class="page">
+  <div class="brand"><b>M<i>/</i>ARC</b><span>Movement, in focus</span></div>
+
+  <main class="sheet" aria-labelledby="ex-title">
+    <div class="grab" aria-hidden="true"></div>
+    <div class="head">
+      <div>
+        <p class="eyebrow">How to do it</p>
+        <h1 id="ex-title">Dumbbell Lateral Raise</h1>
+      </div>
+      <button class="icon-btn" type="button" id="close" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      </button>
+    </div>
+
+    <div class="stage" id="stage">
+      <canvas id="gl" aria-hidden="true"></canvas>
+      <svg class="ov" id="ov" aria-hidden="true"></svg>
+      <span class="view-label" id="view-label">Front</span>
+      <div class="tag" id="tag" hidden></div>
+      <svg class="locator" id="locator" viewBox="0 0 64 108" hidden aria-hidden="true">
+        <g fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" opacity="0.85">
+          <circle cx="32" cy="10" r="6"/>
+          <path d="M24 20 Q32 18 40 20 L42 50 Q36 54 32 54 Q28 54 22 50 Z"/>
+          <path d="M24 21 L16 46 L14 62 M40 21 L48 46 L50 62"/>
+          <path d="M26 54 L25 80 L24 102 M38 54 L39 80 L40 102"/>
+        </g>
+        <rect x="6" y="54" width="16" height="16" rx="2" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="3 2"/>
+        <circle cx="14" cy="62" r="3.4" fill="var(--accent)"/>
+      </svg>
+      <div class="bottom-ui">
+        <span class="pill" id="pill">Lift</span>
+        <div class="seg" id="seg" role="group" aria-label="Form or mistake" hidden>
+          <button type="button" id="seg-form" aria-pressed="true">Form</button>
+          <button type="button" id="seg-mistake" class="m" aria-pressed="false">Mistake</button>
+        </div>
+      </div>
+      <div class="status" id="status">Loading the 3D figure…</div>
+    </div>
+
+    <div class="cue" aria-live="polite">
+      <p class="line" id="cue-line">Elbows lead. Hands follow.</p>
+      <p class="sub" id="cue-sub" hidden></p>
+    </div>
+
+    <div class="transport">
+      <button class="play" type="button" id="play" aria-label="Pause">
+        <svg id="play-icon" width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M6 3.5v15l12.5-7.5z" fill="currentColor"/></svg>
+      </button>
+      <button class="round" type="button" id="replay" aria-label="Replay from the start">
+        <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4.2 7.2A6.5 6.5 0 1 1 3.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3.6 3.4v4.2h4.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="round" type="button" id="speed" aria-label="Playback speed">0.5x</button>
+    </div>
+
+    <div class="tempo">
+      <div class="bar" id="bar" role="slider" tabindex="0" aria-label="Rep position" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" aria-valuetext="Lift"></div>
+      <div class="labels" id="labels"></div>
+    </div>
+
+    <div class="chips" role="group" aria-label="Focus">
+      <button class="chip" type="button" data-mode="movement" aria-pressed="true">Movement</button>
+      <button class="chip" type="button" data-mode="grip" aria-pressed="false">Grip</button>
+      <button class="chip" type="button" data-mode="posture" aria-pressed="false">Posture</button>
+      <button class="chip" type="button" data-mode="feel" aria-pressed="false">Feel</button>
+    </div>
+  </main>
+
+  <p class="note">Figure and grip models made with Meshy (text to 3D, auto-rig). Pose, timing and cues come from the app's lateral raise data: lift 1 s, hold 0.5 s, lower 2 s, rest 0.5 s.</p>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+/* ---------- Exercise data (from src/howto/generated/ht-dumbbell-lateral-raise.ts) ---------- */
+const TEMPO = [
+  { k: 'lift', label: 'Lift', d: 1, move: true },
+  { k: 'hold', label: 'Hold', d: 0.5 },
+  { k: 'lower', label: 'Lower', d: 2, move: true },
+  { k: 'rest', label: 'Rest', d: 0.5 },
+];
+const CYCLE = TEMPO.reduce((a, p) => a + p.d, 0);
+const COPY = {
+  movement: { view: 'Front', tag: 'Elbows lead', cue: { lift: 'Elbows lead. Hands follow.', hold: 'Stop at shoulder height.', lower: 'Lower for two seconds.', rest: 'Arms by your thighs.' } },
+  grip: { view: 'Grip', line: 'Wrist straight. Handle mid-palm.', sub: 'Little finger no higher than the thumb.' },
+  posture: {
+    view: 'Front',
+    form: { tag: 'No shrug', line: 'Shoulders stay down.', sub: 'The upper traps stay quiet.' },
+    mistake: { tag: 'Shoulders raise toward ears', line: 'Keep the shoulders down.', sub: 'Go lighter. Keep the body still.' },
+  },
+  feel: { view: 'Front', tag: 'Side shoulders', line: 'Outside of the shoulders.', sub: 'If your neck takes over, go lighter.' },
+};
+
+/* ---------- Small helpers ---------- */
+const $ = (id) => document.getElementById(id);
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const DEG = Math.PI / 180;
+const minJerk = (x) => { x = clamp01(x); return x * x * x * (10 + x * (-15 + 6 * x)); };
+const easeInOut = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+function phaseAt(t) {
+  let a = 0;
+  for (const p of TEMPO) { if (t < a + p.d) return { p, u: (t - a) / p.d, start: a }; a += p.d; }
+  return { p: TEMPO[TEMPO.length - 1], u: 1, start: CYCLE - TEMPO[TEMPO.length - 1].d };
+}
+function liftAt(t) {
+  const { p, u } = phaseAt(t);
+  return p.k === 'lift' ? minJerk(u) : p.k === 'hold' ? 1 : p.k === 'lower' ? 1 - minJerk(u) : 0;
+}
+const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- State ---------- */
+const state = {
+  mode: 'movement',
+  mistake: false,
+  playing: !reduceMotion,
+  speed: 0.5,
+  t: reduceMotion ? 1.25 : 0,
+};
+
+/* ---------- Tempo strip ---------- */
+const bar = $('bar'), labels = $('labels');
+const segEls = TEMPO.map((p) => {
+  const s = document.createElement('div');
+  s.className = 's' + (p.move ? ' move' : '');
+  s.style.flex = `${p.d} 1 0`;
+  s.appendChild(document.createElement('i'));
+  bar.appendChild(s);
+  const l = document.createElement('div');
+  l.style.flex = `${p.d} 1 0`;
+  l.innerHTML = `<b>${p.label}</b><span>${p.d} s</span>`;
+  labels.appendChild(l);
+  return { s, fill: s.firstChild, l };
+});
+const knob = document.createElement('span');
+knob.className = 'knob';
+bar.appendChild(knob);
+
+function renderTempo() {
+  const { p, u } = phaseAt(state.t);
+  const idx = TEMPO.indexOf(p);
+  segEls.forEach((e, i) => {
+    e.fill.style.width = i < idx ? '100%' : i === idx ? `${u * 100}%` : '0%';
+    e.l.classList.toggle('on', i === idx);
+  });
+  const s = segEls[idx].s;
+  knob.style.left = `${s.offsetLeft + u * s.offsetWidth}px`;
+  bar.setAttribute('aria-valuenow', state.t.toFixed(2));
+  bar.setAttribute('aria-valuetext', `${p.label}, ${state.t.toFixed(1)} of ${CYCLE} seconds`);
+}
+function timeFromX(clientX) {
+  const x = clientX - bar.getBoundingClientRect().left;
+  let acc = 0;
+  for (let i = 0; i < segEls.length; i++) {
+    const s = segEls[i].s;
+    if (x <= s.offsetLeft + s.offsetWidth || i === segEls.length - 1) {
+      return acc + clamp01((x - s.offsetLeft) / s.offsetWidth) * TEMPO[i].d;
+    }
+    acc += TEMPO[i].d;
+  }
+  return 0;
+}
+let scrubbing = false;
+bar.addEventListener('pointerdown', (e) => { scrubbing = true; bar.setPointerCapture(e.pointerId); setPlaying(false); state.t = timeFromX(e.clientX); });
+bar.addEventListener('pointermove', (e) => { if (scrubbing) state.t = timeFromX(e.clientX); });
+bar.addEventListener('pointerup', () => { scrubbing = false; });
+bar.addEventListener('pointercancel', () => { scrubbing = false; });
+bar.addEventListener('keydown', (e) => {
+  const step = e.key === 'ArrowRight' ? 0.25 : e.key === 'ArrowLeft' ? -0.25 : 0;
+  if (!step) return;
+  e.preventDefault(); setPlaying(false);
+  state.t = (state.t + step + CYCLE) % CYCLE;
+});
+
+/* ---------- Transport ---------- */
+const PLAY_PATH = 'M6 3.5v15l12.5-7.5z';
+const PAUSE_PATH = 'M5.5 3.5h4v15h-4zM12.5 3.5h4v15h-4z';
+function setPlaying(on) {
+  state.playing = on;
+  $('play').setAttribute('aria-label', on ? 'Pause' : 'Play');
+  $('play-icon').firstElementChild.setAttribute('d', on ? PAUSE_PATH : PLAY_PATH);
+}
+$('play').addEventListener('click', () => setPlaying(!state.playing));
+$('replay').addEventListener('click', () => { state.t = 0; setPlaying(true); });
+$('speed').addEventListener('click', () => {
+  state.speed = state.speed === 0.5 ? 1 : 0.5;
+  $('speed').textContent = `${state.speed}x`;
+});
+$('close').addEventListener('click', () => { setPlaying(false); });
+setPlaying(state.playing);
+
+/* ---------- Chips and Form/Mistake ---------- */
+document.querySelectorAll('.chip').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+$('seg-form').addEventListener('click', () => setMistake(false));
+$('seg-mistake').addEventListener('click', () => setMistake(true));
+function setMistake(on) {
+  state.mistake = on;
+  $('seg-form').setAttribute('aria-pressed', String(!on));
+  $('seg-mistake').setAttribute('aria-pressed', String(on));
+  document.querySelector('.chip[data-mode="posture"]').classList.toggle('m', on);
+  syncCopy(true);
+}
+
+/* ---------- Three.js scene ---------- */
+const stage = $('stage'), canvas = $('gl'), ov = $('ov');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(26, 1, 0.02, 30);
+
+const hemi = new THREE.HemisphereLight(0xe8ebff, 0x1a1b1f, 1.15);
+const key = new THREE.DirectionalLight(0xffffff, 2.3); key.position.set(1.6, 3.2, 3.4);
+const fill = new THREE.DirectionalLight(0xffffff, 0.55); fill.position.set(-2.4, 1.2, 2.6);
+const rim = new THREE.DirectionalLight(0x8f98ff, 2.0); rim.position.set(-2.2, 2.4, -2.6);
+const rim2 = new THREE.DirectionalLight(0x8f98ff, 1.2); rim2.position.set(2.4, 1.8, -2.2);
+scene.add(hemi, key, fill, rim, rim2);
+
+/* Dotted floor that fades with distance, and a soft contact shadow. */
+const floor = (() => {
+  const pts = [], cols = [];
+  for (let x = -1.6; x <= 1.6001; x += 0.1) for (let z = -1.4; z <= 1.2001; z += 0.1) {
+    pts.push(x, 0, z);
+    const f = clamp01(1 - Math.hypot(x / 1.6, z / 1.3));
+    cols.push(1, 1, 1, f * f);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+  g.setAttribute('color', new THREE.Float32BufferAttribute(cols, 4));
+  const m = new THREE.PointsMaterial({ size: 2.2, sizeAttenuation: false, vertexColors: true, transparent: true, depthWrite: false });
+  return new THREE.Points(g, m);
+})();
+const shadow = (() => {
+  const c = document.createElement('canvas'); c.width = c.height = 128;
+  const x = c.getContext('2d');
+  const gr = x.createRadialGradient(64, 64, 4, 64, 64, 64);
+  gr.addColorStop(0, 'rgba(0,0,0,0.55)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+  x.fillStyle = gr; x.fillRect(0, 0, 128, 128);
+  const m = new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false });
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(1.1, 0.55), m);
+  mesh.rotation.x = -Math.PI / 2; mesh.position.y = 0.002;
+  return mesh;
+})();
+scene.add(floor, shadow);
+
+/* Shared uniforms for the muscle shimmer and the clay tint. */
+const U = {
+  uFigure: { value: new THREE.Color() },
+  uAccent: { value: new THREE.Color() },
+  uMistake: { value: new THREE.Color() },
+  uDelt: { value: 0 },
+  uTrap: { value: 0 },
+  uTrapMistake: { value: 0 },
+};
+function readTheme() {
+  U.uFigure.value.set(css('--figure'));
+  U.uAccent.value.set(css('--accent'));
+  U.uMistake.value.set(css('--mistake'));
+  const rimCol = new THREE.Color(css('--rim'));
+  rim.color.copy(rimCol); rim2.color.copy(rimCol);
+  const dark = css('color-scheme') !== 'light';
+  floor.material.color.set(dark ? 0xffffff : 0x37352f);
+  floor.material.opacity = dark ? 0.28 : 0.35;
+  shadow.material.opacity = dark ? 1 : 0.55;
+  hemi.groundColor.set(dark ? 0x1a1b1f : 0x9a9893);
+}
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', readTheme);
+new MutationObserver(readTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+/* Desaturate Meshy's texture into the theme's clay tone, then mix in muscle colour per vertex. */
+function clayMaterial(src, withMuscles) {
+  const m = new THREE.MeshStandardMaterial({ map: src.map || null, roughness: 0.72, metalness: 0 });
+  m.onBeforeCompile = (sh) => {
+    Object.assign(sh.uniforms, U);
+    sh.vertexShader = sh.vertexShader
+      .replace('#include <common>', '#include <common>\nattribute vec2 aMuscle;\nvarying vec2 vMuscle;')
+      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvMuscle = ' + (withMuscles ? 'aMuscle' : 'vec2(0.0)') + ';');
+    sh.fragmentShader = sh.fragmentShader
+      .replace('#include <common>', '#include <common>\nuniform vec3 uFigure; uniform vec3 uAccent; uniform vec3 uMistake;\nuniform float uDelt; uniform float uTrap; uniform float uTrapMistake;\nvarying vec2 vMuscle;')
+      .replace('#include <map_fragment>', `#include <map_fragment>
+        float lum = dot(diffuseColor.rgb, vec3(0.299, 0.587, 0.114));
+        diffuseColor.rgb = uFigure * (0.35 + 1.15 * lum);
+        float md = vMuscle.x * uDelt;
+        float mt = vMuscle.y * uTrap;
+        vec3 trapCol = mix(uAccent, uMistake, uTrapMistake);
+        diffuseColor.rgb = mix(diffuseColor.rgb, uAccent, md * 0.9);
+        diffuseColor.rgb = mix(diffuseColor.rgb, trapCol, mt * 0.9);`)
+      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+        totalEmissiveRadiance += uAccent * md * 0.28 + mix(uAccent, uMistake, uTrapMistake) * mt * 0.28;`);
+  };
+  m.customProgramCacheKey = () => (withMuscles ? 'clay-m' : 'clay');
+  return m;
+}
+
+/* ---------- Figure rig ---------- */
+const fig = { root: null, mesh: null, bones: {}, bind: new Map(), D: new Map(), side: 1 };
+const handRig = { group: null, pivot: null, grip: new THREE.Vector3(), top: new THREE.Vector3() };
+const tmpV = new THREE.Vector3(), tmpV2 = new THREE.Vector3(), tmpQ = new THREE.Quaternion();
+
+function bindQ(o) { return fig.bind.get(o).q; }
+function bindP(o) { return fig.bind.get(o).p; }
+/** Accumulated world-space delta of a bone: the product of its ancestors' deltas and its own. */
+function accDelta(bone) {
+  const chain = [];
+  for (let b = bone; b && fig.bind.has(b); b = b.parent) chain.push(b);
+  const q = new THREE.Quaternion();
+  for (let i = chain.length - 1; i >= 0; i--) { const d = fig.D.get(chain[i]); if (d) q.multiply(d); }
+  return q;
+}
+/** Point `bone` (toward `child`) along a world direction, with an optional twist about it. */
+function aim(bone, child, dir, twist = 0) {
+  const u = tmpV.copy(bindP(child)).sub(bindP(bone)).normalize();
+  const t = dir.clone().normalize().applyQuaternion(accDelta(bone.parent).invert());
+  const d = new THREE.Quaternion().setFromUnitVectors(u, t);
+  if (twist) d.premultiply(tmpQ.setFromAxisAngle(t, twist));
+  fig.D.set(bone, d);
+}
+function rotateWorld(bone, axis, angle) { fig.D.set(bone, new THREE.Quaternion().setFromAxisAngle(axis, angle)); }
+/** Write every delta into the bones' local quaternions: local = inv(parentBind) * D * bind. */
+function applyDeltas() {
+  for (const [bone, d] of fig.D) {
+    bone.quaternion.copy(bindQ(bone.parent)).invert().multiply(d).multiply(bindQ(bone));
+  }
+}
+
+const AX = { x: new THREE.Vector3(1, 0, 0), z: new THREE.Vector3(0, 0, 1) };
+const PALM_TWIST = 164 * DEG;
+function poseFigure(t) {
+  const B = fig.bones, p = liftAt(t), mis = state.mode === 'posture' && state.mistake;
+  fig.D.clear();
+  if (mis) rotateWorld(B.spine01, AX.x, -6 * DEG * p);           // leans back to swing the weight
+  const shrug = mis ? 24 * DEG * p : 0;
+  const abd = lerp(9, mis ? 96 : 88, p) * DEG;
+  for (const side of [1, -1]) {
+    const L = side === fig.side;
+    const sh = L ? B.lSh : B.rSh, arm = L ? B.lArm : B.rArm, fore = L ? B.lFore : B.rFore, hand = L ? B.lHand : B.rHand;
+    rotateWorld(sh, AX.z, side * shrug);
+    const a = new THREE.Vector3(side * Math.sin(abd), -Math.cos(abd), 0.1 + 0.14 * Math.sin(abd));
+    aim(arm, fore, a, side * PALM_TWIST);
+    const f = a.clone().normalize().add(new THREE.Vector3(0, -0.13 * Math.sin(abd), 0.2));
+    aim(fore, hand, f);
+  }
+  applyDeltas();
+}
+
+/* Region weights (side delts, upper traps) from the bind pose, carried by skinning afterwards. */
+function paintMuscles(mesh) {
+  const g = mesh.geometry, n = g.attributes.position.count;
+  const w = new Float32Array(n * 2);
+  const B = fig.bones, v = new THREE.Vector3();
+  const smooth = (e0, e1, x) => { const t = clamp01((x - e0) / (e1 - e0)); return t * t * (3 - 2 * t); };
+  const sides = [B.lArm, B.rArm].map((arm) => {
+    const s = Math.sign(bindP(arm).x);
+    const ap = bindP(arm), np = bindP(B.neck);
+    return {
+      s, ax: Math.abs(ap.x),
+      delt: new THREE.Vector3(ap.x + s * 0.035, ap.y - 0.015, ap.z + 0.01),
+      trap: new THREE.Vector3(lerp(np.x, ap.x, 0.48), lerp(np.y, ap.y, 0.25) + 0.015, ap.z - 0.005),
+    };
+  });
+  const bindPos = bindPositions(mesh);
+  for (let i = 0; i < n; i++) {
+    v.fromArray(bindPos, i * 3);
+    for (const S of sides) {
+      if (Math.sign(v.x) !== S.s) continue;
+      const dd = v.distanceTo(S.delt);
+      if (Math.abs(v.x) > S.ax - 0.035) w[i * 2] = Math.max(w[i * 2], 1 - smooth(0.045, 0.1, dd));
+      const dt = tmpV2.copy(v).sub(S.trap).multiply(new THREE.Vector3(1, 1.5, 1.25)).length();
+      if (v.y > S.trap.y - 0.05) w[i * 2 + 1] = Math.max(w[i * 2 + 1], 1 - smooth(0.04, 0.09, dt));
+    }
+  }
+  g.setAttribute('aMuscle', new THREE.BufferAttribute(w, 2));
+}
+
+/* Procedural dumbbells in the figure's hands (the Meshy rig has no finger bones). */
+function makeDumbbell(scale = 1) {
+  const g = new THREE.Group();
+  const iron = new THREE.MeshStandardMaterial({ color: 0x2a2b30, roughness: 0.55, metalness: 0.35 });
+  const steel = new THREE.MeshStandardMaterial({ color: 0x5a5d66, roughness: 0.35, metalness: 0.8 });
+  const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.0135, 0.0135, 0.15, 20), steel);
+  g.add(handle);
+  for (const s of [-1, 1]) {
+    const plate = new THREE.Mesh(new THREE.CylinderGeometry(0.052, 0.052, 0.036, 36), iron);
+    plate.position.y = s * 0.085;
+    const lip = new THREE.Mesh(new THREE.TorusGeometry(0.046, 0.006, 10, 36), iron);
+    lip.rotation.x = Math.PI / 2; lip.position.y = s * 0.104;
+    g.add(plate, lip);
+  }
+  g.scale.setScalar(scale);
+  return g;
+}
+/** World positions of every vertex in the bind pose, through the skin (quantised meshes keep
+ *  their dequantisation in the bind matrices, so raw positions are not world positions). */
+let bindPosCache = null;
+function bindPositions(mesh) {
+  if (bindPosCache) return bindPosCache;
+  const n = mesh.geometry.attributes.position.count, out = new Float32Array(n * 3), v = new THREE.Vector3();
+  mesh.updateMatrixWorld(true);
+  for (let i = 0; i < n; i++) mesh.getVertexPosition(i, v).applyMatrix4(mesh.matrixWorld).toArray(out, i * 3);
+  return (bindPosCache = out);
+}
+function handCentroid(mesh, bone) {
+  const g = mesh.geometry, bi = mesh.skeleton.bones.indexOf(bone), bp = bindPositions(mesh);
+  const J = g.attributes.skinIndex, W = g.attributes.skinWeight, c = new THREE.Vector3();
+  let k = 0;
+  for (let i = 0; i < J.count; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (J.getComponent(i, j) === bi && W.getComponent(i, j) > 0.6) { c.x += bp[i * 3]; c.y += bp[i * 3 + 1]; c.z += bp[i * 3 + 2]; k++; break; }
+    }
+  }
+  return k ? c.divideScalar(k) : bindP(bone).clone();
+}
+
+function setupFigure(gltf) {
+  const root = gltf.scene;
+  root.traverse((o) => {
+    if (o.isSkinnedMesh) { fig.mesh = o; o.frustumCulled = false; }
+  });
+  const get = (re) => { let f = null; root.traverse((o) => { if (!f && o.isBone && re.test(o.name)) f = o; }); return f; };
+  const B = fig.bones = {
+    hips: get(/^Hips$/), spine01: get(/^Spine01$/), neck: get(/^neck$/i), head: get(/^Head$/),
+    lSh: get(/^LeftShoulder$/), lArm: get(/^LeftArm$/), lFore: get(/^LeftForeArm$/), lHand: get(/^LeftHand$/),
+    rSh: get(/^RightShoulder$/), rArm: get(/^RightArm$/), rFore: get(/^RightForeArm$/), rHand: get(/^RightHand$/),
+  };
+  if (Object.values(B).some((b) => !b) || !fig.mesh) throw new Error('rig');
+  root.updateMatrixWorld(true);
+  root.traverse((o) => { fig.bind.set(o, { q: o.getWorldQuaternion(new THREE.Quaternion()), p: o.getWorldPosition(new THREE.Vector3()) }); });
+  fig.bind.set(root.parent || scene, { q: new THREE.Quaternion(), p: new THREE.Vector3() });
+  fig.side = Math.sign(bindP(B.lArm).x) || 1;
+
+  fig.mesh.material = clayMaterial(fig.mesh.material, true);
+  paintMuscles(fig.mesh);
+
+  // Dumbbells: placed in bind pose at the palm, handle across the palm, then parented to the hand.
+  for (const [hand, fore] of [[B.lHand, B.lFore], [B.rHand, B.rFore]]) {
+    const c = handCentroid(fig.mesh, hand);
+    const foreDir = tmpV.copy(bindP(hand)).sub(bindP(fore)).normalize();
+    const across = new THREE.Vector3().crossVectors(foreDir, new THREE.Vector3(0, 1, 0)).normalize();
+    const db = makeDumbbell();
+    db.position.copy(c).addScaledVector(foreDir, 0.012).add(new THREE.Vector3(0, 0.018, 0));
+    db.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), across);
+    scene.add(db);
+    hand.attach(db);
+  }
+  scene.add(root);
+  fig.root = root;
+}
+
+function setupHand(gltf) {
+  const src = gltf.scene;
+  src.traverse((o) => { if (o.isMesh) o.material = clayMaterial(o.material, false); });
+  src.updateMatrixWorld(true);
+  // Forearm axis from the model itself: top of the forearm to the fist around the handle.
+  const pts = [], v = new THREE.Vector3();
+  src.traverse((o) => {
+    if (!o.isMesh) return;
+    const a = o.geometry.attributes.position;
+    for (let i = 0; i < a.count; i += 3) pts.push(v.fromBufferAttribute(a, i).applyMatrix4(o.matrixWorld).clone());
+  });
+  let ymin = Infinity, ymax = -Infinity;
+  for (const q of pts) { ymin = Math.min(ymin, q.y); ymax = Math.max(ymax, q.y); }
+  const H = ymax - ymin, top = new THREE.Vector3(), grip = new THREE.Vector3();
+  let nt = 0, ng = 0;
+  for (const q of pts) {
+    if (q.y > ymax - 0.08 * H) { top.add(q); nt++; } else if (q.y < ymin + 0.28 * H) { grip.add(q); ng++; }
+  }
+  top.divideScalar(nt); grip.divideScalar(ng);
+  const holder = new THREE.Group();
+  holder.add(src);
+  holder.quaternion.setFromUnitVectors(top.clone().sub(grip).normalize(), new THREE.Vector3(0, 1, 0));
+  holder.updateMatrixWorld(true);
+  const box = new THREE.Box3().setFromObject(holder), size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
+  holder.position.copy(c).negate();
+  const inner = new THREE.Group();
+  inner.add(holder);
+  inner.scale.setScalar(0.36 / size.y);        // forearm-to-plate height of a real hand, about 36 cm
+  const group = new THREE.Group();
+  group.position.set(0, 1.0, 0);
+  group.add(inner);
+  group.visible = false;
+  scene.add(group);
+  Object.assign(handRig, {
+    group, pivot: inner,
+    top: top.applyQuaternion(holder.quaternion).sub(c),
+    grip: grip.applyQuaternion(holder.quaternion).sub(c),
+  });
+}
+
+/* ---------- Camera views ---------- */
+const view = { pos: new THREE.Vector3(0, 0.98, 4), target: new THREE.Vector3(0, 0.95, 0) };
+const tween = { from: null, to: null, t0: 0, dur: 0 };
+function frontView() {
+  const aspect = stage.clientWidth / Math.max(1, stage.clientHeight);
+  const vh = 2 * Math.tan((camera.fov * DEG) / 2);
+  const d = 1.06 * Math.max(2.02 / vh, 1.9 / (vh * aspect));
+  return { pos: new THREE.Vector3(0, 1.0, d), target: new THREE.Vector3(0, 0.87, 0) };
+}
+function gripView() {
+  return { pos: new THREE.Vector3(0.09, 1.03, 0.86), target: new THREE.Vector3(0, 1.0, 0) };
+}
+function targetView() { return state.mode === 'grip' ? gripView() : frontView(); }
+
+/* ---------- Overlay (SVG drawn over the canvas from projected 3D points) ---------- */
+const NS = 'http://www.w3.org/2000/svg';
+function project(v) {
+  const p = v.clone().project(camera);
+  return { x: (p.x * 0.5 + 0.5) * stage.clientWidth, y: (-p.y * 0.5 + 0.5) * stage.clientHeight };
+}
+function el(name, attrs) { const e = document.createElementNS(NS, name); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; }
+function arrowHead(x, y, ang, color, size = 7) {
+  const a1 = ang + 2.6, a2 = ang - 2.6;
+  return el('path', { d: `M${x + Math.cos(a1) * size},${y + Math.sin(a1) * size} L${x},${y} L${x + Math.cos(a2) * size},${y + Math.sin(a2) * size}`, fill: 'none', stroke: color, 'stroke-width': 1.8, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+}
+function leader(anchor, color) {
+  const tag = $('tag'), sr = stage.getBoundingClientRect(), tr = tag.getBoundingClientRect();
+  const tx = tr.left - sr.left + 6, ty = tr.bottom - sr.top;
+  ov.appendChild(el('path', { d: `M${tx},${ty} L${anchor.x + 6},${anchor.y - 6}`, stroke: color, 'stroke-width': 1.3, fill: 'none' }));
+  ov.appendChild(el('circle', { cx: anchor.x, cy: anchor.y, r: 3.6, fill: color }));
+}
+function drawOverlay(p) {
+  ov.replaceChildren();
+  if (!fig.root) return;
+  const accent = 'var(--accent)', mistake = 'var(--mistake)';
+  const B = fig.bones;
+  if (state.mode === 'grip') {
+    if (!handRig.group) return;
+    const top = project(handRig.pivot.localToWorld(handRig.top.clone()));
+    const grip = project(handRig.pivot.localToWorld(handRig.grip.clone()));
+    ov.appendChild(el('path', { d: `M${top.x},${top.y} L${grip.x},${grip.y}`, stroke: accent, 'stroke-width': 1.6, 'stroke-dasharray': '4 4', fill: 'none' }));
+    ov.appendChild(el('circle', { cx: grip.x, cy: grip.y, r: 7, stroke: accent, 'stroke-width': 2, fill: 'none' }));
+    return;
+  }
+  const wp = (b) => b.getWorldPosition(new THREE.Vector3());
+  const viewerRight = fig.side > 0 ? 'l' : 'r';
+  const sideBones = (s) => (s === 'l' ? [B.lSh, B.lArm, B.lFore, B.lHand] : [B.rSh, B.rArm, B.rFore, B.rHand]);
+  if (state.mode === 'movement') {
+    for (const s of ['l', 'r']) {
+      const [, arm, , hand] = sideBones(s);
+      const sp = wp(arm), r = sp.distanceTo(wp(hand)), sg = Math.sign(sp.x);
+      const pts = [];
+      for (let a = 14; a <= 74; a += 4) {
+        const A = a * DEG;
+        pts.push(project(new THREE.Vector3(sp.x + sg * Math.sin(A) * r * 1.06, sp.y - Math.cos(A) * r * 1.06, sp.z + 0.12)));
+      }
+      ov.appendChild(el('path', { d: 'M' + pts.map((q) => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' L'), stroke: accent, 'stroke-width': 1.6, 'stroke-dasharray': '5 4', fill: 'none', opacity: 0.9 }));
+      const a = pts[pts.length - 1], b = pts[pts.length - 2];
+      ov.appendChild(arrowHead(a.x, a.y, Math.atan2(a.y - b.y, a.x - b.x), accent));
+    }
+    leader(project(wp(sideBones(viewerRight)[2])), accent);
+  } else if (state.mode === 'posture') {
+    const [sh, arm] = sideBones(viewerRight);
+    const trapW = wp(arm).lerp(wp(B.neck), 0.45).add(new THREE.Vector3(0, 0.03, 0));
+    if (state.mistake) {
+      for (const s of ['l', 'r']) {
+        const [, a2] = sideBones(s);
+        const q = project(wp(a2).lerp(wp(B.neck), 0.45).add(new THREE.Vector3(0, 0.05, 0)));
+        const lift = 26 + 8 * p;
+        ov.appendChild(el('path', { d: `M${q.x},${q.y} L${q.x},${q.y - lift}`, stroke: mistake, 'stroke-width': 2, fill: 'none', 'stroke-linecap': 'round' }));
+        ov.appendChild(arrowHead(q.x, q.y - lift, -Math.PI / 2, mistake));
+      }
+    }
+    leader(project(trapW), state.mistake ? mistake : accent);
+  } else if (state.mode === 'feel') {
+    const [, arm] = sideBones(viewerRight);
+    const d = wp(arm).add(new THREE.Vector3(fig.side * 0.03 * (viewerRight === 'l' ? 1 : -1), 0.01, 0.05));
+    leader(project(d), accent);
+  }
+}
+
+/* ---------- Copy and mode ---------- */
+let lastPhase = '';
+function syncCopy(force = false) {
+  const { p } = phaseAt(state.t);
+  if (!force && p.k === lastPhase) return;
+  lastPhase = p.k;
+  const m = state.mode, c = COPY[m];
+  let line, sub = '', tag = '', tagMistake = false;
+  if (m === 'movement') { line = c.cue[p.k]; tag = c.tag; }
+  else if (m === 'grip') { line = c.line; sub = c.sub; }
+  else if (m === 'posture') { const v = state.mistake ? c.mistake : c.form; line = v.line; sub = v.sub; tag = v.tag; tagMistake = state.mistake; }
+  else { line = c.line; sub = c.sub; tag = c.tag; }
+  $('cue-line').textContent = line;
+  $('cue-sub').textContent = sub; $('cue-sub').hidden = !sub;
+  const tg = $('tag');
+  tg.textContent = tag; tg.hidden = !tag;
+  tg.classList.toggle('m', tagMistake); tg.classList.toggle('boxed', tagMistake);
+  $('pill').textContent = p.label;
+}
+function setMode(mode) {
+  const wasGrip = state.mode === 'grip';
+  state.mode = mode;
+  document.querySelectorAll('.chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+  $('view-label').textContent = COPY[mode].view;
+  $('pill').hidden = mode !== 'movement';
+  $('seg').hidden = mode !== 'posture';
+  $('locator').toggleAttribute('hidden', mode !== 'grip'); // an SVG element has no .hidden property
+  if (mode !== 'posture' && state.mistake) setMistake(false);
+  syncCopy(true);
+  const isGrip = mode === 'grip';
+  if (isGrip !== wasGrip && fig.root) {
+    canvas.classList.add('fading');
+    setTimeout(() => {
+      fig.root.visible = !isGrip; floor.visible = !isGrip; shadow.visible = !isGrip;
+      fig.bones.lHand.children.concat(fig.bones.rHand.children).forEach((o) => { o.visible = !isGrip; });
+      if (handRig.group) handRig.group.visible = isGrip;
+      const v = targetView(); view.pos.copy(v.pos); view.target.copy(v.target);
+      canvas.classList.remove('fading');
+    }, reduceMotion ? 0 : 170);
+  }
+}
+
+/* ---------- Muscle emphasis per mode ---------- */
+function muscleLevels(p, now) {
+  const shimmer = 0.5 + 0.5 * Math.sin(now * 0.006);
+  switch (state.mode) {
+    case 'movement': return { delt: 0.45 + 0.5 * p, trap: 0, trapM: 0 };
+    case 'posture': return state.mistake ? { delt: 0.3, trap: 0.35 + 0.65 * p, trapM: 1 } : { delt: 0.55 + 0.35 * p, trap: 0, trapM: 0 };
+    case 'feel': return { delt: 0.45 + 0.5 * p * (0.75 + 0.25 * shimmer), trap: 0.22 * p, trapM: 0 };
+    default: return { delt: 0, trap: 0, trapM: 0 };
+  }
+}
+
+/* ---------- Resize ---------- */
+function resize() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / Math.max(1, h);
+  camera.updateProjectionMatrix();
+  const v = targetView(); view.pos.copy(v.pos); view.target.copy(v.target);
+  camera.position.copy(view.pos); camera.lookAt(view.target);
+}
+new ResizeObserver(resize).observe(stage);
+
+/* ---------- Loop ---------- */
+let last = performance.now();
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000);
+  last = now;
+  if (state.playing && !scrubbing) state.t = (state.t + dt * state.speed) % CYCLE;
+  const p = liftAt(state.t);
+  if (fig.root) {
+    poseFigure(state.t);
+    const lv = muscleLevels(p, now);
+    U.uDelt.value = lv.delt; U.uTrap.value = lv.trap; U.uTrapMistake.value = lv.trapM;
+  }
+  if (handRig.pivot) {
+    // A slow quarter turn shows the grip in depth; the wrist line stays straight through the rep.
+    handRig.pivot.rotation.y = Math.sin((state.t / CYCLE) * Math.PI * 2) * 0.32;
+  }
+  camera.position.lerp(view.pos, 0.18);
+  const look = tmpV.copy(view.target);
+  camera.lookAt(look);
+  renderer.render(scene, camera);
+  drawOverlay(p);
+  renderTempo();
+  syncCopy();
+  requestAnimationFrame(frame);
+}
+
+/* ---------- Boot ---------- */
+// GLTFLoader decodes embedded textures with fetch(blob:) when createImageBitmap exists; a strict
+// connect-src can refuse that. Without it the loader uses <img src="blob:…">, which img-src allows.
+try { window.createImageBitmap = undefined; } catch { /* read-only in some browsers: keep the default path */ }
+readTheme();
+setMode('movement');
+/** A model's bytes: from an embedded base64 block when the page carries one (the published
+ *  single-file build), otherwise the .glb next to the page. */
+function modelBytes(name) {
+  const tag = document.getElementById('glb-' + name);
+  if (tag) {
+    const bin = atob(tag.textContent.trim()), u8 = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+    return Promise.resolve(u8.buffer);
+  }
+  return fetch(name + '.glb').then((r) => { if (!r.ok) throw new Error(`${name}.glb: ${r.status}`); return r.arrayBuffer(); });
+}
+const loader = new GLTFLoader();
+const loadModel = (name) => modelBytes(name).then((buf) => loader.parseAsync(buf, ''));
+loadModel('figure').then((g) => {
+  setupFigure(g);
+  resize();
+  camera.position.copy(view.pos);
+  $('status').hidden = true;
+  return loadModel('hand').then(setupHand);
+}).catch((err) => {
+  console.error(err);
+  $('status').textContent = "The 3D figure didn't load. Reload the page to try again.";
+  $('status').hidden = false;
+});
+requestAnimationFrame(frame);
+</script>

@@ -1,0 +1,52 @@
+name: Deploy Escobar Worker
+
+# Deploys escobar-worker/ into the existing `marc-coach` Worker (its ANTHROPIC_API_KEY
+# secret stays in Cloudflare). Needs the repo secret CLOUDFLARE_API_TOKEN, and
+# CLOUDFLARE_ACCOUNT_ID when the token can see more than one account.
+# Deploys from main only, or on demand (plan D14, finding PL-11).
+on:
+  push:
+    branches: ['main']
+    paths: ['escobar-worker/**', '.github/workflows/deploy-worker.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-escobar-worker
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: escobar-worker
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - run: npm ci
+      - name: Typecheck and tests
+        run: npm run check
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then echo "::error::Add the CLOUDFLARE_API_TOKEN repository secret"; exit 1; fi
+          if [ -n "$ACCOUNT_ID" ]; then export CLOUDFLARE_ACCOUNT_ID="$ACCOUNT_ID"; fi
+          # wrangler is pinned in escobar-worker/package.json (installed by npm ci above).
+          npx --no-install wrangler deploy
+      - name: Check /health answers protocol 2 with the key, quotas and US relay present and no model override ignored
+        run: |
+          for i in 1 2 3 4 5 6; do
+            body=$(curl -fsS https://marc-coach.mmarcdarenz.workers.dev/health || true)
+            echo "$body"
+            if echo "$body" | grep -q '"protocol":2' && echo "$body" | grep -q '"key":true' && echo "$body" | grep -q '"quotas":true' && echo "$body" | grep -q '"relay":true' && echo "$body" | grep -q '"ignoredModels":\[\]'; then exit 0; fi
+            sleep 5
+          done
+          echo "::error::/health must show protocol 2, key:true, quotas:true (spend cap), relay:true (US upstream, PL-20) and ignoredModels:[] (every MODEL_<MODE> usable, QA2-F7-3)"; exit 1

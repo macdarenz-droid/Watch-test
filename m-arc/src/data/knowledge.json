@@ -1,0 +1,1382 @@
+[
+ {
+  "id": "progressive_overload",
+  "title": "Progressive overload",
+  "statement": "Strength and size keep improving when training demand rises gradually over time: more reps at a load first, then more load, or more sets. A common guideline is a 2–10% load increase once you beat the target reps by 1–2.",
+  "numbers": [
+   {
+    "label": "load increase low",
+    "value": 2,
+    "unit": "%"
+   },
+   {
+    "label": "load increase high",
+    "value": 10,
+    "unit": "%"
+   }
+  ],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "ACSM Position Stand: Progression models in resistance training for healthy adults",
+    "year": 2009
+   }
+  ],
+  "tags": [
+   "progression",
+   "overload",
+   "load",
+   "reps",
+   "increase",
+   "stall"
+  ]
+ },
+ {
+  "id": "volume_dose_response",
+  "title": "Volume and muscle growth",
+  "statement": "More weekly sets per muscle generally build more muscle, with diminishing returns. In a meta-analysis, 10 or more weekly sets per muscle produced more growth than fewer than 5.",
+  "numbers": [
+   {
+    "label": "weekly sets, higher group",
+    "value": 10,
+    "unit": "sets"
+   },
+   {
+    "label": "weekly sets, lower group",
+    "value": 5,
+    "unit": "sets"
+   }
+  ],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "Schoenfeld, Ogborn, Krieger. Dose-response relationship between weekly resistance training volume and increases in muscle mass",
+    "year": 2017
+   }
+  ],
+  "tags": [
+   "volume",
+   "sets",
+   "hypertrophy",
+   "growth",
+   "dose"
+  ]
+ },
+ {
+  "id": "weekly_set_landmarks",
+  "title": "Weekly sets per muscle",
+  "statement": "For most trained lifters about 10–20 hard sets per muscle per week is a productive range; beginners grow on less, and going far above your usual volume mostly adds fatigue.",
+  "numbers": [
+   {
+    "label": "productive range low",
+    "value": 10,
+    "unit": "sets/week"
+   },
+   {
+    "label": "productive range high",
+    "value": 20,
+    "unit": "sets/week"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Baz-Valle et al. A systematic review of the effects of different resistance training volumes on muscle hypertrophy",
+    "year": 2022
+   },
+   {
+    "title": "Schoenfeld, Ogborn, Krieger. Dose-response relationship between weekly resistance training volume and increases in muscle mass",
+    "year": 2017
+   }
+  ],
+  "tags": [
+   "volume",
+   "sets",
+   "landmarks",
+   "band",
+   "mev",
+   "mrv",
+   "how many sets"
+  ]
+ },
+ {
+  "id": "proximity_to_failure",
+  "title": "How close to failure",
+  "statement": "Sets ending 0–3 reps short of failure build muscle well. Going to failure on every set adds fatigue and recovery time for little extra growth; keep it for the last set or isolation work.",
+  "numbers": [
+   {
+    "label": "reps in reserve low",
+    "value": 0,
+    "unit": "reps"
+   },
+   {
+    "label": "reps in reserve high",
+    "value": 3,
+    "unit": "reps"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Refalo et al. Influence of resistance training proximity-to-failure on skeletal muscle hypertrophy: a systematic review with meta-analysis",
+    "year": 2023
+   },
+   {
+    "title": "Grgic et al. Effects of resistance training performed to repetition failure or non-failure on muscular strength and hypertrophy: a systematic review and meta-analysis",
+    "year": 2022
+   }
+  ],
+  "tags": [
+   "failure",
+   "rir",
+   "rpe",
+   "effort",
+   "intensity"
+  ]
+ },
+ {
+  "id": "rep_ranges",
+  "title": "Rep ranges by goal",
+  "statement": "Muscle grows across a wide range, roughly 6–30 reps, when sets are taken close to failure. Maximal strength improves most with heavier loads, about 1–6 reps, because strength is specific to heavy practice.",
+  "numbers": [
+   {
+    "label": "hypertrophy reps low",
+    "value": 6,
+    "unit": "reps"
+   },
+   {
+    "label": "hypertrophy reps high",
+    "value": 30,
+    "unit": "reps"
+   },
+   {
+    "label": "strength reps high",
+    "value": 6,
+    "unit": "reps"
+   }
+  ],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "Schoenfeld et al. Loading recommendations for muscle strength, hypertrophy, and local endurance: a re-examination of the repetition continuum",
+    "year": 2021
+   },
+   {
+    "title": "Schoenfeld et al. Strength and hypertrophy adaptations between low- vs. high-load resistance training",
+    "year": 2017
+   }
+  ],
+  "tags": [
+   "reps",
+   "rep range",
+   "goal",
+   "strength",
+   "hypertrophy",
+   "heavy",
+   "light"
+  ]
+ },
+ {
+  "id": "rest_intervals",
+  "title": "Rest between sets",
+  "statement": "Resting about 2 minutes or more between sets of big compound lifts supports strength and muscle gain better than very short rests. 60–120 seconds is fine for isolation work.",
+  "numbers": [
+   {
+    "label": "compound rest",
+    "value": 2,
+    "unit": "min"
+   },
+   {
+    "label": "isolation rest low",
+    "value": 60,
+    "unit": "s"
+   },
+   {
+    "label": "isolation rest high",
+    "value": 120,
+    "unit": "s"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Schoenfeld et al. Longer interset rest periods enhance muscle strength and hypertrophy in resistance-trained men",
+    "year": 2016
+   },
+   {
+    "title": "Grgic et al. The effects of short versus long inter-set rest intervals in resistance training on measures of muscle hypertrophy: a systematic review",
+    "year": 2017
+   }
+  ],
+  "tags": [
+   "rest",
+   "rest time",
+   "between sets",
+   "timer"
+  ]
+ },
+ {
+  "id": "training_frequency",
+  "title": "Training frequency",
+  "statement": "With weekly volume equal, training a muscle 2 times a week is at least as good as once. Frequency mostly helps by spreading the same sets into better-quality sessions.",
+  "numbers": [
+   {
+    "label": "sessions per muscle per week",
+    "value": 2,
+    "unit": "times"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Schoenfeld, Grgic, Krieger. How many times per week should a muscle be trained to maximize muscle hypertrophy?",
+    "year": 2019
+   }
+  ],
+  "tags": [
+   "frequency",
+   "how often",
+   "split",
+   "full body",
+   "times per week"
+  ]
+ },
+ {
+  "id": "deloads",
+  "title": "Deload weeks",
+  "statement": "A planned lighter week (fewer sets, lighter loads) helps shed accumulated fatigue. Practice commonly places one every 4–8 weeks for 5–7 days; direct evidence is limited and mostly expert consensus.",
+  "numbers": [
+   {
+    "label": "every weeks low",
+    "value": 4,
+    "unit": "weeks"
+   },
+   {
+    "label": "every weeks high",
+    "value": 8,
+    "unit": "weeks"
+   },
+   {
+    "label": "length",
+    "value": 7,
+    "unit": "days"
+   }
+  ],
+  "rating": "emerging",
+  "sources": [
+   {
+    "title": "Bell et al. Integrating deloading into strength and physique sports training programmes: an international Delphi consensus",
+    "year": 2023
+   }
+  ],
+  "tags": [
+   "deload",
+   "lighter week",
+   "fatigue",
+   "recovery week",
+   "rest week"
+  ]
+ },
+ {
+  "id": "warm_up",
+  "title": "Warming up",
+  "statement": "A few progressively heavier warm-up sets improve performance on heavy lifts. Long static stretches right before lifting, over about 60 seconds per muscle, can briefly reduce strength; short ones are fine.",
+  "numbers": [
+   {
+    "label": "static stretch threshold",
+    "value": 60,
+    "unit": "s"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Behm et al. Acute effects of muscle stretching on physical performance, range of motion, and injury incidence in healthy active individuals",
+    "year": 2016
+   }
+  ],
+  "tags": [
+   "warm-up",
+   "warmup",
+   "stretching",
+   "ramp"
+  ]
+ },
+ {
+  "id": "e1rm_formulas",
+  "title": "Estimating a one-rep max",
+  "statement": "A one-rep max can be estimated from a set: Epley uses load × (1 + reps / 30). Estimates are most accurate from sets of about 10 reps or fewer; above that they drift.",
+  "numbers": [
+   {
+    "label": "Epley divisor",
+    "value": 30,
+    "unit": ""
+   },
+   {
+    "label": "accurate up to",
+    "value": 10,
+    "unit": "reps"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "LeSuer et al. The accuracy of prediction equations for estimating 1-RM performance in the bench press, squat, and deadlift",
+    "year": 1997
+   }
+  ],
+  "tags": [
+   "e1rm",
+   "one rep max",
+   "1rm",
+   "estimate",
+   "strength"
+  ]
+ },
+ {
+  "id": "plateaus",
+  "title": "Plateaus",
+  "statement": "Stalls are normal. Common fixes: change the rep range or the exercise variation, manage fatigue with a lighter week, check sleep and protein, and progress in smaller steps. Evidence is mostly practical experience.",
+  "numbers": [],
+  "rating": "emerging",
+  "sources": [
+   {
+    "title": "Kraemer, Ratamess. Fundamentals of resistance training: progression and exercise prescription",
+    "year": 2004
+   }
+  ],
+  "tags": [
+   "plateau",
+   "stall",
+   "stuck",
+   "not progressing"
+  ]
+ },
+ {
+  "id": "detraining",
+  "title": "Time off and coming back",
+  "statement": "Strength holds up well for about 3 weeks without training, and muscle lost over longer breaks comes back faster on retraining than it took to build the first time.",
+  "numbers": [
+   {
+    "label": "strength kept for",
+    "value": 3,
+    "unit": "weeks"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Bosquet et al. Effect of training cessation on muscular performance: a meta-analysis",
+    "year": 2013
+   }
+  ],
+  "tags": [
+   "detraining",
+   "break",
+   "time off",
+   "holiday",
+   "muscle memory",
+   "return"
+  ]
+ },
+ {
+  "id": "recovery_time_course",
+  "title": "How long recovery takes",
+  "statement": "Muscle performance after hard lifting usually recovers within 24–72 hours. Sessions taken to failure, with lots of lowering work or heavy compound lifts, sit at the longer end.",
+  "numbers": [
+   {
+    "label": "recovery low",
+    "value": 24,
+    "unit": "h"
+   },
+   {
+    "label": "recovery high",
+    "value": 72,
+    "unit": "h"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Morán-Navarro et al. Time course of recovery following resistance training leading or not to failure",
+    "year": 2017
+   }
+  ],
+  "tags": [
+   "recovery",
+   "how long",
+   "rest days",
+   "fatigue",
+   "hours"
+  ]
+ },
+ {
+  "id": "doms",
+  "title": "Muscle soreness (DOMS)",
+  "statement": "Soreness after unfamiliar training peaks around 24–72 hours and fades with repeated exposure. It is a poor sign of how much a session built muscle.",
+  "numbers": [
+   {
+    "label": "peak low",
+    "value": 24,
+    "unit": "h"
+   },
+   {
+    "label": "peak high",
+    "value": 72,
+    "unit": "h"
+   }
+  ],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "Cheung, Hume, Maxwell. Delayed onset muscle soreness: treatment strategies and performance factors",
+    "year": 2003
+   }
+  ],
+  "tags": [
+   "soreness",
+   "doms",
+   "sore",
+   "aching"
+  ]
+ },
+ {
+  "id": "sleep_performance",
+  "title": "Sleep and training",
+  "statement": "Short or poor sleep lowers strength endurance, mood and motivation, and slows recovery. A single bad night hurts repeated efforts more than one maximal lift.",
+  "numbers": [],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Craven et al. Effects of acute sleep loss on physical performance: a systematic and meta-analytic review",
+    "year": 2022
+   }
+  ],
+  "tags": [
+   "sleep",
+   "tired",
+   "bad night",
+   "performance"
+  ]
+ },
+ {
+  "id": "sleep_duration",
+  "title": "How much sleep",
+  "statement": "Adults should regularly sleep 7 or more hours a night for health; many athletes benefit from more.",
+  "numbers": [
+   {
+    "label": "minimum per night",
+    "value": 7,
+    "unit": "h"
+   }
+  ],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "Watson et al. Recommended amount of sleep for a healthy adult: AASM and SRS joint consensus",
+    "year": 2015
+   }
+  ],
+  "tags": [
+   "sleep",
+   "hours of sleep",
+   "how much sleep"
+  ]
+ },
+ {
+  "id": "protein_intake",
+  "title": "Daily protein",
+  "statement": "For people lifting to build muscle, about 1.6 g of protein per kg of body weight a day captures most of the benefit; up to 2.2 g/kg is a reasonable upper target.",
+  "numbers": [
+   {
+    "label": "protein low",
+    "value": 1.6,
+    "unit": "g/kg/day"
+   },
+   {
+    "label": "protein high",
+    "value": 2.2,
+    "unit": "g/kg/day"
+   }
+  ],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "Morton et al. A systematic review, meta-analysis and meta-regression of the effect of protein supplementation on resistance training-induced gains",
+    "year": 2018
+   },
+   {
+    "title": "Jäger et al. ISSN Position Stand: protein and exercise",
+    "year": 2017
+   }
+  ],
+  "tags": [
+   "protein",
+   "nutrition",
+   "diet",
+   "grams",
+   "how much protein"
+  ]
+ },
+ {
+  "id": "protein_timing",
+  "title": "Spreading protein",
+  "statement": "Total daily protein matters most. Splitting it into 3–5 meals of about 0.4 g/kg each is a sensible way to reach it; the post-workout window is wide.",
+  "numbers": [
+   {
+    "label": "per meal",
+    "value": 0.4,
+    "unit": "g/kg"
+   },
+   {
+    "label": "meals low",
+    "value": 3,
+    "unit": "meals"
+   },
+   {
+    "label": "meals high",
+    "value": 5,
+    "unit": "meals"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Schoenfeld, Aragon. How much protein can the body use in a single meal for muscle-building?",
+    "year": 2018
+   },
+   {
+    "title": "Jäger et al. ISSN Position Stand: protein and exercise",
+    "year": 2017
+   }
+  ],
+  "tags": [
+   "protein timing",
+   "meals",
+   "post-workout",
+   "anabolic window"
+  ]
+ },
+ {
+  "id": "deficit_muscle_retention",
+  "title": "Keeping muscle while dieting",
+  "statement": "In a calorie deficit, keep lifting and eat more protein, around 1.6–2.4 g/kg a day, to hold on to muscle. Slower loss helps too.",
+  "numbers": [
+   {
+    "label": "protein low",
+    "value": 1.6,
+    "unit": "g/kg/day"
+   },
+   {
+    "label": "protein high",
+    "value": 2.4,
+    "unit": "g/kg/day"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Helms et al. A systematic review of dietary protein during caloric restriction in resistance trained lean athletes",
+    "year": 2014
+   },
+   {
+    "title": "Hector, Phillips. Protein recommendations for weight loss in elite athletes",
+    "year": 2018
+   }
+  ],
+  "tags": [
+   "cut",
+   "cutting",
+   "deficit",
+   "fat loss",
+   "diet",
+   "keep muscle"
+  ]
+ },
+ {
+  "id": "weight_change_rate",
+  "title": "Rate of weight change",
+  "statement": "Losing about 0.5–1% of body weight a week preserves muscle and strength better than faster loss for lean lifters. For gaining, about 0.25–0.5% a week limits fat gain.",
+  "numbers": [
+   {
+    "label": "loss low",
+    "value": 0.5,
+    "unit": "%/week"
+   },
+   {
+    "label": "loss high",
+    "value": 1,
+    "unit": "%/week"
+   },
+   {
+    "label": "gain low",
+    "value": 0.25,
+    "unit": "%/week"
+   },
+   {
+    "label": "gain high",
+    "value": 0.5,
+    "unit": "%/week"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Garthe et al. Effect of two different weight-loss rates on body composition and strength and power-related performance in elite athletes",
+    "year": 2011
+   },
+   {
+    "title": "Iraki et al. Nutrition recommendations for bodybuilders in the off-season",
+    "year": 2019
+   }
+  ],
+  "tags": [
+   "weight loss",
+   "rate",
+   "how fast",
+   "bulk",
+   "cut",
+   "weight gain"
+  ]
+ },
+ {
+  "id": "creatine",
+  "title": "Creatine",
+  "statement": "Creatine monohydrate, 3–5 g a day, safely adds to strength and lean mass gains from training in most people. Loading is optional.",
+  "numbers": [
+   {
+    "label": "daily dose low",
+    "value": 3,
+    "unit": "g"
+   },
+   {
+    "label": "daily dose high",
+    "value": 5,
+    "unit": "g"
+   }
+  ],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "Kreider et al. ISSN position stand: safety and efficacy of creatine supplementation in exercise, sport, and medicine",
+    "year": 2017
+   }
+  ],
+  "tags": [
+   "creatine",
+   "supplement",
+   "supplements"
+  ]
+ },
+ {
+  "id": "caffeine",
+  "title": "Caffeine",
+  "statement": "Caffeine at 3–6 mg per kg of body weight, about 60 minutes before training, modestly improves performance. Late doses can cost sleep.",
+  "numbers": [
+   {
+    "label": "dose low",
+    "value": 3,
+    "unit": "mg/kg"
+   },
+   {
+    "label": "dose high",
+    "value": 6,
+    "unit": "mg/kg"
+   },
+   {
+    "label": "timing",
+    "value": 60,
+    "unit": "min"
+   }
+  ],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "Guest et al. ISSN position stand: caffeine and exercise performance",
+    "year": 2021
+   }
+  ],
+  "tags": [
+   "caffeine",
+   "coffee",
+   "pre-workout",
+   "stimulant"
+  ]
+ },
+ {
+  "id": "hydration",
+  "title": "Hydration",
+  "statement": "Losing more than about 2% of body weight through sweat can impair performance. Drinking to thirst works for most sessions; weigh before and after long ones.",
+  "numbers": [
+   {
+    "label": "impairment threshold",
+    "value": 2,
+    "unit": "% body weight"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Sawka et al. ACSM position stand: exercise and fluid replacement",
+    "year": 2007
+   }
+  ],
+  "tags": [
+   "hydration",
+   "water",
+   "dehydration",
+   "fluids"
+  ]
+ },
+ {
+  "id": "bmi_limits",
+  "title": "What BMI can't tell you",
+  "statement": "BMI is weight for height: 18.5–24.9 is 'normal', 25 overweight, 30 obese. It cannot tell muscle from fat, so muscular people often read as overweight.",
+  "numbers": [
+   {
+    "label": "normal low",
+    "value": 18.5,
+    "unit": ""
+   },
+   {
+    "label": "overweight from",
+    "value": 25,
+    "unit": ""
+   },
+   {
+    "label": "obese from",
+    "value": 30,
+    "unit": ""
+   }
+  ],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "WHO. Obesity: preventing and managing the global epidemic",
+    "year": 2000
+   },
+   {
+    "title": "Rothman. BMI-related errors in the measurement of obesity",
+    "year": 2008
+   }
+  ],
+  "tags": [
+   "bmi",
+   "body mass index",
+   "overweight",
+   "weight"
+  ]
+ },
+ {
+  "id": "bodyfat_navy",
+  "title": "Tape-measure body fat",
+  "statement": "The US Navy tape method estimates body fat typically within about 3–4 percentage points of lab methods. Use it for your trend, measured the same way each time.",
+  "numbers": [
+   {
+    "label": "typical error low",
+    "value": 3,
+    "unit": "points"
+   },
+   {
+    "label": "typical error high",
+    "value": 4,
+    "unit": "points"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Hodgdon, Beckett. Prediction of percent body fat for U.S. Navy men and women from body circumferences and height",
+    "year": 1984
+   }
+  ],
+  "tags": [
+   "body fat",
+   "navy",
+   "tape",
+   "bodyfat",
+   "percentage"
+  ]
+ },
+ {
+  "id": "resting_hr",
+  "title": "Resting heart rate",
+  "statement": "Adult resting heart rate is usually 60–100 bpm, lower in trained people. A rise of several beats above your own baseline can signal fatigue, illness, stress or poor sleep.",
+  "numbers": [
+   {
+    "label": "normal low",
+    "value": 60,
+    "unit": "bpm"
+   },
+   {
+    "label": "normal high",
+    "value": 100,
+    "unit": "bpm"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Buchheit. Monitoring training status with HR measures: do all roads lead to Rome?",
+    "year": 2014
+   }
+  ],
+  "tags": [
+   "resting heart rate",
+   "rhr",
+   "heart rate",
+   "pulse",
+   "baseline"
+  ]
+ },
+ {
+  "id": "hrv",
+  "title": "Heart-rate variability",
+  "statement": "HRV is useful against your own baseline, not other people's. Daily readings are noisy, so a 7-day rolling average tracks recovery better than one morning.",
+  "numbers": [
+   {
+    "label": "rolling window",
+    "value": 7,
+    "unit": "days"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Plews et al. Training adaptation and heart rate variability in elite endurance athletes",
+    "year": 2013
+   },
+   {
+    "title": "Buchheit. Monitoring training status with HR measures",
+    "year": 2014
+   }
+  ],
+  "tags": [
+   "hrv",
+   "heart rate variability",
+   "rmssd",
+   "recovery"
+  ]
+ },
+ {
+  "id": "hr_zones",
+  "title": "Heart-rate zones",
+  "statement": "Zones based on heart-rate reserve (max minus resting) fit individuals better than % of max alone. Max heart rate can be estimated as 208 − 0.7 × age.",
+  "numbers": [
+   {
+    "label": "formula intercept",
+    "value": 208,
+    "unit": ""
+   },
+   {
+    "label": "formula age factor",
+    "value": 0.7,
+    "unit": ""
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Tanaka, Monahan, Seals. Age-predicted maximal heart rate revisited",
+    "year": 2001
+   }
+  ],
+  "tags": [
+   "heart rate zones",
+   "zones",
+   "max heart rate",
+   "karvonen",
+   "cardio"
+  ]
+ },
+ {
+  "id": "hr_guided_rest",
+  "title": "Resting by heart rate",
+  "statement": "Resting until heart rate drops back toward a set level is a practical way to fit rest to the person and the set. Direct evidence in lifting is limited.",
+  "numbers": [],
+  "rating": "emerging",
+  "sources": [
+   {
+    "title": "Buchheit. Monitoring training status with HR measures",
+    "year": 2014
+   }
+  ],
+  "tags": [
+   "heart rate rest",
+   "rest by heart rate",
+   "hr rest"
+  ]
+ },
+ {
+  "id": "masters_lifters",
+  "title": "Lifting after 50 and 60",
+  "statement": "Older adults gain strength and muscle from resistance training at any age. 2–3 sessions a week work well; recovery can take a little longer, so progress steadily.",
+  "numbers": [
+   {
+    "label": "sessions low",
+    "value": 2,
+    "unit": "per week"
+   },
+   {
+    "label": "sessions high",
+    "value": 3,
+    "unit": "per week"
+   }
+  ],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "Fragala et al. Resistance training for older adults: position statement from the NSCA",
+    "year": 2019
+   }
+  ],
+  "tags": [
+   "older",
+   "masters",
+   "age",
+   "60",
+   "aging"
+  ]
+ },
+ {
+  "id": "beginners",
+  "title": "Starting out",
+  "statement": "Beginners progress quickly on modest volume: 2–3 full-body sessions a week with a few sets per exercise is enough. Technique first, then add load.",
+  "numbers": [
+   {
+    "label": "sessions low",
+    "value": 2,
+    "unit": "per week"
+   },
+   {
+    "label": "sessions high",
+    "value": 3,
+    "unit": "per week"
+   }
+  ],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "ACSM Position Stand: Progression models in resistance training for healthy adults",
+    "year": 2009
+   }
+  ],
+  "tags": [
+   "beginner",
+   "new",
+   "novice",
+   "starting",
+   "first program"
+  ]
+ },
+ {
+  "id": "youth_training",
+  "title": "Training under 18",
+  "statement": "Supervised resistance training is safe and useful for young people. Focus on technique and gradual progress; avoid maximal lifts without a qualified coach.",
+  "numbers": [],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "Lloyd et al. Position statement on youth resistance training: the 2014 International Consensus",
+    "year": 2014
+   }
+  ],
+  "tags": [
+   "youth",
+   "teen",
+   "teenager",
+   "under 18",
+   "kids"
+  ]
+ },
+ {
+  "id": "pain_red_flags",
+  "title": "Pain red flags",
+  "statement": "Stop the movement and see a physio or doctor for pain that is sharp, spreading, numb or tingling, wakes you at night, or comes with swelling.",
+  "numbers": [],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Finucane et al. International framework for red flags for potential serious spinal pathologies",
+    "year": 2020,
+    "pmid": "32438853",
+    "doi": "10.2519/jospt.2020.9971"
+   }
+  ],
+  "tags": [
+   "pain",
+   "injury",
+   "hurt",
+   "sharp pain",
+   "red flags",
+   "numb"
+  ]
+ },
+ {
+  "id": "tendon_load",
+  "title": "Tendons and load",
+  "statement": "Tendons adapt more slowly than muscle. Gradual increases and heavy, slow reps help them; sudden spikes in load or volume raise the risk of irritation.",
+  "numbers": [],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Magnusson, Kjaer. The impact of loading, unloading, ageing and injury on the human tendon",
+    "year": 2019
+   },
+   {
+    "title": "Beyer et al. Heavy slow resistance versus eccentric training as treatment for Achilles tendinopathy",
+    "year": 2015
+   }
+  ],
+  "tags": [
+   "tendon",
+   "tendinitis",
+   "tendinopathy",
+   "elbow",
+   "knee pain",
+   "achilles"
+  ]
+ },
+ {
+  "id": "cardio_interference",
+  "title": "Cardio and lifting",
+  "statement": "Cardio alongside lifting barely affects muscle growth. High running volume close to lifting can blunt some strength and power gains; separating them or favouring cycling helps.",
+  "numbers": [],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Schumann et al. Compatibility of concurrent aerobic and strength training for skeletal muscle size and function: an updated systematic review and meta-analysis",
+    "year": 2022
+   }
+  ],
+  "tags": [
+   "cardio",
+   "running",
+   "interference",
+   "concurrent",
+   "conditioning"
+  ]
+ },
+ {
+  "id": "steps_neat",
+  "title": "Daily steps",
+  "statement": "More daily steps lower mortality risk, levelling off around 6,000–8,000 a day for adults over 60 and 8,000–10,000 for younger adults.",
+  "numbers": [
+   {
+    "label": "older adults low",
+    "value": 6000,
+    "unit": "steps"
+   },
+   {
+    "label": "older adults high",
+    "value": 8000,
+    "unit": "steps"
+   },
+   {
+    "label": "younger adults high",
+    "value": 10000,
+    "unit": "steps"
+   }
+  ],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "Paluch et al. Daily steps and all-cause mortality: a meta-analysis of 15 international cohorts",
+    "year": 2022
+   }
+  ],
+  "tags": [
+   "steps",
+   "walking",
+   "neat",
+   "activity"
+  ]
+ },
+ {
+  "id": "alcohol",
+  "title": "Alcohol and recovery",
+  "statement": "Heavy drinking after training lowered muscle protein synthesis in a lab study, by about 24% even with protein and 37% without. Occasional moderate drinks matter far less.",
+  "numbers": [
+   {
+    "label": "reduction with protein",
+    "value": 24,
+    "unit": "%"
+   },
+   {
+    "label": "reduction without protein",
+    "value": 37,
+    "unit": "%"
+   }
+  ],
+  "rating": "emerging",
+  "sources": [
+   {
+    "title": "Parr et al. Alcohol ingestion impairs maximal post-exercise rates of myofibrillar protein synthesis",
+    "year": 2014
+   }
+  ],
+  "tags": [
+   "alcohol",
+   "drinking",
+   "beer",
+   "recovery"
+  ]
+ },
+ {
+  "id": "stress",
+  "title": "Life stress",
+  "statement": "High ongoing psychological stress slowed recovery of muscle function over the 96 hours after a hard session in one study. On stressful weeks, keep sessions shorter or lighter.",
+  "numbers": [
+   {
+    "label": "recovery window studied",
+    "value": 96,
+    "unit": "h"
+   }
+  ],
+  "rating": "emerging",
+  "sources": [
+   {
+    "title": "Stults-Kolehmainen et al. Chronic psychological stress impairs recovery of muscular function and somatic sensations over a 96-hour period",
+    "year": 2014
+   }
+  ],
+  "tags": [
+   "stress",
+   "work stress",
+   "life",
+   "anxiety",
+   "recovery"
+  ]
+ },
+ {
+  "id": "menstrual_cycle",
+  "title": "Menstrual cycle and training",
+  "statement": "Evidence that cycle phase meaningfully changes strength or muscle gain is weak and inconsistent. Adjust by how you feel rather than a fixed phase plan.",
+  "numbers": [],
+  "rating": "debated",
+  "sources": [
+   {
+    "title": "McNulty et al. The effects of menstrual cycle phase on exercise performance in eumenorrheic women: a systematic review and meta-analysis",
+    "year": 2020
+   },
+   {
+    "title": "Colenso-Semple et al. Current evidence shows no influence of women's menstrual cycle phase on acute strength performance or adaptations to resistance exercise training",
+    "year": 2023
+   }
+  ],
+  "tags": [
+   "menstrual",
+   "period",
+   "cycle",
+   "women",
+   "female"
+  ]
+ },
+ {
+  "id": "stretching_mobility",
+  "title": "Stretching and mobility",
+  "statement": "Stretching improves range of motion but does not prevent soreness. Lifting through a full range improves flexibility about as well as stretching does.",
+  "numbers": [],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "Afonso et al. The effectiveness of resistance training versus stretching on flexibility: a systematic review and meta-analysis",
+    "year": 2021
+   },
+   {
+    "title": "Herbert et al. Stretching to prevent or reduce muscle soreness after exercise (Cochrane)",
+    "year": 2011
+   }
+  ],
+  "tags": [
+   "stretching",
+   "mobility",
+   "flexibility",
+   "range of motion"
+  ]
+ },
+ {
+  "id": "technique_cues",
+  "title": "Coaching cues",
+  "statement": "Cues that point attention outward ('push the floor away') often produce more force and better movement than cues about body parts ('squeeze your glutes').",
+  "numbers": [],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Wulf. Attentional focus and motor learning: a review of 15 years",
+    "year": 2013
+   }
+  ],
+  "tags": [
+   "cue",
+   "technique",
+   "form",
+   "focus"
+  ]
+ },
+ {
+  "id": "units_and_plates",
+  "title": "Plates, bars and units",
+  "statement": "Standard plates are 25, 20, 15, 10, 5, 2.5 and 1.25 kg or 45, 35, 25, 10, 5 and 2.5 lb. An Olympic bar is 20 kg; a common US bar is 45 lb (20.4 kg). A dumbbell rack's step decides your next loadable jump.",
+  "numbers": [
+   {
+    "label": "Olympic bar",
+    "value": 20,
+    "unit": "kg"
+   },
+   {
+    "label": "US bar",
+    "value": 45,
+    "unit": "lb"
+   },
+   {
+    "label": "US bar in kg",
+    "value": 20.4,
+    "unit": "kg"
+   },
+   {
+    "label": "small plate",
+    "value": 2.5,
+    "unit": "kg"
+   },
+   {
+    "label": "small plate lb",
+    "value": 2.5,
+    "unit": "lb"
+   }
+  ],
+  "rating": "strong",
+  "sources": [
+   {
+    "title": "IWF Technical and Competition Rules and Regulations",
+    "year": 2020
+   }
+  ],
+  "tags": [
+   "plates",
+   "bar",
+   "kg",
+   "lb",
+   "pounds",
+   "units",
+   "dumbbells",
+   "barbell"
+  ]
+ },
+ {
+  "id": "calorie_needs",
+  "title": "Estimating calorie needs",
+  "statement": "Daily energy needs are resting metabolism times activity. Mifflin-St Jeor is the most accurate common resting equation, within about 10% for most adults; adjust from your weight trend.",
+  "numbers": [
+   {
+    "label": "typical accuracy",
+    "value": 10,
+    "unit": "%"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Frankenfield, Roth-Yousey, Compher. Comparison of predictive equations for resting metabolic rate in healthy nonobese and obese adults",
+    "year": 2005
+   }
+  ],
+  "tags": [
+   "calories",
+   "tdee",
+   "bmr",
+   "energy",
+   "maintenance"
+  ]
+ },
+ {
+  "id": "effort_rating",
+  "title": "Rating effort (reps in reserve)",
+  "statement": "Guesses of reps left are accurate to about 1 rep close to failure and get worse further from it; they improve with practice. Rate every set and the app learns your bias.",
+  "numbers": [
+   {
+    "label": "error near failure",
+    "value": 1,
+    "unit": "rep"
+   }
+  ],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Halperin et al. Accuracy in predicting repetitions to task failure in resistance exercise: a scoping review and exploratory meta-analysis",
+    "year": 2022
+   },
+   {
+    "title": "Zourdos et al. Novel resistance training-specific RPE scale measuring repetitions in reserve",
+    "year": 2016
+   }
+  ],
+  "tags": [
+   "effort",
+   "rir",
+   "rpe",
+   "reps in reserve",
+   "rating"
+  ]
+ },
+ {
+  "id": "exercise_selection",
+  "title": "Choosing exercises",
+  "statement": "Compound and isolation exercises both build muscle. Compounds are efficient; isolation fills gaps. Varying angles over time develops a muscle more completely.",
+  "numbers": [],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Gentil et al. Single vs. multi-joint resistance exercises: effects on muscle strength and hypertrophy",
+    "year": 2017
+   }
+  ],
+  "tags": [
+   "exercise selection",
+   "compound",
+   "isolation",
+   "which exercises"
+  ]
+ },
+ {
+  "id": "range_of_motion",
+  "title": "Range of motion",
+  "statement": "Full range, and especially work at long muscle lengths, tends to build as much or more muscle than short partial reps.",
+  "numbers": [],
+  "rating": "moderate",
+  "sources": [
+   {
+    "title": "Pallarés et al. Effects of range of motion on resistance training adaptations: a systematic review and meta-analysis",
+    "year": 2021
+   }
+  ],
+  "tags": [
+   "range of motion",
+   "partials",
+   "full range",
+   "rom",
+   "depth"
+  ]
+ },
+ {
+  "id": "session_length",
+  "title": "Session length",
+  "statement": "Session length follows how many sets you do and how long you rest between them. Guidance for strength and muscle gain is given as sets, loads and rest, not as minutes per session; heavy sets get the longest rests.",
+  "numbers": [],
+  "rating": "emerging",
+  "sources": [
+   {
+    "title": "ACSM Position Stand: Progression models in resistance training for healthy adults",
+    "year": 2009,
+    "pmid": "19204579",
+    "doi": "10.1249/MSS.0b013e3181915670"
+   }
+  ],
+  "tags": [
+   "session length",
+   "how long",
+   "workout duration",
+   "time"
+  ]
+ }
+]

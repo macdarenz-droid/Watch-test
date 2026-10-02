@@ -1,0 +1,35 @@
+// GENERATED, do not edit. Written by tools/plates/generate.mjs (tools/plates/gen/content.mjs). inputsSha256=31b31323a81128aa314e1e98348079a17bbec22574feedeb047a07c21e32a1cd
+{
+  "id": "lib_barbell_back_squat",
+  "rev": 1,
+  "research": {
+    "card": "grip/research/barbell_back_squat.json",
+    "rev": 1
+  },
+  "sources": [
+    "ace-back-squat",
+    "hk-squat",
+    "nsca-summary",
+    "barbell-logic-squat-grip",
+    "schulz",
+    "glassbrook2017",
+    "wretenberg1996",
+    "caterisano2002",
+    "kubo2019",
+    "bloomquist2013",
+    "paoli2009",
+    "clark2012",
+    "escamilla2001",
+    "contreras2015",
+    "fry2003",
+    "hackett2013",
+    "lander1992",
+    "kerr2010",
+    "nhs-wrist-pain",
+    "nhs-knee-pain"
+  ],
+  "riskFlags": [
+    "wrist",
+    "knee"
+  ]
+}

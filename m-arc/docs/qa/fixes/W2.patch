@@ -1,0 +1,152 @@
+diff --git a/src/escobar/loop.ts b/src/escobar/loop.ts
+index 0bd6036..f4e07c2 100644
+--- a/src/escobar/loop.ts
++++ b/src/escobar/loop.ts
+@@ -416,12 +416,19 @@ export class EscobarLoop {
+         if (r.error) { result = finish({ outcome: 'error', error: r.error, outcomes, signals, notSent: !userCommitted }); break; }
+         if (r.refusal) { this.update({ text: '' }); result = finish({ outcome: 'refusal', refusal: r.refusal, outcomes, signals, notSent: !userCommitted }); break; }
+         const final = r.final!;
+-        const u = final.usage as Partial<Usage> & { iterations?: Array<Partial<Usage>> } | undefined;
+-        const its = u?.iterations?.length ? u.iterations : u ? [u] : [];
+-        for (const it of its) {
+-          const step = { inputTokens: it.input_tokens ?? 0, outputTokens: it.output_tokens ?? 0, cacheReadTokens: it.cache_read_input_tokens ?? 0 };
++        const u = final.usage as Partial<Usage> & { iterations?: Array<Partial<Usage> & { model?: string | null }> } | undefined;
++        const its: Array<Partial<Usage> & { model?: string | null }> = u?.iterations?.length ? u.iterations : u ? [u] : [];
++        for (const [i, it] of its.entries()) {
++          // QA2-F7-1: a fallback attempt that declined before any output is reported but not billed.
++          if (i < its.length - 1 && !it.output_tokens) continue;
++          // QA2-F7-4: cache writes by TTL; a write without the breakdown is priced at the 5-minute rate.
++          const cacheWrite1hTokens = it.cache_creation?.ephemeral_1h_input_tokens ?? 0;
++          const cacheWrite5mTokens = Math.max(it.cache_creation?.ephemeral_5m_input_tokens ?? 0, (it.cache_creation_input_tokens ?? 0) - cacheWrite1hTokens);
++          const step = { inputTokens: it.input_tokens ?? 0, outputTokens: it.output_tokens ?? 0, cacheReadTokens: it.cache_read_input_tokens ?? 0, cacheWrite5mTokens, cacheWrite1hTokens };
+           usage.inputTokens += step.inputTokens; usage.outputTokens += step.outputTokens; usage.cacheReadTokens += step.cacheReadTokens;
+-          usage.costUsd += estimateCost(step, typeof final.model === 'string' ? final.model : undefined);
++          // QA2-F7-1: each attempt at the rates of the model that ran it (a fallback turn mixes models).
++          const model = typeof it.model === 'string' ? it.model : typeof final.model === 'string' ? final.model : undefined;
++          usage.costUsd += estimateCost(step, model);
+         }
+         if (staged) {
+           const extra: Partial<Conversation> = userCommitted ? stagedExtra : { ...stagedExtra, pendingDecisions: (this.conversation.pendingDecisions ?? []).filter(d => !reported.has(decisionKey(d))) };
+diff --git a/src/escobar/state.ts b/src/escobar/state.ts
+index 9a8d9a2..540e268 100644
+--- a/src/escobar/state.ts
++++ b/src/escobar/state.ts
+@@ -28,7 +28,10 @@ export const online = signal<boolean | null>(null);
+ export const offlineReason = signal<string | null>(null);
+ export const quotaResetAt = signal<number | null>(null);
+ 
+-/** Per-model prices, $ per million tokens, for the rough cost estimate in Settings (§21). */
++/**
++ * Per-model prices, $ per million tokens, for the rough cost estimate in Settings (§21). Cache
++ * writes cost 1.25x input (5-minute) or 2x input (1-hour) on every model.
++ */
+ export const PRICES: Record<string, { input: number; output: number; cacheRead: number }> = {
+   'claude-opus-5': { input: 5, output: 25, cacheRead: 0.5 },
+   'claude-opus-5-5': { input: 4, output: 20, cacheRead: 0.2 },
+@@ -37,18 +40,30 @@ export const PRICES: Record<string, { input: number; output: number; cacheRead:
+   'claude-fable-5-1': { input: 10, output: 50, cacheRead: 0.25 },
+   'claude-fable-5': { input: 10, output: 50, cacheRead: 1 },
+   'claude-haiku-4-5': { input: 1, output: 5, cacheRead: 0.1 },
++  // QA2-F7-1: the rest of the models the API serves.
++  'claude-mythos-5-1': { input: 10, output: 50, cacheRead: 0.25 },
++  'claude-mythos-5': { input: 10, output: 50, cacheRead: 1 },
++  'claude-opus-4-7': { input: 5, output: 25, cacheRead: 0.5 },
++  'claude-opus-4-6': { input: 5, output: 25, cacheRead: 0.5 },
++  'claude-opus-4-5': { input: 5, output: 25, cacheRead: 0.5 },
++  'claude-sonnet-4-6': { input: 3, output: 15, cacheRead: 0.3 },
++  'claude-sonnet-4-5': { input: 3, output: 15, cacheRead: 0.3 },
+ };
+-// F7: checked against platform.claude.com/docs/en/about-claude/pricing on 2026-09-23.
++// F7: checked against platform.claude.com/docs/en/about-claude/pricing on 2026-09-23 (QA2-F7-1 additions: 2026-09-24).
++/** QA2-F7-1: an id missing from the table is priced at the dearest rates, so the estimate never reads below the bill. */
++const UNKNOWN_PRICE = { input: 10, output: 50, cacheRead: 1 };
+ 
+ /** A dated id (claude-opus-5-20260901) uses its alias's price: the longest key it starts with. */
+ function priceFor(model: string): { input: number; output: number; cacheRead: number } {
+   const key = Object.keys(PRICES).filter(k => model === k || model.startsWith(`${k}-`)).sort((a, b) => b.length - a.length)[0];
+-  return PRICES[key ?? 'claude-opus-5']!;
++  return key ? PRICES[key]! : UNKNOWN_PRICE;
+ }
+ 
+-export function estimateCost(u: { inputTokens: number; outputTokens: number; cacheReadTokens: number }, model = 'claude-opus-5'): number {
++/** QA2-F7-4: `cacheWrite5mTokens` / `cacheWrite1hTokens` are the step's prompt-cache writes by TTL. */
++export function estimateCost(u: { inputTokens: number; outputTokens: number; cacheReadTokens: number; cacheWrite5mTokens?: number; cacheWrite1hTokens?: number }, model = 'claude-opus-5'): number {
+   const p = priceFor(model);
+-  return (u.inputTokens * p.input + u.outputTokens * p.output + u.cacheReadTokens * p.cacheRead) / 1_000_000;
++  const writes = (u.cacheWrite5mTokens ?? 0) * p.input * 1.25 + (u.cacheWrite1hTokens ?? 0) * p.input * 2;
++  return (u.inputTokens * p.input + u.outputTokens * p.output + u.cacheReadTokens * p.cacheRead + writes) / 1_000_000;
+ }
+ 
+ export function proxyUrlOf(proxyUrl: string | null): string { return proxyUrl || ESCOBAR_PROXY_URL; }
+diff --git a/src/escobar/types.ts b/src/escobar/types.ts
+index fd57ba9..cd9bf82 100644
+--- a/src/escobar/types.ts
++++ b/src/escobar/types.ts
+@@ -41,6 +41,8 @@ export interface Usage {
+   output_tokens: number;
+   cache_read_input_tokens?: number;
+   cache_creation_input_tokens?: number;
++  /** The cache writes split by TTL (QA2-F7-4: priced at 1.25x or 2x input). */
++  cache_creation?: { ephemeral_5m_input_tokens?: number; ephemeral_1h_input_tokens?: number } | null;
+ }
+ 
+ export interface Fact {
+diff --git a/tests/escobar/loop.test.ts b/tests/escobar/loop.test.ts
+index 25340b3..3765617 100644
+--- a/tests/escobar/loop.test.ts
++++ b/tests/escobar/loop.test.ts
+@@ -309,4 +309,54 @@ describe('cost by the model that answered (F7)', () => {
+     expect(estimateCost({ inputTokens: 1_000_000, outputTokens: 0, cacheReadTokens: 0 }, 'claude-opus-5-5-20260901')).toBe(4);
+     expect(estimateCost({ inputTokens: 0, outputTokens: 1_000_000, cacheReadTokens: 0 }, 'claude-haiku-4-5')).toBe(5);
+   });
++
++  const oneStep = (usage: Record<string, unknown>, model: string): StreamEvent[] => [{ t: 'text', d: 'Ok.' }, { t: 'final', content: [{ type: 'text', text: 'Ok.' }], stop_reason: 'end_turn', usage, model }];
++  const recorded = async (steps: StreamEvent[]) => {
++    const got: Array<{ inputTokens: number; costUsd?: number }> = [];
++    const { loop } = setup([steps], { recordUsage: u => got.push(u) });
++    await loop.send({ text: 'hi' });
++    return got[0]!;
++  };
++
++  it('QA2-F7-4: cache writes are priced at the 1-hour and 5-minute write rates', async () => {
++    // Opus 5: $5 in, $25 out, 1h write $10, 5m write $6.25 per MTok.
++    const h1 = await recorded(oneStep({ input_tokens: 50, output_tokens: 300, cache_creation_input_tokens: 20_000, cache_creation: { ephemeral_5m_input_tokens: 0, ephemeral_1h_input_tokens: 20_000 } }, 'claude-opus-5'));
++    expect(h1.costUsd).toBeCloseTo(0.20775, 8);
++    const m5 = await recorded(oneStep({ input_tokens: 50, output_tokens: 300, cache_creation_input_tokens: 20_000, cache_creation: { ephemeral_5m_input_tokens: 20_000, ephemeral_1h_input_tokens: 0 } }, 'claude-opus-5'));
++    expect(m5.costUsd).toBeCloseTo(0.13275, 8);
++    // No TTL breakdown: the write is priced at the default 5-minute rate, never dropped.
++    const bare = await recorded(oneStep({ input_tokens: 50, output_tokens: 300, cache_creation_input_tokens: 20_000 }, 'claude-opus-5'));
++    expect(bare.costUsd).toBeCloseTo(0.13275, 8);
++  });
++
++  it('QA2-F7-1: a fallback turn prices each attempt by its own model and skips the unbilled declined attempt', async () => {
++    const it2 = (first: { input: number; output: number }) => ({ input_tokens: 412, output_tokens: 264, cache_read_input_tokens: 0, cache_creation_input_tokens: 0, iterations: [
++      { type: 'message', model: 'claude-opus-5-5', input_tokens: first.input, output_tokens: first.output, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 },
++      { type: 'fallback_message', model: 'claude-opus-4-8', input_tokens: 412, output_tokens: 264, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 },
++    ] });
++    // Declined before any output: reported, not billed. Opus 4.8 serves 412 in / 264 out at $5/$25.
++    const pre = await recorded(oneStep(it2({ input: 535, output: 0 }), 'claude-opus-4-8'));
++    expect(pre.inputTokens).toBe(412);
++    expect(pre.costUsd).toBeCloseTo(0.00866, 8);
++    // Declined mid-output: billed at Opus 5.5's own rates ($4/$20), then the Opus 4.8 attempt.
++    const mid = await recorded(oneStep(it2({ input: 535, output: 40 }), 'claude-opus-4-8'));
++    expect(mid.inputTokens).toBe(947);
++    expect(mid.costUsd).toBeCloseTo(0.00294 + 0.00866, 8);
++  });
++
++  it('QA2-F7-1: every model the API serves has its own price; an unknown id is never priced below the dearest one', async () => {
++    const { estimateCost } = await import('@/escobar/state');
++    const perMTok = (model: string) => [estimateCost({ inputTokens: 1_000_000, outputTokens: 0, cacheReadTokens: 0 }, model), estimateCost({ inputTokens: 0, outputTokens: 1_000_000, cacheReadTokens: 0 }, model)];
++    expect(perMTok('claude-mythos-5-1')).toEqual([10, 50]);
++    expect(perMTok('claude-mythos-5')).toEqual([10, 50]);
++    expect(perMTok('claude-sonnet-4-6')).toEqual([3, 15]);
++    expect(perMTok('claude-sonnet-4-5-20250929')).toEqual([3, 15]);
++    expect(perMTok('claude-opus-4-7')).toEqual([5, 25]);
++    expect(perMTok('claude-opus-4-6')).toEqual([5, 25]);
++    expect(perMTok('claude-opus-4-5-20251101')).toEqual([5, 25]);
++    expect(perMTok('claude-something-9')).toEqual([10, 50]);
++    // Cache reads per MTok: 0.025x on Fable/Mythos 5.1, 0.05x on Opus 5.5, 0.1x elsewhere.
++    expect(estimateCost({ inputTokens: 0, outputTokens: 0, cacheReadTokens: 1_000_000 }, 'claude-mythos-5-1')).toBe(0.25);
++    expect(estimateCost({ inputTokens: 0, outputTokens: 0, cacheReadTokens: 1_000_000 }, 'claude-sonnet-4-6')).toBeCloseTo(0.3, 10);
++  });
+ });
