@@ -1,0 +1,50 @@
+{
+  "lib_dumbbell_lateral_raise": {
+    "src": "ref-src",
+    "slug": "dumbbell-lateral-raise",
+    "prefix": "lr",
+    "chromeId": "lateral-raise"
+  },
+  "lib_barbell_back_squat": {
+    "src": "exercises/barbell_back_squat.mjs",
+    "slug": "barbell-back-squat",
+    "prefix": "barbell-back-squat",
+    "chromeId": "barbell-back-squat"
+  },
+  "lib_pull_up": {
+    "src": "exercises/pull_up.mjs",
+    "slug": "pull-up",
+    "prefix": "pull-up",
+    "chromeId": "pull-up"
+  },
+  "lib_hanging_leg_raise": {
+    "src": "exercises/hanging_leg_raise.mjs",
+    "slug": "hanging-leg-raise",
+    "prefix": "hanging-leg-raise",
+    "chromeId": "hanging-leg-raise"
+  },
+  "lib_lat_pulldown": {
+    "src": "exercises/lat_pulldown.mjs",
+    "slug": "lat-pulldown",
+    "prefix": "lat-pulldown",
+    "chromeId": "lat-pulldown"
+  },
+  "lib_seated_cable_row": {
+    "src": "exercises/seated_cable_row.mjs",
+    "slug": "seated-cable-row",
+    "prefix": "seated-cable-row",
+    "chromeId": "seated-cable-row"
+  },
+  "lib_leg_press": {
+    "src": "exercises/leg_press.mjs",
+    "slug": "leg-press",
+    "prefix": "leg-press",
+    "chromeId": "leg-press"
+  },
+  "lib_machine_chest_press": {
+    "src": "exercises/machine_chest_press.mjs",
+    "slug": "machine-chest-press",
+    "prefix": "machine-chest-press",
+    "chromeId": "machine-chest-press"
+  }
+}

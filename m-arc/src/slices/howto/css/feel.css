@@ -1,0 +1,60 @@
+/* GENERATED, do not edit. Written by tools/plates/generate.mjs (tools/plates/gen/feel.mjs). inputsSha256=af7d956afa1747f5c6879a6ccd008f1af603c34f6de317148fcb231d88fd1beb */
+/* ht-tokens:start */
+.ht { --ht-feel-delay-0: 0ms; --ht-feel-main: color-mix(in srgb, var(--accent) 75%, var(--text)); --ht-feel-map-h: 280px; --ht-feel-mark-dur: 200ms; --ht-feel-sweep: 5200ms;  }
+@keyframes feel-sweep { 0% { transform: translateY(var(--feel-from)); animation-timing-function: cubic-bezier(.45,0,.55,1); } 46.154% { transform: translateY(var(--feel-to)); animation-timing-function: step-end; } 46.155% { transform: translateY(var(--feel-from)); } 53.846% { transform: translateY(var(--feel-from)); animation-timing-function: cubic-bezier(.45,0,.55,1); } 100% { transform: translateY(var(--feel-to)); } }
+/* ht-tokens:end */
+.ht .feel-map { display: flex; justify-content: center; gap: var(--sp-5); -webkit-tap-highlight-color: transparent; }
+.ht .feel-view { margin: 0; display: flex; flex-direction: column; align-items: center; }
+.ht .feel-svg { display: block; height: var(--ht-feel-map-h); width: auto; overflow: visible; }
+.ht .feel-view .map-label { font-size: var(--fs-cap); line-height: var(--lh-cap); font-weight: var(--fw-semibold); letter-spacing: var(--ls-cap); text-transform: uppercase; color: var(--text-2); margin-top: var(--sp-2); }
+.ht .feel-svg .body-part, .ht .feel-svg .muscle { fill: var(--map-body); stroke: var(--map-line); stroke-width: .12; stroke-linejoin: round; }
+.ht .feel-svg .muscle.feel-sec { fill: color-mix(in srgb, var(--accent) 45%, var(--map-body)); stroke: color-mix(in srgb, var(--accent) 45%, var(--map-line)); }
+.ht .feel-svg .muscle.feel-pri { fill: var(--ht-feel-main); stroke: none; }
+.ht .feel-svg .feel-pri-line path { fill: none; stroke: color-mix(in srgb, var(--text) 55%, var(--ht-feel-main)); stroke-width: .22; stroke-linejoin: round; }
+.ht .feel-svg .feel-stop { stop-color: color-mix(in srgb, var(--ht-feel-main) 45%, var(--text)); }
+.ht .feel-svg .feel-band { transform: translateY(var(--feel-from)); }
+.ht .feel-map.is-playing .feel-band { animation: feel-sweep var(--ht-feel-sweep) linear var(--feel-delay, var(--ht-feel-delay-0)) 1 both; }
+.ht .feel-svg .feel-watch path { fill: none; stroke: var(--mistake); stroke-width: .45; stroke-dasharray: .9 .6; stroke-linejoin: round; stroke-linecap: round; }
+.ht .feel-svg .feel-pain path { fill: color-mix(in srgb, var(--mistake) 20%, transparent); stroke: var(--mistake); stroke-width: .35; stroke-linejoin: round; }
+.ht .feel-map.is-focus .feel-watch, .ht .feel-map.is-focus .feel-pain { animation: feel-mark-in var(--dur-base, var(--ht-feel-mark-dur)) var(--ease-standard, ease) both; }
+@keyframes feel-mark-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .ht .feel-band { display: none; }
+  .ht .feel-map .feel-watch, .ht .feel-map .feel-pain { animation: none; }
+}
+html[data-motion="reduce"] .ht .feel-band { display: none; }
+html[data-motion="reduce"] .ht .feel-map .feel-watch, html[data-motion="reduce"] .ht .feel-map .feel-pain { animation: none; }
+.ht .feel-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-2) var(--sp-4); font-size: var(--fs-meta); line-height: var(--lh-meta); color: var(--text-2); }
+.ht .feel-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.ht .feel-sw { width: 14px; height: 14px; flex: none; }
+.ht .feel-sw.sw-pri rect { fill: var(--ht-feel-main); stroke: color-mix(in srgb, var(--text) 55%, var(--ht-feel-main)); stroke-width: 1; }
+.ht .feel-sw.sw-sec rect { fill: color-mix(in srgb, var(--accent) 45%, var(--map-body)); stroke: none; }
+.ht .feel-sw.sw-watch rect { fill: none; stroke: var(--mistake); stroke-width: 1.4; stroke-dasharray: 2.4 1.8; }
+.ht .rf-link { justify-self: start; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--text); font-size: var(--fs-small); font-weight: var(--fw-medium); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--mistake) 50%, transparent); text-underline-offset: 3px; }
+.ht .rf-link svg { color: var(--mistake); }
+.ht .feel { display: grid; gap: var(--sp-3); --ht-feel-map-h: 236px; }
+.ht .feel-lead { font-size: var(--fs-body); line-height: var(--lh-body); letter-spacing: var(--ls-body); font-weight: var(--fw-medium); color: var(--text); }
+.ht .feel .feel-map { padding: var(--sp-2) 0 0; cursor: pointer; }
+.ht .feel-svg .feel-mark { display: none; }
+.ht .feel-svg .feel-mark.on { display: inline; }
+.ht .feel-svg .feel-quiet path { fill: var(--map-body); stroke: var(--map-line); stroke-width: .12; }
+.ht .feel-sw.sw-pain rect { fill: color-mix(in srgb, var(--mistake) 20%, transparent); stroke: var(--mistake); stroke-width: 1.2; }
+.ht .feel-legend span[hidden] { display: none; }
+.ht .feel-note { font-size: var(--fs-small); line-height: var(--lh-small); color: var(--text-2); }
+.ht .fr-head { margin: var(--sp-1) 0 0; }
+.ht .fr-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border-subtle); }
+.ht .fr { border-bottom: 1px solid var(--border-subtle); }
+.ht .fr[hidden] { display: none; }
+.ht .fr-btn { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); width: 100%; min-height: 48px; padding: 4px 0; text-align: left; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text); }
+.ht .fr-btn svg { flex: none; color: var(--text-3); transition: transform var(--dur-base) var(--ease-standard); }
+.ht .fr-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.ht .fr-body { display: grid; gap: var(--sp-2); padding: 0 0 var(--sp-3); font-size: var(--fs-small); line-height: var(--lh-small); color: var(--text); }
+.ht .fr-body[hidden] { display: none; }
+html:not([data-motion="reduce"]) .ht .fr-body:not([hidden]) { animation: fr-in var(--dur-base) var(--ease-standard) both; }
+.ht .fr-body b { display: block; margin-bottom: 2px; font-size: var(--fs-cap); line-height: var(--lh-cap); letter-spacing: var(--ls-cap); text-transform: uppercase; font-weight: var(--fw-semibold); color: var(--text-2); }
+@media (prefers-reduced-motion: reduce) {
+  .ht .fr-body:not([hidden]) { animation: none; }
+  .ht .fr-btn svg { transition: none; }
+}
+@keyframes fr-in { from { opacity: 0; transform: translateY(-4px); } }
+.ht .ht-feel-host { color: var(--text); font-family: var(--font); font-size: var(--fs-body); line-height: var(--lh-body); letter-spacing: var(--ls-body); }

@@ -1,0 +1,27 @@
+// GENERATED, do not edit. Written by tools/plates/generate.mjs (tools/plates/gen/content.mjs). inputsSha256=31b31323a81128aa314e1e98348079a17bbec22574feedeb047a07c21e32a1cd
+{
+  "id": "lib_dumbbell_lateral_raise",
+  "rev": 1,
+  "research": {
+    "card": "grip/research/dumbbell_lateral_raise.json",
+    "rev": 1
+  },
+  "sources": [
+    "ace-lateral-raise",
+    "coratella2020",
+    "graichen1999",
+    "kolber2014",
+    "kolber2010",
+    "andersen2008",
+    "sporrong1995",
+    "sporrong1996",
+    "weiss1995",
+    "jakobsen2012",
+    "nhs-wrist-pain",
+    "nhs-shoulder-pain"
+  ],
+  "riskFlags": [
+    "wrist",
+    "shoulder"
+  ]
+}

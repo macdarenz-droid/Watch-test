@@ -1,0 +1,4 @@
+# Append-only decision log: every task adds its own entry at the end, so a local
+# `git merge origin/main` keeps both sides' lines instead of stopping on a conflict.
+# (GitHub's merge button ignores this; builders merge main locally, per AGENTS.md.)
+docs/COACHING-DECISIONS.md merge=union
