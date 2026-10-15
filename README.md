@@ -45,6 +45,8 @@ Records refresh every 60 seconds while this dashboard is visible. Refreshing can
 3. Tap **Read UDID** and allow Nearby devices. Then **Copy UDID**, **Save file** or **Share**. The file holds the UDID and a log of every frame.
 4. Open Huawei Health again; the watch reconnects.
 
+Verified on 2026-10-15 with the owner's GT 6 (ATM-B19) and a Galaxy Z Flip7 (Android 16): the secure RFCOMM connect failed and the insecure one connected; the watch reported support type 4 and encrypt method 0, and its 01/33 reply carried the 64-character UDID. The UDID itself is kept out of this public repo.
+
 The M/ARC heart-rate path is different: it uses the watch's separate BLE heart-rate broadcast, not this link.
 
 ## Build
