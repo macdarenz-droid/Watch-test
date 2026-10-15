@@ -36,6 +36,17 @@ Tap **Connect health data** to choose read permissions. A companion app must fir
 
 Records refresh every 60 seconds while this dashboard is visible. Refreshing cannot make an upstream app sync sooner. **Choose data source** filters records to an app’s package. The default aggregates all shared sources and can include phone data, so it is labelled accordingly. No Health Connect data is written or deleted. Android 8–13 supports the live Bluetooth portion; this test app’s Health Connect route requires Android 14+.
 
+## Watch UDID tool
+
+`udid-tool/` is a separate one-screen app (`com.marc.udidtool`, **Watch UDID**) that reads the paired watch's UDID, which AppGallery Connect needs to register the watch for a debug build. It talks to the watch over the Huawei Health link (Bluetooth Classic RFCOMM, the link Gadgetbridge uses for the GT 6) and sends three unencrypted setup requests: link parameters (01/01), device status (01/16) and security negotiation (01/33). The watch's reply to 01/33 carries its UDID as 64 hex characters in tag 0x05. It never authenticates, binds, or changes a setting. The protocol code is in `huawei-link/`, a plain Java module with tests; its field meanings follow Gadgetbridge's open-source Huawei support, independently implemented.
+
+1. Pair the watch with Huawei Health as usual.
+2. Open Watch UDID, tap **Force stop Huawei Health** and force stop it, so the watch link is free.
+3. Tap **Read UDID** and allow Nearby devices. Then **Copy UDID**, **Save file** or **Share**. The file holds the UDID and a log of every frame.
+4. Open Huawei Health again; the watch reconnects.
+
+The M/ARC heart-rate path is different: it uses the watch's separate BLE heart-rate broadcast, not this link.
+
 ## Build
 
 JDK 17, Android SDK 35, Gradle 8.11.1 / Android Gradle Plugin 8.9.2:
@@ -50,6 +61,8 @@ Windows: use `gradlew.bat`. Open the root folder in Android Studio for normal de
 ## Project layout
 
 - `sensor-core/`: plain Java packet parser and monotonic freshness/session model, with tests.
+- `huawei-link/`: plain Java Huawei link framing (CRC-16, TLV, slices) and the UDID probe, with tests.
+- `udid-tool/`: the Watch UDID app.
 - `app/.../WatchService.java`: serial GATT operation queue, subscription, bounded retries, foreground lifecycle, optional battery reading, redacted diagnostics.
 - `app/.../DeviceScanner.java`: user-selected discovery, including paired devices and devices omitting service UUIDs from advertisements.
 - `app/.../HealthBridge.java`, `PlatformHealthBridge.java`: delayed shared-data adapter, source filters, pagination, revocation handling.

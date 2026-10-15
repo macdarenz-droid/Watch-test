@@ -4,4 +4,4 @@ dependencyResolutionManagement {
     repositories { google(); mavenCentral() }
 }
 rootProject.name = 'WatchTest'
-include ':app', ':sensor-core'
+include ':app', ':sensor-core', ':huawei-link', ':udid-tool'
