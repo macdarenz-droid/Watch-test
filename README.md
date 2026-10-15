@@ -38,7 +38,9 @@ Records refresh every 60 seconds while this dashboard is visible. Refreshing can
 
 ## Watch UDID tool
 
-`udid-tool/` is a separate one-screen app (`com.marc.udidtool`, **Watch UDID**) that reads the paired watch's UDID, which AppGallery Connect needs to register the watch for a debug build. It talks to the watch over the Huawei Health link (Bluetooth Classic RFCOMM, the link Gadgetbridge uses for the GT 6) and sends three unencrypted setup requests: link parameters (01/01), device status (01/16) and security negotiation (01/33). The watch's reply to 01/33 carries its UDID as 64 hex characters in tag 0x05. It never authenticates, binds, or changes a setting. The protocol code is in `huawei-link/`, a plain Java module with tests; its field meanings follow Gadgetbridge's open-source Huawei support, independently implemented.
+> **Wrong value for debug builds on the GT 6 (found 2026-10-15).** The tag 0x05 value this tool reads is the watch's HiChain auth ID. It is not the UDID the GT 6 installer checks: a debug profile built with it was refused. For AppGallery Connect, take the UDID from HUAWEI DevEco Assistant's "Lite Wearable" tab, which Huawei documents as the source and which ran on a Galaxy Z Flip7. The tool's own results below stay as they were measured.
+
+`udid-tool/` is a separate one-screen app (`com.marc.udidtool`, **Watch UDID**) that reads the 64-character ID in the watch's security-negotiation reply (see the warning above). It talks to the watch over the Huawei Health link (Bluetooth Classic RFCOMM, the link Gadgetbridge uses for the GT 6) and sends three unencrypted setup requests: link parameters (01/01), device status (01/16) and security negotiation (01/33). The watch's reply to 01/33 carries a 64-hex-character ID in tag 0x05. It never authenticates, binds, or changes a setting. The protocol code is in `huawei-link/`, a plain Java module with tests; its field meanings follow Gadgetbridge's open-source Huawei support, independently implemented.
 
 1. Pair the watch with Huawei Health as usual.
 2. Open Watch UDID, tap **Force stop Huawei Health** and force stop it, so the watch link is free.
