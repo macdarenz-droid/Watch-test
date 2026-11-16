@@ -56,6 +56,21 @@ Coach, 05-11: quality over count - the next test starts with ten charts looked a
      and leave it parked: it was chosen after seeing results, and one more case chosen the same way proves nothing.
      Night count: against me by 5.9 pips -> live trade 9 of the count (running: 9 trades, +3.29R). 10-day-trend paper line: trend UP: 4 trades, +0.16R.
      END OF RELEASED DATA (clock Tue 05-12 01:00 London).
+- **Tue 05-12 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID LOSS. Figures from `python bt/call_numbers.py 2015-05-12` and the bar prints.
+  D1 (22:00-22:00 London days): Thu 05-07 high 1.13916 low 1.12373 close 1.12662 (0.19); Fri 05-08 high 1.12880 low 1.11790 close 1.12015 (0.21);
+      Mon 05-11 high 1.12065 low 1.11310 close 1.11546 (0.31, range 75.5). Three falling days from the 1.13916 high, each with a lower high and a lower low.
+  H4 (UTC bars): Monday 08:00 bar low 1.11380, 12:00 bar low 1.11310, 16:00 bar 1.11332-1.11697; tonight's 00:00 bar 1.11457 -> 1.11554, 04:00 bar high 1.11896.
+  H1: the night (00:00-07:00 London): open 1.11487, high 1.11896, low 1.11343, last 1.11761: range 55.3 pips (ratio 1.05), net +27.4 pips - a rising night.
+  M15: after the 1.11896 high at 06:0x London, four small candles 1.11720-1.11868; last close 1.11761.
+  Bias: SELL. 22:00 London closes: 05-11 1.11546 vs 05-06 1.13459 = -191 pips (3-day gap -191.3). The signal flipped to sell after three buy days.
+  UN3 PAPER TAG (never live): 5-day gap +9 pips -> BUY; 3-day says SELL -> DISAGREE: paper SKIPS. Forward day 16, disagree day 4 of 30. Live trade at full size.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 8.
+  Levels: night high 1.11896; Mon high 1.12065; night low 1.11343; Mon low 1.11310.
+  Rejection-day check (parked observation): for a sell, Monday would need the 3-day low (True) AND a close in the top third; it closed at 0.31. Not a rejection day.
+  10-day-trend paper line: UP (1.11546 vs 04-27 1.08909); today's sell is against it. Stretch: gap / ADR5 = 1.39 - a stretched signal (my best group over all history).
+  Worry: selling into a night that rose 27 pips, with my paper filter saying skip. Written; not a rule.
+  Funded check / SIZE RULE: tracker balance $25,222.04, high-water $25,349.14, drawdown -0.50%. Trigger 1 at $24,588.67, trigger 2 at $24,081.68: neither reached -> FULL size.
+  Plan: SELL 08:00 London, SL 40 pips above the bid at 08:00, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$131 -> drawdown about -1.0%. One trade, stop not moved.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
