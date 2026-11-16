@@ -32,5 +32,6 @@
 ## Next step
 1. `git pull origin main`; `python sim.py advance --until 2015-02-02T07:00`; `./look.sh`; journal call (new file journal/2015-W06.md); `python trade_a.py sell|buy|skip`.
 2. Keep rule A2 and $125 risk unchanged until phase 1 resolves or 20 more trades. Phase 1 needs ~+6R more.
-3. Queued ideas (new idea C = a different trend filter / Asia-against-trend skip) only after >= 2 more months lived; backtest on lived history only.
+3. Replay of worst week done (journal/2015-W05-replay.md). Queued idea C v1 = 'yesterday-midpoint filter' with a pass mark fixed in advance; test only on new months (>=40 trades). NOT yet run, not counted.
+4. Other queued ideas (new idea C = a different trend filter / Asia-against-trend skip) only after >= 2 more months lived; backtest on lived history only.
 Tools: look.sh (multi-TF view), trade_a.py (executes the written plan), bt/ideas.py (backtests). Run tests with `python -m pytest -q` (plain `pytest` uses a different interpreter here).
