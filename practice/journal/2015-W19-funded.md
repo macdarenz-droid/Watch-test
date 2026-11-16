@@ -1,7 +1,7 @@
 # Journal - FUNDED ACCOUNT, week of 2015-05-04 (W19). Plan: journal/PLAN-v2-funded-one-page.md. Tracker: journal/FUNDED-TRACKER.md. Size 0.50% = $125 = 0.31 lots. All times London.
 Start of week: tracker balance $25,571.80 (sim $25,697.50 minus $125.70 paid out) = the high-water mark, drawdown 0.00%. Last week +4.04R. Payout date this week: Fri 05-08.
 SIZE RULE (written 04-27, the only size triggers): half size from a day's close at or below 3% under the high-water (today $24,804.65) until a new high-water; stop at 5% under (today $24,293.21).
-Paper tags, never live: UN3 (call at 07:00), PH2 (decided at 08:00, written before the order), F1 / FR1, Q3 / Q1.
+Paper tags, never live: UN3 (call at 07:00), PH2 (decided at 08:00, written before the order). F1 / FR1, Q3 / Q1 were CLOSED on 05-06 at their day-40 gates.
 From May: a number written from memory and corrected later is logged as a process mistake.
 
 ## Funded trades
@@ -108,10 +108,10 @@ From May: a number written from memory and corrected later is logged as a proces
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
 | A2 as traded (R = result / amount risked) | 47 | 29 | +16.53 | +0.35 | 3.23R | 40-trade alarm PASSED 04-24; next alarm look at 100 live trades; real statement at 200 |
-| F1 paper tag | 35 (12 skips) | 23 | +18.51 | +0.53 | 1.28R | filter: no adoption question before 200 forward days; can be killed at day 40 (needs FR1 within 1R of A2) |
-| FR1 (tracked only to judge F1) | 32 (15 skips) | 21 | +15.36 | +0.48 | 1.28R | 1.2R behind A2 |
-| Q3 dead-Asia tag (drawdown goal) | 26 (21 skips) | 15 | +6.06 | +0.23 | 1.01R | 37% of A2's net (needs 85%) |
-| Q1 dead-Asia tag (drawdown goal) | 43 (4 skips) | 25 | +12.32 | +0.29 | 3.23R | 75% of net, same DD |
+| F1 paper tag | 35 (12 skips) | 23 | +18.51 | +0.53 | 1.28R | CLOSED 05-06 at its day-40 gate (journal/2015-paper-tag-gates-day40.md); no longer updated |
+| FR1 (tracked only to judge F1) | 32 (15 skips) | 21 | +15.36 | +0.48 | 1.28R | CLOSED 05-06 at its day-40 gate (journal/2015-paper-tag-gates-day40.md); no longer updated |
+| Q3 dead-Asia tag (drawdown goal) | 26 (21 skips) | 15 | +6.06 | +0.23 | 1.01R | CLOSED 05-06 at its day-40 gate (journal/2015-paper-tag-gates-day40.md); no longer updated |
+| Q1 dead-Asia tag (drawdown goal) | 43 (4 skips) | 25 | +12.32 | +0.29 | 3.23R | CLOSED 05-06 at its day-40 gate (journal/2015-paper-tag-gates-day40.md); no longer updated |
 | UN3 paper tag (never live; rules: journal/UN3-paper-tag-rules.md; forward from 04-21) | 11 days, 2 disagree days of 30 | - | A2 on the disagree days -1.02R; on the agree days +2.85R | - | - | first look only at 30 disagree days AND 200 forward days |
 | PH2 paper tag (never live; rules: journal/PH2-paper-tag-rules.md; forward from 05-01) | 3 days, 3 lively days of 60 | - | A2 on the lively days +0.29R (1 full-stop morning); PH2 +0.14R | - | - | first look only at 200 forward days AND 60 lively days |
 Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8) | 04-08 -1.00 (funded 9) | 04-09 +0.33 (funded 10) | 04-10 +1.62 (funded 11) | 04-13 +1.94 (funded 12) | 04-14 -0.62 (funded 13) | 04-15 +1.48 (funded 14) | 04-16 -1.00 (funded 15) | 04-17 +1.70 (funded 16) | 04-20 -1.00 (funded 17) | 04-21 -0.04 (funded 18) | 04-22 -0.02 (funded 19) | 04-23 -1.00 (funded 20) | 04-24 -1.00 (funded 21) | 04-27 -0.16 (funded 22) | 04-28 +1.61 (funded 23) | 04-29 +0.32 (funded 24) | 04-30 +1.83 (funded 25) | 05-01 +0.44 (funded 26) | 05-04 -1.00 (funded 27) | 05-05 +0.85 (funded 28).
@@ -138,3 +138,5 @@ Count only (no look before 40): live trades after a night (00:00->08:00) against
 
 ## 05-05 research (before the next day): one change to the size rule - when to restore full size after the -3% step, SZ1/SZ2/SZ3 by simulation on my own trades (journal/2015-idea-SZ-brake-restore.md) - no survivor: the rule of 04-27 stays; the half-size step is worth far more than I knew. Ideas 51, variants 140.
 Process mistake P4 (05-05): two counts written from memory in the size-rule note, corrected the same hour (first case under the May rule).
+
+## 05-06 (before the next day): (1) overdue day-40 gates applied: F1 / FR1, Q3, Q1 all CLOSED (journal/2015-paper-tag-gates-day40.md; process mistake P5 for the delay). (2) Rising-trend health check (journal/2015-idea-UP-rising-trend.md): hypothesis survives - up-trend days +0.375R on 29 trades, down-trend +0.307R on 48. Rule A2 and size 0.50% unchanged. Ideas 52, variants 141. Process mistakes: 5.
