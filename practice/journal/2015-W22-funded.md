@@ -29,6 +29,12 @@ Friday 05-29 is the last trading day of May: the month-end review is due on the 
   Monday: five losing Mondays in a row before this one. MO said it was a streak (Mondays +0.397R in the 14 before). The plan, without a second thought.
   Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
   Worry: three stops in a row and I am selling a market that has already fallen 480... correction, I have not computed that - a market at its low of the month. Written, not a rule.
+  08:00 London Mon: pre-entry hour 1.09854-1.10067 = 21.3 pips -> PH2 paper: QUIET, paper full size (decided before the order). Price 1.10039: the hour rose 18 pips; night against me by 2.3 pips (counted); entry 17.6 pips better than at 07:00. Order: SELL 0.31, stop 40 pips above the bid (1.10439).
+  08:15 London: filled SELL 1.10038, stop 1.10439 (40.1 pips). First candle read from the tool. No call that matters; hands off.
+  09:00 London: first hour best +35.7 (low 1.09671), worst -3.5, last +29.5 pips. In profit for the first time in four days and I notice the wish to bank it. No target; the clock is noon. Hands off.
+  10:00 London: second hour best +43.8 (low 1.09590), worst +26.2, last +29.9 pips. No call; hands off.
+  11:00 London: third hour best +34.7, worst +17.0, last +26.4 pips. A 17 pip range. One hour left; close at 12:00 whatever it shows.
+  12:05 London: closed at 12:00 @1.09763, +$85.25 (from the trade list). MB1 paper (forward day 9), written before 13:25: open 08:00 1.10039, open 12:00 1.09752 -> morning DOWN by 28.7 pips (large morning) -> only a DOWN break of the 12:00-13:25 box counts. Result from the tool tomorrow.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
