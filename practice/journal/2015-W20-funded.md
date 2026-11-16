@@ -206,6 +206,11 @@ Coach, 05-11: quality over count - the next test starts with ten charts looked a
   FRIDAY GATES (list read): A2 alarm 54 / 100; UN3 5 / 30 disagree days; PH2 9 / 60 lively days; night count 11 / 40; up-trend line 7 / 40; MB1 0 / 100 kept; payout next Fri 05-22. None due.
   Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade. The release ends at 22:00 London today.
   Worry: the last hour fell 35 pips straight; buying into that. Written, not a rule.
+  08:00 London Fri: pre-entry hour 1.13711-1.14154 = 44.3 pips -> PH2 paper: LIVELY, paper half size (decided before the order). Price 1.14145: the hour dipped to 1.13711 and rallied 44 pips to its high; I buy the top of the hour again (31.3 pips worse than at 07:00). Night with me by 10.5 pips (not counted). Order: BUY 0.31, stop 40 pips below the bid (1.13745).
+  08:15 London: filled BUY 1.14156, stop 1.13745 (41.1 pips from the fill). First candle read from the tool before this note. Call for the hour: none that matters; hands off.
+  09:00 London: first hour best +5.1, worst -39.8 (low 1.13758: 1.3 pips from the stop), last -30.4 pips. Bought the top of the hour and it fell 40 pips at once. Yesterday 3.5 pips, today 1.3. Nothing to do: the stop is the stop. No call.
+  10:00 London: STOPPED in the 09:30 London candle (low 1.13580). Balance read from the tool: sim $25,589.62. One trade a day: done. I only watch to noon for the stop-day routine.
+  12:00 London: price (bid, from the tool) 1.13583 = 57.3 pips under my entry, 16.2 pips beyond the stop: a REAL stop. MB1 paper (forward day 3), written before 13:25: open 08:00 1.14145, price at 12:00 1.13583 -> morning DOWN by about 56 pips (large morning) -> only a DOWN break of the 12:00-13:25 box counts. Exact figures and result from the tool afterwards.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
