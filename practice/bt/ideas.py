@@ -27,7 +27,7 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6):
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
     _a = m5[(m5.time.dt.hour < 7) & (m5.time.dt.date == m5.day)]; _g = _a.groupby('day'); arng = (_g['high'].max() - _g['low'].min()) / PIP   # Asia 00-07 range per day, pips
@@ -85,7 +85,7 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                         c = cl.iloc[i-6:i]; E = abs(c.iloc[-1] - c.iloc[0]) / c.diff().abs().sum(); EFF[d] = E
                         if E < eff:
                             y = dlist[i - 1]; pos = (b.open - lo[y]) / (hi[y] - lo[y]); pos = pos if side > 0 else 1 - pos
-                            if pos >= 0.6: go = False; done = True
+                            if pos >= effchase: go = False; done = True
                 if go and chase is not None:   # idea H: no trade if price already sits in the far part of yesterday's range, in my direction
                     y = dlist[dlist.index(d) - 1]; pos = (b.open - lo[y]) / (hi[y] - lo[y]); pos = pos if side > 0 else 1 - pos
                     if pos >= chase: go = False; done = True
@@ -187,6 +187,9 @@ VARIANTS = {
  "NM1": dict(entry_h=8, exit_h=12, sl=40, night=0),      # idea NM: skip if the night moved against me at all
  "NM2": dict(entry_h=8, exit_h=12, sl=40, night=-14.999), # skip if -15 pips or worse
  "NM3": dict(entry_h=8, exit_h=12, sl=40, night=5),      # trade only if +5 pips or better
+ "FR1": dict(entry_h=8, exit_h=12, sl=40, eff=0.5, effchase=0.5),   # F1 neighbour: stricter no-chase
+ "FR2": dict(entry_h=8, exit_h=12, sl=40, eff=0.5, effchase=0.7),   # F1 neighbour: looser no-chase
+ "FR3": dict(entry_h=8, exit_h=12, sl=40, eff=0.6, effchase=0.6),   # F1 neighbour: higher efficiency threshold
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":

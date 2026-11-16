@@ -86,3 +86,7 @@ For the record, the trend direction today is the same under either reading.
 | N1 paper tag (NY fade; London time from 03-30) | 6 (14 days) | 2 | -3.27 | -0.55 | 3.34R | today +0.07R. Judge at 20 trades AND 8 A2-losing days. A2-losing days so far: 3; N1 on them: -2.02R |
 Days: ... 03-26 -0.50 | 03-27 -1.00 (funded 1) | 03-30 +0.84 (funded 2) | 03-31 +1.14 (funded 3).
 Loss tags, all live trades: valid setup, market disagreed 19 (-10.66R) | my mistake 0. Process mistakes (funded): 1.
+
+## Wed 04-01, before the day is released: test of the day
+F1 robustness (journal/2015-idea-FR-robustness.md): my most promising paper idea is NOT robust to its two numbers - one step stricter and its March lead of +0.33R becomes -3.10R.
+It stays a paper tag with a tougher gate; the funded rule is untouched. FR1 is tracked beside F1 from now on.
