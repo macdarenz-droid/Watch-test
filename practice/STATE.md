@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Sim clock | Tue 2015-04-14 00:00 UTC = 01:00 London (END OF RELEASED DATA; one live day at a time until ~Mar 2017; quality over speed: one honest piece of work earns the next day). London on summer time (UTC+1) |
+| Sim clock | Wed 2015-04-15 00:00 UTC = 01:00 London (END OF RELEASED DATA; one live day at a time until ~Mar 2017; quality over speed: one honest piece of work earns the next day). London on summer time (UTC+1) |
 | Phase | FUNDED ACCOUNT ($25k FundedNext) since Fri 2015-03-27 - see FUNDED SCOREBOARD below. Sim label "challenge #3" = the funded account; MY tracker is journal/FUNDED-TRACKER.md; this week's journal journal/2015-W16-funded.md |
 | Current strategy | Rule A2 unchanged, IN LONDON TIME (decision 2015-03-30, journal/2015-W14-funded.md; confirmed by the clock-shift test): 07:00 London call; trend = last 22:00 London close vs the close 3 trading days earlier; 08:00 London market order; SL 40 pips; close 12:00 London; 1 trade/day, no skips. In UTC during summer time: call 06:00, entry 07:00, exit 11:00. FUNDED PLAN: journal/FUNDED-PLAN.md |
 | Risk | FUNDED: 0.50% = $125 = 0.31 lots. COMMANDS: `python sim.py advance --until DATE T06:00` (= 07:00 London in summer time; T07:00 in winter), `./look.sh 3 0 9`, WRITE THE CALL (before 08:00 London, or no trade that day), then `python trade_a.py buy/sell --risk 125 --london` (08:00 -> 12:00 London, converted automatically). Funded brakes: 3% below high-water (or <= $24,250) -> 0.25% (`--risk 62.5`); 5% below (or <= $23,750) -> STOP + review. Payouts every 14 days: half of profit above $25,000 until a $1,000 buffer, then all above $26,000; none while a brake is on |
@@ -12,15 +12,15 @@
 | Last updated (real date) | 2026-11-16 |
 
 ## FUNDED SCOREBOARD (update after every funded day; source of truth: journal/FUNDED-TRACKER.md)
-| Item | Value (after funded day 12, Mon 2015-04-13) |
+| Item | Value (after funded day 13, Tue 2015-04-14) |
 |---|---|
-| Funded trades | 12 (8 wins, 4 valid losses) |
-| Total R | +3.05R (March +0.98R in 3 trades; April +2.07R in 9 trades) |
-| Balance | $25,311.86 (sim shows $25,380.68; tracker = sim - $68.82 paid out) |
+| Funded trades | 13 (8 wins, 5 valid losses) |
+| Total R | +2.43R (March +0.98R in 3 trades; April +1.45R in 10 trades) |
+| Balance | $25,234.98 (sim shows $25,303.80; tracker = sim - $68.82 paid out) |
 | High-water mark | $25,311.86 |
-| Drawdown now / deepest | 0.00% / -1.00% (first brake -3% = $24,552.50; stop -5% = $24,046.27; account line $22,500) |
+| Drawdown now / deepest | -0.30% / -1.00% (first brake -3% = $24,552.50; stop -5% = $24,046.27; account line $22,500) |
 | Payouts taken | 1 ($68.82 requested on Fri 2015-04-10, $55.06 mine at 80%). Next payout date Fri 2015-04-24 |
-| Trade tags | 12 valid, 0 my mistake |
+| Trade tags | 13 valid, 0 my mistake |
 | Process mistakes | 2 (P1 DST slip 03-30; P2 research script touched March 04-03) |
 
 ## Results (costs on: 1.0 pip spread + 0.1 slippage)
@@ -270,10 +270,10 @@
 - The 11 "closed against me" days earn +0.60R each (others +0.49R): buying the dip inside the trend is where the rule earns (idea D again). Rejection days: 6 cases, 4 losers; parked observation, about 20 cases a year, not testable.
 - Eight chart-reading filters in a row (H, G, NM, GAP, RN, FL, FH, RV) have failed the same way: the losers I look at have more winning twins than losing ones.
 
-## Loss tags (running count, all live trades): valid setup, market disagreed 22 (-12.91R) | my mistake 0. PROCESS mistakes (funded): 1 (P1, 03-30 DST slip: call written at the entry time).
+## Loss tags (running count, all live trades): valid setup, market disagreed 23 (-13.53R) | my mistake 0. PROCESS mistakes (funded): 1 (P1, 03-30 DST slip: call written at the entry time).
 
 ## Next step
-1. FUNDED, one live day at a time. When the next day (Tue 04-14) is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `python sim.py advance --until DATE T06:00` (= 07:00 London in summer time); `./look.sh 3 0 9`; write the call in the week's funded journal (journal/2015-W16-funded.md) AND COMMIT IT BEFORE 08:00 London; at each month's first day write the month-end check (P&L, drawdown, tag counts); check brakes in FUNDED-TRACKER; `python trade_a.py buy|sell --risk 125 --london`; TAG the result valid/mistake FIRST; update journal/FUNDED-TRACKER.md (daily log + status line; payout on the dates) AND the FUNDED SCOREBOARD in this file; paper tags (F1/FR1 via `python bt/ab_drop.py F1,FR1 2015-03-01 <clock date>`, Q3/Q1 from look.sh); forward tally. When replacing a tally in a file, cut at the LAST "## Forward tally".
-2. Forward tests running: A2 forward test (31/40, +14.17R) - when it completes re-run bt/reshuffle_breach.py and bt/funded_sim.py; F1 (28 days; plus FR1 tracked beside it), Q3/Q1. Friday tag and N1 are CLOSED (04-03).
+1. FUNDED, one live day at a time. When the next day (Wed 04-15) is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `python sim.py advance --until DATE T06:00` (= 07:00 London in summer time); `./look.sh 3 0 9`; write the call in the week's funded journal (journal/2015-W16-funded.md) AND COMMIT IT BEFORE 08:00 London; at each month's first day write the month-end check (P&L, drawdown, tag counts); check brakes in FUNDED-TRACKER; `python trade_a.py buy|sell --risk 125 --london`; TAG the result valid/mistake FIRST; update journal/FUNDED-TRACKER.md (daily log + status line; payout on the dates) AND the FUNDED SCOREBOARD in this file; paper tags (F1/FR1 via `python bt/ab_drop.py F1,FR1 2015-03-01 <clock date>`, Q3/Q1 from look.sh); forward tally. When replacing a tally in a file, cut at the LAST "## Forward tally".
+2. Forward tests running: A2 forward test (32/40, +13.55R) - when it completes re-run bt/reshuffle_breach.py and bt/funded_sim.py; F1 (28 days; plus FR1 tracked beside it), Q3/Q1. Friday tag and N1 are CLOSED (04-03).
 3. Research rules: hypothesis + explicit kill lines committed first, max 3 variants per idea, BUILD = all lived history before the clock shown by month (explicit end date), build only kills, survivors -> forward paper tag (200 trades filter / 100 same-trade or stand-alone), inspiring days removed (bt/ab_drop.py), a feature from "best N vs worst N" is counted on all build-month trades before it is pre-registered, everything counted. A reshuffle does not count as the day's test: it must be a new rule test. One honest test earns the next day.
 Tools: look.sh, trade_a.py, bt/*.py (ab, ab_exit, ab_rule, ab_same, ab_score, regime, ignite, ny_fade, dd_goal, cost_stress, edge_compare, phase2_sim, last_stretch, start_weeks, reshuffle_breach, funded_sim, pass_math, risk_math, review, loser_charts, entry_charts). Tests: `python -m pytest -q`.

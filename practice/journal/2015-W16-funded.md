@@ -6,6 +6,7 @@ Size note (coach, 04-13): Friday's +1.62R does not change the size. The risk-siz
 | F# | Entry (London) | Side | Lots | Entry | Stop | Exit | R | $ | Tag | Note |
 |---|---|---|---|---|---|---|---|---|---|---|
 | F12 | Mon 04-13 08:00 | sell | 0.31 | 1.06059 | 1.06463 | 1.05275 (12:00) | +1.94 | +$243.04 | valid win | 11 pips of heat, then -95 pips to noon; afternoon bounced 90; F1, FR1, Q3, Q1 all trade |
+| F13 | Tue 04-14 08:00 | sell | 0.31 | 1.05486 | 1.05888 | 1.05734 (12:00) | -0.62 | -$76.88 | VALID LOSS (valid setup, market disagreed) | chop 1.0537-1.0575 all morning, closed 25 pips against; afternoon rallied 130 pips; F1, FR1, Q3, Q1 all trade |
 
 ## Daily calls - each written at 07:00 London and committed before the entry bar
 - **Mon 04-13 call, written 07:00 London (06:00 UTC), before the entry bar.** Friday's tag stands: VALID WIN.
@@ -40,15 +41,27 @@ Size note (coach, 04-13): Friday's +1.62R does not change the size. The risk-siz
   Funded check: tracker balance $25,311.86, high-water $25,311.86, drawdown 0.00% (brakes -3% = $24,552.50 / -5% = $24,046.27) -> full size allowed.
   Plan: SELL 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$129 -> drawdown -0.5%. One trade, stop not moved.
 
+  -> Tue result, TAG FIRST: VALID LOSS (valid setup, market disagreed; not a mistake). Checked: call written and committed at 07:00 London, before the entry bar; entry
+     08:00 London, 0.31 lots, stop 40.2 pips from the fill, SELL per the trend rule, one trade, stop never moved, closed 12:00 London. Process: clean.
+     Result: sold 1.05486, closed 12:00 London @1.05734, -$76.88 = -0.62R. Tracker balance $25,234.98 (sim $25,303.80), drawdown -0.30% from the $25,311.86 high-water.
+     What happened: the hour before entry had already turned (low 1.0532 at 07:xx, back to 1.0549 by 08:00). First half hour spiked to 1.0575 (26 pips against), fell
+     back to 1.0537 (+11), and then four hours of overlapping swings with higher lows: 1.0537, 1.0538, 1.0549, 1.0554. Never more than +11 pips for me. At noon I was
+     25 pips under water and out. From 13:30 London it rallied 130 pips to 1.0707 - the snap-back day I wrote about on Monday. The stop (1.0589) would have gone at about 13:30;
+     the noon exit made this -0.62R instead of -1R. That is what the noon exit is for; it is not skill.
+     Monday's low held by 12 pips in the night and was never retested: after six days down the sellers were done at 1.0520-1.0530. I could not have known at 07:00.
+     Feeling: calm. After +1.62 and +1.94 this is the ordinary cost of the rule. Size stays 0.50%.
+     Paper tags: F1, FR1, Q3 and Q1 all traded (-0.62R each).
+     END OF RELEASED DATA (clock Wed 04-15 01:00 London).
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
-| A2 as traded (R = result / amount risked) | 31 | 22 | +14.17 | +0.46 | 2.00R | early alarm at 40 trades (avg >= +0.10R, DD <= 8R): 31 done; real statement at 200 |
-| F1 paper tag | 23 (8 skips) | 17 | +14.82 | +0.64 | 1.28R | filter: no adoption question before 200 forward days; can be killed at day 40 (needs FR1 within 1R of A2) |
-| FR1 (tracked only to judge F1) | 21 (10 skips) | 15 | +11.51 | +0.55 | 1.28R | 2.7R behind A2 |
-| Q3 dead-Asia tag (drawdown goal) | 18 (13 skips) | 12 | +6.52 | +0.36 | 1.01R | 46% of A2's net (needs 85%) |
-| Q1 dead-Asia tag (drawdown goal) | 29 (2 skips) | 20 | +11.98 | +0.41 | 2.00R | 85% of net, same DD |
-Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8) | 04-08 -1.00 (funded 9) | 04-09 +0.33 (funded 10) | 04-10 +1.62 (funded 11) | 04-13 +1.94 (funded 12).
-Loss tags, all live trades: valid loss 22 (-12.91R) | my mistake 0. Process mistakes (funded): 2.
+| A2 as traded (R = result / amount risked) | 32 | 22 | +13.55 | +0.42 | 2.00R | early alarm at 40 trades (avg >= +0.10R, DD <= 8R): 32 done; real statement at 200 |
+| F1 paper tag | 24 (8 skips) | 17 | +14.20 | +0.59 | 1.28R | filter: no adoption question before 200 forward days; can be killed at day 40 (needs FR1 within 1R of A2) |
+| FR1 (tracked only to judge F1) | 22 (10 skips) | 15 | +10.89 | +0.50 | 1.28R | 2.7R behind A2 |
+| Q3 dead-Asia tag (drawdown goal) | 19 (13 skips) | 12 | +5.90 | +0.31 | 1.01R | 44% of A2's net (needs 85%) |
+| Q1 dead-Asia tag (drawdown goal) | 30 (2 skips) | 20 | +11.36 | +0.38 | 2.00R | 84% of net, same DD |
+Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8) | 04-08 -1.00 (funded 9) | 04-09 +0.33 (funded 10) | 04-10 +1.62 (funded 11) | 04-13 +1.94 (funded 12) | 04-14 -0.62 (funded 13).
+Loss tags, all live trades: valid loss 23 (-13.53R) | my mistake 0. Process mistakes (funded): 2.
 
 ## 04-14 research (before the next day): replay of week 04-06..04-10 + rejection-day test RV1/RV2/RV3 (journal/2015-replay-W15-and-idea-RV.md) - no survivor. Rule A2 and size 0.50% unchanged. Ideas 37, variants 98.
