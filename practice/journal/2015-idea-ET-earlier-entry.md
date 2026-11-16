@@ -26,3 +26,32 @@ Hand-check before totals: one day, each part's entry price and stop against the 
 A survivor gets a forward paper tag only.
 My guess, written now: ET1 about 3R BEHIND A2, ET2 and ET3 within 1.5R of A2 either way; nothing passes K1. If so I will have the whole profile
 (07:00 ... 09:00) and can stop asking whether 08:00 is the right minute.
+
+## Mechanics hand-check (`python bt/earlier_entry.py 2015-05-20 --check 2015-05-19`)
+The 08:00 part reproduces engine A2 on every day (largest difference 0.000R). 05-19, sell: ET1 enters 1.13161 at 07:00 (my call that morning read the 07:00
+price as 1.13162), stop 1.13562, out 12:00 @1.12163 (my live exit price) = +2.49R; ET2 1.12852 = +1.72R; ET3 1.12904 = +1.85R. Pre-entry hour 38.4 pips, as in my 08:00 note.
+
+## Results (run once; `python bt/earlier_entry.py 2015-05-20`; figures copied from the print)
+A2: 96 days, net +36.71R, max DD 3.28R, worst 10 in a row -1.70R; before 03-02 +19.56R, from 03-02 +17.16R; lively days 43 (+6.51R), quiet days 53 (+30.20R).
+| variant | net R (vs A2) | wins | full stops | max DD | worst 10 | before 03-02 (vs A2) | from 03-02 (vs A2) | diff without best 3 days | gain on lively / quiet days | days better / worse |
+|---|---|---|---|---|---|---|---|---|---|---|
+| ET1 07:00 | +27.80 (-8.91) | 56% | 27 | 5.07R | -4.40 | +14.33 (-5.22) | +13.47 (-3.69) | -12.62 | -4.84 / -4.07 | 31 / 45 |
+| ET2 07:30 | +33.01 (-3.70) | 56% | 22 | 6.12R | -3.05 | +16.26 (-3.30) | +16.75 (-0.40) | -7.69 | -2.27 / -1.43 | 35 / 44 |
+| ET3 07:45 | +32.16 (-4.56) | 58% | 21 | 5.35R | -4.07 | +16.32 (-3.24) | +15.84 (-1.32) | -6.43 | -2.21 / -2.35 | 31 / 44 |
+Kill lines: K1, K2, K3, K4, K5 all FAIL for all three. VERDICT: no survivor, no tag. The entry stays a market order at 08:00 London.
+
+## My guess against what happened
+"ET1 about 3R behind": 8.91R behind. "ET2 and ET3 within 1.5R either way": 3.70R and 4.56R behind. Right direction, too small again.
+
+## What I learned
+- 08:00 is not late. Every earlier minute earns less, in both halves, and with a much deeper drawdown (5.1R to 6.1R against 3.28R) and 5 to 11 more full
+  stops than A2's 16: the extra hour mostly adds stop risk, as the 24-day table had already hinted.
+- The mechanism fails on its own ground (K5): on LIVELY pre-entry hours, where I thought I was arriving late, the early entry is 2.2R to 4.8R worse.
+  The lively hour is not my edge starting early; more often it is the move my 08:00 entry then gets a better price against.
+- The whole profile by entry time, now on all history (the 08:30 and 09:00 figures are from SI on 05-08, a slightly shorter history):
+  07:00 76% of A2's net | 07:30 90% | 07:45 88% | 08:00 100% | 08:30 81% | 09:00 61%.
+  08:00 is the top of a hill, not a spike: half an hour either side keeps 81-90%. That is what a real effect should look like, and it is the most useful
+  thing in this test: the minute I trade is the best one I have measured AND its neighbours still work. I can stop asking whether 08:00 is the right minute.
+- Printed beside, and it agrees with PH: A2 makes +6.51R on 43 lively-hour days (+0.15R each) and +30.20R on 53 quiet ones (+0.57R each). PH2 stays the
+  paper line for that; nothing new to test here.
+Counts: ideas 62, variants 173 (ET1 ET2 ET3). Adopted trading ideas: 0. On paper: UN3, PH2, MB1.

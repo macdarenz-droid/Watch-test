@@ -141,3 +141,7 @@ Normal worst for 56 trades (bt/streak_check.py 2015-05-19, all 95 A2 trades resh
 entry time (journal/2015-losers-winners-table-and-idea-MO.md). Nothing separates them except the weekday (5 Mondays among the losers, none among the winners).
 Idea MO pre-registered with my expectation of a kill and run once: without the 24 table days Mondays are +0.397R (14 trades, 9 wins) against +0.485R for
 Tuesday-Friday; both variants killed. The five losing Mondays were a streak. A2 and size unchanged. Counts: 61 ideas, 170 variants.
+
+## 05-19 research after funded day 38: idea ET, is my 08:00 entry late? (journal/2015-idea-ET-earlier-entry.md). What I already knew against it was added up
+first; kill lines pushed; one run. Entry at 07:00 / 07:30 / 07:45: 8.91R / 3.70R / 4.56R behind A2, deeper drawdowns, worse on exactly the lively hours the
+idea was about. All killed. Profile by entry time: 07:00 76% | 07:30 90% | 07:45 88% | 08:00 100% | 08:30 81% | 09:00 61%. Counts: 62 ideas, 173 variants.
