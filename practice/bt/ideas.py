@@ -27,7 +27,7 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None, scale=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None, scale=None, rn=None):
     _best = {}
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
@@ -56,6 +56,11 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                 if go and midfilter:   # idea C: only trade on the trend side of yesterday's range midpoint
                     y = dlist[dlist.index(d) - 1]; mid = (hi[y] + lo[y]) / 2
                     if (side < 0 and b.open > mid) or (side > 0 and b.open < mid): go = False; done = True
+                if go and rn is not None:        # idea RN: skip if a round number lies within rn[1] pips AHEAD of the entry in my direction; rn = (level step in pips, window)
+                    import math
+                    step = rn[0] * PIP; px0 = b.open
+                    lvl = math.ceil(px0 / step - 1e-9) * step if side > 0 else math.floor(px0 / step + 1e-9) * step
+                    if abs(lvl - px0) / PIP <= rn[1]: go = False; done = True
                 if go and mingap is not None:        # idea GAP: skip when the 3-day close gap is small; mingap = pips, or ("rel", k) x 5-day average daily range
                     i = dlist.index(d)
                     if i >= look + 1:
@@ -229,6 +234,9 @@ VARIANTS = {
  "SO40": dict(entry_h=8, exit_h=12, sl=40, scale=(40, False)),    # idea SO: scale-out
  "SO20": dict(entry_h=8, exit_h=12, sl=40, scale=(20, False)),
  "SO40BE": dict(entry_h=8, exit_h=12, sl=40, scale=(40, True)),
+ "RN00_15": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 15)),   # idea RN: round numbers ahead
+ "RN00_25": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 25)),
+ "RN50_15": dict(entry_h=8, exit_h=12, sl=40, rn=(50, 15)),
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":

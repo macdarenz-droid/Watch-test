@@ -26,3 +26,29 @@ No survivor -> closed. A survivor is NOT run on February or March and is NOT ado
 (kept-minus-skipped at least 0.3R, at least two standard errors); an interim look at 40 days can kill it.
 My guess: RN00 variants skip fewer than 3 January trades (a 15-25 pip window in front of a level 100 pips apart catches few days) and fail B3; RN50-15 skips more, and its
 skipped trades are ordinary winners.
+
+# RESULTS of idea RN (run after the pre-registration commit). RN00-15 / RN00-25 / RN50-15 = variants 81/82/83; ideas 32. January only, costs on, $125 risk (bt/ab_drop.py, explicit end date).
+
+| Rule | Trades | Win rate | Avg R | Net R | Max DD | Kept | Skipped: n / win / avg R |
+|---|---|---|---|---|---|---|---|
+| A2 (before) | 19 | 74% | +0.78 | +14.89 | 1.34R | - | - |
+| RN00-15: skip if a "00" level is within 15 pips ahead | 17 | 71% | +0.78 | +13.24 | 1.34R | 89% | 2 / 100% / +0.83 |
+| RN00-25: skip if a "00" level is within 25 pips ahead | 15 | 67% | +0.73 | +10.91 | 1.34R | 79% | 4 / 100% / +1.00 |
+| RN50-15: skip if a "00" or "50" level is within 15 pips ahead | 11 | 82% | +1.07 | +11.74 | 1.00R | 58% | 8 / 62% / +0.39 |
+Skipped by RN00-25: 01-08 +1.14, 01-14 +1.13, 01-22 +1.19, 01-29 +0.53 (four winners). Skipped by RN50-15: 01-12 +1.35, 01-13 +1.40, 01-14 +1.13, 01-19 -1.00, 01-21 -0.51,
+01-28 +0.28, 01-29 +0.53, 01-30 -0.02.
+
+## Kill test, applied
+- RN00-15: B3 fails (skips only 2), and both skipped trades were winners.
+- RN00-25: B1 fails (kept +0.73 < A2), B2 fails (the skipped trades, +1.00R, are better than the kept ones). With a "00" level just ahead the trade won four times of four:
+  in January the market went THROUGH the big figures.
+- RN50-15: B1 and B2 pass (kept +1.07R vs skipped +0.39R), B3 fails: it keeps 58% of the trades, the line is 60%. One trade short. I am not moving the line.
+=> NO SURVIVOR. Closed. Nothing was run on February or March.
+
+## Reading it
+- The pure round-number idea ("00" levels stop the morning) is plainly wrong for January: those trades were the better half.
+- RN50-15 is the one I must be most careful with, because it "almost" passed. By my own sample-size rule a kept-minus-skipped gap of 0.68R on 19 trades is inside the noise
+  (on 19 trades only a gap above about 1.0R stands out), it only appears when I widen the idea from "00" to "00 or 50", and it throws away 42% of the trades.
+  Three variants gave three different stories; that is what noise looks like. A near-miss on a build month earns nothing.
+- Round numbers stay in my calls as landmarks to describe the chart. No rule.
+- Counts: ideas 32, variants 83.
