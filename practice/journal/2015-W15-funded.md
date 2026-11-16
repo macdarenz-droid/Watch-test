@@ -69,6 +69,15 @@ Start of week: balance $25,114.39, high-water $25,135.78, drawdown -0.09%. Payou
      Paper tags: F1 and FR1 SKIPPED (crooked week, entry 0.69 down yesterday's range) and avoid -1.00R; Q3 and Q1 traded.
      END OF RELEASED DATA (clock Thu 04-09 01:00 London).
 
+- **Thu 04-09 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID LOSS.
+  Bias: SELL. 22:00 London closes: 04-08 1.07805 vs 04-03 1.09713 = -191 pips. Second day on the sell side (not a flip day - and the FL test says that would not matter).
+  Picture: three falling days from 1.1035 (Mon high) to 1.0763 (Wed low); the night made a new low at 1.0750 and price sits at 1.0755, on the low. Asia range 38.9 pips (ratio 1.13).
+  Levels: night low 1.0750; Wed low 1.0763; night high 1.0789; Wed high 1.0887. Below: 1.0713 (03-31 low, from memory of my journal - not re-checked).
+  Worry, written honestly: I am selling at the bottom of a 280 pip, three-day drop. The no-chase idea (H) said this kind of entry is fine on average; I do not skip.
+  Paper tags: Q3 trade, Q1 trade. F1 / FR1 are decided by where the 08:00 price sits in yesterday's range - read from the engine after the day.
+  Funded check: balance $24,896.77, high-water $25,148.18, drawdown -1.00% (brakes -3% = $24,393.73 / -5% = $23,890.77) -> full size allowed.
+  Plan: SELL 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$129 -> drawdown -1.5%. One trade, stop not moved.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
