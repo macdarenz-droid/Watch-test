@@ -145,10 +145,11 @@ From May: a number written from memory and corrected later is logged as a proces
      Tracker balance $25,630.70 (sim $25,756.40 minus $125.70 paid out). NEW HIGH-WATER $25,630.70, drawdown 0.00%.
      Size rule after the day: trigger 1 (-3%) $24,861.78, trigger 2 (-5%) $24,349.17. Full size tomorrow.
      Funded totals from the log: 29 trades, 16 wins, 13 valid losses, +6.07R (March +0.97R, April +4.17R, May +0.92R in 4 trades). This week: -1.00, +0.85, +0.63 = +0.48R.
-     What happened: +32.0 pips in the first fifteen minutes, back to -15.2 at 08:3x, then lower highs all morning to +53.1 at 10:1x, and a 25 pip bounce into noon.
+     What happened: +32.0 pips in the first fifteen minutes, back to -15.2 at 08:3x, then lower highs all morning to +53.1 at 10:1x, and a 28.6 pip bounce into noon [computed; I first typed "25 pip" without computing it - P6].
      After noon the market went 139.2 pips ABOVE my exit (1.13700): the day belonged to the buyers, the London morning to my sell.
      The morning with every warning at once made +0.63R. If I had spent "one discretionary skip a year" here, as I wrote at 07:00 that I wanted to, it would have cost
-     +0.63R - my second recorded skip-urge, the second that would have cost money. Kept for the next time.
+     +0.63R - another written skip-urge that would have cost money (the plan records my one real skip, in February, as costing +1.1R; I have not counted the urges
+     and first wrote "my second" as if I had - P6). Kept for the next time.
      Paper tags: UN3 - third forward DISAGREE day - paper skips a +0.63R trade (disagree days so far: -0.02, -1.00, +0.63 = -0.39R; n = 3 of 30).
      PH2 (paper, forward day 4): lively hour -> paper half size = +0.32R against the live +0.63R. Not a full-stop morning (worst -15.2 pips).
      Tally: 4 lively days, live +0.92R, paper +0.46R, 1 full-stop morning.
@@ -192,3 +193,4 @@ Counts only: live trades after a night (00:00->08:00) against my side, from 04-2
 Process mistake P4 (05-05): two counts written from memory in the size-rule note, corrected the same hour (first case under the May rule).
 
 ## 05-06 (before the next day): (1) overdue day-40 gates applied: F1 / FR1, Q3, Q1 all CLOSED (journal/2015-paper-tag-gates-day40.md; process mistake P5 for the delay). (2) Rising-trend health check (journal/2015-idea-UP-rising-trend.md): hypothesis survives - up-trend days +0.375R on 29 trades, down-trend +0.307R on 48. Rule A2 and size 0.50% unchanged. Ideas 52, variants 141. Process mistakes: 5.
+Process mistake P6 (05-06): two uncomputed statements in the day's result note (a "25 pip" bounce that is 28.6; "my second skip-urge", never counted), corrected the same hour.

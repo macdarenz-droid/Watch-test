@@ -21,7 +21,7 @@
 | Drawdown now / deepest | 0.00% / -1.63% (first brake -3% = $24,861.78; stop -5% = $24,349.17; account line $22,500) |
 | Payouts taken | 2: $68.82 (04-10) + $56.88 (04-24) = $125.70 requested, $100.56 mine at 80%. Next payout date Fri 2015-05-08 |
 | Trade tags | 29 valid, 0 my mistake |
-| Process mistakes | 5 (P1 DST slip 03-30; P2 research script touched March 04-03; P3 04-08 journal note read a UTC hour as London; P4 05-05 two counts written from memory; P5 day-40 gates of F1 / Q3 / Q1 applied 7 trading days late, found 05-06) |
+| Process mistakes | 6 (P1 DST slip 03-30; P2 research script touched March 04-03; P3 04-08 journal note read a UTC hour as London; P4 05-05 two counts written from memory; P5 day-40 gates of F1 / Q3 / Q1 applied 7 trading days late, found 05-06; P6 05-06 two uncomputed statements in a day note) |
 
 ## Results (costs on: 1.0 pip spread + 0.1 slippage)
 | Period | Trades | Win rate | Avg R | Net R | Max drawdown | Notes |
