@@ -73,3 +73,8 @@ Kill test, in two gates:
   Otherwise killed and I do not rescue it with a second threshold.
 Until gate 2 is decided the traded rule stays A2 at $125.
 Nothing in this section has been run.
+
+## 5. Run notes for idea F, written before the run
+- Coach allowed up to 3 variants. I pre-registered ONE (E >= 0.5, 5-day lookback, H1 filter) and "no other thresholds", so I run one: F1 = variant 14. Ideas -> 7.
+- E needs six earlier daily closes, so it does not exist before Mon 01-12. Days without E are left out for BOTH A2 and F1 (same days compared). Decided now, before seeing any E.
+- Order: gate 1 (does E label Jan straight / Feb crooked), build on January, then February ONCE. February is CONTAMINATED for this idea (the no-chase half was shaped on it): not validation.
