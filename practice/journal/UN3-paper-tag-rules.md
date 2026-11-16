@@ -58,3 +58,4 @@ is to be written in the journal as a feeling, like every other such thought.
 | Fri 2015-05-08 | 14 | 3 | -0.39R (3 trades) | +3.38R (11 trades) | +3.38R / 1.20R | +2.99R / 2.22R |
 | Mon 2015-05-11 | 15 | 3 | -0.39R (3 trades) | +2.38R (12 trades) | +2.38R / 1.20R | +1.99R / 2.22R |
 | Tue 2015-05-12 | 16 | 4 | -1.39R (4 trades) | +2.38R (12 trades) | +2.38R / 1.20R | +0.99R / 2.22R |
+| Wed 2015-05-13 | 17 | 5 | -0.75R (5 trades) | +2.38R (12 trades) | +2.38R / 1.20R | +1.63R / 2.22R |

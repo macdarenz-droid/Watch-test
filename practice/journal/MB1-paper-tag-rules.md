@@ -16,3 +16,4 @@ Source: journal/2015-review-losers-of-3-killed-ideas-and-idea-MB.md. PAPER ONLY.
 ## Forward tally (from Wed 2015-05-13)
 | date | morning (pips) | break | kept / removed | R | kept total (n, R, DD) | removed total (n, R) | small / large morning (kept) |
 |---|---|---|---|---|---|---|---|
+| Wed 2015-05-13 | -26.9 | UP | removed | +4.23 | 0, 0.00R, 0.00R | 1, +4.23R | - |
