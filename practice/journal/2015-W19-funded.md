@@ -156,6 +156,21 @@ From May: a number written from memory and corrected later is logged as a proces
      Rejection day, 8th case: +0.63R (all eight: -1.75R, -0.22R each). Night count: against me by 76.9 pips -> live trade 6 of the count (running: 6 trades, +3.76R).
      10-day-trend live tally (paper line, from 05-06): trend UP: 1 trade, +0.63R (a sell against it).
      END OF RELEASED DATA (clock Thu 05-07 01:00 London).
+- **Thu 05-07 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID WIN. Every figure copied from `python bt/call_numbers.py 2015-05-07` and the bar prints.
+  D1 (22:00-22:00 London days): Mon 05-04 high 1.12245 low 1.11228 close 1.11454 (0.22, range 101.7); Tue 05-05 high 1.12231 low 1.10663 close 1.11848 (0.76, range 156.8);
+      Wed 05-06 high 1.13700 low 1.11750 close 1.13459 (0.88, range 195.0). Wednesday broke above the 05-01 high (1.12900) and closed near its top: a new high for the move.
+  H4 (UTC bars): Wednesday 12:00 bar 1.12222 -> 1.13453 (high 1.13676); 16:00 bar high 1.13700; tonight 00:00 bar low 1.13251, 04:00 bar high 1.13660.
+  H1: the night (00:00-07:00 London): open 1.13431, high 1.13660, low 1.13251, last 1.13579: range 40.9 pips (ratio 1.13), net +14.8 pips. Dip early, new night high in the last hour.
+  M15: 05:15 UTC candle rose from 1.13448 to 1.13608; last close 1.13579.
+  Bias: BUY. 22:00 London closes: 05-06 1.13459 vs 05-01 1.11948 = +151 pips (3-day gap 151.1). The signal flipped back to buy after one sell day.
+  UN3 PAPER TAG (never live): 5-day gap +218 pips -> BUY; 3-day says BUY -> agree: paper TRADES. Forward day 13 (3 disagree days of 30 so far).
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 5.
+  Levels: night high 1.13660; Wed high 1.13700; night low 1.13251; Wed breakout level 1.12900.
+  Rejection-day check (parked observation): Wednesday made the 3-day high and closed at 0.88 - with a buy. Not a rejection day.
+  10-day-trend paper line: UP (1.13459 vs 04-22 1.07248); today's buy is with it. Stretch: gap / ADR5 = 0.99.
+  Worry: none I can name beyond 'it has gone up a long way'. Order as the rule says.
+  Funded check / SIZE RULE: tracker balance $25,630.70 = the high-water, drawdown 0.00%. Trigger 1 at $24,861.78, trigger 2 at $24,349.17: neither reached -> FULL size.
+  Plan: BUY 08:00 London, SL 40 pips under the bid at 08:00, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$131 -> drawdown -0.5%. One trade, stop not moved.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
