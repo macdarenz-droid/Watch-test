@@ -32,3 +32,28 @@ Check (March lived days) - the candidate passes only if ALL:
 A pass earns a FORWARD PAPER TAG only.
 Whatever the result, one thing changes in my journal: if the filter fails, I stop writing "coin flip" as a worry in my calls - the gap size goes in as a number, without the adjective.
 My guess: January has too few small-gap days to skip three (B3 fails) or the skipped ones are winners. No survivor.
+
+# RESULTS of idea GAP (run after the pre-registration commit). GAP25/GAP50/GAPR = variants 72/73/74; ideas 29. Costs on, $125 risk, London time (bt/ab_drop.py).
+
+## Build - January
+| Rule | Trades | Win rate | Avg R | Net R | Max DD | Kept | Skipped: n / win / avg R |
+|---|---|---|---|---|---|---|---|
+| A2 (before) | 19 | 74% | +0.78 | +14.89 | 1.34R | - | - |
+| GAP25: skip if the 3-day gap is under 25 pips | 16 | 69% | +0.75 | +12.08 | 1.34R | 84% | 3 / 100% / +0.94 |
+| GAP50: skip if under 50 pips | 14 | 64% | +0.68 | +9.54 | 1.34R | 74% | 5 / 100% / +1.07 |
+| GAPR: skip if under a quarter of the average daily range | 16 | 69% | +0.75 | +12.08 | 1.34R | 84% | 3 / 100% / +0.94 |
+Small-gap days in January: 01-12 +1.35, 01-13 +1.40, 01-14 +1.13, 01-22 +1.19, 01-28 +0.28 - five days, five winners.
+
+## Kill lines, applied
+- B1 (kept avg R at least +0.05R above A2): +0.75, +0.68, +0.75 against +0.78 -> all fail (all WORSE).
+- B2 (skipped trades worse than kept): the skipped trades average +0.94R to +1.07R - better than the kept ones -> all fail.
+=> NO SURVIVOR. Closed. As written beforehand, March was NOT run for this idea (clean-month uses stay at 2).
+
+## What it settles
+- With my February hand count (small-gap days +3.72R in 9 trades), that is two months in which "coin-flip" days were the BETTER half of A2's trades, and none in which they
+  were worse. The hypothesis is not just unproven; my worry was pointing the wrong way.
+- Why, as far as I can see: a small 3-day gap usually means price has just pulled back inside a move or is swinging in a box - the entry is a pullback entry, which is where
+  this rule has always done well. The gap being small does not mean the morning has no direction.
+- Change to my journal, as promised: the word "coin flip" is retired from my calls. The gap goes in as a number. I have been attaching a worry to a number that, if anything,
+  deserved the opposite.
+- Counts: ideas 29, variants 74.

@@ -27,7 +27,7 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None):
     _best = {}
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
@@ -56,6 +56,12 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                 if go and midfilter:   # idea C: only trade on the trend side of yesterday's range midpoint
                     y = dlist[dlist.index(d) - 1]; mid = (hi[y] + lo[y]) / 2
                     if (side < 0 and b.open > mid) or (side > 0 and b.open < mid): go = False; done = True
+                if go and mingap is not None:        # idea GAP: skip when the 3-day close gap is small; mingap = pips, or ("rel", k) x 5-day average daily range
+                    i = dlist.index(d)
+                    if i >= look + 1:
+                        gp = abs(cl.iloc[i-1] - cl.iloc[i-1-look]) / PIP
+                        lim = mingap if not isinstance(mingap, tuple) else (mingap[1] * sum((hi[x] - lo[x]) / PIP for x in dlist[max(0, i-5):i]) / 5 if i >= 5 else 0)
+                        if gp < lim: go = False; done = True
                 if go and night is not None and len(asia):     # idea NM: the move from 00:00 London to the entry must not be against my side; night = minimum pips with me
                     nm = (b.open - asia.open.iloc[0]) * side / PIP
                     if nm < night: go = False; done = True
@@ -201,6 +207,9 @@ VARIANTS = {
  "TR20": dict(entry_h=8, exit_h=12, sl=40, trail=(20, 20)),   # idea TR: trailing stops
  "TR30": dict(entry_h=8, exit_h=12, sl=40, trail=(30, 30)),
  "TR40": dict(entry_h=8, exit_h=12, sl=40, trail=(40, 20)),
+ "GAP25": dict(entry_h=8, exit_h=12, sl=40, mingap=25),            # idea GAP: skip small 3-day gaps
+ "GAP50": dict(entry_h=8, exit_h=12, sl=40, mingap=50),
+ "GAPR": dict(entry_h=8, exit_h=12, sl=40, mingap=("rel", 0.25)),
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
