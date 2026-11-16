@@ -66,11 +66,11 @@ VERDICT: NO SURVIVOR, and not narrowly. The night fade earns nothing. Idea close
 
 ## My guess against what happened - the arithmetic I trusted was wrong
 I wrote, twice, that the mirror of a -0.21R trade should make about +0.13R after costs, and I guessed +0.10R to +0.14R. It makes +0.03R / +0.02R.
-Where the missing tenth of an R went: the continuation trade and the fade trade are not mirror images once each has its own 30 pip stop. On a night that first
-runs 30 pips one way and then comes back, the continuation trade... wins if held, but the fade is STOPPED for a full -1R before the reversal it was betting on; on a
-night that dips against the continuation trade by 30 pips and then goes its way, the continuation trade is stopped and the fade's gain is whatever is left at 07:00.
-Both sides pay the stop when the night is two-way. Added together NT2 and NF1 lose 0.18R a night: 0.07R of that is the two sets of costs, the other 0.10R is
-whipsaw - nights that go far enough both ways to stop someone.
+Where the missing tenth of an R went - my reading, NOT checked night by night: the two trades are not mirror images once each has its own 30 pip stop.
+On a two-way night (30 pips one way, then back) one of the two is stopped for a full -1R while the other earns only what is left at 07:00; which one is stopped
+depends on the order. Both sides pay the stop on such nights. The numbers that ARE measured: continuation (NT2, 76 nights, run on 04-22) -0.21R and fade (NF1, 84 nights,
+today) +0.03R - together about -0.18R a night, of which two sets of costs are 0.07R (2 x 1.1 pips on a 30 pip stop). The remaining 0.10R I attribute to those stop-outs;
+the samples differ by eight nights, so this is an estimate.
 - Lesson, general and worth keeping: "this loses consistently, so the opposite wins" is only true for trades without stops. With a stop on each side, both can lose.
   I will not write "the mirror would make about X" again without running it.
 - What is left of the 04-22 observation: nights do go against yesterday's move slightly more often than with it - and it is not tradeable with a 30 pip stop at any
