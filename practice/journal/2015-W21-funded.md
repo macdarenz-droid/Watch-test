@@ -194,3 +194,8 @@ Tuesday-Friday; both variants killed. The five losing Mondays were a streak. A2 
 ## 05-19 research after funded day 38: idea ET, is my 08:00 entry late? (journal/2015-idea-ET-earlier-entry.md). What I already knew against it was added up
 first; kill lines pushed; one run. Entry at 07:00 / 07:30 / 07:45: 8.91R / 3.70R / 4.56R behind A2, deeper drawdowns, worse on exactly the lively hours the
 idea was about. All killed. Profile by entry time: 07:00 76% | 07:30 90% | 07:45 88% | 08:00 100% | 08:30 81% | 09:00 61%. Counts: 62 ideas, 173 variants.
+
+## 05-20 research after funded day 39 (coach: the exit side): idea SA, the 40 pip stop re-tested on all history (journal/2015-idea-SA-stop-all-history.md).
+My 12 live stop notes read first (8 real, 4 pokes of 10 pips or less), the four poke days dropped, kill lines pushed, one run. Stop 50 / 60 / 80 pips at
+the same $ risk: 9.60R / 15.99R / 21.52R behind A2, behind in both periods; with the poke days back in still 6.43R behind at 50 pips. Losing days do get
+smaller and pokes do disappear - and every winner shrinks. All killed; the stop stays 40 pips. Counts: 63 ideas, 176 variants; process mistakes 8 (P8 today).
