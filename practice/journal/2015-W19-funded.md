@@ -202,6 +202,29 @@ From May: a number written from memory and corrected later is logged as a proces
      10-day-trend paper line: trend UP: 2 trades, +0.70R.
      Payout date tomorrow (Fri 05-08): after the trade, on the tracker balance, half of what is above $25,000 unless a trigger is on.
      END OF RELEASED DATA (clock Fri 05-08 01:00 London).
+- **Fri 05-08 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID WIN. Figures from `python bt/call_numbers.py 2015-05-08` and the bar prints.
+  PAYOUT DATE - the rule, re-read from journal/FUNDED-PLAN.md before the day: after the day's trade, on the tracker balance; below $26,000 -> request HALF of what is
+     above $25,000; at or above $26,000 -> everything above $26,000; no request while a trigger is on; the high-water mark is LOWERED by the amount paid, not reset.
+     Today: balance $25,639.69, no trigger on. Computed: $319.84 if the day is flat, about $254 after a full stop, about $383 after +1R. I keep 80%.
+     (While checking I found the one-pager still said '1 payout so far'; corrected from the tracker's ledger: 2 payouts, $125.70.)
+  D1 (22:00-22:00 London days): Tue 05-05 high 1.12231 low 1.10663 close 1.11848 (0.76); Wed 05-06 high 1.13700 low 1.11750 close 1.13459 (0.88);
+      Thu 05-07 high 1.13916 low 1.12373 close 1.12662 (0.19, range 154.3). Thursday made a new high for the move and closed near its low.
+  H4 (UTC bars): Thursday 08:00 bar 1.13662 -> 1.12973; 12:00 bar low 1.12373; 20:00 bar low 1.12282; tonight 00:00 bar 1.12445 -> 1.12043 (low 1.11979).
+  H1: the night (00:00-07:00 London): open 1.12413, high 1.12571, low 1.11979, last 1.12052: range 59.2 pips (ratio 1.63), net -36.1 pips - a falling night.
+  M15: the 05:30 UTC candle fell from 1.12276 to 1.12010; last close 1.12052.
+  Bias: BUY. 22:00 London closes: 05-07 1.12662 vs 05-04 1.11454 = +121 pips (3-day gap 120.8). Second day on the buy side.
+  UN3 PAPER TAG (never live): 5-day gap +43 pips -> BUY; 3-day says BUY -> agree: paper TRADES. Forward day 14 (3 disagree days of 30 so far).
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 6.
+  Levels: night low 1.11979; 1.1200; night high 1.12571; Thu low 1.12373 (price is under it); Thu high 1.13916.
+  REJECTION-DAY CHECK (parked observation, not a rule): Thursday made the 3-day high (True) and closed at 0.19 of its range - the far third against a buy -> YES, the ninth case
+     (the eight before, copied from Wednesday's note: -1.00, -0.32, -1.03, +1.09, +0.91, -1.03, -1.00, +0.63).
+  10-day-trend paper line: UP (1.12662 vs 04-23 1.08234); today's buy is with it. Stretch: gap / ADR5 = 0.84.
+  Worry: a buy the morning after a rejection day, after a falling night, under yesterday's low - and a US jobs report is due today if my memory of the calendar is right
+     (first Friday of the month; I cannot verify it from inside the sim). I am flat at noon London in any case.
+  Friday check of the SCHEDULED GATES list in STATE.md: A2 alarm 49 of 100; UN3 3 of 30 disagree days, 13 of 200 days; PH2 5 of 60 lively days, 5 of 200 days; night count 7 of 40;
+     up-trend line 2 of 40; payout today. Nothing due except the payout.
+  Funded check / SIZE RULE: tracker balance $25,639.69 = the high-water, drawdown 0.00%. Trigger 1 at $24,870.50, trigger 2 at $24,357.71: neither reached -> FULL size.
+  Plan: BUY 08:00 London, SL 40 pips under the bid at 08:00, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$131 -> drawdown -0.51%. One trade, stop not moved, flat for the weekend.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
