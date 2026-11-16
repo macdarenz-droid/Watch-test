@@ -74,3 +74,19 @@ Breach 0%: right. Own stop +8 points: +9.5 plain, +8.7 block (understated). Payo
 - For the coach, as a note and not a proposal: my -5% stop is the line most likely to end this account's trading, and the plan says "stop" without saying
   what happens after. That sentence should exist before I ever need it. I will write it into the plan only if the coach wants it.
 Counts: ideas 59, variants 162 (T1 T2 T3; T1 void). Adopted: 0. Process mistakes: 7.
+
+# CLEAN RE-RUN (coach 05-14: "fix the method flaw, rerun TS cleanly with the same pre-registered kill lines, no changes to them") - METHOD FIX pushed before the run
+Sim clock unchanged: Fri 2015-05-15 01:00 London. END 2015-05-15. Hypothesis, scenarios T0-T3, seeds, list, size rule and kill lines K1-K3: exactly as above.
+The one thing fixed is HOW a badly filled stop is put into the shifted list:
+- Wrong (first run): after the shift, a full stop was REPLACED by a DC1 result. The shift had already moved stops to about -1.23R, so they got milder.
+- Right: a badly filled stop is the SAME stop plus the extra slippage DC1 measured. For each of the 16 stop days the extra is (worst-in-the-minute R minus
+  engine R). In the shifted list every full stop (R <= -0.95) gets one of those 16 extras ADDED, drawn at random. The jump day stays "the day's result is
+  replaced by -3.07R", as pre-registered.
+Hand-worked BEFORE the run (the P7 fix; `bt/day_cushion.py` tables, arithmetic shown):
+- 16 extras: average -0.0797R, between -0.003R and -0.305R. List: 93 trades, mean +0.3934R, shift 0.2134R, 16 full stops, shifted stops average -1.229R.
+- Expected T1 list average = 0.180 + (16 / 93) x (-0.0797) = +0.166R. It must be BELOW +0.180R; if the run prints anything above, the method is wrong again.
+- Expected T2 = 0.1663 x 91/92 - 3.07 / 92 = +0.131R. Expected T3 = 0.1663 x 90/92 - 2 x 3.07 / 92 = +0.096R.
+  (The first run's T2 and T3 were +0.167R and +0.132R: the flaw had hidden about 0.036R of tail.)
+- Each scenario must be worse than the one before on the own-stop line, or I stop and look before reading the kill lines.
+Counting: T1 T2 T3 corrected are the same three definitions re-run at the coach's direction; I count them as 3 more variants anyway (162 -> 165), idea count stays 59.
+My guess, written now: K1 pass (0% breached); own stop under T2 about +14 points plain (K2 FAIL); payout about 75% of T0 (K3 FAIL).
