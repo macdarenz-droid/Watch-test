@@ -54,3 +54,32 @@ Also reported: how many trades each variant touched, and whether it helped or hu
 My guess, written now: January has few standing walls in front of sells, so Z1/Z2 barely touch it and miss the +0.05R bar (cannot be built on a trend month);
 Z3 caps January's winners and fails like X3 did. If that is right, the wall idea is not dead - it simply cannot be judged on a trend month plus a contaminated one, and would need forward days.
 Nothing above has been run.
+
+# RESULTS of idea Z (run after commit 3dc7fb8). Z1/Z2/Z3 = variants 42/43/44; ideas 19. Costs on, $125 risk, same entries as A2. Jan-Feb only, one month per run (bt/ab_exit.py); March not used.
+
+| Month | Rule | Trades | Win rate | Avg R | Net R | Max DD | Trades it changed |
+|---|---|---|---|---|---|---|---|
+| Jan (build) | A2 (before) | 19 | 74% | +0.78 | +14.79 | 1.33R | - |
+| Jan (build) | Z1: 5-day wall, >= 2 days old | 19 | 74% | +0.78 | +14.79 | 1.33R | none |
+| Jan (build) | Z2: 10-day wall, >= 2 days old | 19 | 74% | +0.78 | +14.79 | 1.33R | none |
+| Jan (build) | Z3: 10-day extreme, any age (control) | 19 | 74% | +0.59 | +11.22 | 1.33R | 1: 01-23 +4.27 -> +0.69R |
+| Feb (CONTAMINATED) | A2 (before) | 20 | 55% | +0.23 | +4.64 | 1.86R | - |
+| Feb (CONTAMINATED) | Z1 | 20 | 60% | +0.30 | +5.95 | 1.02R | 2: 02-17 +2.14 -> +2.18R; 02-19 -0.36 -> +0.91R |
+| Feb (CONTAMINATED) | Z2 | 20 | 55% | +0.23 | +4.64 | 1.86R | none |
+| Feb (CONTAMINATED) | Z3 | 20 | 55% | +0.23 | +4.64 | 1.86R | none |
+February Z1 with the inspiring day 02-19 removed: one trade changed, +0.04R. That is the whole effect.
+
+## Build (January): NO SURVIVOR - and nothing to build on
+- Z1 and Z2 never fired in January: no standing wall sat within reach in front of a trade. +0.00R against a +0.05R bar. They cannot be built on a trend month, as I guessed.
+- Z3 (the control) fired once and destroyed my best day (01-23: +4.27R cut to +0.69R). So the "standing" condition is not decoration: a fresh extreme in a trend is NOT a wall.
+## Check (February): nothing to claim
+Z1 fixes exactly the day it was drawn from (02-19, +1.27R better) and touches one other trade by +0.04R. Take 02-19 out and the rule did nothing for a month.
+
+## Verdict: closed, not adopted. A2 stays.
+- The honest finding is about frequency, not direction: a wall that has held for days AND sits within a London morning's reach in front of my trade happened about twice in 39 trades.
+  A rule that fires twice in two months cannot be tested on two months, and cannot move a challenge either way.
+- The replay lesson stays true for that one morning - I wrote the level at 07:00 and had no plan for it - and it stays an anecdote. Same shape as idea G: the rule built from my
+  worst day fixes my worst day.
+- What I keep as a habit, not a rule: the 07:00 call already lists levels. From now it also says, in words, whether a level that has held for days sits inside the stop distance
+  in front of the trade. Not to act on - to collect cases forward, so that in a few months "bank at the wall" can be judged on more than one Thursday.
+- Counts: ideas 19, variants 44.

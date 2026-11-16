@@ -23,7 +23,7 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None):
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
     _a = m5[(m5.time.dt.hour < 7) & (m5.time.dt.date == m5.day)]; _g = _a.groupby('day'); arng = (_g['high'].max() - _g['low'].min()) / PIP   # Asia 00-07 range per day, pips
@@ -76,6 +76,16 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                     # market order queued now fills at THIS bar's open via on_bar below
                     px = b.open
                     s = px + side * -sl * PIP; t = px + side * tp * PIP if tp else None
+                    if wall is not None:      # idea Z: take profit 2 pips in front of a standing N-day extreme (wall = (N days, min age in days))
+                        N, minage = wall; i = dlist.index(d)
+                        if i >= N:
+                            win = dlist[i-N:i]
+                            if side > 0:
+                                w = max(hi[x] for x in win); age = i - max(k for k in range(i-N, i) if hi[dlist[k]] == w); cand = w - 2 * PIP
+                                if age >= minage and cand - px >= 10 * PIP: t = cand
+                            else:
+                                w = min(lo[x] for x in win); age = i - max(k for k in range(i-N, i) if lo[dlist[k]] == w); cand = w + 2 * PIP
+                                if age >= minage and px - cand >= 10 * PIP: t = cand
                     oid = acct.market(side, round(RISK / (sl * 10), 2), sl=s, tp=t, tag=str(d)); done = True
             if hourcheck is not None and acct.positions and h == entry_h + 1 and b.time.minute == 0:   # idea T: one-hour check at this bar's open
                 p = acct.positions[0]; pips = ((b.open - p.entry) if p.side > 0 else (p.entry - (b.open + acct.spread))) / PIP
@@ -130,6 +140,9 @@ VARIANTS = {
  "Q1": dict(entry_h=8, exit_h=12, sl=40, asiamin=20),    # idea Q: skip if Asia range < 20 pips
  "Q2": dict(entry_h=8, exit_h=12, sl=40, asiamin=25),    # idea Q: skip if Asia range < 25 pips
  "Q3": dict(entry_h=8, exit_h=12, sl=40, asiarel=0.8),   # idea Q: skip if Asia range < 0.8 x its 5-day average
+ "Z1": dict(entry_h=8, exit_h=12, sl=40, wall=(5, 2)),    # idea Z: TP in front of a 5-day extreme that is >= 2 days old
+ "Z2": dict(entry_h=8, exit_h=12, sl=40, wall=(10, 2)),   # idea Z: 10-day, >= 2 days old
+ "Z3": dict(entry_h=8, exit_h=12, sl=40, wall=(10, 1)),   # idea Z: 10-day, any age (control)
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":

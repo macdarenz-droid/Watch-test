@@ -2,12 +2,12 @@
 
 | Field | Value |
 |---|---|
-| Sim clock | Fri 2015-03-13 21:00 UTC, weekend (END OF RELEASED DATA; one day at a time - each finished backtest test earns the next day) |
-| Phase | Challenge #1: PHASE 1 PASSED Fri 2015-03-06 (39 trades, $27,083.04 = +8.33%). PHASE 2 ACTIVE: balance $25,689.02 (+2.76%), target $26,250 ($561 = 3.0R away), 5 trading days (minimum met), brakes at $24,000 / $23,500, max loss line $22,500 |
+| Sim clock | Tue 2015-03-17 00:00 UTC (END OF RELEASED DATA; one day at a time - each finished backtest test earns the next day) |
+| Phase | Challenge #1: PHASE 1 PASSED Fri 2015-03-06 (39 trades, $27,083.04 = +8.33%). PHASE 2 ACTIVE: balance $25,698.89 (+2.80%), target $26,250 ($551 = 2.9R away), 6 trading days (minimum met), brakes at $24,000 / $23,500, max loss line $22,500 |
 | Current strategy | ONE-PAGE PLAN: journal/PLAN-v2-one-page.md. Rule A2 "London trend": 07:00 UTC write call; trend = yesterday's 22:00 close vs close 3 trading days earlier; 08:00 market order with trend; SL 40 pips; close 12:00 UTC; 1 trade/day; flat at weekend |
 | Risk | PHASE 2 (journal/PLAN-v2-phase-handling.md): $187.50 = 0.75% per trade (0.47 lots x 40 pips; `python trade_a.py sell/buy --risk 187.5`), 1 trade/day (worst day -0.77%); brakes: balance <= $24,000 -> back to 0.5% ($125); <= $23,500 -> stop and review; target hit before 5 trading days -> 0.01 lots until 5 logged; finishing size 0.10 lots when the target is within $47 |
-| Ideas tried | 18 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed], F efficiency regime [not adopted], G don't-fight-the-first-break [killed], T one-hour check exit [killed], K first-break direction [killed], L lookback 2/5/10 [no improvement; A2 robust], W no-Friday [pending forward test], X exits: break-even / runner / target [no survivor], R regime detectors [no survivor], Q dead-Asia filter [Q3 killed on Feb check], M ignition-candle setup [no survivor], DD drawdown-goal re-scoring [Q3, Q1 to forward tag; F1 fails], N NY-fades-London second setup [N1 profitable both months, fails independence by 0.01]) |
-| Variants tested | 41 (38 definitions incl. N1 N2 N3:A1 A2 A3, B1 B2 B3, C1, D1, E1, DE, H1 H2 H3, F1, G1, T1 T2, K1 K2, L1 L2 L3, W1, X1 X2 X3, R1 R2 R3, Q1 Q2 Q3, M1 M2 M3) + 3 re-scored for the drawdown goal (DD1=Q3, DD2=Q1, DD3=F1). A and B at the 3-variant cap; review round used its 3 |
+| Ideas tried | 19 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed], F efficiency regime [not adopted], G don't-fight-the-first-break [killed], T one-hour check exit [killed], K first-break direction [killed], L lookback 2/5/10 [no improvement; A2 robust], W no-Friday [pending forward test], X exits: break-even / runner / target [no survivor], R regime detectors [no survivor], Q dead-Asia filter [Q3 killed on Feb check], M ignition-candle setup [no survivor], DD drawdown-goal re-scoring [Q3, Q1 to forward tag; F1 fails], N NY-fades-London second setup [N1 profitable both months, fails independence by 0.01; forward paper tag], Z bank-at-the-wall take-profit [almost never fires; closed]) |
+| Variants tested | 44 (41 definitions incl. N1 N2 N3, Z1 Z2 Z3:A1 A2 A3, B1 B2 B3, C1, D1, E1, DE, H1 H2 H3, F1, G1, T1 T2, K1 K2, L1 L2 L3, W1, X1 X2 X3, R1 R2 R3, Q1 Q2 Q3, M1 M2 M3) + 3 re-scored for the drawdown goal (DD1=Q3, DD2=Q1, DD3=F1). A and B at the 3-variant cap; review round used its 3 |
 | Challenge attempts | 1 (active) |
 | Last updated (real date) | 2026-11-16 |
 
@@ -17,7 +17,7 @@
 | LIVE Jan (01-12..01-30) A2 | 14 | 71% | +0.72 | +10.04 (+$1,257) | 1.33R | one big downtrend; 2 shock-day trades = +6.3R |
 | LIVE Feb (02-02..02-27) A2 | 20 | 55% | +0.23 | +4.64 (+$580) | 1.86R | box market; one coin-flip day = +2.14R |
 | LIVE total Jan-Feb | 34 | 62% | +0.43 | +14.69 (+$1,836) | 1.86R | |
-| LIVE March = FORWARD TALLY (unseen data, from 03-02) A2, in R = result / amount risked | 10 | 70% | +0.71 | +7.07 | 1.01R | 03-02 -1.00 (valid), 03-03 +1.12, 03-04 +1.17, 03-05 +0.02, 03-06 +2.12 (phase 1 passed), 03-09 -1.01 (valid), 03-10 +1.73, 03-11 +1.93, 03-12 -0.12 (valid), 03-13 +1.10. All sells, one fall 1.12 -> 1.05. A2 forward kill test: 10 of 40. Paper tags: F1 identical; Fridays 2/8, both winners (+3.22R); Q3 = Q1 skip only 03-06 -> +4.95R, DD 1.01R; N1 (from 03-13): 1 day, no trade. Phase 2: 5 trades, +3.63R |
+| LIVE March = FORWARD TALLY (unseen data, from 03-02) A2, in R = result / amount risked | 11 | 73% | +0.65 | +7.12 | 1.01R | 03-02 -1.00 (valid), 03-03 +1.12, 03-04 +1.17, 03-05 +0.02, 03-06 +2.12 (phase 1 passed), 03-09 -1.01 (valid), 03-10 +1.73, 03-11 +1.93, 03-12 -0.12 (valid), 03-13 +1.10, 03-16 +0.05. A2 forward kill test: 11 of 40. Paper tags: F1 identical; Fridays 2/8, both winners (+3.22R); Q3 = Q1 skip only 03-06 -> +5.00R, DD 1.01R; N1 (from 03-13): 2 days, 0 trades. Phase 2: 6 trades, +3.68R |
 | Backtest Feb only (out-of-sample) A1 / A2 / A3 | 20 each | 50 / 55 / 40% | +0.18 / +0.23 / +0.00 | +3.60 / +4.64 / +0.10 | 2.2 / 1.9 / 3.1R | A2 = live exactly |
 | Backtest Feb only B1 / B2 / B3 | 13 / 14 / 13 | 54 / 57 / 54% | +0.32 / +0.34 / +0.23 | +4.10 / +4.79 / +2.98 | 1.1 / 1.7 / 1.0R | |
 | Backtest Feb only C1 (A2 + midpoint filter) | 13 | 38% | -0.08 | -1.04 | 1.5R | skipped 7 trades worth +5.68R: failing |
@@ -129,11 +129,16 @@
 - A2 with spread+slippage 1.5+0.3 / 2.0+0.5 / 3.0+1.0 pips: Jan +0.76 / +0.74 / +0.69R (base +0.78); Feb +0.18 / +0.16 / +0.11R (base +0.23). Positive everywhere: not a cost artifact.
 - Decision rule: Feb under 2.0+0.5 = +0.156R vs line +0.15R -> plan stands, narrowly. Planning edge for a box month is now +0.18R (realistic costs), not +0.23R.
 
+## Idea Z bank at the wall (journal/2015-replay-worst-stretch-and-idea-Z.md; M15 replay of 02-18..02-20; pre-registered)
+- TP 2 pips in front of a standing N-day extreme (>= 2 days old) at least 10 pips beyond entry. Jan: Z1/Z2 never fire; Z3 (any age, control) cuts 01-23 from +4.27R to +0.69R. Feb: Z1 changes 2 trades, one is the inspiring day.
+- No survivor; fires ~2 times in 39 trades = cannot be tested or matter. Habit kept: note in the 07:00 call whether a multi-day level sits inside the stop distance in front of the trade.
+- US clocks changed 03-08: US data now 12:30 UTC, market closes Fri 21:00 UTC; look.sh closes line misses Fridays (use the D1 close).
+
 ## Loss tags (running count, all live trades): valid setup, market disagreed 16 (-8.16R) | my mistake 0.
 
 ## Next step
-1. Day 03-13 traded (phase 2 day 5, +1.10R); N1 forward kill test written; cost stress test finished. When the next day (Mon 03-16; weekend gap possible) is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `./look.sh 3 0 9`; write the call in journal/2015-W11.md;
+1. Day 03-16 traded (phase 2 day 6, +0.05R); worst-stretch replay + idea Z finished. When the next day (Tue 03-17) is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `./look.sh 3 0 9`; write the call in journal/2015-W12.md;
    `python trade_a.py sell|buy` (A2; PHASE 2 sizing `--risk 187.5` = 0.47 lots; check `python sim.py account` and the brakes before sizing); tag any loss; paper-tag F1, Fridays (idea W), Q3/Q1 (Asia line printed by look.sh) and N1 (previous day's result via bt/ny_fade.py).
 2. Keep backtesting on Jan-Feb only (never load March into a test: pass END <= 2015-03-01). Each test: hypothesis + kill test committed first, max 3 variants, counted, February labelled contaminated.
-3. Open idea: trend vs box before 08:00. Forward tests running (tally table at the end of journal/2015-W11.md): A2 kill test (10/40 trades, +7.07R), F1 paper tag (10 days, same), Friday tag (2/8: +3.22R, both wins), Q3/Q1 drawdown tags (10 days, 1 skip), N1 paper tag (1 day, 0 trades).
+3. Open idea: trend vs box before 08:00. Forward tests running (tally table at the end of journal/2015-W12.md): A2 kill test (11/40 trades, +7.12R), F1 paper tag (11 days, same), Friday tag (2/8: +3.22R, both wins), Q3/Q1 drawdown tags (11 days, 1 skip), N1 paper tag (2 days, 0 trades).
 Tools: look.sh, trade_a.py, bt/ab.py (filters), bt/ab_exit.py (exits), bt/ab_rule.py and bt/ab_same.py (own entries/direction), bt/pass_math.py, bt/risk_math.py, bt/review.py, bt/loser_charts.py. Tests: `python -m pytest -q`.
