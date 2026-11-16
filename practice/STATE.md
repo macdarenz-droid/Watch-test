@@ -2,12 +2,12 @@
 
 | Field | Value |
 |---|---|
-| Sim clock | Wed 2015-03-04 00:00 UTC (END OF RELEASED DATA; one day at a time - each finished backtest test earns the next day) |
-| Phase | Challenge #1, phase 1 ACTIVE: balance $26,851.01 (+7.40%), target $27,000 (+$148.99 = 1.2R to go), 36 trading days, no breach |
+| Sim clock | Thu 2015-03-05 00:00 UTC (END OF RELEASED DATA; one day at a time - each finished backtest test earns the next day) |
+| Phase | Challenge #1, phase 1 ACTIVE: balance $26,997.64 (+7.99%), target $27,000 (+$2.36 to go), 37 trading days, no breach |
 | Current strategy | Rule A2 "London trend": 07:00 UTC write call; trend = yesterday's 22:00 close vs close 3 trading days earlier; 08:00 market order with trend; SL 40 pips; close 12:00 UTC; 1 trade/day; flat at weekend |
 | Risk | PLAN v2 + risk math (journal/2015-risk-math.md): finish phase 1 at $125 = 0.5% (0.31 lots); from phase 2 $187.50 = 0.75% (0.47 lots x 40 pips), confirmed by replay at 0.5/0.75/1/1.5%. Brakes: -4% from phase start -> back to 0.5%; -6% -> stop and review. 1 trade/day so worst day = 1R |
-| Ideas tried | 12 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed], F efficiency regime [not adopted], G don't-fight-the-first-break [killed], T one-hour check exit [killed], K first-break direction [killed], L lookback 2/5/10 [no improvement; A2 robust], W no-Friday [pending forward test]) |
-| Variants tested | 23 (A1 A2 A3, B1 B2 B3, C1, D1, E1, DE, H1 H2 H3, F1, G1, T1 T2, K1 K2, L1 L2 L3, W1). A and B at the 3-variant cap; review round used its 3 |
+| Ideas tried | 13 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed], F efficiency regime [not adopted], G don't-fight-the-first-break [killed], T one-hour check exit [killed], K first-break direction [killed], L lookback 2/5/10 [no improvement; A2 robust], W no-Friday [pending forward test], X exits: break-even / runner / target [no survivor]) |
+| Variants tested | 26 (A1 A2 A3, B1 B2 B3, C1, D1, E1, DE, H1 H2 H3, F1, G1, T1 T2, K1 K2, L1 L2 L3, W1, X1 X2 X3). A and B at the 3-variant cap; review round used its 3 |
 | Challenge attempts | 1 (active) |
 | Last updated (real date) | 2026-11-16 |
 
@@ -17,7 +17,7 @@
 | LIVE Jan (01-12..01-30) A2 | 14 | 71% | +0.72 | +10.04 (+$1,257) | 1.33R | one big downtrend; 2 shock-day trades = +6.3R |
 | LIVE Feb (02-02..02-27) A2 | 20 | 55% | +0.23 | +4.64 (+$580) | 1.86R | box market; one coin-flip day = +2.14R |
 | LIVE total Jan-Feb | 34 | 62% | +0.43 | +14.69 (+$1,836) | 1.86R | |
-| LIVE March = FORWARD TALLY (unseen data, from 03-02) A2 | 2 | 50% | +0.06 | +0.12 (+$15) | 1.00R | 03-02 sell -1.00R (valid setup, market disagreed), 03-03 sell +1.12R. A2 forward kill test: 2 of 40 trades. F1 paper tag identical so far. Fridays 0/8 |
+| LIVE March = FORWARD TALLY (unseen data, from 03-02) A2 | 3 | 67% | +0.43 | +1.29 (+$161) | 1.00R | 03-02 sell -1.00R (valid setup, market disagreed), 03-03 sell +1.12R, 03-04 sell +1.17R. A2 forward kill test: 3 of 40 trades. F1 paper tag identical so far. Fridays 0/8 |
 | Backtest Feb only (out-of-sample) A1 / A2 / A3 | 20 each | 50 / 55 / 40% | +0.18 / +0.23 / +0.00 | +3.60 / +4.64 / +0.10 | 2.2 / 1.9 / 3.1R | A2 = live exactly |
 | Backtest Feb only B1 / B2 / B3 | 13 / 14 / 13 | 54 / 57 / 54% | +0.32 / +0.34 / +0.23 | +4.10 / +4.79 / +2.98 | 1.1 / 1.7 / 1.0R | |
 | Backtest Feb only C1 (A2 + midpoint filter) | 13 | 38% | -0.08 | -1.04 | 1.5R | skipped 7 trades worth +5.68R: failing |
@@ -90,11 +90,15 @@
 - Jan-Feb table (in-sample both months): Jan W1 +0.66R (15) vs A2 +0.78R (19), skipped Fridays +4.92R; Feb (contaminated) W1 +0.40R (16) vs +0.23R (20), skipped Fridays -1.78R. As predicted; no evidence.
 - Kill test as written is forward-only: 8 unseen Fridays. Status 0/8 -> PENDING, not adopted, not killed. A2 trades Fridays for real meanwhile.
 
+## Idea X exits (journal/2015-idea-X-exits.md; pre-registered)
+- X1 break-even after +20 pips: Jan +0.70R, Feb +0.25R. X2 runner (>= +40 pips at noon holds to 16:00): Jan +0.81R, Feb +0.09R. X3 target +60 pips: Jan +0.64R, Feb +0.24R. A2: +0.78 / +0.23R.
+- No variant clears the January build (+0.05R needed). Each helps one month and hurts the other. Exit unchanged: stop 40, out 12:00.
+
 ## Loss tags (running count, all live trades): valid setup, market disagreed 14 (-7.03R) | my mistake 0.
 
 ## Next step
-1. Day 03-03 traded. Friday test run on Jan-Feb but its verdict is forward-only (pending) - coach decides if that earns a day. When the next day is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `./look.sh 3 0 9`; write the call in journal/2015-W10.md;
-   `python trade_a.py sell|buy` (A2, $125 until phase 1 resolves, then $187.50 per plan v2); tag any loss; paper-tag F1 and Fridays (idea W).
+1. Day 03-04 traded; exit test (idea X) finished. When the next day is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `./look.sh 3 0 9`; write the call in journal/2015-W10.md;
+   `python trade_a.py sell|buy` (A2, $125 until phase 1 resolves - it is $2.36 away - then $187.50 = 0.47 lots per plan v2; check `python sim.py account` for the phase before sizing); tag any loss; paper-tag F1 and Fridays (idea W).
 2. Keep backtesting on Jan-Feb only (never load March into a test: pass END <= 2015-03-01). Each test: hypothesis + kill test committed first, max 3 variants, counted, February labelled contaminated.
-3. Open idea: trend vs box before 08:00. Forward tests running (tally table at the end of journal/2015-W10.md): A2 kill test (2/40 trades, +0.12R), F1 paper tag (2 days, same), Friday tag (0/8).
+3. Open idea: trend vs box before 08:00. Forward tests running (tally table at the end of journal/2015-W10.md): A2 kill test (3/40 trades, +1.29R), F1 paper tag (3 days, same), Friday tag (0/8).
 Tools: look.sh, trade_a.py, bt/ab.py (filters), bt/ab_exit.py (exits), bt/ab_rule.py and bt/ab_same.py (own entries/direction), bt/pass_math.py, bt/risk_math.py, bt/review.py, bt/loser_charts.py. Tests: `python -m pytest -q`.

@@ -23,13 +23,13 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None):
     tr = trend_map(m5, look, strict); acct = Account(); risk_of = {}
     cl = m5.groupby('day')['close'].last()
     hi = m5.groupby('day')['high'].max(); lo = m5.groupby('day')['low'].min(); dlist = list(hi.index)
     for d, g in m5.groupby("day"):
         if d not in tr or g["time"].iloc[0].weekday() == 6 and len(g) < 100: continue
-        side = tr[d]; done = False
+        side = tr[d]; done = False; running = False
         asia = g[(g.time.dt.hour < 7) & (g.time.dt.date == d)]
         for _, b in g.iterrows():
             h = b.time.hour
@@ -73,8 +73,17 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
             if hourcheck is not None and acct.positions and h == entry_h + 1 and b.time.minute == 0:   # idea T: one-hour check at this bar's open
                 p = acct.positions[0]; pips = ((b.open - p.entry) if p.side > 0 else (p.entry - (b.open + acct.spread))) / PIP
                 if pips < hourcheck: acct.close()
-            if acct.positions and h >= exit_h: acct.close()
+            if acct.positions and h >= exit_h:
+                p = acct.positions[0]
+                if runner is not None and not running and h == exit_h and b.time.minute == 0:      # idea X2: at the exit time, a trade >= +runner pips becomes a runner
+                    pips = ((b.open - p.entry) if p.side > 0 else (p.entry - (b.open + acct.spread))) / PIP
+                    if pips >= runner: running = True; acct.modify(p.id, sl=p.entry + p.side * 20 * PIP)   # lock +20 pips
+                if not running or h >= 16: acct.close()
             acct.on_bar(b)
+            if be is not None:                                                                    # idea X1: after +be pips my way, stop to entry (from the next bar)
+                for p in acct.positions:
+                    fav = ((b.high - p.entry) if p.side > 0 else (p.entry - (b.low + acct.spread))) / PIP
+                    if fav >= be and ((p.side > 0 and p.sl < p.entry) or (p.side < 0 and p.sl > p.entry)): acct.modify(p.id, sl=p.entry)
     t = pd.DataFrame(acct.trades)
     if not t.empty and since: t = t[t.entry_time >= pd.Timestamp(since, tz="UTC")].reset_index(drop=True)
     if t.empty: print(name, "no trades"); return t
@@ -108,6 +117,9 @@ VARIANTS = {
  "L2": dict(entry_h=8, exit_h=12, sl=40, look=5, strict=True),    # idea L: lookback 5 days
  "L3": dict(entry_h=8, exit_h=12, sl=40, look=10, strict=True),   # idea L: lookback 10 days
  "W1": dict(entry_h=8, exit_h=12, sl=40, nofri=True),   # idea W: A2 Monday-Thursday only
+ "X1": dict(entry_h=8, exit_h=12, sl=40, be=20),       # idea X: break-even stop after +20 pips
+ "X2": dict(entry_h=8, exit_h=12, sl=40, runner=40),   # idea X: trades >= +40 pips at noon run to 16:00 with +20 locked
+ "X3": dict(entry_h=8, exit_h=12, sl=40, tp=60),       # idea X: take profit at +60 pips
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":

@@ -14,6 +14,8 @@ def get(n):
 A = get("A2"); print(a, "..", b); print("  A2 ", st(A))
 for k in ks:
     V = get(k); m = A.merge(V, on="entry_time", suffixes=("_a", "_v")); cut = m[(m.exit_time_v < m.exit_time_a)]
+    ch = m[(m.R_a - m.R_v).abs() > 0.005]
+    print(f"  {k}  touched {len(ch)} trades: better on {int((ch.R_v > ch.R_a).sum())}, worse on {int((ch.R_v < ch.R_a).sum())}, net {(ch.R_v - ch.R_a).sum():+.2f}R |", " ".join(f"{str(r.entry_time)[5:10]} {r.R_a:+.2f}->{r.R_v:+.2f}" for r in ch.itertuples()))
     rest = cut.R_a - cut.R_v
     print(f"  {k} ", st(V), f"| cut early: {len(cut)}, what they did 09:00->exit under A2: avg {rest.mean():+.2f}R sum {rest.sum():+.2f}R")
     print("     cut:", " ".join(f"{str(r.entry_time)[5:10]} {r.R_v:+.2f}(A2 {r.R_a:+.2f})" for r in cut.itertuples()))
