@@ -184,3 +184,15 @@ Trade tags to date: 6 valid, 0 my mistake. Process mistakes: 2 (P1 DST slip on M
 Days: ... 03-31 +1.14 (funded 3) | 04-01 +0.09 (funded 4) | 04-02 -0.25 (funded 5) | 04-03 +0.07 (funded 6).
 Loss tags, all live trades: valid setup, market disagreed 20 (-10.91R) | my mistake 0. Process mistakes (funded): 2.
 Two paper tags end today by their own pre-registered lines: idea W "no Friday" (cannot reach 5 losers in 8) and N1 "NY fade" (drawdown past its 4R limit; 2 wins in 7).
+
+## FUNDED LEDGER TO DATE - every trade tagged, with balance and drawdown (checked against sim/trades.csv on Sat 04-04: all six rows match to the cent)
+| Funded day | Date | Side | R | $ | Tag | Balance | High-water | Drawdown |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Fri 03-27 | sell | -1.00 | -122.45 | VALID LOSS (valid setup, market disagreed) | $24,877.55 | $25,000.00 | -0.49% |
+| 2 | Mon 03-30 | sell | +0.84 | +105.09 | valid win | $24,982.64 | $25,000.00 | -0.07% |
+| 3 | Tue 03-31 | sell | +1.14 | +141.67 | valid win | $25,124.31 | $25,124.31 | 0.00% |
+| 4 | Wed 04-01 | sell | +0.09 | +11.47 | valid win | $25,135.78 | $25,135.78 | 0.00% |
+| 5 | Thu 04-02 | sell | -0.25 | -30.69 | VALID LOSS (valid setup, market disagreed) | $25,105.09 | $25,135.78 | -0.12% |
+| 6 | Fri 04-03 | buy | +0.07 | +9.30 | valid win | $25,114.39 | $25,135.78 | -0.09% |
+Totals: 6 trades, 4 wins, +0.89R, +$114.39 (+0.46%). Valid losses 2 (-1.25R). MISTAKES: 0 trades. Process mistakes: 2 (P1, P2 - neither changed a trade).
+Deepest drawdown so far -0.49% (day 1). Brakes at -3% / -5% from high-water; account line $22,500. Payouts: none yet (first date 04-10).
