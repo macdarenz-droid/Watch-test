@@ -305,3 +305,8 @@ smaller and pokes do disappear - and every winner shrinks. All killed; the stop 
 pushed; mechanics worked by hand on 05-19; one run with 05-19 dropped. 60/40: +0.44R on 4 days (killed). 60/30: -2.81R, it cut my best day from +4.30R to
 +1.41R (killed). 80/40: +1.10R on 3 days, none worse - too thin by my own sample line, no tag. Exit unchanged. A counts-only line for +80 pip trades starts.
 Counts: 64 ideas, 179 variants.
+
+## 05-22 research after funded day 41: idea LB, the 3-day lookback on all history (journal/2015-idea-LB-lookback-hill.md). Challenger lines and the
+hill-or-spike reading pushed before any code; signals of two days worked by hand from my own calls; one run. Lookback 2 / 4 / 5 days keep 55% / 78% / 87%
+of A2's net, all positive in both halves, with deeper drawdowns; none is a challenger. By my pre-written rule the shape is "unclear" (lookback 2 is five
+points under my hill line), nowhere near a spike. A2 unchanged. Counts: 65 ideas, 182 variants.

@@ -28,3 +28,45 @@ common days is printed). Nothing dropped: there are no inspiring days. Known bef
 - Anything between: "unclear", said as such.
 Hand-check before totals: the three signals of one day worked from the 22:00 closes of my own call, against the script.
 My guess, written now (I cannot guess these; kept to show it): LB2 about 70% of A2, LB4 about 85%, LB5 about 75%; none passes K1; reading HILL.
+
+## Mechanics hand-check (`python bt/lookback_hill.py 2015-05-23 --check DATE`)
+- Lookback 3 through this script reproduces engine A2 on all 99 days (largest difference 0.000R).
+- 05-19, from the 22:00 closes in my own calls (05-18 1.13141; 05-14 1.14097; 05-13 1.13536; 05-12 1.12127; 05-11 1.11546): 2-day 1.13141 < 1.14097 SELL;
+  3-day < 1.13536 SELL; 4-day > 1.12127 BUY; 5-day > 1.11546 BUY. The script: SELL +2.18R | SELL +2.18R | BUY -1.03R | BUY -1.03R. Same.
+- 05-22: all four SELL by hand and by script.
+- Note: the engine fills the first days of January with a shorter lookback when there are not enough closes yet, so all variants have 99 common days.
+
+## Results (run once; `python bt/lookback_hill.py 2015-05-23`; figures copied from the print)
+A2 on the 99 days (engine): net +33.70R (before 03-02 +19.56R, from 03-02 +14.14R), win 61%, max DD 3.75R, worst 10 in a row -3.75R.
+| lookback | net R | share of A2 | before 03-02 (vs A2) | from 03-02 (vs A2) | wins | max DD | worst 10 | days with the opposite direction: variant / A2 on them | diff without best 3 days |
+|---|---|---|---|---|---|---|---|---|---|
+| 2 days | +18.44 | 55% | +12.80 (-6.75) | +5.64 (-8.51) | 53% | 4.39R | -4.21 | 16 days: -6.32R / +8.94R | -19.36 |
+| 3 days (A2) | +33.70 | 100% | +19.56 | +14.14 | 61% | 3.75R | -3.75 | - | - |
+| 4 days | +26.31 | 78% | +14.26 (-5.30) | +12.05 (-2.09) | 54% | 7.60R | -6.96 | 17 days: -4.35R / +3.05R | -13.05 |
+| 5 days | +29.23 | 87% | +16.17 (-3.39) | +13.05 (-1.09) | 57% | 6.60R | -5.92 | 21 days: -3.48R / +1.00R | -11.65 |
+Challenger lines: K1, K2, K3, K4 all FAIL for all three. No challenger; no tag.
+
+## The reading, by the rule I wrote before the run
+HILL needed lookbacks 2 AND 4 at 60% or more, positive in both halves. Lookback 4 keeps 78%, lookback 2 keeps 55%: five points short. SPIKE needed 30% or
+less, or a negative half: neither is anywhere near that - every neighbour is positive in both halves. By my own written rule the reading is "UNCLEAR",
+and I report it as that rather than round 55% up.
+What the table says beyond the label, said carefully:
+- 3 days is the best lookback I have measured on all history, in both halves, and it was the best in January too. Nothing beats it; nothing is close on
+  drawdown (the 4- and 5-day versions go through 6.6R to 7.6R drawdowns against 3.75R).
+- Its neighbours all make money in both halves: 55% / 78% / 87% of A2's net for 2 / 4 / 5 days. That is not what a lucky number looks like; a lucky
+  number has dead neighbours (the 10-day lookback was dead in January and February). But the slope on the short side is steep: one day shorter loses
+  almost half.
+- On the days where a neighbour points the other way, A2 was the one that made money each time (+8.94R against -6.32R on 16 days for the 2-day signal).
+  This is also the UN3 question from the other side: the 5-day signal disagreed on 21 days and A2 made +1.00R on them - about nothing, which is what the
+  paper tag is there to settle.
+- So: the edge is "the direction of the last few days", it is there for every lookback from 2 to 5, and 3 is the best member of the family rather than
+  an island. I trust the signal a little more after this than before; I cannot call it a clean hill.
+
+## My guess against what happened
+"LB2 70%, LB4 85%, LB5 75%; none passes K1; HILL": 55%, 78%, 87%; none passes; UNCLEAR. Wrong on two numbers and on the label.
+
+## What I do with it
+Nothing changes. A2 keeps the 3-day lookback; UN3 stays the paper line for 3-day against 5-day; the alarm at 100 live trades stays A2's judge.
+With ET, SA, TW and this, every number in the rule (direction lookback, entry minute, stop distance, exit clock) has now been re-tested on all history
+and none moved. The losing run is not explained by a wrong setting. It is, as far as I can measure, variance inside the range I wrote down on 05-19.
+Counts: ideas 65, variants 182 (LB2 LB4 LB5). Adopted trading ideas: 0. On paper: UN3, PH2, MB1.
