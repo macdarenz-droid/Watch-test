@@ -134,3 +134,5 @@ Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 42 done, avg +0.34R, m
 Count only (from 04-23, no look before 40): live trades after a night (00:00->08:00) against my side: 2 (+1.45R).
 
 ## 04-28 research (before the next day): new idea, a separate afternoon trade in the rule's direction, AF1/AF2/AF3 (journal/2015-idea-AF-afternoon.md) - no survivor: 75 afternoons at -0.11R each. Rule A2 and size 0.50% unchanged. Ideas 46, variants 125.
+
+## 04-29 (before the next day): streak check against the backtest (journal/2015-streak-check.md) - the six-loss run is a 4.9% event for the backtest list (just outside my 5% line), the drawdown 7.6% (inside). What changed: mornings going a full stop against my entry, 8% before, 26% live; nothing else. Plan unchanged. Counts stay 46 ideas, 125 variants.

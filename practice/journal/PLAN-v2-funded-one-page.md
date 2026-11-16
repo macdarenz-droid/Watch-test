@@ -42,7 +42,7 @@ Score so far (funded): 14 trades, 14 valid (9 wins, 5 valid losses), 0 trade mis
 | February (frozen rule) | 20 | 55% | +0.23 |
 | March to now, traded forward one day at a time | 33 | 70% | +0.46 |
 Planning number: +0.18R. On 72 trades my average is only known to about +-0.25R. At 0.50%: roughly +$460 (planning edge) to +$890 (February-to-now edge) a month on the
-account before the split; about one month in five negative at the planning edge; a bad month about -$450. Drawdowns of 3-4% will happen and are not a signal to change anything.
+account before the split; about one month in five negative at the planning edge; a bad month about -$450. Drawdowns of 3-4% will happen and are not a signal to change anything. (04-29, from the live loss side: about one trade in four is a full stop; a run of six losses is a once-in-a-few-months event; 5R of drawdown inside two months is within the normal range.)
 Where it comes from (04-17, 74 trades): both sides earn - sells +0.61R (47), buys +0.24R (27), each positive in all three periods - but 81% of the net R is sells in a market that
 fell 1,200 pips. The smaller side is known only to +-0.40R. I have not yet traded a rising market; +0.18R is about what the weaker side has earned.
 
