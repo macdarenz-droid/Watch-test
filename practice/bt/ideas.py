@@ -27,7 +27,8 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None):
+    _best = {}
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
     _a = m5[(m5.time.dt.hour < 7) & (m5.time.dt.date == m5.day)]; _g = _a.groupby('day'); arng = (_g['high'].max() - _g['low'].min()) / PIP   # Asia 00-07 range per day, pips
@@ -123,6 +124,13 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                     if pips >= runner: running = True; acct.modify(p.id, sl=p.entry + p.side * 20 * PIP)   # lock +20 pips
                 if not running or h >= 16: acct.close()
             acct.on_bar(b)
+            if trail is not None:        # idea TR: trail = (activate pips, distance pips); stop follows the best price, only in my favour, from the next bar
+                for p in acct.positions:
+                    best = _best.get(p.id); cur = b.high if p.side > 0 else b.low + acct.spread
+                    best = cur if best is None else (max(best, cur) if p.side > 0 else min(best, cur)); _best[p.id] = best
+                    if (best - p.entry) * p.side / PIP >= trail[0]:
+                        ns = best - p.side * trail[1] * PIP
+                        if (p.side > 0 and ns > p.sl) or (p.side < 0 and ns < p.sl): acct.modify(p.id, sl=ns)
             if be is not None:                                                                    # idea X1: after +be pips my way, stop to entry (from the next bar)
                 for p in acct.positions:
                     fav = ((b.high - p.entry) if p.side > 0 else (p.entry - (b.low + acct.spread))) / PIP
@@ -190,6 +198,9 @@ VARIANTS = {
  "FR1": dict(entry_h=8, exit_h=12, sl=40, eff=0.5, effchase=0.5),   # F1 neighbour: stricter no-chase
  "FR2": dict(entry_h=8, exit_h=12, sl=40, eff=0.5, effchase=0.7),   # F1 neighbour: looser no-chase
  "FR3": dict(entry_h=8, exit_h=12, sl=40, eff=0.6, effchase=0.6),   # F1 neighbour: higher efficiency threshold
+ "TR20": dict(entry_h=8, exit_h=12, sl=40, trail=(20, 20)),   # idea TR: trailing stops
+ "TR30": dict(entry_h=8, exit_h=12, sl=40, trail=(30, 30)),
+ "TR40": dict(entry_h=8, exit_h=12, sl=40, trail=(40, 20)),
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
