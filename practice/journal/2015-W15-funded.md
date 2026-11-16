@@ -91,6 +91,17 @@ Start of week: balance $25,114.39, high-water $25,135.78, drawdown -0.09%. Payou
      Payout check for Fri 04-10: balance $24,938.31 is below $25,000 -> nothing to request.
      END OF RELEASED DATA (clock Fri 04-10 01:00 London).
 
+- **Fri 04-10 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID WIN.
+  Bias: SELL. 22:00 London closes: 04-09 1.06587 vs 04-06 1.09217 = -263 pips. Third day on the sell side.
+  Picture: four falling days, 1.1035 (Mon high) to 1.0638 (Thu low); Thu alone fell 150 pips, most of it after my noon exit. The night was a quiet 25 pip shelf
+  1.0662-1.0684 (Asia ratio 0.74), price 1.0673, about 35 pips above Thursday's low.
+  Levels: night high 1.0684; night low 1.0662; Thu low 1.0638. Above: Thu's breakdown area around 1.0750 is outside the stop distance.
+  Worry: a Friday after a 400 pip week - the kind of day where shorts take profit. My Friday test (W) said Fridays are not worse; no skip.
+  Paper tags: Q3 SKIP (Asia 25.3 vs 34.0 = 0.74), Q1 trade. F1 / FR1 read from the engine after the day.
+  Funded check: balance $24,938.31, high-water $25,148.18, drawdown -0.83% (brakes -3% = $24,393.73 / -5% = $23,890.77) -> full size allowed.
+  Payout date today: balance below $25,000 -> nothing to request.
+  Plan: SELL 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$129 -> drawdown -1.35%. One trade, stop not moved, flat for the weekend.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
