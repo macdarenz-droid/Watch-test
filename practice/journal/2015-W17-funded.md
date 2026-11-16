@@ -80,6 +80,21 @@ Live day routine since 04-17: D1 / H4 / H1 / M15 walk in the call, then a note w
      Feeling: at 08:00 typing the buy into five red candles was the hardest order since the funded account started. It cost $5. Good.
      Paper tags: F1, FR1 and Q1 traded (-0.04R); Q3 SKIPPED (dead Asia) and avoids -0.04R. UN3: agree day, paper trades = same as live.
      END OF RELEASED DATA (clock Wed 04-22 01:00 London).
+- **Wed 04-22 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID LOSS (scratch).
+  D1: two days of lower highs after the 1.0849 top (1.0821, 1.0781) but Tuesday made a lower low (1.0660) and closed back at 1.0735 - a 121 pip range closing in its
+      upper half. Three daily closes within 70 pips (1.0805, 1.0737, 1.0735): the bounce has stalled into a range, roughly 1.066-1.085.
+  H4: Tuesday: London fell to 1.0660, New York rallied to 1.0781, evening back to 1.0735. Tonight: dip to 1.0717 at 00:xx, recovery to 1.0748.
+  H1: night low 1.0717 in the first hour, then higher lows (1.0717, 1.0718, 1.0720, 1.0724, 1.0732) and a high at 1.0748 in the last hour. Asia range 32 pips (ratio 0.69).
+  M15: the 05:15 candle jumped 15 pips to 1.0748; since then 1.0739-1.0746. Price 1.0739, in the top third of the night range.
+  Bias: SELL. 22:00 London closes: 04-21 1.07354 vs 04-16 1.07605 = -25 pips. The signal flipped back to sell: first sell after four buy days.
+  UN3 PAPER TAG (never live): 5-day gap +81 pips -> BUY; 3-day says SELL -> DISAGREE: paper SKIPS. Forward day 2, disagree day 1 of 30.
+     This is the first live morning where the paper tag says skip. I trade it exactly as the rule says, full size. Skipping would be a trade mistake.
+  Levels: night high 1.0748; Tue high 1.0781; night low 1.0717; Tue low 1.0660; 1.0700.
+  Rejection-day check (parked observation): Tuesday closed at 0.62 of its range - not in the far third for a sell. Nothing.
+  Worry: selling the middle of a three-day range, into a night of higher lows, on a 25 pip signal, with my own paper filter saying no. Written; not acted on.
+  Paper tags: Q3 SKIP (Asia 31.8 vs 46.1 = 0.69), Q1 trade. F1 / FR1 read from the engine after the day.
+  Funded check: tracker balance $25,376.03, high-water $25,508.71, drawdown -0.52% (brakes -3% = $24,743.45 / -5% = $24,233.27) -> full size allowed.
+  Plan: SELL 08:00 London, SL 40 pips above the bid at 08:00, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$129 -> drawdown -1.0%. One trade, stop not moved.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
