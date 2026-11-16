@@ -51,3 +51,33 @@ A paper tag is the most this test can produce. It cannot change my stop in phase
 My guess: none survives January - the winners' shrinkage costs more R than the two January stops can give back. If so the answer to "is 40 too tight?" is "no: the pip-or-two
 stop-outs are the price of a stop that keeps the winners big", and I stop looking at 03-09 and 03-19 as near misses.
 Nothing above has been run.
+
+# RESULTS of idea S (run after commit 93cfac3). S50/S60/S80 = variants 54/55/56; ideas 23. Costs on, same entries and noon exit, $125 at the stop (bt/ab_score.py).
+
+| Data | Stop | Trades | Win rate | Avg R | Net R (vs A2) | Max DD | Net R / max DD (vs A2) | Full stops |
+|---|---|---|---|---|---|---|---|---|
+| January (BUILD) | 40 (A2) | 19 | 74% | +0.78 | +14.89 | 1.34R | 11.1 | 2 |
+| January | 50 | 19 | 74% | +0.61 | +11.53 (77%) | 1.27R | 9.1 (0.81x) | 2 |
+| January | 60 | 19 | 74% | +0.49 | +9.26 (62%) | 1.22R | 7.6 (0.68x) | 2 |
+| January | 80 | 19 | 74% | +0.37 | +7.07 (47%) | 1.00R | 7.1 (0.63x) | 1 |
+| February (contaminated) | 40 (A2) | 20 | 55% | +0.23 | +4.67 | 1.87R | 2.5 | 1 |
+| February | 50 | 20 | 55% | +0.18 | +3.54 (76%) | 1.70R | 2.1 (0.83x) | 1 |
+| February | 60 | 20 | 55% | +0.16 | +3.20 (69%) | 1.15R | 2.8 (1.11x) | 0 |
+| February | 80 | 20 | 55% | +0.12 | +2.40 (51%) | 0.86R | 2.8 (1.11x) | 0 |
+| March forward (NOT clean for this idea) | 40 (A2) | 15 | 73% | +0.50 | +7.52 | 1.03R | 7.3 | 3 |
+| March | 50 | 15 | 80% | +0.43 | +6.47 (86%) | 1.02R | 6.3 (0.86x) | 2 |
+| March | 60 | 15 | 80% | +0.35 | +5.27 (70%) | 1.02R | 5.2 (0.71x) | 1 |
+| March | 80 | 15 | 80% | +0.30 | +4.57 (61%) | 0.59R | 7.8 (1.07x) | 0 |
+
+## Build (January): NO SURVIVOR
+Needed a score 1.25x A2's with 95% of its net R. The wider stops reach 0.81x, 0.68x, 0.63x and keep only 77%, 62%, 47% of the profit. No candidate; nothing to claim from the other months.
+For the record, nowhere does a wider stop keep 95% of A2's net R: the best is 86% (50 pips in March), and that includes March, the month the idea came from.
+
+## Answer to "is 40 pips too tight?": NO
+- A wider stop does save stop-outs (March: 3 -> 2 -> 1 -> 0) and trims drawdown a little, but every winner is paid in smaller R, and there are five times more winners than stop-outs.
+  The trade-off loses 14-53% of the profit for a drawdown that is at best a third smaller.
+- With E1 (30 pips: worse) and V (scaled: worse) this closes the stop from both sides: 40 is not a lucky number, it is near the sensible middle - tight enough to keep winners
+  big, wide enough for a winner's 12 pip wobble.
+- So 03-09 (stopped by 2.4 pips) and 03-19 were not near misses to engineer away, and 03-17 (survived by 0.9 pip) was not skill. They are the same coin.
+  A 20% stop-out rate over 15 trades against 8% over 39 is three events against three; I will watch it in the forward tally, not act on it.
+- Counts: ideas 23, variants 56.

@@ -171,6 +171,9 @@ VARIANTS = {
  "ET10": dict(entry_h=8, exit_h=10, sl=40),   # idea E-time: A2, out at 10:00
  "ET11": dict(entry_h=8, exit_h=11, sl=40),   # out at 11:00
  "ET13": dict(entry_h=8, exit_h=13, sl=40),   # out at 13:00
+ "S50": dict(entry_h=8, exit_h=12, sl=50),   # idea S: wider fixed stop, same $ risk
+ "S60": dict(entry_h=8, exit_h=12, sl=60),
+ "S80": dict(entry_h=8, exit_h=12, sl=80),
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
