@@ -24,6 +24,11 @@ Coach, 05-18: no more risk-plan tests for now; the next backtest is about findin
   SIZE RULE: tracker balance $25,114.78, high-water $25,349.14, drawdown -0.92%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
   Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
   Worry: three stops last week, two of them buys into this same up-move. The signal is the same and so is the plan. Written, not a rule.
+  08:00 London Mon: pre-entry hour 1.14166-1.14468 = 30.2 pips -> PH2 paper: LIVELY (just over the 30 pip line), paper half size (decided before the order). Price 1.14169, the low of the hour: night against me by 23.2 pips (counted); entry 20.7 pips better than at 07:00. Order: BUY 0.31, stop 40 pips below the bid (1.13769).
+  08:15 London: filled BUY 1.14178, stop 1.13769 (40.9 pips from the fill). First candle read from the tool. Call for the hour: none that matters; 1.1417 is the night low area I bought at. Hands off.
+  09:00 London: first hour best +7.8, worst -37.8 (low 1.13800: 3.1 pips from the stop), last -27.4 pips. Third morning in a row that drops about 38 pips in the first hour of a buy. I notice the pattern and I notice that I want a rule for it; that is for the backtest, not for now. Hands off.
+  10:00 London: STOPPED in the 09:00 London candle (low 1.13666). Sim balance from the tool $25,462.52. One trade a day: done. I watch to noon only for the stop-day routine.
+  12:00 London: price (bid, from the tool) 1.14172 = 0.6 pips under my entry and 40.3 pips ABOVE my stop. NOT a real stop: the morning low 1.13666 went 10.3 pips through it and the price came all the way back. Without the stop this is a scratch. With it, -1.00R. The stop is the rule; this is what it costs on such a morning (the 04-22 / 05-11 kind). MB1 paper (forward day 4), written before 13:25: open 08:00 1.14167, price at 12:00 1.14172 -> morning about +0.5 pips, as good as flat (small morning). By the rule the sign decides: UP if the tool's 12:00 open is above 1.14167, else DOWN; the tool's figure rules, I do not pick.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
