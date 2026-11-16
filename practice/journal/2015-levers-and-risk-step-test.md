@@ -43,3 +43,36 @@ So this test can only tell me the MINIMUM size the goal would have needed on a f
 forward test are what stand between this table and my account.
 My guess: 0.75% gets 2 of the 4 or 5 decided starts home in time (borderline); 1.00% gets all of them; no start touches a brake at any of the three sizes.
 Nothing above has been run.
+
+# RESULTS (run after commit d1a9acc). Full rulebook from each Monday 01-05..02-23, data to 03-25, costs on, brakes and finishing size on. 3 sizing policies; variant count stays 56.
+
+| Risk (both phases) | Both phases within 1 month | Within 2 months (42 trading days) | Trading days to pass both, per start (01-05 ... 02-23) | Breach / -6% brake | Touched the -4% brake | Worst point of any start |
+|---|---|---|---|---|---|---|
+| 0.50% (reference, earlier test) | 0 of 8 | 0 of 4 decided | 49, 51, then not yet | 0 | 0 | -0.93% |
+| 0.75% | 0 of 8 | 2 of 4 decided (4 undecided) | 26, 40, 46, then not yet (phase 2 at +1.2% to +4.2%) | 0 | 0 | -1.00% |
+| 1.00% | 1 of 8 | 6 of 6 decided (2 undecided, both in phase 2 at +4.6%) | 14, 37, 38, 41, 36, 31, not yet, not yet | 0 | 0 | -1.87% |
+| 1.25% | 2 of 8 | 8 of 8 | 14, 10, 35, 40, 35, 30, 27, 22 | 0 | 0 | -1.67% |
+Phase 1 alone at 0.75%: 13, 10, 35, 33, 28, 25, 26, 21 trading days (every start finished phase 1). At 1.00%: 8, 10, 22, 30, 25, 22, 20, 15.
+
+## Decision rule, applied
+- 0.75%: (a) at least half of the decided starts within 42 days: 2 of 4 = exactly half -> yes, on the line; (b) no brake-stop or breach -> yes; (c) never touched the -4% brake -> yes.
+  So by the rule the SMALLEST size that delivers the goal on this history is 0.75%.
+- It is the weakest possible pass: the two starts that make it are the two that got all of January; the two decided starts that miss took 46 days and "not yet at 43".
+  1.00% is the first size where the answer does not depend on having started in early January (6 of 6, slowest 41 days).
+- The other two locks (written before, not reopened): 0.75% already passed the pessimistic reshuffle on 03-09; 1.00% passed its safety lines there but failed the "+15 points" line.
+  A2's forward test is 18 of 40 trades. So: NOTHING changes in the account today. Attempt #2 stays at 0.5%, as my coach set it.
+
+## What I now know about the wall
+- It is a sizing wall, not a rule wall. The same trades that took 49-51 days at 0.5% take 26-46 at 0.75% and 14-41 at 1.00%, and in none of 8 x 3 runs did the account ever stand
+  more than 1.9% under water. The rulebook has been using about a fifth of the room the challenge gives it.
+- That is exactly the kind of sentence that gets accounts blown up, so the other half in the same breath: every one of these windows is January-to-March 2015, a period in which
+  the rule made money. On such a history more size always looks free. The reshuffle with a zero edge says what it costs when the period is not friendly:
+  my -6% brake ends the attempt about 9 times in 100 at 0.75% and 15 in 100 at 1.00% within 60 days (no breach, because the brake comes first).
+- So the honest plan for the goal "both phases in about two months" is: 0.75% once the rule has earned it forward (40 unseen trades at +0.10R or better), with the brakes,
+  0.50% inside the last 4R of a target, and no promise shorter than "about two months if the months are ordinary, three if they are flat".
+- Cheapest lever: risk. Not because it is good, but because setups-per-week and bigger winners are both shut after 56 variants. If a second setup ever passes forward (N1 is
+  at 4 trades, -2.34R), that would be the better lever: it adds R without adding risk per trade.
+
+## For my coach to decide (I am not doing either by myself)
+1. Whether attempt #2 should move from 0.5% to 0.75% when the forward test completes (22 more trades), or stay at 0.5% to the end as a pure "same rules" proof.
+2. Whether the goal itself should read "about two to three months without breaching" for this rulebook.
