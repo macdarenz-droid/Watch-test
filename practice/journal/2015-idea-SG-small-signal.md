@@ -28,3 +28,44 @@ A variant survives only if ALL:
   K4. it changes at least 10 days and leaves at least 60% of the days alone.
 My guess, written now: small-gap days earn a little less than the others (about 0.2R), the gap is under 0.3R in at least one of the two months, K1 fails for all three
 (removing trades that still earn something lowers the average per signal day). No survivor - and April's last four days stay what they look like: a range week.
+
+# RESULTS (kill test above pushed in commit 02d2733 before the script existed; labels checked on three days against my daily signal lines; one run: `python bt/small_signal.py 2015-04-24`)
+78 A2 trades 01-06..04-23, engine, full costs.
+
+## 3-day gap under 50 pips, or not
+| | trades | win rate | avg R | net R | Jan | Feb | Mar-now |
+|---|---|---|---|---|---|---|---|
+| Large gap (50+) | 57 | 56% | +0.356 | +20.31 | 14, +0.68 | 11, +0.08 | 32, +0.31 |
+| Small gap (< 50) | 21 | 81% | +0.619 | +12.99 | 5, +1.07 | 9, +0.42 | 7, +0.56 |
+Small-gap trades are BETTER by 0.26R (noise +-0.46R), in all three periods.
+
+## Gap under half the 5-day average daily range, or not
+| | trades | win rate | avg R | net R | Jan | Feb | Mar-now |
+|---|---|---|---|---|---|---|---|
+| Large (>= half a day) | 49 | 57% | +0.412 | +20.17 | 13, +0.80 | 9, -0.03 | 27, +0.37 |
+| Small (< half a day) | 29 | 72% | +0.453 | +13.14 | 6, +0.75 | 11, +0.45 | 12, +0.31 |
+No difference (0.04R); in February the small-signal days were the ones that made the money (+4.97R against -0.30R).
+
+## Variants and kill lines
+| | changes | avg R / signal day (A2 +0.427) | net R (A2 +33.31) | max DD (A2 2.10) | gap all | Jan | Feb | Mar-now | K1 | K2 | K3 | K4 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| SG1 skip when gap < 50 pips (GAP50 re-run) | 21 days | +0.260 | +20.31 | 2.29 | -0.26 | -0.39 | -0.33 | -0.25 | FAIL | FAIL | FAIL | PASS |
+| SG2 skip when gap < half a normal day | 29 days | +0.259 | +20.17 | 2.31 | -0.04 | +0.05 | -0.49 | +0.07 | FAIL | FAIL | FAIL | PASS |
+| SG3 half size on those days | 29 days | +0.343 | +26.74 | 2.06 | -0.04 | same | | | FAIL | FAIL | FAIL | PASS |
+VERDICT: NO SURVIVOR. Not close: skipping small signals would have cost 13R of 33R and made the drawdown deeper. A2 unchanged. No tag.
+
+## My guess against what happened
+I guessed "small-gap days earn about 0.2R LESS". They earn 0.26R MORE (under 50 pips) or the same (relative version). Wrong direction. The January finding
+("the skipped days were all winners") was not a January oddity: it holds in February and in March-to-now.
+
+## What I learned
+- A small 3-day gap is not a weak signal for this rule. 21 trades with a gap under 50 pips: 81% winners, +0.62R each. A plausible reason, as a guess only: a small gap
+  means the last three days went nowhere, so I am not chasing an extended move; the rule's worst trades are the ones entered after a big move has already happened
+  (the full stops of 03-19, 03-27, 04-07, 04-16, 04-20 all came with gaps of 150+ pips). I am NOT turning that into "skip large gaps" - that would be the mirror of a
+  failed test on the same data, chosen after seeing it.
+- So weakness 4 of the April review was not a weakness of the rule. The last four days lost 2.07R with gaps of 151, 54, 25 and 80 pips; nothing about their size
+  explains it. It was a range week.
+- The second time this month that the answer to "what did my recent losers have in common" is "something my winners have even more of".
+- What the April review leaves as the real, untestable-for-now weaknesses: the month is one week (regime, which I cannot see in advance), and the income is small
+  (size, which is capped by how badly I know my edge). Both are answered only by more live trades. I will say that in the final April review rather than invent a fifth test for it.
+Counts: ideas 45, variants 122 (SG1 is a re-run of GAP50 on the full history, marked as such).

@@ -160,11 +160,11 @@ Live day routine since 04-17: D1 / H4 / H1 / M15 walk in the call, then a note w
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
-| A2 as traded (R = result / amount risked) | 39 | 24 | +13.67 | +0.35 | 2.06R | early alarm at 40 trades (avg >= +0.10R, DD <= 8R): 39 done; real statement at 200 |
+| A2 as traded (R = result / amount risked) | 39 | 24 | +13.67 | +0.35 | 2.07R | early alarm at 40 trades (avg >= +0.10R, DD <= 8R): 39 done; real statement at 200 |
 | F1 paper tag | 28 (11 skips) | 18 | +14.62 | +0.52 | 1.28R | filter: no adoption question before 200 forward days; can be killed at day 40 (needs FR1 within 1R of A2) |
 | FR1 (tracked only to judge F1) | 26 (13 skips) | 16 | +11.31 | +0.44 | 1.28R | 2.4R behind A2 |
 | Q3 dead-Asia tag (drawdown goal) | 22 (17 skips) | 13 | +5.38 | +0.24 | 1.01R | 39% of A2's net (needs 85%) |
-| Q1 dead-Asia tag (drawdown goal) | 37 (2 skips) | 22 | +11.48 | +0.31 | 2.06R | 84% of net, same DD |
+| Q1 dead-Asia tag (drawdown goal) | 37 (2 skips) | 22 | +11.48 | +0.31 | 2.07R | 84% of net, same DD |
 | UN3 paper tag (never live; rules: journal/UN3-paper-tag-rules.md; forward from 04-21) | 3 days, 2 disagree days of 30 | - | A2 on the disagree days -1.02R; on the agree day -0.04R | - | - | first look only at 30 disagree days AND 200 forward days |
 Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8) | 04-08 -1.00 (funded 9) | 04-09 +0.33 (funded 10) | 04-10 +1.62 (funded 11) | 04-13 +1.94 (funded 12) | 04-14 -0.62 (funded 13) | 04-15 +1.48 (funded 14) | 04-16 -1.00 (funded 15) | 04-17 +1.70 (funded 16) | 04-20 -1.00 (funded 17) | 04-21 -0.04 (funded 18) | 04-22 -0.02 (funded 19) | 04-23 -1.00 (funded 20).
 Loss tags, all live trades: valid loss 28 (-16.59R) | my mistake 0. Process mistakes (funded): 3.
@@ -195,3 +195,5 @@ Count only (from 04-23, no look before 40): live trades after a night (00:00->08
 
 ## 04-23 research (before the next day): review of A2's last 15 losers by eye + one-way-night test ON1/ON2/ON3 (journal/2015-review-last-15-losers-and-idea-ON.md) - no survivor: the lesson fails on the period I did not review. Method rule added: losers are reviewed with winners beside them and base rates first. Rule A2 and size 0.50% unchanged. Ideas 44, variants 119.
 Count only, from 04-23: live trades after a night (00:00->08:00) against my side: 0 so far (no look before 40).
+
+## 04-24 (before the next day): April month-end review so far (journal/2015-04-month-end-review-so-far.md) and the test of its chosen weakness, small signals SG1/SG2/SG3 (journal/2015-idea-SG-small-signal.md) - no survivor: small-gap days are the better ones. Rule A2 and size 0.50% unchanged. Ideas 45, variants 122.
