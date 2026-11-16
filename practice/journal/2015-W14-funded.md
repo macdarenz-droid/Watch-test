@@ -52,3 +52,10 @@ For the record, the trend direction today is the same under either reading.
 | N1 paper tag (NY fade; from 03-13) | 5 (12 days) | 1 | -3.34 | -0.67 | 3.34R | judge at 20 trades AND 8 A2-losing days. A2-losing days so far: 3; N1 on them: -2.02R |
 Days: ... 03-23 +2.52 | 03-24 +0.71 | 03-25 +0.89 | 03-26 -0.50 | 03-27 -1.00 (funded 1) | 03-30 +0.84 (funded 2).
 Loss tags, all live trades: valid setup, market disagreed 19 (-10.66R) | my mistake 0.
+
+## Coach ruling, Tue 2015-03-31
+- "Use London time consistently from now on, and always write the call before the entry bar opens." The London-time reading stands; it is now the rule, not my interpretation.
+- Monday's slip is logged as PROCESS MISTAKE P1 in the funded tracker (not a trade mistake: the trade itself is tagged valid). I own it: the clocks changing was knowable on Sunday
+  from the sim's own time line, and I did not look.
+- Guard built today: trade_a.py --london takes London times and converts them, so the entry can no longer drift with the UTC label; and my own rule is that with no written call
+  before 08:00 London there is no trade that day.

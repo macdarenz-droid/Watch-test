@@ -15,5 +15,12 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | Date | Balance before | Requested | My 80% | Balance after | Note |
 |---|---|---|---|---|---|
 
+## Process mistakes log (separate from trade tags; a process mistake is something I did wrong AROUND a trade)
+| # | Date | What happened | Effect on the trade | Fix |
+|---|---|---|---|---|
+| P1 | Mon 2015-03-30 | London had moved to summer time on 03-29 and I did not check: I advanced the sim clock to 07:00 UTC (= 08:00 London) as on every winter day, so the call was written AT the entry time instead of before the entry bar opened | none on the order (side, time, size and stop were the rule's; tagged VALID as a trade) - but I had seen one more hour of candles than my process allows when writing the notes | coach ruling 03-31: London time from now on, call always before the entry bar; trade_a.py --london converts for me; no written call before 08:00 London = no trade that day |
+Earlier record-keeping slips, for completeness (challenge stage, none changed a trade): invented backtest numbers in STATE once (fixed the same turn); H2/H3 run on February against my
+pre-registration; worst losing run overstated as -2.17R (was -1.86R); a journal edit on 03-25 cut out a section (restored from git on 03-26).
+
 ## Status line (update every day)
-After funded day 2 (03-30): balance $24,982.64 | high-water $25,000.00 | drawdown -0.07% (brake at -3%, stop at -5%, account line $22,500) | March MTD -0.16R (2 trades, 1 win) | tags: 2 valid, 0 mistake | payouts 0 | next payout date 04-10.
+After funded day 2 (03-30): balance $24,982.64 | high-water $25,000.00 | drawdown -0.07% (brake at -3%, stop at -5%, account line $22,500) | March MTD -0.16R (2 trades, 1 win) | TRADE tags: 2 valid, 0 my mistake | PROCESS mistakes: 1 (P1, DST slip) | payouts 0 | next payout date 04-10.

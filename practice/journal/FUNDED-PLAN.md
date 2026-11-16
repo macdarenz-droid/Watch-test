@@ -8,8 +8,8 @@ in journal/FUNDED-TRACKER.md, because the sim knows nothing about payouts and wo
 - At most 3% risk open at any time. No profit target. 80% profit split. Payout every 14 days (I track the dates).
 - Goal: steady monthly profit and safe payouts. NEVER breach. A breach here is not "an attempt counted" - it is the account gone.
 
-## The trading rule: unchanged
-A2 exactly as frozen: 07:00 UTC written call; direction = last 22:00 close vs the close three trading days earlier; 08:00 market order; stop 40 pips; close 12:00 UTC;
+## The trading rule: unchanged, in LONDON time (confirmed by my coach on 2015-03-31: "use London time consistently from now on")
+A2 exactly as frozen: written call at 07:00 London, ALWAYS before the entry bar opens; direction = last 22:00 London close vs the close three trading days earlier; market order 08:00 London; stop 40 pips; close 12:00 London;
 one trade per weekday, no skips; flat by noon and over weekends. One position, so risk open is my per-trade risk: far inside the 3% rule.
 
 ## Funded risk size: 0.50% per trade = $125 = 0.31 lots. Chosen from my reshuffle numbers, survival first.
@@ -49,3 +49,10 @@ slightly negative. That is "steady", and it is enough.
 ## What stays the same about how I work
 One live day at a time, call written before the clock moves; the day's result tagged valid / mistake before anything else; tracker updated the same day;
 one honest test (hypothesis, kill lines written first, max 3 variants) earns the next day; paper tags (F1, Q3/Q1, Friday, N1) continue; everything counted in STATE.md.
+
+## Process rules (added 2015-03-31)
+- All clock times in my rules, journal and tools are London local time. The sim runs on UTC: I advance to 07:00 London with `python sim.py advance --until DATE T<UTC>` and trade with
+  `python trade_a.py buy|sell --risk 125 --london` (default entry 08:00, exit 12:00, next call 07:00, all London; the helper converts to UTC, summer or winter).
+- The call is written and committed to the journal BEFORE the entry bar opens - no exceptions. If I ever find the clock already at or past 08:00 London without a written call,
+  I do not trade that day and log it as a process mistake.
+- Two separate tallies: TRADE tags (valid setup / my mistake) and PROCESS mistakes (things I did wrong around the trade that did not change the trade). Both are in the tracker.
