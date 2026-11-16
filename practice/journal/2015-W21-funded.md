@@ -141,6 +141,10 @@ Coach, 05-18: no more risk-plan tests for now; the next backtest is about findin
      the noon price; the three real ones were saved from -0.95R, -1.76R and -1.43R... correction: I have not computed those three; the routine recorded
      the noon distances 38.1, 70.5 and 57.3 pips against entry, i.e. about -0.95R, -1.76R and -1.43R at noon without a stop (pips / 40). So over these five
      the stop cost about 1.5R on the pokes and saved about 1.2R on the real ones: about even, five cases. S, SS and CS said the same over all history.
+     CORRECTION, same day, after the push (process mistake P8): the three lines above were arithmetic done in my head. Computed from the recorded noon
+     distances and each day's stop distance: without a stop the five trades would have been at noon 05-11 -0.93R, 05-12 -1.76R, 05-15 -1.39R, 05-18 -0.01R,
+     05-20 -0.23R. So the stop COST 0.99R and 0.77R on the two pokes (1.76R, not "about 1.5R"), SAVED 0.76R and 0.39R on two real ones (1.15R, not "about
+     1.2R") and cost 0.07R on 05-11: net cost 0.67R over the five, not "about even". The drift of the sentence was right, the numbers were not from a tool.
      Paper tags: UN3 agreed, the paper line takes the same -1.00R (agree days -0.11R in 16 trades; disagree days +1.42R in 6; n = 6 of 30).
      PH2 (paper, forward day 14): lively (53.7) -> paper half = -0.50R against the live -1.00R. Tally: 14 days, 13 lively (live -0.69R, 6 full-stop mornings),
      1 quiet (+0.46R); PH2 total about +0.12R against A2's -0.24R.
