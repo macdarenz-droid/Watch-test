@@ -34,6 +34,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | 28 | Tue 2015-05-05 | buy | 0.31 | +0.85 | +108.19 | 25,551.65 (sim 25,677.35) | 25,571.80 | -0.08% | +0.29 (May, from the log) | valid (win) | - |
 | 29 | Wed 2015-05-06 | sell | 0.31 | +0.63 | +79.05 | 25,630.70 (sim 25,756.40) | 25,630.70 (new high) | 0.00% | +0.92 (May, from the log) | valid (win) | - |
 | 30 | Thu 2015-05-07 | buy | 0.31 | +0.07 | +8.99 | 25,639.69 (sim 25,765.39) | 25,639.69 (new high) | 0.00% | +1.00 (May, from the log) | valid (win) | - |
+| 31 | Fri 2015-05-08 | buy | 0.31 | +0.46 | +58.59 | 25,698.28 (25,349.14 after payout; sim 25,823.98) | 25,698.28 -> 25,349.14 (lowered by the payout) | 0.00% | +1.45 (May, from the log) | valid (win) | - |
 
 ## Monthly summary
 | Month | Trades | Wins | Net R | $ P&L | Worst day | Deepest drawdown | Valid / mistake tags | Payouts requested | My 80% |
@@ -46,6 +47,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 |---|---|---|---|---|---|
 | Fri 2015-04-10 | 25,137.64 | 68.82 (half of the $137.64 above $25,000; buffer not built yet) | 55.06 | 25,068.82 | first payout date; high-water reset to 25,068.82; sim balance stays 25,137.64 (offset -68.82). Unknown: whether the firm has a minimum payout amount |
 | Fri 2015-04-24 | 25,113.77 | 56.88 (half of the $113.77 above $25,000) | 45.50 | 25,056.89 | second payout date; account in a -1.55% drawdown: high-water LOWERED BY THE PAYOUT to 25,451.83 (not reset to the balance - that would have erased the drawdown and loosened the brakes); sim balance 25,182.59 (offset -125.70) |
+| Fri 2015-05-08 | 25,698.28 | 349.14 (half of the $698.28 above $25,000) | 279.31 | 25,349.14 | third payout date; account at its high: high-water lowered by the payout to 25,349.14 (= balance); sim balance 25,823.98 (offset -474.84) |
 
 ## Process mistakes log (separate from trade tags; a process mistake is something I did wrong AROUND a trade)
 | # | Date | What happened | Effect on the trade | Fix |
@@ -60,4 +62,4 @@ Earlier record-keeping slips, for completeness (challenge stage, none changed a 
 pre-registration; worst losing run overstated as -2.17R (was -1.86R); a journal edit on 03-25 cut out a section (restored from git on 03-26).
 
 ## Status line (update every day)
-After funded day 30 (05-07; figures from bt/daily_numbers.py): tracker balance $25,639.69 (sim $25,765.39 minus $125.70 paid out) | high-water $25,639.69 (new) | drawdown 0.00% (deepest so far -1.63%; SIZE RULE: trigger 1 half size at $24,870.50, trigger 2 stop at $24,357.71; account line $22,500) | funded total +6.14R in 30 trades (17 wins, 13 valid losses) | March +0.97R (3) | April +4.17R (22) | May MTD +1.00R (5 trades) | TRADE tags: 30 valid, 0 my mistake | PROCESS mistakes: 6 | payouts 2: $125.70 requested, $100.56 mine | next payout date Fri 05-08 (tomorrow).
+After funded day 31 (05-08) and payout 3 (figures from bt/daily_numbers.py 474.84 25349.14): tracker balance $25,349.14 (sim $25,823.98 minus $474.84 paid out) | high-water $25,349.14 | drawdown 0.00% (deepest so far -1.63%; SIZE RULE: trigger 1 half size at $24,588.67, trigger 2 stop at $24,081.68; account line $22,500) | funded total +6.59R in 31 trades (18 wins, 13 valid losses) | March +0.97R (3) | April +4.17R (22) | May MTD +1.45R (6 trades) | TRADE tags: 31 valid, 0 my mistake | PROCESS mistakes: 6 | payouts 3: $474.84 requested, $379.87 mine | next payout date Fri 05-22.
