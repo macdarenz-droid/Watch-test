@@ -61,4 +61,4 @@ A few good paper days, a losing week, or "it would have halved today's stop" are
 | Fri 2015-05-22 | 16 | 14 | -1.69R / 7 | -0.54R / 1 (2 quiet days) | about -1.38R | -2.24R / 3.69R (from the trade list) |
 | Mon 2015-05-25 | 17 | 14 | -1.69R / 7 | +0.15R / 1 (3 quiet days) | about -0.69R | -1.55R / 3.69R (from the trade list) |
 
-Reading rule added 2015-05-25 (from idea LD; no threshold changed): on all history to 05-25 only 6 of 42 lively days fall before 03-02. At the first look, lively and quiet days are compared INSIDE the same calendar months (and the forward tally above is already inside one stretch); a lively-quiet gap that is only a between-months gap does not count for PH2.
+NOTE, not a rule (coach 05-26: one year of data; relabelled the day after it was written) - added 2015-05-25 from idea LD; no threshold changed: on all history to 05-25 only 6 of 42 lively days fall before 03-02. At the first look, lively and quiet days are compared INSIDE the same calendar months (and the forward tally above is already inside one stretch); a lively-quiet gap that is only a between-months gap does not count for PH2.

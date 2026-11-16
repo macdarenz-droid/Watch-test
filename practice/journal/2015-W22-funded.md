@@ -55,6 +55,26 @@ Friday 05-29 is the last trading day of May: the month-end review is due on the 
      +80 pip trades (counts-only): none today (best +43.8); 0 of 15.
      END OF RELEASED DATA (clock Tue 05-26 01:00 London).
 
+- **Tue 05-26 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID WIN. Figures from `python bt/call_numbers.py 2015-05-26` and the bar prints.
+  Coach 05-26, taken into the call: 66 ideas and 185 variants are a lot of looks at the same history, so a backtest win on it is weaker than it looks; A2
+      stays as it is unless something beats it on my lived forward days too. The "lively days are mostly March-May" finding is one year of data: a NOTE, not
+      a rule (the sentence I added to PH2's file yesterday is relabelled as a note today; PH2's thresholds were never touched).
+  D1 (London days): Thu 05-21 close 1.11117 (0.31); Fri 05-22 high 1.12083 low 1.10023 close 1.10074 (0.02, range 206.0); Mon 05-25 high 1.10095 low 1.09590
+      close 1.09766 (0.35, range 50.5): a small holiday-quiet day, a lower close and a new 3-day low.
+  H4 (UTC bars): Mon 12:00, 16:00, 20:00 bars flat 1.0967-1.0991; tonight 00:00 bar down 1.09683 -> 1.09427 (low 1.09311); 04:00 bar low 1.09278.
+  H1: the night (00:00-07:00 London): open 1.09783, high 1.09798, low 1.09278, last 1.09327: range 52.0 pips (ratio 1.20), net -45.6 pips - a falling night, with my side.
+  M15: stepped down 1.0948 -> 1.09278, then three small candles; last close 1.09327.
+  Bias: SELL. 22:00 London closes: 05-25 1.09766 vs 05-20 1.10937 = -117 pips (3-day gap -117.1). Gap / ADR5 0.89.
+  UN3 PAPER TAG (never live): 5-day gap -337 pips -> SELL; agree: paper TRADES. Forward day 26, disagree days 6 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 18.
+  MB1 PAPER TAG (never live, forward day 10): morning direction written at 12:00, before 13:25.
+  Levels: night low 1.09278; Mon low 1.09590 (now above the price); night high 1.09798.
+  Rejection-day check: for a sell, Monday would need the 3-day low (True) AND a close in the top third; it closed at 0.35. Not a rejection day.
+  10-day-trend paper line: DOWN (1.09766 vs 05-11 1.11546); the sell is with it.
+  SIZE RULE: tracker balance $24,969.70, high-water $25,349.14, drawdown -1.50%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
+  Worry: selling at a new low after a night that already fell. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
