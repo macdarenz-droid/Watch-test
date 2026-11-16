@@ -59,3 +59,16 @@ Loss tags, all live trades: valid setup, market disagreed 19 (-10.66R) | my mist
   from the sim's own time line, and I did not look.
 - Guard built today: trade_a.py --london takes London times and converts them, so the entry can no longer drift with the UTC label; and my own rule is that with no written call
   before 08:00 London there is no trade that day.
+
+## Daily calls (Tue) - written at 07:00 London, before the entry bar
+- Tue 03-31 07:00 London @1.0783. Mon: fell from 1.0886 to 1.0810, closed 1.0833. Asia has dropped another 68 pips (1.0845 -> 1.0778), through Monday's low AND Friday's low (1.0801),
+  and sits on its low. Asia range 67.7 pips against a 38 pip average: a lively night, and it moved WITH the signal.
+  TREND RULE: SELL. Mon close 1.0833 < Wed 03-25 close 1.0971, by 139 pips.
+  Read: lower highs since 1.1052 (03-26); two floors gave way overnight. The obvious worry is the one I always have - 55 pips under yesterday's close before London opens.
+  Levels: 1.0845 Asia high, 1.0810 / 1.0801 broken floors (now ceilings), 1.0778 Asia low, 1.0767 last Monday's low, 1.0700. Week's open 1.0886.
+  WALL NOTE (a real case for the file): 1.0767, the low of Mon 03-23, has stood for six trading days and is about 16 pips below a 1.0783 entry - INSIDE my stop distance,
+  in front of the trade. Idea Z would have put a target 2 pips in front of it. I trade the frozen rule (no target) and record what happens at that level.
+  Paper tags: F1 efficiency 0.46 (crooked) -> no-chase applies; price is below yesterday's whole range -> F1 would SKIP. Q3: Asia 67.7 vs 38.2 (1.77) -> trade. Q1: trade.
+  N1 yesterday: no trade. Friday n/a. Month-end day (odd flows possible; no rule about it).
+  Funded check: balance $24,982.64, high-water $25,000, drawdown -0.07% -> full size allowed.
+  Plan: SELL 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case -$129.
