@@ -23,10 +23,13 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None):
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
     _a = m5[(m5.time.dt.hour < 7) & (m5.time.dt.date == m5.day)]; _g = _a.groupby('day'); arng = (_g['high'].max() - _g['low'].min()) / PIP   # Asia 00-07 range per day, pips
+    _wk = {d: pd.Timestamp(d).isocalendar()[:2] for d in m5['day'].unique()}; _first = {}
+    for d in sorted(_wk): _first.setdefault(_wk[d], d)                      # first trading day of each week (Monday, incl. Sunday evening)
+    _dopen = m5.groupby('day')['open'].first()
     hi = m5.groupby('day')['high'].max(); lo = m5.groupby('day')['low'].min(); dlist = list(hi.index)
     for d, g in m5.groupby("day"):
         if d not in tr or g["time"].iloc[0].weekday() == 6 and len(g) < 100: continue
@@ -48,6 +51,16 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                 if go and midfilter:   # idea C: only trade on the trend side of yesterday's range midpoint
                     y = dlist[dlist.index(d) - 1]; mid = (hi[y] + lo[y]) / 2
                     if (side < 0 and b.open > mid) or (side > 0 and b.open < mid): go = False; done = True
+                if go and weekbias is not None:      # idea Y: which side of the week's open / Monday's range
+                    fd = _first[_wk[d]]; wopen = _dopen[fd]; wside = 1 if b.open > wopen else -1
+                    if weekbias == "dir": side = wside
+                    elif weekbias == "agree":
+                        if wside != side: go = False; done = True
+                    elif weekbias == "monrange":
+                        if d == fd or pd.Timestamp(fd).weekday() != 0: go = False; done = True
+                        elif b.open > hi[fd]: side = 1
+                        elif b.open < lo[fd]: side = -1
+                        else: go = False; done = True
                 if go and (asiamin is not None or asiarel is not None) and len(asia):   # idea Q: no trade after a dead Asia session
                     ar = (asia.high.max() - asia.low.min()) / PIP
                     if asiamin is not None and ar < asiamin: go = False; done = True
@@ -143,6 +156,9 @@ VARIANTS = {
  "Z1": dict(entry_h=8, exit_h=12, sl=40, wall=(5, 2)),    # idea Z: TP in front of a 5-day extreme that is >= 2 days old
  "Z2": dict(entry_h=8, exit_h=12, sl=40, wall=(10, 2)),   # idea Z: 10-day, >= 2 days old
  "Z3": dict(entry_h=8, exit_h=12, sl=40, wall=(10, 1)),   # idea Z: 10-day, any age (control)
+ "Y1": dict(entry_h=8, exit_h=12, sl=40, weekbias="dir"),        # idea Y: side of the week's opening price
+ "Y2": dict(entry_h=8, exit_h=12, sl=40, weekbias="monrange"),   # idea Y: Tue-Fri, outside Monday's range
+ "Y3": dict(entry_h=8, exit_h=12, sl=40, weekbias="agree"),      # idea Y: A2 only when it agrees with the week-open side
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":

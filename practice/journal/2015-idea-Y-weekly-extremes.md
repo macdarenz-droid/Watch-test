@@ -45,3 +45,33 @@ What a pass earns: a forward paper tag. Nothing else.
 - January: both signals say "sell" almost every day, so Y1 should be close to A2 and Y3 should skip very little (and fail the "skips at least 3" line).
 - February: a box around an unchanged weekly open; I expect Y1 to flip sides daily and do badly, like idea K's raw break.
 Nothing above has been run.
+
+# RESULTS of idea Y (run after commit b9a74f4). Y1/Y2/Y3 = variants 45/46/47; ideas 20. Costs on, $125 risk. Jan-Feb only, one month per run; March not used.
+
+| Month | Rule | Trades | Win rate | Avg R | Net R | Max DD | Note |
+|---|---|---|---|---|---|---|---|
+| Jan (build) | A2 (before) | 19 | 74% | +0.78 | +14.79 | 1.33R | |
+| Jan (build) | Y1 side of the week's open | 19 | 68% | +0.69 | +13.16 | 2.48R | lower net, bigger drawdown |
+| Jan (build) | Y2 outside Monday's range, Tue-Fri | 7 | 71% | +1.20 | +8.40 | 0.43R | good per trade, 7 trades, net far below A2 |
+| Jan (build) | Y3 A2 only when it agrees with the week-open side | 12 | 83% | +1.17 | +14.08 | 0.43R | skipped 7 trades: avg +0.10R (net +0.71R) |
+| Feb (CONTAMINATED) | A2 (before) | 20 | 55% | +0.23 | +4.64 | 1.86R | |
+| Feb (CONTAMINATED) | Y1 | 20 | 50% | -0.00 | -0.07 | 4.00R | |
+| Feb (CONTAMINATED) | Y2 | 5 | 20% | +0.02 | +0.08 | 0.76R | |
+| Feb (CONTAMINATED) | Y3 | 13 | 54% | +0.15 | +1.90 | 1.01R | skipped 7 trades: avg +0.39R (net +2.74R) |
+
+## Build (January)
+- Y1 fails (net R and drawdown worse than A2). Y2 fails (net R 8.40 vs 14.79: too few trades).
+- Y3 SURVIVES: kept trades +1.17R vs A2 +0.78R, the 7 skipped trades averaged only +0.10R, it keeps 63%, and drawdown drops from 1.33R to 0.43R. My guess ("it will skip very little") was wrong:
+  in January the week-open side disagreed with A2 on 7 days, mostly Mondays/Tuesdays after a weekend gap or a bounce (01-12, 01-13, 01-19, 01-20, 01-21, 01-26, 01-27).
+- Candidate: Y3.
+## Check (February, contaminated) - Y3 FAILS
+Kept avg R +0.15 (needed A2's +0.23 plus 0.15 = +0.38): no. Skipped trades averaged +0.39R (needed <= 0): no - the days it skips were February's BEST A2 trades (02-10 +1.26R, 02-17 +2.14R).
+Y1 and Y2 are about zero in February, with a 4R drawdown for Y1.
+
+## Verdict: KILLED. Not adopted, no paper tag. A2 stays.
+- Same wall, seen from a new side: in the trend month, agreeing with the week's open was a good filter; in the box month, the trades that DISAGREED with the week's open were the ones
+  that paid (in a box, being on the "wrong" side of the week's open is just buying low / selling high).
+- The week-open side by itself (Y1) is a worse direction signal than my 3-day rule in both months - like the raw Asia break (K). Third time the 3-day rule beats an "obvious" alternative.
+- The study itself stays as knowledge, not as a rule: a week mostly travels away from Monday; the weekly low of a down week comes in New York after I am flat.
+  Practical habit for the 07:00 call: note the week's opening price and Monday's range as levels. No action attached.
+- Counts: ideas 20, variants 47.
