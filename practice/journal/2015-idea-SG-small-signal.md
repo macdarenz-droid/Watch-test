@@ -61,7 +61,9 @@ I guessed "small-gap days earn about 0.2R LESS". They earn 0.26R MORE (under 50 
 ## What I learned
 - A small 3-day gap is not a weak signal for this rule. 21 trades with a gap under 50 pips: 81% winners, +0.62R each. A plausible reason, as a guess only: a small gap
   means the last three days went nowhere, so I am not chasing an extended move; the rule's worst trades are the ones entered after a big move has already happened
-  (the full stops of 03-19, 03-27, 04-07, 04-16, 04-20 all came with gaps of 150+ pips). I am NOT turning that into "skip large gaps" - that would be the mirror of a
+  (checked after writing this, because my first draft quoted five dates "all with gaps of 150+ pips" from memory and that was WRONG:
+  the gaps on my 12 full-stop days are 210, 371, 15, 142, 332, 334, 70, 159, 65, 81, 151, 80 pips - six of twelve are 142 or more, one is under 50; the median stop
+  day has a gap of 147 pips against 116 for all days. A lean, not a pattern). I am NOT turning that into "skip large gaps" - that would be the mirror of a
   failed test on the same data, chosen after seeing it.
 - So weakness 4 of the April review was not a weakness of the rule. The last four days lost 2.07R with gaps of 151, 54, 25 and 80 pips; nothing about their size
   explains it. It was a range week.
