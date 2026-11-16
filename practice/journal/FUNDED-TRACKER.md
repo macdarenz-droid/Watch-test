@@ -22,6 +22,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | 16 | Fri 2015-04-17 | buy | 0.31 | +1.70 | +215.45 | 25,508.71 (sim 25,577.53) | 25,508.71 | 0.00% | +3.63 (April) | valid (win) | - |
 | 17 | Mon 2015-04-20 | buy | 0.31 | -1.00 | -127.72 | 25,380.99 (sim 25,449.81) | 25,508.71 | -0.50% | +2.63 (April) | valid setup, market disagreed | - |
 | 18 | Tue 2015-04-21 | buy | 0.31 | -0.04 | -4.96 | 25,376.03 (sim 25,444.85) | 25,508.71 | -0.52% | +2.59 (April) | valid setup, market disagreed (scratch) | - |
+| 19 | Wed 2015-04-22 | sell | 0.31 | -0.02 | -3.10 | 25,372.93 (sim 25,441.75) | 25,508.71 | -0.53% | +2.57 (April) | valid setup, market disagreed (scratch) | - |
 
 ## Monthly summary
 | Month | Trades | Wins | Net R | $ P&L | Worst day | Deepest drawdown | Valid / mistake tags | Payouts requested | My 80% |
@@ -43,4 +44,4 @@ Earlier record-keeping slips, for completeness (challenge stage, none changed a 
 pre-registration; worst losing run overstated as -2.17R (was -1.86R); a journal edit on 03-25 cut out a section (restored from git on 03-26).
 
 ## Status line (update every day)
-After funded day 18 (04-21): tracker balance $25,376.03 (sim $25,444.85 minus $68.82 paid out) | high-water $25,508.71 | drawdown -0.52% (deepest so far -1.00%; first brake at -3% = $24,743.45, stop at -5% = $24,233.27, account line $22,500) | funded total +3.57R in 18 trades (10 wins, 8 valid losses) | March: +0.98R in 3 trades | April MTD: +2.59R (15 trades, 8 wins) | TRADE tags: 18 valid, 0 my mistake | PROCESS mistakes: 3 | payouts 1: $68.82 requested, $55.06 mine | next payout date Fri 04-24.
+After funded day 19 (04-22): tracker balance $25,372.93 (sim $25,441.75 minus $68.82 paid out) | high-water $25,508.71 | drawdown -0.53% (deepest so far -1.00%; first brake at -3% = $24,743.45, stop at -5% = $24,233.27, account line $22,500) | funded total +3.55R in 19 trades (10 wins, 9 valid losses) | March: +0.98R in 3 trades | April MTD: +2.57R (16 trades, 8 wins) | TRADE tags: 19 valid, 0 my mistake | PROCESS mistakes: 3 | payouts 1: $68.82 requested, $55.06 mine | next payout date Fri 04-24.

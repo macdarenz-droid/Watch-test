@@ -43,3 +43,4 @@ is to be written in the journal as a feeling, like every other such thought.
 | as of | forward days | disagree days (of 30) | A2 R on disagree days | A2 R on agree days | UN3 net R / max DD | A2 net R / max DD |
 |---|---|---|---|---|---|---|
 | Tue 2015-04-21 | 1 | 0 | - | -0.04R (1 trade) | -0.04R / 0.04R | -0.04R / 0.04R |
+| Wed 2015-04-22 | 2 | 1 | -0.02R (1 trade) | -0.04R (1 trade) | -0.04R / 0.04R | -0.06R / 0.06R |
