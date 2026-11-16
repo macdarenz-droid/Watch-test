@@ -41,3 +41,50 @@ A variant survives only if ALL:
 My guess, written now: nights have no drift I can use. NT1 comes out between -0.10R and +0.05R per trade, NT2 and NT3 the same; all three fail K1, and at least two
 fail K2. If one of them is strongly NEGATIVE (below -0.15R in all three periods) I will note it - a consistent loser is a fade - but I will not test the mirror now:
 that would be a fourth variant.
+
+# RESULTS (kill test above pushed in commit 1ce4614 before any code; one run: `python bt/night.py 2015-04-22`)
+76 nights per variant, 01-06..04-21, costs on, R of $125 (0.42 lots, 30 pip stop).
+
+## Mechanics checked by hand on two nights BEFORE the totals (`--check 2015-04-16,2015-04-21`)
+- 04-16: last 22:00 close 1.06834 above the previous one (1.06541), above 3 back (1.06022) and above the 17:00 price (1.05955): all three say BUY. 00:00 London open
+  bid 1.06756 -> bought 1.06767 (spread + slippage), stop 1.06456. The night spiked to 1.0747 and came all the way back; 07:00 open 1.06781 -> closed 1.06780: +0.04R.
+  (A 71 pip spike in my favour and four hundredths of an R: no target. Noted, not acted on.)
+- 04-21: close 1.07374 above 3 back (NT1 buy) but below the previous close 1.08048 and below the 17:00 price 1.07623 (NT2, NT3 sell). Sold 1.07378, closed 1.07197: +0.61R;
+  the NT1 buy at 1.07390 closed 1.07185: -0.69R. Engine = candles, both nights.
+
+## Totals
+| | nights | win rate | avg R | net R | full stops | max DD | worst 10 | Jan (19) | Feb (20) | Mar-now (37) | without best 3 | corr with A2 | net on A2's 27 losing mornings |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| NT1 with the 3-day signal | 76 | 49% | -0.007 | -0.54 | 10 | 3.87R | -3.87R | -3.44 | +1.71 | +1.19 | -5.01 | +0.18 | -2.60 |
+| NT2 with the 1-day direction | 76 | 37% | -0.208 | -15.79 | 17 | 17.22R | -6.73R | -6.91 | -2.31 | -6.58 | -19.75 | -0.03 | -3.43 |
+| NT3 with the NY afternoon | 76 | 37% | -0.209 | -15.87 | 18 | 18.56R | -6.02R | -4.08 | -3.47 | -8.32 | -18.72 | -0.02 | -3.48 |
+
+## Kill lines applied
+| line | NT1 | NT2 | NT3 |
+|---|---|---|---|
+| K1 avg >= +0.15R | FAIL (-0.01) | FAIL (-0.21) | FAIL (-0.21) |
+| K2 positive in each period | FAIL (Jan -3.44) | FAIL (all negative) | FAIL (all negative) |
+| K3 positive without best 3 | FAIL | FAIL | FAIL |
+| K4 DD <= 5R, worst 10 >= -4R | PASS | FAIL (DD 17R) | FAIL (DD 19R) |
+| K5 independent of A2 | FAIL (-2.60R on A2's losing mornings) | FAIL | FAIL |
+VERDICT: NO SURVIVOR. The hypothesis "the night continues the prevailing direction" is dead on 76 nights. No second setup here. A2 unchanged.
+
+## My guess against what happened
+"NT1 between -0.10R and +0.05R": -0.01R, right. "NT2 and NT3 the same": WRONG - they lose 0.21R a night, about five times the cost, in every period.
+
+## What I learned
+- The night has no memory of my 3-day direction: 49% winners, zero average. The hours I trade (08:00-12:00 London) are where the 3-day signal pays; the same signal at
+  midnight is a coin that costs 1.1 pips to flip. That is useful to know about my own rule: the edge is in London's morning, not "in the trend".
+- The night does have a memory of YESTERDAY, and it is a contrary one: after an up day (or an up New York afternoon) the night goes down more often than not - 63% of the time
+  against the last move, -0.21R per continuation trade, negative in January, February and March-to-now.
+- What I said beforehand I would do with a consistent loser: note it, and NOT test the mirror, because that is a fourth variant. So, noted. And before anyone (me) gets
+  excited, the arithmetic: the mirror trade (fade yesterday's move from midnight to 07:00) would make about +0.21R minus two more costs = roughly +0.13R per trade on these
+  76 nights - UNDER my +0.15R line for a stand-alone setup before it has even been run, with a win rate near 63% and losses that are full 30 pip stops; and it lives
+  on the one cost I trust least (the sim's 1.0 pip spread at midnight). It is an observation for the parked list:
+  "nights tend to give back part of the previous day's move (76 nights, about 0.2R, all three periods)". If my coach wants it tested it gets its own hypothesis and kill
+  test, with a cost stress in the kill lines; I am not starting it myself today.
+- It also explains two things in my own journal: why "the night went against me" was never a warning for A2 (NM test) - nights usually go against the last move, so it
+  is the normal case - and why the trades after a day that "closed against me" were fine (RV test).
+- Sample, plainly: 76 nights per variant is the same size as my A2 book; an average of -0.21R with a spread of about 0.8R is roughly 2.3 standard errors from zero.
+  Enough to kill "continuation". Not enough to bank a fade.
+Counts: ideas 43, variants 116.

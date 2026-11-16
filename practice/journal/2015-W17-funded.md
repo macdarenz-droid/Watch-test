@@ -113,3 +113,5 @@ Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 37 done, avg +0.40R, m
 36-37 live trades is still a small book: the live average is known to about +-0.35R. What differs live: more full stops (22% vs 8%) and deeper average losses.
 
 ## 04-21 research (before the next day): signal-agreement test UN1/UN2/UN3 (journal/2015-idea-UN-signal-agreement.md) - no survivor by the kill test. UN3 (skip when the 3-day and 5-day signals disagree) passes three lines and fails the profit line; question to the coach about a paper tag. Rule A2 and size 0.50% unchanged. Ideas 42, variants 113.
+
+## 04-22 research (before the next day): night-continuation second setup NT1/NT2/NT3 (journal/2015-idea-NT-night-continuation.md) - no survivor on 76 nights each. Parked observation: nights give back part of yesterday's move; the fade is not tested. Rule A2 and size 0.50% unchanged. Ideas 43, variants 116.
