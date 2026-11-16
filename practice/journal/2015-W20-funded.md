@@ -189,6 +189,24 @@ Coach, 05-11: quality over count - the next test starts with ten charts looked a
      Night count: with me today, not counted (running: 11 trades, +2.93R). 10-day-trend paper line: trend UP: 7 trades, +0.31R.
      END OF RELEASED DATA (clock Fri 05-15 01:00 London).
 
+- **Fri 05-15 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID WIN. Figures from `python bt/call_numbers.py 2015-05-15` and the bar prints.
+  D1 (London days): Tue 05-12 close 1.12127 (0.54); Wed 05-13 high 1.13827 low 1.12023 close 1.13536 (0.84); Thu 05-14 high 1.14447 low 1.13406 close 1.14097
+      (0.66, range 104.1): third rising close, new 3-day high. Thursday afternoon fell 100 pips from 1.14356 to 1.13435 and came all the way back by 22:00.
+  H4 (UTC bars): Thu 12:00 bar 1.14254 -> low 1.13435 -> 1.13676; 16:00 bar back to 1.14084; tonight 00:00 bar 1.14022-1.14184; 04:00 bar down to 1.13803.
+  H1: the night (00:00-07:00 London): open 1.14040, high 1.14184, low 1.13803, last 1.13832: range 38.1 pips (ratio 0.72), net -20.8 pips - a falling night, against my side.
+  M15: four falling candles in a row from 1.14147 to the night low 1.13803; last close 1.13832.
+  Bias: BUY. 22:00 London closes: 05-14 1.14097 vs 05-11 1.11546 = +255 pips (3-day gap +255.1). Gap / ADR5 2.08: very stretched (my best group over all history).
+  UN3 PAPER TAG (never live): 5-day gap +144 pips -> BUY; agree: paper TRADES. Forward day 19, disagree days 5 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 11.
+  MB1 PAPER TAG (never live, forward day 3): morning direction written at 12:00, before 13:25.
+  Levels: night high 1.14184; Thu high 1.14447; night low 1.13803; Thu afternoon low 1.13435.
+  Rejection-day check: Thursday made the 3-day high (True) and closed at 0.66, not in the bottom third. Not a rejection day. 10-day trend: UP; the buy is with it.
+  PERSONAL STOP CHANGED TODAY (coach 05-15; written in the plan before this call): 7% under the high-water instead of 5%. Size unchanged. Fixed for funded days 36-55.
+  SIZE RULE: tracker balance $25,242.50, high-water $25,349.14, drawdown -0.42%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) now $23,574.70.
+  FRIDAY GATES (list read): A2 alarm 54 / 100; UN3 5 / 30 disagree days; PH2 9 / 60 lively days; night count 11 / 40; up-trend line 7 / 40; MB1 0 / 100 kept; payout next Fri 05-22. None due.
+  Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade. The release ends at 22:00 London today.
+  Worry: the last hour fell 35 pips straight; buying into that. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|

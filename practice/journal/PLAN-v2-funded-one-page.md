@@ -19,6 +19,15 @@ A raise needs BOTH the 40-trade forward test passed (33 done) AND a re-run of th
 - (Tested 05-05: restoring full size earlier, or dropping the half-size step, fails - the step cuts my own-stop odds from 49% to 15% at the planning edge. "Until a new high-water" stays.)
 - BRAKE 1: balance 3% below the high-water mark (now $24,657.75) -> half size ($62.50) until a new high-water.
 - BRAKE 2: balance 5% below the high-water mark (now $24,149.34) -> stop trading, full review, restart only with my coach.
+- BRAKE 2, CHANGED 2015-05-15 (coach: "your personal stop is too tight for your size - pick one, write why, stick with it for 20 live days before judging"):
+  my choice is the WIDER PERSONAL STOP: balance 7% below the high-water mark (today $23,574.70) -> stop trading, written review, restart only with my coach.
+  Size stays 0.50%; half size from 3% under the high-water as before. The old 5% line above is retired from today.
+  Why the stop and not the size: (1) idea TS: no run in 16,000 got below -5.7% and no day cost more than 1.54%, so the firm's line ($22,500 = -10%) was never
+  near; the thing being hit was my own line. (2) Between -3% and -5% I trade half size: that is only about 16 half-size stops of room, and one jump day uses 3
+  of them. (3) A smaller size cuts the payout in every scenario, including the ones with no jump; a wider stop costs nothing unless I am already deep.
+  (4) At -7% there is still 3% to the firm's line: 24 half-size stops, or 4 jump days at half size. What I give up: if my edge is gone, I find out 2% later.
+  Fixed for 20 live days: funded days 36 to 55. No judging, no second change before the review after day 55. The check of this choice by simulation is in
+  journal/2015-idea-WS-wider-stop.md.
 - RULE ALARM: PASSED 04-24 - 40 forward trades, +12.64R, +0.32R each, max drawdown 3.07R (lines: >= +0.10R, <= 8R). Next alarm look at 100 live trades, same lines.
 
 ## 4. Payout plan (dates every 14 days from 03-27: 04-10 done, 04-24, 05-08, ...)
