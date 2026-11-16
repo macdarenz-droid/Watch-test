@@ -37,3 +37,38 @@ Two locks around that choice, both binding:
 What I already know and cannot un-know (so the lines are not secretly fitted): my earlier single-phase reshuffles put the zero-edge brake-stop chance near 3% (0.75%) and 8% (1.00%)
 within 40 days, and the true-breach chance with brakes at 0. So I expect K3 to leave all three sizes alive and the choice to turn on the 500-of-1,000 line.
 My guess for the rehearsal: 0.50% passes well under 500 of 1,000 on L2; 0.75% is near the line; 1.00% clears it. No breach anywhere with the brakes on.
+
+# RESULTS - REHEARSAL RUN (after commit 361a23f). 1,000 reshuffled orders per cell, 42 trading days, two phases, one trade a day. Policy runs on my own results; variant count stays 56.
+
+| List | Risk | PASSED both phases in 2 months | Breached 5% daily | Breached 10% max | Stopped by my -6% brake | Median days to pass | Brakes OFF: passed / max breach |
+|---|---|---|---|---|---|---|---|
+| L1 full list, 53 trades (+0.49R), shuffled | 0.50% | 24 of 1,000 | 0 | 0 | 0 | 39 | 24 / 0 |
+| | 0.75% | 783 | 0 | 0 | 0 | 35 | 783 / 0 |
+| | 1.00% | 979 | 0 | 0 | 0 | 28 | 979 / 0 |
+| L2 forward only, 19 trades (+0.58R) | 0.50% | 409 | 0 | 0 | 0 | 37 | 409 / 0 |
+| | 0.75% | 862 | 0 | 0 | 0 | 29 | 863 / 0 |
+| | 1.00% | 955 | 0 | 0 | 0 | 23 | 961 / 0 |
+| L3 zero edge (February shifted to 0R) | 0.50% | 0 | 0 | 0 | 4 | - | 0 / 0 |
+| | 0.75% | 1 | 0 | 0 | 30 | 39 | 1 / 4 |
+| | 1.00% | 7 | 0 | 0 | 70 | 36 | 7 / 13 |
+Longest losing streak that turned up in any reshuffled order: 7 trades (full list), 8 (forward list), 19 (zero-edge list, where many of the "losses" are small scratches) -
+against 3 in my real history. The reshuffle does produce orders far unluckier than the one I lived.
+The daily-breach column is 0 everywhere, as stated beforehand: built in by one trade a day and a hard stop, not a finding.
+
+## Kill lines, applied one by one (REHEARSAL - cannot move attempt #2)
+- K1 (any breach on the full list, brakes on): 0 / 0 / 0 -> all three sizes alive.
+- K2 (zero edge: breach more than 5 of 1,000 with brakes, or more than 30 without): with brakes 0 / 0 / 0; without 0 / 4 / 13 -> all alive.
+- K3 (zero edge: my brake more than 100 of 1,000): 4 / 30 / 70 -> all alive. (1.00% uses 70 of its 100.)
+- Choice (smallest size passing both phases in at least 500 of 1,000 forward-list orders): 0.50% = 409 -> no. 0.75% = 862 -> YES. So the rehearsal names 0.75%.
+- Lock L-A: A2's forward test is 19 of 40. Nothing changes. Attempt #2 stays at 0.5%.
+- Lock L-B: when the forward test completes, this script is re-run on the list as it then stands and that run decides.
+
+## What the rehearsal shows
+- At 0.5% the goal is mostly out of reach even if the future looks like my whole record (24 of 1,000) or like March (409 of 1,000). That agrees with the start-week test and
+  this time it does not rest on 4-8 overlapping windows.
+- 0.75% is the first size where two months becomes the likely outcome on a real edge (783-862 of 1,000), and it stays inside every kill line with room: no breach in 3,000 orders
+  with the brakes on, 4 raw breaches in 1,000 only if the edge is zero AND I ignore my brakes.
+- 1.00% buys another 10-20 points of pass chance and takes K3 from 30 to 70 of an allowed 100. Alive, not chosen: the rule takes the smallest size that does the job.
+- If the edge is zero, NO size passes (0, 1 and 7 of 1,000). Size cannot rescue a rule without an edge; it only changes how often my brake ends the attempt (0.4% / 3% / 7%).
+  That is the real meaning of lock L-A: the forward test is what tells me whether I am in the top two blocks of this table or the bottom one.
+- Caveat I owe every time: L1 and L2 are my own results from a period the rule liked; 19 forward trades is a short list to resample; and reshuffling assumes days are independent.

@@ -2,10 +2,10 @@
 
 | Field | Value |
 |---|---|
-| Sim clock | Thu 2015-03-26 00:00 UTC (END OF RELEASED DATA; one day at a time - each finished backtest test earns the next day) |
-| Phase | CHALLENGE #1 PASSED both phases (01-12..03-23, 50 trades, no breach). CHALLENGE ATTEMPT #2 ACTIVE since Tue 03-24: phase 1, balance $25,202.74 (+0.81%), target $27,000 ($1,797 = 14.4R away), 2 trading days, risk 0.5% = $125 = 0.31 lots (coach's instruction), brakes $24,000 / $23,500 |
+| Sim clock | Fri 2015-03-27 00:00 UTC (END OF RELEASED DATA; one day at a time - each finished backtest test earns the next day) |
+| Phase | CHALLENGE #1 PASSED both phases (01-12..03-23, 50 trades, no breach). CHALLENGE ATTEMPT #2 ACTIVE since Tue 03-24: phase 1, balance $25,139.50 (+0.56%), target $27,000 ($1,861 = 14.9R away), 3 trading days, risk 0.5% = $125 = 0.31 lots, brakes $24,000 / $23,500. GOAL STAYS 1-2 MONTHS (coach) |
 | Current strategy | ONE-PAGE PLAN: journal/PLAN-v2-one-page.md. Rule A2 "London trend": 07:00 UTC write call; trend = yesterday's 22:00 close vs close 3 trading days earlier; 08:00 market order with trend; SL 40 pips; close 12:00 UTC; 1 trade/day; flat at weekend |
-| Risk | ATTEMPT #2: 0.5% = $125 per trade (`python trade_a.py buy/sell --risk 125`), 1 trade/day (worst day -0.51%), brakes -4% ($24,000) / -6% ($23,500), finishing size 0.10 lots (`--risk 40`) when the target is within $31. Never size for a deadline (journal/2015-risk-for-the-last-stretch.md) |
+| Risk | ATTEMPT #2: 0.5% = $125 per trade (`--risk 125`) UNTIL A2's forward test is complete (40 unseen trades; 19 done). Then re-run `python bt/reshuffle_breach.py` and apply the kill lines in journal/2015-reshuffle-breach-test.md (rehearsal today names 0.75%). 1 trade/day, brakes -4% / -6%, finishing size 0.10 lots within $31 of the target |
 | Ideas tried | 23 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed], F efficiency regime [not adopted], G don't-fight-the-first-break [killed], T one-hour check exit [killed], K first-break direction [killed], L lookback 2/5/10 [no improvement; A2 robust], W no-Friday [pending forward test], X exits: break-even / runner / target [no survivor], R regime detectors [no survivor], Q dead-Asia filter [Q3 killed on Feb check], M ignition-candle setup [no survivor], DD drawdown-goal re-scoring [Q3, Q1 to forward tag; F1 fails], N NY-fades-London second setup [N1 profitable both months, fails independence by 0.01; forward paper tag], Z bank-at-the-wall take-profit [almost never fires; closed], Y week-open side / Monday range [Y3 survives Jan, killed on Feb], V stop/size by volatility [no survivor; worse in Feb], E-time exit hour 10/11/13 [noon best in Jan, Feb and clean March], S wider stop 50/60/80 [no survivor; loses 14-53% of net R]) |
 | Variants tested | 56 (53 definitions incl. N1 N2 N3, Z1 Z2 Z3, Y1 Y2 Y3, V1 V2 V3, ET10 ET11 ET13, S50 S60 S80:A1 A2 A3, B1 B2 B3, C1, D1, E1, DE, H1 H2 H3, F1, G1, T1 T2, K1 K2, L1 L2 L3, W1, X1 X2 X3, R1 R2 R3, Q1 Q2 Q3, M1 M2 M3) + 3 re-scored for the drawdown goal (DD1=Q3, DD2=Q1, DD3=F1). A and B at the 3-variant cap; review round used its 3 |
 | Challenge attempts | 2. #1 PASSED both phases (no breach). #2 started Tue 2015-03-24, active |
@@ -17,7 +17,7 @@
 | LIVE Jan (01-12..01-30) A2 | 14 | 71% | +0.72 | +10.04 (+$1,257) | 1.33R | one big downtrend; 2 shock-day trades = +6.3R |
 | LIVE Feb (02-02..02-27) A2 | 20 | 55% | +0.23 | +4.64 (+$580) | 1.86R | box market; one coin-flip day = +2.14R |
 | LIVE total Jan-Feb | 34 | 62% | +0.43 | +14.69 (+$1,836) | 1.86R | |
-| LIVE March = FORWARD TALLY (unseen data, from 03-02) A2, in R = result / amount risked | 18 | 78% | +0.65 | +11.62 | 1.01R | ... 03-23 +2.52 (challenge #1 passed), 03-24 +0.71, 03-25 +0.89 (attempt #2 days 1-2, tagged valid). Losses: 03-02, 03-09, 03-12, 03-19, all valid. A2 forward kill test: 18 of 40 - NOT finished. Paper tags: F1 17 trades +11.58R; Fridays 3/8, all winners; Q3 11 trades +4.00R (failing), Q1 17 trades +9.50R; N1: 4 trades, -2.34R |
+| LIVE March = FORWARD TALLY (unseen data, from 03-02) A2, in R = result / amount risked | 19 | 74% | +0.59 | +11.12 | 1.01R | ... 03-23 +2.52 (challenge #1 passed), 03-24 +0.71, 03-25 +0.89, 03-26 -0.50 (attempt #2 days 1-3). Losses: 03-02, 03-09, 03-12, 03-19, 03-26, all tagged valid. A2 forward kill test: 19 of 40 (21 to go). Paper tags: F1 17 trades +11.58R; Fridays 3/8, all winners; Q3 11 trades +4.00R (failing), Q1 18 trades +9.00R; N1: 4 trades, -2.34R |
 | Backtest Feb only (out-of-sample) A1 / A2 / A3 | 20 each | 50 / 55 / 40% | +0.18 / +0.23 / +0.00 | +3.60 / +4.64 / +0.10 | 2.2 / 1.9 / 3.1R | A2 = live exactly |
 | Backtest Feb only B1 / B2 / B3 | 13 / 14 / 13 | 54 / 57 / 54% | +0.32 / +0.34 / +0.23 | +4.10 / +4.79 / +2.98 | 1.1 / 1.7 / 1.0R | |
 | Backtest Feb only C1 (A2 + midpoint filter) | 13 | 38% | -0.08 | -1.04 | 1.5R | skipped 7 trades worth +5.68R: failing |
@@ -175,10 +175,16 @@
 - Start weeks passing both phases within 42 trading days: 0.5% 0 of 4 decided; 0.75% 2 of 4 (borderline); 1.00% 6 of 6; 1.25% 8 of 8. No breach, no brake touch, worst low -1.9% at any size. Friendly history: minimum size only, not proof of safety.
 - Rule's answer: 0.75% is the smallest size that delivers; allowed only after A2's forward test passes (18/40). Attempt #2 stays at 0.5%. Coach to decide: move to 0.75% after the forward test, or keep 0.5% as the pure proof.
 
-## Loss tags (running count, all live trades): valid setup, market disagreed 17 (-9.16R) | my mistake 0.
+## Reshuffle breach test (journal/2015-reshuffle-breach-test.md; explicit kill lines K1-K3 + locks committed before the run; bt/reshuffle_breach.py)
+- My list: 53 trades, worst day -1.00R, worst streak 3 trades / -1.82R. 1,000 reshuffled orders, 42 days, two phases, sizes 0.50 / 0.75 / 1.00%.
+- Passed both phases: full list 24 / 783 / 979; forward-only list 409 / 862 / 955; zero-edge list 0 / 1 / 7. Breaches with brakes on: 0 everywhere. Zero-edge brake-stops 4 / 30 / 70; raw breaches without brakes 0 / 4 / 13.
+- Kill lines: all three sizes alive; smallest size with >= 500 of 1,000 on the forward list = 0.75%. REHEARSAL ONLY: attempt #2 stays at 0.5% until the forward test completes, then re-run and let that run decide. If the forward test fails, size goes to 0.
+- Journal hygiene: when replacing the tally in a week file use the LAST "## Forward tally" (rindex); a first-match cut on 03-25 removed a section (restored from git).
+
+## Loss tags (running count, all live trades): valid setup, market disagreed 18 (-9.66R) | my mistake 0.
 
 ## Next step
-1. ATTEMPT #2 running (0.5%). When the next day (Thu 03-26) is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `python sim.py advance --until DATE T07:00`; `./look.sh 3 0 9`; write the call in journal/2015-W13.md (attempt #2 section); `python trade_a.py buy|sell --risk 125`; TAG the result valid/mistake FIRST; then paper tags (F1, Q3/Q1 from look.sh, Friday, N1 via `python bt/ny_fade.py 2015-03-13 2100-01-01 --overlap | grep -A1 N1`); then the forward tally.
-2. Forward tests running: A2 kill test (18/40, +11.62R), F1 (18 days), Friday (3/8, all wins), Q3/Q1 drawdown tags, N1 (4 trades, -2.34R).
+1. ATTEMPT #2 running (0.5%). When the next day (Fri 03-27, unseen Friday 4 of 8) is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `python sim.py advance --until DATE T07:00`; `./look.sh 3 0 9`; write the call in journal/2015-W13.md (attempt #2 section); `python trade_a.py buy|sell --risk 125`; TAG the result valid/mistake FIRST; then paper tags (F1, Q3/Q1 from look.sh, Friday, N1 via `python bt/ny_fade.py 2015-03-13 2100-01-01 --overlap | grep -A1 N1`); then the forward tally.
+2. Forward tests running: A2 kill test (19/40, +11.12R), F1 (19 days), Friday (3/8, all wins), Q3/Q1 drawdown tags, N1 (4 trades, -2.34R).
 3. Research rules: hypothesis + kill test committed first, max 3 variants, January = build, March lived days = clean check (uses: 1, exit time), February = reference only, inspiring days removed, everything counted. Each finished test earns the next day.
 Tools: look.sh, trade_a.py, bt/*.py (ab, ab_exit, ab_rule, ab_same, ab_score, regime, ignite, ny_fade, dd_goal, cost_stress, edge_compare, phase2_sim, last_stretch, start_weeks, pass_math, risk_math, review, loser_charts, entry_charts). Tests: `python -m pytest -q`.
