@@ -42,3 +42,4 @@ is to be written in the journal as a feeling, like every other such thought.
 ## Running tally (updated in the weekly journal; forward from 2015-04-21 only)
 | as of | forward days | disagree days (of 30) | A2 R on disagree days | A2 R on agree days | UN3 net R / max DD | A2 net R / max DD |
 |---|---|---|---|---|---|---|
+| Tue 2015-04-21 | 1 | 0 | - | -0.04R (1 trade) | -0.04R / 0.04R | -0.04R / 0.04R |
