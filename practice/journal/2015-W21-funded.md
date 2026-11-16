@@ -169,6 +169,10 @@ Coach, 05-18: no more risk-plan tests for now; the next backtest is about findin
   SIZE RULE: tracker balance $25,134.31, high-water $25,349.14, drawdown -0.85%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
   Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
   Worry: third sell day in a falling market that stopped falling yesterday afternoon and rose overnight. Stretched signals are my best group; written, not a rule.
+  08:00 London Thu: pre-entry hour 1.10797-1.11170 = 37.3 pips -> PH2 paper: LIVELY, paper half size (decided before the order). Price 1.11008: the hour fell 37 pips and bounced 21; night against me by 5.2 pips (counted); entry 16.2 pips worse than at 07:00. Order: SELL 0.31, stop 40 pips above the bid (1.11408).
+  08:15 London: filled SELL 1.11007, stop 1.11408 (40.1 pips). First candle read from the tool. No call that matters; hands off.
+  09:00 London: STOPPED in the second M15 candle (bid high 1.11434); the first candle had already gone 37.5 pips against me. Never in profit. Sim balance from the tool $25,484.53. One trade a day: done. I watch to noon only for the stop-day routine.
+  12:00 London: price (bid, from the tool) 1.11645 = 63.8 pips against my entry, 23.7 pips beyond the stop: a REAL stop (about -1.59R at noon without it, by python). MB1 paper (forward day 7), written before 13:25: open 08:00 1.11008, price at 12:00 1.11645 -> morning UP by about 64 pips (large morning) -> only an UP break of the 12:00-13:25 box counts. Exact figures from the tool afterwards.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
