@@ -28,3 +28,32 @@ Because test B needs them, all three variants are run on both months; only the J
 - Days compared: the 10-day lookback cannot trade the first two weeks of January; each variant is compared with A2 on the days that variant can trade.
 - My guess: neighbours positive in January (everything was), mixed in February. I do not know.
 Nothing above has been run.
+
+# RESULTS of idea L (run after commit 7353f6d). L1/L2/L3 = variants 20/21/22; ideas 11. Costs on, $125 risk. Jan-Feb only, one month per run (bt/ab_same.py); March not used.
+
+| Month | Rule | Trades | Win rate | Avg R | Net R | Max DD | A2 on the same days (avg R / net R / max DD) |
+|---|---|---|---|---|---|---|---|
+| Jan (build) | A2, lookback 3 (before) | 19 | 74% | +0.78 | +14.79 | 1.33R | - |
+| Jan (build) | L1, lookback 2 | 18 | 61% | +0.49 | +8.77 | 2.48R | +0.75 / +13.57 / 1.33R |
+| Jan (build) | L2, lookback 5 | 15 | 53% | +0.49 | +7.30 | 2.32R | +0.75 / +11.23 / 1.33R |
+| Jan (build) | L3, lookback 10 | 10 | 30% | +0.03 | +0.29 | 2.32R | +0.42 / +4.22 / 1.33R |
+| Feb (CONTAMINATED) | A2, lookback 3 (before) | 20 | 55% | +0.23 | +4.64 | 1.86R | - |
+| Feb (CONTAMINATED) | L1, lookback 2 | 20 | 50% | +0.14 | +2.72 | 2.60R | +0.23 / +4.64 / 1.86R |
+| Feb (CONTAMINATED) | L2, lookback 5 | 20 | 60% | +0.26 | +5.20 | 1.21R | +0.23 / +4.64 / 1.86R |
+| Feb (CONTAMINATED) | L3, lookback 10 | 20 | 30% | -0.14 | -2.85 | 3.59R | +0.23 / +4.64 / 1.86R |
+Days where the side differed from A2: Jan 3 / 4 / 4, Feb 5 / 5 / 11 (L1 / L2 / L3).
+
+## Test A - improvement: DEAD on the build
+No lookback beats 3 in January (all three have lower avg R and a bigger drawdown than A2 on the same days), so there is no candidate and no improvement claim.
+L2 is a touch better than A2 in February (+0.26 vs +0.23R, drawdown 1.21R vs 1.86R) but it failed January and February is contaminated: that is not an improvement, and I am not adopting it.
+
+## Test B - robustness: PASS
+Both neighbours are above zero after costs in both months (L1 +0.49 / +0.14R; L2 +0.49 / +0.26R). By the rule I wrote first, A2 is ROBUST to its lookback:
+the result does not hinge on the number 3. The first good news about the rule that did not come from the rule's own numbers.
+The 10-day lookback is the exception that teaches something: +0.03R and -0.14R, 30% wins in both months. So the thing that works is SHORT-term direction (2 to 5 days of closes);
+the "big picture" direction over two weeks was useless for the London morning in both months - the opposite of what I assumed when I kept writing "D1 big picture down" in my calls.
+
+## Verdict
+- Rule unchanged (A2, lookback 3). Variants L1, L2, L3 closed. Counts: ideas 11, variants 22.
+- What I know more firmly than yesterday: direction from the last few daily closes carries the edge (K: beats the raw break; L: 2, 3 and 5 all positive, 10 not).
+- Honest size of that: 18-20 trades per cell; "positive" for the neighbours means +0.14 to +0.49R, none of it proven.

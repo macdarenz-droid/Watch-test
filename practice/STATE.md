@@ -2,12 +2,12 @@
 
 | Field | Value |
 |---|---|
-| Sim clock | Fri 2015-02-27 22:00 UTC (END OF RELEASED DATA - stopped, waiting for coach) |
-| Phase | Challenge #1, phase 1 ACTIVE: balance $26,836.44 (+7.35%), target $27,000 (+$163.56 = 1.3R to go), 34 trading days, no breach |
+| Sim clock | Tue 2015-03-03 00:00 UTC (END OF RELEASED DATA; one day at a time - each finished backtest test earns the next day) |
+| Phase | Challenge #1, phase 1 ACTIVE: balance $26,711.51 (+6.85%), target $27,000 (+$288.49 = 2.3R to go), 35 trading days, no breach |
 | Current strategy | Rule A2 "London trend": 07:00 UTC write call; trend = yesterday's 22:00 close vs close 3 trading days earlier; 08:00 market order with trend; SL 40 pips; close 12:00 UTC; 1 trade/day; flat at weekend |
 | Risk | PLAN v2 + risk math (journal/2015-risk-math.md): finish phase 1 at $125 = 0.5% (0.31 lots); from phase 2 $187.50 = 0.75% (0.47 lots x 40 pips), confirmed by replay at 0.5/0.75/1/1.5%. Brakes: -4% from phase start -> back to 0.5%; -6% -> stop and review. 1 trade/day so worst day = 1R |
-| Ideas tried | 10 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed], F efficiency regime [not adopted], G don't-fight-the-first-break [killed], T one-hour check exit [killed], K first-break direction [killed]) |
-| Variants tested | 19 (A1 A2 A3, B1 B2 B3, C1, D1, E1, DE, H1 H2 H3, F1, G1, T1 T2, K1 K2). A and B at the 3-variant cap; review round used its 3 |
+| Ideas tried | 11 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed], F efficiency regime [not adopted], G don't-fight-the-first-break [killed], T one-hour check exit [killed], K first-break direction [killed], L lookback 2/5/10 [no improvement; A2 robust]) |
+| Variants tested | 22 (A1 A2 A3, B1 B2 B3, C1, D1, E1, DE, H1 H2 H3, F1, G1, T1 T2, K1 K2, L1 L2 L3). A and B at the 3-variant cap; review round used its 3 |
 | Challenge attempts | 1 (active) |
 | Last updated (real date) | 2026-11-16 |
 
@@ -16,7 +16,8 @@
 |---|---|---|---|---|---|---|
 | LIVE Jan (01-12..01-30) A2 | 14 | 71% | +0.72 | +10.04 (+$1,257) | 1.33R | one big downtrend; 2 shock-day trades = +6.3R |
 | LIVE Feb (02-02..02-27) A2 | 20 | 55% | +0.23 | +4.64 (+$580) | 1.86R | box market; one coin-flip day = +2.14R |
-| LIVE total | 34 | 62% | +0.43 | +14.69 (+$1,836) | 1.86R | |
+| LIVE total Jan-Feb | 34 | 62% | +0.43 | +14.69 (+$1,836) | 1.86R | |
+| LIVE March (unseen data, from 03-02) A2 | 1 | 0% | -1.00 | -1.00 (-$125) | 1.00R | 03-02 sell stopped; loss tag: valid setup, market disagreed. A2 forward kill test: 1 of 40 trades |
 | Backtest Feb only (out-of-sample) A1 / A2 / A3 | 20 each | 50 / 55 / 40% | +0.18 / +0.23 / +0.00 | +3.60 / +4.64 / +0.10 | 2.2 / 1.9 / 3.1R | A2 = live exactly |
 | Backtest Feb only B1 / B2 / B3 | 13 / 14 / 13 | 54 / 57 / 54% | +0.32 / +0.34 / +0.23 | +4.10 / +4.79 / +2.98 | 1.1 / 1.7 / 1.0R | |
 | Backtest Feb only C1 (A2 + midpoint filter) | 13 | 38% | -0.08 | -1.04 | 1.5R | skipped 7 trades worth +5.68R: failing |
@@ -80,7 +81,16 @@
 - Only repeat-loss group: Fridays (last 5 in a row lost, -1.80R; but Jan Fridays +5.35R). Next change to test = "no Friday trade" (idea W, would be variant 20): WRITTEN, NOT RUN.
   Forward-only kill test on 8 unseen Fridays (net <= 0R, >= 5 losers, Mon-Thu avg > 0, still <= 0 without the worst Friday). Not testable on Jan-Feb (result already known from my trade list).
 
+## Idea L (journal/2015-idea-L-lookback.md; pre-registered, earned the next day)
+- Lookback 2 / 5 / 10 instead of 3. Jan build: +0.49 / +0.49 / +0.03R vs A2 +0.75R on the same days -> no candidate, improvement dead.
+- Robustness test PASS: neighbours 2 and 5 positive in both months (Feb +0.14 / +0.26R vs A2 +0.23R). 10-day lookback fails both months (+0.03 / -0.14R). Edge = short-term direction. Rule unchanged.
+- Use bt/ab_same.py VARIANTS START END (always END <= 2015-03-01 for Jan-Feb work: history now contains March days).
+
+## Loss tags (running count, all live trades): valid setup, market disagreed 14 (-7.03R) | my mistake 0.
+
 ## Next step
-1. STOPPED after loss tags. No new runs, no new candles until told. Traded rule is still A2 frozen at $125.
-2. When unseen data arrives: `git fetch origin main && git merge --no-edit FETCH_HEAD`; trade A2 per PLAN v2 sizing ($125 until phase 1 resolves, then $187.50); paper-tag F1 and Fridays (idea W) on every signal day; judge gate 2 only after 40 new signal days.
-Tools: look.sh, trade_a.py, bt/ideas.py [names] [--since=YYYY-MM-DD] (careful: with no names it runs EVERY variant on all months), bt/review.py, bt/loser_charts.py. Tests: `python -m pytest -q`.
+1. One finished test (idea L) is done -> next day is earned. When the coach releases it: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `./look.sh 3 0 9`; write the call in journal/2015-W10.md;
+   `python trade_a.py sell|buy` (A2, $125 until phase 1 resolves, then $187.50 per plan v2); tag any loss; paper-tag F1 and Fridays (idea W).
+2. Keep backtesting on Jan-Feb only (never load March into a test: pass END <= 2015-03-01). Each test: hypothesis + kill test committed first, max 3 variants, counted, February labelled contaminated.
+3. Open idea: trend vs box before 08:00. Forward tests running: A2 kill test (1/40 trades, -1.00R), F1 paper tag, Friday tag (0/8).
+Tools: look.sh, trade_a.py, bt/ab.py (filters), bt/ab_exit.py (exits), bt/ab_rule.py and bt/ab_same.py (own entries/direction), bt/pass_math.py, bt/risk_math.py, bt/review.py, bt/loser_charts.py. Tests: `python -m pytest -q`.

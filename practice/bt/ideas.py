@@ -14,17 +14,17 @@ def days(m5):
     m5["day"] = t.dt.date
     return m5
 
-def trend_map(m5, look=3):
+def trend_map(m5, look=3, strict=False):
     cl = m5.groupby("day")["close"].last()
     out = {}
     ds = list(cl.index)
     for i, d in enumerate(ds):
         if i >= look + 1: out[d] = 1 if cl.iloc[i-1] > cl.iloc[i-1-look] else -1
-        elif i >= 2: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
+        elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None):
-    tr = trend_map(m5, look); acct = Account(); risk_of = {}
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False):
+    tr = trend_map(m5, look, strict); acct = Account(); risk_of = {}
     cl = m5.groupby('day')['close'].last()
     hi = m5.groupby('day')['high'].max(); lo = m5.groupby('day')['low'].min(); dlist = list(hi.index)
     for d, g in m5.groupby("day"):
@@ -103,6 +103,9 @@ VARIANTS = {
  "T2": dict(entry_h=8, exit_h=12, sl=40, hourcheck=-10),   # idea T: close at 09:00 if worse than -10 pips
  "K1": dict(mode="anybreak", entry_h=7, exit_h=12, sl=40),   # idea K: first break of the Asia range from 07:00, either side
  "K2": dict(mode="anybreak", entry_h=8, exit_h=12, sl=40),   # idea K: same, watching from 08:00
+ "L1": dict(entry_h=8, exit_h=12, sl=40, look=2, strict=True),    # idea L: lookback 2 days
+ "L2": dict(entry_h=8, exit_h=12, sl=40, look=5, strict=True),    # idea L: lookback 5 days
+ "L3": dict(entry_h=8, exit_h=12, sl=40, look=10, strict=True),   # idea L: lookback 10 days
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
