@@ -48,3 +48,47 @@ Sample, plainly: 35 / 47 days for the split, 25 for XS1; within one period the s
 on 11 days and at most 3 events. If E2 cannot be read for lack of events I will say "not readable", which counts as not passed.
 My guess, written now: E1 fails (ratio about 1.5); E3 explains a quarter of the rise at most; XS1-XS3 fail K1 and K3. The rise stays mostly unexplained, and the next
 honest sentence is "eleven events in 42 trades against three in 39 is about 2.3 standard errors - partly luck".
+
+# RESULTS (hypothesis and kill lines above pushed in commit 516733b before any result; labels checked on three days; one run: `python bt/stretched.py 2015-04-29`)
+81 A2 trades 01-06..04-28, engine, full costs. Full-stop morning = 40+ pips against the entry between 08:00 and 12:00 London: 14 of 81 (3 of 39 before 03-02, 11 of 42 live).
+
+## Part 1 - does a stretched signal explain the rise?
+| | stretched (gap >= 1.0 x ADR5) | others | ratio | share of days stretched |
+|---|---|---|---|---|
+| All history | 7 of 34 = 20.6% | 7 of 47 = 14.9% | 1.38 | 42% |
+| Backtest months | 2 of 11 = 18.2% | 1 of 28 = 3.6% | 5.09 | 28% |
+| Live months | 5 of 23 = 21.7% | 6 of 19 = 31.6% | 0.69 | 55% |
+Accounting: the backtest months' two rates applied to the live mix predict 11.6% full-stop mornings. Actual live: 26.2%. The change of mix explains 21% of the rise.
+- E1 (stretched at least twice the others, all history): 1.38 -> FAIL.
+- E2 (ratio at least 1.5 inside both periods): 5.09 in the backtest months (on 2 and 1 events - not worth the paper), 0.69 live - the WRONG WAY ROUND -> FAIL.
+- E3 (mix explains at least half of the rise): 21% -> FAIL.
+THE EXPLANATION IS DEAD. Stretched signals did become twice as common, and they did not cause the full-stop mornings.
+
+## Part 2 - variants
+| | changes | avg R / signal day (A2 +0.417) | net R (A2 +33.77) | max DD (A2 3.28) | gap all | backtest | live | full-stop mornings removed | K1 | K2 | K3 | K4 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| XS1 skip when gap >= 1.25 x ADR5 | 24 days | +0.232 | +18.77 | 5.02 | -0.30 | +0.13 | -0.64 | 5 of 14 | FAIL | FAIL | FAIL | PASS |
+| XS2 half size on those days | 24 days | +0.324 | +26.27 | 3.45 | -0.30 | +0.13 | -0.64 | - | FAIL | FAIL | FAIL | PASS |
+| XS3 skip when gap >= 1.0 x ADR5 | 34 days | +0.231 | +18.74 | 3.47 | -0.04 | +0.17 | -0.30 | 7 of 14 | FAIL | FAIL | FAIL | FAIL |
+NO SURVIVOR. The most stretched signals (gap >= 1.25 days) are my BEST trades: 24 trades, +0.625R each, +15.01R of the +33.77R. Skipping them would have cost 15R and
+raised the drawdown from 3.3R to 5.0R.
+
+## My guess against what happened
+"E1 fails with a ratio of about 1.5": 1.38. "The mix explains a quarter at most": 21%. "XS1-XS3 fail K1 and K3": yes. What I did not guess: live, the full-stop
+mornings sit MORE in the ordinary signals than in the stretched ones.
+
+## What I learned
+- Where the rise actually is: in the ORDINARY signals. Mornings with a gap under one day's range went a full stop against me 1 time in 28 in January-February and
+  6 times in 19 live (3.6% -> 31.6%). In the stretched signals the rate did not move (18% -> 22%). So "I am entering late on extended moves" is exactly wrong:
+  the extended entries behave as they always did, and it is the quiet-signal mornings that turned violent.
+- This also corrects the picture I drew on 04-24 ("a small gap is a strong signal: 81% winners"). Averaged over all history that is true; live, the non-stretched
+  group has both the scratches-that-win and most of the new full stops. Two readings of the same days; I trust neither as a rule.
+- Two causes are now ruled out with numbers - a choppier two-week market (did not increase) and stretched signals (do not carry the stops) - and one is still
+  untouched on the parked list: the hour before my entry is twice as lively live (30+ pips on 57% of days against 17%). I have NOT looked at any result by that
+  measure, apart from one three-case note on 04-09. If my coach wants the "why" pursued, that is the next and last candidate I have, and it gets its own
+  pre-registration; I am not running it today as a fourth variant.
+- And the plain statistical reading, which I owe after two failed explanations: 3 events in 39 trades against 11 in 42 is a difference of 18.5 points with a standard
+  error of about 8 - roughly 2.3 standard errors. Unlikely to be all luck, far from certain to be a change. With 14 events in total I cannot tell a cause from noise,
+  and every split I make leaves 1 to 7 events per cell. The honest position: the loss side IS worse live, my expectations and sizing already use the worse numbers,
+  and I do not know why.
+Counts: ideas 47, variants 128 (the "choppier market" idea was dropped at the feature stage and is not counted as a variant).

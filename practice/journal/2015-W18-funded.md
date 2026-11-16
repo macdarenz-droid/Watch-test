@@ -136,3 +136,5 @@ Count only (from 04-23, no look before 40): live trades after a night (00:00->08
 ## 04-28 research (before the next day): new idea, a separate afternoon trade in the rule's direction, AF1/AF2/AF3 (journal/2015-idea-AF-afternoon.md) - no survivor: 75 afternoons at -0.11R each. Rule A2 and size 0.50% unchanged. Ideas 46, variants 125.
 
 ## 04-29 (before the next day): streak check against the backtest (journal/2015-streak-check.md) - the six-loss run is a 4.9% event for the backtest list (just outside my 5% line), the drawdown 7.6% (inside). What changed: mornings going a full stop against my entry, 8% before, 26% live; nothing else. Plan unchanged. Counts stay 46 ideas, 125 variants.
+
+## 04-29 research (to earn the next day): why did full-stop mornings rise - stretched-signal hypothesis XS1/XS2/XS3 (journal/2015-idea-XS-stretched-signal.md) - explanation dead (ratio 1.38, mix explains 21%), no survivor; the rise sits in ordinary signals; cause unknown. Rule A2 and size 0.50% unchanged. Ideas 47, variants 128.
