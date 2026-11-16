@@ -20,6 +20,7 @@ For the record, the trend direction today is the same under either reading.
 |---|---|---|---|---|---|---|---|---|---|---|
 | F2 | Mon 03-30 07:00 (08:00 London) | sell | 0.31 | 1.08659 | 1.09064 | 1.08320 (11:00 UTC = 12:00 London) | +0.84 | +$105.09 | VALID (win) | first summer-time day, London-time reading; F1 trade, Q3 SKIP, Q1 trade; N1 no trade |
 | F3 | Tue 03-31 08:00 London | sell | 0.31 | 1.07858 | 1.08259 | 1.07401 (12:00 London) | +1.14 | +$141.67 | VALID (win) | call written before the entry bar; wall case logged; F1 SKIP, Q3 trade, Q1 trade |
+| F4 | Wed 04-01 08:00 London | sell | 0.31 | 1.07618 | 1.08021 | 1.07581 (12:00 London) | +0.09 | +$11.47 | VALID (scratch win) | was +43 pips at 09:55 London, gave it back; F1, FR1, Q3, Q1 traded; N1 no trade |
 
 ## Daily calls
 - Mon 03-30 08:00 London (07:00 UTC) @1.0866. Fri: stopped me at 11:23, ran to 1.0949, closed 1.0887. Sunday opened flat; Asia 29 pips, slid to 1.0855 at midnight and has
@@ -75,18 +76,6 @@ For the record, the trend direction today is the same under either reading.
 ## MARCH 2015 - funded month summary (the account started on Fri 03-27: 3 trading days)
 3 trades, 2 wins, +0.98R, +$124.31 (+0.50%). Worst day -0.49%. Deepest drawdown -0.49% (day 1). Trade tags: 3 valid, 0 my mistake. Process mistakes: 1 (P1, DST slip). Payouts: none due (first date 04-10).
 
-## Forward tally of the rule (unseen data only, from 03-02)
-| Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
-|---|---|---|---|---|---|---|
-| A2 as traded (R = result / amount risked) | 22 | 16 | +12.10 | +0.55 | 1.50R | kill test: 40 trades, avg >= +0.10R, DD <= 8R (22 of 40 done) |
-| F1 paper tag | 18 (4 skips: 2 losers avoided, 2 winners missed) | 14 | +12.42 | +0.69 | 1.01R | gate 2 needs 40 signal days (22 done) |
-| Q3 dead-Asia tag (drawdown goal) | 12 (10 skips) | 8 | +5.14 | +0.43 | 1.01R | 42% of A2's net (needs 85%) |
-| Q1 dead-Asia tag (drawdown goal) | 21 (skip 03-06) | 15 | +9.98 | +0.48 | 1.50R | 82% of net, same DD |
-| Friday tag (idea W) | 4 Fridays | 3 | +3.26 | - | - | 4 of 8 unseen Fridays: 3 winners, 1 loser |
-| N1 paper tag (NY fade; London time from 03-30) | 6 (14 days) | 2 | -3.27 | -0.55 | 3.34R | today +0.07R. Judge at 20 trades AND 8 A2-losing days. A2-losing days so far: 3; N1 on them: -2.02R |
-Days: ... 03-26 -0.50 | 03-27 -1.00 (funded 1) | 03-30 +0.84 (funded 2) | 03-31 +1.14 (funded 3).
-Loss tags, all live trades: valid setup, market disagreed 19 (-10.66R) | my mistake 0. Process mistakes (funded): 1.
-
 ## Wed 04-01, before the day is released: test of the day
 F1 robustness (journal/2015-idea-FR-robustness.md): my most promising paper idea is NOT robust to its two numbers - one step stricter and its March lead of +0.33R becomes -3.10R.
 It stays a paper tag with a tougher gate; the funded rule is untouched. FR1 is tracked beside F1 from now on.
@@ -120,3 +109,25 @@ It stays a paper tag with a tougher gate; nothing from it touches this account.
   Paper tags: F1 efficiency 0.59 (straight) -> trades; FR1 the same. Q3: Asia 61.4 vs 42.1 (1.46) -> trade. Q1: trade. N1 yesterday: +0.07R (6 trades, -3.27R). Friday n/a.
   Funded check: balance $25,124.31 = high-water, drawdown 0% -> full size allowed.
   Plan: SELL 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case -$129.
+  -> Wed result, TAG FIRST: VALID (not a mistake). Checked: call and month-end check written and committed at 07:00 London, before the entry bar; entry 08:00 London,
+     0.31 lots, stop 40 pips (40.3 from the fill), SELL per the trend rule (144 pip gap), one trade, closed at 12:00 London, stop never moved. Process: clean.
+     Result: sold 1.07618, closed @1.07581, +$11.47 = +0.09R. Funded balance $25,135.78 (+0.54%), a new high-water mark by eleven dollars.
+     What happened: the 07-08 hour had already dropped 18 pips; London took it to 1.0718 by 09:55 (+43 pips for me, a full R on the table), then one hour gave back 55 pips
+     (1.0774) and noon came 4 pips in profit. The afternoon whipped 1.0727-1.0800 around the 12:30-14:00 US data.
+     Feeling: a full R evaporated in an hour and I closed for eleven dollars. That stings a little, and it is exactly the feeling that sells trailing stops to beginners.
+     I have tested break-even, targets and a runner; I have never tested a trailing stop. So that is today's test - built on January, not on this morning.
+     Paper tags: F1 and FR1 traded (straight week): +0.09R each. Q3 and Q1 traded. N1: move -14 pips at 13:00 London -> no trade. Friday n/a.
+     END OF RELEASED DATA (clock Thu 04-02 01:00 London).
+
+## Forward tally of the rule (unseen data only, from 03-02)
+| Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
+|---|---|---|---|---|---|---|
+| A2 as traded (R = result / amount risked) | 23 | 17 | +12.19 | +0.53 | 1.50R | kill test: 40 trades, avg >= +0.10R, DD <= 8R (23 of 40 done) |
+| F1 paper tag | 19 (4 skips) | 15 | +12.51 | +0.66 | 1.01R | gate 2 at 40 signal days (23 done); NOT robust (FR test): needs FR1 within 1R of A2 at day 40 |
+| FR1 (tracked only to judge F1) | 17 (6 skips) | 13 | +9.20 | +0.54 | 1.03R | 3.1R behind A2 |
+| Q3 dead-Asia tag (drawdown goal) | 13 (10 skips) | 9 | +5.23 | +0.40 | 1.01R | 43% of A2's net (needs 85%) |
+| Q1 dead-Asia tag (drawdown goal) | 22 (skip 03-06) | 16 | +10.07 | +0.46 | 1.50R | 83% of net, same DD |
+| Friday tag (idea W) | 4 Fridays | 3 | +3.26 | - | - | 4 of 8 unseen Fridays: 3 winners, 1 loser |
+| N1 paper tag (NY fade; London time from 03-30) | 6 (15 days) | 2 | -3.27 | -0.55 | 3.34R | judge at 20 trades AND 8 A2-losing days. A2-losing days so far: 3; N1 on them: -2.02R |
+Days: ... 03-27 -1.00 (funded 1) | 03-30 +0.84 (funded 2) | 03-31 +1.14 (funded 3) | 04-01 +0.09 (funded 4).
+Loss tags, all live trades: valid setup, market disagreed 19 (-10.66R) | my mistake 0. Process mistakes (funded): 1.
