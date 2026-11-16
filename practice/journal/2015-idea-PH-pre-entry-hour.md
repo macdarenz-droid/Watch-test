@@ -48,3 +48,59 @@ Sample, plainly: 30 lively days against about 52 quiet ones; 14-15 full-stop mor
 strong concentration (say 10 of the 14 in the lively third) and nothing subtler.
 My guess, written now: lively mornings carry about half of the full-stop mornings with 37% of the days - a ratio near 1.6, failing E1; E3 explains a third of the rise;
 the lively group's average R is positive and not far below the rest; PH1-PH3 fail K1 and K5. The loss-side change stays unexplained and I stop looking for its cause.
+
+# RESULTS (pre-registration above pushed in commit a9e62e3 before any result; labels checked on two days against my walk notes; one run: `python bt/pre_hour.py 2015-04-30`)
+82 A2 trades 01-06..04-29, engine, full costs.
+
+## First line, as promised: average R of the two groups
+| | trades | win rate | avg R | net R | backtest months | live months |
+|---|---|---|---|---|---|---|
+| Quiet hour before entry (under 30 pips) | 52 | 69% | +0.572 | +29.73 | 33 trades, +0.565 | 19 trades, +0.583 |
+| Lively hour before entry (30+ pips) | 30 | 50% | +0.146 | +4.37 | 6 trades, +0.150 | 24 trades, +0.144 |
+Gap 0.43R; two standard errors +-0.47R (computed) - just INSIDE the noise band. The lively mornings are not losers: they earn +0.15R. They are not my winners either.
+
+## Part 1 - does it explain the rise in full-stop mornings?
+| | lively hour | quiet hour | ratio | share of days lively |
+|---|---|---|---|---|
+| All history | 9 of 30 = 30.0% | 5 of 52 = 9.6% | 3.12 | 37% |
+| Backtest months | 1 of 6 = 16.7% | 2 of 33 = 6.1% | 2.75 (six days: not readable) | 15% |
+| Live months | 8 of 24 = 33.3% | 3 of 19 = 15.8% | 2.11 | 56% |
+Accounting: (30.0% - 9.6%) x (56% - 15%) = 8.2 points of the 17.9-point rise = 46%.
+- E1 (at least twice the rate, all history): 3.12 -> PASS. (9 of 14 full-stop mornings fall in 37% of the days; one-sided exact test p about 0.02.)
+- E2 (ratio at least 1.5 inside the live months): 2.11 -> PASS.
+- E3 (explains at least half of the rise): 46% -> FAIL, by four points.
+BY MY OWN RULE THE EXPLANATION DOES NOT SURVIVE: all three lines had to hold and the third does not. What I can say, and no more: the lively pre-entry hour is the
+first thing I have found that goes WITH the full-stop mornings in both periods, and its increase accounts for a bit under half of the rise. The other half is still
+unexplained (quiet-hour mornings also got worse live: 6% -> 16%, on 2 and 3 events).
+
+## Part 2 - variants
+| | changes | avg R / signal day (A2 +0.416) | net R (A2 +34.10) | max DD (A2 3.28) | gap all / live / backtest | full-stop mornings removed | winners removed | K1 | K2 | K3 | K4 | K5 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| PH1 skip after a 30+ pip hour | 30 days | +0.363 | +29.73 (87%) | 1.87 | +0.43 / +0.44 / +0.42 | 9 of 14 | 15 of 51 | FAIL | PASS | PASS | PASS | FAIL |
+| PH2 half size on those days | 30 days | +0.389 | +31.91 (94%) | 1.87 | same | - | - | FAIL | PASS | PASS | PASS | PASS |
+| PH3 skip after a 40+ pip hour | 15 days | +0.386 | +31.64 (93%) | 3.22 | +0.31 / +0.37 / -0.21 | 4 of 14 | 8 of 51 | FAIL | PASS | PASS | PASS | PASS |
+VERDICT BY THE KILL TEST AS WRITTEN: NO SURVIVOR. All three fail K1: removing or halving trades that still earn +0.15R lowers the average per signal day. PH1 also fails
+the coach's line K5 (it throws away 13% of the profit and 15 winners). A2 unchanged. No tag awarded.
+
+## My guess against what happened
+"Ratio near 1.6, failing E1": WRONG - 3.12, E1 and E2 pass. "E3 explains a third": 46%. "The lively group's average is positive and not far below the rest": positive,
+yes; "not far below" - it is 0.43R below. "PH1-PH3 fail K1 and K5": K1 yes; K5 only PH1. I underestimated this one; my memory of "mixed" cases was a dozen recent days.
+
+## What this is and is not - said as carefully as the UN3 note
+For it:
+- Same picture in both periods: quiet-hour mornings +0.57R before and +0.58R live; lively-hour mornings +0.15R before and +0.14R live. I have not had a split this stable.
+- It accounts for something I could not explain: live average +0.34R against +0.50R in the backtest. Backtest group averages on the live mix (56% lively) give
+  0.44 x 0.565 + 0.56 x 0.15 = +0.33R. The whole live-vs-backtest gap is the mix of mornings - arithmetically. (Post hoc; it is one way of cutting 82 trades.)
+- Halving size on those days (PH2) would have kept 94% of the profit with a maximum drawdown of 1.87R instead of 3.28R.
+Against it:
+- It failed the lines I wrote beforehand: E3 (46% < 50%) and K1 for every variant. The gap in average R is inside its noise band (0.43 against +-0.47).
+- The backtest side rests on SIX lively days. "Stable in both periods" means 6 trades agree with 24.
+- Without its three worst trades the lively group averages +0.28R; without its three best -0.06R. Thirty trades.
+- It is my twelfth conditional split of the same 82 trades. One in twelve looking like this is not rare.
+- The coach's warning stands: these 30 days include 15 winners (04-10, 04-13, 04-15, 04-17 among them). Skipping is out by K5; I would not skip them.
+What I do: nothing to the rule or the size. The threshold, the definition and this table are frozen here.
+QUESTION FOR MY COACH: this is the UN3 situation again, with a stronger explanation part and a failed profit line. May I log PH2 (half size after a 30+ pip pre-entry
+hour) as a second forward PAPER tag under the same discipline as UN3 - its line written in the 08:00 note before the order (it is only known at 08:00), counting from the
+next live day, promotion rule written before its first day, never live on a few good days? If the answer is no, I keep only a count in the live table
+("live trades after a lively hour: n, average R, full-stop mornings") and look at it at 100 live trades.
+Counts: ideas 48, variants 131.
