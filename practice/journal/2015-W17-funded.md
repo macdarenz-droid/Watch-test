@@ -152,3 +152,6 @@ Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 38 done, avg +0.39R, m
 ## 04-21 research (before the next day): signal-agreement test UN1/UN2/UN3 (journal/2015-idea-UN-signal-agreement.md) - no survivor by the kill test. UN3 (skip when the 3-day and 5-day signals disagree) passes three lines and fails the profit line; question to the coach about a paper tag. Rule A2 and size 0.50% unchanged. Ideas 42, variants 113.
 
 ## 04-22 research (before the next day): night-continuation second setup NT1/NT2/NT3 (journal/2015-idea-NT-night-continuation.md) - no survivor on 76 nights each. Parked observation: nights give back part of yesterday's move; the fade is not tested. Rule A2 and size 0.50% unchanged. Ideas 43, variants 116.
+
+## 04-23 research (before the next day): review of A2's last 15 losers by eye + one-way-night test ON1/ON2/ON3 (journal/2015-review-last-15-losers-and-idea-ON.md) - no survivor: the lesson fails on the period I did not review. Method rule added: losers are reviewed with winners beside them and base rates first. Rule A2 and size 0.50% unchanged. Ideas 44, variants 119.
+Count only, from 04-23: live trades after a night (00:00->08:00) against my side: 0 so far (no look before 40).

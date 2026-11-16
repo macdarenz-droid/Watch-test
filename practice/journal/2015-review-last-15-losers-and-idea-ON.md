@@ -61,3 +61,50 @@ A variant survives only if ALL:
 Also reported: how many of the 15 reviewed losers each variant would have removed, next to how many WINNERS it removes - the number my eye could not see.
 My guess, written now: on 02-27..04-22 the one-way-night days look terrible (that is where I found them); on 01-06..02-26 they are average or better; K3 fails for all three.
 If so the honest lesson of this review is about the method: fifteen losers share whatever is common, and I need the winners next to them before I see anything.
+
+# RESULTS (review and kill test above pushed in commit 6953357 before the script existed; labels checked on two days against the charts; one run: `python bt/night_against.py 2015-04-23`)
+77 A2 trades 01-06..04-22, engine, full costs. Not reviewed: 01-06..02-26, 38 trades, +0.52R each. Reviewed stretch: 02-27..04-22, 39 trades, +0.37R each.
+
+## Night (00:00 -> 08:00 London) against my side, or not
+| | trades | win rate | avg R | net R | NOT reviewed (01-06..02-26) | reviewed stretch (02-27..04-22) |
+|---|---|---|---|---|---|---|
+| Night with me or flat | 40 | 75% | +0.710 | +28.42 | 20 trades, +0.61 | 20 trades, +0.81 (85% wins) |
+| Night against me (any) | 37 | 51% | +0.159 | +5.90 | 18 trades, +0.42 (67% wins) | 19 trades, -0.09 (37% wins) |
+| gap | | | +0.55 (noise +-0.46) | | +0.19 | +0.89 |
+| Night NOT one-way against me | 57 | 70% | +0.553 | +31.52 | 31 trades, +0.53 | 26 trades, +0.58 |
+| Night one-way against me | 20 | 45% | +0.140 | +2.79 | 7 trades, +0.50 (71% wins) | 13 trades, -0.05 (31% wins) |
+| gap | | | +0.41 (noise +-0.50) | | +0.03 | +0.64 |
+
+## The number my eye could not see
+- "Night against me" days contain 12 of my 15 reviewed losers - and 19 of my 49 winners. All losers: 18 of 28.
+- "One-way night against me" days contain 9 of the 15 reviewed losers - and 9 winners. All losers: 11 of 28.
+Looking only at the losers I saw "12 of 15 share it". With the winners beside them it is "18 losers and 19 winners share it".
+
+## Variants and kill lines
+| | changes | avg R / signal day (A2 +0.446) | net R (A2 +34.31) | max DD (A2 2.03) | gap, all history | gap, NOT-reviewed part | K1 | K2 | K3 (decisive) | K4 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| ON1 skip when the night is against me (NM1 re-run) | 37 days (52% left) | +0.369 | +28.42 | 1.51 | +0.55 | +0.19 | FAIL | PASS | FAIL | FAIL (as written beforehand) |
+| ON2 skip when one-way against me | 20 days (74% left) | +0.409 | +31.52 | 1.51 | +0.41 | +0.03 | FAIL | PASS | FAIL | PASS |
+| ON3 half size on those days | 20 days | +0.427 | +32.92 | 1.63 | +0.41 | +0.03 | FAIL | PASS | FAIL | PASS |
+VERDICT: NO SURVIVOR. All three fail K1 (they give up +2.8R to +5.9R of profit) and the decisive K3: on the 38 trades I did not review, the one-way-night mornings earned
++0.50R - the same as every other morning. A2 unchanged. No paper tag.
+
+## My guess against what happened
+"Terrible on the reviewed stretch, average or better on the un-reviewed part, K3 fails for all three": yes, exactly. One nuance I did not expect: for the plain
+"night against me" split the un-reviewed part has the same SIGN (+0.19R) - not backwards as my January NM note said (that test had removed its inspiring days and used a
+smaller sample). Small, inside the noise, but not zero.
+
+## What I learned
+- About the losers: since late February, mornings after a night that ran against my side have been poor (19 trades, 37% winners, -0.09R) and mornings after a night with
+  me excellent (20 trades, 85% winners). In January-February there was almost no difference. I cannot tell whether the market changed or whether I am describing the
+  same 15 trades I started from; the test was built to refuse exactly this evidence, and it did.
+- About the method - the real lesson, and the coach's "slow down" is why I saw it: a losers-only review finds whatever is COMMON, not what is DIFFERENT. "12 of 15 losers
+  had the night against them" sounded like a discovery; the base rate was 37 of 77 mornings, and the same days hold 19 winners. From now on a chart review of losers
+  is always done with the same number of winners from the same weeks next to it, and the first thing written is the base rate of every feature on all days.
+- What stays on the table without any action: the all-history gap for "night against me" is +0.55R against a noise band of +-0.46R, with 37 and 40 trades - the
+  biggest-sample split I have, and just outside noise. It failed the line that matters (the part I did not choose by its losers), and skipping those days would have
+  cost 5.9R. If it is real it will show in the forward record without my help: the live-vs-backtest table gets one more line from tomorrow, "live trades after a night
+  against me: n, avg R" - a count, not a tag, not a rule. I will not look at it before 40 such live trades from 04-23.
+- For the daily call: when I write "the night went against me" as a worry, the honest sentence after it is "half of all mornings look like this; over all history they
+  still earned +0.16R".
+Counts: ideas 44, variants 119 (ON1 is a re-run of NM1 on the full history, marked as such).
