@@ -44,3 +44,4 @@ A few good paper days, a losing week, or "it would have halved today's stop" are
 | as of | forward days | lively days (of 60) | A2 R / full-stop mornings on lively days | A2 R / full-stop mornings on quiet days | PH2 net R / max DD | A2 net R / max DD |
 |---|---|---|---|---|---|---|
 | Fri 2015-05-01 | 1 | 1 | +0.44R / 0 | - | +0.22R / 0R | +0.44R / 0R |
+| Mon 2015-05-04 | 2 | 2 | -0.56R / 1 | - | -0.28R / 0.50R | -0.56R / 1.00R |

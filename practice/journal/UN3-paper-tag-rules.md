@@ -51,3 +51,4 @@ is to be written in the journal as a feeling, like every other such thought.
 | Wed 2015-04-29 | 7 | 2 | -1.02R (2 trades) | +0.73R (5 trades) | +0.73R / 1.20R | -0.29R / 2.22R |
 | Thu 2015-04-30 | 8 | 2 | -1.02R (2 trades) | +2.56R (6 trades) | +2.56R / 1.20R | +1.54R / 2.22R |
 | Fri 2015-05-01 | 9 | 2 | -1.02R (2 trades) | +3.00R (7 trades) | +3.00R / 1.20R | +1.98R / 2.22R |
+| Mon 2015-05-04 | 10 | 2 | -1.02R (2 trades) | +2.00R (8 trades) | +2.00R / 1.20R | +0.98R / 2.22R |
