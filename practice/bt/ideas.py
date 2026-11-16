@@ -27,7 +27,7 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None, scale=None, rn=None, flip=None, fh=None, rej=None, add=None, cstop=None, lock=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None, scale=None, rn=None, flip=None, fh=None, rej=None, add=None, cstop=None, lock=None, tdstop=None):
     _best = {}
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
@@ -159,6 +159,9 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                 pk = (hh.high.values.argmax() if p.side > 0 else hh.low.values.argmin()) * 5        # minute of my best price in the hour
                 loc = ((b.open - lo_) if p.side > 0 else (hi - b.open)) / (hi - lo_) if hi > lo_ else 0.5
                 if (fh == "early" and pk < 15) or (fh == "notlate" and pk < 40) or (fh == "low" and loc < 1/3): acct.close()
+            if tdstop is not None and acct.positions and acct.positions[0].tag == str(d) and h == tdstop[0] and b.time.minute == 0:   # idea TD: from this hour the stop is tdstop[1] pips from my entry
+                p = acct.positions[0]; ns = p.entry - p.side * tdstop[1] * PIP
+                if (p.side > 0 and ns > p.sl) or (p.side < 0 and ns < p.sl): acct.modify(p.id, sl=ns)
             if lock is not None and acct.positions and acct.positions[0].tag == str(d) and h == lock[0] and b.time.minute == 0:   # idea LK: one check at a fixed late time, only for trades in profit
                 p = acct.positions[0]; pips = ((b.open - p.entry) if p.side > 0 else (p.entry - (b.open + acct.spread))) / PIP
                 if pips >= lock[1]:
@@ -272,6 +275,9 @@ VARIANTS = {
  "RN00_15": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 15)),   # idea RN: round numbers ahead
  "RN00_25": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 25)),
  "RN50_15": dict(entry_h=8, exit_h=12, sl=40, rn=(50, 15)),
+ "TD1": dict(entry_h=8, exit_h=12, sl=40, tdstop=(9, 25)),      # idea TD: time-decay stop: 25 pips from entry from 09:00
+ "TD2": dict(entry_h=8, exit_h=12, sl=40, tdstop=(9, 20)),      # 20 pips from 09:00
+ "TD3": dict(entry_h=8, exit_h=12, sl=40, tdstop=(10, 20)),     # 20 pips from 10:00
  "LK1": dict(entry_h=8, exit_h=12, sl=40, lock=(11, 20, 0.5)),     # idea LK: at 11:00, if 20+ pips up, stop to half the open profit
  "LK2": dict(entry_h=8, exit_h=12, sl=40, lock=(10, 20, 0.5)),     # the same at 10:00
  "LK3": dict(entry_h=8, exit_h=12, sl=40, lock=(11, 20, "exit")),  # at 11:00, if 20+ pips up, close

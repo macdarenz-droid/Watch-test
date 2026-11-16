@@ -242,3 +242,5 @@ Process mistake P4 (05-05): two counts written from memory in the size-rule note
 Process mistake P6 (05-06): two uncomputed statements in the day's result note (a "25 pip" bounce that is 28.6; "my second skip-urge", never counted), corrected the same hour.
 
 ## 05-07 research (before the next day): direction of a lively pre-entry hour, LM1/LM2/LM3 (journal/2015-idea-LM-lively-morning.md) - no survivor: following the hour loses 0.22R a trade; fading it earns the same as A2 on those mornings. Rule A2 and size 0.50% unchanged. Ideas 53, variants 144. Process mistakes: 6.
+
+## 05-08 research (before the next day): exit/management on A2, time-decay stop TD1/TD2/TD3 (journal/2015-idea-TD-time-decay-stop.md) - no survivor: 3.9R to 4.7R worse than the plain stop; the noon exit is already the loss-cutter. Rule A2 and size 0.50% unchanged. Ideas 54, variants 147.
