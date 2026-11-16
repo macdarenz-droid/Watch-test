@@ -45,8 +45,12 @@
 - Build on Jan: all three thresholds FAILED (kept avg R +0.48..+0.58 vs A2 +0.78; the skipped "chasing" trades were Jan's best). Feb check of H1 only: +0.50 avg (10 trades) vs A2 +0.23 (20), passes the Feb test.
 - Verdict: killed by the build rule; Feb was not truly unseen. Finding: "don't chase" helps in a box and hurts in a trend. Traded rule stays A2.
 
+## Audit (journal/2015-audit-feb-and-next-hypothesis.md)
+- Feb is NOT unused: clean only for the live trades, frozen A/B and C1. D, E, H are in-sample on both months. H2/H3 were run on Feb by my own scripting error (recorded). No unseen data is left.
+- All 13 live losses tagged: 13 "valid setup, market disagreed", 0 "my mistake" (34/34 trades followed every execution rule). One real mistake: the 01-22 skip.
+- Idea F ("straight or crooked": 5-day efficiency >= 0.5 -> A2 every day, else A2 + no-chase H1) is WRITTEN with a two-gate kill test and NOT RUN. It will be variant 14.
+
 ## Next step
-1. Waiting for the coach. No March data. Clock stays at 2015-02-27 22:00.
-2. If allowed another round on Jan-Feb: idea F "regime" (A2 every day when the 3-day gap is large, pullback-day only when small), threshold fixed before running, max 3 variants.
-3. When data resumes: `git fetch origin main && git merge --no-edit FETCH_HEAD`; trade A2 at $125 unless a tested rule has replaced it; log D1/DE as paper tags on each trade.
-Tools: look.sh, trade_a.py, bt/ideas.py [names] [--since=YYYY-MM-DD], bt/review.py (trade context), bt/loser_charts.py (trade charts). Tests: `python -m pytest -q`.
+1. Waiting for the coach's go: run gate 1 of idea F on Jan-Feb (measure only), exactly as written, one variant.
+2. When unseen data arrives: `git fetch origin main && git merge --no-edit FETCH_HEAD`; trade A2 at $125; paper-tag F (and H1) on every signal day; judge gate 2 only after 40 new signal days.
+Tools: look.sh, trade_a.py, bt/ideas.py [names] [--since=YYYY-MM-DD] (careful: with no names it runs EVERY variant on all months), bt/review.py, bt/loser_charts.py. Tests: `python -m pytest -q`.
