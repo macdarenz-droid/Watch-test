@@ -46,10 +46,10 @@ account before the split; about one month in five negative at the planning edge;
 Where it comes from (04-17, 74 trades): both sides earn - sells +0.61R (47), buys +0.24R (27), each positive in all three periods - but 81% of the net R is sells in a market that
 fell 1,200 pips. The smaller side is known only to +-0.40R. I have not yet traded a rising market; +0.18R is about what the weaker side has earned.
 
-## 7. What is closed, so I do not reopen it on a bad day (49 ideas, 134 variants, none adopted)
+## 7. What is closed, so I do not reopen it on a bad day (50 ideas, 137 variants, none adopted)
 Entry filters from chart reading (no-chase, first break, night against me (twice), gap size (small and large), round numbers, flip day, rejection day, dead Asia, Friday): the losers I look at have more winning twins.
 Exits (tighter / wider / structural stop, break-even, trail, target, runner, scale-out, partial at +1R, add at +1R, stop on a candle close, late profit lock, 09:00 checks, other exit hours): 29 definitions, none beats noon. The hour 11:00-12:00 adds +0.18R per in-profit trade.
-Entry time and price (07:00, 09:00, +-1h, limit orders); lookback 2 / 5 / 10; second setups tried (Asia break, ignition candle, NY fade, range fade, night continuation, afternoon trade in the rule's direction). Size above 0.50%.
+Entry time and price (07:00, 09:00, +-1h, limit orders); lookback 2 / 5 / 10; second setups tried (Asia break, ignition candle, NY fade, range fade, night continuation, afternoon trade in the rule's direction, night fade). Size above 0.50%.
 Ruled out about myself: discretionary skips and rules made from one replayed day.
 KEEP IN MIND (XS test 04-29, coach: do not filter winners away): the most STRETCHED signals (3-day gap >= 1.25 average days' range) are my best trades, 24 at +0.625R each.
 "It is extended, be careful" is not supported by my record; skipping them would have cost 15R of 34R.

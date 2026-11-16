@@ -266,3 +266,5 @@ Count only (no look before 40): live trades after a night (00:00->08:00) against
 ## 04-30 research (before the next day): lively-hour-before-entry idea PH1/PH2/PH3, pre-registered before touching results (journal/2015-idea-PH-pre-entry-hour.md) - no survivor by the kill test (explains 46% of the rise, needed 50%; every variant fails the profit line), but the strongest and most stable split so far: quiet-hour mornings +0.57R, lively-hour mornings +0.15R, in both periods. Question to the coach about a paper tag. Rule A2 and size 0.50% unchanged. Ideas 48, variants 131.
 
 ## 05-01 research (before the next day): exit/management on A2, late profit lock LK1/LK2/LK3 (journal/2015-idea-LK-late-lock.md) - no survivor: -1.6R / -1.8R / -6.2R against the noon exit; the last hour adds for trades in profit. Rule A2 and size 0.50% unchanged. Ideas 49, variants 134.
+
+## 05-01 weekend research: night fade NF1/NF2/NF3, the parked observation tested with a cost stress (journal/2015-idea-NF-night-fade.md) - no survivor: +0.03R a night, negative at a 2.5 pip spread. My 'mirror arithmetic' was wrong. Rule A2 and size 0.50% unchanged. Ideas 50, variants 137.

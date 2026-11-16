@@ -38,3 +38,43 @@ A variant survives only if ALL:
   K6. independence from A2: correlation of its nightly R with A2's R the same morning at most +0.30, and net R not negative on the mornings A2 lost.
 My guess, written now: NF1 and NF2 come out at +0.10R to +0.14R: fail K1 narrowly, and fail K2 (at 2.5 pips the average drops by about 0.10R to roughly zero).
 NF3 has fewer trades and may look better per trade; if it clears K1 it will fail K2 or K4. No survivor. If one does survive every line, it is a paper tag and nothing more.
+
+# RESULTS (kill test above pushed in commit 69d4eca before any code; one run: `python bt/night_fade.py 2015-05-02`)
+84 nights 01-06..05-01 (NF3: 58), R of $125 (0.42 lots, 30 pip stop), at the sim's costs and at a 2.5 pip spread.
+
+## Mechanics checked on one night before the totals (`--check 2015-04-21`)
+Monday 04-20 fell (close 1.07374 under the previous 1.08048 and under the 17:00 price 1.07623): all three fade variants BUY at midnight. 00:00 open bid 1.07379 ->
+bought 1.07390, stop 1.07079; the night low was 1.07136 (not stopped); closed 07:00 at 1.07185: -0.69R. At a 2.5 pip spread the entry is 1.07405: -0.74R. Engine = candles.
+
+## Totals
+| | nights | win rate | avg R (+- 2 SE) | net R | full stops | max DD | worst 10 | Jan | Feb | Mar-now | without best 3 | avg at 2.5 pip spread | corr with A2 | net on A2's losing mornings |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| NF1 against the 1-day direction | 84 | 45% | +0.032 (+-0.16) | +2.73 | 13 | 4.77R | -3.80R | +4.39 | -0.01 | -1.65 | -2.75 | -0.026 | +0.03 | -4.11 |
+| NF2 against the NY afternoon | 84 | 45% | +0.016 (+-0.16) | +1.36 | 13 | 5.75R | -3.71R | +1.56 | +1.15 | -1.35 | -4.20 | -0.047 | -0.03 | -3.50 |
+| NF3 only when both agree | 58 | 45% | +0.069 (+-0.19) | +4.02 | 8 | 4.05R | -3.68R | +3.90 | +0.78 | -0.67 | -1.46 | +0.016 | +0.04 | -3.47 |
+
+## Kill lines applied
+| line | NF1 | NF2 | NF3 |
+|---|---|---|---|
+| K1 avg >= +0.15R | FAIL (+0.03) | FAIL (+0.02) | FAIL (+0.07) |
+| K2 stressed avg >= +0.05R | FAIL (-0.03) | FAIL (-0.05) | FAIL (+0.02) |
+| K3 positive in each period | FAIL | FAIL | FAIL |
+| K4 positive without best 3 | FAIL | FAIL | FAIL |
+| K5 DD <= 5R, worst 10 >= -4R | PASS | FAIL | PASS |
+| K6 independent of A2 | FAIL (-4.11R on A2's losing mornings) | FAIL | FAIL |
+VERDICT: NO SURVIVOR, and not narrowly. The night fade earns nothing. Idea closed; the parked observation is taken off the list. A2 unchanged.
+
+## My guess against what happened - the arithmetic I trusted was wrong
+I wrote, twice, that the mirror of a -0.21R trade should make about +0.13R after costs, and I guessed +0.10R to +0.14R. It makes +0.03R / +0.02R.
+Where the missing tenth of an R went: the continuation trade and the fade trade are not mirror images once each has its own 30 pip stop. On a night that first
+runs 30 pips one way and then comes back, the continuation trade... wins if held, but the fade is STOPPED for a full -1R before the reversal it was betting on; on a
+night that dips against the continuation trade by 30 pips and then goes its way, the continuation trade is stopped and the fade's gain is whatever is left at 07:00.
+Both sides pay the stop when the night is two-way. Added together NT2 and NF1 lose 0.18R a night: 0.07R of that is the two sets of costs, the other 0.10R is
+whipsaw - nights that go far enough both ways to stop someone.
+- Lesson, general and worth keeping: "this loses consistently, so the opposite wins" is only true for trades without stops. With a stop on each side, both can lose.
+  I will not write "the mirror would make about X" again without running it.
+- What is left of the 04-22 observation: nights do go against yesterday's move slightly more often than with it - and it is not tradeable with a 30 pip stop at any
+  cost level I believe in. With March-to-now negative in all three variants, there is not even a period to argue from.
+- Seven second setups tried, none alive: Asia break, ignition candle, NY fade, range fade, night continuation, afternoon trade, night fade. The record says the
+  one edge I have is the 3-day direction between 08:00 and 12:00 London.
+Counts: ideas 50, variants 137.
