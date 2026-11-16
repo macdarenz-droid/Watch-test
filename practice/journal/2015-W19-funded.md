@@ -194,3 +194,5 @@ Process mistake P4 (05-05): two counts written from memory in the size-rule note
 
 ## 05-06 (before the next day): (1) overdue day-40 gates applied: F1 / FR1, Q3, Q1 all CLOSED (journal/2015-paper-tag-gates-day40.md; process mistake P5 for the delay). (2) Rising-trend health check (journal/2015-idea-UP-rising-trend.md): hypothesis survives - up-trend days +0.375R on 29 trades, down-trend +0.307R on 48. Rule A2 and size 0.50% unchanged. Ideas 52, variants 141. Process mistakes: 5.
 Process mistake P6 (05-06): two uncomputed statements in the day's result note (a "25 pip" bounce that is 28.6; "my second skip-urge", never counted), corrected the same hour.
+
+## 05-07 research (before the next day): direction of a lively pre-entry hour, LM1/LM2/LM3 (journal/2015-idea-LM-lively-morning.md) - no survivor: following the hour loses 0.22R a trade; fading it earns the same as A2 on those mornings. Rule A2 and size 0.50% unchanged. Ideas 53, variants 144. Process mistakes: 6.
