@@ -49,3 +49,33 @@ Total 34 trades, 21 wins (62%), +14.70R, avg +0.43R. Winners avg +0.99R, losers 
 - Next hypothesis, written down but NOT run (I have used my 3 variants): F "regime": when the 3-day close gap is large (a trend) trade every day as A2; when it is small (a box) trade only after a pullback day.
   It needs its own count, a threshold fixed before testing, and above all months I have not seen.
 - Counts: ideas 5 (A, B, C, D, E), variants 10.
+
+## 7. Out-of-sample check: A and B exactly as frozen in January, run on February (no tweaks)
+Frozen = the six definitions written on 01-09 in bt/ideas.py (A1 A2 A3, B1 B2 B3). No new variants: count stays 5 ideas / 10 variants. Costs on (1.0 pip spread + 0.1 slippage), $125 risk.
+The only code change since January is the Sunday-candle fix (data handling, not a rule): January numbers are identical with and without it; February A2 would read +0.86R with the bug, +4.64R without (= my live result).
+
+| Variant | Jan trades | Jan win | Jan avg R | Jan max DD | Feb trades | Feb win | Feb avg R | Feb max DD | Avg R kept |
+|---|---|---|---|---|---|---|---|---|---|
+| A1 London trend, in 07:00, out 12:00 | 19 | 68% | +0.56 | 3.02R | 20 | 50% | +0.18 | 2.17R | 32% |
+| A2 same, in 08:00 (traded rule) | 19 | 74% | +0.78 | 1.33R | 20 | 55% | +0.23 | 1.86R | 29% |
+| A3 SL40 TP60, hold to 16:00 | 19 | 53% | +0.30 | 3.06R | 20 | 40% | +0.00 | 3.07R | 0% |
+| B1 Asia break w/ trend, SL30, out 12:00 | 13 | 69% | +0.76 | 2.10R | 13 | 54% | +0.32 | 1.05R | 42% |
+| B2 same, TP45, out 16:00 | 13 | 62% | +0.53 | 2.10R | 14 | 57% | +0.34 | 1.71R | 64% |
+| B3 same, SL40, out 12:00 | 13 | 77% | +0.64 | 1.02R | 13 | 54% | +0.23 | 1.02R | 36% |
+
+Did it fall apart? Not into losses - all six stayed >= 0 after costs - but every one lost most of its edge (A kept ~30%, A3 none, B kept 36-64%). With 13-20 trades a month,
++0.2 to +0.3R per trade is not distinguishable from zero. So: January's numbers were mostly January.
+
+### Why, from the charts (H4 Jan-Feb chart + measured from history; nothing changed in the rules)
+| | Jan | Feb |
+|---|---|---|
+| Picture on H4 | staircase down 1.20 -> 1.11, each bounce fails under the last low | flat box 1.127-1.150 for four weeks, two false breakouts up, real break only on the last Thursday |
+| Avg day range | 140 pips | 115 pips |
+| Avg 08-12 range | 77 pips | 53 pips |
+| Avg 08-12 move WITH my trend rule | +34 pips, right 79% of days | +11 pips, right 55% of days |
+| Avg 12-21 move with my trend rule | -30 pips (NY gave it back) | +5 pips (nothing) |
+1. The rule is a trend rule and February had no trend: my "trend" (3-day close change) flipped 4 times in Feb and half its signals were under 35 pips = noise.
+2. The London morning itself shrank by a third, and its drift with my signal fell from +34 to +11 pips. My fixed costs (1.1 pips) and 40 pip stop did not shrink with it.
+3. In January NY reversed the morning (-30 pips), so "out at noon" was a real edge. In February NY did nothing on average: the noon exit neither helped nor hurt.
+4. B kept more of its edge than A (it only trades when price actually breaks the Asia range, so it sat out 6-7 dead days). That is one month and 13 trades - noted, not concluded.
+What I am NOT doing: changing anything on this evidence. Two months = one trend sample and one box sample. The traded rule stays A2 as frozen.
