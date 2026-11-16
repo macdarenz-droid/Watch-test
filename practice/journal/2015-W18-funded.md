@@ -100,6 +100,23 @@ Coach, 04-27: the decision lines did not trigger, so 0.50% stays; no size cut of
      Paper tags: F1 and FR1 traded (+1.61R); Q3 and Q1 SKIPPED and miss it. UN3: agree day, paper trades = +1.61R.
      Night count: against me by 2 pips -> live trade 2 of the count, +1.61R (running: 2 trades, +1.45R).
      END OF RELEASED DATA (clock Wed 04-29 01:00 London).
+- **Wed 04-29 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID WIN.
+  D1: fourth rising day and the biggest: Tuesday 1.0860 -> 1.0991, close 1.0980 (0.93 of its range). From Thursday's 1.0666 low the move is 325 pips in four days.
+      Price is back where it was on 04-06/07 (the 1.0950-1.1035 area of the early-April top).
+  H4: Tuesday: London broke 1.0900, New York added 60 pips to 1.0991; evening 1.0960-1.0983. Tonight flat 1.0960-1.0982.
+  H1: night range 1.0960-1.0982, 22 pips (ratio 0.68); small dip to 1.0960 at 05:xx, back to 1.0968.
+  M15: four small candles 1.0961-1.0972; price 1.0968, mid-range of a dead night.
+  Bias: BUY. 22:00 London closes: 04-28 1.09802 vs 04-23 1.08234 = +157 pips. Fourth day on the buy side.
+  UN3 PAPER TAG (never live): 5-day gap +245 pips -> BUY; 3-day says BUY -> agree: paper TRADES. Forward day 7 (2 disagree days of 30 so far).
+  Levels: night high 1.0982; Tue high 1.0991; 1.1000; early-April highs 1.1035; night low 1.0960; Tue London breakout level 1.0900.
+  Stretched-signal note (from the XS test, coach: keep it in the notes, do not filter winners away): today's gap is 157 pips, more than one average day's range.
+     That group is my BEST over all history (24 trades at 1.25+ days: +0.625R each). The feeling 'this is extended, be careful' is not supported by my record.
+  Rejection-day check (parked observation): Tuesday closed near its high, with a buy. Nothing.
+  Worry: buying 30 pips under 1.1000 after 325 pips up; today is also a US central-bank day in my memory of the calendar - I cannot verify dates from inside the sim,
+     and my rule is flat by noon London in any case.
+  Paper tags: Q3 SKIP (Asia 22.0 vs 32.2 = 0.68), Q1 trade. F1 / FR1 read from the engine after the day.
+  Funded check / SIZE RULE: tracker balance $25,242.27, high-water $25,451.83, drawdown -0.82%. Trigger 1 at $24,688.28, trigger 2 at $24,179.24: neither reached -> FULL size.
+  Plan: BUY 08:00 London, SL 40 pips under the bid at 08:00, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$131 -> drawdown -1.3%. One trade, stop not moved.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
