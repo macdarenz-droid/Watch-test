@@ -29,6 +29,17 @@ Size note (coach, 04-13): Friday's +1.62R does not change the size. The risk-siz
      Paper tags: F1, FR1, Q3 and Q1 all traded (+1.94R each).
      END OF RELEASED DATA (clock Tue 04-14 01:00 London).
 
+- **Tue 04-14 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID WIN.
+  Bias: SELL. 22:00 London closes: 04-13 1.05669 vs 04-08 1.07805 = -214 pips. Fifth day on the sell side.
+  Picture: six falling days, 1.1035 to 1.0520 (Mon low). Monday bounced 90 pips in the afternoon and closed mid-range (1.0567). The night went up to 1.0594 first and has
+  fallen 55 pips since, the last three hours in a row; price 1.0540, on the night low (1.0539), 20 pips above Monday's low. Asia range 55 pips (ratio 1.59) - a lively night.
+  Levels: night low 1.0539; Mon low 1.0520; 1.0500; night high 1.0594.
+  Rejection-day check (parked observation, not a rule): Monday closed mid-range (0.47), no rejection. Nothing to note.
+  Worry: I am selling 55 pips below the night's high after three falling hours, into Monday's low and the 1.05 round number. Same kind of entry as Friday. No skip.
+  Paper tags: Q3 trade, Q1 trade. F1 / FR1 read from the engine after the day.
+  Funded check: tracker balance $25,311.86, high-water $25,311.86, drawdown 0.00% (brakes -3% = $24,552.50 / -5% = $24,046.27) -> full size allowed.
+  Plan: SELL 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$129 -> drawdown -0.5%. One trade, stop not moved.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
