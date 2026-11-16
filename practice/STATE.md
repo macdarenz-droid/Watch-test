@@ -276,6 +276,13 @@
 - February alone favours the partial (103%, DD 1.03 vs 1.87R) on one day; Feb + Mar-now together 87-90% with the same drawdown. A partial cannot touch a drawdown (days that never reach +1R). For a calmer curve the tool is a smaller size.
 - Exit side: 20 exit definitions tested, none beats A2's. Lever CLOSED again.
 
+## PLAN v2 FUNDED, one page (journal/PLAN-v2-funded-one-page.md, 04-16): rule, size, daily stop (one trade, -1R, done for the day), brakes, payout plan, what counts as a trade mistake vs a process mistake, expectations, what is closed. Replaces the challenge one-pager.
+
+## Idea AD add-to-winner: PRE-REGISTERED ONLY, NOT RUN (journal/2015-idea-AD-add-to-winner.md, 04-16)
+- From the PM look (25 of 33 trades that reach +1R are above it at noon). AD1 add half at +1R (add's stop at my entry), AD2 same + first position to break-even, AD3 as AD2 with a quarter add.
+- Mirror of PM2, so net R on the build is known to rise and is NOT a kill line. Kill lines K1-K5 are about drawdown, worst 10 days, worst day, Feb and Mar-now separately, and the cost on come-back days.
+- Run only when the coach says so: implement the add in bt/ideas.py, `bt/ab_manage.py`, hand-check two days on M5 first. Will be idea 39, variants 102-104. Survivor = paper tag only.
+
 ## Loss tags (running count, all live trades): valid setup, market disagreed 23 (-13.53R) | my mistake 0. PROCESS mistakes (funded): 1 (P1, 03-30 DST slip: call written at the entry time).
 
 ## Next step

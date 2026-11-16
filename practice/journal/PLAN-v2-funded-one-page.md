@@ -1,0 +1,55 @@
+# TRADING PLAN v2 - FUNDED, one page (as of Thu 2015-04-16 01:00 London sim time)
+Replaces journal/PLAN-v2-one-page.md (challenge version, 03-12). Details: journal/FUNDED-PLAN.md, journal/FUNDED-TRACKER.md. Account: FundedNext funded $25,000;
+5% daily loss, 10% max loss (floating counts, line $22,500), max 3% risk open, no target, 80% split, payout every 14 days. Goal: steady monthly profit, safe payouts, NEVER breach.
+
+## 1. The rule (A2, frozen since 2015-01-09; all times London)
+EURUSD only. 07:00: look at D1 / H4 / H1 and WRITE the call (bias, levels, plan, risk), committed before the entry bar. Direction = last 22:00 close vs the 22:00 close
+three trading days earlier (lower -> sell, higher -> buy; any gap, even 1 pip). 08:00: market order. Stop 40 pips from the fill, never moved. No target, no partial,
+no break-even. 12:00: close at market. One trade every weekday, no skips, no second trade. Flat by noon, flat over weekends.
+
+## 2. Size
+0.50% of $25,000 = $125 per trade = 0.31 lots. Fixed. Not raised after wins, not raised to "make back" a loss.
+Why: risk-size test 04-10 - at the edge I plan with (+0.18R) 1.0% breaches about 1 two-year run in 10, 0.50% about 1 in 500; with my brakes nothing breached at any size.
+A raise needs BOTH the 40-trade forward test passed (33 done) AND a re-run of that test in which the bigger size passes all five lines. Neither is close.
+
+## 3. Daily stop, and the stops behind it
+- DAILY: one trade, one stop. The worst planned day is -1R = -$125 (-0.5%), ten times inside the firm's 5% daily line. After the trade is closed - win, loss or stop -
+  I am done for the day. No re-entry, no "second chance", no afternoon trade. A day can only be worse than -1R through a gap past the stop; I cannot prevent that, the size covers it.
+- BRAKE 1: balance 3% below the high-water mark (now $24,657.75) -> half size ($62.50) until a new high-water.
+- BRAKE 2: balance 5% below the high-water mark (now $24,149.34) -> stop trading, full review, restart only with my coach.
+- RULE ALARM: after 40 forward trades the rule must average >= +0.10R with drawdown <= 8R, or I stop trading it for money (33 done: +15.03R, +0.46R, drawdown 2.00R).
+
+## 4. Payout plan (dates every 14 days from 03-27: 04-10 done, 04-24, 05-08, ...)
+On the payout date, after the day's trade, on the tracker balance: below $26,000 -> request HALF of what is above $25,000; at or above $26,000 -> request everything above
+$26,000 (the $1,000 buffer stays). No request while a brake is on. After a payout the high-water mark is reset to the new balance. I keep 80% of what is requested.
+So far: 1 payout, $68.82 requested, $55.06 mine. (Unknown to me: whether the firm has a minimum payout amount.)
+
+## 5. What counts as a mistake
+TRADE MISTAKE (tag "my mistake"; the trade's R is then my fault, not the market's) - any ONE of:
+  no written, committed call before 08:00 and I traded anyway | wrong side versus the rule | wrong size (not 0.31 lots at full size / 0.16 at half) | stop not 40 pips, or
+  moved, or removed | entry not at 08:00 or exit not at 12:00 by my own choice | a skipped day | a second trade | trading with a brake ignored | holding past noon or over a weekend.
+NOT a mistake: a loss on a trade that followed every line above. That is "valid setup, market disagreed", and the rule does not change for it. A win on a rule-break is still a mistake.
+PROCESS MISTAKE (separate tally; something wrong AROUND the trade that did not change it): call written late or after seeing extra candles; clock/time-zone slips; a research
+script touching data it should not; a test run before its kill test is pushed; more than 3 variants; numbers written from memory instead of from the tool; journal or tracker not
+updated the same day; result not tagged before anything else.
+Score so far (funded): 14 trades, 14 valid (9 wins, 5 valid losses), 0 trade mistakes, 2 process mistakes (P1 DST slip 03-30, P2 research script 04-03).
+
+## 6. What I expect, honestly
+| Sample (A2, full costs) | Trades | Win rate | Avg R |
+|---|---|---|---|
+| January (where the rule came from) | 19 | 74% | +0.78 |
+| February (frozen rule) | 20 | 55% | +0.23 |
+| March to now, traded forward one day at a time | 33 | 70% | +0.46 |
+Planning number: +0.18R. On 72 trades my average is only known to about +-0.25R. At 0.50%: roughly +$460 (planning edge) to +$890 (February-to-now edge) a month on the
+account before the split; about one month in five negative at the planning edge; a bad month about -$450. Drawdowns of 3-4% will happen and are not a signal to change anything.
+
+## 7. What is closed, so I do not reopen it on a bad day (38 ideas, 101 variants, none adopted)
+Entry filters from chart reading (no-chase, first break, night, gap size, round numbers, flip day, rejection day, dead Asia, Friday): the losers I look at have more winning twins.
+Exits (tighter / wider / structural stop, break-even, trail, target, runner, scale-out, partial at +1R, 09:00 checks, other exit hours): 20 definitions, none beats noon.
+Entry time and price (07:00, 09:00, +-1h, limit orders); lookback 2 / 5 / 10; second setups tried (Asia break, ignition candle, NY fade, range fade). Size above 0.50%.
+Ruled out about myself: discretionary skips and rules made from one replayed day.
+
+## 8. How I work
+One live day at a time. Result tagged before anything else. One honest test earns the next day: hypothesis and explicit kill test pushed BEFORE the run, max 3 variants, all lived
+history with an explicit end date, shown by period; the build can only kill; a survivor earns a forward paper tag (100-200 forward trades), never a rule change.
+Paper tags running: F1 / FR1, Q3 / Q1. Everything counted in STATE.md.
