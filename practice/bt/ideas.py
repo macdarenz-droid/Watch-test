@@ -27,7 +27,7 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None, scale=None):
     _best = {}
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
@@ -125,7 +125,11 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                             else:
                                 w = min(lo[x] for x in win); age = i - max(k for k in range(i-N, i) if lo[dlist[k]] == w); cand = w + 2 * PIP
                                 if age >= minage and px - cand >= 10 * PIP: t = cand
-                    oid = acct.market(side, round(mult * RISK / (sl_d * 10), 3), sl=s, tp=t, tag=str(d)); done = True
+                    if scale is None: oid = acct.market(side, round(mult * RISK / (sl_d * 10), 3), sl=s, tp=t, tag=str(d))
+                    else:      # idea SO: two equal halves; the first takes profit at +scale[0] pips, the second runs to the exit time
+                        half = round(mult * RISK / (sl_d * 10) / 2, 4)
+                        acct.market(side, half, sl=s, tp=px + side * scale[0] * PIP, tag=str(d)); acct.market(side, half, sl=s, tp=None, tag=str(d))
+                    done = True
             if hourcheck is not None and acct.positions and h == entry_h + 1 and b.time.minute == 0:   # idea T: one-hour check at this bar's open
                 p = acct.positions[0]; pips = ((b.open - p.entry) if p.side > 0 else (p.entry - (b.open + acct.spread))) / PIP
                 if pips < hourcheck: acct.close()
@@ -136,6 +140,9 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                     if pips >= runner: running = True; acct.modify(p.id, sl=p.entry + p.side * 20 * PIP)   # lock +20 pips
                 if not running or h >= 16: acct.close()
             acct.on_bar(b)
+            if scale is not None and scale[1] and len(acct.positions) == 1 and acct.trades and acct.trades[-1]["tag"] == str(d) and acct.trades[-1]["reason"] == "tp":
+                p = acct.positions[0]          # idea SO40BE: first half banked -> stop of the runner to entry
+                if (p.side > 0 and p.sl < p.entry) or (p.side < 0 and p.sl > p.entry): acct.modify(p.id, sl=p.entry)
             if trail is not None:        # idea TR: trail = (activate pips, distance pips); stop follows the best price, only in my favour, from the next bar
                 for p in acct.positions:
                     best = _best.get(p.id); cur = b.high if p.side > 0 else b.low + acct.spread
@@ -219,6 +226,9 @@ VARIANTS = {
  "SSA": dict(entry_h=8, exit_h=12, sl=40, sstop=("asia", 20, 60)),    # idea SS: structure stops
  "SSH": dict(entry_h=8, exit_h=12, sl=40, sstop=("h7", 15, 60)),
  "SSN": dict(entry_h=8, exit_h=12, sl=40, sstop=("night", 20, 60)),
+ "SO40": dict(entry_h=8, exit_h=12, sl=40, scale=(40, False)),    # idea SO: scale-out
+ "SO20": dict(entry_h=8, exit_h=12, sl=40, scale=(20, False)),
+ "SO40BE": dict(entry_h=8, exit_h=12, sl=40, scale=(40, True)),
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
