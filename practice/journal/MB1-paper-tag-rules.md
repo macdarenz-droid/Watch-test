@@ -24,3 +24,4 @@ Source: journal/2015-review-losers-of-3-killed-ideas-and-idea-MB.md. PAPER ONLY.
 | Fri 2015-05-15 | -56.2 | none | no box trade | - | 0, 0.00R, 0.00R | 2, +3.23R | - |
 | Mon 2015-05-18 | +0.7 | DOWN | removed | +0.86 | 0, 0.00R, 0.00R | 3, +4.09R | - |
 | Tue 2015-05-19 | -88.7 | DOWN | KEPT | +0.76 | 1, +0.76R, 0.00R | 3, +4.09R | 0 small / 1 large |
+| Wed 2015-05-20 | +9.7 | UP | KEPT | -1.00 | 2, -0.24R, 1.00R | 3, +4.09R | 1 small / 1 large |
