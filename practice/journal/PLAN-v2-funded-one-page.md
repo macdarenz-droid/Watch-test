@@ -46,7 +46,7 @@ Planning number: +0.18R. On 72 trades my average is only known to about +-0.25R.
 account before the split; about one month in five negative at the planning edge; a bad month about -$450. Drawdowns of 3-4% will happen and are not a signal to change anything. (04-29, from the live loss side: about one trade in four is a full stop; a run of six losses is a once-in-a-few-months event; about 5R of drawdown inside two months is the 95th percentile.)
 Where it comes from (04-17, 74 trades): both sides earn - sells +0.61R (47), buys +0.24R (27), each positive in all three periods - but 81% of the net R is sells in a market that
 fell 1,200 pips. The smaller side is known only to +-0.40R. I have not yet traded a rising market; +0.18R is about what the weaker side has earned.
-Update 05-06 (86 trades): with the 10-day trend UP the rule earned +0.375R on 29 trades (buys +0.30R on 19), with it DOWN +0.307R on 48. It has not needed a falling euro so far; 29 trades, longest up stretch three weeks.
+PAPER LINE, not a basis for any live rule until live days confirm it (coach 05-06) - 05-06, 86 trades: with the 10-day trend UP the rule earned +0.375R on 29 trades (buys +0.30R on 19), with it DOWN +0.307R on 48. It has not needed a falling euro so far; 29 trades, longest up stretch three weeks.
 
 ## 7. What is closed, so I do not reopen it on a bad day (52 ideas, 141 variants, none adopted)
 Entry filters from chart reading (no-chase, first break, night against me (twice), gap size (small and large), round numbers, flip day, rejection day, dead Asia, Friday): the losers I look at have more winning twins.

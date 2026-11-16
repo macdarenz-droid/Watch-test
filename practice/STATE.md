@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Sim clock | Wed 2015-05-06 00:00 UTC = 01:00 London (END OF RELEASED DATA; one live day at a time until ~Mar 2017; quality over speed: one honest piece of work earns the next day). London on summer time (UTC+1) |
+| Sim clock | Thu 2015-05-07 00:00 UTC = 01:00 London (END OF RELEASED DATA; one live day at a time until ~Mar 2017; quality over speed: one honest piece of work earns the next day). London on summer time (UTC+1) |
 | Phase | FUNDED ACCOUNT ($25k FundedNext) since Fri 2015-03-27 - see FUNDED SCOREBOARD below. Sim label "challenge #3" = the funded account; MY tracker is journal/FUNDED-TRACKER.md; this week's journal journal/2015-W19-funded.md |
 | Current strategy | Rule A2 unchanged, IN LONDON TIME (decision 2015-03-30, journal/2015-W14-funded.md; confirmed by the clock-shift test): 07:00 London call; trend = last 22:00 London close vs the close 3 trading days earlier; 08:00 London market order; SL 40 pips; close 12:00 London; 1 trade/day, no skips. In UTC during summer time: call 06:00, entry 07:00, exit 11:00. FUNDED PLAN: journal/FUNDED-PLAN.md |
 | Risk | FUNDED: 0.50% = $125 = 0.31 lots. COMMANDS: `python sim.py advance --until DATE T06:00` (= 07:00 London in summer time; T07:00 in winter), `./look.sh 3 0 9`, WRITE THE CALL (before 08:00 London, or no trade that day), then `python trade_a.py buy/sell --risk 125 --london` (08:00 -> 12:00 London, converted automatically). Funded brakes: 3% below high-water (or <= $24,250) -> 0.25% (`--risk 62.5`); 5% below (or <= $23,750) -> STOP + review. Payouts every 14 days: half of profit above $25,000 until a $1,000 buffer, then all above $26,000; none while a brake is on |
@@ -12,15 +12,15 @@
 | Last updated (real date) | 2026-11-16 |
 
 ## FUNDED SCOREBOARD (update after every funded day; source of truth: journal/FUNDED-TRACKER.md)
-| Item | Value (after funded day 28, Tue 2015-05-05; figures from `python bt/daily_numbers.py PAID HIGH_WATER`) |
+| Item | Value (after funded day 29, Wed 2015-05-06; figures from `python bt/daily_numbers.py PAID HIGH_WATER`) |
 |---|---|
-| Funded trades | 28 (15 wins, 13 valid losses) |
-| Total R | +5.43R from the log (March +0.97R in 3; April +4.17R in 22; May +0.29R in 3) |
-| Balance | $25,551.65 (sim shows $25,677.35; tracker = sim - $125.70 paid out) |
-| High-water mark | $25,571.80 (new high 05-01; moves up with new highs, down only by a payout) |
-| Drawdown now / deepest | -0.08% / -1.63% (first brake -3% = $24,804.65; stop -5% = $24,293.21; account line $22,500) |
+| Funded trades | 29 (16 wins, 13 valid losses) |
+| Total R | +6.07R from the log (March +0.97R in 3; April +4.17R in 22; May +0.92R in 4) |
+| Balance | $25,630.70 (sim shows $25,756.40; tracker = sim - $125.70 paid out) |
+| High-water mark | $25,630.70 (new high 05-06; moves up with new highs, down only by a payout) |
+| Drawdown now / deepest | 0.00% / -1.63% (first brake -3% = $24,861.78; stop -5% = $24,349.17; account line $22,500) |
 | Payouts taken | 2: $68.82 (04-10) + $56.88 (04-24) = $125.70 requested, $100.56 mine at 80%. Next payout date Fri 2015-05-08 |
-| Trade tags | 28 valid, 0 my mistake |
+| Trade tags | 29 valid, 0 my mistake |
 | Process mistakes | 5 (P1 DST slip 03-30; P2 research script touched March 04-03; P3 04-08 journal note read a UTC hour as London; P4 05-05 two counts written from memory; P5 day-40 gates of F1 / Q3 / Q1 applied 7 trading days late, found 05-06) |
 
 ## Results (costs on: 1.0 pip spread + 0.1 slippage)
@@ -296,7 +296,7 @@
 ## Idea UN signal agreement (journal/2015-idea-UN-signal-agreement.md; counts, limits and kill test pushed before the script; bt/signal_agree.py END [--check])
 - Majority vote of 2/3/5-day signals differs from A2 on 3 days: untestable, not run. All three agree (51 trades, +0.50R) vs not (24, +0.38R): nothing. UN1 skip / UN2 half size: fail K1-K3.
 - 3-day vs 5-day: agree 60 trades +0.58R; DISAGREE 15 trades -0.03R (gap 0.61R, noise +-0.47R, same sign in all 3 periods; 4 of 11 stops are in these 15 days). UN3 skip: net +34.81 vs +34.38, DD 1.34 vs 2.03R.
-- UN3 passes K2, K3, K4 and FAILS K1 (+0.006R per signal day, needs +0.05R): NOT a survivor, no tag awarded. 15 days, third of three variants, effect rests on 4 stops. COACH 04-21: paper only, call written before each live day, never live on a few good days. Rules + PROMOTION RULE (first look only at 30 forward disagree days AND 200 forward days; P1-P5; coach decides) in journal/UN3-paper-tag-rules.md; look.sh prints the UN3 line; forward from 04-21: 11 days, 2 disagree (A2 -1.02R on them).
+- UN3 passes K2, K3, K4 and FAILS K1 (+0.006R per signal day, needs +0.05R): NOT a survivor, no tag awarded. 15 days, third of three variants, effect rests on 4 stops. COACH 04-21: paper only, call written before each live day, never live on a few good days. Rules + PROMOTION RULE (first look only at 30 forward disagree days AND 200 forward days; P1-P5; coach decides) in journal/UN3-paper-tag-rules.md; look.sh prints the UN3 line; forward from 04-21: 12 days, 3 disagree (A2 -0.39R on them).
 
 ## Idea NT night continuation (journal/2015-idea-NT-night-continuation.md; stand-alone kill lines K1-K5 pushed before any code; bt/night.py END [--check DATES]; 76 nights per variant)
 - Dropped first, plainly: "why are live losses deeper" (22% vs 8% full stops is under two standard errors; volatility is not clearly higher live; V already tested) - look again at 100 live trades.
@@ -340,7 +340,7 @@
 - Feature: 07:00-08:00 London range 30+ pips: 6 of 39 backtest days, 24 of 43 live days. Quiet-hour mornings: 52 trades +0.572R (69% wins; +0.565 backtest, +0.583 live). Lively-hour mornings: 30 trades +0.146R (50% wins; +0.150 / +0.144). Gap 0.43R, noise +-0.47R.
 - Full-stop mornings: lively 9 of 30 (30%) vs quiet 5 of 52 (9.6%), ratio 3.12 (live 2.11). E1, E2 PASS; E3 FAIL (explains 46% of the rise, needed 50%). Backtest averages on the live mix give +0.33R = the live average.
 - PH1 skip (87% of net R, DD 1.87): fails K1, K5. PH2 half size (94%, DD 1.87) and PH3 skip at 40+ (93%): fail K1 only. NO SURVIVOR, no tag awarded. Six backtest lively days; roughly the twelfth split of the same trades.
-- COACH 05-01: PH2 is a paper tag, same discipline as UN3. Rules + PROMOTION RULE (first look at 200 forward days AND 60 lively days; P1-P6; coach decides) in journal/PH2-paper-tag-rules.md. Its line is written in the 08:00 note before the order ('decided at 08:00' in the 07:00 call). Forward from 05-01: 3 days, 3 lively (+0.29R live, +0.14R paper, 1 full-stop morning).
+- COACH 05-01: PH2 is a paper tag, same discipline as UN3. Rules + PROMOTION RULE (first look at 200 forward days AND 60 lively days; P1-P6; coach decides) in journal/PH2-paper-tag-rules.md. Its line is written in the 08:00 note before the order ('decided at 08:00' in the 07:00 call). Forward from 05-01: 4 days, 4 lively (+0.92R live, +0.46R paper, 1 full-stop morning).
 - KEEP (coach): most-stretched signals are my best trades (+0.625R on 24); do not filter winners away - PH1 would remove 15 winners.
 
 ## Idea LK late profit lock (journal/2015-idea-LK-late-lock.md; coach: exits/management on A2; kill lines pushed before any code; bt/ab_lock.py VARIANTS END DROP; two days hand-checked)
@@ -350,10 +350,10 @@
 - Exit/management side: 29 definitions tested, none beats the noon exit. CLOSED unless the live record changes character.
 
 ## SCHEDULED GATES (added 05-06 after P5; check this list every Friday)
-- A2 rule alarm: next look at 100 live trades (47 done): avg >= +0.10R, max DD <= 8R.
-- UN3: first look at 30 forward disagree days AND 200 forward days from 04-21 (2 / 11 done). Early close if A2 makes +5R on the first 15 disagree days.
-- PH2: first look at 60 forward lively days AND 200 forward days from 05-01 (3 / 3 done). Early close after 40 lively days if they are not below the quiet days.
-- Night-against count: look at 40 such live trades (5 done). Buys/sells and 10-day-trend direction: tracking only.
+- A2 rule alarm: next look at 100 live trades (48 done): avg >= +0.10R, max DD <= 8R.
+- UN3: first look at 30 forward disagree days AND 200 forward days from 04-21 (3 / 12 done). Early close if A2 makes +5R on the first 15 disagree days.
+- PH2: first look at 60 forward lively days AND 200 forward days from 05-01 (4 / 4 done). Early close after 40 lively days if they are not below the quiet days.
+- Night-against count: look at 40 such live trades (6 done). Buys/sells: tracking only. 10-day-trend direction: PAPER LINE from 05-06 (coach: the up-trend result of 29 trades is not to change live rules until live days confirm it); look at 40 live up-trend trades (1 done).
 - Payout dates: every 14 days from 03-27 (next Fri 05-08). Month-end review: first live day of each month.
 
 ## Paper-tag gates at forward day 40 (journal/2015-paper-tag-gates-day40.md; applied late on 05-06 = process mistake P5; numbers of 04-24 from the engine)
@@ -377,28 +377,28 @@
 ## April 2015 FINAL review (journal/2015-04-month-end-review-final.md): 22 trades, 11 wins, +4.17R, +$517.39 (+2.07%); 6 full stops; deepest drawdown -1.63% (six losses in a row), closed in 8 days; 2 payouts ($125.70 requested, $100.56 mine); 0 trade mistakes, 2 process mistakes. From May: a number written from memory and corrected later is logged as a process mistake.
 
 ## LIVE vs BACKTEST, running (coach 04-20; `python bt/live_vs_bt.py END`; updated after every live day; the live column is the real out-of-sample)
-As of live day Tue 2015-05-05:
+As of live day Wed 2015-05-06:
 | | Backtest Jan-Feb (engine) | LIVE from 03-02 (as traded) | Engine on the live days |
 |---|---|---|---|
-| Trades | 39 | 47 | 47 |
+| Trades | 39 | 48 | 48 |
 | Win rate | 64% | 62% | 62% |
-| Avg R | +0.50 | +0.35 | +0.36 |
-| +- 2 standard errors | 0.33 | 0.31 | 0.31 |
-| Net R | +19.56 | +16.53 | +16.71 |
-| Avg win / avg loss | +1.04 / -0.46 | +1.01 / -0.71 | +1.02 / -0.72 |
+| Avg R | +0.50 | +0.36 | +0.36 |
+| +- 2 standard errors | 0.33 | 0.30 | 0.30 |
+| Net R | +19.56 | +17.17 | +17.35 |
+| Avg win / avg loss | +1.04 / -0.46 | +1.00 / -0.71 | +1.01 / -0.72 |
 | Full stops | 3 (8%) | 11 (23%) | 11 (23%) |
 | Max drawdown | 1.87R | 3.23R | 3.28R |
 | Worst 10 trades in a row | +0.56R | -1.66R | -1.70R |
-| Sells: n, avg R | 24, +0.70 | 25, +0.44 | 25, +0.44 |
+| Sells: n, avg R | 24, +0.70 | 26, +0.45 | 26, +0.45 |
 | Buys: n, avg R | 15, +0.18 | 22, +0.25 | 22, +0.26 |
-Live minus backtest: -0.15R per trade (noise band +-0.45R) -> inside the noise. Live vs February alone (+0.23R, 20 trades): +0.12R. As traded vs engine on the same days: -0.18R over 47 trades (fills and rounding).
-Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 47 done, avg +0.35R, max DD 3.23R. Planning edge +0.18R: live is +0.17R above it.
-Count only (no look before 40): live trades after a night (00:00->08:00) against my side, from 04-23: 5 (+3.13R).
+Live minus backtest: -0.14R per trade (noise band +-0.45R) -> inside the noise. Live vs February alone (+0.23R, 20 trades): +0.12R. As traded vs engine on the same days: -0.18R over 48 trades (fills and rounding).
+Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 48 done, avg +0.36R, max DD 3.23R. Planning edge +0.18R: live is +0.18R above it.
+Counts only: live trades after a night (00:00->08:00) against my side, from 04-23: 6 (+3.76R; look at 40). 10-day-trend direction, paper line from 05-06 (coach: not a live rule until live days confirm it): trend UP 1 trade +0.63R; trend DOWN 0 trades.
 
 ## Loss tags (running count, all live trades): valid setup, market disagreed 31 (-18.72R from the log) | my mistake 0. PROCESS mistakes (funded): 1 (P1, 03-30 DST slip: call written at the entry time).
 
 ## Next step
-1. FUNDED, one live day at a time. When the next day (Wed 05-06) is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `python sim.py advance --until DATE T06:00` (= 07:00 London in summer time); `./look.sh 3 0 9`; write the call in the week's funded journal (journal/2015-W19-funded.md) AND COMMIT IT BEFORE 08:00 London; at each month's first day write the month-end check (P&L, drawdown, tag counts); check brakes in FUNDED-TRACKER; AFTER THE DAY run `python bt/daily_numbers.py PAID_OUT HIGH_WATER_BEFORE` and copy every bookkeeping figure from its output (coach 05-05: read numbers from the tool, every time); LIVE DAY WALKED BAR BY BAR since 04-17 (coach): D1/H4/H1/M15 notes in the call, then sim.py advance in steps (08:00 order with --sl, 08:15, 09:00, 10:00, 11:00, 12:00 close) with a note written before each advance; `python trade_a.py buy|sell --risk 125 --london`; TAG the result valid/mistake FIRST; update journal/FUNDED-TRACKER.md (daily log + status line; payout on the dates) AND the FUNDED SCOREBOARD in this file; paper tags (F1/FR1 via `python bt/ab_drop.py F1,FR1 2015-03-01 <clock date>`, Q3/Q1 from look.sh); forward tally. When replacing a tally in a file, cut at the LAST "## Forward tally".
+1. FUNDED, one live day at a time. When the next day (Thu 05-07) is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `python sim.py advance --until DATE T06:00` (= 07:00 London in summer time); `./look.sh 3 0 9`; write the call in the week's funded journal (journal/2015-W19-funded.md) AND COMMIT IT BEFORE 08:00 London; at each month's first day write the month-end check (P&L, drawdown, tag counts); check brakes in FUNDED-TRACKER; AFTER THE DAY run `python bt/daily_numbers.py PAID_OUT HIGH_WATER_BEFORE` and copy every bookkeeping figure from its output (coach 05-05: read numbers from the tool, every time); LIVE DAY WALKED BAR BY BAR since 04-17 (coach): D1/H4/H1/M15 notes in the call, then sim.py advance in steps (08:00 order with --sl, 08:15, 09:00, 10:00, 11:00, 12:00 close) with a note written before each advance; `python trade_a.py buy|sell --risk 125 --london`; TAG the result valid/mistake FIRST; update journal/FUNDED-TRACKER.md (daily log + status line; payout on the dates) AND the FUNDED SCOREBOARD in this file; paper tags (F1/FR1 via `python bt/ab_drop.py F1,FR1 2015-03-01 <clock date>`, Q3/Q1 from look.sh); forward tally. When replacing a tally in a file, cut at the LAST "## Forward tally".
 2. Forward tests running: A2 40-trade alarm PASSED 04-24 (40 trades, +12.64R, +0.32R each, max DD 3.07R; sims re-run in journal/2015-forward-40-and-sims.md); F1 (plus FR1 tracked beside it), Q3/Q1, UN3 (paper, from 04-21; its call goes in every 07:00 call), PH2 (paper, from 05-01; 'decided at 08:00' in the call, range and verdict in the 08:00 note before the order). Friday tag and N1 are CLOSED (04-03).
 3. Research rules: hypothesis + explicit kill lines committed first, max 3 variants per idea, BUILD = all lived history before the clock shown by month (explicit end date), build only kills, survivors -> forward paper tag (200 trades filter / 100 same-trade or stand-alone), inspiring days removed (bt/ab_drop.py), a feature from "best N vs worst N" is counted on all build-month trades before it is pre-registered, everything counted. A reshuffle does not count as the day's test: it must be a new rule test. One honest test earns the next day.
 Tools: look.sh, trade_a.py, bt/*.py (ab, ab_exit, ab_rule, ab_same, ab_score, regime, ignite, ny_fade, dd_goal, cost_stress, edge_compare, phase2_sim, last_stretch, start_weeks, reshuffle_breach, funded_sim, pass_math, risk_math, review, loser_charts, entry_charts). Tests: `python -m pytest -q`.
