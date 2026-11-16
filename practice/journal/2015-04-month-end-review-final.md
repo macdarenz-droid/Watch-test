@@ -29,8 +29,9 @@ On 04-24 I found and closed a hole in my payout rule: the high-water mark is low
 - TRADE mistakes: 0 of 22. All eleven losses tagged "valid setup, market disagreed". Full size every day, including the two mornings the UN3 paper tag said skip and
   the seventh trade after six losses.
 - PROCESS mistakes logged in April: 2 (P2 research script, 04-03; P3 a journal number in the wrong time zone, 04-08, found 04-17).
-- Not logged as mistakes but counted here: seven times this month I wrote a number or a claim from memory in a research note and had to correct it the same hour
-  (the last one yesterday). The corrections are in the notes. The habit is the problem: every figure in a note is to be read from the tool before it is written.
+- Not logged as mistakes but counted here: at least six times this month I wrote a number or a claim from memory in a research note and had to correct it the same hour
+  (five separate correction commits in the log since 04-22, plus corrections folded into other commits; the last one yesterday. My first draft of this very
+  sentence said "seven" - from memory.) The corrections are in the notes. The habit is the problem: every figure in a note is to be read from the tool before it is written.
   From May a correction of this kind is logged as a process mistake.
 
 ## What the month taught me (one line each, with where it is written)

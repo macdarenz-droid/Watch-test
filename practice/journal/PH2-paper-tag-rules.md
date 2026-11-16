@@ -43,3 +43,4 @@ A few good paper days, a losing week, or "it would have halved today's stop" are
 ## Running tally (forward from 2015-05-01 only)
 | as of | forward days | lively days (of 60) | A2 R / full-stop mornings on lively days | A2 R / full-stop mornings on quiet days | PH2 net R / max DD | A2 net R / max DD |
 |---|---|---|---|---|---|---|
+| Fri 2015-05-01 | 1 | 1 | +0.44R / 0 | - | +0.22R / 0R | +0.44R / 0R |
