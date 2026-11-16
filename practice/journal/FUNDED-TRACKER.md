@@ -28,6 +28,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | 22 | Mon 2015-04-27 | buy | 0.31 | -0.16 | -19.84 | 25,037.05 (sim 25,162.75) | 25,451.83 | -1.63% | +0.41 (April) | valid setup, market disagreed | - |
 | 23 | Tue 2015-04-28 | buy | 0.31 | +1.61 | +205.22 | 25,242.27 (sim 25,367.97) | 25,451.83 | -0.82% | +2.02 (April) | valid (win) | - |
 | 24 | Wed 2015-04-29 | buy | 0.31 | +0.32 | +40.30 | 25,282.57 (sim 25,408.27) | 25,451.83 | -0.67% | +2.34 (April) | valid (win) | - |
+| 25 | Thu 2015-04-30 | buy | 0.31 | +1.83 | +233.43 | 25,516.00 (sim 25,641.70) | 25,516.00 (new high) | 0.00% | +4.17 (April, complete) | valid (win) | - |
 
 ## Monthly summary
 | Month | Trades | Wins | Net R | $ P&L | Worst day | Deepest drawdown | Valid / mistake tags | Payouts requested | My 80% |
@@ -50,4 +51,4 @@ Earlier record-keeping slips, for completeness (challenge stage, none changed a 
 pre-registration; worst losing run overstated as -2.17R (was -1.86R); a journal edit on 03-25 cut out a section (restored from git on 03-26).
 
 ## Status line (update every day)
-After funded day 24 (04-29): tracker balance $25,282.57 (sim $25,408.27 minus $125.70 paid out) | high-water $25,451.83 | drawdown -0.67% (deepest so far -1.63%; SIZE RULE: trigger 1 half size at $24,688.28, trigger 2 stop at $24,179.24; account line $22,500) | funded total +3.32R in 24 trades (12 wins, 12 valid losses) | March: +0.98R in 3 trades | April MTD: +2.34R (21 trades, 10 wins) | TRADE tags: 24 valid, 0 my mistake | PROCESS mistakes: 3 | payouts 2: $125.70 requested, $100.56 mine | next payout date Fri 05-08.
+After funded day 25 (04-30): tracker balance $25,516.00 (sim $25,641.70 minus $125.70 paid out) | high-water $25,516.00 (new) | drawdown 0.00% (deepest so far -1.63%; SIZE RULE: trigger 1 half size at $24,750.52, trigger 2 stop at $24,240.20; account line $22,500) | funded total +5.15R in 25 trades (13 wins, 12 valid losses) | March: +0.98R in 3 trades | April (complete): +4.17R in 22 trades, 11 wins | TRADE tags: 25 valid, 0 my mistake | PROCESS mistakes: 3 | payouts 2: $125.70 requested, $100.56 mine | next payout date Fri 05-08.
