@@ -23,9 +23,10 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None):
     tr = trend_map(m5, look, strict); acct = Account(); risk_of = {}
     cl = m5.groupby('day')['close'].last()
+    _a = m5[(m5.time.dt.hour < 7) & (m5.time.dt.date == m5.day)]; _g = _a.groupby('day'); arng = (_g['high'].max() - _g['low'].min()) / PIP   # Asia 00-07 range per day, pips
     hi = m5.groupby('day')['high'].max(); lo = m5.groupby('day')['low'].min(); dlist = list(hi.index)
     for d, g in m5.groupby("day"):
         if d not in tr or g["time"].iloc[0].weekday() == 6 and len(g) < 100: continue
@@ -47,6 +48,12 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                 if go and midfilter:   # idea C: only trade on the trend side of yesterday's range midpoint
                     y = dlist[dlist.index(d) - 1]; mid = (hi[y] + lo[y]) / 2
                     if (side < 0 and b.open > mid) or (side > 0 and b.open < mid): go = False; done = True
+                if go and (asiamin is not None or asiarel is not None) and len(asia):   # idea Q: no trade after a dead Asia session
+                    ar = (asia.high.max() - asia.low.min()) / PIP
+                    if asiamin is not None and ar < asiamin: go = False; done = True
+                    if asiarel is not None:
+                        prev5 = arng[arng.index < d].tail(5)
+                        if len(prev5) < 5 or ar < asiarel * prev5.mean(): go = False; done = True
                 if go and nofri and b.time.weekday() == 4: go = False; done = True   # idea W: no Friday trade
                 if go and nofight and len(asia):   # idea G: no trade if 07:00-08:00 already broke the Asia range against my direction
                     fh = g[(g.time.dt.date == d) & (g.time.dt.hour == 7)]
@@ -120,6 +127,9 @@ VARIANTS = {
  "X1": dict(entry_h=8, exit_h=12, sl=40, be=20),       # idea X: break-even stop after +20 pips
  "X2": dict(entry_h=8, exit_h=12, sl=40, runner=40),   # idea X: trades >= +40 pips at noon run to 16:00 with +20 locked
  "X3": dict(entry_h=8, exit_h=12, sl=40, tp=60),       # idea X: take profit at +60 pips
+ "Q1": dict(entry_h=8, exit_h=12, sl=40, asiamin=20),    # idea Q: skip if Asia range < 20 pips
+ "Q2": dict(entry_h=8, exit_h=12, sl=40, asiamin=25),    # idea Q: skip if Asia range < 25 pips
+ "Q3": dict(entry_h=8, exit_h=12, sl=40, asiarel=0.8),   # idea Q: skip if Asia range < 0.8 x its 5-day average
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":

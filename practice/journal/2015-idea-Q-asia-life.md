@@ -50,3 +50,36 @@ Check - February (CONTAMINATED), all three shown, only the candidate can be clai
   "cannot be built on January", not "works".
 - Dead nights were common in February and rare in January, so this may just be idea R (regime) again under another name.
 Nothing above has been run.
+
+# RESULTS of idea Q (run after commit 497148b). Q1/Q2/Q3 = variants 30/31/32; ideas 15. Costs on, $125 risk. Jan-Feb only, one month per run (bt/ab.py); March not used.
+Handling decided when I saw it (not pre-registered, so stated): Q3 needs five earlier Asia sessions and cannot label 01-06..01-12. Those five days are left out for BOTH rules in Q3's rows
+(same treatment as F1), otherwise they would count as "skipped" for a reason that has nothing to do with a dead night.
+
+## Build - January
+| Rule | Trades | Win rate | Avg R | Net R | Max DD | Skipped (n / avg R) | Without 01-23: kept avg vs A2 avg | Build |
+|---|---|---|---|---|---|---|---|---|
+| A2 before (all days) | 19 | 74% | +0.78 | +14.79 | 1.33R | - | - | - |
+| Q1 Asia < 20 pips | 19 | 74% | +0.78 | +14.79 | 1.33R | 0 | same | FAIL: skips nothing in January |
+| Q2 Asia < 25 pips | 17 | 82% | +0.95 | +16.22 | 1.00R | 2 / -0.71 (01-09, 01-19) | +0.75 vs +0.58 | FAIL: skips only 2 (needed 3) |
+| A2 before (days Q3 can label, from 01-13) | 14 | 71% | +0.71 | +9.88 | 1.33R | - | - | - |
+| Q3 Asia < 0.8 x 5-day average | 10 | 90% | +1.14 | +11.38 | 0.51R | 4 / -0.38 (01-19, 01-27, 01-29, 01-30) | +0.79 vs +0.43 | SURVIVES: +0.43R better, skipped worse than kept, 4 skipped, keeps 71% |
+Candidate: Q3. (As predicted, the fixed-pip versions cannot be built on January: its nights were almost never that narrow.)
+
+## Check - February (CONTAMINATED)
+| Rule | Trades | Win rate | Avg R | Net R | Max DD | Skipped (n / avg R) | Keeps |
+|---|---|---|---|---|---|---|---|
+| A2 before | 20 | 55% | +0.23 | +4.64 | 1.86R | - | - |
+| Q3 (the candidate) | 9 | 56% | +0.46 | +4.10 | 0.65R | 11 / +0.05 | 45% |
+| Q1 (not a candidate, shown only) | 11 | 55% | +0.44 | +4.89 | 0.65R | 9 / -0.03 | 55% |
+| Q2 (not a candidate, shown only) | 10 | 50% | +0.36 | +3.63 | 0.65R | 10 / +0.10 | 50% |
+Q3 against its February test: kept avg R +0.46 >= +0.38 YES; max drawdown 0.65R <= 1.86R YES; skipped trades avg <= 0R NO (+0.05R); keeps >= 60% NO (45%). FAILS on two lines.
+Extra look, not in the test: without February's biggest day (02-17) Q3 is +0.24R vs A2 +0.13R.
+
+## Verdict: Q3 KILLED by its February check. Not adopted, no forward paper tag (that was reserved for a pass). A2 stays.
+- What it does is consistent and real-looking but not what I hypothesised: in February it drops 11 trades that together made about nothing (+0.54R) and keeps the same profit in 9 trades.
+  Avg R doubles and drawdown falls from 1.86R to 0.65R, but net R does not rise (4.10 vs 4.64), and the trades it removes are not losers - they are zeros.
+  "A dead night makes a dead morning" is roughly true; "a dead morning loses money" is not. Skipping zeros does not get me to +5% any sooner; it only makes the ride smoother.
+- That is the third filter with exactly this shape (F1, W in February, now Q): fewer trades, same total, smaller drawdown. Worth knowing as a PATTERN: if I ever need less drawdown
+  rather than more profit (for example to carry a bigger size), this family is where to look - but that would be its own pre-registered question, with drawdown as the stated goal.
+- January's pass rests on 4 skipped trades; both months were peeked at before I wrote the test. Weak evidence either way; the kill stands.
+- Variants Q1, Q2, Q3 closed. Counts: ideas 15, variants 32.
