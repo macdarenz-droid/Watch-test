@@ -44,6 +44,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | 38 | Tue 2015-05-19 | sell | 0.31 | +2.17 | +271.25 | 25,258.93 (sim 25,733.77) | 25,349.14 | -0.36% | +0.77 (May, from the log) | valid win | - |
 | 39 | Wed 2015-05-20 | sell | 0.31 | -1.00 | -124.62 | 25,134.31 (sim 25,609.15) | 25,349.14 | -0.85% | -0.24 (May, from the log) | valid setup, market disagreed | - |
 | 40 | Thu 2015-05-21 | sell | 0.31 | -1.00 | -124.62 | 25,009.69 (sim 25,484.53) | 25,349.14 | -1.34% | -1.24 (May, from the log) | valid setup, market disagreed | - |
+| 41 | Fri 2015-05-22 | sell | 0.31 | -1.00 | -125.24 | 24,884.45 (sim 25,359.29) | 25,349.14 | -1.83% | -2.24 (May, from the log) | valid setup, market disagreed | payout date: $0 |
 
 ## Monthly summary
 | Month | Trades | Wins | Net R | $ P&L | Worst day | Deepest drawdown | Valid / mistake tags | Payouts requested | My 80% |
@@ -57,6 +58,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | Fri 2015-04-10 | 25,137.64 | 68.82 (half of the $137.64 above $25,000; buffer not built yet) | 55.06 | 25,068.82 | first payout date; high-water reset to 25,068.82; sim balance stays 25,137.64 (offset -68.82). Unknown: whether the firm has a minimum payout amount |
 | Fri 2015-04-24 | 25,113.77 | 56.88 (half of the $113.77 above $25,000) | 45.50 | 25,056.89 | second payout date; account in a -1.55% drawdown: high-water LOWERED BY THE PAYOUT to 25,451.83 (not reset to the balance - that would have erased the drawdown and loosened the brakes); sim balance 25,182.59 (offset -125.70) |
 | Fri 2015-05-08 | 25,698.28 | 349.14 (half of the $698.28 above $25,000) | 279.31 | 25,349.14 | third payout date; account at its high: high-water lowered by the payout to 25,349.14 (= balance); sim balance 25,823.98 (offset -474.84) |
+| Fri 2015-05-22 | 24,884.45 | 0.00 (balance not above $25,000: the rule gives nothing) | 0.00 | 24,884.45 | fourth payout date; account in a -1.83% drawdown, no size trigger on; high-water unchanged 25,349.14; next date Fri 06-05 |
 
 ## Process mistakes log (separate from trade tags; a process mistake is something I did wrong AROUND a trade)
 | # | Date | What happened | Effect on the trade | Fix |
@@ -73,4 +75,4 @@ Earlier record-keeping slips, for completeness (challenge stage, none changed a 
 pre-registration; worst losing run overstated as -2.17R (was -1.86R); a journal edit on 03-25 cut out a section (restored from git on 03-26).
 
 ## Status line (update every day)
-After funded day 40 (05-21; figures from bt/daily_numbers.py 474.84 25349.14): tracker balance $25,009.69 (sim $25,484.53 minus $474.84 paid out) | high-water $25,349.14 | drawdown -1.34% (deepest so far -1.63%; SIZE RULE: trigger 1 half size at $24,588.67; trigger 2 stop trading at 7% under the high-water = $23,574.70, fixed for funded days 36-55; account line $22,500) | funded total +3.90R in 40 trades (21 wins, 19 valid losses) | March +0.97R (3) | April +4.17R (22) | May MTD -1.24R (15 trades) | TRADE tags: 40 valid, 0 my mistake | PROCESS mistakes: 8 | payouts 3: $474.84 requested, $379.87 mine | next payout date Fri 05-22 (rule read 05-21: half of what is above $25,000 after Friday's trade; nothing at or below) | normal worst for 56 trades by reshuffle: 6 losses in a row, about 5.9R drawdown (95th pct); now 2 in a row, 2.69R.
+After funded day 41 (05-22; figures from bt/daily_numbers.py 474.84 25349.14): tracker balance $24,884.45 (sim $25,359.29 minus $474.84 paid out) | high-water $25,349.14 | drawdown -1.83% = deepest so far (SIZE RULE: trigger 1 half size at $24,588.67, $295.78 away; trigger 2 stop trading at 7% under the high-water = $23,574.70, fixed for funded days 36-55; account line $22,500) | funded total +2.90R in 41 trades (21 wins, 20 valid losses) | March +0.97R (3) | April +4.17R (22) | May MTD -2.24R (16 trades) | TRADE tags: 41 valid, 0 my mistake | PROCESS mistakes: 8 | payouts: 4 dates, 3 paid: $474.84 requested, $379.87 mine; 05-22 $0 | next payout date Fri 06-05 | normal worst for 56 trades by reshuffle: 6 losses in a row, about 5.9R drawdown (95th pct); now 3 in a row, 3.69R.

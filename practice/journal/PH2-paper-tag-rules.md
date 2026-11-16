@@ -58,3 +58,4 @@ A few good paper days, a losing week, or "it would have halved today's stop" are
 | Tue 2015-05-19 | 13 | 12 | +0.31R / 5 | +0.46R / 0 (1 quiet day) | about +0.62R | +0.77R / 2.86R (from the trade list) |
 | Wed 2015-05-20 | 14 | 13 | -0.69R / 6 | +0.46R / 0 (1 quiet day) | about +0.12R | -0.24R / 2.86R (from the trade list) |
 | Thu 2015-05-21 | 15 | 14 | -1.69R / 7 | +0.46R / 0 (1 quiet day) | about -0.38R | -1.24R / 2.86R (from the trade list) |
+| Fri 2015-05-22 | 16 | 14 | -1.69R / 7 | -0.54R / 1 (2 quiet days) | about -1.38R | -2.24R / 3.69R (from the trade list) |
