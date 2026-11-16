@@ -1,0 +1,1082 @@
+diff --git a/.github/workflows/deploy-worker.yml b/.github/workflows/deploy-worker.yml
+index 45126ea..7d91b5a 100644
+--- a/.github/workflows/deploy-worker.yml
++++ b/.github/workflows/deploy-worker.yml
+@@ -41,12 +41,12 @@ jobs:
+           if [ -n "$ACCOUNT_ID" ]; then export CLOUDFLARE_ACCOUNT_ID="$ACCOUNT_ID"; fi
+           # wrangler is pinned in escobar-worker/package.json (installed by npm ci above).
+           npx --no-install wrangler deploy
+-      - name: Check /health answers protocol 2 with the key, quotas and US relay present
++      - name: Check /health answers protocol 2 with the key, quotas and US relay present and no model override ignored
+         run: |
+           for i in 1 2 3 4 5 6; do
+             body=$(curl -fsS https://marc-coach.mmarcdarenz.workers.dev/health || true)
+             echo "$body"
+-            if echo "$body" | grep -q '"protocol":2' && echo "$body" | grep -q '"key":true' && echo "$body" | grep -q '"quotas":true' && echo "$body" | grep -q '"relay":true'; then exit 0; fi
++            if echo "$body" | grep -q '"protocol":2' && echo "$body" | grep -q '"key":true' && echo "$body" | grep -q '"quotas":true' && echo "$body" | grep -q '"relay":true' && echo "$body" | grep -q '"ignoredModels":\[\]'; then exit 0; fi
+             sleep 5
+           done
+-          echo "::error::/health must show protocol 2, key:true, quotas:true (spend cap) and relay:true (US upstream, PL-20)"; exit 1
++          echo "::error::/health must show protocol 2, key:true, quotas:true (spend cap), relay:true (US upstream, PL-20) and ignoredModels:[] (every MODEL_<MODE> usable, QA2-F7-3)"; exit 1
+diff --git a/escobar-worker/README.md b/escobar-worker/README.md
+index bd41ee6..0149191 100644
+--- a/escobar-worker/README.md
++++ b/escobar-worker/README.md
+@@ -18,12 +18,12 @@ The app treats Escobar as online only when `GET /health` answers `protocol: 2`.
+ 
+ ## Routes
+ 
+-- `GET /health` → `{ok, protocol: 2, model, modes, quotas, relay, key}` (`quotas` is true when `QUOTA_DO` or `QUOTA` is bound; `relay` when `UPSTREAM` is bound)
++- `GET /health` → `{ok, protocol: 2, model, models, modes, quotas, relay, key, ignoredModels}` (`quotas` is true when `QUOTA_DO` or `QUOTA` is bound; `relay` when `UPSTREAM` is bound; `ignoredModels` names the modes whose `MODEL_<MODE>` is not a model the Worker can drive)
+ - `POST /v2/turn` (header `x-escobar-device: dev_<24 hex>`) → `text/event-stream` of `data: {t: …}` events: `start`, `text`, `thinking`, `tool`, `tool_input`, `final`, `refusal`, `error`; `: ping` every 10 s. Validation, quota and rate failures are plain 400/429 JSON before the stream.
+ 
+ ## Configure (wrangler.toml `[vars]`)
+ 
+-- `MODEL` (default `claude-opus-5`), `EFFORT_CHAT|PLAN|LIVE|BRIEF|MOMENT|SUMMARIZE`
++- `MODEL` (default `claude-opus-5`), `MODEL_CHAT|PLAN|LIVE|BRIEF|MOMENT|SUMMARIZE` (one of `MODE_MODELS` in `src/anthropic.ts`, else ignored), `EFFORT_CHAT|PLAN|LIVE|BRIEF|MOMENT|SUMMARIZE`
+ - `MAX_TURNS_PER_DEVICE` 80, `MAX_STEPS_PER_DEVICE` 400, `MAX_OUTPUT_PER_DEVICE` 400000, `MAX_TURNS_PER_IP` 300, `MAX_STEPS_TOTAL` 20000, `MAX_OUTPUT_TOTAL` 3000000
+ - `ALLOWED_ORIGINS` for the PWA; the Android app is always allowed
+ - `RATE` rate-limit binding: 30 steps a minute per device; `RATE_IP`: 60 requests a minute per client IP
+@@ -32,6 +32,8 @@ Quotas live in the `QUOTA_DO` Durable Object (`src/quotaDO.ts`, one SQLite-backe
+ 
+ The Anthropic call runs in the `UPSTREAM` Durable Object (`src/upstreamRelay.ts`), pinned to eastern North America with `locationHint: 'enam'`, so it always leaves from the US. Anthropic refuses some locations, and Cloudflare serves each network from its nearest location (a Philippine ISP was routed to Hong Kong). A 403 reaches the app as `upstream_region`; a 401 stays `upstream_auth`; both carry the API's text as `detail`.
+ 
++A step cut short before the API reports its usage (a hang-up, a timeout, a mid-stream error) is charged for the time it ran at `CUT_SHORT_TOKENS_PER_SEC` (200 output tokens a second, up to the step's `max_tokens`), or its streamed characters / 3 if more, because its thinking is billed but never streamed.
++
+ Every step logs one JSON line (`requestId, colo, mode, model, stop_reason, in, out, cacheRead, cacheWrite, steps, ms`), with no device id and no content; read it with `npx wrangler tail`.
+ 
+ ## Tools
+diff --git a/escobar-worker/src/anthropic.ts b/escobar-worker/src/anthropic.ts
+index 3f5494e..71adeb3 100644
+--- a/escobar-worker/src/anthropic.ts
++++ b/escobar-worker/src/anthropic.ts
+@@ -8,7 +8,7 @@ import type { MessageCreateParamsStreaming, BetaMessageParam, BetaRawMessageStre
+ import generated from './tools.generated.json';
+ import { WORKER_POLICY } from './prompt/policy';
+ import { renderManifest } from './prompt/manifest';
+-import type { Mode } from './prompt/modes';
++import { MODES, type Mode } from './prompt/modes';
+ import type { TurnBody } from './validate';
+ import type { QuotaCounter } from './quotaDO';
+ import type { UpstreamRelay } from './upstreamRelay';
+@@ -89,14 +89,28 @@ export function foldSystemMessages(messages: TurnBody['messages']): TurnBody['me
+   return out;
+ }
+ 
+-/** A model id as the API names them; anything else in an override is ignored. */
+-const MODEL_ID = /^claude-[a-z0-9.-]{2,60}$/;
+-/** F7: the model for one mode: MODEL_<MODE> when set and well-formed, else MODEL, else the default. */
+-export function modelFor(mode: TurnBody['mode'], env: Env): string {
++/**
++ * QA2-F7-3: the models a mode may be switched to. Each takes the request buildParams sends (adaptive
++ * thinking and output_config.effort from low to max). Anything else, a typo or a model such as Haiku
++ * 4.5 that rejects adaptive thinking, would fail every turn in that mode, so it is ignored. These ids
++ * have no dated snapshots, so an id with a date suffix is ignored like any other unknown id.
++ */
++const MODE_MODELS = new Set(['claude-opus-5-5', 'claude-opus-5', 'claude-opus-4-8', 'claude-opus-4-7', 'claude-sonnet-5', 'claude-fable-5-1', 'claude-fable-5', 'claude-mythos-5-1', 'claude-mythos-5']);
++const overrideFor = (mode: TurnBody['mode'], env: Env): string | undefined => {
+   const v = (env as Record<string, unknown>)[`MODEL_${mode.toUpperCase()}`];
+-  if (typeof v === 'string' && MODEL_ID.test(v.trim())) return v.trim();
++  return typeof v === 'string' && v.trim() ? v.trim() : undefined;
++};
++const usableOverride = (v: string): boolean => MODE_MODELS.has(v);
++/** F7: the model for one mode: MODEL_<MODE> when set to a model the Worker can drive, else MODEL, else the default. */
++export function modelFor(mode: TurnBody['mode'], env: Env): string {
++  const v = overrideFor(mode, env);
++  if (v && usableOverride(v)) return v;
+   return env.MODEL || DEFAULT_MODEL;
+ }
++/** QA2-F7-3: the modes whose MODEL_<MODE> is set but ignored, for /health and the deploy check. */
++export function ignoredModelOverrides(env: Env): Mode[] {
++  return MODES.filter(m => { const v = overrideFor(m, env); return !!v && !usableOverride(v); });
++}
+ 
+ export function buildParams(body: TurnBody, env: Env, opts: { foldSystem?: boolean } = {}): MessageCreateParamsStreaming {
+   const model = modelFor(body.mode, env);
+diff --git a/escobar-worker/src/handler.ts b/escobar-worker/src/handler.ts
+index 8338694..da912a6 100644
+--- a/escobar-worker/src/handler.ts
++++ b/escobar-worker/src/handler.ts
+@@ -3,7 +3,7 @@
+  * relayed as server-sent events (§12.2, §12.4–12.6). Pure over injected deps so tests can
+  * drive it with a scripted SDK stream.
+  */
+-import { buildParams, modelFor, noSystemRole, DEFAULT_MODEL, type ClientLike, type Env, type SseEvent, type ErrorCode } from './anthropic';
++import { buildParams, modelFor, ignoredModelOverrides, noSystemRole, DEFAULT_MODEL, type ClientLike, type Env, type SseEvent, type ErrorCode } from './anthropic';
+ import { localStep, relayStep, type StepResult } from './upstream';
+ import { validateTurn, stepsSinceUser, MAX_BODY_BYTES } from './validate';
+ import { checkQuota, recordStep } from './quota';
+@@ -44,6 +44,15 @@ const fail = (status: number, code: ErrorCode, message: string, cors: Record<str
+ /** Whether the API billed this step: it produced output, finished, refused, or was cut off after starting. */
+ export const billed = (r: StepResult): boolean => !!r.final || !!r.refused || r.emittedAny || !!r.aborted || !!r.timedOut;
+ 
++/**
++ * QA2-FA-1..4: output tokens per second a step is taken to produce while it runs, for a step cut
++ * short before the API reported its usage. Thinking is billed as output but never streamed (display
++ * "omitted" is the default, so a thinking block arrives empty), so how long the step ran is the only
++ * measure of it. Set above the output speed of every model a mode can use, so the estimate does not
++ * fall below the bill; it never passes the step's max_tokens.
++ */
++export const CUT_SHORT_TOKENS_PER_SEC = 200;
++
+ /**
+  * QA-R0-1: rate and daily limits key an IPv6 caller by its /64, the block one subscriber usually
+  * controls, so rotating addresses inside it gains nothing. IPv4 stays as is.
+@@ -83,7 +92,7 @@ export async function handle(req: Request, env: Env, deps: Deps): Promise<Respon
+   if (origin && !('Access-Control-Allow-Origin' in cors)) return new Response('forbidden origin', { status: 403 });
+   if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
+   if (url.pathname === '/health' && req.method === 'GET') {
+-    return json(200, { ok: true, protocol: PROTOCOL, model: env.MODEL || DEFAULT_MODEL, models: Object.fromEntries(MODES.map(m => [m, modelFor(m, env)])), modes: MODES, quotas: !!(env.QUOTA_DO || env.QUOTA), relay: !!env.UPSTREAM, key: !!env.ANTHROPIC_API_KEY }, cors);
++    return json(200, { ok: true, protocol: PROTOCOL, model: env.MODEL || DEFAULT_MODEL, models: Object.fromEntries(MODES.map(m => [m, modelFor(m, env)])), modes: MODES, quotas: !!(env.QUOTA_DO || env.QUOTA), relay: !!env.UPSTREAM, key: !!env.ANTHROPIC_API_KEY, ignoredModels: ignoredModelOverrides(env) }, cors);
+   }
+   if (url.pathname !== '/v2/turn') return json(404, { t: 'error', code: 'invalid', message: 'not found' }, cors);
+   if (req.method !== 'POST') return fail(405, 'invalid', 'use POST', cors);
+@@ -127,9 +136,12 @@ export async function handle(req: Request, env: Env, deps: Deps): Promise<Respon
+   const gone = () => { closed = true; upstream.abort(); };
+   writer.closed.catch(gone);
+   const write = (s: string) => { if (!closed) void writer.write(enc.encode(s)).catch(gone); };
+-  // Characters of model output sent so far: the billed-output estimate when a step has no final message.
++  // Characters of model output sent so far, and whether the model began its answer (thinking
++  // included): with the step's running time, the billed-output estimate when it has no final message.
+   let outChars = 0;
++  let modelOutput = false;
+   const emit = (e: SseEvent) => {
++    if (e.t === 'thinking' || e.t === 'text' || e.t === 'tool') modelOutput = true;
+     if (e.t === 'text') outChars += e.d.length;
+     else if (e.t === 'tool_input') outChars += JSON.stringify(e.input ?? '').length;
+     write(`data: ${JSON.stringify(e)}\n\n`);
+@@ -141,10 +153,14 @@ export async function handle(req: Request, env: Env, deps: Deps): Promise<Respon
+     emit({ t: 'start', requestId });
+     const model = modelFor(body.mode, env);
+     const turnSteps = stepsSinceUser(body.messages) + 1;
++    let stepStart = now;
+     // PL-20: with the relay bound, the Anthropic call leaves from the US, not from this edge.
+-    const step = (p: ReturnType<typeof buildParams>): Promise<StepResult> => env.UPSTREAM
+-      ? relayStep(env, p, emit, { idleMs: deps.idleMs, signal: upstream.signal, shardKey: device })
+-      : localStep(deps.makeClient(env), p, emit, { idleMs: deps.idleMs, signal: upstream.signal });
++    const step = (p: ReturnType<typeof buildParams>): Promise<StepResult> => {
++      stepStart = deps.now();
++      return env.UPSTREAM
++        ? relayStep(env, p, emit, { idleMs: deps.idleMs, signal: upstream.signal, shardKey: device })
++        : localStep(deps.makeClient(env), p, emit, { idleMs: deps.idleMs, signal: upstream.signal });
++    };
+     let params = buildParams(body, env);
+     let res = await step(params);
+     if (res.systemRole && !res.emittedAny) {
+@@ -161,8 +177,11 @@ export async function handle(req: Request, env: Env, deps: Deps): Promise<Respon
+     console.log(JSON.stringify({ requestId, colo, mode: body.mode, model: res.final?.model ?? model, stop_reason: res.final?.stop_reason ?? null, in: usage.input_tokens ?? 0, out: usage.output_tokens ?? 0, cacheRead: usage.cache_read_input_tokens ?? 0, cacheWrite: usage.cache_creation_input_tokens ?? 0, steps: turnSteps, ms: deps.now() - now }));
+     // QA-R0-1/2/3: every step the API bills is counted: a finished one, a refusal, and one cut short by
+     // a hang-up, a timeout or a mid-stream error. Only an error before any output (nothing billed) is not.
+-    if (billed(res)) {
+-      const outputTokens = res.final?.usage?.output_tokens ?? res.outputTokens ?? Math.ceil(outChars / 3);
++    if (billed(res) || modelOutput) {
++      // QA2-FA-1..4: a cut-short step is charged for the time it ran, which covers thinking the stream never shows.
++      const ranSec = Math.max(0, deps.now() - stepStart) / 1000;
++      const cutShort = Math.min(params.max_tokens, Math.max(Math.ceil(outChars / 3), Math.ceil(ranSec * CUT_SHORT_TOKENS_PER_SEC)));
++      const outputTokens = res.final?.usage?.output_tokens ?? res.outputTokens ?? cutShort;
+       const p = recordStep(env, keys, now, { turnEnded: res.final ? res.final.stop_reason !== 'tool_use' : true, outputTokens, turnSteps });
+       if (deps.waitUntil) deps.waitUntil(p); else await p;
+     }
+diff --git a/escobar-worker/test/anthropic.test.ts b/escobar-worker/test/anthropic.test.ts
+index 3395c31..01d1b3f 100644
+--- a/escobar-worker/test/anthropic.test.ts
++++ b/escobar-worker/test/anthropic.test.ts
+@@ -120,7 +120,7 @@ describe('policy', () => {
+   });
+ });
+ 
+-import { modelFor } from '../src/anthropic';
++import { modelFor, ignoredModelOverrides } from '../src/anthropic';
+ describe('per-mode models (F7, D12)', () => {
+   it('MODEL_<MODE> overrides one mode; the rest keep MODEL', () => {
+     const env = baseEnv({ MODEL: 'claude-opus-5', MODEL_BRIEF: 'claude-sonnet-5' });
+@@ -133,6 +133,16 @@ describe('per-mode models (F7, D12)', () => {
+     expect(modelFor('chat', baseEnv({ MODEL: 'claude-opus-5', MODEL_CHAT: 'gpt-x; drop' }))).toBe('claude-opus-5');
+     expect(modelFor('chat', baseEnv({ MODEL_CHAT: ' claude-opus-5-5 ' }))).toBe('claude-opus-5-5');
+   });
++  it('QA2-F7-3: an override the Worker cannot drive (a typo, Haiku 4.5, a dated id) is ignored, so that mode keeps MODEL', () => {
++    const env = baseEnv({ MODEL: 'claude-opus-5', MODEL_LIVE: 'claude-haiku-4-5', MODEL_PLAN: 'claude-sonet-5', MODEL_BRIEF: 'claude-sonnet-5', MODEL_CHAT: 'claude-opus-5-5-20261001' });
++    expect(modelFor('live', env)).toBe('claude-opus-5');
++    expect(modelFor('plan', env)).toBe('claude-opus-5');
++    expect(P(turn({ mode: 'live' }) as TurnBody, env).model).toBe('claude-opus-5');
++    expect(modelFor('brief', env)).toBe('claude-sonnet-5');
++    expect(modelFor('chat', env)).toBe('claude-opus-5'); // these models have no dated ids; a date suffix would 404
++    expect(ignoredModelOverrides(env)).toEqual(['chat', 'plan', 'live']);
++    expect(ignoredModelOverrides(baseEnv({ MODEL_BRIEF: 'claude-sonnet-5' }))).toEqual([]);
++  });
+   it('a model without system messages gets them folded, per mode', () => {
+     const env = baseEnv({ MODEL: 'claude-opus-5', MODEL_LIVE: 'claude-sonnet-5' });
+     const live = P(turn({ mode: 'live' }) as TurnBody, env);
+diff --git a/escobar-worker/test/handler.test.ts b/escobar-worker/test/handler.test.ts
+index 9b848ad..e853fb8 100644
+--- a/escobar-worker/test/handler.test.ts
++++ b/escobar-worker/test/handler.test.ts
+@@ -12,7 +12,14 @@ const TEXT = [{ type: 'thinking', thinking: '', signature: 'sig' }, { type: 'tex
+ describe('routes, CORS and device', () => {
+   it('health answers protocol 2', async () => {
+     const r = await handle(new Request('https://x/health'), baseEnv(), deps(mockClient([])));
+-    expect(await r.json()).toEqual({ ok: true, protocol: 2, model: 'claude-opus-5', models: { chat: 'claude-opus-5', plan: 'claude-opus-5', live: 'claude-opus-5', brief: 'claude-opus-5', moment: 'claude-opus-5', summarize: 'claude-opus-5' }, modes: ['chat', 'plan', 'live', 'brief', 'moment', 'summarize'], quotas: false, relay: false, key: true }); // F7: /health lists each mode's model
++    expect(await r.json()).toEqual({ ok: true, protocol: 2, model: 'claude-opus-5', models: { chat: 'claude-opus-5', plan: 'claude-opus-5', live: 'claude-opus-5', brief: 'claude-opus-5', moment: 'claude-opus-5', summarize: 'claude-opus-5' }, modes: ['chat', 'plan', 'live', 'brief', 'moment', 'summarize'], quotas: false, relay: false, key: true, ignoredModels: [] }); // F7: /health lists each mode's model
++  });
++  it('health names the modes whose model override was ignored (QA2-F7-3), without echoing the value', async () => {
++    const r = await handle(new Request('https://x/health'), baseEnv({ MODEL_LIVE: 'claude-haiku-4-5', MODEL_BRIEF: 'claude-sonnet-5' }), deps(mockClient([])));
++    const body = (await r.json()) as { models: Record<string, string>; ignoredModels: string[] };
++    expect(body.ignoredModels).toEqual(['live']);
++    expect(body.models).toMatchObject({ live: 'claude-opus-5', brief: 'claude-sonnet-5' });
++    expect(JSON.stringify(body)).not.toContain('haiku');
+   });
+   it('allows the app origins and configured web origins, refuses others', async () => {
+     expect(corsHeaders('capacitor://localhost', baseEnv())['Access-Control-Allow-Origin']).toBe('capacitor://localhost');
+diff --git a/escobar-worker/test/quota.test.ts b/escobar-worker/test/quota.test.ts
+index c9fb405..9217bc1 100644
+--- a/escobar-worker/test/quota.test.ts
++++ b/escobar-worker/test/quota.test.ts
+@@ -1,8 +1,10 @@
+-import { describe, it, expect, vi, beforeEach } from 'vitest';
++import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
++import Anthropic from '@anthropic-ai/sdk';
+ import { QuotaCounter, type Limits } from '../src/quotaDO';
+-import { handle } from '../src/handler';
++import { handle, CUT_SHORT_TOKENS_PER_SEC } from '../src/handler';
+ import { checkQuota, recordStep } from '../src/quota';
+-import type { Env } from '../src/anthropic';
++import { UpstreamRelay } from '../src/upstreamRelay';
++import type { ClientLike, Env } from '../src/anthropic';
+ import { baseEnv, deps, eventsFor, finalMessage, mockClient, post, sse, turn, DEVICE } from './helpers';
+ 
+ /** In-memory Durable Object storage: `kv` is synchronous like SyncKvStorage; the alarm calls yield. */
+@@ -191,3 +193,98 @@ describe('billed steps are counted however they end (QA-R0-1, QA-R0-2, QA-R0-3)'
+     expect(statuses).toEqual([200, 200, 429, 429]);
+   });
+ });
++
++describe('thinking the caller never sees is counted when a step is cut short (QA2-FA-1..4)', () => {
++  const originalRelayClient = UpstreamRelay.makeClient;
++  afterEach(() => { UpstreamRelay.makeClient = originalRelayClient; });
++  const setup = (extra: Partial<Env> = {}) => { const ns = fakeNamespace(); return { ns, env: baseEnv({ QUOTA_DO: ns as never, ...extra }) }; };
++  const row = (ns: ReturnType<typeof fakeNamespace>) => ns.objects.get('2026-09-22')?.state.data.get(`d:${DEVICE}`);
++  const clock = () => ({ t: Date.parse('2026-09-22T12:00:00Z') });
++  const untilAbort = (signal?: AbortSignal) => new Promise((_, rej) => {
++    if (signal?.aborted) rej(new Anthropic.APIUserAbortError());
++    signal?.addEventListener('abort', () => rej(new Anthropic.APIUserAbortError()));
++  });
++  /**
++   * One step as the API streams it by default (thinking display "omitted"): the thinking block carries no
++   * text, `thinkMs` passes on the clock while the model thinks, then a short answer (or `fail`, or it keeps
++   * thinking until the caller goes away when `stopIn` is 'thinking').
++   */
++  function thinkingClient(c: { t: number }, o: { thinkMs: number; fail?: unknown; stopIn?: 'thinking' }): ClientLike {
++    return { beta: { messages: { stream(_p, opts) {
++      return {
++        async *[Symbol.asyncIterator]() {
++          yield { type: 'message_start', message: finalMessage([]) } as never;
++          yield { type: 'content_block_start', index: 0, content_block: { type: 'thinking', thinking: '', signature: '' } } as never;
++          yield { type: 'content_block_delta', index: 0, delta: { type: 'thinking_delta', thinking: '' } } as never;
++          c.t += o.thinkMs;
++          if (o.fail) throw o.fail;
++          if (o.stopIn === 'thinking') await untilAbort(opts?.signal);
++          yield { type: 'content_block_delta', index: 0, delta: { type: 'signature_delta', signature: 'sig' } } as never;
++          yield { type: 'content_block_stop', index: 0 } as never;
++          yield { type: 'content_block_start', index: 1, content_block: { type: 'text', text: '' } } as never;
++          yield { type: 'content_block_delta', index: 1, delta: { type: 'text_delta', text: 'Here is your plan.' } } as never;
++          await untilAbort(opts?.signal);
++        },
++        finalMessage: () => new Promise(() => {}),
++        abort() {},
++      };
++    } } } };
++  }
++  /** A UPSTREAM namespace backed by one real UpstreamRelay running `client`. */
++  function relayNs(client: ClientLike) {
++    UpstreamRelay.makeClient = () => client;
++    const relay = new UpstreamRelay({ waitUntil: () => {} } as never, {} as never);
++    return { idFromName: (n: string) => n, get: () => ({ fetch: (url: string, init: RequestInit) => relay.fetch(new Request(url, init)) }) };
++  }
++  /** Sends one turn and hangs up as soon as `marker` has arrived; resolves once the step is recorded. */
++  async function hangUpAfter(env: Env, client: ClientLike, c: { t: number }, mode: string, marker: string) {
++    const pending: Promise<unknown>[] = [];
++    const r = await handle(post(turn({ mode })), env, { ...deps(client), now: () => c.t, waitUntil: p => { pending.push(p); } });
++    if (r.status !== 200) return r.status;
++    const reader = r.body!.getReader();
++    const dec = new TextDecoder();
++    let seen = '';
++    while (!seen.includes(marker)) { const { value, done } = await reader.read(); if (done) break; seen += dec.decode(value, { stream: true }); }
++    await reader.cancel();
++    await Promise.all(pending);
++    return r.status;
++  }
++
++  it('a hang-up right after the answer starts counts the minute of hidden thinking, so the output cap trips', async () => {
++    const c = clock();
++    const { ns, env } = setup({ MAX_OUTPUT_PER_DEVICE: '1000' });
++    const client = thinkingClient(c, { thinkMs: 60_000 });
++    expect(await hangUpAfter(env, client, c, 'plan', '"t":"text"')).toBe(200);
++    expect(row(ns)).toEqual({ turns: 1, steps: 1, out: 60 * CUT_SHORT_TOKENS_PER_SEC });
++    expect(await hangUpAfter(env, client, c, 'plan', '"t":"text"')).toBe(429);
++  });
++  it('the same through the US relay', async () => {
++    const c = clock();
++    const client = thinkingClient(c, { thinkMs: 60_000 });
++    const { ns, env } = setup({ MAX_OUTPUT_PER_DEVICE: '1000', UPSTREAM: relayNs(client) as never });
++    expect(await hangUpAfter(env, mockClient([]), c, 'plan', '"t":"text"')).toBe(200);
++    expect(row(ns)).toEqual({ turns: 1, steps: 1, out: 60 * CUT_SHORT_TOKENS_PER_SEC });
++    expect(await hangUpAfter(env, mockClient([]), c, 'plan', '"t":"text"')).toBe(429);
++  });
++  it('a hang-up while the model is still thinking is counted by how long it thought', async () => {
++    const c = clock();
++    const { ns, env } = setup();
++    expect(await hangUpAfter(env, thinkingClient(c, { thinkMs: 45_000, stopIn: 'thinking' }), c, 'chat', '"t":"thinking"')).toBe(200);
++    expect(row(ns)).toEqual({ turns: 1, steps: 1, out: 45 * CUT_SHORT_TOKENS_PER_SEC });
++  });
++  it("the estimate never passes the step's max_tokens", async () => {
++    const c = clock();
++    const { ns, env } = setup();
++    expect(await hangUpAfter(env, thinkingClient(c, { thinkMs: 600_000 }), c, 'live', '"t":"text"')).toBe(200);
++    expect(row(ns)).toEqual({ turns: 1, steps: 1, out: 4000 });
++  });
++  it('an API error after a thinking-only phase is counted too (QA2-FA-3)', async () => {
++    const c = clock();
++    const { ns, env } = setup();
++    const boom = new Anthropic.InternalServerError(500, { type: 'error', error: { type: 'api_error', message: 'boom' } }, 'boom', new Headers());
++    vi.spyOn(console, 'error').mockImplementation(() => {});
++    const ev = await sse(await handle(post(turn()), env, { ...deps(thinkingClient(c, { thinkMs: 30_000, fail: boom })), now: () => c.t }));
++    expect(ev.map(e => e.t)).toEqual(['start', 'thinking', 'error']);
++    expect(row(ns)).toEqual({ turns: 1, steps: 1, out: 30 * CUT_SHORT_TOKENS_PER_SEC });
++  });
++});
+diff --git a/escobar-worker/wrangler.toml b/escobar-worker/wrangler.toml
+index 0319abb..ca01897 100644
+--- a/escobar-worker/wrangler.toml
++++ b/escobar-worker/wrangler.toml
+@@ -10,6 +10,8 @@ compatibility_flags = ["nodejs_compat", "enable_request_signal"]
+ # Default model and per-mode effort; change here without touching code.
+ MODEL = "claude-opus-5"
+ # F7: per-mode models, each falling back to MODEL. The owner picks; see docs/REMEDIATION-PROGRESS.md (F7) for verified prices.
++# Only models that take adaptive thinking and effort are used (MODE_MODELS in src/anthropic.ts; not Haiku 4.5).
++# Any other value is ignored, that mode keeps MODEL, and /health lists it under ignoredModels, which fails the deploy check.
+ # MODEL_CHAT = ""
+ # MODEL_PLAN = ""
+ # MODEL_LIVE = ""
+diff --git a/src/app/ErrorBoundary.tsx b/src/app/ErrorBoundary.tsx
+index d3f0de7..a41cf02 100644
+--- a/src/app/ErrorBoundary.tsx
++++ b/src/app/ErrorBoundary.tsx
+@@ -7,14 +7,19 @@
+ import { Component, type ComponentChildren } from 'preact';
+ import { buildRescueJson, saveRescueFile } from '@/core/rescue';
+ import { exportText } from '@/native/share';
++import { stopSaving } from '@/core/store';
+ 
+ export async function saveRescueCopy(): Promise<void> {
+   const text = buildRescueJson();
+   try { await exportText('marc-rescue.json', text); } catch { await saveRescueFile(text); }
+ }
+ 
+-/** The same wipe as the start-up crash screen in index.html: every stored key and the photo database. */
++/**
++ * The same wipe as the start-up crash screen in index.html: every stored key and the photo database.
++ * Saving stops first, so the save on unload cannot write the crashing state back (QA2-FB-1).
++ */
+ export function resetAppData(storage: Pick<Storage, 'clear'> = localStorage, idb: Pick<IDBFactory, 'databases' | 'deleteDatabase'> | undefined = globalThis.indexedDB): void {
++  stopSaving();
+   try { storage.clear(); } catch { /* storage unavailable */ }
+   try { void idb?.databases?.().then(dbs => dbs.forEach(d => { if (d.name) idb.deleteDatabase(d.name); })).catch(() => {}); } catch { /* no IndexedDB */ }
+ }
+diff --git a/src/brain/coach/rules.ts b/src/brain/coach/rules.ts
+index 15ddcdd..7c26963 100644
+--- a/src/brain/coach/rules.ts
++++ b/src/brain/coach/rules.ts
+@@ -13,7 +13,7 @@ import { GOAL_BY_ID, type GoalId } from '@/data/goals';
+ import { formatHours, weekdayOf, daysBetween, addDays, weekStart } from '@/core/dates';
+ import { muscleDoses, recoveryAt, recoveryStatus, type MuscleRecovery } from '../recovery';
+ import { exerciseHistory, isActive, modeOf } from '../history';
+-import { plateauStatus } from '../trend';
++import { plateauStatus, sinceLastBreak } from '../trend';
+ import { effortDrift } from '../effort';
+ import { trainingBalance } from '../balance';
+ import { weekSummary, daysSinceLastSession } from '../weekly';
+@@ -339,7 +339,8 @@ export const RULES: Rule[] = [
+         if (meta?.role !== 'main' || modeOf(id, ctx.custom) !== 'weighted') return [];
+         const hist = exerciseHistory(ctx.sessions, id, ctx.custom);
+         // BR-04: the last 8 weeks, 6+ sessions, and flat means under 1.5% total change over them.
+-        const recent = hist.filter(h => daysBetween(h.day, ctx.today) <= 56);
++        // QA2-FC-2/3: like plateauStatus, only the sessions since the last long break count.
++        const recent = sinceLastBreak(hist).filter(h => daysBetween(h.day, ctx.today) <= 56);
+         if (recent.length < 6) return [];
+         // QA-R3a-7: 'flat' needs the sessions to cover most of the eight weeks, never two weeks of a 3x/week lift.
+         if (daysBetween(recent[0]!.day, recent[recent.length - 1]!.day) < PLATEAU_MIN_SPAN_DAYS) return [];
+diff --git a/src/brain/coach/weeklyReview.ts b/src/brain/coach/weeklyReview.ts
+index 34f2a52..b8b9865 100644
+--- a/src/brain/coach/weeklyReview.ts
++++ b/src/brain/coach/weeklyReview.ts
+@@ -12,7 +12,7 @@ import { MUSCLE_IDS, muscleLabel, type MuscleId } from '@/data/muscles';
+ import { findExercise } from '@/core/exercises';
+ import { effectiveSetsByMuscle, isWorkingSet, ROLE_WEIGHT, rolesFor } from '../exposure';
+ import { exerciseHistory, isActive, modeOf, type ExerciseSessionSummary } from '../history';
+-import { trend } from '../trend';
++import { sinceLastBreak, trend } from '../trend';
+ import { weekStart, addDays, daysBetween, weekdayOf } from '@/core/dates';
+ import type { Insight } from './rules';
+ 
+@@ -236,7 +236,8 @@ export function weeklyReviewInsights(input: WeeklyReviewInput, limit = 6): Insig
+ 
+   // e1RM trend and progress vs training age, and staleness, per exercise the user actually does
+   for (const { id, name } of exerciseIds) {
+-    const hist = exerciseHistory(sessions, id, custom);
++    // QA2-FC-2: a comeback is judged only on the sessions since the break, as in plateauStatus.
++    const hist = sinceLastBreak(exerciseHistory(sessions, id, custom));
+     if (hist.length < 4 || !isActive(hist, today)) continue;
+     // e1RM says nothing for assisted, body-weight or timed work (BR-06).
+     if (modeOf(id, custom) !== 'weighted') continue;
+diff --git a/src/brain/trend.ts b/src/brain/trend.ts
+index b6e6297..1a28197 100644
+--- a/src/brain/trend.ts
++++ b/src/brain/trend.ts
+@@ -37,16 +37,20 @@ export function trend(points: Array<{ day: string; value: number }>): Trend {
+ /**
+  * QA-R3a-2: the trend of what counts as progress for the lift's mode. Weighted: the strength
+  * estimate (or top load). Bodyweight: best reps. Duration: longest hold. Assisted: the assistance
+- * load, with the direction inverted (less help is up).
++ * load, with the direction inverted (less help is up); with it flat, the best reps, as in plateauStatus.
+  */
+ export function liftTrend(history: ExerciseSessionSummary[], mode: ResistanceMode = 'weighted'): Trend {
+   const recent = history.slice(-12);
+   if (mode === 'bodyweight') return trend(recent.map(h => ({ day: h.day, value: h.bestReps })));
+   if (mode === 'duration') return trend(recent.map(h => ({ day: h.day, value: h.bestDurationSec })));
+-  const t = trend(recent.map(h => ({ day: h.day, value: h.bestE1rm || h.topKg })));
+-  if (mode !== 'assisted') return t;
+-  const flipped: Direction = t.direction === 'up' ? 'down' : t.direction === 'down' ? 'up' : t.direction;
+-  return { ...t, direction: flipped, slopePerWeek: -t.slopePerWeek };
++  if (mode === 'assisted') {
++    // QA2-FC-4: not the e1RM of the assistance, which rises with more reps and would read as down.
++    const help = trend(recent.map(h => ({ day: h.day, value: h.topKg })));
++    if (help.direction === 'up' || help.direction === 'down') return { ...help, direction: help.direction === 'up' ? 'down' : 'up', slopePerWeek: -help.slopePerWeek };
++    const reps = trend(recent.map(h => ({ day: h.day, value: h.bestReps })));
++    return reps.direction === 'unknown' && help.direction === 'flat' ? help : reps;
++  }
++  return trend(recent.map(h => ({ day: h.day, value: h.bestE1rm || h.topKg })));
+ }
+ 
+ export type PlateauStatus = 'progressing' | 'plateaued' | 'declining' | 'unknown';
+diff --git a/src/core/store.ts b/src/core/store.ts
+index 821006b..566189d 100644
+--- a/src/core/store.ts
++++ b/src/core/store.ts
+@@ -363,3 +363,12 @@ export function flushSave(): void {
+   persistNow();
+ }
+ 
++/**
++ * QA2-FB-1: the error card's reset wipes storage and reloads. No save may follow, not even the
++ * one on unload (pagehide, visibilitychange), or the state that crashed is written straight back.
++ */
++export function stopSaving(): void {
++  if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
++  storageRef = null;
++}
++
+diff --git a/src/escobar/apply.ts b/src/escobar/apply.ts
+index 0fb8efa..faa2d92 100644
+--- a/src/escobar/apply.ts
++++ b/src/escobar/apply.ts
+@@ -181,7 +181,8 @@ const APPLIERS: Record<string, Applier> = {
+   propose_reminder: input => {
+     const before = state.value.preferences.reminders;
+     update(s => ({ ...s, preferences: { ...s.preferences, reminders: { ...s.preferences.reminders, enabled: input.enabled === true, time: String(input.time), style: input.style as AppState['preferences']['reminders']['style'], readinessSummary: input.readinessSummary === true } } }));
+-    syncReminders();
++    // QA2-FB-2: Apply is the person's own tap, like the Settings reminder toggle, so it may ask for notification permission.
++    void resyncReminders({ prompt: true });
+     return { message: 'Reminders updated', undo: () => { update(s => ({ ...s, preferences: { ...s.preferences, reminders: before } })); syncReminders(); } };
+   },
+   propose_setting: input => {
+diff --git a/src/escobar/loop.ts b/src/escobar/loop.ts
+index 0bd6036..665cc2b 100644
+--- a/src/escobar/loop.ts
++++ b/src/escobar/loop.ts
+@@ -88,6 +88,12 @@ const isObj = (v: unknown): v is Record<string, unknown> => !!v && typeof v ===
+ const blocksOf = (m: StoredMessage): unknown[] => (Array.isArray(m.content) ? m.content : []);
+ const toolUses = (content: unknown[]) => content.filter((b): b is { type: 'tool_use'; id: string; name: string; input: unknown } => isObj(b) && b.type === 'tool_use');
+ const textOf = (content: unknown[]) => content.filter((b): b is { type: 'text'; text: string } => isObj(b) && b.type === 'text').map(b => b.text).join('');
++/**
++ * QA2-FD-1: proposals issued so far, for the next card's id. A trim drops the oldest cards, so
++ * the number of cards kept can be lower than the highest id kept, and a new id would repeat it.
++ */
++const proposalsIssued = (proposals: ProposalRecord[]): number =>
++  proposals.reduce((n, p) => Math.max(n, Number(/^p(\d+)$/.exec(p.id)?.[1] ?? 0)), proposals.length);
+ 
+ /** At most this many photos travel inline in one request (D3, ES-13); older ones go as stubs. */
+ export const MAX_INLINE_IMAGES = 2;
+@@ -416,12 +422,19 @@ export class EscobarLoop {
+         if (r.error) { result = finish({ outcome: 'error', error: r.error, outcomes, signals, notSent: !userCommitted }); break; }
+         if (r.refusal) { this.update({ text: '' }); result = finish({ outcome: 'refusal', refusal: r.refusal, outcomes, signals, notSent: !userCommitted }); break; }
+         const final = r.final!;
+-        const u = final.usage as Partial<Usage> & { iterations?: Array<Partial<Usage>> } | undefined;
+-        const its = u?.iterations?.length ? u.iterations : u ? [u] : [];
+-        for (const it of its) {
+-          const step = { inputTokens: it.input_tokens ?? 0, outputTokens: it.output_tokens ?? 0, cacheReadTokens: it.cache_read_input_tokens ?? 0 };
++        const u = final.usage as Partial<Usage> & { iterations?: Array<Partial<Usage> & { model?: string | null }> } | undefined;
++        const its: Array<Partial<Usage> & { model?: string | null }> = u?.iterations?.length ? u.iterations : u ? [u] : [];
++        for (const [i, it] of its.entries()) {
++          // QA2-F7-1: a fallback attempt that declined before any output is reported but not billed.
++          if (i < its.length - 1 && !it.output_tokens) continue;
++          // QA2-F7-4: cache writes by TTL; a write without the breakdown is priced at the 5-minute rate.
++          const cacheWrite1hTokens = it.cache_creation?.ephemeral_1h_input_tokens ?? 0;
++          const cacheWrite5mTokens = Math.max(it.cache_creation?.ephemeral_5m_input_tokens ?? 0, (it.cache_creation_input_tokens ?? 0) - cacheWrite1hTokens);
++          const step = { inputTokens: it.input_tokens ?? 0, outputTokens: it.output_tokens ?? 0, cacheReadTokens: it.cache_read_input_tokens ?? 0, cacheWrite5mTokens, cacheWrite1hTokens };
+           usage.inputTokens += step.inputTokens; usage.outputTokens += step.outputTokens; usage.cacheReadTokens += step.cacheReadTokens;
+-          usage.costUsd += estimateCost(step, typeof final.model === 'string' ? final.model : undefined);
++          // QA2-F7-1: each attempt at the rates of the model that ran it (a fallback turn mixes models).
++          const model = typeof it.model === 'string' ? it.model : typeof final.model === 'string' ? final.model : undefined;
++          usage.costUsd += estimateCost(step, model);
+         }
+         if (staged) {
+           const extra: Partial<Conversation> = userCommitted ? stagedExtra : { ...stagedExtra, pendingDecisions: (this.conversation.pendingDecisions ?? []).filter(d => !reported.has(decisionKey(d))) };
+@@ -473,7 +486,7 @@ export class EscobarLoop {
+         const assistantIndex = this.conversation.messages.length - 1;
+         for (const use of uses) {
+           if (gen !== this.generation) break;
+-          const o = executeTool(use, { ctx: this.ctx(), ledger, turn: this.conversation.userTurns ?? 0, proposalCount: proposals.length });
++          const o = executeTool(use, { ctx: this.ctx(), ledger, turn: this.conversation.userTurns ?? 0, proposalCount: proposalsIssued(proposals) });
+           ledger = [...ledger, ...o.facts];
+           if (o.proposal) proposals = [...proposals, { ...o.proposal, status: 'awaiting', messageIndex: assistantIndex } as ProposalRecord];
+           if (o.effect) this.deps.applyEffect?.(o.effect);
+diff --git a/src/escobar/state.ts b/src/escobar/state.ts
+index 9a8d9a2..0d7785f 100644
+--- a/src/escobar/state.ts
++++ b/src/escobar/state.ts
+@@ -28,7 +28,10 @@ export const online = signal<boolean | null>(null);
+ export const offlineReason = signal<string | null>(null);
+ export const quotaResetAt = signal<number | null>(null);
+ 
+-/** Per-model prices, $ per million tokens, for the rough cost estimate in Settings (§21). */
++/**
++ * Per-model prices, $ per million tokens, for the rough cost estimate in Settings (§21). Cache
++ * writes cost 1.25x input (5-minute) or 2x input (1-hour) on every model.
++ */
+ export const PRICES: Record<string, { input: number; output: number; cacheRead: number }> = {
+   'claude-opus-5': { input: 5, output: 25, cacheRead: 0.5 },
+   'claude-opus-5-5': { input: 4, output: 20, cacheRead: 0.2 },
+@@ -37,18 +40,33 @@ export const PRICES: Record<string, { input: number; output: number; cacheRead:
+   'claude-fable-5-1': { input: 10, output: 50, cacheRead: 0.25 },
+   'claude-fable-5': { input: 10, output: 50, cacheRead: 1 },
+   'claude-haiku-4-5': { input: 1, output: 5, cacheRead: 0.1 },
++  // QA2-F7-1: the rest of the models the API serves.
++  'claude-mythos-5-1': { input: 10, output: 50, cacheRead: 0.25 },
++  'claude-mythos-5': { input: 10, output: 50, cacheRead: 1 },
++  'claude-opus-4-7': { input: 5, output: 25, cacheRead: 0.5 },
++  'claude-opus-4-6': { input: 5, output: 25, cacheRead: 0.5 },
++  'claude-opus-4-5': { input: 5, output: 25, cacheRead: 0.5 },
++  'claude-sonnet-4-6': { input: 3, output: 15, cacheRead: 0.3 },
++  'claude-sonnet-4-5': { input: 3, output: 15, cacheRead: 0.3 },
+ };
+-// F7: checked against platform.claude.com/docs/en/about-claude/pricing on 2026-09-23.
++// F7: checked against platform.claude.com/docs/en/about-claude/pricing on 2026-09-23 (QA2-F7-1 additions: 2026-09-24).
++/** QA2-F7-1: an id missing from the table is priced at the dearest rates, so the estimate never reads below the bill. */
++const UNKNOWN_PRICE = { input: 10, output: 50, cacheRead: 1 };
+ 
+-/** A dated id (claude-opus-5-20260901) uses its alias's price: the longest key it starts with. */
++/**
++ * An exact id, or a dated id (alias-YYYYMMDD, e.g. claude-haiku-4-5-20251001), uses that alias's price.
++ * Any other id is unknown, so a newer minor version (claude-sonnet-5-5) is never priced as its prefix.
++ */
+ function priceFor(model: string): { input: number; output: number; cacheRead: number } {
+-  const key = Object.keys(PRICES).filter(k => model === k || model.startsWith(`${k}-`)).sort((a, b) => b.length - a.length)[0];
+-  return PRICES[key ?? 'claude-opus-5']!;
++  const key = Object.keys(PRICES).find(k => model === k || (model.startsWith(`${k}-`) && /^\d{8}$/.test(model.slice(k.length + 1))));
++  return key ? PRICES[key]! : UNKNOWN_PRICE;
+ }
+ 
+-export function estimateCost(u: { inputTokens: number; outputTokens: number; cacheReadTokens: number }, model = 'claude-opus-5'): number {
++/** QA2-F7-4: `cacheWrite5mTokens` / `cacheWrite1hTokens` are the step's prompt-cache writes by TTL. */
++export function estimateCost(u: { inputTokens: number; outputTokens: number; cacheReadTokens: number; cacheWrite5mTokens?: number; cacheWrite1hTokens?: number }, model = 'claude-opus-5'): number {
+   const p = priceFor(model);
+-  return (u.inputTokens * p.input + u.outputTokens * p.output + u.cacheReadTokens * p.cacheRead) / 1_000_000;
++  const writes = (u.cacheWrite5mTokens ?? 0) * p.input * 1.25 + (u.cacheWrite1hTokens ?? 0) * p.input * 2;
++  return (u.inputTokens * p.input + u.outputTokens * p.output + u.cacheReadTokens * p.cacheRead + writes) / 1_000_000;
+ }
+ 
+ export function proxyUrlOf(proxyUrl: string | null): string { return proxyUrl || ESCOBAR_PROXY_URL; }
+diff --git a/src/escobar/types.ts b/src/escobar/types.ts
+index fd57ba9..cd9bf82 100644
+--- a/src/escobar/types.ts
++++ b/src/escobar/types.ts
+@@ -41,6 +41,8 @@ export interface Usage {
+   output_tokens: number;
+   cache_read_input_tokens?: number;
+   cache_creation_input_tokens?: number;
++  /** The cache writes split by TTL (QA2-F7-4: priced at 1.25x or 2x input). */
++  cache_creation?: { ephemeral_5m_input_tokens?: number; ephemeral_1h_input_tokens?: number } | null;
+ }
+ 
+ export interface Fact {
+diff --git a/src/slices/history/History.tsx b/src/slices/history/History.tsx
+index 99de097..4356692 100644
+--- a/src/slices/history/History.tsx
++++ b/src/slices/history/History.tsx
+@@ -11,10 +11,10 @@ import { rebuildRecoveryModel, sortByStart } from '@/slices/workout/session';
+ import { parseDurationSec, parseReps } from '@/core/parse';
+ import { hasEntry } from '@/brain/exposure';
+ import { allRecords, PR_LABEL } from '@/brain/prs';
+-import { exerciseHistory } from '@/brain/history';
+-import { trend } from '@/brain/trend';
++import { exerciseHistory, modeOf } from '@/brain/history';
+ import { plannedThisWeek, weekSummary } from '@/brain/weekly';
+ import { volumeChartWeeks } from './volumeChart';
++import { progressHint, progressTrend, progressValue } from './progressTrend';
+ import { muscleLabel } from '@/data/muscles';
+ import { showToast } from '@/app/toast';
+ import { Sparkline } from '@/ui/Sparkline';
+@@ -212,7 +212,8 @@ function Stats() {
+   const exercise = fromPanel && exerciseIds.some(([id]) => id === fromPanel) ? fromPanel : picked;
+   usePalaceFocus(exercise ? 'history.exercise-stats' : 'history.week', exercise ? { exerciseId: exercise } : undefined);
+   const hist = exercise ? exerciseHistory(s.sessions, exercise, s.customExercises) : [];
+-  const t = trend(hist.map(h => ({ day: h.day, value: h.bestE1rm || h.volume })));
++  const mode = modeOf(exercise, s.customExercises);
++  const t = progressTrend(hist, mode);
+   const muscleRows = (Object.entries(w.muscleSets) as Array<[string, number]>).sort((a, b) => b[1] - a[1]).slice(0, 6);
+   const maxSets = muscleRows[0]?.[1] ?? 1;
+ 
+@@ -239,14 +240,14 @@ function Stats() {
+             <select value={exercise} onChange={e => { setExercise((e.target as HTMLSelectElement).value); if (fromPanel) closePanel('exercise-stats'); }}>{exerciseIds.map(([id, name]) => <option key={id} value={id}>{name}</option>)}</select>
+             {hist.length >= 2 ? (
+               <div class="stack-sm" style={{ marginTop: 12 }}>
+-                <Sparkline points={hist.slice(-12).map(h => h.bestE1rm || h.topKg || h.bestReps)} />
++                <Sparkline points={hist.slice(-12).map(h => progressValue(h, mode))} />
+                 <div class="grid-3">
+                   <Stat value={formatLoad(hist[hist.length - 1]!.topKg, u)} label="last top load" />
+                   <Stat value={`${hist[hist.length - 1]!.topReps}`} label="reps at top" />
+                   <Stat value={t.direction === 'up' ? 'Improving' : t.direction === 'down' ? 'Slipping' : t.direction === 'flat' ? 'Steady' : 'Early'} label={`trend · ${t.confidence}`} tone={t.direction === 'up' ? 'positive' : t.direction === 'down' ? 'warning' : undefined} />
+                 </div>
+                 <div class="list">{[...hist].reverse().slice(0, 5).map(h => <Row key={h.sessionId} trailing={<span class="hint num">{h.sets.map((st, i) => <span key={i}>{i ? ' · ' : ''}{setLabel(st, u)}<UnitTag st={st} u={u} /></span>)}</span>}><span class="small">{formatDay(h.day)}</span></Row>)}</div>
+-                <p class="hint">Trend uses an estimated one-rep strength score from sets of 10 reps or fewer. It is a guide, not a test.</p>
++                <p class="hint">{progressHint(mode)}</p>
+               </div>
+             ) : <p class="small muted" style={{ marginTop: 10 }}>One session so far. The trend line appears after the second.</p>}
+           </Card>
+diff --git a/src/slices/history/progressTrend.ts b/src/slices/history/progressTrend.ts
+new file mode 100644
+index 0000000..07251e4
+--- /dev/null
++++ b/src/slices/history/progressTrend.ts
+@@ -0,0 +1,33 @@
++/**
++ * The Exercise progress card's trend (QA2-FC-1). Assisted, bodyweight and hold lifts are judged by
++ * their mode, as Escobar judges them (less assistance is up). Weighted lifts keep the strength
++ * score, with volume for sessions of sets over 10 reps.
++ */
++import type { ResistanceMode } from '@/core/models';
++import type { ExerciseSessionSummary } from '@/brain/history';
++import { liftTrend, trend, type Trend } from '@/brain/trend';
++
++export function progressTrend(hist: ExerciseSessionSummary[], mode: ResistanceMode): Trend {
++  if (mode === 'assisted' || mode === 'bodyweight' || mode === 'duration') return liftTrend(hist, mode);
++  return trend(hist.map(h => ({ day: h.day, value: h.bestE1rm || h.volume })));
++}
++
++/**
++ * The value the card's sparkline draws, in the same direction as the trend: up is progress. Assisted
++ * lifts plot the assistance negated (less help is higher), bodyweight lifts their best reps, holds
++ * their longest time. Weighted and conditioning keep the strength score (QA2-FC-1 follow-up).
++ */
++export function progressValue(h: ExerciseSessionSummary, mode: ResistanceMode): number {
++  if (mode === 'assisted') return -h.topKg;
++  if (mode === 'bodyweight') return h.bestReps;
++  if (mode === 'duration') return h.bestDurationSec;
++  return h.bestE1rm || h.topKg || h.bestReps;
++}
++
++/** The hint under the card, describing what the trend actually follows for this mode. */
++export function progressHint(mode: ResistanceMode): string {
++  if (mode === 'assisted') return 'Trend follows the assistance: less help is progress; with the same help, more reps.';
++  if (mode === 'bodyweight') return 'Trend follows your best reps.';
++  if (mode === 'duration') return 'Trend follows your longest hold.';
++  return 'Trend uses an estimated one-rep strength score from sets of 10 reps or fewer. It is a guide, not a test.';
++}
+diff --git a/src/ui/styles.css b/src/ui/styles.css
+index 28d0285..6a65ffd 100644
+--- a/src/ui/styles.css
++++ b/src/ui/styles.css
+@@ -160,7 +160,8 @@ svg { display: block; }
+ /* UI-30: a 44 px tall hit area. QA-R7-1: the row is 48 px tall, so the area stays inside it with
+    2 px to spare and a tap up to 8 px below a button still lands in its own row, even where rows
+    touch (the past-session list); sideways it stops at the gap to the next button. */
+-.effort button::before { content: ""; position: absolute; inset: -7px -2px; }
++/* The inset is measured from the 28 px padding box inside the 1 px border, so -8px gives 44 px. */
++.effort button::before { content: ""; position: absolute; inset: -8px -2px; }
+ .effort button[aria-pressed="true"].easy { background: var(--positive); color: #fff; border-color: transparent; }
+ .effort button[aria-pressed="true"].ideal { background: var(--info); color: #fff; border-color: transparent; }
+ .effort button[aria-pressed="true"].max { background: var(--negative); color: #fff; border-color: transparent; }
+diff --git a/tests/coach.test.ts b/tests/coach.test.ts
+index ec76aa2..3d212b1 100644
+--- a/tests/coach.test.ts
++++ b/tests/coach.test.ts
+@@ -211,4 +211,23 @@ describe('plateau needs time and ignores the time before a break (QA-R3a-6, QA-R
+     expect(out.some(i => i.id.startsWith('plateau:'))).toBe(false);
+     expect(deloadTrigger(sessions, '2026-09-23').suggest).toBe(false);
+   });
++  it('the plateau lever is not judged on sessions from before a five-week break (QA2-FC-2)', () => {
++    const before = ['2026-07-29', '2026-07-31', '2026-08-03', '2026-08-05'];
++    const after = ['2026-09-14', '2026-09-16', '2026-09-18'];
++    const sessions = [...before, ...after].map(d => session(d, [{ id: bench, sets: sets(100, 5, 'ideal', 3) }]));
++    const out = coachInsights({ ...baseCtx, today: '2026-09-19', now: new Date('2026-09-19T12:00:00Z').getTime(), sessions }, 20);
++    expect(out.some(i => i.id.startsWith('plateau-lever'))).toBe(false);
++    // Seven flat weeks after the break are enough on their own.
++    const back = ['2026-07-24', '2026-07-31', '2026-08-07', '2026-08-14', '2026-08-21', '2026-08-28', '2026-09-04', '2026-09-11', '2026-09-18'];
++    const flatAfter = ['2026-05-01', '2026-05-08', ...back].map(d => session(d, [{ id: bench, sets: sets(100, 5, 'ideal', 1) }]));
++    expect(coachInsights({ ...baseCtx, today: '2026-09-19', now: new Date('2026-09-19T12:00:00Z').getTime(), sessions: flatAfter }, 20).some(i => i.id === `plateau-lever:${bench}`)).toBe(true);
++  });
++  it('one stray session a month before two weeks of training does not make a plateau (QA2-FC-3)', () => {
++    const days = ['2026-09-07', '2026-09-09', '2026-09-11', '2026-09-14', '2026-09-16', '2026-09-18'];
++    const ctx = { ...baseCtx, today: '2026-09-19', now: new Date('2026-09-19T12:00:00Z').getTime() };
++    for (const n of [1, 3]) {
++      const sessions = [session('2026-08-07', [{ id: bench, sets: sets(100, 5, 'ideal', n) }]), ...days.map((d, i) => session(d, [{ id: bench, sets: sets(100 + i * 0.25, 5, 'ideal', n) }]))];
++      expect(coachInsights({ ...ctx, sessions }, 20).some(i => i.id.startsWith('plateau-lever'))).toBe(false);
++    }
++  });
+ });
+diff --git a/tests/error-boundary.test.ts b/tests/error-boundary.test.ts
+index b30cad8..239fbc3 100644
+--- a/tests/error-boundary.test.ts
++++ b/tests/error-boundary.test.ts
+@@ -1,6 +1,20 @@
+ import { describe, it, expect, vi } from 'vitest';
+ import type { VNode } from 'preact';
+ import { ErrorBoundary, resetAppData } from '@/app/ErrorBoundary';
++import { BACKUP_DAY_KEY, BACKUP_KEY, STATE_KEY, flushSave, initStore, update } from '@/core/store';
++import { freshState } from '@/core/models';
++
++function memoryStorage(): Storage {
++  const map = new Map<string, string>();
++  return {
++    getItem: (k: string) => map.get(k) ?? null,
++    setItem: (k: string, v: string) => { map.set(k, v); },
++    removeItem: (k: string) => { map.delete(k); },
++    clear: () => map.clear(),
++    key: (i: number) => [...map.keys()][i] ?? null,
++    get length() { return map.size; },
++  } as Storage;
++}
+ 
+ const texts = (n: unknown): string[] => {
+   if (n == null || typeof n === 'boolean') return [];
+@@ -27,4 +41,20 @@ describe('the error card (QA-R1-8)', () => {
+     expect(clear).toHaveBeenCalled();
+     expect(deleteDatabase).toHaveBeenCalledWith('marc-escobar-img');
+   });
++  it('QA2-FB-1: the save on unload does not write the crashing state back after the reset', () => {
++    vi.useFakeTimers();
++    try {
++      const st = memoryStorage();
++      st.setItem(STATE_KEY, JSON.stringify({ ...freshState(), profile: { ...freshState().profile, name: 'crash' } }));
++      initStore(st);
++      update(s => ({ ...s, profile: { ...s.profile, name: 'crash again' } }));
++      resetAppData(st, undefined);
++      vi.advanceTimersByTime(1000); // a save that was pending when the reset ran
++      flushSave(); // pagehide / visibilitychange while location.reload() unloads the page
++      expect(st.getItem(STATE_KEY)).toBeNull();
++      expect(st.getItem(BACKUP_KEY)).toBeNull();
++      expect(st.getItem(BACKUP_DAY_KEY)).toBeNull();
++      expect(st.length).toBe(0);
++    } finally { vi.useRealTimers(); }
++  });
+ });
+diff --git a/tests/escobar/apply-reminders.test.ts b/tests/escobar/apply-reminders.test.ts
+new file mode 100644
+index 0000000..d0c43d9
+--- /dev/null
++++ b/tests/escobar/apply-reminders.test.ts
+@@ -0,0 +1,47 @@
++import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
++
++const plugin = vi.hoisted(() => {
++  let pending: Array<{ id: number }> = [];
++  return {
++    schedule: vi.fn(async ({ notifications }: { notifications: Array<{ id: number }> }) => { pending = notifications.map(n => ({ id: n.id })); return { notifications: [] }; }),
++    cancel: vi.fn(async () => { pending = []; }),
++    getPending: vi.fn(async () => ({ notifications: pending })),
++    createChannel: vi.fn(async () => undefined),
++    checkPermissions: vi.fn(async () => ({ display: 'prompt' })),
++    requestPermissions: vi.fn(async () => ({ display: 'granted' })),
++    checkExactNotificationSetting: vi.fn(async () => ({ exact_alarm: 'denied' })),
++    changeExactNotificationSetting: vi.fn(async () => ({ exact_alarm: 'granted' })),
++    addListener: vi.fn(),
++  };
++});
++vi.mock('@capacitor/local-notifications', () => ({ LocalNotifications: plugin }));
++vi.mock('@/native/capacitor', () => ({ isNative: () => true }));
++
++import { replaceState, state } from '@/core/store';
++import { decide } from '@/escobar/apply';
++import { buildProposal } from '@/escobar/tools/actions';
++import { memoryStorage, newConversation, setEscobarStorage } from '@/escobar/store';
++import { reminderHealth } from '@/slices/settings/reminders';
++import type { Conversation } from '@/escobar/types';
++import { NOW, ctxOf, twoWeeksState } from './fixtures';
++
++const proposal = (name: string, input: Record<string, unknown>, id = 'p1'): Conversation => {
++  const p = buildProposal(name, input, ctxOf(state.value), id);
++  return { ...newConversation('test', 'chat'), proposals: [{ ...p, status: 'awaiting', messageIndex: 1 }] };
++};
++
++beforeEach(() => { vi.clearAllMocks(); vi.useFakeTimers({ now: NOW, toFake: ['Date'] }); replaceState(twoWeeksState()); setEscobarStorage(memoryStorage()); });
++afterEach(() => { vi.useRealTimers(); });
++
++describe('reminders turned on through Escobar (QA2-FB-2)', () => {
++  it('Apply is the person\'s tap: it asks for notification permission and schedules the reminders', async () => {
++    expect(state.value.preferences.reminders.enabled).toBe(false);
++    const a = decide(proposal('propose_reminder', { enabled: true, time: '23:59' }), 'p1', 'apply');
++    expect(a.result).toMatchObject({ ok: true, status: 'applied', message: 'Reminders updated' });
++    expect(state.value.preferences.reminders.enabled).toBe(true);
++    await vi.waitFor(() => expect(reminderHealth.value.queued).toBeGreaterThan(0));
++    expect(plugin.requestPermissions).toHaveBeenCalledTimes(1);
++    expect(plugin.schedule).toHaveBeenCalledTimes(1);
++    expect(reminderHealth.value.ok).toBe(true);
++  });
++});
+diff --git a/tests/escobar/loop.test.ts b/tests/escobar/loop.test.ts
+index 25340b3..44d889d 100644
+--- a/tests/escobar/loop.test.ts
++++ b/tests/escobar/loop.test.ts
+@@ -1,7 +1,8 @@
+ import { describe, it, expect } from 'vitest';
+ import { EscobarLoop, toRequestMessages, windowMessages, offlineReply, STEP_BUDGET, type LoopDeps } from '@/escobar/loop';
+ import type { StreamEvent, Transport } from '@/escobar/transport';
+-import { newConversation } from '@/escobar/store';
++import { newConversation, trimOldest } from '@/escobar/store';
++import { decide } from '@/escobar/apply';
+ import type { Conversation, StoredMessage } from '@/escobar/types';
+ import type { MemoryEffect } from '@/escobar/tools/executor';
+ import { sixMonthsState, NOW } from './fixtures';
+@@ -249,6 +250,29 @@ describe('agent loop (§13)', () => {
+   });
+ });
+ 
++describe('suggestion ids after a trim (QA2-FD-1)', () => {
++  it('a new card never takes the id of a card that survived the trim, so Apply or Dismiss acts on the card tapped', async () => {
++    const { loop } = setup([
++      tools(['a1', 'propose_goal', { goal: 'strength' }]), answer('Done.'),
++      tools(['a2', 'propose_goal', { goal: 'strength' }], ['a3', 'propose_deload', { reason: 'Tired' }]), answer('Done.'),
++      tools(['a4', 'propose_deload', { reason: 'Take a lighter week' }]), answer('Done.'),
++    ]);
++    await loop.send({ text: 'Switch my goal?' });
++    await loop.send({ text: 'Goal again, and a lighter week?' });
++    expect(loop.conversation.proposals!.map(p => p.id)).toEqual(['p1', 'p2', 'p3']);
++    // A long chat is stored (and reloaded) with its oldest half cut: p1 goes, p2 and p3 stay.
++    loop.conversation = trimOldest(loop.conversation)!;
++    expect(loop.conversation.proposals!.map(p => p.id)).toEqual(['p2', 'p3']);
++    await loop.send({ text: 'Just the lighter week then.' });
++    expect(loop.conversation.proposals!.map(p => p.id)).toEqual(['p2', 'p3', 'p4']);
++    const fresh = loop.conversation.proposals!.at(-1)!;
++    expect(fresh.input).toEqual({ reason: 'Take a lighter week' });
++    const { conversation } = decide(loop.conversation, fresh.id, 'dismiss');
++    expect(conversation.proposals!.map(p => p.status)).toEqual(['awaiting', 'awaiting', 'dismissed']);
++    expect(conversation.pendingDecisions!.at(-1)).toMatchObject({ proposalId: fresh.id, title: fresh.title });
++  });
++});
++
+ describe('history window (§11.4)', () => {
+   it('replaces the oldest half with the rolling summary in the request only', () => {
+     const conv = newConversation('37.0.0');
+@@ -309,4 +333,58 @@ describe('cost by the model that answered (F7)', () => {
+     expect(estimateCost({ inputTokens: 1_000_000, outputTokens: 0, cacheReadTokens: 0 }, 'claude-opus-5-5-20260901')).toBe(4);
+     expect(estimateCost({ inputTokens: 0, outputTokens: 1_000_000, cacheReadTokens: 0 }, 'claude-haiku-4-5')).toBe(5);
+   });
++
++  const oneStep = (usage: Record<string, unknown>, model: string): StreamEvent[] => [{ t: 'text', d: 'Ok.' }, { t: 'final', content: [{ type: 'text', text: 'Ok.' }], stop_reason: 'end_turn', usage, model }];
++  const recorded = async (steps: StreamEvent[]) => {
++    const got: Array<{ inputTokens: number; costUsd?: number }> = [];
++    const { loop } = setup([steps], { recordUsage: u => got.push(u) });
++    await loop.send({ text: 'hi' });
++    return got[0]!;
++  };
++
++  it('QA2-F7-4: cache writes are priced at the 1-hour and 5-minute write rates', async () => {
++    // Opus 5: $5 in, $25 out, 1h write $10, 5m write $6.25 per MTok.
++    const h1 = await recorded(oneStep({ input_tokens: 50, output_tokens: 300, cache_creation_input_tokens: 20_000, cache_creation: { ephemeral_5m_input_tokens: 0, ephemeral_1h_input_tokens: 20_000 } }, 'claude-opus-5'));
++    expect(h1.costUsd).toBeCloseTo(0.20775, 8);
++    const m5 = await recorded(oneStep({ input_tokens: 50, output_tokens: 300, cache_creation_input_tokens: 20_000, cache_creation: { ephemeral_5m_input_tokens: 20_000, ephemeral_1h_input_tokens: 0 } }, 'claude-opus-5'));
++    expect(m5.costUsd).toBeCloseTo(0.13275, 8);
++    // No TTL breakdown: the write is priced at the default 5-minute rate, never dropped.
++    const bare = await recorded(oneStep({ input_tokens: 50, output_tokens: 300, cache_creation_input_tokens: 20_000 }, 'claude-opus-5'));
++    expect(bare.costUsd).toBeCloseTo(0.13275, 8);
++  });
++
++  it('QA2-F7-1: a fallback turn prices each attempt by its own model and skips the unbilled declined attempt', async () => {
++    const it2 = (first: { input: number; output: number }) => ({ input_tokens: 412, output_tokens: 264, cache_read_input_tokens: 0, cache_creation_input_tokens: 0, iterations: [
++      { type: 'message', model: 'claude-opus-5-5', input_tokens: first.input, output_tokens: first.output, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 },
++      { type: 'fallback_message', model: 'claude-opus-4-8', input_tokens: 412, output_tokens: 264, cache_read_input_tokens: 0, cache_creation_input_tokens: 0 },
++    ] });
++    // Declined before any output: reported, not billed. Opus 4.8 serves 412 in / 264 out at $5/$25.
++    const pre = await recorded(oneStep(it2({ input: 535, output: 0 }), 'claude-opus-4-8'));
++    expect(pre.inputTokens).toBe(412);
++    expect(pre.costUsd).toBeCloseTo(0.00866, 8);
++    // Declined mid-output: billed at Opus 5.5's own rates ($4/$20), then the Opus 4.8 attempt.
++    const mid = await recorded(oneStep(it2({ input: 535, output: 40 }), 'claude-opus-4-8'));
++    expect(mid.inputTokens).toBe(947);
++    expect(mid.costUsd).toBeCloseTo(0.00294 + 0.00866, 8);
++  });
++
++  it('QA2-F7-1: every model the API serves has its own price; an unknown id is never priced below the dearest one', async () => {
++    const { estimateCost } = await import('@/escobar/state');
++    const perMTok = (model: string) => [estimateCost({ inputTokens: 1_000_000, outputTokens: 0, cacheReadTokens: 0 }, model), estimateCost({ inputTokens: 0, outputTokens: 1_000_000, cacheReadTokens: 0 }, model)];
++    expect(perMTok('claude-mythos-5-1')).toEqual([10, 50]);
++    expect(perMTok('claude-mythos-5')).toEqual([10, 50]);
++    expect(perMTok('claude-sonnet-4-6')).toEqual([3, 15]);
++    expect(perMTok('claude-sonnet-4-5-20250929')).toEqual([3, 15]);
++    expect(perMTok('claude-opus-4-7')).toEqual([5, 25]);
++    expect(perMTok('claude-opus-4-6')).toEqual([5, 25]);
++    expect(perMTok('claude-opus-4-5-20251101')).toEqual([5, 25]);
++    expect(perMTok('claude-something-9')).toEqual([10, 50]);
++    // A newer minor version is unknown, not its prefix's price (QA2-F7-1 follow-up).
++    expect(perMTok('claude-sonnet-5-5')).toEqual([10, 50]);
++    expect(perMTok('claude-opus-5-6')).toEqual([10, 50]);
++    expect(perMTok('claude-haiku-4-5-20251001')).toEqual([1, 5]);
++    // Cache reads per MTok: 0.025x on Fable/Mythos 5.1, 0.05x on Opus 5.5, 0.1x elsewhere.
++    expect(estimateCost({ inputTokens: 0, outputTokens: 0, cacheReadTokens: 1_000_000 }, 'claude-mythos-5-1')).toBe(0.25);
++    expect(estimateCost({ inputTokens: 0, outputTokens: 0, cacheReadTokens: 1_000_000 }, 'claude-sonnet-4-6')).toBeCloseTo(0.3, 10);
++  });
+ });
+diff --git a/tests/escobar/read.test.ts b/tests/escobar/read.test.ts
+index 3859788..96c2ca1 100644
+--- a/tests/escobar/read.test.ts
++++ b/tests/escobar/read.test.ts
+@@ -189,6 +189,21 @@ describe('assisted lifts in Escobar (QA-R3a-2)', () => {
+     const { summarize } = await import('@/escobar/tools/show');
+     expect((summarize('lift_trend', { exerciseId: id, weeks: 12 }, c) as { plateau: string }).plateau).toBe('progressing');
+   });
++  it('more reps at the same assistance reads as up, not down (QA2-FC-4)', async () => {
++    const s = sixMonthsState();
++    const id = 'lib_assisted_pull_up';
++    const reps = [3, 3, 4, 4, 5, 5, 6, 6];
++    const sessions = reps.map((r, i) => {
++      const day = new Date(Date.UTC(2026, 6, 28 + i * 7)).toISOString().slice(0, 10);
++      return { id: `ar${i}`, splitId: 'x', splitName: 'Pull', day, startedAt: `${day}T10:00:00.000Z`, endedAt: `${day}T11:00:00.000Z`, durationSec: 3600, exercises: [{ exerciseId: id, name: 'Assisted Pull-Up', sets: [{ kg: 20, reps: r, effort: 'ideal' as const }] }], logging: { mode: 'live', flags: [] } as never };
++    });
++    const c = ctxOf({ ...s, sessions: [...s.sessions, ...sessions].sort((a, b) => a.startedAt.localeCompare(b.startedAt)) });
++    const h = R.getExerciseHistory({ exerciseId: id, weeks: 12 }, c) as { plateau: { status: string }; trend: { direction: string } };
++    expect(h.plateau.status).toBe('progressing');
++    expect(h.trend.direction).toBe('up');
++    const { summarize } = await import('@/escobar/tools/show');
++    expect((summarize('lift_trend', { exerciseId: id, weeks: 12 }, c) as { trend: string }).trend).toBe('up');
++  });
+ });
+ 
+ describe('warm-ups in the live view (QA-R6-3, QA-R6-11)', () => {
+diff --git a/tests/progress-trend.test.ts b/tests/progress-trend.test.ts
+new file mode 100644
+index 0000000..efe5fa5
+--- /dev/null
++++ b/tests/progress-trend.test.ts
+@@ -0,0 +1,44 @@
++import { describe, it, expect } from 'vitest';
++import { progressHint, progressTrend, progressValue } from '@/slices/history/progressTrend';
++import { exerciseHistory, modeOf } from '@/brain/history';
++import { session, sets } from './helpers';
++
++const weekly = (n: number) => Array.from({ length: n }, (_, i) => new Date(Date.UTC(2026, 6, 28 + i * 7)).toISOString().slice(0, 10));
++const histOf = (id: string, set: (i: number) => Parameters<typeof session>[1][number]['sets']) =>
++  exerciseHistory(weekly(8).map((d, i) => session(d, [{ id, sets: set(i) }])), id);
++
++describe('the Exercise progress card trend follows the lift mode (QA2-FC-1)', () => {
++  it('an assisted lift needing less help is improving, not slipping', () => {
++    expect(modeOf('lib_assisted_pull_up')).toBe('assisted');
++    const h = histOf('lib_assisted_pull_up', i => sets(40 - i * 4, 8, 'ideal', 3));
++    expect(progressTrend(h, 'assisted').direction).toBe('up');
++    expect(progressTrend(histOf('lib_assisted_pull_up', i => sets(12 + i * 4, 8, 'ideal', 3)), 'assisted').direction).toBe('down');
++  });
++  it('a hold getting longer is improving, not early', () => {
++    expect(modeOf('lib_plank')).toBe('duration');
++    const h = histOf('lib_plank', i => [{ durationSec: 30 + i * 10, effort: 'ideal' as const }]);
++    expect(progressTrend(h, 'duration').direction).toBe('up');
++  });
++  it('weighted lifts keep the strength score, and volume for sets over 10 reps', () => {
++    expect(progressTrend(histOf('lib_barbell_bench_press', i => sets(80 + i * 2.5, 5, 'ideal', 3)), 'weighted').direction).toBe('up');
++    expect(progressTrend(histOf('lib_barbell_bench_press', i => sets(20, 12 + (i >> 1), 'ideal', 3)), 'weighted').direction).toBe('up');
++  });
++});
++
++describe('the card line and hint agree with the trend (QA2-FC-1 follow-up)', () => {
++  it('an assisted lift needing less help draws a rising line', () => {
++    const pts = histOf('lib_assisted_pull_up', i => sets(40 - i * 4, 8, 'ideal', 3)).map(h => progressValue(h, 'assisted'));
++    expect(pts[pts.length - 1]!).toBeGreaterThan(pts[0]!);
++    for (let i = 1; i < pts.length; i++) expect(pts[i]!).toBeGreaterThan(pts[i - 1]!);
++  });
++  it('a hold draws its time, a bodyweight lift its reps', () => {
++    expect(histOf('lib_plank', i => [{ durationSec: 30 + i * 10, effort: 'ideal' as const }]).map(h => progressValue(h, 'duration'))).toEqual([30, 40, 50, 60, 70, 80, 90, 100]);
++    expect(histOf('lib_pull_up', i => [{ reps: 5 + i, effort: 'ideal' as const }]).map(h => progressValue(h, 'bodyweight'))).toEqual([5, 6, 7, 8, 9, 10, 11, 12]);
++  });
++  it('the hint names what each mode follows', () => {
++    expect(progressHint('assisted')).toMatch(/assistance/);
++    expect(progressHint('bodyweight')).toMatch(/reps/);
++    expect(progressHint('duration')).toMatch(/hold/);
++    expect(progressHint('weighted')).toMatch(/one-rep/);
++  });
++});
+diff --git a/tests/trend.test.ts b/tests/trend.test.ts
+index 419d725..359c859 100644
+--- a/tests/trend.test.ts
++++ b/tests/trend.test.ts
+@@ -1,5 +1,5 @@
+ import { describe, it, expect } from 'vitest';
+-import { plateauStatus, trend } from '@/brain/trend';
++import { liftTrend, plateauStatus, trend } from '@/brain/trend';
+ import { exerciseHistory } from '@/brain/history';
+ import { session } from './helpers';
+ 
+@@ -22,6 +22,26 @@ describe('plateauStatus for assisted work (BR-06)', () => {
+   });
+ });
+ 
++describe('liftTrend for assisted work (QA2-FC-4)', () => {
++  it('more reps at the same assistance is up, as plateauStatus says', () => {
++    const reps = [3, 3, 4, 4, 5, 5, 6, 6];
++    const h = hist(() => 20, i => reps[i]!);
++    expect(plateauStatus(h, 'assisted').status).toBe('progressing');
++    expect(liftTrend(h, 'assisted').direction).toBe('up');
++    expect(liftTrend(hist(() => 20, i => 8 - Math.floor(i / 2)), 'assisted').direction).toBe('down');
++  });
++  it('less assistance is up and more is down, whatever the reps do', () => {
++    expect(liftTrend(hist(i => 40 - i * 2.5, () => 8), 'assisted').direction).toBe('up');
++    expect(liftTrend(hist(i => 40 - i * 2.5, i => 8 - Math.floor(i / 3)), 'assisted').direction).toBe('up');
++    const more = liftTrend(hist(i => 20 + i * 2.5, () => 8), 'assisted');
++    expect(more.direction).toBe('down');
++    expect(more.slopePerWeek).toBeLessThan(0);
++  });
++  it('same assistance and same reps is flat', () => {
++    expect(liftTrend(hist(() => 30, () => 8), 'assisted').direction).toBe('flat');
++  });
++});
++
+ describe('trend', () => {
+   it('needs four points and reports relative weekly slope', () => {
+     expect(trend([{ day: '2026-08-01', value: 100 }]).direction).toBe('unknown');
+diff --git a/tests/weeklyReview.test.ts b/tests/weeklyReview.test.ts
+index 1690d4d..c1dc278 100644
+--- a/tests/weeklyReview.test.ts
++++ b/tests/weeklyReview.test.ts
+@@ -132,3 +132,25 @@ describe('weight trend and week grade (BR-14, BR-22)', () => {
+     expect(weekSummary(two, '2026-09-18', [], null).grade.title).toBe('Building momentum'); // QA-R6-10: no schedule is null; 0 now means every planned day was taken off
+   });
+ });
++
++describe('weekly e1RM review after a break (QA2-FC-2)', () => {
++  const profile: Profile = { name: 'Test' };
++  const review = (sessions: ReturnType<typeof session>[], today: string) => weeklyReviewInsights({
++    sessions, today, custom: [], schedule: emptySchedule(), goal: 'lean', profile,
++    weightLog: [], trainingAgeMonths: 24, exerciseIds: [{ id: bench, name: 'Barbell Bench Press' }],
++  }, 50).filter(i => i.id.startsWith('weekly:e1rm'));
++  it('sessions before a break do not make a comeback read as flat', () => {
++    const before = ['2026-07-29', '2026-07-31', '2026-08-03', '2026-08-05'].map(d => session(d, [{ id: bench, sets: sets(100, 5, 'ideal', 3) }]));
++    const after = ['2026-09-14', '2026-09-16', '2026-09-18'].map(d => session(d, [{ id: bench, sets: sets(100, 5, 'ideal', 3) }]));
++    expect(review([...before, ...after], '2026-09-19')).toEqual([]);
++  });
++  it('a rebuild after the break is judged on its own sessions: rising, not falling', async () => {
++    const { addDays } = await import('@/core/dates');
++    const before = ['2026-07-27', '2026-07-29', '2026-07-31', '2026-08-03', '2026-08-05', '2026-08-07'].map(d => session(d, [{ id: bench, sets: sets(100, 5, 'ideal', 3) }]));
++    const after = Array.from({ length: 10 }, (_, i) => session(addDays('2026-09-14', Math.round(i * 11 / 9)), [{ id: bench, sets: sets(85 + i, 5, 'ideal', 3) }]));
++    const e1rm = review([...before, ...after], '2026-09-26');
++    expect(e1rm.length).toBeGreaterThan(0);
++    expect(e1rm[0]!.title).not.toMatch(/falling/i);
++    expect(e1rm[0]!.title).toMatch(/rising/i);
++  });
++});

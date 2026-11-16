@@ -1,0 +1,130 @@
+M•ARC V36.7 — FRESH GITHUB REPOSITORY INSTRUCTIONS
+==================================================
+
+THIS PACKAGE IS FOR A BRAND-NEW EMPTY GITHUB REPOSITORY.
+Do not upload the ZIP itself. Extract it first, then upload the extracted contents.
+
+1. CREATE THE NEW REPOSITORY
+----------------------------
+Create a new GitHub repository.
+Recommended name: MARC-Tracker
+
+During creation leave it EMPTY:
+- Do not add README
+- Do not add .gitignore
+- Do not add a license
+
+2. EXTRACT THIS ZIP
+-------------------
+Extract:
+MARC_V36_7_FRESH_GITHUB_REPO_READY.zip
+
+The extracted root contains:
+.github/workflows/build-apk.yml
+.github/workflows/release-apk.yml
+www/index.html
+www/sw.js
+www/manifest.webmanifest
+native/HealthConnectNativePlugin.java
+native/MainActivity.java
+native/PermissionsRationaleActivity.java
+native/patch_manifest.py
+package.json
+capacitor.config.json
+.gitignore
+README.md
+docs/
+SHA256.txt
+
+3. UPLOAD EVERYTHING TO THE ROOT OF THE NEW REPOSITORY
+-------------------------------------------------------
+In GitHub:
+Add file > Upload files
+
+Upload/drag the CONTENTS of the extracted folder, not the outer folder itself.
+The repository root must show package.json, capacitor.config.json, www, native and .github.
+
+Commit to main.
+
+4. AUTOMATIC APK BUILD
+----------------------
+The first push automatically triggers:
+Build M-ARC Debug APK
+
+This build does NOT require signing secrets.
+It creates Android from scratch, installs Capacitor native plugins, installs the Health Connect bridge, checks the exact V36.7 web bytes, builds the APK, checks the APK contains the same bytes, then uploads an artifact named:
+MARC-V36.7-DEBUG-APK
+
+Open GitHub > Actions > Build M-ARC Debug APK > latest run > Artifacts.
+Download the artifact ZIP and extract MARC-V36.7-debug.apk.
+
+5. IMPORTANT: INSTALLING OVER YOUR OLD APP
+------------------------------------------
+A debug APK is signed with GitHub/Gradle's debug key.
+If the app already installed on your phone was signed with your OLD permanent release key, Android will NOT allow this debug APK to update it in place because the signatures differ.
+
+If you still have the old release keystore/signing secrets, configure the signed release workflow instead (Step 6) so the new APK can retain the same signing identity.
+
+If the old signing key is permanently lost, export a Full Backup from the currently installed M•ARC app BEFORE uninstalling it. Then uninstall the old app, install the new debug/new-key APK, and restore your backup. Uninstalling normally removes the old app's private local data.
+
+6. OPTIONAL: RESTORE PERMANENT SIGNING
+--------------------------------------
+For a signed release that can update a previous release, the SAME old keystore/key must be used.
+
+GitHub > Repository Settings > Secrets and variables > Actions > New repository secret
+
+Create these exact secret names:
+MARC_ANDROID_KEYSTORE_B64
+MARC_ANDROID_KEYSTORE_PASSWORD
+MARC_ANDROID_KEY_ALIAS
+MARC_ANDROID_KEY_PASSWORD
+
+MARC_ANDROID_KEYSTORE_B64 must contain the base64 text of the original .jks/.keystore file.
+
+Then open:
+Actions > Build Signed M-ARC Release APK > Run workflow
+
+The version fields may be left blank; the workflow generates safe V36.7 run values automatically.
+
+7. WHAT IS SELF-CONTAINED
+-------------------------
+The repository generates android/ fresh on every CI build. You do NOT need to upload an android folder.
+
+The repository contains the native bridge source required by the current app:
+- Health Connect
+- Haptics plugin (Capacitor dependency)
+- Local Notifications plugin
+- Filesystem plugin
+- Share plugin
+
+The workflow verifies those Capacitor plugins before compiling.
+
+8. HEALTH CONNECT NOTE
+----------------------
+The reconstructed native bridge targets Android 14+ framework Health Connect, matching the current V36.7 UI behavior and the current Android 16 test device. It reads Steps, Sleep, Heart Rate/Resting Heart Rate and Active Calories and supplies the JS fields expected by V36.7.
+
+The first GitHub Actions compile is the final Android-SDK compilation gate for the reconstructed native bridge. Static source/API checks were performed before packaging, but this environment does not contain a local Android SDK, so do not treat local QA as a substitute for the first CI compile.
+
+9. LOCKED APP SOURCE
+--------------------
+Current www/index.html SHA-256:
+5563acffb233fdfc69fce97d3d6eb0972fbcdfeda92c3d833fc209f8b2e7fe66
+
+Do not replace index.html with an older V36/J2/J3 file.
+
+10. AFTER THE APK BUILDS — DEVICE CHECK
+---------------------------------------
+Test:
+- App opens normally
+- Existing navigation
+- Settings > Test haptic physically vibrates
+- Training reminder remains ON after closing/reopening
+- Test 5s rest notification
+- Health Connect Connect / Sync / Diagnostic
+- Workout split/Add Split
+- Exercise chevron and Progress
+- Today Skip
+- History scrolling
+- Android visual export/save-share sheet
+
+END

@@ -1,0 +1,25 @@
+{
+  "name": "relay",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Relay: a shared workspace where you and your agents (Claude, GPT, Gemini, Codex) work in project folders through one link",
+  "type": "module",
+  "scripts": {
+    "dev": "node --disable-warning=ExperimentalWarning src/node.ts",
+    "start": "node --disable-warning=ExperimentalWarning src/node.ts",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "check": "npm run typecheck && npm test",
+    "deploy": "wrangler deploy",
+    "dry-run": "wrangler deploy --dry-run --outdir=dist"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20260922.1",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0",
+    "wrangler": "4.136.3"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}

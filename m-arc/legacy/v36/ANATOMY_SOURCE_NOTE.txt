@@ -1,0 +1,8 @@
+M•ARC REGISTERED ANATOMY SOURCE NOTE
+====================================
+
+The project architecture remains locked to the historical 657×650 registered anatomy coordinate system documented in the project handoff.
+
+The current exact V36.7 runtime www/index.html does not reference external assets/anatomy_master_neutral.png or separate registered-mask PNG files; its current visualization resources are embedded in the shipped app bytes. Therefore the fresh GitHub build is runtime-complete without those historical standalone source PNGs.
+
+Historical standalone authoring assets (neutral master/masks) remain important if muscle-mask development resumes. Do not regenerate or approximate them. Restore the authoritative originals from the prior project handoff/File Library before editing registered anatomy.

@@ -1,0 +1,91 @@
+# M/ARC coach Worker, Escobar v2. Deploys under the existing name so the stored
+# ANTHROPIC_API_KEY secret and bindings carry over. Deploy: npx wrangler deploy (pinned in package.json)
+name = "marc-coach"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+# enable_request_signal: request.signal fires when the app disconnects, so the model stream stops (PL-05).
+compatibility_flags = ["nodejs_compat", "enable_request_signal"]
+
+[vars]
+# Default model and per-mode effort; change here without touching code.
+MODEL = "claude-opus-5"
+# F7: per-mode models, each falling back to MODEL. The owner picks; see docs/REMEDIATION-PROGRESS.md (F7) for verified prices.
+# Only models that take adaptive thinking and effort are used (MODE_MODELS in src/anthropic.ts; not Haiku 4.5).
+# Any other value is ignored, that mode keeps MODEL, and /health lists it under ignoredModels, which fails the deploy check.
+# MODEL_CHAT = ""
+# MODEL_PLAN = ""
+# MODEL_LIVE = ""
+# MODEL_BRIEF = ""
+# MODEL_MOMENT = ""
+# MODEL_SUMMARIZE = ""
+# EFFORT_CHAT = "medium"
+# EFFORT_PLAN = "high"
+# EFFORT_LIVE = "low"
+# EFFORT_BRIEF = "low"
+# EFFORT_MOMENT = "low"
+# EFFORT_SUMMARIZE = "low"
+# Daily caps (per device, per IP, global). Exact with the QUOTA_DO Durable Object; soft on the KV fallback.
+MAX_TURNS_PER_DEVICE = "80"
+MAX_STEPS_PER_DEVICE = "400"
+MAX_OUTPUT_PER_DEVICE = "400000"
+MAX_TURNS_PER_IP = "300"
+MAX_STEPS_PER_IP = "1500"
+MAX_STEPS_TOTAL = "20000"
+MAX_OUTPUT_TOTAL = "3000000"
+# Web origins allowed to call this Worker (the PWA). The Android app sends capacitor://localhost or no Origin.
+ALLOWED_ORIGINS = "https://mrcdrnzz.netlify.app"
+
+# Per-device burst limit: 30 model steps a minute.
+[[ratelimits]]
+name = "RATE"
+namespace_id = "1001"
+simple = { limit = 30, period = 60 }
+
+# Per-IP burst limit: 60 requests a minute, so rotating device ids does not escape RATE (PL-01).
+[[ratelimits]]
+name = "RATE_IP"
+namespace_id = "1002"
+simple = { limit = 60, period = 60 }
+
+# Daily quotas: one SQLite-backed Durable Object per UTC day (src/quotaDO.ts).
+[[durable_objects.bindings]]
+name = "QUOTA_DO"
+class_name = "QuotaCounter"
+
+# Every Anthropic call leaves from this object, pinned to eastern North America (PL-20).
+[[durable_objects.bindings]]
+name = "UPSTREAM"
+class_name = "UpstreamRelay"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["QuotaCounter"]
+
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["UpstreamRelay"]
+
+# Fallback only if Durable Objects are unavailable on the account: soft KV quotas.
+# Create the namespace once and paste its id here:
+#   npx wrangler kv namespace create QUOTA
+# [[kv_namespaces]]
+# binding = "QUOTA"
+# id = "paste-the-id-here"
+
+# Anonymous error reports (docs/ERROR-REPORTS.md, item 7.5): reports and rate counters in D1
+# (src/errorsStore.ts; tables are created on first use). The owner creates the database once:
+#   npx wrangler d1 create marc-errors
+# and replaces database_id below with the id it prints (an id, not a secret).
+[[d1_databases]]
+binding = "ERRORS_DB"
+database_name = "marc-errors"
+database_id = "398dabc4-282f-437a-97dd-e3ce9aeb5d93"
+
+# Daily at 03:17 UTC: delete error reports past 90 days and old rate counters.
+[triggers]
+crons = ["17 3 * * *"]
+
+# Error reports secret: the bearer token for GET /errors/summary and the key of the IP hash.
+# POST /errors answers 503 until it is set. The owner sets it once, before merging:
+#   npx wrangler secret put ERRORS_SUMMARY_TOKEN
+# Never set in [vars]: secrets don't belong in the repo.

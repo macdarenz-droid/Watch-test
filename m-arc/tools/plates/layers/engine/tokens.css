@@ -1,0 +1,65 @@
+/* tokens:start */
+:root {
+  /* durations */
+  --dur-press: 100ms; --dur-fast: 150ms; --dur-base: 200ms; --dur-enter: 240ms; --dur-exit: 160ms;
+  --dur-sheet: 320ms; --dur-sheet-exit: 200ms; --dur-spring: 310ms; --dur-bounce: 460ms;
+  --stagger: 40ms; --delay-content: 60ms;
+  /* easings */
+  --ease-standard: cubic-bezier(.2,0,0,1);      /* M3 standard: colour, opacity, small moves */
+  --ease-enter: cubic-bezier(.05,.7,.1,1);      /* M3 emphasized-decelerate */
+  --ease-exit: cubic-bezier(.3,0,.8,.15);       /* M3 emphasized-accelerate, exits only */
+  --ease-drawer: cubic-bezier(.32,.72,0,1);     /* Vaul, sheets */
+  --ease-linear: linear;                        /* timers, progress, hold fill */
+  --ease-spring: var(--ease-enter);             /* fallback when linear() is unsupported */
+  --ease-spring-bounce: var(--ease-enter);
+  /* distances and scales */
+  --shift-sheet: 100%; --shift-md: 16px; --shift-sm: 8px;
+  --scale-in: .96; --scale-press: .97; --scale-press-sm: .95; --scale-press-card: .985;
+  --lift-scale: 1.02; --scale-pop: .9; --scale-swell: 1.02; --enter-opacity: 1;
+  /* type: size / line-height / tracking */
+  --fs-cap: 11px; --lh-cap: 14px; --ls-cap: .06em;
+  --fs-meta: 12px; --lh-meta: 16px;
+  --fs-small: 13px; --lh-small: 18px; --ls-small: -.003em;
+  --fs-body: 15px; --lh-body: 20px; --ls-body: -.009em;
+  --fs-title: 17px; --lh-title: 22px; --ls-title: -.013em;
+  --fs-stat: 22px; --lh-stat: 26px; --ls-stat: -.018em;
+  --fs-h1: 28px; --lh-h1: 34px; --ls-h1: -.021em; --fs-h1-narrow: 24px;
+  --fs-display: 40px; --lh-display: 44px; --ls-display: -.022em;
+  --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600;
+  /* space */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px;
+  /* radius (theme radii stay in themes.ts) */
+  --radius-xs: 4px; --radius-pill: 999px;
+  /* elevation */
+  --shadow-float: 0 1px 2px rgba(0,0,0,.5), 0 12px 32px -8px rgba(0,0,0,.6);
+  --shadow-thumb: 0 1px 2px rgba(0,0,0,.25);
+  --scrim: rgba(0,0,0,.5);
+  /* layout */
+  --nav-h: 58px; --float-gap: 12px;
+  --inset-b: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
+  --float-bottom: calc(var(--nav-h) + var(--float-gap) + var(--inset-b)); /* = 70px + inset, same as today */
+  --rest-h: 0px; /* RestBanner writes the real value on <html> (I1) */
+  --live-top-h: 0px; /* the sticky live header writes the real value on <html> (A2) */
+  /* layers */
+  --z-dock: 19; --z-nav: 20; --z-rest: 25; --z-toast: 30;
+}
+[data-theme="paper"] {
+  --shadow-float: 0 1px 2px rgba(0,0,0,.08), 0 12px 32px -8px rgba(0,0,0,.18);
+  --shadow-thumb: 0 1px 2px rgba(0,0,0,.12);
+}
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    /* derived by the research agent's own simulation of M3 spring params, not published values: unverified, tune by eye */
+    --ease-spring: linear(0,0.123,0.351,0.562,0.725,0.838,0.912,0.955,0.979,0.992,0.998,1,1.001,1.001,1);          /* ζ0.9 k700, use with --dur-spring */
+    --ease-spring-bounce: linear(0,0.106,0.323,0.554,0.748,0.889,0.978,1.025,1.043,1.044,1.036,1.026,1.016,1.008,1.003,1,0.998,0.998,0.998,0.999,1); /* ζ0.7 k500, 4.5% overshoot, use with --dur-bounce */
+  }
+}
+html[data-motion="reduce"] {
+  --shift-sheet: 0px; --shift-md: 0px; --shift-sm: 0px;
+  --scale-in: 1; --scale-press: 1; --scale-press-sm: 1; --scale-press-card: 1;
+  --lift-scale: 1; --scale-pop: 1; --scale-swell: 1; --enter-opacity: 0;
+  --dur-enter: 150ms; --dur-sheet: 150ms; --dur-exit: 100ms; --dur-sheet-exit: 100ms;
+  --dur-spring: 150ms; --dur-bounce: 150ms; --stagger: 0ms; --delay-content: 0ms;
+  --ease-spring: var(--ease-standard); --ease-spring-bounce: var(--ease-standard);
+}
+/* tokens:end */

@@ -1,0 +1,32 @@
+# Relay: shared workspace for you and your agents. Deploy: npx wrangler deploy (pinned in package.json).
+# Set the owner key once: npx wrangler secret put OWNER_KEY   (CI does it from the RELAY_OWNER_KEY repo secret)
+name = "relay"
+main = "src/worker.ts"
+compatibility_date = "2026-09-01"
+
+[vars]
+MAX_FILE_MB = "25"
+
+# public/ is served by the Worker (run_worker_first) so every response gets the same security headers.
+[assets]
+directory = "public"
+binding = "ASSETS"
+run_worker_first = true
+
+# All data lives in one SQLite-backed Durable Object (src/worker.ts).
+[[durable_objects.bindings]]
+name = "RELAY"
+class_name = "RelayStore"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["RelayStore"]
+
+# v2 added UsEgress for the assigned-agents feature (since removed); v3 retires that class.
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["UsEgress"]
+
+[[migrations]]
+tag = "v3"
+deleted_classes = ["UsEgress"]

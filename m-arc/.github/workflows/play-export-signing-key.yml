@@ -1,0 +1,116 @@
+name: Play - export app signing key for Google (one-off)
+
+# REL-3, owner decision 2026-09-30: Google Play uses the EXISTING permanent key
+# (SHA-256 05:66:9A:...:F1:F5) as the Play app signing key. This job hands that key
+# to Google with Google's PEPK tool. The output zip is encrypted to Google's public
+# key, so only Google Play can open it. The key and its password are never printed,
+# and the key files are removed from the runner at the end, pass or fail.
+# Needs .github/play/encryption_public_key.pem (a public key from the Play Console).
+# Delete this file once Play has accepted the key.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: play-export-signing-key
+  cancel-in-progress: false
+
+env:
+  EXPECTED_SHA256: '05:66:9A:D2:72:1C:6A:BA:F9:FD:D4:B9:B8:4E:2F:B7:94:48:44:B1:DE:F3:59:84:5F:01:5F:2B:67:CA:F1:F5'
+  # Google's tool, from the link in Play Console > App signing. Pinned by hash (checked 2026-09-30).
+  PEPK_URL: 'https://www.gstatic.com/play-apps-publisher-rapid/signing-tool/prod/pepk.jar'
+  PEPK_SHA256: 'aaccc0774b240aa5304bdad2a49865e92f229ca73209ecb6eaafe75dc858e24e'
+  GOOGLE_PEM: '.github/play/encryption_public_key.pem'
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check prerequisites
+        shell: bash
+        env:
+          KS_B64: ${{ secrets.MARC_SIGNING_KEYSTORE_B64 }}
+          KS_PW: ${{ secrets.MARC_SIGNING_STORE_PASSWORD }}
+        run: |
+          set -euo pipefail
+          [ -n "$KS_B64" ] || { echo '::error::Secret MARC_SIGNING_KEYSTORE_B64 is missing.'; exit 1; }
+          [ -n "$KS_PW" ] || { echo '::error::Secret MARC_SIGNING_STORE_PASSWORD is missing.'; exit 1; }
+          if [ ! -s "$GOOGLE_PEM" ]; then
+            echo "::error::Google's encryption public key is missing. Upload it to $GOOGLE_PEM on this branch first (see docs/RELEASE-READINESS.md, section Google Play)."
+            exit 1
+          fi
+          grep -q -- '-----BEGIN PUBLIC KEY-----' "$GOOGLE_PEM" \
+            || { echo "::error::$GOOGLE_PEM is not a PEM public key. Download it again from the Play Console."; exit 1; }
+          if grep -q 'PRIVATE KEY' "$GOOGLE_PEM"; then echo "::error::$GOOGLE_PEM holds a PRIVATE key. Delete it from the repo now; Google's file is public only."; exit 1; fi
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Decode the permanent key and verify its fingerprint
+        shell: bash
+        env:
+          KS_B64: ${{ secrets.MARC_SIGNING_KEYSTORE_B64 }}
+          KS_PW: ${{ secrets.MARC_SIGNING_STORE_PASSWORD }}
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -p "$RUNNER_TEMP/key"
+          printf '%s' "$KS_B64" | base64 --decode > "$RUNNER_TEMP/key/marc-signing.p12"
+          FP=$(keytool -list -v -storetype PKCS12 -keystore "$RUNNER_TEMP/key/marc-signing.p12" -storepass "$KS_PW" -alias marc 2>/dev/null | awk '/SHA256:/{print $2; exit}' || true)
+          if [ "$FP" != "$EXPECTED_SHA256" ]; then
+            echo "::error::The key in MARC_SIGNING_KEYSTORE_B64 (alias marc) is not the permanent key. Expected $EXPECTED_SHA256, got '${FP:-unreadable}'. Nothing was exported."
+            exit 1
+          fi
+          echo "Permanent key verified: $FP"
+
+      - name: Download PEPK and check its hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSfL --retry 3 -o "$RUNNER_TEMP/pepk.jar" "$PEPK_URL"
+          echo "$PEPK_SHA256  $RUNNER_TEMP/pepk.jar" | sha256sum -c - \
+            || { echo '::error::pepk.jar does not match the pinned hash. Google may have updated it; check it and update PEPK_SHA256.'; exit 1; }
+
+      - name: Encrypt the key for Google Play with PEPK
+        shell: bash
+        env:
+          KS_PW: ${{ secrets.MARC_SIGNING_STORE_PASSWORD }}
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -p out
+          # PEPK only takes passwords as flags. The value is a masked secret and set -x is off.
+          java -jar "$RUNNER_TEMP/pepk.jar" \
+            --keystore="$RUNNER_TEMP/key/marc-signing.p12" --alias=marc \
+            --keystore-pass="$KS_PW" --key-pass="$KS_PW" \
+            --output=out/marc-app-signing-key-for-google.zip \
+            --include-cert --rsa-aes-encryption --encryption-key-path="$GOOGLE_PEM"
+          [ -s out/marc-app-signing-key-for-google.zip ] || { echo '::error::PEPK produced no output.'; exit 1; }
+          {
+            echo '### App signing key exported for Google Play'
+            echo ''
+            echo "Key SHA-256: \`$EXPECTED_SHA256\`"
+            echo ''
+            echo 'Download the artifact **marc-app-signing-key-for-google-ENCRYPTED** (kept 1 day), unzip it once,'
+            echo 'and upload the zip inside to Play Console. Only Google can open it.'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the encrypted key for Google
+        uses: actions/upload-artifact@v4
+        with:
+          name: marc-app-signing-key-for-google-ENCRYPTED
+          path: out/marc-app-signing-key-for-google.zip
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: Remove key material from the runner
+        if: always()
+        shell: bash
+        run: rm -rf "$RUNNER_TEMP/key" "$RUNNER_TEMP/pepk.jar" out

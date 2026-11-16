@@ -1,0 +1,222 @@
+diff --git a/src/brain/coach/rules.ts b/src/brain/coach/rules.ts
+index 15ddcdd..7c26963 100644
+--- a/src/brain/coach/rules.ts
++++ b/src/brain/coach/rules.ts
+@@ -13,7 +13,7 @@ import { GOAL_BY_ID, type GoalId } from '@/data/goals';
+ import { formatHours, weekdayOf, daysBetween, addDays, weekStart } from '@/core/dates';
+ import { muscleDoses, recoveryAt, recoveryStatus, type MuscleRecovery } from '../recovery';
+ import { exerciseHistory, isActive, modeOf } from '../history';
+-import { plateauStatus } from '../trend';
++import { plateauStatus, sinceLastBreak } from '../trend';
+ import { effortDrift } from '../effort';
+ import { trainingBalance } from '../balance';
+ import { weekSummary, daysSinceLastSession } from '../weekly';
+@@ -339,7 +339,8 @@ export const RULES: Rule[] = [
+         if (meta?.role !== 'main' || modeOf(id, ctx.custom) !== 'weighted') return [];
+         const hist = exerciseHistory(ctx.sessions, id, ctx.custom);
+         // BR-04: the last 8 weeks, 6+ sessions, and flat means under 1.5% total change over them.
+-        const recent = hist.filter(h => daysBetween(h.day, ctx.today) <= 56);
++        // QA2-FC-2/3: like plateauStatus, only the sessions since the last long break count.
++        const recent = sinceLastBreak(hist).filter(h => daysBetween(h.day, ctx.today) <= 56);
+         if (recent.length < 6) return [];
+         // QA-R3a-7: 'flat' needs the sessions to cover most of the eight weeks, never two weeks of a 3x/week lift.
+         if (daysBetween(recent[0]!.day, recent[recent.length - 1]!.day) < PLATEAU_MIN_SPAN_DAYS) return [];
+diff --git a/src/brain/trend.ts b/src/brain/trend.ts
+index b6e6297..1a28197 100644
+--- a/src/brain/trend.ts
++++ b/src/brain/trend.ts
+@@ -37,16 +37,20 @@ export function trend(points: Array<{ day: string; value: number }>): Trend {
+ /**
+  * QA-R3a-2: the trend of what counts as progress for the lift's mode. Weighted: the strength
+  * estimate (or top load). Bodyweight: best reps. Duration: longest hold. Assisted: the assistance
+- * load, with the direction inverted (less help is up).
++ * load, with the direction inverted (less help is up); with it flat, the best reps, as in plateauStatus.
+  */
+ export function liftTrend(history: ExerciseSessionSummary[], mode: ResistanceMode = 'weighted'): Trend {
+   const recent = history.slice(-12);
+   if (mode === 'bodyweight') return trend(recent.map(h => ({ day: h.day, value: h.bestReps })));
+   if (mode === 'duration') return trend(recent.map(h => ({ day: h.day, value: h.bestDurationSec })));
+-  const t = trend(recent.map(h => ({ day: h.day, value: h.bestE1rm || h.topKg })));
+-  if (mode !== 'assisted') return t;
+-  const flipped: Direction = t.direction === 'up' ? 'down' : t.direction === 'down' ? 'up' : t.direction;
+-  return { ...t, direction: flipped, slopePerWeek: -t.slopePerWeek };
++  if (mode === 'assisted') {
++    // QA2-FC-4: not the e1RM of the assistance, which rises with more reps and would read as down.
++    const help = trend(recent.map(h => ({ day: h.day, value: h.topKg })));
++    if (help.direction === 'up' || help.direction === 'down') return { ...help, direction: help.direction === 'up' ? 'down' : 'up', slopePerWeek: -help.slopePerWeek };
++    const reps = trend(recent.map(h => ({ day: h.day, value: h.bestReps })));
++    return reps.direction === 'unknown' && help.direction === 'flat' ? help : reps;
++  }
++  return trend(recent.map(h => ({ day: h.day, value: h.bestE1rm || h.topKg })));
+ }
+ 
+ export type PlateauStatus = 'progressing' | 'plateaued' | 'declining' | 'unknown';
+diff --git a/src/slices/history/History.tsx b/src/slices/history/History.tsx
+index 99de097..11d4aac 100644
+--- a/src/slices/history/History.tsx
++++ b/src/slices/history/History.tsx
+@@ -11,10 +11,10 @@ import { rebuildRecoveryModel, sortByStart } from '@/slices/workout/session';
+ import { parseDurationSec, parseReps } from '@/core/parse';
+ import { hasEntry } from '@/brain/exposure';
+ import { allRecords, PR_LABEL } from '@/brain/prs';
+-import { exerciseHistory } from '@/brain/history';
+-import { trend } from '@/brain/trend';
++import { exerciseHistory, modeOf } from '@/brain/history';
+ import { plannedThisWeek, weekSummary } from '@/brain/weekly';
+ import { volumeChartWeeks } from './volumeChart';
++import { progressTrend } from './progressTrend';
+ import { muscleLabel } from '@/data/muscles';
+ import { showToast } from '@/app/toast';
+ import { Sparkline } from '@/ui/Sparkline';
+@@ -212,7 +212,7 @@ function Stats() {
+   const exercise = fromPanel && exerciseIds.some(([id]) => id === fromPanel) ? fromPanel : picked;
+   usePalaceFocus(exercise ? 'history.exercise-stats' : 'history.week', exercise ? { exerciseId: exercise } : undefined);
+   const hist = exercise ? exerciseHistory(s.sessions, exercise, s.customExercises) : [];
+-  const t = trend(hist.map(h => ({ day: h.day, value: h.bestE1rm || h.volume })));
++  const t = progressTrend(hist, modeOf(exercise, s.customExercises));
+   const muscleRows = (Object.entries(w.muscleSets) as Array<[string, number]>).sort((a, b) => b[1] - a[1]).slice(0, 6);
+   const maxSets = muscleRows[0]?.[1] ?? 1;
+ 
+diff --git a/src/slices/history/progressTrend.ts b/src/slices/history/progressTrend.ts
+new file mode 100644
+index 0000000..de26461
+--- /dev/null
++++ b/src/slices/history/progressTrend.ts
+@@ -0,0 +1,13 @@
++/**
++ * The Exercise progress card's trend (QA2-FC-1). Assisted, bodyweight and hold lifts are judged by
++ * their mode, as Escobar judges them (less assistance is up). Weighted lifts keep the strength
++ * score, with volume for sessions of sets over 10 reps.
++ */
++import type { ResistanceMode } from '@/core/models';
++import type { ExerciseSessionSummary } from '@/brain/history';
++import { liftTrend, trend, type Trend } from '@/brain/trend';
++
++export function progressTrend(hist: ExerciseSessionSummary[], mode: ResistanceMode): Trend {
++  if (mode === 'assisted' || mode === 'bodyweight' || mode === 'duration') return liftTrend(hist, mode);
++  return trend(hist.map(h => ({ day: h.day, value: h.bestE1rm || h.volume })));
++}
+diff --git a/tests/coach.test.ts b/tests/coach.test.ts
+index ec76aa2..3d212b1 100644
+--- a/tests/coach.test.ts
++++ b/tests/coach.test.ts
+@@ -211,4 +211,23 @@ describe('plateau needs time and ignores the time before a break (QA-R3a-6, QA-R
+     expect(out.some(i => i.id.startsWith('plateau:'))).toBe(false);
+     expect(deloadTrigger(sessions, '2026-09-23').suggest).toBe(false);
+   });
++  it('the plateau lever is not judged on sessions from before a five-week break (QA2-FC-2)', () => {
++    const before = ['2026-07-29', '2026-07-31', '2026-08-03', '2026-08-05'];
++    const after = ['2026-09-14', '2026-09-16', '2026-09-18'];
++    const sessions = [...before, ...after].map(d => session(d, [{ id: bench, sets: sets(100, 5, 'ideal', 3) }]));
++    const out = coachInsights({ ...baseCtx, today: '2026-09-19', now: new Date('2026-09-19T12:00:00Z').getTime(), sessions }, 20);
++    expect(out.some(i => i.id.startsWith('plateau-lever'))).toBe(false);
++    // Seven flat weeks after the break are enough on their own.
++    const back = ['2026-07-24', '2026-07-31', '2026-08-07', '2026-08-14', '2026-08-21', '2026-08-28', '2026-09-04', '2026-09-11', '2026-09-18'];
++    const flatAfter = ['2026-05-01', '2026-05-08', ...back].map(d => session(d, [{ id: bench, sets: sets(100, 5, 'ideal', 1) }]));
++    expect(coachInsights({ ...baseCtx, today: '2026-09-19', now: new Date('2026-09-19T12:00:00Z').getTime(), sessions: flatAfter }, 20).some(i => i.id === `plateau-lever:${bench}`)).toBe(true);
++  });
++  it('one stray session a month before two weeks of training does not make a plateau (QA2-FC-3)', () => {
++    const days = ['2026-09-07', '2026-09-09', '2026-09-11', '2026-09-14', '2026-09-16', '2026-09-18'];
++    const ctx = { ...baseCtx, today: '2026-09-19', now: new Date('2026-09-19T12:00:00Z').getTime() };
++    for (const n of [1, 3]) {
++      const sessions = [session('2026-08-07', [{ id: bench, sets: sets(100, 5, 'ideal', n) }]), ...days.map((d, i) => session(d, [{ id: bench, sets: sets(100 + i * 0.25, 5, 'ideal', n) }]))];
++      expect(coachInsights({ ...ctx, sessions }, 20).some(i => i.id.startsWith('plateau-lever'))).toBe(false);
++    }
++  });
+ });
+diff --git a/tests/escobar/read.test.ts b/tests/escobar/read.test.ts
+index 3859788..96c2ca1 100644
+--- a/tests/escobar/read.test.ts
++++ b/tests/escobar/read.test.ts
+@@ -189,6 +189,21 @@ describe('assisted lifts in Escobar (QA-R3a-2)', () => {
+     const { summarize } = await import('@/escobar/tools/show');
+     expect((summarize('lift_trend', { exerciseId: id, weeks: 12 }, c) as { plateau: string }).plateau).toBe('progressing');
+   });
++  it('more reps at the same assistance reads as up, not down (QA2-FC-4)', async () => {
++    const s = sixMonthsState();
++    const id = 'lib_assisted_pull_up';
++    const reps = [3, 3, 4, 4, 5, 5, 6, 6];
++    const sessions = reps.map((r, i) => {
++      const day = new Date(Date.UTC(2026, 6, 28 + i * 7)).toISOString().slice(0, 10);
++      return { id: `ar${i}`, splitId: 'x', splitName: 'Pull', day, startedAt: `${day}T10:00:00.000Z`, endedAt: `${day}T11:00:00.000Z`, durationSec: 3600, exercises: [{ exerciseId: id, name: 'Assisted Pull-Up', sets: [{ kg: 20, reps: r, effort: 'ideal' as const }] }], logging: { mode: 'live', flags: [] } as never };
++    });
++    const c = ctxOf({ ...s, sessions: [...s.sessions, ...sessions].sort((a, b) => a.startedAt.localeCompare(b.startedAt)) });
++    const h = R.getExerciseHistory({ exerciseId: id, weeks: 12 }, c) as { plateau: { status: string }; trend: { direction: string } };
++    expect(h.plateau.status).toBe('progressing');
++    expect(h.trend.direction).toBe('up');
++    const { summarize } = await import('@/escobar/tools/show');
++    expect((summarize('lift_trend', { exerciseId: id, weeks: 12 }, c) as { trend: string }).trend).toBe('up');
++  });
+ });
+ 
+ describe('warm-ups in the live view (QA-R6-3, QA-R6-11)', () => {
+diff --git a/tests/progress-trend.test.ts b/tests/progress-trend.test.ts
+new file mode 100644
+index 0000000..ec84d59
+--- /dev/null
++++ b/tests/progress-trend.test.ts
+@@ -0,0 +1,26 @@
++import { describe, it, expect } from 'vitest';
++import { progressTrend } from '@/slices/history/progressTrend';
++import { exerciseHistory, modeOf } from '@/brain/history';
++import { session, sets } from './helpers';
++
++const weekly = (n: number) => Array.from({ length: n }, (_, i) => new Date(Date.UTC(2026, 6, 28 + i * 7)).toISOString().slice(0, 10));
++const histOf = (id: string, set: (i: number) => Parameters<typeof session>[1][number]['sets']) =>
++  exerciseHistory(weekly(8).map((d, i) => session(d, [{ id, sets: set(i) }])), id);
++
++describe('the Exercise progress card trend follows the lift mode (QA2-FC-1)', () => {
++  it('an assisted lift needing less help is improving, not slipping', () => {
++    expect(modeOf('lib_assisted_pull_up')).toBe('assisted');
++    const h = histOf('lib_assisted_pull_up', i => sets(40 - i * 4, 8, 'ideal', 3));
++    expect(progressTrend(h, 'assisted').direction).toBe('up');
++    expect(progressTrend(histOf('lib_assisted_pull_up', i => sets(12 + i * 4, 8, 'ideal', 3)), 'assisted').direction).toBe('down');
++  });
++  it('a hold getting longer is improving, not early', () => {
++    expect(modeOf('lib_plank')).toBe('duration');
++    const h = histOf('lib_plank', i => [{ durationSec: 30 + i * 10, effort: 'ideal' as const }]);
++    expect(progressTrend(h, 'duration').direction).toBe('up');
++  });
++  it('weighted lifts keep the strength score, and volume for sets over 10 reps', () => {
++    expect(progressTrend(histOf('lib_barbell_bench_press', i => sets(80 + i * 2.5, 5, 'ideal', 3)), 'weighted').direction).toBe('up');
++    expect(progressTrend(histOf('lib_barbell_bench_press', i => sets(20, 12 + (i >> 1), 'ideal', 3)), 'weighted').direction).toBe('up');
++  });
++});
+diff --git a/tests/trend.test.ts b/tests/trend.test.ts
+index 419d725..359c859 100644
+--- a/tests/trend.test.ts
++++ b/tests/trend.test.ts
+@@ -1,5 +1,5 @@
+ import { describe, it, expect } from 'vitest';
+-import { plateauStatus, trend } from '@/brain/trend';
++import { liftTrend, plateauStatus, trend } from '@/brain/trend';
+ import { exerciseHistory } from '@/brain/history';
+ import { session } from './helpers';
+ 
+@@ -22,6 +22,26 @@ describe('plateauStatus for assisted work (BR-06)', () => {
+   });
+ });
+ 
++describe('liftTrend for assisted work (QA2-FC-4)', () => {
++  it('more reps at the same assistance is up, as plateauStatus says', () => {
++    const reps = [3, 3, 4, 4, 5, 5, 6, 6];
++    const h = hist(() => 20, i => reps[i]!);
++    expect(plateauStatus(h, 'assisted').status).toBe('progressing');
++    expect(liftTrend(h, 'assisted').direction).toBe('up');
++    expect(liftTrend(hist(() => 20, i => 8 - Math.floor(i / 2)), 'assisted').direction).toBe('down');
++  });
++  it('less assistance is up and more is down, whatever the reps do', () => {
++    expect(liftTrend(hist(i => 40 - i * 2.5, () => 8), 'assisted').direction).toBe('up');
++    expect(liftTrend(hist(i => 40 - i * 2.5, i => 8 - Math.floor(i / 3)), 'assisted').direction).toBe('up');
++    const more = liftTrend(hist(i => 20 + i * 2.5, () => 8), 'assisted');
++    expect(more.direction).toBe('down');
++    expect(more.slopePerWeek).toBeLessThan(0);
++  });
++  it('same assistance and same reps is flat', () => {
++    expect(liftTrend(hist(() => 30, () => 8), 'assisted').direction).toBe('flat');
++  });
++});
++
+ describe('trend', () => {
+   it('needs four points and reports relative weekly slope', () => {
+     expect(trend([{ day: '2026-08-01', value: 100 }]).direction).toBe('unknown');

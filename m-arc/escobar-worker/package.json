@@ -1,0 +1,26 @@
+{
+  "name": "marc-coach-escobar",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Escobar v2: a stateless single-step relay between the M/ARC app and the Claude API (deploys as the marc-coach Worker)",
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit -p tsconfig.json && vitest run",
+    "test": "vitest run",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "dry-run": "wrangler deploy --dry-run --outdir=dist"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.128.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20260922.1",
+    "typescript": "^5.7.0",
+    "vitest": "^3.2.0",
+    "wrangler": "4.136.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

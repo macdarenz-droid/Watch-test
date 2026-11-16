@@ -1,0 +1,55 @@
+/* GENERATED, do not edit. Written by tools/plates/generate.mjs (tools/plates/gen/zooms.mjs). inputsSha256=f2642aef761d371aed673e0c1ab549fe7ae645a851f33e71e6a272bc0ee897ce */
+/* ht-tokens:start */
+.ht { --ht-t-160ms: 160ms; --ht-t-2-3s: 2.3s; --ht-t-2-4s: 2.4s; --ht-t-80ms: 80ms; }
+/* ht-tokens:end */
+.ht :where(.hx) .plate { all: revert; }
+.ht :where(.hx) .plate { position: relative; width: 100%; aspect-ratio: 1; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); background: var(--surface-2); overflow: hidden; }
+.ht :where(.hx) .plate .dot { fill: var(--border-subtle); }
+.ht :where(.hx) .plate .u-stroke use { fill: none; stroke-width: 2; stroke-linejoin: round; }
+.ht :where(.hx) .plate .pose-end .u-stroke use { stroke: var(--text-2); }
+.ht :where(.hx) .plate .pose-end .u-fill use { fill: var(--surface-3); }
+.ht :where(.hx) .plate .pose-start .u-stroke use { stroke: var(--border-strong); stroke-dasharray: 3 3; }
+.ht :where(.hx) .plate .pose-start .u-fill use, .ht :where(.hx) .plate .ghost .u-fill use { fill: var(--surface-2); }
+.ht :where(.hx) .plate .ghost { opacity: var(--o); }
+.ht :where(.hx) .plate .ghost .u-stroke use { stroke: var(--text-3); }
+.ht :where(.hx) .plate .disc { fill: var(--surface-3); stroke: var(--text-2); stroke-width: 1; }
+.ht :where(.hx) .plate .disc-core { fill: none; stroke: var(--text-3); stroke-width: 1; }
+.ht :where(.hx) .plate .joint { fill: var(--surface-2); stroke: var(--text-2); stroke-width: 1; }
+.ht :where(.hx) .plate .datum { stroke: var(--text-3); stroke-width: .75; stroke-dasharray: 2 3; fill: none; }
+.ht :where(.hx) .plate .floorline { stroke: var(--border); stroke-width: 1; }
+.ht :where(.hx) .plate .trace { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.ht :where(.hx) .plate .arrow { fill: var(--accent); }
+.ht :where(.hx) .plate .arc { fill: color-mix(in srgb, var(--accent) 12%, transparent); }
+.ht :where(.hx) .plate .arc-line { fill: none; stroke: var(--accent); stroke-width: 1; }
+.ht :where(.hx) .plate .arc-ticks path { stroke: var(--accent); stroke-width: 1; }
+.ht :where(.hx) .plate .lead-guide { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+.ht :where(.hx) .plate .leader { fill: none; stroke: var(--text-3); stroke-width: .75; }
+.ht :where(.hx) .plate .leader.on { stroke: var(--accent); }
+.ht :where(.hx) .plate .anchor { fill: var(--text-3); }
+.ht :where(.hx) .plate .anchor.on { fill: var(--accent); }
+.ht :where(.hx) .plate .mistake-layer { fill: none; stroke: var(--mistake); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.ht :where(.hx) .plate .m-line { stroke-width: 1; stroke-dasharray: 3 3; }
+.ht :where(.hx) .plate .leader.m { stroke: var(--mistake); stroke-width: .75; }
+html:not([data-motion="reduce"]) .ht :where(.hx) .plate.tracing .trace { animation: plate-trace var(--ht-t-2-4s) var(--ease-standard) both; }
+html:not([data-motion="reduce"]) .ht :where(.hx) .plate.tracing .ghost { animation: plate-ghost var(--dur-enter) var(--ease-standard) both; animation-delay: calc(var(--i) * var(--ht-t-80ms)); }
+.ht :where(.hx) .plate .pose-end .far .u-stroke use { stroke: var(--text-3); }
+.ht :where(.hx) .plate .eq { fill: var(--surface-2); stroke: var(--text-3); stroke-width: 1; stroke-linejoin: round; }
+.ht :where(.hx) .plate .eq-solid { fill: var(--surface-3); stroke: var(--text-2); stroke-width: 1; stroke-linejoin: round; }
+.ht :where(.hx) .plate .eq-line { fill: none; stroke: var(--text-3); stroke-width: 1; stroke-linecap: round; }
+.ht :where(.hx) .plate .eq-thin { fill: none; stroke: var(--border-strong); stroke-width: .75; }
+.ht :where(.hx) .plate .eq-cable { fill: none; stroke: var(--text-2); stroke-width: .75; stroke-linecap: round; }
+.ht :where(.hx) .plate .eq-pin { fill: var(--text-3); stroke: none; }
+.ht :where(.hx) .plate .pose-start .eq, .ht :where(.hx) .plate .pose-start .eq-solid { fill: var(--surface-2); stroke: var(--border-strong); stroke-dasharray: 3 3; }
+.ht :where(.hx) .plate .pose-start .eq-line, .ht :where(.hx) .plate .pose-start .eq-cable, .ht :where(.hx) .plate .pose-start .eq-thin { stroke: var(--border-strong); stroke-dasharray: 3 3; }
+.ht :where(.hx) .plate .pose-start .eq-pin { fill: var(--border-strong); }
+.ht :where(.hx) .plate .ghost .eq, .ht :where(.hx) .plate .ghost .eq-solid { fill: var(--surface-2); stroke: var(--text-3); }
+.ht :where(.hx) .plate .ghost .eq-line, .ht :where(.hx) .plate .ghost .eq-cable, .ht :where(.hx) .plate .ghost .eq-thin { stroke: var(--text-3); }
+.ht :where(.hx) .plate .ghost .eq-pin { fill: var(--text-3); }
+.ht :where(.hx) .plate .m-pose .u-stroke use { fill: none; stroke: var(--mistake); stroke-width: 2; stroke-linejoin: round; stroke-dasharray: 4 3; }
+html:not([data-motion="reduce"]) .ht :where(.hx) .plate.tracing .ghost { animation: plate-ghost var(--dur-enter) var(--ease-standard) both; animation-delay: var(--gd, calc(var(--i) * var(--ht-t-80ms))); }
+html:not([data-motion="reduce"]) .ht :where(.hx) .plate.tracing .arrow { animation: plate-fade var(--ht-t-160ms) var(--ease-standard) var(--ht-t-2-3s) both; }
+html:not([data-motion="reduce"]) .ht :where(.hx) .plate.tracing .measure, html:not([data-motion="reduce"]) .ht :where(.hx) .plate.tracing .plate-arc-label { animation: plate-fade var(--dur-enter) var(--ease-standard) var(--ht-t-2-4s) both; }
+@media (prefers-reduced-motion: reduce) {
+  .ht :where(.hx) .plate .trace, .ht :where(.hx) .plate .ghost, .ht :where(.hx) .plate .arrow, .ht :where(.hx) .plate .measure { animation: none !important; }
+}
+.ht .zdot { fill: var(--border-subtle); }

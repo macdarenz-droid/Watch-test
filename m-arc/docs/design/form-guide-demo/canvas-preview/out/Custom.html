@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create my own</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400..700&amp;display=swap">
+<style>html,body{margin:0}#dc-board{position:relative;width:390px;height:844px;overflow:hidden}</style>
+<style data-dc-helmet="Custom" media="not all">
+body{margin:0;font-family:Roboto,Inter,"SF Pro Text",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+/* Custom: "tate press" finds nothing (spec 6.3), then Create my own with the live name check (6.4) and Ask Escobar (6.3, 7.7).
+   Classes start with cu- (ct- for the Train screen behind). Only theme tokens are used, set on the root from the theme prop.
+   --cu-ink paints accent icons: the plain accent, lifted toward the text colour only in Midnight, where the accent is 2.65:1 on the sheet.
+   --cu-fill fills primary buttons: the accent, deepened only in Paper so white text on it reaches 4.5:1 (plain Paper accent is 3.9:1), as on the Warmup board. */
+.cu-root{--tz:.8;--cu-focus:color-mix(in srgb,var(--accent) 80%,var(--text));position:relative;overflow:hidden;background:var(--bg);color:var(--text);font-family:Roboto,Inter,"SF Pro Text",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:calc(16px * var(--tz));line-height:1.4;-webkit-font-smoothing:antialiased}
+.cu-b{appearance:none;-webkit-appearance:none;margin:0;padding:0;border:0;background:none;color:inherit;font:inherit;line-height:inherit;text-align:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;box-sizing:border-box}
+.cu-root button:focus-visible,.cu-root a:focus-visible{outline:2px solid var(--cu-focus);outline-offset:2px}
+.cu-svg{display:block;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* The real Escobar mark (src/assets/escobar-mark.png) as a mask, painted with currentColor like the app does. */
+.cu-mark{--cu-mark:url("data:image/png;base64,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");display:inline-block;flex:none;background-color:currentColor;-webkit-mask:var(--cu-mark) center / contain no-repeat;mask:var(--cu-mark) center / contain no-repeat}
+.cu-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+
+/* ---- Behind the sheet: the owner's Train screen as Main draws it at scroll 0 (static, hidden from screen readers). The Escobar dock is hidden while a sheet is open. ---- */
+.ct-bg{--tz:.8;position:absolute;inset:0;font-size:calc(16px * var(--tz));line-height:1.4;pointer-events:none}
+.ct-scroll{position:absolute;inset:0;box-sizing:border-box;overflow:hidden;padding:12px 16px 140px}
+.ct-topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:6px 0 18px}
+.ct-eyebrow{font-size:calc(11px * var(--tz));font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)}
+.ct-h1{margin:0;font-size:calc(28px * var(--tz));font-weight:650;letter-spacing:-.02em;line-height:1.15;color:var(--text)}
+.ct-h2{margin:0;font-size:calc(17px * var(--tz));font-weight:600;letter-spacing:-.01em;line-height:1.4;color:var(--text)}
+.ct-hint{font-size:calc(12px * var(--tz));color:var(--text-2)}
+.ct-btn{position:relative;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:var(--radius-md);font-weight:600;font-size:calc(14px * var(--tz));border:1px solid var(--border);background:var(--surface-2);color:var(--text);white-space:nowrap}
+.ct-primary{background:var(--cu-fill);border-color:transparent;color:var(--on-accent)}
+.ct-quiet{background:transparent;border-color:transparent;color:var(--text-2)}
+.ct-sm{min-height:34px;padding:0 12px;font-size:calc(13px * var(--tz))}
+.ct-block{display:flex;width:100%}
+.ct-icon{width:44px;min-height:44px;padding:0;border-radius:50%}
+.ct-gymrow{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ct-chip{box-sizing:border-box;display:inline-flex;align-items:center;gap:4px;min-height:36px;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--text-2);font-size:calc(12px * var(--tz));font-weight:600;white-space:nowrap}
+.ct-tabs{display:flex;gap:8px;overflow:hidden;padding:4px 4px 8px;margin:-2px -4px 0}
+.ct-tab{box-sizing:border-box;flex:none;display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface-1);color:var(--text-2);font-size:calc(13px * var(--tz));font-weight:600;white-space:nowrap}
+.ct-tab-on{background:var(--text);color:var(--bg);border-color:transparent}
+.ct-dot{flex:none;width:8px;height:8px;border-radius:50%}
+.ct-card{background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:16px}
+.ct-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ct-list{display:grid;min-width:0;margin-top:6px}
+.ct-row{position:relative;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:calc(100% + 16px);min-width:0;min-height:52px;margin:0 -8px;padding:10.8px 8px}
+.ct-row::after{content:"";position:absolute;left:8px;right:8px;bottom:0;height:1px;background:var(--border-subtle)}
+.ct-row:last-child::after{display:none}
+.ct-grow{display:block;flex:1;min-width:0}
+.ct-name{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.ct-sub{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:calc(12px * var(--tz));color:var(--text-2)}
+.ct-trail{flex:none;font-size:calc(12px * var(--tz));color:var(--text-2);font-variant-numeric:tabular-nums}
+.ct-start{margin-top:12px}
+.ct-nav{position:absolute;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--bg) 88%,transparent);border-top:1px solid var(--border-subtle)}
+.ct-nav-inner{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.ct-navbtn{display:grid;justify-items:center;align-content:start;gap:3px;min-height:58px;padding:10px 0 8px;box-sizing:border-box;color:var(--text-2);font-size:calc(11px * var(--tz));font-weight:600;line-height:1.4}
+.ct-navbtn-on{color:var(--text)}
+
+/* ---- Demo controls (not part of the app): jump to a screen, preview offline ---- */
+.cu-demo{position:absolute;top:8px;left:16px;right:16px;z-index:60;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr);gap:8px;padding:8px;background:var(--surface-1);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow)}
+.cu-demo-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.cu-demo-row2{display:flex;align-items:center;gap:10px}
+.cu-demo-note{margin:0;min-width:0;font-size:12px;line-height:16px;color:var(--text-2)}
+.cu-chip{position:relative;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:36px;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--text-2);font-size:12px;line-height:16px;font-weight:600;white-space:nowrap;text-align:center;transition:scale 200ms cubic-bezier(.2,0,0,1)}
+.cu-chip::before{content:"";position:absolute;inset:-4px 0}
+.cu-chip:active{scale:.95;transition-duration:100ms}
+.cu-chip[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:transparent}
+.cu-demo-row2 .cu-chip{flex:none}
+
+/* ---- Scrim and the picker sheet (origin/main after patch b3: surface-2 panel, sticky top, hairline once scrolled).
+   The sheet stops 10px under the demo controls (max 728px), instead of the app's 92% of the screen. ---- */
+.cu-scrim{position:absolute;inset:0;z-index:30;display:block;background:var(--scrim);cursor:default;-webkit-tap-highlight-color:transparent}
+.cu-scrim:focus-visible{outline:none}
+.cu-sheet{position:absolute;left:0;right:0;bottom:0;z-index:31;max-height:728px;box-sizing:border-box;overflow:hidden;display:flex;flex-direction:column;background:var(--surface-2);color:var(--text);border-radius:var(--radius-xl) var(--radius-xl) 0 0;animation:cu-rise 320ms cubic-bezier(.32,.72,0,1) both}
+.cu-sheet::after,.cu-esc::after{content:"";position:absolute;inset:0;z-index:3;border:1px solid var(--border);border-bottom:0;border-radius:inherit;pointer-events:none}
+.cu-scroll{min-height:0;max-height:728px;box-sizing:border-box;padding:8px 16px 20px;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
+.cu-scroll::-webkit-scrollbar,.cu-thread::-webkit-scrollbar{display:none}
+.cu-top{position:sticky;top:-8px;z-index:2;margin:-8px -16px 0;padding:8px 16px 0;background:var(--surface-2)}
+.cu-hair{position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--border-subtle);transition:opacity 150ms cubic-bezier(.2,0,0,1)}
+.cu-grab{width:36px;height:4px;border-radius:2px;background:var(--border-strong);margin:4px auto 14px}
+.cu-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px}
+.cu-head h2{margin:0;min-width:0;font-size:calc(17px * var(--tz));line-height:calc(22px * var(--tz));font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.cu-close{flex:none;box-sizing:border-box;width:44px;height:44px;border-radius:50%;background:transparent;color:var(--text-2);display:inline-grid;place-items:center;cursor:pointer;text-decoration:none;transition:background-color 100ms cubic-bezier(.2,0,0,1)}
+.cu-close:active{background:var(--surface-3)}
+.cu-stack{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+
+/* Search field in its focused look (accent border, 3px accent-soft ring), as on the Search board. */
+.cu-field{display:flex;align-items:center;box-sizing:border-box;min-height:44px;padding:10px 12px;border:1px solid var(--accent);border-radius:var(--radius-md);background:var(--surface-2);box-shadow:0 0 0 3px var(--accent-soft);color:var(--text);font-size:calc(16px * var(--tz));line-height:calc(22px * var(--tz))}
+.cu-caret{flex:none;width:2px;height:calc(20px * var(--tz));margin-left:1px;border-radius:1px;background:var(--cu-ink);animation:cu-blink 1s step-end infinite}
+
+/* No match */
+.cu-empty{display:grid;justify-items:center;gap:4px;padding:12px 0 4px;text-align:center}
+.cu-empty-ico{width:44px;height:44px;margin-bottom:6px;border-radius:50%;background:var(--surface-3);color:var(--text-2);display:grid;place-items:center}
+.cu-empty-t{margin:0;font-size:calc(15px * var(--tz));line-height:calc(20px * var(--tz));font-weight:600;color:var(--text)}
+.cu-empty-s{margin:0;font-size:calc(13px * var(--tz));line-height:calc(18px * var(--tz));color:var(--text-2)}
+
+/* The custom exercise once it exists: a normal result row (the whole row adds it). */
+.cu-list{display:grid;min-width:0}
+.cu-rrow{position:relative;box-sizing:border-box;display:flex;align-items:center;gap:12px;min-width:0;min-height:52px;margin:0 -8px;padding:12px 8px}
+.cu-radd{position:absolute;inset:0;z-index:0;width:100%;height:100%;border-radius:var(--radius-sm);transition:background-color 150ms cubic-bezier(.2,0,0,1)}
+.cu-radd:active{background:var(--surface-3);transition:none}
+.cu-radd:focus-visible{outline-offset:-2px}
+.cu-rgrow{position:relative;display:block;flex:1;min-width:0;pointer-events:none}
+.cu-rname{display:block;color:var(--text);font-size:calc(16px * var(--tz));line-height:1.4}
+.cu-rhint{display:block;margin-top:1px;color:var(--text-2);font-size:calc(12px * var(--tz));line-height:1.4}
+.cu-rchip{position:relative;flex:none;display:inline-flex;align-items:center;box-sizing:border-box;min-height:28px;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--text-2);font-size:calc(12px * var(--tz));line-height:calc(16px * var(--tz));font-weight:600;pointer-events:none}
+
+/* "Can't find it?" */
+.cu-cant{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin-top:4px;padding-top:16px;border-top:1px solid var(--border-subtle)}
+.cu-cant-q{margin:0;text-align:center;font-size:calc(15px * var(--tz));line-height:calc(20px * var(--tz));color:var(--text-2)}
+.cu-cant-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:start}
+.cu-col{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+.cu-why{margin:0;display:flex;align-items:center;justify-content:center;gap:6px;font-size:calc(12px * var(--tz));line-height:calc(16px * var(--tz));color:var(--text-2)}
+
+/* Buttons (.btn, .btn-primary, .btn-quiet, .btn-sm). Small buttons keep a 44px touch box through ::before. */
+.cu-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;box-sizing:border-box;min-height:44px;padding:0 16px;border-radius:var(--radius-md);border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:calc(14px * var(--tz));line-height:1.2;font-weight:600;white-space:nowrap;text-decoration:none;cursor:pointer;transition:transform 200ms cubic-bezier(.2,0,0,1),background-color 150ms cubic-bezier(.2,0,0,1)}
+.cu-btn:active{transform:scale(.97);transition-duration:100ms}
+.cu-btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.cu-btn .cu-mark{color:var(--cu-ink)}
+.cu-primary{background:var(--cu-fill);border-color:transparent;color:var(--on-accent)}
+.cu-quiet{background:transparent;border-color:transparent;color:var(--text-2)}
+.cu-sm{min-height:34px;padding:0 12px;font-size:calc(13px * var(--tz))}
+.cu-sm::before{content:"";position:absolute;inset:-5px 0}
+.cu-grow{flex:1;min-width:0}
+
+/* ---- New exercise form (ExercisePicker custom form, fields as today) ---- */
+.cu-form{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.cu-fld{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;min-width:0}
+.cu-lbl{font-size:calc(13px * var(--tz));line-height:calc(18px * var(--tz));color:var(--text-2)}
+.cu-hint{font-size:calc(12px * var(--tz));line-height:calc(16px * var(--tz));color:var(--text-2)}
+.cu-input{box-sizing:border-box;display:block;width:100%;min-height:44px;margin:0;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface-2);color:var(--text);font-family:inherit;font-size:calc(16px * var(--tz));line-height:calc(22px * var(--tz));outline:none}
+.cu-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.cu-input::placeholder{color:var(--text-2);opacity:1}
+.cu-wrap{display:flex;flex-wrap:wrap;gap:8px}
+.cu-seg{display:flex;gap:2px;padding:3px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--radius-md)}
+.cu-seg-b{position:relative;flex:1;min-height:34px;border-radius:calc(var(--radius-md) - 3px);font-size:calc(13px * var(--tz));line-height:calc(16px * var(--tz));font-weight:600;color:var(--text-2);text-align:center;transition:color 150ms cubic-bezier(.2,0,0,1)}
+.cu-seg-b::before{content:"";position:absolute;inset:-5px 0}
+.cu-seg-b[aria-pressed="true"]{background:var(--surface-1);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.18)}
+.cu-actions{display:flex;align-items:center;gap:10px}
+
+/* The name check card (spec 6.4), under the Name field. */
+.cu-dup{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface-1);animation:cu-in 240ms cubic-bezier(.05,.7,.1,1) both}
+.cu-dup-head{display:flex;gap:10px;align-items:flex-start}
+.cu-dup-head .cu-svg{margin-top:1px;color:var(--cu-ink)}
+.cu-dup-t{margin:0;font-size:calc(15px * var(--tz));line-height:calc(20px * var(--tz));font-weight:600;color:var(--text)}
+.cu-dup-m{margin:2px 0 0;font-size:calc(13px * var(--tz));line-height:calc(18px * var(--tz));color:var(--text-2)}
+.cu-dup-n{margin:4px 0 0;font-size:calc(13px * var(--tz));line-height:calc(18px * var(--tz));color:var(--text)}
+.cu-dup-row{display:flex;gap:8px}
+.cu-dup-row .cu-btn{flex:1;min-width:0;padding:0 12px;white-space:normal;text-align:center}
+
+/* ---- Escobar panel (origin/main .esc-panel at the half detent: 62% of the screen), over the picker with a clear backdrop ---- */
+.cu-layer{position:absolute;inset:0;z-index:40}
+.cu-clear{position:absolute;inset:0;width:100%;height:100%;background:transparent;cursor:default}
+.cu-clear:focus-visible{outline:none}
+.cu-esc{position:absolute;left:0;right:0;bottom:0;height:523px;box-sizing:border-box;display:flex;flex-direction:column;padding:0 16px 10px;background:var(--surface-2);color:var(--text);border-radius:var(--radius-xl) var(--radius-xl) 0 0;animation:cu-rise 320ms cubic-bezier(.32,.72,0,1) both}
+.cu-grabzone{padding:6px 0 2px}
+.cu-grabzone .cu-grab{margin:4px auto 8px}
+.cu-esc-head{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--border-subtle)}
+.cu-esc-head .cu-mark{color:var(--cu-ink)}
+.cu-esc-head-text{flex:1;min-width:0;display:grid;gap:1px}
+.cu-esc-head-text h2{margin:0;font-size:calc(16px * var(--tz));line-height:calc(22px * var(--tz));font-weight:600;letter-spacing:-.01em;color:var(--text)}
+.cu-esc-status{margin:0;font-size:calc(12px * var(--tz));line-height:calc(16px * var(--tz));color:var(--text-2)}
+.cu-thread{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;margin:0 -4px;padding:12px 4px;scrollbar-width:none}
+.cu-thread-in{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.cu-user{justify-self:end;max-width:82%}
+.cu-bubble{margin:0;padding:10px 14px;border-radius:18px 18px 6px 18px;background:var(--accent-soft);color:var(--text);font-size:calc(15px * var(--tz));line-height:1.4;overflow-wrap:anywhere}
+.cu-turn{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;min-width:0}
+.cu-answer{margin:0;font-size:calc(15.5px * var(--tz));line-height:1.5;color:var(--text)}
+.cu-prop{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--radius-lg)}
+.cu-prop-t{margin:0;font-size:calc(15px * var(--tz));line-height:calc(20px * var(--tz));font-weight:600;color:var(--text)}
+/* Change table, as origin/main ProposalCard (.esc-diff small): label | before (—) | → | after. The "—" uses --text-2, not the app's --text-3, to keep 4.5:1. */
+.cu-diff{width:100%;border-collapse:collapse;font-size:calc(13px * var(--tz));line-height:calc(18px * var(--tz))}
+.cu-diff th{text-align:left;font-weight:600;color:var(--text-2);padding:4px 8px 4px 0}
+.cu-diff td{padding:4px;color:var(--text)}
+.cu-diff td.cu-was{color:var(--text-2)}
+.cu-prop-row{display:flex;gap:8px;padding-top:2px}
+.cu-prop-st{margin:0;display:flex;align-items:center;gap:6px;font-size:calc(13px * var(--tz));line-height:calc(18px * var(--tz));color:var(--text-2)}
+/* Applied + Undo link, as origin/main (.esc-link: accent, weight 600, 32px row, taller tap area). Link colour is the accent mixed 70/30 with the text colour: at least 4.8:1 on the card in every theme (plain accent is 3.0:1 in Midnight, 3.6:1 in Paper). */
+.cu-link{position:relative;display:inline-flex;align-items:center;min-height:32px;color:color-mix(in srgb,var(--accent) 70%,var(--text));font-weight:600}
+.cu-link::before{content:"";position:absolute;inset:-6px -10px}
+
+/* Message composer at the foot of the Escobar panel (origin/main Composer.tsx: esc-composer, esc-input-row, esc-textarea, esc-send). */
+.cu-composer{padding-top:8px;border-top:1px solid var(--border-subtle)}
+.cu-composer-row{display:flex;align-items:center;gap:6px}
+.cu-composer-input{flex:1;min-width:0;box-sizing:border-box;display:flex;align-items:center;min-height:44px;padding:11px 12px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface-2);color:var(--text-2);font-size:calc(15px * var(--tz));line-height:1.4}
+.cu-send{flex:none;box-sizing:border-box;width:44px;height:44px;border-radius:50%;background:var(--cu-fill);color:var(--on-accent);display:inline-grid;place-items:center}
+.cu-send:disabled{opacity:.45;cursor:not-allowed}
+
+/* ---- End of a branch: the sheet has closed; the split editor it returns to is not in this demo ---- */
+.cu-dim{position:absolute;inset:0;z-index:30;background:var(--scrim)}
+
+/* ---- Toast (origin/main .toast): text colour fill, page colour text, 5 s with Undo, 3 s without ---- */
+.cu-toast{position:absolute;left:0;right:0;bottom:124px;z-index:70;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:max-content;max-width:calc(100% - 32px);margin-inline:auto;padding:10px 14px;border-radius:999px;background:var(--text);color:var(--bg);font-size:calc(13px * var(--tz));line-height:calc(18px * var(--tz));font-weight:600;text-align:center;box-shadow:var(--cu-float);transform-origin:50% 100%}
+.cu-tg-0{animation:cu-toast-a 240ms cubic-bezier(.05,.7,.1,1) both}
+.cu-tg-1{animation:cu-toast-b 240ms cubic-bezier(.05,.7,.1,1) both}
+.cu-toast.cu-leave{animation:cu-toast-out 160ms cubic-bezier(.3,0,.8,.15) forwards}
+/* While Escobar's panel is open the toast sits above the composer, so it never covers the proposal card or the message box:
+   10px panel bottom padding + 53px composer height + 12px gap. */
+.cu-toast.cu-toast-esc{bottom:75px}
+/* While the picker sheet is open (no Escobar panel), the toast sits above the sheet so it never covers the row just added. */
+.cu-toast.cu-toast-pick{bottom:412px}
+.cu-toast-b{position:relative;min-height:32px;padding:0 4px;margin-left:8px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.cu-toast-b::before{content:"";position:absolute;inset:-8px}
+.cu-toast .cu-toast-b:focus-visible{outline-color:var(--bg)}
+
+@keyframes cu-rise{from{transform:translateY(100%)}to{transform:none}}
+@keyframes cu-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes cu-toast-a{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes cu-toast-b{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes cu-toast-out{to{opacity:0;transform:translateY(4px)}}
+@keyframes cu-fade{from{opacity:0}to{opacity:1}}
+@keyframes cu-blink{50%{opacity:0}}
+@media (hover:hover){.cu-close:hover,.cu-btn:not(:disabled):hover,.cu-radd:hover{background:var(--surface-3)}.cu-primary:not(:disabled):hover{background:var(--cu-fill)}}
+@media (prefers-reduced-motion: reduce){
+  .cu-sheet,.cu-esc{animation:cu-fade 160ms linear both}
+  .cu-dup,.cu-tg-0,.cu-tg-1{animation:cu-fade 160ms linear both}
+  .cu-toast.cu-leave{animation:none;opacity:0}
+  .cu-caret{animation:none}
+  .cu-hair,.cu-close,.cu-btn,.cu-radd,.cu-chip,.cu-seg-b{transition:none}
+  .cu-btn:active{transform:none;opacity:.7}
+  .cu-chip:active{scale:1;opacity:.7}
+}
+</style>
+<script src="runtime.js"></script>
+</head>
+<body>
+<div id="dc-board"></div>
+<script>
+DC.define("Custom", {"props":{"theme":{"editor":"enum","options":["silent-black","paper","ember","emerald","midnight"],"default":"silent-black"},"view":{"editor":"enum","options":["no-match","duplicate","ask-escobar","escobar-duplicate"],"default":"no-match"},"online":{"editor":"boolean","default":true},"$preview":{"width":390,"height":844}},"markup":"\n\u003cdiv class=\"cu-root\" style=\"width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: var(--bg); {{ themeCss }}\">\n\n\u003c!-- Behind: the owner's Train screen at scroll 0, under the scrim. Static and hidden from screen readers. -->\n\u003cdiv class=\"ct-bg\" aria-hidden=\"true\">\n  \u003cdiv class=\"ct-scroll\">\n    \u003cdiv class=\"ct-topbar\">\n      \u003cdiv>\n        \u003cdiv class=\"ct-eyebrow\">Train\u003c/div>\n        \u003cdiv class=\"ct-h1\">Workouts\u003c/div>\n      \u003c/div>\n      \u003cspan class=\"ct-btn ct-quiet ct-sm\">\u003csvg class=\"cu-svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\">\u003cpath d=\"M12 5v14M5 12h14\">\u003c/path>\u003c/svg>Split\u003c/span>\n    \u003c/div>\n    \u003cdiv class=\"ct-gymrow\">\n      \u003cspan class=\"ct-chip\">At: Anytime Fitness \u003csvg class=\"cu-svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\">\u003cpath d=\"M6 9l6 6 6-6\">\u003c/path>\u003c/svg>\u003c/span>\n    \u003c/div>\n    \u003cdiv class=\"ct-tabs\">\n      \u003cspan class=\"ct-tab ct-tab-on\">\u003ci class=\"ct-dot\" style=\"background: #4d9dff;\">\u003c/i>SPLIT 1 UPPER BODY\u003c/span>\n      \u003cspan class=\"ct-tab\">\u003ci class=\"ct-dot\" style=\"background: #ffc845;\">\u003c/i>SPLIT 2 - LOWER AND CORE\u003c/span>\n      \u003cspan class=\"ct-tab\">\u003ci class=\"ct-dot\" style=\"background: #a061ff;\">\u003c/i>SPLIT 3\u003c/span>\n    \u003c/div>\n    \u003cdiv class=\"ct-card\">\n      \u003cdiv class=\"ct-head\">\n        \u003cdiv>\n          \u003cdiv class=\"ct-h2\">SPLIT 1 UPPER BODY\u003c/div>\n          \u003cspan class=\"ct-hint\">8 exercises · 21 sets\u003c/span>\n        \u003c/div>\n        \u003cspan class=\"ct-btn ct-quiet ct-icon\">\u003csvg class=\"cu-svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\">\u003cpath d=\"M4 20h4l10-10-4-4L4 16zM13 7l4 4\">\u003c/path>\u003c/svg>\u003c/span>\n      \u003c/div>\n      \u003cdiv class=\"ct-list\">\n        \u003cdiv class=\"ct-row\">\u003cspan class=\"ct-grow\">\u003cspan class=\"ct-name\">Machine Chest Press\u003c/span>\u003cspan class=\"ct-sub\">120 lb · 12 reps · Last set was max effort. Keep the load and aim for one more clean rep.\u003c/span>\u003c/span>\u003cspan class=\"ct-trail\">3 sets\u003c/span>\u003c/div>\n        \u003cdiv class=\"ct-row\">\u003cspan class=\"ct-grow\">\u003cspan class=\"ct-name\">Lat Pulldown\u003c/span>\u003cspan class=\"ct-sub\">45 kg · 6–8 reps · Progress has slipped over recent sessions. Keep this load, stop short of max effort for a week, then build back up.\u003c/span>\u003c/span>\u003cspan class=\"ct-trail\">3 sets\u003c/span>\u003c/div>\n        \u003cdiv class=\"ct-row\">\u003cspan class=\"ct-grow\">\u003cspan class=\"ct-name\">Incline Machine Press\u003c/span>\u003cspan class=\"ct-sub\">55 lb · 11 reps · Last set was max effort. Keep the load and aim for one more clean rep.\u003c/span>\u003c/span>\u003cspan class=\"ct-trail\">3 sets\u003c/span>\u003c/div>\n        \u003cdiv class=\"ct-row\">\u003cspan class=\"ct-grow\">\u003cspan class=\"ct-name\">Seated Cable Row\u003c/span>\u003cspan class=\"ct-sub\">45 kg · 12 reps · Last set was max effort. Keep the load and aim for one more clean rep.\u003c/span>\u003c/span>\u003cspan class=\"ct-trail\">3 sets\u003c/span>\u003c/div>\n        \u003cdiv class=\"ct-row\">\u003cspan class=\"ct-grow\">\u003cspan class=\"ct-name\">Dumbbell Lateral Raise\u003c/span>\u003cspan class=\"ct-sub\">6 kg · 13 reps · Last set was max effort. Keep the load and aim for one more clean rep.\u003c/span>\u003c/span>\u003cspan class=\"ct-trail\">3 sets\u003c/span>\u003c/div>\n        \u003cdiv class=\"ct-row\">\u003cspan class=\"ct-grow\">\u003cspan class=\"ct-name\">Rear Delt Fly\u003c/span>\u003cspan class=\"ct-sub\">55 lb · 15 reps · Last set was max effort. Keep the load and aim for one more clean rep.\u003c/span>\u003c/span>\u003cspan class=\"ct-trail\">2 sets\u003c/span>\u003c/div>\n        \u003cdiv class=\"ct-row\">\u003cspan class=\"ct-grow\">\u003cspan class=\"ct-name\">Dumbbell Biceps Curl\u003c/span>\u003cspan class=\"ct-sub\">10 kg · 8–10 reps · Progress has slipped over recent sessions. Keep this load, stop short of max effort for a week, then build back up.\u003c/span>\u003c/span>\u003cspan class=\"ct-trail\">2 sets\u003c/span>\u003c/div>\n        \u003cdiv class=\"ct-row\">\u003cspan class=\"ct-grow\">\u003cspan class=\"ct-name\">Single-Arm Triceps Pushdown\u003c/span>\u003cspan class=\"ct-sub\">5 kg · 9 reps · Last set was max effort. Keep the load and aim for one more clean rep.\u003c/span>\u003c/span>\u003cspan class=\"ct-trail\">2 sets\u003c/span>\u003c/div>\n      \u003c/div>\n      \u003cspan class=\"ct-btn ct-primary ct-block ct-start\">\u003csvg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" style=\"display: block; flex: none;\">\u003cpath d=\"M7 5l12 7-12 7z\" fill=\"currentColor\">\u003c/path>\u003c/svg>Start SPLIT 1 UPPER BODY\u003c/span>\n      \u003cspan class=\"ct-btn ct-quiet ct-block\">Log a past session\u003c/span>\n    \u003c/div>\n  \u003c/div>\n  \u003cdiv class=\"ct-nav\">\n    \u003cdiv class=\"ct-nav-inner\">\n      \u003cspan class=\"ct-navbtn\">\u003csvg class=\"cu-svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\">\u003ccircle cx=\"12\" cy=\"12\" r=\"4\">\u003c/circle>\u003cpath d=\"M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4\">\u003c/path>\u003c/svg>\u003cspan>Today\u003c/span>\u003c/span>\n      \u003cspan class=\"ct-navbtn ct-navbtn-on\">\u003csvg class=\"cu-svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\">\u003cpath d=\"M6 7v10M18 7v10M3 9v6M21 9v6M6 12h12\">\u003c/path>\u003c/svg>\u003cspan>Train\u003c/span>\u003c/span>\n      \u003cspan class=\"ct-navbtn\">\u003csvg class=\"cu-svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\">\u003crect x=\"4\" y=\"5\" width=\"16\" height=\"15\" rx=\"2\">\u003c/rect>\u003cpath d=\"M4 10h16M8 3v4M16 3v4\">\u003c/path>\u003c/svg>\u003cspan>History\u003c/span>\u003c/span>\n      \u003cspan class=\"ct-navbtn\">\u003csvg class=\"cu-svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\">\u003ccircle cx=\"12\" cy=\"4.5\" r=\"2.5\">\u003c/circle>\u003cpath d=\"M8 9h8l1 6h-2l-1 6h-4l-1-6H7z\">\u003c/path>\u003c/svg>\u003cspan>Body\u003c/span>\u003c/span>\n      \u003cspan class=\"ct-navbtn\">\u003cspan class=\"cu-mark\" style=\"width: 22px; height: 22px;\">\u003c/span>\u003cspan>Escobar\u003c/span>\u003c/span>\n    \u003c/div>\n  \u003c/div>\n\u003c/div>\n\n\u003c!-- Scrim: tapping outside the sheet goes back to the Train screen. -->\n\u003csc-if value=\"{{ sheetShown }}\" hint-placeholder-val=\"{{ true }}\">\n\u003ca class=\"cu-scrim\" href=\"Main.dc.html\" tabindex=\"-1\" aria-label=\"Close\">\u003c/a>\n\u003c/sc-if>\n\u003csc-if value=\"{{ ended }}\" hint-placeholder-val=\"{{ false }}\">\n\u003cdiv class=\"cu-dim\" aria-hidden=\"true\">\u003c/div>\n\u003c/sc-if>\n\n\u003c!-- The picker sheet: \"Add exercise\" (search) or \"New exercise\" (Create my own). -->\n\u003csc-if value=\"{{ sheetShown }}\" hint-placeholder-val=\"{{ true }}\">\n\u003cdiv class=\"cu-sheet\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"cu-title\" aria-hidden=\"{{ pickerHidden }}\">\n\u003cdiv class=\"cu-scroll\" onScroll=\"{{ onScroll }}\">\n\n\u003cdiv class=\"cu-top\">\n\u003cdiv class=\"cu-grab\" aria-hidden=\"true\">\u003c/div>\n\u003cdiv class=\"cu-head\">\n\u003ch2 id=\"cu-title\">{{ sheetTitle }}\u003c/h2>\n\u003ca class=\"cu-close\" href=\"Main.dc.html\" tabindex=\"{{ pickTab }}\" aria-label=\"Close\">\u003csvg class=\"cu-svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" aria-hidden=\"true\">\u003cpath d=\"M6 6l12 12M18 6L6 18\">\u003c/path>\u003c/svg>\u003c/a>\n\u003c/div>\n\u003cdiv class=\"cu-hair\" aria-hidden=\"true\" style=\"{{ hairStyle }}\">\u003c/div>\n\u003c/div>\n\n\u003c!-- Screen 1: the search finds nothing. -->\n\u003csc-if value=\"{{ isSearch }}\" hint-placeholder-val=\"{{ true }}\">\n\u003cdiv class=\"cu-stack\">\n\u003cdiv class=\"cu-field\" role=\"search\">\u003cspan class=\"cu-sr\">Search: \u003c/span>\u003cspan>tate press\u003c/span>\u003cspan class=\"cu-caret\" aria-hidden=\"true\">\u003c/span>\u003c/div>\n\n\u003csc-if value=\"{{ noMatch }}\" hint-placeholder-val=\"{{ true }}\">\n\u003cdiv class=\"cu-empty\" role=\"status\">\n  \u003cspan class=\"cu-empty-ico\" aria-hidden=\"true\">\u003csvg class=\"cu-svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\">\u003ccircle cx=\"11\" cy=\"11\" r=\"6\">\u003c/circle>\u003cpath d=\"M20 20l-4.5-4.5\">\u003c/path>\u003c/svg>\u003c/span>\n  \u003cp class=\"cu-empty-t\">No match for \"tate press\"\u003c/p>\n  \u003cp class=\"cu-empty-s\">Not in the library or your own exercises.\u003c/p>\n\u003c/div>\n\u003c/sc-if>\n\n\u003csc-if value=\"{{ hasCustom }}\" hint-placeholder-val=\"{{ false }}\">\n\u003cdiv class=\"cu-list\" role=\"list\" aria-label=\"Results: 1 exercise found\">\n  \u003cdiv class=\"cu-rrow\" role=\"listitem\">\n    \u003cbutton type=\"button\" class=\"cu-b cu-radd\" tabindex=\"{{ pickTab }}\" aria-label=\"Add Tate Press\" onClick=\"{{ pickCustom }}\">\u003c/button>\n    \u003cspan class=\"cu-rgrow\" aria-hidden=\"true\">\u003cspan class=\"cu-rname\">Tate Press\u003c/span>\u003cspan class=\"cu-rhint\">Dumbbells · Triceps\u003c/span>\u003c/span>\n    \u003cspan class=\"cu-rchip\" aria-hidden=\"true\">Add\u003c/span>\n  \u003c/div>\n\u003c/div>\n\u003c/sc-if>\n\n\u003cdiv class=\"cu-cant\">\n  \u003cp class=\"cu-cant-q\">Can't find it?\u003c/p>\n  \u003cdiv class=\"cu-cant-row\">\n    \u003cdiv class=\"cu-col\">\n      \u003cbutton type=\"button\" class=\"cu-b cu-btn\" tabindex=\"{{ pickTab }}\" onClick=\"{{ openCreate }}\">Create my own\u003c/button>\n    \u003c/div>\n    \u003cdiv class=\"cu-col\">\n      \u003cbutton type=\"button\" class=\"cu-b cu-btn\" tabindex=\"{{ pickTab }}\" disabled=\"{{ offline }}\" aria-describedby=\"cu-why\" onClick=\"{{ askEscobar }}\">\u003cspan class=\"cu-mark\" style=\"width: 18px; height: 18px;\" aria-hidden=\"true\">\u003c/span>Ask Escobar\u003c/button>\n      \u003csc-if value=\"{{ offline }}\" hint-placeholder-val=\"{{ false }}\">\n      \u003cp class=\"cu-why\" id=\"cu-why\">\u003csvg class=\"cu-svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" aria-hidden=\"true\">\u003cpath d=\"M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01M3 3l18 18\">\u003c/path>\u003c/svg>Needs internet\u003c/p>\n      \u003c/sc-if>\n    \u003c/div>\n  \u003c/div>\n\u003c/div>\n\u003c/div>\n\u003c/sc-if>\n\n\u003c!-- Screen 2: Create my own, with the live name check. -->\n\u003csc-if value=\"{{ isCreate }}\" hint-placeholder-val=\"{{ false }}\">\n\u003cdiv class=\"cu-form\">\n  \u003cdiv class=\"cu-fld\">\n    \u003clabel class=\"cu-lbl\" for=\"cu-name\">Name\u003c/label>\n    \u003cinput id=\"cu-name\" class=\"cu-input\" type=\"text\" autocomplete=\"off\" spellcheck=\"false\" placeholder=\"e.g. Cable Y-raise\" value=\"{{ name }}\" onInput=\"{{ onName }}\" onChange=\"{{ onName }}\">\n    \u003cdiv aria-live=\"polite\">\n      \u003csc-if value=\"{{ dup }}\" hint-placeholder-val=\"{{ true }}\">\n      \u003cdiv class=\"cu-dup\">\n        \u003cdiv class=\"cu-dup-head\">\n          \u003csvg class=\"cu-svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" aria-hidden=\"true\">\u003ccircle cx=\"12\" cy=\"12\" r=\"9\">\u003c/circle>\u003cpath d=\"M12 11v5M12 8h.01\">\u003c/path>\u003c/svg>\n          \u003cdiv>\n            \u003cp class=\"cu-dup-t\">{{ dupTitle }}\u003c/p>\n            \u003cp class=\"cu-dup-m\">{{ dupMeta }}\u003c/p>\n            \u003csc-if value=\"{{ dupInSplit }}\" hint-placeholder-val=\"{{ false }}\">\u003cp class=\"cu-dup-n\">It's already in SPLIT 1 UPPER BODY.\u003c/p>\u003c/sc-if>\n          \u003c/div>\n        \u003c/div>\n        \u003cdiv class=\"cu-dup-row\">\n          \u003csc-if value=\"{{ dupCanUse }}\" hint-placeholder-val=\"{{ true }}\">\u003cbutton type=\"button\" class=\"cu-b cu-btn cu-primary\" onClick=\"{{ useMatch }}\">{{ useLabel }}\u003c/button>\u003c/sc-if>\n          \u003cbutton type=\"button\" class=\"cu-b cu-btn\" onClick=\"{{ keepMine }}\">Create mine anyway\u003c/button>\n        \u003c/div>\n      \u003c/div>\n      \u003c/sc-if>\n    \u003c/div>\n  \u003c/div>\n\n  \u003cdiv class=\"cu-fld\">\n    \u003clabel class=\"cu-lbl\" for=\"cu-eq\">Equipment\u003c/label>\n    \u003cselect id=\"cu-eq\" class=\"cu-input\" value=\"{{ equipment }}\" onChange=\"{{ onEquipment }}\">\n      \u003coption value=\"Machine\">Machine\u003c/option>\n      \u003coption value=\"Cable\">Cable\u003c/option>\n      \u003coption value=\"Dumbbells\">Dumbbells\u003c/option>\n      \u003coption value=\"Barbell\">Barbell\u003c/option>\n      \u003coption value=\"Smith Machine\">Smith Machine\u003c/option>\n      \u003coption value=\"Bodyweight\">Bodyweight\u003c/option>\n      \u003coption value=\"Kettlebell\">Kettlebell\u003c/option>\n      \u003coption value=\"Band\">Band\u003c/option>\n      \u003coption value=\"Other\">Other\u003c/option>\n    \u003c/select>\n  \u003c/div>\n\n  \u003cdiv class=\"cu-fld\">\n    \u003clabel class=\"cu-lbl\" for=\"cu-mode\">How resistance works\u003c/label>\n    \u003cselect id=\"cu-mode\" class=\"cu-input\" value=\"{{ mode }}\" onChange=\"{{ onMode }}\" aria-describedby=\"cu-mode-hint\">\n      \u003coption value=\"weighted\">Weighted: more load is progress\u003c/option>\n      \u003coption value=\"bodyweight\">Bodyweight: more reps is progress\u003c/option>\n      \u003coption value=\"assisted\">Assisted: less help is progress\u003c/option>\n      \u003coption value=\"duration\">Timed hold: longer is progress\u003c/option>\n      \u003coption value=\"conditioning\">Carry or sled: further or longer at the same load\u003c/option>\n    \u003c/select>\n    \u003cspan class=\"cu-hint\" id=\"cu-mode-hint\">Decides what progress means for this exercise.\u003c/span>\n  \u003c/div>\n\n  \u003cdiv class=\"cu-fld\" role=\"group\" aria-labelledby=\"cu-mus-l\">\n    \u003cspan class=\"cu-lbl\" id=\"cu-mus-l\">Main muscles (pick one or two)\u003c/span>\n    \u003cdiv class=\"cu-wrap\">\n      \u003csc-for list=\"{{ muscles }}\" as=\"m\" hint-placeholder-count=\"23\">\u003cbutton type=\"button\" class=\"cu-b cu-chip\" aria-pressed=\"{{ m.pressed }}\" onClick=\"{{ m.pick }}\">{{ m.label }}\u003c/button>\u003c/sc-for>\n    \u003c/div>\n  \u003c/div>\n\n  \u003cdiv class=\"cu-fld\" role=\"group\" aria-labelledby=\"cu-role-l\">\n    \u003cspan class=\"cu-lbl\" id=\"cu-role-l\">Main lift or accessory\u003c/span>\n    \u003cdiv class=\"cu-seg\">\n      \u003cbutton type=\"button\" class=\"cu-b cu-seg-b\" aria-pressed=\"{{ roleAcc }}\" onClick=\"{{ pickAcc }}\">Accessory\u003c/button>\n      \u003cbutton type=\"button\" class=\"cu-b cu-seg-b\" aria-pressed=\"{{ roleMain }}\" onClick=\"{{ pickMain }}\">Main lift\u003c/button>\n    \u003c/div>\n    \u003cspan class=\"cu-hint\">Main lifts get your goal's main rep range; accessories get the accessory range.\u003c/span>\n  \u003c/div>\n\n  \u003cdiv class=\"cu-actions\">\n    \u003cbutton type=\"button\" class=\"cu-b cu-btn cu-quiet\" onClick=\"{{ back }}\">Back\u003c/button>\n    \u003cbutton type=\"button\" class=\"cu-b cu-btn cu-primary cu-grow\" disabled=\"{{ createDisabled }}\" onClick=\"{{ create }}\">Create and add\u003c/button>\n  \u003c/div>\n\u003c/div>\n\u003c/sc-if>\n\n\u003c/div>\n\u003c/div>\n\u003c/sc-if>\n\n\u003c!-- Screen 3: Ask Escobar. His panel rises over the picker (clear backdrop: tapping outside closes it). -->\n\u003csc-if value=\"{{ escOpen }}\" hint-placeholder-val=\"{{ false }}\">\n\u003cdiv class=\"cu-layer\">\n  \u003cbutton type=\"button\" class=\"cu-b cu-clear\" tabindex=\"-1\" aria-label=\"Close Escobar\" onClick=\"{{ closeEscobar }}\">\u003c/button>\n  \u003cdiv class=\"cu-esc\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"cu-esc-title\">\n    \u003cdiv class=\"cu-grabzone\" aria-hidden=\"true\">\u003cdiv class=\"cu-grab\">\u003c/div>\u003c/div>\n    \u003cdiv class=\"cu-esc-head\">\n      \u003cspan class=\"cu-mark\" style=\"width: 26px; height: 26px;\" aria-hidden=\"true\">\u003c/span>\n      \u003cdiv class=\"cu-esc-head-text\">\u003ch2 id=\"cu-esc-title\">Escobar\u003c/h2>\u003cspan class=\"cu-esc-status\" role=\"status\">online\u003c/span>\u003c/div>\n      \u003cbutton type=\"button\" class=\"cu-b cu-close\" aria-label=\"Escobar menu\">\u003csvg class=\"cu-svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" aria-hidden=\"true\">\u003ccircle cx=\"5\" cy=\"12\" r=\"1.5\" fill=\"currentColor\">\u003c/circle>\u003ccircle cx=\"12\" cy=\"12\" r=\"1.5\" fill=\"currentColor\">\u003c/circle>\u003ccircle cx=\"19\" cy=\"12\" r=\"1.5\" fill=\"currentColor\">\u003c/circle>\u003c/svg>\u003c/button>\n      \u003cbutton type=\"button\" class=\"cu-b cu-close\" aria-label=\"Close\" onClick=\"{{ closeEscobar }}\">\u003csvg class=\"cu-svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" aria-hidden=\"true\">\u003cpath d=\"M6 6l12 12M18 6L6 18\">\u003c/path>\u003c/svg>\u003c/button>\n    \u003c/div>\n    \u003cdiv class=\"cu-thread\">\n      \u003csc-if value=\"{{ threadTate }}\" hint-placeholder-val=\"{{ true }}\">\n      \u003cdiv class=\"cu-thread-in\">\n        \u003cdiv class=\"cu-user\">\u003cp class=\"cu-bubble\">Add \"tate press\" as my own exercise.\u003c/p>\u003c/div>\n        \u003cdiv class=\"cu-turn\">\n          \u003cp class=\"cu-answer\">Tate Press isn't in the library yet, so I can add it as your own exercise: dumbbells, working the triceps, with the chest helping.\u003c/p>\n          \u003cdiv class=\"cu-prop\">\n            \u003cp class=\"cu-prop-t\">Add exercise: Tate Press\u003c/p>\n            \u003ctable class=\"cu-diff\">\u003ctbody>\u003ctr>\u003cth scope=\"row\">Tate Press\u003c/th>\u003ctd class=\"cu-was\">—\u003c/td>\u003ctd aria-hidden=\"true\">→\u003c/td>\u003ctd>Dumbbells · Triceps\u003c/td>\u003c/tr>\u003c/tbody>\u003c/table>\n            \u003csc-if value=\"{{ propAwaiting }}\" hint-placeholder-val=\"{{ true }}\">\n            \u003cdiv class=\"cu-prop-row\">\n              \u003cbutton type=\"button\" class=\"cu-b cu-btn cu-primary cu-sm\" onClick=\"{{ applyProp }}\">Apply\u003c/button>\n              \u003cbutton type=\"button\" class=\"cu-b cu-btn cu-quiet cu-sm\" onClick=\"{{ notNow }}\">Not now\u003c/button>\n            \u003c/div>\n            \u003c/sc-if>\n            \u003csc-if value=\"{{ propDone }}\" hint-placeholder-val=\"{{ false }}\">\n            \u003cp class=\"cu-prop-st\" role=\"status\">\u003cspan>{{ propStatus }}\u003c/span>\u003csc-if value=\"{{ propUndo }}\" hint-placeholder-val=\"{{ false }}\">\u003cbutton type=\"button\" class=\"cu-b cu-link\" onClick=\"{{ undo }}\">Undo\u003c/button>\u003c/sc-if>\u003c/p>\n            \u003c/sc-if>\n          \u003c/div>\n        \u003c/div>\n      \u003c/div>\n      \u003c/sc-if>\n      \u003c!-- Name match through Escobar (spec 6.3): he searches first and points to the library exercise, so no copy is proposed. -->\n      \u003csc-if value=\"{{ threadDup }}\" hint-placeholder-val=\"{{ false }}\">\n      \u003cdiv class=\"cu-thread-in\">\n        \u003cdiv class=\"cu-user\">\u003cp class=\"cu-bubble\">Add \"reverse pec deck\" as my own exercise.\u003c/p>\u003c/div>\n        \u003cdiv class=\"cu-turn\">\n          \u003cp class=\"cu-answer\">That's already in the library as Rear Delt Fly.\u003c/p>\n          \u003cdiv class=\"cu-prop-row\">\n            \u003cbutton type=\"button\" class=\"cu-b cu-btn cu-primary cu-sm\" onClick=\"{{ useRearDelt }}\">Use Rear Delt Fly\u003c/button>\n          \u003c/div>\n        \u003c/div>\n      \u003c/div>\n      \u003c/sc-if>\n    \u003c/div>\n    \u003cdiv class=\"cu-composer\">\n      \u003cdiv class=\"cu-composer-row\">\n        \u003cspan class=\"cu-composer-input\" aria-hidden=\"true\">Ask Escobar…\u003c/span>\n        \u003cbutton type=\"button\" class=\"cu-b cu-send\" aria-label=\"Send\" disabled>\u003csvg class=\"cu-svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" aria-hidden=\"true\">\u003cpath d=\"M21 3L3 10.5l7.5 3L14 21l7-18z\">\u003c/path>\u003cpath d=\"M10.5 13.5L21 3\">\u003c/path>\u003c/svg>\u003c/button>\n      \u003c/div>\n    \u003c/div>\n  \u003c/div>\n\u003c/div>\n\u003c/sc-if>\n\n\u003c!-- Demo controls (not part of the app). -->\n\u003cdiv class=\"cu-demo\" role=\"group\" aria-label=\"Demo controls, not part of the app\">\n  \u003cdiv class=\"cu-demo-row\">\n    \u003cbutton type=\"button\" class=\"cu-b cu-chip\" aria-pressed=\"{{ chipNoMatch }}\" onClick=\"{{ goNoMatch }}\">No match\u003c/button>\n    \u003cbutton type=\"button\" class=\"cu-b cu-chip\" aria-pressed=\"{{ chipDup }}\" onClick=\"{{ goDup }}\">Name match\u003c/button>\n    \u003cbutton type=\"button\" class=\"cu-b cu-chip\" aria-pressed=\"{{ chipEsc }}\" onClick=\"{{ goEsc }}\">Ask Escobar\u003c/button>\n    \u003cbutton type=\"button\" class=\"cu-b cu-chip\" aria-pressed=\"{{ chipEscDup }}\" onClick=\"{{ goEscDup }}\">Escobar name match\u003c/button>\n  \u003c/div>\n  \u003cdiv class=\"cu-demo-row2\">\n    \u003cbutton type=\"button\" class=\"cu-b cu-chip\" aria-pressed=\"{{ offline }}\" onClick=\"{{ toggleOffline }}\">\u003csvg class=\"cu-svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" aria-hidden=\"true\">\u003cpath d=\"M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01M3 3l18 18\">\u003c/path>\u003c/svg>Offline preview\u003c/button>\n    \u003cp class=\"cu-demo-note\">{{ demoNote }}\u003c/p>\n  \u003c/div>\n\u003c/div>\n\n\u003c!-- Toast -->\n\u003csc-if value=\"{{ toastOn }}\" hint-placeholder-val=\"{{ false }}\">\n\u003cdiv class=\"{{ toastClass }}\" role=\"status\">\n  \u003cspan>{{ toastMsg }}\u003c/span>\n  \u003csc-if value=\"{{ toastUndo }}\" hint-placeholder-val=\"{{ false }}\">\u003cbutton type=\"button\" class=\"cu-b cu-toast-b\" onClick=\"{{ undo }}\">Undo\u003c/button>\u003c/sc-if>\n\u003c/div>\n\u003c/sc-if>\n\n\u003c/div>\n"}, function (DCLogic) {
+const THEMES = {
+  'silent-black': { bg:'#08090a', s1:'#0f1011', s2:'#141516', s3:'#1b1c1f', bSub:'rgba(255,255,255,0.06)', b:'rgba(255,255,255,0.10)', bStr:'rgba(255,255,255,0.18)', text:'#f7f8f8', t2:'#8a8f98', t3:'#62666d', acc:'#5e6ad2', accSoft:'rgba(94,106,210,0.16)', onAcc:'#ffffff', pos:'#4cc38a', warn:'#f2b544', neg:'#eb5757', info:'#6ea8fe', shadow:'0 16px 40px rgba(0,0,0,0.45)', mapBody:'#1b1c1f', mapLine:'rgba(255,255,255,0.10)', scheme:'dark', r:['8px','12px','16px','22px'] },
+  'paper':        { bg:'#ffffff', s1:'#f7f6f3', s2:'#efeeea', s3:'#e6e4df', bSub:'rgba(55,53,47,0.08)', b:'rgba(55,53,47,0.14)', bStr:'rgba(55,53,47,0.26)', text:'#37352f', t2:'#6b6a66', t3:'#9b9a97', acc:'#2383e2', accSoft:'rgba(35,131,226,0.12)', onAcc:'#ffffff', pos:'#0f7b4f', warn:'#b7791f', neg:'#c0392b', info:'#2383e2', shadow:'0 8px 24px rgba(15,15,15,0.08)', mapBody:'#e6e4df', mapLine:'rgba(55,53,47,0.18)', scheme:'light', r:['6px','10px','14px','18px'] },
+  'ember':        { bg:'#07080a', s1:'#0e1013', s2:'#14171b', s3:'#1c2026', bSub:'rgba(255,255,255,0.05)', b:'rgba(255,255,255,0.09)', bStr:'rgba(255,255,255,0.16)', text:'#ffffff', t2:'#9aa0a6', t3:'#5f666d', acc:'#ff6363', accSoft:'rgba(255,99,99,0.16)', onAcc:'#1a0b0b', pos:'#59d499', warn:'#ffb454', neg:'#ff6363', info:'#7aa7ff', shadow:'0 18px 44px rgba(0,0,0,0.5)', mapBody:'#1c2026', mapLine:'rgba(255,255,255,0.10)', scheme:'dark', r:['8px','12px','16px','20px'] },
+  'emerald':      { bg:'#0f0f0f', s1:'#171717', s2:'#1c1c1c', s3:'#242424', bSub:'#242424', b:'#2e2e2e', bStr:'#393939', text:'#ededed', t2:'#a0a0a0', t3:'#707070', acc:'#3ecf8e', accSoft:'rgba(62,207,142,0.14)', onAcc:'#062d1c', pos:'#3ecf8e', warn:'#f5a623', neg:'#f04438', info:'#5fa8ff', shadow:'0 14px 36px rgba(0,0,0,0.45)', mapBody:'#242424', mapLine:'#393939', scheme:'dark', r:['6px','8px','12px','16px'] },
+  'midnight':     { bg:'#0a2540', s1:'#0f2d4d', s2:'#143559', s3:'#1a3f68', bSub:'rgba(246,249,252,0.07)', b:'rgba(246,249,252,0.12)', bStr:'rgba(246,249,252,0.22)', text:'#f6f9fc', t2:'#a3b6cc', t3:'#6c839c', acc:'#635bff', accSoft:'rgba(99,91,255,0.18)', onAcc:'#ffffff', pos:'#3ecf8e', warn:'#ffbb00', neg:'#ff5c5c', info:'#00d4ff', shadow:'0 18px 44px rgba(3,20,40,0.55)', mapBody:'#1a3f68', mapLine:'rgba(246,249,252,0.14)', scheme:'dark', r:['8px','12px','16px','22px'] },
+};
+function themeVars(id) {
+  const t = THEMES[id] || THEMES['silent-black'];
+  return `color-scheme:${t.scheme};--bg:${t.bg};--surface-1:${t.s1};--surface-2:${t.s2};--surface-3:${t.s3};--border-subtle:${t.bSub};--border:${t.b};--border-strong:${t.bStr};--text:${t.text};--text-2:${t.t2};--text-3:${t.t3};--accent:${t.acc};--accent-soft:${t.accSoft};--on-accent:${t.onAcc};--positive:${t.pos};--warning:${t.warn};--negative:${t.neg};--info:${t.info};--shadow:${t.shadow};--map-body:${t.mapBody};--map-line:${t.mapLine};--radius-sm:${t.r[0]};--radius-md:${t.r[1]};--radius-lg:${t.r[2]};--radius-xl:${t.r[3]};--scrim:rgba(0,0,0,.5)`;
+}
+// Accent icons: plain accent everywhere except Midnight (2.65:1 on the sheet), lifted there.
+const INK = { midnight: 'color-mix(in srgb,var(--accent) 80%,var(--text))' };
+// Primary fill: plain accent everywhere except Paper, deepened there so white text reaches 4.5:1 (4.8:1).
+const FILL = { paper: 'color-mix(in srgb,var(--accent) 82%,var(--text))' };
+// Toast float shadow (origin/main --shadow-float): darker on the dark themes, softer on Paper.
+const FLOAT_DEFAULT = '0 1px 2px rgba(0,0,0,.5), 0 12px 32px -8px rgba(0,0,0,.6)';
+const FLOAT = { paper: '0 1px 2px rgba(0,0,0,.08), 0 12px 32px -8px rgba(0,0,0,.18)' };
+// Canvas booleans may arrive as true/false or as text.
+const on = v => v === true || v === 'true' || v === 'yes';
+const readOnline = v => (v === undefined || v === null || v === '') ? true : on(v);
+
+const SEARCHED = 'tate press';     // a real exercise missing from the library (spec 6.3, gap.json)
+const PRESET_NAME = 'Pec deck';    // the "Name match" preset: an alias of the library's Pec Fly
+
+// Main muscles, in the app's order and words (src/data/muscles.ts).
+const MUSCLES = [
+  ['chest', 'Chest'], ['upper_chest', 'Upper chest'], ['front_delts', 'Front shoulders'], ['side_delts', 'Side shoulders'],
+  ['rear_delts', 'Rear shoulders'], ['rotator_cuff', 'Rotator cuff'], ['biceps', 'Biceps'], ['triceps', 'Triceps'],
+  ['brachialis', 'Brachialis'], ['forearms', 'Forearms'], ['lats', 'Lats'], ['mid_back', 'Mid back'],
+  ['upper_traps', 'Upper traps'], ['lower_back', 'Lower back'], ['abs', 'Abs'], ['obliques', 'Obliques'],
+  ['core', 'Deep core'], ['hip_flexors', 'Hip flexors'], ['quads', 'Quads'], ['hamstrings', 'Hamstrings'],
+  ['glutes', 'Glutes'], ['adductors', 'Inner thighs'], ['abductors', 'Outer hips'], ['calves', 'Calves'],
+];
+
+// Library rows the name check knows in this demo (names, aliases, equipment and main muscles from src/data/exercises.json):
+// the 8 exercises of SPLIT 1 UPPER BODY, plus common upper-body moves that are not in the split.
+const LIB = [
+  { name: 'Machine Chest Press', equipment: 'Machine', main: 'Chest', aliases: ['chest press machine', 'machine press', 'seated chest press'], inSplit: true },
+  { name: 'Lat Pulldown', equipment: 'Cable / Machine', main: 'Lats', aliases: ['wide grip pulldown', 'lat pull down'], inSplit: true },
+  { name: 'Incline Machine Press', equipment: 'Machine', main: 'Upper chest', aliases: ['incline chest press machine'], inSplit: true },
+  { name: 'Seated Cable Row', equipment: 'Cable', main: 'Mid back', aliases: ['cable row', 'seated row'], inSplit: true },
+  { name: 'Dumbbell Lateral Raise', equipment: 'Dumbbells', main: 'Side shoulders', aliases: ['lateral raise', 'side raise', 'db lateral raise'], inSplit: true },
+  { name: 'Rear Delt Fly', equipment: 'Machine', main: 'Rear shoulders', aliases: ['reverse pec deck', 'rear delt machine fly'], inSplit: true },
+  { name: 'Dumbbell Biceps Curl', equipment: 'Dumbbells', main: 'Biceps', aliases: ['db biceps curl', 'dumbbell curl', 'db curl'], inSplit: true },
+  { name: 'Single-Arm Triceps Pushdown', equipment: 'Cable', main: 'Triceps', aliases: ['unilateral pushdown', 'one arm pushdown'], inSplit: true },
+  { name: 'Pec Fly', equipment: 'Machine', main: 'Chest', aliases: ['pec deck', 'machine fly', 'chest fly machine'] },
+  { name: 'Cable Fly', equipment: 'Cable', main: 'Chest', aliases: ['cable chest fly', 'standing cable fly'] },
+  { name: 'Dumbbell Fly', equipment: 'Dumbbells', main: 'Chest', aliases: ['db fly', 'dumbbell chest fly'] },
+  { name: 'Face Pull', equipment: 'Cable', main: 'Rear shoulders', aliases: ['rope face pull'] },
+  { name: 'Skull Crusher', equipment: 'EZ Bar / Barbell', main: 'Triceps', aliases: ['lying tricep extension', 'ez bar skullcrusher'] },
+  { name: 'Hammer Curl', equipment: 'Dumbbells', main: 'Brachialis, Biceps', aliases: ['db hammer curl'] },
+];
+// Tate Press as the owner's own exercise, once Escobar has added it (from gap.json: dumbbells, main triceps, helps chest).
+const TATE = { name: 'Tate Press', equipment: 'Dumbbells', main: 'Triceps', aliases: [], yours: true };
+
+// The app's name normalising (src/core/exercises.ts normalizeName) and its exact-match rule (findByExactName):
+// names and aliases, custom exercises first, a trailing "s" on any word ignored.
+function norm(s) {
+  return String(s || '').toLowerCase()
+    .replace(/dumbell/g, 'dumbbell')
+    .replace(/\bdbs?\b/g, 'dumbbell')
+    .replace(/\btricep\b/g, 'triceps')
+    .replace(/\bbicep\b/g, 'biceps')
+    .replace(/pull ?down/g, 'pulldown')
+    .replace(/[^a-z0-9 ]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+function findExact(typed, rows) {
+  const q = norm(typed);
+  if (!q) return null;
+  const singular = q.replace(/s\b/g, '');
+  const same = a => { const n = norm(a); return n === q || n.replace(/s\b/g, '') === singular; };
+  for (const e of rows) {
+    if (same(e.name)) return { e, via: '' };
+    const a = e.aliases.find(same);
+    if (a) return { e, via: a };
+  }
+  return null;
+}
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.timers = [];
+    this.state = Object.assign(this.fresh(props.view, readOnline(props.online)), { toastGen: 0 });
+  }
+  componentDidUpdate(prev) {
+    if (prev.view !== this.props.view || prev.online !== this.props.online) this.go(this.props.view, readOnline(this.props.online));
+  }
+  componentWillUnmount() { this.clearTimers(); }
+  // A clean start on one of the screens. Offline, Escobar cannot be asked, so his screens fall back to the search.
+  // escobar-duplicate: the owner asks Escobar for a copy of a library exercise under another name; he points to it instead.
+  fresh(view, online) {
+    let v = view === 'duplicate' ? 'create' : (view === 'ask-escobar' || view === 'escobar-duplicate') ? 'escobar' : 'search';
+    if (!online && v === 'escobar') v = 'search';
+    return {
+      view: v, online: online, escDup: v === 'escobar' && view === 'escobar-duplicate',
+      name: v === 'create' ? PRESET_NAME : SEARCHED, keepFor: '',
+      equipment: 'Machine', mode: 'weighted', primary: [], role: 'accessory',
+      proposal: 'awaiting', customAdded: false, undoOpen: false,
+      toast: null, toastLeaving: false, ended: false, scrolled: false,
+    };
+  }
+  go(view, online) {
+    this.clearTimers();
+    this.setState(this.fresh(view, online));
+  }
+  later(fn, ms) {
+    const id = setTimeout(() => { this.timers = this.timers.filter(t => t !== id); fn(); }, ms);
+    this.timers.push(id);
+  }
+  clearTimers() { this.timers.forEach(t => clearTimeout(t)); this.timers = []; }
+  // Toasts as the app times them: 5 s with Undo, 3 s without.
+  showToast(msg, kind) {
+    this.clearTimers();
+    const gen = this.state.toastGen + 1;
+    this.setState({ toast: { msg, kind }, toastGen: gen, toastLeaving: false });
+    this.later(() => {
+      if (this.state.toastGen !== gen) return;
+      this.setState({ toastLeaving: true });
+      this.later(() => { if (this.state.toastGen === gen) this.setState({ toast: null, toastLeaving: false }); }, 160);
+    }, kind === 'undo' ? 5000 : 3000);
+  }
+  // The sheet closes after something is added; the split editor it goes back to is not part of this demo.
+  // Same toast as anywhere else in the app: 3 s, no button (showToast(msg, null)).
+  finish(msg) {
+    this.setState({ ended: true, view: 'search' });
+    this.showToast(msg, null);
+  }
+  rows() { return this.state.customAdded ? [TATE].concat(LIB) : LIB; }
+  match() { return this.state.view === 'create' ? findExact(this.state.name, this.rows()) : null; }
+
+  renderVals() {
+    const p = this.props, s = this.state;
+    const theme = THEMES[p.theme] ? p.theme : 'silent-black';
+    const escOpen = s.view === 'escobar' && !s.ended;
+    const isCreate = s.view === 'create' && !s.ended;
+    const m = this.match();
+    const dup = !!m && s.keepFor !== norm(s.name);
+    const meta = m ? [m.e.equipment, m.e.main].concat(m.via ? ['also called ' + m.via] : []).concat(m.e.yours ? ['one of your exercises'] : []).join(' · ') : '';
+    const t = s.toast;
+    return {
+      theme: theme,
+      themeCss: `${themeVars(theme)};--cu-ink:${INK[theme] || 'var(--accent)'};--cu-fill:${FILL[theme] || 'var(--accent)'};--cu-float:${FLOAT[theme] || FLOAT_DEFAULT}`,
+
+      // Demo controls
+      chipNoMatch: !s.ended && (s.view === 'search'),
+      chipDup: isCreate && dup,
+      chipEsc: escOpen && !s.escDup,
+      chipEscDup: escOpen && s.escDup,
+      goNoMatch: () => this.go('no-match', s.online),
+      goDup: () => this.go('duplicate', s.online),
+      goEsc: () => this.go('ask-escobar', true),
+      goEscDup: () => this.go('escobar-duplicate', true),
+      offline: !s.online,
+      toggleOffline: () => { if (s.online) this.go('no-match', false); else this.setState({ online: true }); },
+      demoNote: s.ended ? 'Done. Tap a button above to see it again.' : 'Demo buttons. They are not part of the app.',
+
+      // Picker sheet
+      sheetShown: !s.ended,
+      ended: s.ended,
+      sheetTitle: isCreate ? 'New exercise' : 'Add exercise',
+      pickerHidden: escOpen,
+      pickTab: escOpen ? -1 : 0,
+      hairStyle: `opacity:${s.scrolled ? 1 : 0}`,
+      onScroll: (e) => {
+        const el = e && (e.currentTarget || e.target);
+        const v = !!el && el.scrollTop > 2;
+        if (v !== this.state.scrolled) this.setState({ scrolled: v });
+      },
+      isSearch: !s.ended && s.view !== 'create',
+      isCreate: isCreate,
+      noMatch: !s.customAdded,
+      hasCustom: s.customAdded,
+      pickCustom: () => this.finish('Added Tate Press to your split'),
+      openCreate: () => this.setState({ view: 'create', name: SEARCHED, keepFor: '', equipment: 'Machine', mode: 'weighted', primary: [], role: 'accessory', scrolled: false }),
+      askEscobar: () => {
+        if (!this.state.online) return;
+        this.setState({ view: 'escobar', escDup: false, proposal: this.state.customAdded ? 'applied' : 'awaiting' });
+      },
+
+      // Create my own
+      name: s.name,
+      onName: (e) => {
+        const v = e && e.target ? e.target.value : '';
+        if (v !== this.state.name) this.setState({ name: v });
+      },
+      dup: dup,
+      dupTitle: m ? `This looks like ${m.e.name}. Use it?` : '',
+      dupMeta: meta,
+      dupInSplit: !!m && !!m.e.inSplit,
+      dupCanUse: !!m,
+      useLabel: m ? `Use ${m.e.name}` : '',
+      useMatch: () => { const x = this.match(); if (!x) return; this.finish(x.e.inSplit ? `${x.e.name} is already in SPLIT 1 UPPER BODY` : `Added ${x.e.name} to your split`); },
+      keepMine: () => this.setState({ keepFor: norm(this.state.name) }),
+      equipment: s.equipment,
+      onEquipment: (e) => this.setState({ equipment: e.target.value }),
+      mode: s.mode,
+      onMode: (e) => this.setState({ mode: e.target.value }),
+      muscles: MUSCLES.map(([id, label]) => ({
+        label: label,
+        pressed: s.primary.indexOf(id) >= 0,
+        pick: () => {
+          const cur = this.state.primary;
+          this.setState({ primary: cur.indexOf(id) >= 0 ? cur.filter(x => x !== id) : cur.concat([id]).slice(-2) });
+        },
+      })),
+      roleAcc: s.role === 'accessory',
+      roleMain: s.role === 'main',
+      pickAcc: () => this.setState({ role: 'accessory' }),
+      pickMain: () => this.setState({ role: 'main' }),
+      back: () => this.setState({ view: 'search', scrolled: false }),
+      createDisabled: !s.name.trim() || !s.primary.length || dup,
+      create: () => {
+        const st = this.state;
+        const x = this.match();
+        const blocked = !!x && st.keepFor !== norm(st.name);
+        if (!st.name.trim() || !st.primary.length || blocked) return;
+        this.finish(`Added ${st.name.trim().replace(/\s+/g, ' ')} to your split`);
+      },
+
+      // Ask Escobar
+      escOpen: escOpen,
+      closeEscobar: () => this.setState({ view: 'search', escDup: false }),
+      threadTate: !s.escDup,
+      threadDup: s.escDup,
+      useRearDelt: () => this.finish('Rear Delt Fly is already in SPLIT 1 UPPER BODY'),
+      propAwaiting: s.proposal === 'awaiting',
+      propDone: s.proposal !== 'awaiting',
+      // Words as origin/main ProposalCard: Applied (+ Undo link while the 8 s undo window is open), Dismissed, Undone.
+      propUndo: s.proposal === 'applied' && s.undoOpen,
+      propStatus: s.proposal === 'applied' ? 'Applied' : s.proposal === 'dismissed' ? 'Dismissed' : s.proposal === 'undone' ? 'Undone' : '',
+      applyProp: () => {
+        if (this.state.proposal !== 'awaiting') return;
+        this.setState({ proposal: 'applied', customAdded: true, undoOpen: true });
+        this.showToast('Added Tate Press to your exercises', 'undo');
+        // origin/main apply.ts UNDO_WINDOW_MS = 8000: the card's Undo link goes away after 8 s.
+        this.later(() => { if (this.state.proposal === 'applied') this.setState({ undoOpen: false }); }, 8000);
+      },
+      notNow: () => { if (this.state.proposal === 'awaiting') this.setState({ proposal: 'dismissed' }); },
+
+      // Toast
+      toastOn: !!t,
+      toastClass: `cu-toast cu-tg-${s.toastGen % 2}${escOpen ? ' cu-toast-esc' : (s.view === 'search' && !s.ended ? ' cu-toast-pick' : '')}${s.toastLeaving ? ' cu-leave' : ''}`,
+      toastMsg: t ? t.msg : '',
+      toastUndo: !!t && t.kind === 'undo',
+      undo: () => {
+        if (this.state.proposal !== 'applied') return;
+        this.setState({ proposal: 'undone', customAdded: false, undoOpen: false });
+        this.showToast('Removed Tate Press', null);
+      },
+    };
+  }
+}
+;return Component;
+});
+DC.mount(document.getElementById("dc-board"), "Custom");
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+name: Agent guard
+
+# Enforces docs/AGENT-RULES.md on every push: one signing key (05:66:9A...F1:F5, registered
+# with Huawei), no key material in a public repo, and file ownership between the two agents
+# working in parallel. Failures print the reason and the fix.
+on:
+  push:
+    branches: ['**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch main for comparison
+        run: git fetch --no-tags origin main:refs/remotes/origin/main || true
+      - name: Check the agent rules
+        run: bash .github/scripts/agent-guard.sh

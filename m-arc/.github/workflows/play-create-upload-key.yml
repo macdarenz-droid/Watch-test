@@ -1,0 +1,126 @@
+name: Play - create upload key (one-off)
+
+# REL-3, owner decision 2026-09-30: CI signs the Google Play bundle with a SEPARATE
+# upload key; the permanent key (05:66:9A:...:F1:F5) stays the app signing key.
+# This job creates the upload key once, stores it as repo secrets, uploads an
+# encrypted backup and the public certificate for Play, and prints the SHA-256.
+# It refuses to run if MARC_UPLOAD_KEYSTORE_B64 already exists, so it can never
+# replace the key. The key and its password are never printed.
+# Delete this file once the owner has saved the backup.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: play-create-upload-key
+  cancel-in-progress: false
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check prerequisites and refuse to overwrite an existing key
+        shell: bash
+        env:
+          EXISTING: ${{ secrets.MARC_UPLOAD_KEYSTORE_B64 }}
+          GH_TOKEN: ${{ secrets.SECRETS_WRITE_TOKEN }}
+          KEY_EXPORT_PASSPHRASE: ${{ secrets.KEY_EXPORT_PASSPHRASE }}
+        run: |
+          set -euo pipefail
+          if [ -n "$EXISTING" ]; then echo '::error::MARC_UPLOAD_KEYSTORE_B64 already exists. Not creating another upload key.'; exit 1; fi
+          [ -n "$GH_TOKEN" ] || { echo '::error::Secret SECRETS_WRITE_TOKEN is missing. Create it first (docs/RELEASE-READINESS.md, Google Play, step 1). Nothing was created.'; exit 1; }
+          [ -n "$KEY_EXPORT_PASSPHRASE" ] || { echo '::error::Secret KEY_EXPORT_PASSPHRASE is missing.'; exit 1; }
+          gh secret list --repo "$GITHUB_REPOSITORY" >/dev/null || { echo '::error::SECRETS_WRITE_TOKEN cannot manage secrets (needs Secrets: Read and write on this repo).'; exit 1; }
+          # Also catch a secret that exists but was hidden from this run.
+          if gh secret list --repo "$GITHUB_REPOSITORY" --json name --jq '.[].name' | grep -qx 'MARC_UPLOAD_KEYSTORE_B64'; then
+            echo '::error::MARC_UPLOAD_KEYSTORE_B64 already exists. Not creating another upload key.'; exit 1
+          fi
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Generate the upload key
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -p "$RUNNER_TEMP/key" cert
+          PW=$(openssl rand -base64 48 | tr -dc 'A-Za-z0-9' | head -c 32)
+          echo "::add-mask::$PW"
+          keytool -genkeypair -storetype PKCS12 -keystore "$RUNNER_TEMP/key/marc-upload.p12" -alias upload \
+            -keyalg RSA -keysize 4096 -validity 36500 -dname 'CN=MARC Upload, O=MARC' \
+            -storepass "$PW" -keypass "$PW" 2>/dev/null
+          printf '%s' "$PW" > "$RUNNER_TEMP/key/password.txt"
+          keytool -exportcert -rfc -keystore "$RUNNER_TEMP/key/marc-upload.p12" -storepass "$PW" -alias upload \
+            -file cert/upload_certificate.pem 2>/dev/null
+          FP=$(keytool -list -v -keystore "$RUNNER_TEMP/key/marc-upload.p12" -storepass "$PW" -alias upload | awk '/SHA256:/{print $2; exit}')
+          [ -n "$FP" ] || { echo '::error::Could not read the new fingerprint.'; exit 1; }
+          if [ "$FP" = '05:66:9A:D2:72:1C:6A:BA:F9:FD:D4:B9:B8:4E:2F:B7:94:48:44:B1:DE:F3:59:84:5F:01:5F:2B:67:CA:F1:F5' ]; then
+            echo '::error::The upload key matches the app signing key; it must be separate.'; exit 1
+          fi
+          echo "FP=$FP" >> "$GITHUB_ENV"
+          echo "Upload key SHA-256: $FP"
+          {
+            echo '### Google Play upload key created'
+            echo ''
+            echo 'Upload key SHA-256 fingerprint:'
+            echo ''
+            echo "\`$FP\`"
+            echo ''
+            echo 'Upload **upload_certificate.pem** (artifact marc-upload-certificate) to Play Console when it asks for the upload key certificate.'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Encrypt the backup
+        shell: bash
+        env:
+          KEY_EXPORT_PASSPHRASE: ${{ secrets.KEY_EXPORT_PASSPHRASE }}
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -p backup
+          tar -C "$RUNNER_TEMP/key" -cf - marc-upload.p12 password.txt \
+            | openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -pass env:KEY_EXPORT_PASSPHRASE -out backup/marc-upload-key.tar.enc
+          {
+            echo "M/ARC Google Play upload key, encrypted with your KEY_EXPORT_PASSPHRASE."
+            echo "SHA-256: $FP"
+            echo ""
+            echo "Restore (on a computer):"
+            echo "  openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in marc-upload-key.tar.enc | tar -xf -"
+            echo "This gives marc-upload.p12 (alias upload) and password.txt."
+          } > backup/README.txt
+
+      - name: Upload the encrypted backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: marc-upload-key-backup-ENCRYPTED
+          path: backup/
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Upload the public certificate
+        uses: actions/upload-artifact@v4
+        with:
+          name: marc-upload-certificate
+          path: cert/upload_certificate.pem
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Store the upload key as repository secrets
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.SECRETS_WRITE_TOKEN }}
+        run: |
+          set -euo pipefail
+          base64 -w0 "$RUNNER_TEMP/key/marc-upload.p12" | gh secret set MARC_UPLOAD_KEYSTORE_B64 --repo "$GITHUB_REPOSITORY"
+          gh secret set MARC_UPLOAD_STORE_PASSWORD --repo "$GITHUB_REPOSITORY" < "$RUNNER_TEMP/key/password.txt"
+          echo 'Secrets MARC_UPLOAD_KEYSTORE_B64 and MARC_UPLOAD_STORE_PASSWORD are set.'
+
+      - name: Remove key material from the runner
+        if: always()
+        shell: bash
+        run: rm -rf "$RUNNER_TEMP/key" backup

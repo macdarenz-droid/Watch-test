@@ -1,0 +1,19 @@
+{
+  "release": "V36.8.25",
+  "replace_exactly": [
+    "www/index.html",
+    ".github/workflows/build-apk.yml",
+    ".github/workflows/release-apk.yml"
+  ],
+  "index_sha256": "0fecc0147fb18de89b2a649cdc2d9e9c8d81a94c9a1fa7f4385ef578da55e0f9",
+  "checks": {
+    "build_old_hash_absent": true,
+    "release_old_hash_absent": true,
+    "new_hash_build_count": true,
+    "new_hash_release_count": true,
+    "build_v3625": true,
+    "release_v3625": true,
+    "index_hash_exact": true
+  },
+  "all_checks_pass": true
+}

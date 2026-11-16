@@ -1,0 +1,126 @@
+<title>M/ARC Form Guide Canvas</title>
+<style>
+:root{color-scheme:light;--bg:#ffffff;--surface-1:#f7f6f3;--surface-2:#efeeea;--border-subtle:rgba(55,53,47,0.08);--border:rgba(55,53,47,0.14);--text:#37352f;--text-2:#6b6a66;--accent:#2383e2}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#08090a;--surface-1:#0f1011;--surface-2:#141516;--border-subtle:rgba(255,255,255,0.06);--border:rgba(255,255,255,0.10);--text:#f7f8f8;--text-2:#8a8f98;--accent:#5e6ad2}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#08090a;--surface-1:#0f1011;--surface-2:#141516;--border-subtle:rgba(255,255,255,0.06);--border:rgba(255,255,255,0.10);--text:#f7f8f8;--text-2:#8a8f98;--accent:#5e6ad2}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.4 Inter,"SF Pro Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.cv{box-sizing:border-box;padding:24px 16px 48px;min-width:0}
+.cv h1{margin:0;font-size:22px;font-weight:650;letter-spacing:-.018em;line-height:1.2}
+.cv-lede{margin:6px 0 0;max-width:62ch;color:var(--text-2);font-size:13px;line-height:18px}
+.cv-size{display:flex;align-items:center;gap:8px;margin-top:16px;color:var(--text-2);font-size:12px;font-weight:600}
+.cv-seg{display:inline-flex;padding:2px;border-radius:999px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--border-subtle)}
+.cv-seg button{min-width:56px;min-height:32px;padding:0 12px;border:0;border-radius:999px;background:none;color:var(--text-2);font:inherit;cursor:pointer}
+.cv-seg button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.cv-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.cv-row{margin-top:32px}
+.cv-row h2{margin:0 0 12px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)}
+.cv-strip{display:flex;align-items:flex-start;gap:24px;overflow-x:auto;padding:1px 1px 12px;scroll-snap-type:x proximity;overscroll-behavior-x:contain}
+.cv-board{flex:none;margin:0;scroll-snap-align:start}
+.cv-board figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px;font-size:13px;font-weight:600;line-height:18px}
+.cv-board figcaption span{flex:none;color:var(--text-2);font-size:12px;font-weight:400;font-variant-numeric:tabular-nums}
+.cv-frame{overflow:hidden;outline:1px solid var(--border);background:var(--surface-1)}
+.cv-frame iframe{display:block;border:0;transform-origin:0 0}
+</style>
+<main class="cv">
+<h1>M/ARC form guide canvas</h1>
+<p class="cv-lede">This page renders the 13 canvas artboards from the canvas files, with the 3 animated form-guide players live.</p>
+<div class="cv-size" role="group" aria-label="Size">Size<span class="cv-seg"><button type="button" data-size="fit" aria-pressed="true">Fit</button><button type="button" data-size="full" aria-pressed="false">100 %</button></span></div>
+
+<section class="cv-row" aria-labelledby="cv-r-n1">
+<h2 id="cv-r-n1">Animated form guides (3)</h2>
+<div class="cv-strip">
+<figure class="cv-board" data-w="358" data-h="460">
+<figcaption>Machine Chest Press form guide<span>358 × 460</span></figcaption>
+<div class="cv-frame" style="width:358px;height:460px"><iframe src="Player-MachineChestPress.html" title="Machine Chest Press form guide" width="358" height="460" style="width:358px;height:460px"></iframe></div>
+</figure>
+<figure class="cv-board" data-w="358" data-h="460">
+<figcaption>Lat Pulldown form guide<span>358 × 460</span></figcaption>
+<div class="cv-frame" style="width:358px;height:460px"><iframe src="Player-LatPulldown.html" title="Lat Pulldown form guide" width="358" height="460" style="width:358px;height:460px"></iframe></div>
+</figure>
+<figure class="cv-board" data-w="358" data-h="460">
+<figcaption>Dumbbell Lateral Raise form guide<span>358 × 460</span></figcaption>
+<div class="cv-frame" style="width:358px;height:460px"><iframe src="Player-DumbbellLateralRaise.html" title="Dumbbell Lateral Raise form guide" width="358" height="460" style="width:358px;height:460px"></iframe></div>
+</figure>
+</div>
+</section>
+
+<section class="cv-row" aria-labelledby="cv-r-n0">
+<h2 id="cv-r-n0">Flow</h2>
+<div class="cv-strip">
+<figure class="cv-board" data-w="390" data-h="844">
+<figcaption>Train workouts<span>390 × 844</span></figcaption>
+<div class="cv-frame" style="width:390px;height:844px"><iframe src="Main.html" title="Train workouts" width="390" height="844" style="width:390px;height:844px"></iframe></div>
+</figure>
+<figure class="cv-board" data-w="390" data-h="776">
+<figcaption>Exercise about sheet<span>390 × 776</span></figcaption>
+<div class="cv-frame" style="width:390px;height:776px"><iframe src="About.html" title="Exercise about sheet" width="390" height="776" style="width:390px;height:776px"></iframe></div>
+</figure>
+<figure class="cv-board" data-w="390" data-h="844">
+<figcaption>Lat pulldown station<span>390 × 844</span></figcaption>
+<div class="cv-frame" style="width:390px;height:844px"><iframe src="Machine.html" title="Lat pulldown station" width="390" height="844" style="width:390px;height:844px"></iframe></div>
+</figure>
+<figure class="cv-board" data-w="390" data-h="844">
+<figcaption>Split warm-up<span>390 × 844</span></figcaption>
+<div class="cv-frame" style="width:390px;height:844px"><iframe src="Warmup.html" title="Split warm-up" width="390" height="844" style="width:390px;height:844px"></iframe></div>
+</figure>
+<figure class="cv-board" data-w="390" data-h="844">
+<figcaption>Search other names<span>390 × 844</span></figcaption>
+<div class="cv-frame" style="width:390px;height:844px"><iframe src="Search.html" title="Search other names" width="390" height="844" style="width:390px;height:844px"></iframe></div>
+</figure>
+<figure class="cv-board" data-w="390" data-h="844">
+<figcaption>Create my own<span>390 × 844</span></figcaption>
+<div class="cv-frame" style="width:390px;height:844px"><iframe src="Custom.html" title="Create my own" width="390" height="844" style="width:390px;height:844px"></iframe></div>
+</figure>
+</div>
+</section>
+
+<section class="cv-row" aria-labelledby="cv-r-n2">
+<h2 id="cv-r-n2">Other themes</h2>
+<div class="cv-strip">
+<figure class="cv-board" data-w="390" data-h="844">
+<figcaption>Train in Paper<span>390 × 844</span></figcaption>
+<div class="cv-frame" style="width:390px;height:844px"><iframe src="Theme-Paper.html" title="Train in Paper" width="390" height="844" style="width:390px;height:844px"></iframe></div>
+</figure>
+<figure class="cv-board" data-w="390" data-h="844">
+<figcaption>Train in Ember<span>390 × 844</span></figcaption>
+<div class="cv-frame" style="width:390px;height:844px"><iframe src="Theme-Ember.html" title="Train in Ember" width="390" height="844" style="width:390px;height:844px"></iframe></div>
+</figure>
+<figure class="cv-board" data-w="390" data-h="844">
+<figcaption>Train in Emerald<span>390 × 844</span></figcaption>
+<div class="cv-frame" style="width:390px;height:844px"><iframe src="Theme-Emerald.html" title="Train in Emerald" width="390" height="844" style="width:390px;height:844px"></iframe></div>
+</figure>
+<figure class="cv-board" data-w="390" data-h="844">
+<figcaption>Train in Midnight<span>390 × 844</span></figcaption>
+<div class="cv-frame" style="width:390px;height:844px"><iframe src="Theme-Midnight.html" title="Train in Midnight" width="390" height="844" style="width:390px;height:844px"></iframe></div>
+</figure>
+</div>
+</section>
+</main>
+<script>
+(function () {
+  var mode = 'fit';
+  var figs = Array.prototype.slice.call(document.querySelectorAll('.cv-board'));
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.cv-seg button'));
+  function layout() {
+    figs.forEach(function (fig) {
+      var strip = fig.parentNode, cs = getComputedStyle(strip);
+      var avail = strip.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var w = +fig.getAttribute('data-w'), h = +fig.getAttribute('data-h');
+      var s = mode === 'fit' ? Math.min(1, avail / w) : 1;
+      var frame = fig.querySelector('.cv-frame'), ifr = frame.querySelector('iframe');
+      fig.style.width = frame.style.width = w * s + 'px';
+      frame.style.height = h * s + 'px';
+      ifr.style.transform = s < 1 ? 'scale(' + s + ')' : '';
+    });
+  }
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      mode = b.getAttribute('data-size');
+      btns.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      layout();
+    });
+  });
+  window.addEventListener('resize', layout);
+  layout();
+})();
+</script>
