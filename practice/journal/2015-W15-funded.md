@@ -106,8 +106,8 @@ Start of week: balance $25,114.39, high-water $25,135.78, drawdown -0.09%. Payou
   -> Fri result, TAG FIRST: VALID WIN. Checked: call written and committed at 07:00 London, before the entry bar; entry 08:00 London, 0.31 lots, stop 39.8 pips from the
      fill, SELL per the trend rule, one trade, stop never moved, closed 12:00 London, flat for the weekend. Process: clean.
      Result: sold 1.06456, closed 12:00 London @1.05813, +$199.33 = +1.62R. Sim balance $25,137.64 (+0.55% vs start).
-     What happened: the hour before entry broke the night shelf and fell 27 pips, so I sold 27 pips WORSE than the 07:00 price and already below Thursday's... no: Thursday's
-     low was 1.0638, I sold at 1.0646, just above it. Heat: 3 pips. It fell to 1.0607 in the first hour, bounced 27 pips at 09:xx, made new lows at 10:xx and 11:xx and I
+     What happened: the hour before entry broke the night shelf and fell 27 pips, so I sold 27 pips WORSE than the 07:00 price, at 1.0646, just above
+     Thursday's low (1.0638). Heat: 3 pips. It fell to 1.0607 in the first hour, bounced 27 pips at 09:xx, made new lows at 10:xx and 11:xx and I
      closed almost on the low of the morning. The afternoon went 13 pips lower (1.0568), then bounced 65 pips and closed the week at 1.0608.
      This is the "chase" entry the H filter would have skipped (27 pips already gone, right on the old low) - and the best funded day so far. Noted, not a new idea.
      Feeling: pleased, and aware that Tuesday's and Wednesday's stops and today's win are the same rule doing the same thing.
