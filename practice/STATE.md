@@ -35,5 +35,5 @@
 1. `git fetch origin main && git merge --no-edit FETCH_HEAD` (plain pull fails: divergent); `python sim.py advance --until 2015-03-02T07:00`; `./look.sh 3 0 9`; journal/2015-W10.md; `python trade_a.py sell|buy`.
 2. Keep A2 at $125 until phase 1 resolves. If phase 1 passes: same rule, same risk in phase 2 (needs +5% = 10R).
 3. C1: finish its test at >= 40 new trades (20 so far) against the pass mark in journal/2015-W05-replay.md, then drop or keep.
-4. Queued, not run: idea D (trade A2 only when the 3-day close gap > ~50 pips); later exit than noon is NOT allowed as a new A variant (A cap reached) - would need a new idea with its own count.
+4. Queued, not run: idea D (trade A2 only when the 3-day close gap > ~50 pips; a hand count on Feb points the other way: small-gap days +3.72R in 9, big-gap +0.92R in 11); later exit than noon is NOT allowed as a new A variant (A cap reached) - would need a new idea with its own count.
 Tools: look.sh (multi-TF view + trend closes), trade_a.py (executes the written plan), bt/ideas.py [names] [--since=YYYY-MM-DD]. Tests: `python -m pytest -q`.
