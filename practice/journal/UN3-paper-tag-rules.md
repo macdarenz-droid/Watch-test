@@ -47,3 +47,4 @@ is to be written in the journal as a feeling, like every other such thought.
 | Thu 2015-04-23 | 3 | 2 | -1.02R (2 trades) | -0.04R (1 trade) | -0.04R / 0.04R | -1.06R / 1.06R |
 | Fri 2015-04-24 | 4 | 2 | -1.02R (2 trades) | -1.04R (2 trades) | -1.04R / 1.04R | -2.06R / 2.06R |
 | Mon 2015-04-27 | 5 | 2 | -1.02R (2 trades) | -1.20R (3 trades) | -1.20R / 1.20R | -2.22R / 2.22R |
+| Tue 2015-04-28 | 6 | 2 | -1.02R (2 trades) | +0.41R (4 trades) | +0.41R / 1.20R | -0.61R / 2.22R |
