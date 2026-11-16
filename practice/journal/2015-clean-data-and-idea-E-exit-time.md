@@ -53,3 +53,36 @@ My guess, written first: 11:00 gives up a little R and saves little; 10:00 gives
 What I know from memory that could bias me: I have seen March's hourly candles once; I recall days that kept running after noon (03-04, 03-06, 03-10) and Monday 03-16's jump at 12:00-13:00.
 I have not looked at any table of exit hours for any month.
 Nothing above has been run.
+
+# RESULTS of the exit-time test (run after commit b555138). ET10/ET11/ET13 = variants 51/52/53; ideas 22. Costs on, same entries, stop and size as A2 (bt/ab_score.py).
+
+| Data | Exit | Trades | Win rate | Avg R | Net R | Max DD | Net R / max DD |
+|---|---|---|---|---|---|---|---|
+| January (BUILD, in-sample) | 12:00 (A2) | 19 | 74% | +0.78 | +14.89 | 1.34R | 11.1 |
+| January | 10:00 | 19 | 63% | +0.42 | +7.90 | 1.75R | 4.5 |
+| January | 11:00 | 19 | 74% | +0.62 | +11.86 | 1.80R | 6.6 |
+| January | 13:00 | 19 | 63% | +0.56 | +10.63 | 1.86R | 5.7 |
+| MARCH lived days (CLEAN check, use #1) | 12:00 (A2) | 14 | 71% | +0.46 | +6.45 | 1.03R | 6.3 |
+| March | 10:00 | 14 | 64% | +0.33 | +4.66 | 1.31R | 3.6 |
+| March | 11:00 | 14 | 57% | +0.34 | +4.77 | 1.35R | 3.5 |
+| March | 13:00 | 14 | 57% | +0.27 | +3.73 | 1.18R | 3.1 |
+| February (CONTAMINATED, reference only) | 12:00 (A2) | 20 | 55% | +0.23 | +4.67 | 1.87R | 2.5 |
+| February | 10:00 | 20 | 55% | +0.01 | +0.13 | 1.49R | 0.1 |
+| February | 11:00 | 20 | 50% | +0.15 | +3.07 | 1.38R | 2.2 |
+| February | 13:00 | 20 | 55% | +0.23 | +4.62 | 2.19R | 2.1 |
+
+## Build (January): NO SURVIVOR - no exit hour beats noon
+All three have lower avg R AND a bigger drawdown than the 12:00 exit. My hypothesis (earlier = same R, smaller drawdown) is wrong: leaving early gives back profit and does not smooth anything.
+No candidate, so nothing is claimed from March. The March rows are read only for the robustness question.
+
+## What the clean month says (this is the part worth having)
+- Noon was the best of the four exit hours in March too - a month that played no part in choosing it. First time one of A2's parts has support from data it was not built on.
+- Every exit hour was positive in January and March (and 11:00-13:00 in February): the edge is not a knife-edge on one clock time.
+- But my robustness line ("11:00 and 13:00 within 0.15R of noon in January AND March") is NOT met: 11:00 is 0.16R lower in January and 0.12R lower in March; 13:00 is 0.22R and 0.19R lower.
+  So noon is a real peak, and part of January's +0.78R belongs to having picked the best hour. A fair expectation for the morning edge is nearer the neighbours' level than the peak's.
+- 13:00 was the worst hour in March, as guessed: with the US clock change it now straddles the 12:30 data. Staying flat at 12:00 is worth more since 03-08, not less.
+- 10:00 is clearly too early everywhere: half the leg is still to come.
+
+## Verdict
+Exit stays at 12:00 UTC. Variants ET10, ET11, ET13 closed. March has now been used once as a check (for exit time); it is spent for that question.
+Counts: ideas 22, variants 53.

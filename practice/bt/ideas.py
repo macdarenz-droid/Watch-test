@@ -168,6 +168,9 @@ VARIANTS = {
  "V1": dict(entry_h=8, exit_h=12, sl=40, vol=("atr", 0.30)),    # idea V: stop = 0.30 x 5-day avg daily range (25-70 pips)
  "V2": dict(entry_h=8, exit_h=12, sl=40, vol=("yday", 0.32)),   # idea V: stop = 0.32 x yesterday's range (25-70 pips)
  "V3": dict(entry_h=8, exit_h=12, sl=40, vol=("size", 131)),    # idea V: 40 pip stop, size x 131 / 5-day avg range (0.6-1.5)
+ "ET10": dict(entry_h=8, exit_h=10, sl=40),   # idea E-time: A2, out at 10:00
+ "ET11": dict(entry_h=8, exit_h=11, sl=40),   # out at 11:00
+ "ET13": dict(entry_h=8, exit_h=13, sl=40),   # out at 13:00
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
