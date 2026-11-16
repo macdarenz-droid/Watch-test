@@ -35,3 +35,14 @@ Start of week: balance $25,114.39, high-water $25,135.78, drawdown -0.09%. Payou
 | Q1 dead-Asia tag (drawdown goal) | 24 (2 skips) | 17 | +10.09 | +0.42 | 1.50R | 82% of net, same DD |
 Days: ... 04-01 +0.09 (funded 4) | 04-02 -0.25 (funded 5) | 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7).
 Loss tags, all live trades: valid loss 20 (-10.91R) | my mistake 0. Process mistakes (funded): 2.
+
+- Tue 04-07 07:00 London @1.0942. Mon: quiet holiday morning, US session up to 1.1036 (the March highs, again rejected), then a 125 pip drop in one evening hour; closed 1.0922.
+  Asia 33 pips, a small bounce to 1.0955 and back.
+  TREND RULE: BUY. Mon close 1.0922 > Wed 04-01 close 1.0762, by 159 pips.
+  Read: fourth failure at 1.1027-1.1052 since 03-18 and a hard rejection last night; the 3-day rule still points up because the jobs-day rally is inside its window.
+  Price is in the lower third of yesterday's range. Description only.
+  Levels: 1.0955 Asia high, 1.1000, 1.1036 Mon high; 1.0922 Asia low, 1.0910 Mon low (32 pips below - a break of it and my stop is 8 pips further), 1.0864.
+  Wall note: nothing that has held for days sits inside the stop distance in front of this buy (the March highs are 90+ pips above).
+  Paper tags: F1 efficiency 0.23 (crooked) -> no-chase applies; price 0.26 up yesterday's range -> F1 trades; FR1 trades. Q3: Asia 32.6 vs 46.6 (0.70) -> SKIP. Q1: trade.
+  Funded check: balance $25,148.18 = high-water, drawdown 0% -> full size allowed.
+  Plan: BUY 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case -$129.
