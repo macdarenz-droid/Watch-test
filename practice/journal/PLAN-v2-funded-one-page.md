@@ -21,7 +21,7 @@ A raise needs BOTH the 40-trade forward test passed (33 done) AND a re-run of th
 
 ## 4. Payout plan (dates every 14 days from 03-27: 04-10 done, 04-24, 05-08, ...)
 On the payout date, after the day's trade, on the tracker balance: below $26,000 -> request HALF of what is above $25,000; at or above $26,000 -> request everything above
-$26,000 (the $1,000 buffer stays). No request while a brake is on. After a payout the high-water mark is reset to the new balance. I keep 80% of what is requested.
+$26,000 (the $1,000 buffer stays). No request while a brake is on. After a payout the high-water mark is lowered by the amount paid out (corrected 04-24; never reset to the balance while in a drawdown). I keep 80% of what is requested.
 So far: 1 payout, $68.82 requested, $55.06 mine. (Unknown to me: whether the firm has a minimum payout amount.)
 
 ## 5. What counts as a mistake

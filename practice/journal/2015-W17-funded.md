@@ -10,6 +10,7 @@ Live day routine since 04-17: D1 / H4 / H1 / M15 walk in the call, then a note w
 | F18 | Tue 04-21 08:00 | buy | 0.31 | 1.06828 | 1.06418 | 1.06812 (12:00) | -0.04 | -$4.96 | VALID LOSS (scratch; valid setup) | bought after a 37 pip drop; -23 pips at worst, 30 pip chop around entry; +100 pips after noon; F1, FR1, Q1 trade; Q3 SKIP; UN3 agree |
 | F19 | Wed 04-22 08:00 | sell | 0.31 | 1.07680 | 1.08082 | 1.07690 (12:00) | -0.02 | -$3.10 | VALID LOSS (scratch; valid setup) | +23 at best, then -33 (ask ~6 pips from the stop), back to entry at noon; -57 pips after noon; F1, FR1, Q1 trade; Q3 SKIP; UN3 DISAGREE (paper skips) |
 | F20 | Thu 04-23 08:00 | sell | 0.31 | 1.06859 | 1.07280 | 1.07281 (stop, 09:51) | -1.00 | -$130.82 | VALID LOSS (valid setup, market disagreed) | sold the night low; +20 at best; 70 pip rally 09:00-09:50; price at 12:00 London 1.0740 (-54 from entry): a real stop; F1, FR1, Q3 SKIP; Q1 trades; UN3 DISAGREE (paper skips) |
+| F21 | Fri 04-24 08:00 | buy | 0.31 | 1.08748 | 1.08335 | 1.08334 (stop, 11:10) | -1.00 | -$128.34 | VALID LOSS (valid setup, market disagreed) | bought after a 60 pip breakout hour; +25 at best (rejected at 1.0900); price at 12:00 London 1.0815 (-59 from entry): a real stop; F1, FR1 SKIP; Q3, Q1 trade; UN3 agree |
 
 ## Daily calls - each written at 07:00 London and committed before the entry bar
 - **Mon 04-20 call, written 07:00 London (06:00 UTC), before the entry bar.** Friday's tag stands: VALID WIN.
@@ -172,37 +173,84 @@ Live day routine since 04-17: D1 / H4 / H1 / M15 walk in the call, then a note w
   Funded check: tracker balance $25,242.11, high-water $25,508.71, drawdown -1.05% (brakes -3% = $24,743.45 / -5% = $24,233.27) -> full size allowed.
   PAYOUT DATE today: handled after the trade, on the tracker balance, by the plan (half of what is above $25,000; nothing if at or below; no brake is on).
   Plan: BUY 08:00 London, SL 40 pips under the bid at 08:00, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$131 -> drawdown -1.6%. One trade, stop not moved, flat for the weekend.
+  08:00 London note (before the order): at 07:15 one M15 candle jumped 50 pips through the double top (1.0845 / 1.0849), and the hour ended at 1.0874 after a high of
+     1.0880. I am buying 60 pips WORSE than the 07:00 price, right after a breakout candle - the 'chase' shape of 03-26. The no-chase filter failed its test; I buy.
+     Night count: 00:00 open 1.0816 -> 1.0874 = WITH my side. Order: BUY 0.31 at market, stop 1.08735 - 0.00400 = 1.08335. Next look 08:15.
+  08:15 note: filled 1.08748, stop 1.08335 (41.3 pips, risk $128). First M15: low 1.0862 (-13), high 1.0886, close 1.0881 (+6). Holding above the breakout.
+     Stop stays. Next look 09:00.
+  09:00 note: first hour: high 1.0897 (+22) at 08:2x, then two lower M15 candles back to 1.0871-1.0877; now 1.0877 (+2). The breakout has stopped extending but
+     has not been given back. Stop stays 1.08335. Next look 10:00.
+  10:00 note: second hour: pushed to exactly 1.0900 (+25) at 09:4x and was rejected 28 pips in the same M15 candle (1.0900 -> 1.0872), then recovered to 1.0885 (+10).
+     The round number is the ceiling so far; lows 1.0872-1.0873 are holding at my entry. Stop stays. Next look 11:00.
+  11:00 note: third hour slid: lower highs 1.0885, 1.0874, 1.0873, 1.0872 and lows 1.0863, 1.0862, 1.0851; now 1.0852 (-23), on the low of the morning,
+     18 pips above my stop. The breakout candle is half given back. One hour left. Stop stays. At 12:00 I close at market if still in.
+  12:00 note: STOPPED at 11:10 London. The fourth hour broke the morning's lows: 1.0826 at 11:0x, 1.0817 at 11:1x through the stop (1.08335). Balance shows -$128.34.
+     Done for the day. (I typed the noon close out of routine; there was no position, so it did nothing.)
+  -> Fri result, TAG FIRST: VALID LOSS (valid setup, market disagreed; not a mistake). Checked: call with the walk and the UN3 paper call written and committed at
+     07:00 London, before the entry bar; a note before each advance; entry 08:00 London, 0.31 lots, stop 41.3 pips from the fill, BUY per the trend rule, one trade,
+     stop never moved, no second trade, flat for the weekend. Process: clean.
+     Result: bought 1.08748, STOPPED 11:10 London @1.08334, -$128.34 = -1.00R.
+     Price at 12:00 London (stop-day routine, from the engine): 1.0815 = 59 pips below my entry, 18 beyond the stop. A REAL stop. The afternoon recovered to 1.0875-1.0879
+     (my entry) twice and closed the week at 1.0871.
+     What happened: the breakout through the double top happened in the hour BEFORE my entry (60 pips); I bought it at 1.0875, it was rejected at exactly 1.0900 an
+     hour and three-quarters later and unwound completely by 11:15. The 'chase' shape again (03-26, 03-27, 04-23). The no-chase filter (H) and the F1 tag both skip
+     these; H failed its test on all the days where chasing was right, and F1 is on paper (it skipped today and yesterday).
+     WEEK W17: -1.00, -0.04, -0.02, -1.00, -1.00 = -3.07R in 5 trades, no winner. My first losing week as a funded trader and the worst week of A2 on record
+     (previous worst -0.03R). Five losses in a row; live maximum drawdown now 3.07R.
+     Account: tracker balance before payout $25,113.77 = -1.55% from the $25,508.71 high-water. First brake (-3%) $24,743.45 is three full stops away.
+     Coach this morning: valid losses happen, no rule changes off a losing week. Checked against my own plan line "drawdowns of 3-4% will happen and are not a signal
+     to change anything": this is 1.55%. Nothing is changed. All five trades were valid; zero mistakes.
+     Feeling, honestly: flat and a bit sour. The urge today is not to change the rule but to distrust it ("the edge was January"). The numbers I have for that urge:
+     40 live trades, +0.32R each, and the 40-trade alarm passed today (below). I trade Monday the same way.
+     Paper tags: F1 and FR1 SKIPPED (avoid -1.00R); Q3 and Q1 traded. UN3: agree day, paper trades = -1.00R. Night count: night with me -> not counted (0 so far).
+
+  40-TRADE RULE ALARM (pre-registered on 03-12 in the plan: first 40 trades on unseen days must average >= +0.10R with max drawdown <= 8R, or I stop trading the rule for money):
+     COMPLETE TODAY. 40 live trades 03-02..04-24, as traded: 24 wins, +12.64R, average +0.32R, maximum drawdown 3.07R. Both lines hold -> the alarm is PASSED.
+     What it means: I keep trading A2 for money. What it does NOT mean: the size goes up (the plan needs a re-run of the risk-size test where 1.0% passes all five lines;
+     with the planning edge still +0.18R it will not), or that the edge is +0.32R (known to +-0.34R). The standing follow-up - re-run bt/reshuffle_breach.py and
+     bt/funded_sim.py with the 40 forward trades - is done in the weekend research note.
+
+  PAYOUT (second date, Fri 04-24), by my plan: no brake is on; tracker balance $25,113.77 is between $25,000 and $26,000 -> request HALF of what is above $25,000.
+     Requested $56.88 -> my 80% = $45.50. Tracker balance after payout $25,056.89 (sim $25,182.59 minus $125.70 paid out in total).
+     A HOLE IN MY OWN RULE, found while doing this: the plan says "after a payout the high-water mark is reset to the new balance". On 04-10 the account was at its
+     high and that was harmless. Today the account is 1.55% under its high: resetting the high-water to $25,056.89 would wipe the drawdown to 0.00% and move my
+     brakes $380 further away - a payout would loosen my own safety rules in the middle of a losing run. That cannot be what "survival first" means.
+     So I apply the reading that keeps the drawdown: the high-water mark is LOWERED BY THE AMOUNT PAID OUT, not reset: $25,508.71 - $56.88 = $25,451.83.
+     Drawdown stays -1.55% ($25,056.89 vs $25,451.83). Brakes: -3% = $24,688.28, -5% = $24,179.24.
+     (By the letter of the old sentence they would have been $24,305 and $23,804.) This makes my rules tighter, not looser, and changes no trade; I have corrected the
+     sentence in FUNDED-PLAN.md and the one-pager and I am telling my coach so that it is a decision, not a quiet edit. For 04-10 both readings give the same numbers.
+     END OF RELEASED DATA (clock Fri 04-24 22:00 London, weekend).
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
-| A2 as traded (R = result / amount risked) | 39 | 24 | +13.67 | +0.35 | 2.07R | early alarm at 40 trades (avg >= +0.10R, DD <= 8R): 39 done; real statement at 200 |
-| F1 paper tag | 28 (11 skips) | 18 | +14.62 | +0.52 | 1.28R | filter: no adoption question before 200 forward days; can be killed at day 40 (needs FR1 within 1R of A2) |
-| FR1 (tracked only to judge F1) | 26 (13 skips) | 16 | +11.31 | +0.44 | 1.28R | 2.4R behind A2 |
-| Q3 dead-Asia tag (drawdown goal) | 22 (17 skips) | 13 | +5.38 | +0.24 | 1.01R | 39% of A2's net (needs 85%) |
-| Q1 dead-Asia tag (drawdown goal) | 37 (2 skips) | 22 | +11.48 | +0.31 | 2.07R | 84% of net, same DD |
-| UN3 paper tag (never live; rules: journal/UN3-paper-tag-rules.md; forward from 04-21) | 3 days, 2 disagree days of 30 | - | A2 on the disagree days -1.02R; on the agree day -0.04R | - | - | first look only at 30 disagree days AND 200 forward days |
-Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8) | 04-08 -1.00 (funded 9) | 04-09 +0.33 (funded 10) | 04-10 +1.62 (funded 11) | 04-13 +1.94 (funded 12) | 04-14 -0.62 (funded 13) | 04-15 +1.48 (funded 14) | 04-16 -1.00 (funded 15) | 04-17 +1.70 (funded 16) | 04-20 -1.00 (funded 17) | 04-21 -0.04 (funded 18) | 04-22 -0.02 (funded 19) | 04-23 -1.00 (funded 20).
-Loss tags, all live trades: valid loss 28 (-16.59R) | my mistake 0. Process mistakes (funded): 3.
+| A2 as traded (R = result / amount risked) | 40 | 24 | +12.64 | +0.32 | 3.07R | 40-trade alarm (avg >= +0.10R, DD <= 8R): PASSED on 04-24; real statement at 200 |
+| F1 paper tag | 28 (12 skips) | 18 | +14.62 | +0.52 | 1.28R | filter: no adoption question before 200 forward days; can be killed at day 40 (needs FR1 within 1R of A2) |
+| FR1 (tracked only to judge F1) | 26 (14 skips) | 16 | +11.31 | +0.44 | 1.28R | 1.3R behind A2 |
+| Q3 dead-Asia tag (drawdown goal) | 23 (17 skips) | 13 | +4.38 | +0.19 | 1.01R | 35% of A2's net (needs 85%) |
+| Q1 dead-Asia tag (drawdown goal) | 38 (2 skips) | 22 | +10.48 | +0.28 | 3.07R | 83% of net, same DD |
+| UN3 paper tag (never live; rules: journal/UN3-paper-tag-rules.md; forward from 04-21) | 4 days, 2 disagree days of 30 | - | A2 on the disagree days -1.02R; on the agree days -1.04R | - | - | first look only at 30 disagree days AND 200 forward days |
+Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8) | 04-08 -1.00 (funded 9) | 04-09 +0.33 (funded 10) | 04-10 +1.62 (funded 11) | 04-13 +1.94 (funded 12) | 04-14 -0.62 (funded 13) | 04-15 +1.48 (funded 14) | 04-16 -1.00 (funded 15) | 04-17 +1.70 (funded 16) | 04-20 -1.00 (funded 17) | 04-21 -0.04 (funded 18) | 04-22 -0.02 (funded 19) | 04-23 -1.00 (funded 20) | 04-24 -1.00 (funded 21).
+Loss tags, all live trades: valid loss 29 (-17.59R) | my mistake 0. Process mistakes (funded): 3.
 
 ## LIVE vs BACKTEST, running (coach 04-20; `python bt/live_vs_bt.py END`; updated after every live day; the live column is the real out-of-sample)
-As of live day Thu 2015-04-23:
+As of live day Fri 2015-04-24:
 | | Backtest Jan-Feb (engine) | LIVE from 03-02 (as traded) | Engine on the live days |
 |---|---|---|---|
-| Trades | 39 | 39 | 39 |
-| Win rate | 64% | 62% | 62% |
-| Avg R | +0.50 | +0.35 | +0.35 |
+| Trades | 39 | 40 | 40 |
+| Win rate | 64% | 60% | 60% |
+| Avg R | +0.50 | +0.32 | +0.32 |
 | +- 2 standard errors | 0.33 | 0.34 | 0.34 |
-| Net R | +19.56 | +13.64 | +13.75 |
-| Avg win / avg loss | +1.04 / -0.46 | +1.01 / -0.70 | +1.02 / -0.71 |
-| Full stops | 3 (8%) | 9 (23%) | 9 (23%) |
-| Max drawdown | 1.87R | 2.07R | 2.10R |
+| Net R | +19.56 | +12.64 | +12.72 |
+| Avg win / avg loss | +1.04 / -0.46 | +1.01 / -0.72 | +1.02 / -0.73 |
+| Full stops | 3 (8%) | 10 (25%) | 10 (25%) |
+| Max drawdown | 1.87R | 3.07R | 3.12R |
 | Worst 10 trades in a row | +0.56R | -1.34R | -1.37R |
 | Sells: n, avg R | 24, +0.70 | 25, +0.44 | 25, +0.44 |
-| Buys: n, avg R | 15, +0.18 | 14, +0.19 | 14, +0.20 |
-Live minus backtest: -0.15R per trade (noise band +-0.48R) -> inside the noise. Live vs February alone (+0.23R, 20 trades): +0.12R. As traded vs engine on the same days: -0.11R over 39 trades (fills and rounding).
-Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 39 done, avg +0.35R, max DD 2.07R. Planning edge +0.18R: live is +0.17R above it.
-39 live trades is still a small book: the live average is known to about +-0.34R. What differs live: more full stops (23% vs 8%) and deeper average losses.
+| Buys: n, avg R | 15, +0.18 | 15, +0.11 | 15, +0.11 |
+Live minus backtest: -0.19R per trade (noise band +-0.47R) -> inside the noise. Live vs February alone (+0.23R, 20 trades): +0.08R. As traded vs engine on the same days: -0.08R over 40 trades (fills and rounding).
+Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 40 done, avg +0.32R, max DD 3.07R. Planning edge +0.18R: live is +0.14R above it.
+40 live trades is still a small book: the live average is known to about +-0.34R. What differs live: more full stops (25% vs 8%) and deeper average losses.
 Count only (from 04-23, no look before 40): live trades after a night (00:00->08:00) against my side: 0.
 
 ## 04-21 research (before the next day): signal-agreement test UN1/UN2/UN3 (journal/2015-idea-UN-signal-agreement.md) - no survivor by the kill test. UN3 (skip when the 3-day and 5-day signals disagree) passes three lines and fails the profit line; question to the coach about a paper tag. Rule A2 and size 0.50% unchanged. Ideas 42, variants 113.

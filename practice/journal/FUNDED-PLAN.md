@@ -44,7 +44,8 @@ slightly negative. That is "steady", and it is enough.
 - Until the balance has a buffer of $1,000 (+4%, i.e. $26,000): request half of the profit above $25,000 at each payout date, leave half in.
 - Once the buffer exists: request everything above $26,000 at each payout date. I keep 80% of what is requested.
 - No payout request while a brake is active.
-- After a payout the high-water mark is reset to the balance after the payout.
+- After a payout the high-water mark is LOWERED BY THE AMOUNT PAID OUT (corrected 04-24: the old wording 'reset to the balance after the payout' would have erased a drawdown
+  and loosened the brakes when a payout falls inside a losing run; at an account high both readings are the same).
 
 ## What stays the same about how I work
 One live day at a time, call written before the clock moves; the day's result tagged valid / mistake before anything else; tracker updated the same day;

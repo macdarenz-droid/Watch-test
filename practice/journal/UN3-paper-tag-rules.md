@@ -45,3 +45,4 @@ is to be written in the journal as a feeling, like every other such thought.
 | Tue 2015-04-21 | 1 | 0 | - | -0.04R (1 trade) | -0.04R / 0.04R | -0.04R / 0.04R |
 | Wed 2015-04-22 | 2 | 1 | -0.02R (1 trade) | -0.04R (1 trade) | -0.04R / 0.04R | -0.06R / 0.06R |
 | Thu 2015-04-23 | 3 | 2 | -1.02R (2 trades) | -0.04R (1 trade) | -0.04R / 0.04R | -1.06R / 1.06R |
+| Fri 2015-04-24 | 4 | 2 | -1.02R (2 trades) | -1.04R (2 trades) | -1.04R / 1.04R | -2.06R / 2.06R |
