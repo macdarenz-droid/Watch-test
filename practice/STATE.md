@@ -5,7 +5,7 @@
 | Sim clock | Fri 2015-02-27 22:00 UTC (END OF RELEASED DATA - stopped, waiting for coach) |
 | Phase | Challenge #1, phase 1 ACTIVE: balance $26,836.44 (+7.35%), target $27,000 (+$163.56 = 1.3R to go), 34 trading days, no breach |
 | Current strategy | Rule A2 "London trend": 07:00 UTC write call; trend = yesterday's 22:00 close vs close 3 trading days earlier; 08:00 market order with trend; SL 40 pips; close 12:00 UTC; 1 trade/day; flat at weekend |
-| Risk | PLAN v2 (journal/PLAN-v2.md): finish phase 1 at $125 = 0.5% (0.31 lots); from phase 2 $187.50 = 0.75% (0.47 lots x 40 pips). Brakes: -4% from phase start -> back to 0.5%; -6% -> stop and review. 1 trade/day so worst day = 1R |
+| Risk | PLAN v2 + risk math (journal/2015-risk-math.md): finish phase 1 at $125 = 0.5% (0.31 lots); from phase 2 $187.50 = 0.75% (0.47 lots x 40 pips), confirmed by replay at 0.5/0.75/1/1.5%. Brakes: -4% from phase start -> back to 0.5%; -6% -> stop and review. 1 trade/day so worst day = 1R |
 | Ideas tried | 10 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed], F efficiency regime [not adopted], G don't-fight-the-first-break [killed], T one-hour check exit [killed], K first-break direction [killed]) |
 | Variants tested | 19 (A1 A2 A3, B1 B2 B3, C1, D1, E1, DE, H1 H2 H3, F1, G1, T1 T2, K1 K2). A and B at the 3-variant cap; review round used its 3 |
 | Challenge attempts | 1 (active) |
@@ -15,8 +15,8 @@
 | Period | Trades | Win rate | Avg R | Net R | Max drawdown | Notes |
 |---|---|---|---|---|---|---|
 | LIVE Jan (01-12..01-30) A2 | 14 | 71% | +0.72 | +10.04 (+$1,257) | 1.33R | one big downtrend; 2 shock-day trades = +6.3R |
-| LIVE Feb (02-02..02-27) A2 | 20 | 55% | +0.23 | +4.64 (+$580) | 2.17R | box market; one coin-flip day = +2.14R |
-| LIVE total | 34 | 62% | +0.43 | +14.69 (+$1,836) | 2.17R | |
+| LIVE Feb (02-02..02-27) A2 | 20 | 55% | +0.23 | +4.64 (+$580) | 1.86R | box market; one coin-flip day = +2.14R |
+| LIVE total | 34 | 62% | +0.43 | +14.69 (+$1,836) | 1.86R | |
 | Backtest Feb only (out-of-sample) A1 / A2 / A3 | 20 each | 50 / 55 / 40% | +0.18 / +0.23 / +0.00 | +3.60 / +4.64 / +0.10 | 2.2 / 1.9 / 3.1R | A2 = live exactly |
 | Backtest Feb only B1 / B2 / B3 | 13 / 14 / 13 | 54 / 57 / 54% | +0.32 / +0.34 / +0.23 | +4.10 / +4.79 / +2.98 | 1.1 / 1.7 / 1.0R | |
 | Backtest Feb only C1 (A2 + midpoint filter) | 13 | 38% | -0.08 | -1.04 | 1.5R | skipped 7 trades worth +5.68R: failing |
@@ -69,7 +69,13 @@
 - K = take the side of the first break of the Asia range instead of the 3-day trend. Jan build: K1 +0.12R, K2 +0.20R vs A2 +0.78R -> FAIL. Feb (contaminated, K2 only): +0.08R vs +0.23R -> FAIL. Killed.
 - Finding: the 3-day trend direction beats the raw break in both months; it stays. Use bt/ab_rule.py VARIANTS START END [--drop=DATE] for rules with their own entries.
 
+## Risk math (bt/risk_math.py, journal/2015-risk-math.md)
+- Replay of my 34 real trades: final +7.35 / +11.02 / +14.69 / +22.04% at 0.5 / 0.75 / 1 / 1.5%; worst day -0.51 / -0.77 / -1.02 / -1.54%; max DD incl. floating 1.02 / 1.53 / 2.04 / 3.05%.
+- At a Feb-sized edge (+0.23R, 95% range -0.10..+0.56) +8% takes ~69 / 46 / 35 / 23 trades. If the edge is really -0.10R, 2-month breach chance is 0 / 2.4 / 12.7 / 38%.
+- Chosen: 0.75% (cushion over speed): ~2.3 months at +0.23R. 1.0% is the smallest size that makes 2 months on expectation but its safety depends on an edge I cannot prove.
+- Correction: live max closed drawdown is 1.86R (3 losses, 02-18..02-20), not 2.17R as I wrote in W08/W09 (I had added four losers that were not consecutive).
+
 ## Next step
-1. STOPPED after idea K. No new runs, no new candles until told. Traded rule is still A2 frozen at $125.
+1. STOPPED after risk math. No new runs, no new candles until told. Traded rule is still A2 frozen at $125.
 2. When unseen data arrives: `git fetch origin main && git merge --no-edit FETCH_HEAD`; trade A2 per PLAN v2 sizing ($125 until phase 1 resolves, then $187.50); paper-tag F1 on every signal day; judge gate 2 only after 40 new signal days.
 Tools: look.sh, trade_a.py, bt/ideas.py [names] [--since=YYYY-MM-DD] (careful: with no names it runs EVERY variant on all months), bt/review.py, bt/loser_charts.py. Tests: `python -m pytest -q`.

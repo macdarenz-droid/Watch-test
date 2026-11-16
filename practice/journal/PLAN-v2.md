@@ -59,7 +59,7 @@ Chance of passing phase 1 / chance of breaching, from the bootstrap:
 ### Changed
 1. Risk per trade: 0.5% -> 0.75% ($187.50 = 0.47 lots x 40 pips), starting with PHASE 2. Phase 1 is $164 from its target; I finish it at 0.5% and change nothing mid-phase.
    Why 0.75% and not 1%: at 0.75% the 2-month requirement (+0.27R, 50% wins) is about what the out-of-sample month delivered (+0.23R, 55%), so the plan no longer needs January to repeat;
-   a zero-edge rule still has only ~0.2% breach chance over two months (2% at 1.00%); worst day is -0.75%, worst run of 13 straight full stops has not come close (my worst: 4 losses, -2.17R).
+   a zero-edge rule still has only ~0.2% breach chance over two months (2% at 1.00%); worst day is -0.75%, worst run of 13 straight full stops has not come close (my worst: 3 losses, -1.86R; corrected, see 2015-risk-math.md).
    What it does NOT do: it does not improve the strategy. If the edge is zero, 0.75% just loses 50% faster than 0.5%.
 2. Brakes (new, fixed in advance):
    - Account 4% below the phase start (-5.3R at 0.75%): risk back to 0.5% until a new equity high for the phase.
