@@ -32,7 +32,7 @@ NOT a mistake: a loss on a trade that followed every line above. That is "valid 
 PROCESS MISTAKE (separate tally; something wrong AROUND the trade that did not change it): call written late or after seeing extra candles; clock/time-zone slips; a research
 script touching data it should not; a test run before its kill test is pushed; more than 3 variants; numbers written from memory instead of from the tool; journal or tracker not
 updated the same day; result not tagged before anything else.
-Score so far (funded): 14 trades, 14 valid (9 wins, 5 valid losses), 0 trade mistakes, 2 process mistakes (P1 DST slip 03-30, P2 research script 04-03).
+Score so far (funded): 14 trades, 14 valid (9 wins, 5 valid losses), 0 trade mistakes, 2 process mistakes (P1 DST slip 03-30, P2 research script 04-03). [04-17: 15 trades, 0 trade mistakes, 3 process mistakes - P3 a journal number in the wrong time zone.]
 
 ## 6. What I expect, honestly
 | Sample (A2, full costs) | Trades | Win rate | Avg R |
@@ -43,9 +43,9 @@ Score so far (funded): 14 trades, 14 valid (9 wins, 5 valid losses), 0 trade mis
 Planning number: +0.18R. On 72 trades my average is only known to about +-0.25R. At 0.50%: roughly +$460 (planning edge) to +$890 (February-to-now edge) a month on the
 account before the split; about one month in five negative at the planning edge; a bad month about -$450. Drawdowns of 3-4% will happen and are not a signal to change anything.
 
-## 7. What is closed, so I do not reopen it on a bad day (39 ideas, 104 variants, none adopted)
+## 7. What is closed, so I do not reopen it on a bad day (40 ideas, 107 variants, none adopted)
 Entry filters from chart reading (no-chase, first break, night, gap size, round numbers, flip day, rejection day, dead Asia, Friday): the losers I look at have more winning twins.
-Exits (tighter / wider / structural stop, break-even, trail, target, runner, scale-out, partial at +1R, add at +1R, 09:00 checks, other exit hours): 23 definitions, none beats noon.
+Exits (tighter / wider / structural stop, break-even, trail, target, runner, scale-out, partial at +1R, add at +1R, stop on a candle close, 09:00 checks, other exit hours): 26 definitions, none beats noon.
 Entry time and price (07:00, 09:00, +-1h, limit orders); lookback 2 / 5 / 10; second setups tried (Asia break, ignition candle, NY fade, range fade). Size above 0.50%.
 Ruled out about myself: discretionary skips and rules made from one replayed day.
 

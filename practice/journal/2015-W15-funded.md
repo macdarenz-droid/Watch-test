@@ -63,6 +63,8 @@ Start of week: balance $25,114.39, high-water $25,135.78, drawdown -0.09%. Payou
      Result: sold 1.08450, STOPPED 11:15 London @1.08851, -$124.31 = -1.00R. Funded balance $24,896.77 (-0.41% vs start), drawdown -1.00% from the $25,148.18 high-water.
      What happened: the hour before entry popped 24 pips; the morning ground higher in a tight channel, touched 1.08873 at 11:1x - 2.3 pips past my stop - and that was the
      high of the day. By noon it was back at 1.0843, by the evening at 1.0763, 110 pips below where I was stopped. Right side, stopped by the width of the spread.
+     [CORRECTION written 04-17, original line above left as it was: "by noon it was back at 1.0843" is WRONG. At 12:00 London price was 1.0872, 27 pips against
+     me; 1.0843 came about 12:45-13:00 London - I read a UTC hour as a London hour. Without the stop this trade would have closed about -0.7R at noon. Process mistake P3.]
      Same shape as 03-09. I tested wider stops because of that day (idea S): they cost 14-53% of the profit. So this is the known price of a 40 pip stop, paid again.
      Two full stops in a row, both valid. Account check, because this is what the brakes are for: drawdown -1.00%; first brake at -3% ($24,394), stop at -5% ($23,891),
      account line $22,500. Four more full stops in a row would reach the first brake. Nothing to do today but the same size and the same rule tomorrow.

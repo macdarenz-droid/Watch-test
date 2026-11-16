@@ -99,6 +99,8 @@ Size note (coach, 04-13): Friday's +1.62R does not change the size. The risk-siz
      What happened: the hour before entry kept falling (1.0678 -> 1.0655, bounce to 1.0666). First half hour popped to 1.0685 (+18) and then slid for two hours:
      1.0647, 1.0627, 1.0626, and at 10:0x London 1.06247 - 1.4 pips through my stop. That was the low of the day. By noon price was 1.0713, 46 pips ABOVE my entry;
      by the evening 1.0817. Right side again, out at the exact bottom. Same shape as 04-08 (stop taken by 2.3 pips at the day's extreme) and 03-09.
+     [Note added 04-17 after the close-stop test: price at 12:00 London was 1.0713, +46 pips from my entry (engine: +1.14R without the stop) - this one WAS a wick.
+     04-08 and 03-09 were not: see journal/2015-idea-CS-close-stop.md. "Same shape" was wrong.]
      The thought "a 45 pip stop would have made +1R today" is true and I have tested it: S50/S60/S80 cost 14-53% of the profit over the days where the wider stop simply
      loses more. Three such days in six weeks is what a fixed 40 pip stop costs. Written down; not acted on.
      Second thing I notice: three of my last four full stops (04-07, 04-08, 04-16) came after a LIVELY night or evening against me. That is the NM / RV family and both
@@ -116,7 +118,7 @@ Size note (coach, 04-13): Friday's +1.62R does not change the size. The risk-siz
 | Q3 dead-Asia tag (drawdown goal) | 21 (13 skips) | 13 | +6.38 | +0.30 | 1.01R | 45% of A2's net (needs 85%) |
 | Q1 dead-Asia tag (drawdown goal) | 32 (2 skips) | 21 | +11.84 | +0.37 | 2.00R | 84% of net, same DD |
 Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8) | 04-08 -1.00 (funded 9) | 04-09 +0.33 (funded 10) | 04-10 +1.62 (funded 11) | 04-13 +1.94 (funded 12) | 04-14 -0.62 (funded 13) | 04-15 +1.48 (funded 14) | 04-16 -1.00 (funded 15).
-Loss tags, all live trades: valid loss 24 (-14.53R) | my mistake 0. Process mistakes (funded): 2.
+Loss tags, all live trades: valid loss 24 (-14.53R) | my mistake 0. Process mistakes (funded): 3.
 
 ## 04-14 research (before the next day): replay of week 04-06..04-10 + rejection-day test RV1/RV2/RV3 (journal/2015-replay-W15-and-idea-RV.md) - no survivor. Rule A2 and size 0.50% unchanged. Ideas 37, variants 98.
 
@@ -125,3 +127,5 @@ Loss tags, all live trades: valid loss 24 (-14.53R) | my mistake 0. Process mist
 ## 04-16 (before the next day): trading plan v2 funded one-pager written (journal/PLAN-v2-funded-one-page.md); one new hypothesis pre-registered and NOT run: add to the trade at +1R (journal/2015-idea-AD-add-to-winner.md).
 
 ## 04-16 research (before the next day): add-at-+1R test AD1/AD2/AD3 run on the coach's go (journal/2015-idea-AD-add-to-winner.md) - no survivor: more net R, deeper drawdown. Rule A2 and size 0.50% unchanged. Ideas 39, variants 104.
+
+## 04-17 research (before the next day): close-stop test CS1/CS2/CS3 (journal/2015-idea-CS-close-stop.md) - no survivor: 0 of 7 clean stop-outs were wicks. Found and corrected an error in my 04-08 journal note (process mistake P3). Rule A2 and size 0.50% unchanged. Ideas 40, variants 107.
