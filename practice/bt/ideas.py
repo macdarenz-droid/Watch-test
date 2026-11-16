@@ -27,7 +27,7 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None):
     _best = {}
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
@@ -108,6 +108,12 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                         if vol[0] == "atr" and i >= 5: sl_d = min(70, max(25, vol[1] * sum(dr) / 5))
                         elif vol[0] == "yday" and i >= 5: sl_d = min(70, max(25, vol[1] * dr[-1]))
                         elif vol[0] == "size" and i >= 5: mult = min(1.5, max(0.6, vol[1] / (sum(dr) / 5)))
+                    if sstop is not None:        # idea SS: stop 5 pips beyond a structure extreme; sstop = (kind, min pips, max pips)
+                        kind, lo_c, hi_c = sstop; today = g[g.time.dt.date == d]
+                        seg = today[today.time.dt.hour < 7] if kind == "asia" else (today[today.time.dt.hour == 7] if kind == "h7" else today[today.time.dt.hour < 8])
+                        if len(seg):
+                            dist = ((px - (seg.low.min() - 5 * PIP)) if side > 0 else ((seg.high.max() + 5 * PIP) - px)) / PIP
+                            sl_d = min(hi_c, max(lo_c, dist))
                     s = px + side * -sl_d * PIP; t = px + side * tp * PIP if tp else None
                     if wall is not None:      # idea Z: take profit 2 pips in front of a standing N-day extreme (wall = (N days, min age in days))
                         N, minage = wall; i = dlist.index(d)
@@ -210,6 +216,9 @@ VARIANTS = {
  "GAP25": dict(entry_h=8, exit_h=12, sl=40, mingap=25),            # idea GAP: skip small 3-day gaps
  "GAP50": dict(entry_h=8, exit_h=12, sl=40, mingap=50),
  "GAPR": dict(entry_h=8, exit_h=12, sl=40, mingap=("rel", 0.25)),
+ "SSA": dict(entry_h=8, exit_h=12, sl=40, sstop=("asia", 20, 60)),    # idea SS: structure stops
+ "SSH": dict(entry_h=8, exit_h=12, sl=40, sstop=("h7", 15, 60)),
+ "SSN": dict(entry_h=8, exit_h=12, sl=40, sstop=("night", 20, 60)),
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
