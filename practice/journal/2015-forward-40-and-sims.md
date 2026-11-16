@@ -22,7 +22,7 @@ These are sizing runs on my own results; no rule variant, no new idea. Counts st
   D3. A RAISE is not on the table whatever the numbers say: it needs 1.0% to pass all five lines of the 04-10 test at the planning edge, and the planning edge (+0.18R)
       has not changed. If 1.0% happens to pass on the longer list I report it and do nothing.
   D4. Otherwise 0.50% stays, brakes unchanged.
-Also reported: what the losing week did to the numbers (live average +0.46R a week ago, +0.32R now; planning edge +0.18R).
+Also reported: what the losing week did to the numbers (live average +0.45R a week ago [first written as +0.46 from memory; the tally says +15.73R / 35], +0.32R now; planning edge +0.18R).
 My guess: D1 and D2 are not triggered (the stop is reached in a few percent of runs on the live list); the corrected high-water rule makes my stop slightly MORE frequent
 than the old reading; 1.0% still fails at the planning edge. 0.50% stays.
 
@@ -54,7 +54,7 @@ Old high-water reading on the same list: stop reached 5 times instead of 11.
 - D4: 0.50% STAYS. Brakes unchanged.
 
 ## What the losing week did
-A week ago the live average was +0.46R on 35 trades; now +0.32R on 40. The backtest-plus-live A2 list went from +0.46R (69 trades, 04-10) to +0.41R (79).
+A week ago (04-17) the live average was +0.45R on 35 trades; now +0.32R on 40. The backtest-plus-live A2 list went from +0.46R (69 trades, 04-10) to +0.41R (79).
 The planning edge stays +0.18R; live is still above it, and the gap is far inside the +-0.34R I can measure.
 
 ## What I did NOT expect, said plainly: the high-water correction matters in the simulations
