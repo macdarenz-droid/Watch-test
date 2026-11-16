@@ -20,3 +20,4 @@ Source: journal/2015-review-losers-of-3-killed-ideas-and-idea-MB.md. PAPER ONLY.
 | date | morning (pips) | break | kept / removed | R | kept total (n, R, DD) | removed total (n, R) | small / large morning (kept) |
 |---|---|---|---|---|---|---|---|
 | Wed 2015-05-13 | -26.9 | UP | removed | +4.23 | 0, 0.00R, 0.00R | 1, +4.23R | - |
+| Thu 2015-05-14 | +22.3 | DOWN | removed | -1.00 | 0, 0.00R, 0.00R | 2, +3.23R | - |
