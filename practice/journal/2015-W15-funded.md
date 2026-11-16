@@ -79,3 +79,5 @@ Start of week: balance $25,114.39, high-water $25,135.78, drawdown -0.09%. Payou
 | Q1 dead-Asia tag (drawdown goal) | 26 (2 skips) | 17 | +8.09 | +0.31 | 2.00R | 79% of net, same DD |
 Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8) | 04-08 -1.00 (funded 9).
 Loss tags, all live trades: valid loss 22 (-12.91R) | my mistake 0. Process mistakes (funded): 2.
+
+## 04-09 research (no trading day): flip-day test FL1/FL2/FL3 on all history - no survivor (journal/2015-idea-FL-flip-days.md). Rule A2 and size 0.50% unchanged. Ideas 34, variants 89.

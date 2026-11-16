@@ -27,7 +27,7 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None, scale=None, rn=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None, scale=None, rn=None, flip=None):
     _best = {}
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
@@ -39,6 +39,12 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
     for d, g in m5.groupby("day"):
         if d not in tr or g["time"].iloc[0].weekday() == 6 and len(g) < 100: continue
         side = tr[d]; done = False; running = False
+        if flip is not None:           # idea FL: first day(s) after the trend signal changes side
+            _ds = sorted(tr); _i = _ds.index(d); p1 = tr[_ds[_i-1]] if _i >= 1 else None; p2 = tr[_ds[_i-2]] if _i >= 2 else None
+            f1 = p1 is not None and p1 != tr[d]; f2 = (not f1) and p2 is not None and p2 != p1
+            if flip == "skip1" and f1: continue
+            if flip == "skip2" and (f1 or f2): continue
+            if flip == "confirm" and f1: side = p1
         asia = g[(g.time.dt.hour < 7) & (g.time.dt.date == d)]
         for _, b in g.iterrows():
             h = b.time.hour
@@ -237,6 +243,9 @@ VARIANTS = {
  "RN00_15": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 15)),   # idea RN: round numbers ahead
  "RN00_25": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 25)),
  "RN50_15": dict(entry_h=8, exit_h=12, sl=40, rn=(50, 15)),
+ "FL1": dict(entry_h=8, exit_h=12, sl=40, flip="skip1"),     # idea FL: flip days
+ "FL2": dict(entry_h=8, exit_h=12, sl=40, flip="skip2"),
+ "FL3": dict(entry_h=8, exit_h=12, sl=40, flip="confirm"),
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
