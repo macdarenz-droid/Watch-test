@@ -13,7 +13,7 @@ Why: risk-size test 04-10 - at the edge I plan with (+0.18R) 1.0% breaches about
 Re-run 04-24 (80 trades, corrected high-water rule): on my 40 live trades 0.50% is stopped by my own -5% brake in 1.1% of two-year runs; at the planning edge in about 14% (never a breach).
 A raise needs BOTH the 40-trade forward test passed (33 done) AND a re-run of that test in which the bigger size passes all five lines. Neither is close.
 
-## 3. Daily stop, and the stops behind it
+## 3. Daily stop, and the stops behind it (the two brakes are the ONLY size triggers - written out as a mechanical size rule on 04-27, journal/2015-W18-funded.md)
 - DAILY: one trade, one stop. The worst planned day is -1R = -$125 (-0.5%), ten times inside the firm's 5% daily line. After the trade is closed - win, loss or stop -
   I am done for the day. No re-entry, no "second chance", no afternoon trade. A day can only be worse than -1R through a gap past the stop; I cannot prevent that, the size covers it.
 - BRAKE 1: balance 3% below the high-water mark (now $24,657.75) -> half size ($62.50) until a new high-water.
