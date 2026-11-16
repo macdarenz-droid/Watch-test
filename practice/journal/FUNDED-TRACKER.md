@@ -14,6 +14,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | 8 | Tue 2015-04-07 | buy | 0.31 | -1.00 | -127.10 | 25,021.08 | 25,148.18 | -0.51% | -0.82 (April) | valid setup, market disagreed | - |
 | 9 | Wed 2015-04-08 | sell | 0.31 | -1.00 | -124.31 | 24,896.77 | 25,148.18 | -1.00% | -1.82 (April) | valid setup, market disagreed | - |
 | 10 | Thu 2015-04-09 | sell | 0.31 | +0.33 | +41.54 | 24,938.31 | 25,148.18 | -0.83% | -1.49 (April) | valid (win) | - |
+| 11 | Fri 2015-04-10 | sell | 0.31 | +1.62 | +199.33 | 25,137.64 (25,068.82 after payout) | 25,148.18 -> reset 25,068.82 | -0.04% -> 0.00% | +0.13 (April) | valid (win) | - |
 
 ## Monthly summary
 | Month | Trades | Wins | Net R | $ P&L | Worst day | Deepest drawdown | Valid / mistake tags | Payouts requested | My 80% |
@@ -23,6 +24,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 ## Payout ledger
 | Date | Balance before | Requested | My 80% | Balance after | Note |
 |---|---|---|---|---|---|
+| Fri 2015-04-10 | 25,137.64 | 68.82 (half of the $137.64 above $25,000; buffer not built yet) | 55.06 | 25,068.82 | first payout date; high-water reset to 25,068.82; sim balance stays 25,137.64 (offset -68.82). Unknown: whether the firm has a minimum payout amount |
 
 ## Process mistakes log (separate from trade tags; a process mistake is something I did wrong AROUND a trade)
 | # | Date | What happened | Effect on the trade | Fix |
@@ -33,4 +35,4 @@ Earlier record-keeping slips, for completeness (challenge stage, none changed a 
 pre-registration; worst losing run overstated as -2.17R (was -1.86R); a journal edit on 03-25 cut out a section (restored from git on 03-26).
 
 ## Status line (update every day)
-After funded day 10 (04-09): balance $24,938.31 | high-water $25,148.18 | drawdown -0.83% (deepest so far -1.00%; first brake at -3% = $24,393.73, stop at -5% = $23,890.77, account line $22,500) | funded total -0.51R in 10 trades (6 wins, 4 valid losses) | March: +0.98R in 3 trades | April MTD: -1.49R (7 trades, 4 wins) | TRADE tags: 10 valid, 0 my mistake | PROCESS mistakes: 2 | payouts 0 | payout date Fri 04-10: balance below $25,000 -> nothing to request; next date after that Fri 04-24.
+After funded day 11 (04-10) and payout 1: tracker balance $25,068.82 (sim $25,137.64 minus $68.82 paid out) | high-water $25,068.82 | drawdown 0.00% (deepest so far -1.00%; first brake at -3% = $24,316.76, stop at -5% = $23,815.38, account line $22,500) | funded total +1.11R in 11 trades (7 wins, 4 valid losses) | March: +0.98R in 3 trades | April MTD: +0.13R (8 trades, 5 wins) | TRADE tags: 11 valid, 0 my mistake | PROCESS mistakes: 2 | payouts 1: $68.82 requested, $55.06 mine | next payout date Fri 04-24.
