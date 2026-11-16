@@ -10,6 +10,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | 4 | Wed 2015-04-01 | sell | 0.31 | +0.09 | +11.47 | 25,135.78 | 25,135.78 | 0.00% | +0.09 (April) | valid (win) | - |
 | 5 | Thu 2015-04-02 | sell | 0.31 | -0.25 | -30.69 | 25,105.09 | 25,135.78 | -0.12% | -0.16 (April) | valid setup, market disagreed | - |
 | 6 | Fri 2015-04-03 | buy | 0.31 | +0.07 | +9.30 | 25,114.39 | 25,135.78 | -0.09% | -0.09 (April) | valid (win) | - |
+| 7 | Mon 2015-04-06 | buy | 0.31 | +0.27 | +33.79 | 25,148.18 | 25,148.18 | 0.00% | +0.18 (April) | valid (win) | - |
 
 ## Monthly summary
 | Month | Trades | Wins | Net R | $ P&L | Worst day | Deepest drawdown | Valid / mistake tags | Payouts requested | My 80% |
@@ -29,4 +30,4 @@ Earlier record-keeping slips, for completeness (challenge stage, none changed a 
 pre-registration; worst losing run overstated as -2.17R (was -1.86R); a journal edit on 03-25 cut out a section (restored from git on 03-26).
 
 ## Status line (update every day)
-After funded day 6 (04-03, end of week 14): balance $25,114.39 | high-water $25,135.78 | drawdown -0.09% (brake at -3%, stop at -5%, account line $22,500) | March: +0.98R in 3 trades | April MTD: -0.09R (3 trades, 2 wins) | TRADE tags: 6 valid (4 wins, 2 losses "valid setup, market disagreed"), 0 my mistake | PROCESS mistakes: 2 (P1 DST slip, P2 research script touched March) | payouts 0 | next payout date 04-10.
+After funded day 7 (04-06): balance $25,148.18 | high-water $25,148.18 (new) | drawdown 0.00% (deepest so far -0.49%; brake at -3%, stop at -5%, account line $22,500) | funded total +1.16R in 7 trades (5 wins) | March: +0.98R in 3 trades | April MTD: +0.18R (4 trades, 3 wins) | TRADE tags: 7 valid (5 wins, 2 valid losses), 0 my mistake | PROCESS mistakes: 2 | payouts 0 | next payout date Fri 04-10 (policy: half of the profit above $25,000 while the buffer is under $1,000).
