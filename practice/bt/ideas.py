@@ -23,7 +23,7 @@ def trend_map(m5, look=3):
         elif i >= 2: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None):
     tr = trend_map(m5, look); acct = Account(); risk_of = {}
     cl = m5.groupby('day')['close'].last()
     hi = m5.groupby('day')['high'].max(); lo = m5.groupby('day')['low'].min(); dlist = list(hi.index)
@@ -65,6 +65,9 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                     px = b.open
                     s = px + side * -sl * PIP; t = px + side * tp * PIP if tp else None
                     oid = acct.market(side, round(RISK / (sl * 10), 2), sl=s, tp=t, tag=str(d)); done = True
+            if hourcheck is not None and acct.positions and h == entry_h + 1 and b.time.minute == 0:   # idea T: one-hour check at this bar's open
+                p = acct.positions[0]; pips = ((b.open - p.entry) if p.side > 0 else (p.entry - (b.open + acct.spread))) / PIP
+                if pips < hourcheck: acct.close()
             if acct.positions and h >= exit_h: acct.close()
             acct.on_bar(b)
     t = pd.DataFrame(acct.trades)
@@ -92,6 +95,8 @@ VARIANTS = {
  "H3": dict(entry_h=8, exit_h=12, sl=40, chase=0.8),
  "F1": dict(entry_h=8, exit_h=12, sl=40, eff=0.5),      # idea F: straight week -> A2 every day; crooked week -> A2 + no-chase(0.6)
  "G1": dict(entry_h=8, exit_h=12, sl=40, nofight=True),   # idea G: A2, skip when the first London hour broke the Asia range against me
+ "T1": dict(entry_h=8, exit_h=12, sl=40, hourcheck=0),     # idea T: close at 09:00 if not in profit
+ "T2": dict(entry_h=8, exit_h=12, sl=40, hourcheck=-10),   # idea T: close at 09:00 if worse than -10 pips
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":

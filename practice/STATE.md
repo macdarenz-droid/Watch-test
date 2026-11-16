@@ -6,8 +6,8 @@
 | Phase | Challenge #1, phase 1 ACTIVE: balance $26,836.44 (+7.35%), target $27,000 (+$163.56 = 1.3R to go), 34 trading days, no breach |
 | Current strategy | Rule A2 "London trend": 07:00 UTC write call; trend = yesterday's 22:00 close vs close 3 trading days earlier; 08:00 market order with trend; SL 40 pips; close 12:00 UTC; 1 trade/day; flat at weekend |
 | Risk | $125/trade = 0.5% (0.31 lots x 40 pips). Own max daily loss 0.5% (1 trade/day). Reason: unproven rule; 20 straight losses to hit max loss |
-| Ideas tried | 8 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed], F efficiency regime [not adopted], G don't-fight-the-first-break [killed]) |
-| Variants tested | 15 (A1 A2 A3, B1 B2 B3, C1, D1, E1, DE, H1 H2 H3, F1, G1). A and B at the 3-variant cap; review round used its 3 |
+| Ideas tried | 9 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed], F efficiency regime [not adopted], G don't-fight-the-first-break [killed], T one-hour check exit [killed]) |
+| Variants tested | 17 (A1 A2 A3, B1 B2 B3, C1, D1, E1, DE, H1 H2 H3, F1, G1, T1 T2). A and B at the 3-variant cap; review round used its 3 |
 | Challenge attempts | 1 (active) |
 | Last updated (real date) | 2026-11-16 |
 
@@ -55,7 +55,12 @@
   Feb (contaminated): +0.36R (14) vs +0.23R (20); without 02-20: +0.36 vs +0.30, skipped trades +0.12R -> FAIL. Killed. The gain was only the two days it was built from.
 - Method rule kept: any idea born from a replay is judged with its inspiring day(s) removed. Use bt/ab.py VARIANT START END [--drop=DATE] to run one variant on one month only.
 
+## Idea T (journal/2015-winners-review-and-idea-T.md; review of 5 biggest winners, hypothesis + kill test committed before the run)
+- Winners share: tiny adverse move (0-15 pips), in profit within the first hour, quiet Asia shelf before. Idea T = close at 09:00 if not working.
+- T1 (below zero): Jan +0.66R vs A2 +0.78R, FAIL. T2 (worse than -10 pips): Jan +0.78 vs +0.78, FAIL; Feb (contaminated, T2 only) +0.25 vs +0.23, FAIL. Killed. 09:00 state does not predict 09-12.
+- Use bt/ab_exit.py VARIANTS START END for exit variants (one month at a time).
+
 ## Next step
-1. STOPPED after idea G. No new runs, no new candles until told. Traded rule is still A2 frozen at $125.
+1. STOPPED after idea T. No new runs, no new candles until told. Traded rule is still A2 frozen at $125.
 2. When unseen data arrives: `git fetch origin main && git merge --no-edit FETCH_HEAD`; trade A2 at $125; paper-tag F (and H1) on every signal day; judge gate 2 only after 40 new signal days.
 Tools: look.sh, trade_a.py, bt/ideas.py [names] [--since=YYYY-MM-DD] (careful: with no names it runs EVERY variant on all months), bt/review.py, bt/loser_charts.py. Tests: `python -m pytest -q`.
