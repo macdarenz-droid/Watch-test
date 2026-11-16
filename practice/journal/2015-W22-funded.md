@@ -87,3 +87,8 @@ Live minus backtest: -0.26R per trade (noise band +-0.43R) -> inside the noise. 
 Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 61 done, avg +0.24R, max DD 3.69R. Planning edge +0.18R: live is +0.06R above it.
 Counts only: live trades after a night (00:00->08:00) against my side, from 04-23: 15 (+0.62R; look at 40). 10-day-trend direction, paper line from 05-06: trend UP 10 trades +0.48R; trend DOWN 4 trades -2.31R (look at 40 up-trend trades). MB1 paper from 05-13: 9 days, kept 2 trades (-0.24R); removed 6 (+7.70R); no break 1. +80 pip trades from 05-22: 0 of 15.
 Normal worst for 56 trades (bt/streak_check.py 2015-05-19, all 95 A2 trades reshuffled): longest losing run median 4, 95th pct 6; max drawdown median 3.09R, 95th pct 5.92R. Live worst: 6 in a row (April), 3.69R (05-22). Now: 0 in a row, 3.01R under the high.
+
+## 05-25 research after funded day 42: idea LD, enter later after a lively pre-entry hour (journal/2015-idea-LD-late-entry-lively.md). Three recent
+mornings worked by hand first, declared and dropped; kill lines with a quiet-day control pushed; one run. 08:15 / 08:30 / 09:00 on lively days: 7.57R /
+5.70R / 4.78R behind A2, with as many or more full stops. All killed. Side finding: 36 of the 42 lively days are from March on, so "lively against quiet"
+is nearly "March-May against January-February"; a reading rule for PH2's first look was added to its file. Counts: 66 ideas, 185 variants.

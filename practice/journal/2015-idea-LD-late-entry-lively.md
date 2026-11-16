@@ -33,3 +33,35 @@ which is where the idea was born - so the from-03-02 half is not clean, and I sa
 Hand-check before totals: 05-18 at 09:00 against my hand sum above (about +0.6R), and the 08:00 part must reproduce engine A2.
 A survivor gets a forward paper tag only (it would sit beside PH2, not replace it).
 My guess (I cannot guess these; kept to show it): LD1 about level, LD2 about 1R behind, LD3 about 2R behind; killed on K1.
+
+## Mechanics hand-check (`python bt/late_lively.py 2015-05-26 2015-05-15,2015-05-18,2015-05-20 --check 2015-05-18`)
+The 08:00 part reproduces engine A2 on every day (0.000R). 05-18 at 09:00: entry 1.13915, stop 1.13504, out 12:00 @1.14173 = +0.64R; my hand sum said
+"new stop about 1.1350, about +0.6R". At 08:30: +0.52R. At 08:15: stopped 09:05, -1.03R.
+
+## Results (run once; `python bt/late_lively.py 2015-05-26 2015-05-15,2015-05-18,2015-05-20`; figures copied from the print)
+DECISION SET: 97 days. A2 +37.45R (before 03-02 +19.56R, from 03-02 +17.89R), max DD 3.28R, worst 10 in a row -1.70R.
+Lively days 42 (6 before 03-02, 36 from 03-02): A2 +0.180R each, 12 full stops. Quiet days 55: A2 +0.543R each, 6 full stops.
+| variant | net R (vs A2) | before 03-02 | from 03-02 | max DD | worst 10 | lively days: late vs 08:00 (avg R) | full stops late vs 08:00 | better / worse | CONTROL quiet days: late vs 08:00 |
+|---|---|---|---|---|---|---|---|---|---|
+| LD1 08:15 | +29.88 (-7.57) | -0.26 | -7.31 | 6.01R | -3.99 | -0.000 vs +0.180 | 14 vs 12 | 11 / 19 | +0.471 vs +0.543 (-0.072 a day) |
+| LD2 08:30 | +31.75 (-5.70) | +0.17 | -5.87 | 5.53R | -4.48 | +0.045 vs +0.180 | 13 vs 12 | 14 / 20 | +0.444 vs +0.543 (-0.099 a day) |
+| LD3 09:00 | +32.67 (-4.78) | +0.87 | -5.66 | 4.20R | -2.71 | +0.066 vs +0.180 | 12 vs 12 | 15 / 17 | +0.320 vs +0.543 (-0.224 a day) |
+Kill lines: K1, K2, K3, K4, K5 FAIL for all three (sample line passes: 42 lively days). VERDICT: all KILLED. No tag.
+Reported only, all 100 days (the three hand-worked days back in): LD1 -7.57R, LD2 -4.15R, LD3 -1.62R against A2. Even with the days that
+inspired it, the best version loses.
+
+## My guess against what happened
+"LD1 about level, LD2 about 1R behind, LD3 about 2R behind": 7.57R, 5.70R and 4.78R behind. The order was even the wrong way round.
+
+## What I learned
+- A later entry on lively days does not step over a shake-out. It has as many or MORE full stops (14 / 13 / 12 against 12) and a lower average. The three
+  mornings I worked by hand were three of the 15 it helps; it hurts 17 to 20 others. SA's lesson again: the days that hurt are the days I count.
+- One part of the story did hold, and I write it because it is true and small: at 09:00 the delay costs half as much per day on lively days (-0.114R) as on
+  quiet ones (-0.224R). Lively mornings do give some of the first hour back. Not enough to pay for the wait.
+- THE IMPORTANT SIDE FINDING, which I had not seen this clearly: of the 42 lively days, 6 are before 03-02 and 36 after. "Lively against quiet" is
+  very nearly "March-May against January-February". So the big split I quoted at the top (+0.54R quiet, +0.18R lively) cannot tell me whether a lively
+  hour before entry hurts A2, or whether A2 has simply earned less since March and those months happen to be the lively ones. PH's own test had a line
+  for this; I re-read it tomorrow before the call. For PH2 on paper it means: its first look must compare lively and quiet days INSIDE the same months,
+  or it will only re-discover the calendar. I add that sentence to PH2's rules file now, as a reading rule; it changes no threshold.
+- Entry time, both directions, all days and lively days only: closed. 08:00 stays.
+Counts: ideas 66, variants 185 (LD1 LD2 LD3). Adopted trading ideas: 0. On paper: UN3, PH2, MB1.
