@@ -1,5 +1,7 @@
 # Watch Test
 
+> The repository now also contains the integrated M/ARC client under `marc-app/`. See [the M/ARC integration guide](docs/MARC-INTEGRATION.md). The standalone dashboard described below remains available as a transport test harness.
+
 A small, native Android dashboard that receives **real Bluetooth heart-rate notifications** from a compatible watch. Optional Health Connect readings stay clearly separate from the live stream. There is no demo data, account, server or internet permission.
 
 ## Install and try with a Huawei GT6

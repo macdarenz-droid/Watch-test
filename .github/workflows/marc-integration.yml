@@ -1,0 +1,101 @@
+name: Build integrated M/ARC heart-rate APK
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: marc-watch-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: marc-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: marc-app/package-lock.json
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools platforms;android-36 build-tools;36.0.0'
+          log-accepted-android-sdk-licenses: false
+      - run: npm ci
+      - name: Typecheck, unit tests and production web build
+        run: npm run check
+      - name: Native heart-rate metric regression tests
+        run: |
+          mkdir -p native-test-build
+          javac -d native-test-build native/HeartRateMetrics.java native-tests/HeartRateMetricsTest.java
+          java -cp native-test-build com.mrcdrnzz.dailytracker.HeartRateMetricsTest
+      - name: Watch coaching browser gate
+        run: |
+          npx playwright install --with-deps chromium
+          npm run gate:watch
+      - name: Generate Capacitor Android project
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf android
+          npx cap add android
+          npx cap sync android
+          npm run cap:prepare
+      - name: Build integrated debug APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd android
+          chmod +x gradlew
+          ./gradlew --no-daemon lintDebug assembleDebug
+      - name: Verify embedded app and native bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f android/app/build/outputs/apk/debug/app-debug.apk
+          grep -q 'registerPlugin(HeartRateNativePlugin.class)' android/app/src/main/java/com/mrcdrnzz/dailytracker/MainActivity.java
+          grep -q 'HeartRateService' android/app/src/main/AndroidManifest.xml
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, zipfile
+          apk=Path('android/app/build/outputs/apk/debug/app-debug.apk')
+          source=Path('www/index.html').read_bytes()
+          with zipfile.ZipFile(apk) as z:
+              bundled=z.read('assets/public/index.html')
+          if bundled != source: raise SystemExit('APK embedded web app differs from current build')
+          print('Integrated APK web source SHA256:', hashlib.sha256(bundled).hexdigest())
+          PY
+          mkdir -p release-output
+          cp android/app/build/outputs/apk/debug/app-debug.apk release-output/MARC-Watch-debug.apk
+          sha256sum release-output/MARC-Watch-debug.apk > release-output/MARC-Watch-debug.apk.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MARC-WATCH-DEBUG-APK
+          path: |
+            marc-app/release-output/MARC-Watch-debug.apk
+            marc-app/release-output/MARC-Watch-debug.apk.sha256
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: MARC-WATCH-reports
+          path: |
+            marc-app/android/app/build/reports/
+            marc-app/screenshots/
+          if-no-files-found: ignore
+          retention-days: 14
