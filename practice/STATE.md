@@ -293,6 +293,27 @@
 - By the 10-day trend: with 39 trades +0.405R, against 26 trades +0.345R. Hypothesis "two-sided" SURVIVES D1-D4. Sells-only / skip-against / half-size-against all fail K1: no survivor.
 - Not over-read: 81% of net R is from sells; February buys +0.07R (11 trades). Planning edge +0.18R stays. Smaller group 26-27 trades: a dependence under ~0.5R is invisible. Tracking only: running R of buys and sells in the weekly journal.
 
+## LIVE vs BACKTEST, running (coach 04-20; `python bt/live_vs_bt.py END`; updated after every live day; the live column is the real out-of-sample)
+As of live day Mon 2015-04-20:
+| | Backtest Jan-Feb (engine) | LIVE from 03-02 (as traded) | Engine on the live days |
+|---|---|---|---|
+| Trades | 39 | 36 | 36 |
+| Win rate | 64% | 67% | 67% |
+| Avg R | +0.50 | +0.41 | +0.41 |
+| +- 2 standard errors | 0.33 | 0.36 | 0.36 |
+| Net R | +19.56 | +14.71 | +14.82 |
+| Avg win / avg loss | +1.04 / -0.46 | +1.01 / -0.79 | +1.02 / -0.80 |
+| Full stops | 3 (8%) | 8 (22%) | 8 (22%) |
+| Max drawdown | 1.87R | 2.00R | 2.03R |
+| Worst 10 trades in a row | +0.56R | -1.34R | -1.37R |
+| Sells: n, avg R | 24, +0.70 | 23, +0.52 | 23, +0.52 |
+| Buys: n, avg R | 15, +0.18 | 13, +0.21 | 13, +0.21 |
+Live minus backtest: -0.09R per trade (noise band +-0.49R) -> inside the noise. Live vs February alone (+0.23R, 20 trades): +0.18R. As traded vs engine on the same days: -0.11R over 36 trades (fills and rounding).
+Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 36 done, avg +0.41R, max DD 2.00R. Planning edge +0.18R: live is +0.23R above it.
+Reading (04-20): live average is 0.09R below the backtest, far inside the noise, and above February and the planning edge. What IS different live: full stops 22% of trades
+against 8% in the backtest, and the average loss is -0.79R against -0.46R - my live losses are deeper, paid for by the same size of wins. Both columns: sells earn more than buys.
+36 live trades is still a small book: the live average is known to +-0.36R.
+
 ## Loss tags (running count, all live trades): valid setup, market disagreed 25 (-15.53R) | my mistake 0. PROCESS mistakes (funded): 1 (P1, 03-30 DST slip: call written at the entry time).
 
 ## Next step

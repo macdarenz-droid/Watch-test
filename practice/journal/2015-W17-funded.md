@@ -43,6 +43,27 @@ Live day routine since 04-17: D1 / H4 / H1 / M15 walk in the call, then a note w
      Paper tags: F1, FR1, Q3 and Q1 all traded (-1.00R each; engine -1.03R).
      END OF RELEASED DATA (clock Tue 04-21 01:00 London).
 
+## LIVE vs BACKTEST, running (coach 04-20; `python bt/live_vs_bt.py END`; updated after every live day; the live column is the real out-of-sample)
+As of live day Mon 2015-04-20:
+| | Backtest Jan-Feb (engine) | LIVE from 03-02 (as traded) | Engine on the live days |
+|---|---|---|---|
+| Trades | 39 | 36 | 36 |
+| Win rate | 64% | 67% | 67% |
+| Avg R | +0.50 | +0.41 | +0.41 |
+| +- 2 standard errors | 0.33 | 0.36 | 0.36 |
+| Net R | +19.56 | +14.71 | +14.82 |
+| Avg win / avg loss | +1.04 / -0.46 | +1.01 / -0.79 | +1.02 / -0.80 |
+| Full stops | 3 (8%) | 8 (22%) | 8 (22%) |
+| Max drawdown | 1.87R | 2.00R | 2.03R |
+| Worst 10 trades in a row | +0.56R | -1.34R | -1.37R |
+| Sells: n, avg R | 24, +0.70 | 23, +0.52 | 23, +0.52 |
+| Buys: n, avg R | 15, +0.18 | 13, +0.21 | 13, +0.21 |
+Live minus backtest: -0.09R per trade (noise band +-0.49R) -> inside the noise. Live vs February alone (+0.23R, 20 trades): +0.18R. As traded vs engine on the same days: -0.11R over 36 trades (fills and rounding).
+Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 36 done, avg +0.41R, max DD 2.00R. Planning edge +0.18R: live is +0.23R above it.
+Reading (04-20): live average is 0.09R below the backtest, far inside the noise, and above February and the planning edge. What IS different live: full stops 22% of trades
+against 8% in the backtest, and the average loss is -0.79R against -0.46R - my live losses are deeper, paid for by the same size of wins. Both columns: sells earn more than buys.
+36 live trades is still a small book: the live average is known to +-0.36R.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
