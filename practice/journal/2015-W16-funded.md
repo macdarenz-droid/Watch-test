@@ -109,6 +109,22 @@ Size note (coach, 04-13): Friday's +1.62R does not change the size. The risk-siz
      Paper tags: F1 and FR1 SKIPPED (avoid -1.00R); Q3 and Q1 traded.
      END OF RELEASED DATA (clock Fri 04-17 01:00 London).
 
+- **Fri 04-17 call, written 07:00 London (06:00 UTC), before the entry bar. Walked D1 -> H4 -> H1 -> M15 this time, one note per step, each written before the clock moves.**
+  Yesterday's tag stands: VALID LOSS.
+  D1: five falling days to 1.0520 (Mon 04-13), then three rising days with higher lows (1.0532, 1.0571, 1.0625) and higher highs (1.0707, 1.0702, 1.0818). Thursday was the
+      widest day of the fortnight (193 pips) and closed at 1.0758, 60 pips off its high. The fall from 1.1036 is 516 pips; the bounce has retraced about 300 of them at the high.
+  H4: Thursday's London morning low 1.0625 -> evening high 1.0818 -> close 1.0758. Since then two small H4 candles inside 1.0758-1.0786. No new high, no real pullback.
+  H1: night range 1.0758-1.0786 (28 pips); highs 1.0785 (00:xx), 1.0786 (01:xx), 1.0779 (05:xx) - flat top; lows rising slightly until the last hour.
+  M15: the last candle before 07:00 fell from 1.0779 to 1.0765 - the biggest M15 of the night, down. Price 1.0765, in the lower half of the night range.
+  Bias: BUY. 22:00 London closes: 04-16 1.07605 vs 04-13 1.05669 = +194 pips. Second day on the buy side.
+  Levels: night low 1.0758 (= the 00:00 open); night high 1.0786; Thu high 1.0818; 1.0800. Below: Thu 16:00-20:00 low 1.0724; stop will sit near 1.0725-1.0730 if I am filled around here.
+  Rejection-day check (parked observation): Thursday's 22:00-22:00 day made the 3-day high and closed at (1.07605-1.06247)/(1.08175-1.06247) = 0.70 of its range - upper
+  third for a buy. Not a rejection day.
+  Worry: Friday, after a 300 pip bounce in three days, entry in the middle of a dead 28 pip night. Nothing here I have a tested reason to act on.
+  Paper tags: Q3 SKIP (Asia 32.8 vs 45.9 = 0.71), Q1 trade. F1 / FR1 read from the engine after the day.
+  Funded check: tracker balance $25,293.26, high-water $25,420.36, drawdown -0.50% (brakes -3% = $24,657.75 / -5% = $24,149.34) -> full size allowed.
+  Plan: BUY 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$129 -> drawdown -1.0%. One trade, stop not moved, flat for the weekend.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
