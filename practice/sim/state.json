@@ -1,0 +1,19 @@
+{
+ "clock": "2015-01-01T00:00:00+00:00",
+ "next_id": 1,
+ "orders": [],
+ "positions": [],
+ "challenge": {
+  "attempt": 1,
+  "phase": 1,
+  "status": "active",
+  "reason": "",
+  "balance": 25000.0,
+  "phase_start": "2015-01-01T00:00:00+00:00",
+  "day": null,
+  "sod_balance": 25000.0,
+  "trading_days": [],
+  "low_equity": 25000.0
+ },
+ "attempts": []
+}
