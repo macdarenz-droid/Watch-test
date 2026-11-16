@@ -41,3 +41,31 @@ What a pass would earn: a forward paper tag only (a possible second setup for mo
 My guess: with the five showpiece days removed, the setup triggers rarely and is about break-even - most big candles that poke outside yesterday's range are the END of a move
 (my R1 detector had the wrong sign in February for a similar reason). I run it because a second, different setup is the one lever I have not found.
 Nothing above has been run.
+
+# RESULTS of idea M (run after commit a3b1803). M1/M2/M3 = variants 33/34/35; ideas 16. Costs on, $125 risk, stop 40. Jan-Feb only, one month per run (bt/ignite.py); March not used.
+
+| Month | Variant | All triggers (FLATTERED: includes the inspiring days) trades / win / avg R / net R / max DD | Without the 5 inspiring days: trades / win / avg R / net R |
+|---|---|---|---|
+| Jan (build) | M1 body >= 40, exit 20:00 | 7 / 43% / -0.13 / -0.92 / 2.61R | 3 / 0% / -1.01 / -3.02 |
+| Jan (build) | M2 body >= 60, exit 20:00 | 4 / 75% / +0.52 / +2.10 / 1.02R | 0 trades |
+| Jan (build) | M3 body >= 40, exit after 4 hours | 7 / 43% / +0.08 / +0.57 / 2.67R | 3 / 0% / -1.01 / -3.02 |
+| Feb (CONTAMINATED) | M1 | 2 / 100% / +1.31 / +2.63 / 0R | 1 / 100% / +1.54 / +1.54 |
+| Feb (CONTAMINATED) | M2 | 2 / 100% / +1.31 / +2.63 / 0R | 1 / 100% / +1.54 / +1.54 |
+| Feb (CONTAMINATED) | M3 | 2 / 100% / +1.11 / +2.23 / 0R | 1 / 100% / +1.55 / +1.55 |
+January triggers (M1): 01-14 sell -1.00, 01-15* sell +0.41, 01-16 sell -1.00, 01-21 buy -1.02, 01-22* sell +2.06, 01-23* sell +0.65, 01-27* buy -1.02. February: 02-03* buy +1.09, 02-26 sell +1.54. (* = inspiring day)
+
+## Build (January, inspiring days removed): NO SURVIVOR
+- M1 and M3: the three other triggers were three full stops (01-14, 01-16, 01-21): avg -1.01R. M2: no trigger at all outside the showpiece days ("cannot be judged").
+- Even WITH the showpiece days M1 loses in January (-0.13R per trade): one of the five "biggest days" itself was a full stop when entered after the candle (01-27: two-hour pullback),
+  and two others paid little because the candle that qualified came late (01-15 and 01-22 only triggered at 14:00, after most of the move).
+February: two triggers in the whole month, one of them a showpiece day. Nothing to judge. Closed.
+
+## What I learned (the concept, not the rule)
+- The selection warning was the whole story. Looking at the five biggest days, "one giant candle out of yesterday's range, then continuation" looked like a law.
+  Counting every time that candle appeared: 9 triggers in two months, 5 on the days I had hand-picked, and the other 4 went 1 win, 3 full losses.
+- By the time an hourly candle is big enough to notice, a 40 pip stop sits inside the normal pullback of that same move (01-27) or the move is mostly spent (01-14, 01-16, 01-21).
+  Big days are obvious after the fact; entering after the proof costs the edge.
+- Useful for how I read A2: three of the five giant days began in the 08:00-09:00 hour, where A2 is already in the market before the candle. Being positioned BEFORE the big hour
+  with a small fixed stop is what A2 does; chasing after it is what M does. On this evidence the first is the better seat.
+- A second setup for more trades per month is still missing. This one is not it.
+- Counts: ideas 16, variants 35.
