@@ -243,3 +243,9 @@ idea was about. All killed. Profile by entry time: 07:00 76% | 07:30 90% | 07:45
 My 12 live stop notes read first (8 real, 4 pokes of 10 pips or less), the four poke days dropped, kill lines pushed, one run. Stop 50 / 60 / 80 pips at
 the same $ risk: 9.60R / 15.99R / 21.52R behind A2, behind in both periods; with the poke days back in still 6.43R behind at 50 pips. Losing days do get
 smaller and pokes do disappear - and every winner shrinks. All killed; the stop stays 40 pips. Counts: 63 ideas, 176 variants; process mistakes 8 (P8 today).
+
+## 05-21 research after funded day 40 (coach: one exit rule on A2 - target, trail or time): idea TW, a wide trailing stop for big mornings
+(journal/2015-idea-TW-wide-trail.md). Trail chosen and the sample counted (23 of 98 trades reach +60 pips, 10 reach +80) before any result; kill lines
+pushed; mechanics worked by hand on 05-19; one run with 05-19 dropped. 60/40: +0.44R on 4 days (killed). 60/30: -2.81R, it cut my best day from +4.30R to
++1.41R (killed). 80/40: +1.10R on 3 days, none worse - too thin by my own sample line, no tag. Exit unchanged. A counts-only line for +80 pip trades starts.
+Counts: 64 ideas, 179 variants.
