@@ -21,7 +21,9 @@ def trades(spread, slip):
 T = trades(1.0, 0.1); TS = trades(3.0, 1.0)
 if "--check" in sys.argv:
     for d in sys.argv[sys.argv.index("--check") + 1].split(","):
-        (o0, t0), (o8, t8), (o12, t12) = op(d, 0), op(d, 8), op(d, 12); r = T.loc[d]
+        (o0, t0), (o8, t8), (o12, t12) = op(d, 0), op(d, 8), op(d, 12)
+        if d not in T.index: print(f"{d}: open {t8} {o8:.5f} | open {t12} {o12:.5f} | morning {(o12-o8)/PIP:+.1f} pips | NO box trade (no break of the 12:00-13:25 box between 13:25 and 14:30)"); continue
+        r = T.loc[d]
         print(f"{d}: open {t0} {o0:.5f} | open {t8} {o8:.5f} | open {t12} {o12:.5f} | morning {r.morn:+.1f} pips, day so far {r.day:+.1f} pips | break {'UP' if r.side>0 else 'DOWN'} {r.R:+.2f}R | MB1 {'keep' if r.MB1 else 'remove'} MB2 {'keep' if r.MB2 else 'remove'} MB3 {'keep' if r.MB3 else 'remove'}")
     sys.exit()
 per = lambda d: "Jan" if d < "2015-02-01" else ("Feb" if d < "2015-03-01" else "Mar-now"); PS = ("Jan", "Feb", "Mar-now")
