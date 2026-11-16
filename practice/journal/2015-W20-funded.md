@@ -237,3 +237,8 @@ MB1's possible size cut to about 0.09% in its rules. Counts: 58 ideas, 159 varia
 day minute by minute first, then kill lines, then one run. Account line never breached (lowest -5.7% in any run); my own -5% stop is reached about 9 points more
 often with a jump day per 92 days: K2 fails, the claim "the plan holds with the tail in" is killed. Found a flaw in my own method in the result (T1 eased the
 stops instead of worsening them): process mistake P7, T1 void, no re-run. Size and rules unchanged. Counts: 59 ideas, 162 variants; process mistakes 7.
+
+## 05-14 research, second part (coach: a test with a voided part earns no day; fix the flaw and re-run with the same kill lines): TS clean re-run.
+Method fix and hand-worked expected averages pushed before the run; the print matched them (+0.166 / +0.131 / +0.096R). K1 PASS (0.0% breached), K2 FAIL
+(own -5% stop 13.4% -> 43.9% under one jump per 92 days), K3 FAIL (payout 55% of base). Same verdict, three times the size the flawed run showed.
+Size and rules unchanged; proposal to the coach written. Counts: 59 ideas, 165 variants.
