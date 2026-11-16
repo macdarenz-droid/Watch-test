@@ -121,6 +121,11 @@ Coach, 05-18: no more risk-plan tests for now; the next backtest is about findin
   After a +2.17R day: same 0.31 lots, same plan. I notice I feel clever this morning; yesterday's candle was luck and is written down as luck.
   Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
   Worry: selling 510 pips... correction, I have not computed that; selling far below Friday's close after two wide down days and a 44 pip drop a minute ago. Stretched signals have been my best. Written, not a rule.
+  08:00 London Wed: pre-entry hour 1.10621-1.11158 = 53.7 pips -> PH2 paper: LIVELY, paper half size (decided before the order). Price 1.10831: the hour fell to 1.10621 and bounced 21 pips; night with me by 63.8 pips (not counted); entry 16.2 pips worse than at 07:00. I am selling after a fall, the mirror of last week's 'bought the top'. Order: SELL 0.31, stop 40 pips above the bid (1.11231).
+  08:15 London: filled SELL 1.10830, stop 1.11231 (40.1 pips). First candle read from the tool. No call that matters; hands off.
+  09:00 London: first hour best +14.5, worst -23.6, last -17.9 pips: drifting up since 08:30, lows rising. No call; the stop and the clock. Hands off.
+  10:00 London: STOPPED in the 09:00 London candle (bid high 1.11267, 4.6 pips through my level). Sim balance from the tool $25,609.15. One trade a day: done. I watch to noon only for the stop-day routine.
+  12:00 London: price (bid, from the tool) 1.10923 = 9.3 pips against my entry and 30.8 pips INSIDE my stop. NOT a real stop: the morning's highest bid was 1.11279, 4.8 pips through my level, and the price came back. At noon this trade would have been about -0.25R. The second poke in three days (05-18 was the first). Two cases; every wider-stop and close-stop variant is closed (S, SS, CS); I write it and leave it. MB1 paper (forward day 6), written before 13:25: open 08:00 1.10831, price at 12:00 1.10923 -> morning UP by about 9 pips (small morning) -> only an UP break of the 12:00-13:25 box counts. Exact figures from the tool afterwards.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
