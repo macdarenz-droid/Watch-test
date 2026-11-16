@@ -23,7 +23,7 @@ def trend_map(m5, look=3):
         elif i >= 2: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False):
     tr = trend_map(m5, look); acct = Account(); risk_of = {}
     cl = m5.groupby('day')['close'].last()
     hi = m5.groupby('day')['high'].max(); lo = m5.groupby('day')['low'].min(); dlist = list(hi.index)
@@ -43,6 +43,9 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                 if go and midfilter:   # idea C: only trade on the trend side of yesterday's range midpoint
                     y = dlist[dlist.index(d) - 1]; mid = (hi[y] + lo[y]) / 2
                     if (side < 0 and b.open > mid) or (side > 0 and b.open < mid): go = False; done = True
+                if go and nofight and len(asia):   # idea G: no trade if 07:00-08:00 already broke the Asia range against my direction
+                    fh = g[(g.time.dt.date == d) & (g.time.dt.hour == 7)]
+                    if len(fh) and ((side < 0 and fh.high.max() > asia.high.max()) or (side > 0 and fh.low.min() < asia.low.min())): go = False; done = True
                 if go and eff is not None:    # idea F: 5-day efficiency decides whether the no-chase filter applies today
                     i = dlist.index(d)
                     if i < 6: go = False; done = True
@@ -88,6 +91,7 @@ VARIANTS = {
  "H2": dict(entry_h=8, exit_h=12, sl=40, chase=0.7),
  "H3": dict(entry_h=8, exit_h=12, sl=40, chase=0.8),
  "F1": dict(entry_h=8, exit_h=12, sl=40, eff=0.5),      # idea F: straight week -> A2 every day; crooked week -> A2 + no-chase(0.6)
+ "G1": dict(entry_h=8, exit_h=12, sl=40, nofight=True),   # idea G: A2, skip when the first London hour broke the Asia range against me
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":

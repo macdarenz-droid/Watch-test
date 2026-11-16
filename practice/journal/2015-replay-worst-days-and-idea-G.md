@@ -43,3 +43,37 @@ Contamination label, written in advance: February is NOT clean for this idea. On
 and 8 winners with the 07:00 line drawn. What IS new: I have never measured "first-hour break against me" on any day. Removing the two inspiring days from the judging is my attempt
 to keep the test honest; a pass would still be weaker than an unseen month, a fail is a real fail.
 Nothing above has been run.
+
+# RESULTS of idea G (run after commit 114d681). G1 = variant 15; ideas 8. Costs on, $125 risk. Each month run by itself (bt/ab.py loads nothing past the window).
+
+## Build - January
+| Rule | Trades | Win rate | Avg R | Net R | Max DD |
+|---|---|---|---|---|---|
+| A2 before | 19 | 74% | +0.78 | +14.79 | 1.33R |
+| G1 after | 13 | 69% | +0.80 | +10.45 | 1.00R |
+| skipped by G1 | 6 | 83% | +0.72 | +4.34 | - |
+| A2 before, without 01-19 | 18 | 78% | +0.88 | +15.79 | 1.00R |
+| G1 after, without 01-19 | 13 | 69% | +0.80 | +10.45 | 1.00R |
+| skipped by G1, without 01-19 | 5 | 100% | +1.07 | +5.34 | - |
+Skipped days: 01-07 +1.63, 01-14 +1.12, 01-16 +1.10, 01-19 -1.00, 01-22 +1.18, 01-26 +0.31.
+Build rule: with 01-19 in, it scrapes through (+0.80 vs +0.78). With 01-19 removed it FAILS: kept +0.80 < A2 +0.88, and the skipped days (+1.07) were better than the kept ones.
+=> DEAD on the build. In January a first-hour break against me was a fake 5 times out of 6 - exactly the observation A2 was born from. My worst day was the exception, not the pattern.
+
+## Check - February (CONTAMINATED, information only; one run)
+| Rule | Trades | Win rate | Avg R | Net R | Max DD |
+|---|---|---|---|---|---|
+| A2 before | 20 | 55% | +0.23 | +4.64 | 1.86R |
+| G1 after | 14 | 64% | +0.36 | +5.05 | 0.65R |
+| skipped by G1 | 6 | 33% | -0.07 | -0.41 | - |
+| A2 before, without 02-20 | 19 | 58% | +0.30 | +5.66 | 0.83R |
+| G1 after, without 02-20 | 14 | 64% | +0.36 | +5.05 | 0.65R |
+| skipped by G1, without 02-20 | 5 | 40% | +0.12 | +0.61 | - |
+Skipped days: 02-06 -0.19, 02-09 +0.77, 02-18 -0.47, 02-20 -1.02, 02-25 +0.73, 02-27 -0.23.
+February test (judged without 02-20): +0.06R per trade better (needed +0.15) and the skipped trades made money (+0.12R avg, needed <= 0). FAILS here too.
+
+## Verdict: KILLED in both months. Not adopted. A2 stays.
+- In each month the whole "improvement" is the single day I built the idea from. Take that day out and the filter removes good trades.
+- Lesson about my own method, more useful than the rule: a replay of my WORST days produces rules that fix those days and nothing else. Two days are anecdotes.
+  The leave-the-inspiring-day-out check caught it; I keep that check for every future idea that comes from a replay.
+- What a better trader would have done on 01-19 and 02-20 may still be right for those two mornings. It is not a rule I can show an edge for.
+- Counts: ideas 8 (A B C D E H F G), variants 15. Still no change that beats frozen A2 on a month it was not built on.
