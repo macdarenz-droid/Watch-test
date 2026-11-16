@@ -27,7 +27,7 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None, scale=None, rn=None, flip=None, fh=None, rej=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None, scale=None, rn=None, flip=None, fh=None, rej=None, add=None):
     _best = {}
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
@@ -38,7 +38,7 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
     hi = m5.groupby('day')['high'].max(); lo = m5.groupby('day')['low'].min(); dlist = list(hi.index)
     for d, g in m5.groupby("day"):
         if d not in tr or g["time"].iloc[0].weekday() == 6 and len(g) < 100: continue
-        side = tr[d]; done = False; running = False
+        side = tr[d]; done = False; running = False; added = False
         if flip is not None:           # idea FL: first day(s) after the trend signal changes side
             _ds = sorted(tr); _i = _ds.index(d); p1 = tr[_ds[_i-1]] if _i >= 1 else None; p2 = tr[_ds[_i-2]] if _i >= 2 else None
             f1 = p1 is not None and p1 != tr[d]; f2 = (not f1) and p2 is not None and p2 != p1
@@ -167,6 +167,12 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
             if scale is not None and scale[1] and len(acct.positions) == 1 and acct.trades and acct.trades[-1]["tag"] == str(d) and acct.trades[-1]["reason"] == "tp":
                 p = acct.positions[0]          # idea SO40BE: first half banked -> stop of the runner to entry
                 if (p.side > 0 and p.sl < p.entry) or (p.side < 0 and p.sl > p.entry): acct.modify(p.id, sl=p.entry)
+            if add is not None and not added and len(acct.positions) == 1 and acct.positions[0].tag == str(d) and not (h >= exit_h - 1 and b.time.minute == 55) and h < exit_h:
+                p = acct.positions[0]          # idea AD: add = (fraction of the first position, move the first position's stop to break-even?)
+                fav = ((b.high - p.entry) if p.side > 0 else (p.entry - (b.low + acct.spread))) / PIP
+                if fav >= 40:                  # price traded 40 pips beyond my fill in THIS bar -> the add is a market order filled at the NEXT bar's open, stop at my original entry
+                    acct.market(p.side, round(p.lots * add[0], 3), sl=p.entry, tp=None, tag=str(d)); added = True
+                    if add[1]: acct.modify(p.id, sl=p.entry)
             if trail is not None:        # idea TR: trail = (activate pips, distance pips); stop follows the best price, only in my favour, from the next bar
                 for p in acct.positions:
                     best = _best.get(p.id); cur = b.high if p.side > 0 else b.low + acct.spread
@@ -256,6 +262,9 @@ VARIANTS = {
  "RN00_15": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 15)),   # idea RN: round numbers ahead
  "RN00_25": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 25)),
  "RN50_15": dict(entry_h=8, exit_h=12, sl=40, rn=(50, 15)),
+ "AD1": dict(entry_h=8, exit_h=12, sl=40, add=(0.5, False)),     # idea AD: add half at +1R, add's stop at my entry
+ "AD2": dict(entry_h=8, exit_h=12, sl=40, add=(0.5, True)),      # + first position to break-even
+ "AD3": dict(entry_h=8, exit_h=12, sl=40, add=(0.25, True)),     # as AD2, quarter add
  "PM1": dict(entry_h=8, exit_h=12, sl=40, scale=(40, True)),     # idea PM (all history): half off at +1R + runner to break-even (= SO40BE)
  "PM2": dict(entry_h=8, exit_h=12, sl=40, scale=(40, False)),    # half off at +1R only (= SO40)
  "PM3": dict(entry_h=8, exit_h=12, sl=40, be=40),                # whole position to break-even after +1R

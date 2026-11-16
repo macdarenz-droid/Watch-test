@@ -94,3 +94,5 @@ Loss tags, all live trades: valid loss 23 (-13.53R) | my mistake 0. Process mist
 ## 04-15 research (before the next day): partial at +1R + break-even on all history, PM1/PM2/PM3 (journal/2015-idea-PM-partial-breakeven.md) - no survivor. Rule A2 and size 0.50% unchanged. Ideas 38, variants 101.
 
 ## 04-16 (before the next day): trading plan v2 funded one-pager written (journal/PLAN-v2-funded-one-page.md); one new hypothesis pre-registered and NOT run: add to the trade at +1R (journal/2015-idea-AD-add-to-winner.md).
+
+## 04-16 research (before the next day): add-at-+1R test AD1/AD2/AD3 run on the coach's go (journal/2015-idea-AD-add-to-winner.md) - no survivor: more net R, deeper drawdown. Rule A2 and size 0.50% unchanged. Ideas 39, variants 104.
