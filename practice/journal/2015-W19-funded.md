@@ -103,6 +103,26 @@ From May: a number written from memory and corrected later is logged as a proces
      Tally: 3 lively days, live +0.29R, paper +0.14R, 1 full-stop morning.
      Night count: against me by 55 pips -> live trade 5 of the count (running: 5 trades, +3.13R).
      END OF RELEASED DATA (clock Wed 05-06 01:00 London).
+- **Wed 05-06 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID WIN. Every figure copied from this morning's tool output.
+  D1 (22:00-22:00 London days): Fri 05-01 high 1.12900 low 1.11746 close 1.11948 (0.18); Mon 05-04 high 1.12245 low 1.11228 close 1.11454 (0.22);
+      Tue 05-05 high 1.12231 low 1.10663 close 1.11848 (0.76). Tuesday made a lower low than the two days before and closed in its top quarter.
+  H4 (UTC bars): Tuesday 12:00 bar 1.11203 -> 1.11734 (high 1.12095), 16:00 bar high 1.12231. Tonight's 00:00 bar rose from 1.11794 to 1.12297 (high 1.12419).
+  H1: the night (00:00-07:00 London): open 1.11796, high 1.12419, low 1.11750, last 1.12309: range 66.9 pips (5-day average 27.3, ratio 2.45) - a strong one-way night UP.
+  M15: last five candles between 1.12252 and 1.12406; last close 1.12309.
+  Bias: SELL. 22:00 London closes: 05-05 1.11848 vs 04-30 1.12236 = -39 pips. The signal flipped to sell after eight buy days.
+  UN3 PAPER TAG (never live): 5-day gap +205 pips -> BUY; 3-day says SELL -> DISAGREE: paper SKIPS. Forward day 12, disagree day 3 of 30. Live trade at full size.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 4.
+  Levels: night high 1.12419; Tue high 1.12231 (price is above it); Fri high 1.12900; night low 1.11750; Tue low 1.10663.
+  REJECTION-DAY CHECK (parked observation, not a rule): for a sell, a rejection day = yesterday made the lowest low of the last three days AND closed in the top third.
+     Tuesday: 3-day low True, close position 0.76 -> YES, the eighth case (the seven before: -1.00, -0.32, -1.03, +1.09, +0.91, -1.03, -1.00, copied from Monday's note).
+  10-day-trend line (coach 05-06: the up-trend result is a PAPER line until live days confirm it; no live rule depends on it): 10-day trend UP (1.11848 vs 04-21 1.07354);
+     today's sell is against it. Counted from today as a live tally only.
+  Small-signal note: gap is 0.24 of the 5-day average daily range. Small gaps are not weak signals in my record.
+  Worry, honestly: this is the morning with every warning on the page at once - a sell against the 10-day trend, after a rejection day, into a one-way night against
+     me (51 pips, at its high), with my own paper filter saying skip. If I were allowed one discretionary skip a year I would spend it here. I am not; my one skip in
+     February cost +1.1R. The rule says sell.
+  Funded check / SIZE RULE: tracker balance $25,551.65, high-water $25,571.80, drawdown -0.08%. Trigger 1 at $24,804.65, trigger 2 at $24,293.21: neither reached -> FULL size.
+  Plan: SELL 08:00 London, SL 40 pips above the bid at 08:00, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$131 -> drawdown -0.6%. One trade, stop not moved.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
