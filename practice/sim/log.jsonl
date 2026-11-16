@@ -614,3 +614,10 @@
 {"real_utc": "2026-11-16T10:48:08+00:00", "clock": "2015-03-30T07:00:00+00:00", "action": "bars", "tf": "D1", "n": 3}
 {"real_utc": "2026-11-16T10:48:08+00:00", "clock": "2015-03-30T07:00:00+00:00", "action": "bars", "tf": "H1", "n": 10}
 {"real_utc": "2026-11-16T10:48:09+00:00", "clock": "2015-03-30T07:00:00+00:00", "action": "bars", "tf": "H1", "n": 150}
+{"real_utc": "2026-11-16T10:49:10+00:00", "clock": "2015-03-30T07:00:00+00:00", "action": "order", "id": 109, "side": -1, "lots": 0.31, "kind": "market", "price": null, "sl": 1.09064, "tp": null, "tag": "", "placed": "2015-03-30T07:00:00+00:00"}
+{"real_utc": "2026-11-16T10:49:11+00:00", "clock": "2015-03-30T07:00:00+00:00", "action": "filled", "id": 109, "px": 1.08659, "t": "2015-03-30T07:00:00+00:00"}
+{"real_utc": "2026-11-16T10:49:11+00:00", "clock": "2015-03-30T11:00:00+00:00", "action": "advance", "frm": "2015-03-30T07:00:00+00:00", "to": "2015-03-30T11:00:00+00:00", "note": ""}
+{"real_utc": "2026-11-16T10:49:11+00:00", "clock": "2015-03-30T11:00:00+00:00", "action": "close", "target": null}
+{"real_utc": "2026-11-16T10:49:11+00:00", "clock": "2015-03-30T11:00:00+00:00", "action": "exit", "id": 109, "side": -1, "lots": 0.31, "sl": 1.09064, "tp": null, "tag": "", "entry": 1.08659, "entry_time": "2015-03-30T07:00:00+00:00", "exit": 1.0832, "exit_time": "2015-03-30T11:00:00+00:00", "pnl": 105.09, "reason": "close", "attempt": 3, "phase": 1}
+{"real_utc": "2026-11-16T10:49:11+00:00", "clock": "2015-03-31T00:00:00+00:00", "action": "advance", "frm": "2015-03-30T11:00:00+00:00", "to": "2015-03-31T00:00:00+00:00", "note": "END OF RELEASED DATA: commit + push sim/ and your journal, then wait for your coach to release more and run `git pull origin main`."}
+{"real_utc": "2026-11-16T10:49:12+00:00", "clock": "2015-03-31T00:00:00+00:00", "action": "bars", "tf": "H1", "n": 18}

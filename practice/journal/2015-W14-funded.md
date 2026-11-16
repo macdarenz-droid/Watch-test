@@ -18,6 +18,7 @@ For the record, the trend direction today is the same under either reading.
 ## Funded trades
 | F# | Sim time in (UTC) | Side | Lots | Entry | Stop | Exit | R | $ | Tag | Note |
 |---|---|---|---|---|---|---|---|---|---|---|
+| F2 | Mon 03-30 07:00 (08:00 London) | sell | 0.31 | 1.08659 | 1.09064 | 1.08320 (11:00 UTC = 12:00 London) | +0.84 | +$105.09 | VALID (win) | first summer-time day, London-time reading; F1 trade, Q3 SKIP, Q1 trade; N1 no trade |
 
 ## Daily calls
 - Mon 03-30 08:00 London (07:00 UTC) @1.0866. Fri: stopped me at 11:23, ran to 1.0949, closed 1.0887. Sunday opened flat; Asia 29 pips, slid to 1.0855 at midnight and has
@@ -30,3 +31,24 @@ For the record, the trend direction today is the same under either reading.
   N1 Friday: -1.00R (5 trades, -3.34R). Friday n/a.
   Funded check before the order: balance $24,877.55, high-water $25,000, drawdown -0.49% (brakes at -3% / -5%): full size allowed.
   Plan: SELL at 08:00 London (07:00 UTC, now), SL 40, out 12:00 London (11:00 UTC), 0.31 lots ($125 = 0.50%). Worst case -$129.
+  -> Mon result, TAG FIRST: VALID (not a mistake). Checked: entry at 08:00 London (07:00 UTC) as decided and written before the trade, 0.31 lots, stop 40 pips (40.5 from the fill),
+     SELL per the trend rule (31 pip gap), one trade, closed at 12:00 London (11:00 UTC), stop never moved.
+     Result: sold 1.08659, closed @1.08320, +$105.09 = +0.84R. Funded balance $24,982.64 (-0.07%).
+     What happened: London sold from its first minute - 1.0866 -> 1.0820 in the first hour - bounced back to 1.0870 (4 pips under water), and drifted down to 1.0831 by London noon.
+     Honesty about the clock decision: under the other reading (enter 08:00 UTC = 09:00 London, exit 12:00 UTC) the same day would have been a sell at 1.0831 closed at about
+     1.0837, a small loss. So the decision was worth roughly +1R today. That is ONE day and proves nothing about which reading is right; it only shows the choice is not cosmetic.
+     Paper tags: F1 traded (+0.84R); Q3 SKIPPED (a winner); Q1 traded. N1 (now also on London time: fade at 13:00 London of the move since 08:00 London): move -29 pips, one pip
+     short -> no trade. Friday n/a.
+     END OF RELEASED DATA (clock Tue 03-31 00:00 UTC).
+
+## Forward tally of the rule (unseen data only, from 03-02)
+| Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
+|---|---|---|---|---|---|---|
+| A2 as traded (R = result / amount risked) | 21 | 15 | +10.96 | +0.52 | 1.50R | kill test: 40 trades, avg >= +0.10R, DD <= 8R (21 of 40 done) |
+| F1 paper tag | 18 (3 skips) | 14 | +12.42 | +0.69 | 1.01R | gate 2 needs 40 signal days (21 done) |
+| Q3 dead-Asia tag (drawdown goal) | 11 (10 skips: 7 winners, 1 scratch, 2 losers) | 7 | +4.00 | +0.36 | 1.01R | 36% of A2's net (needs 85%) |
+| Q1 dead-Asia tag (drawdown goal) | 20 (skip 03-06) | 14 | +8.84 | +0.44 | 1.50R | 81% of net, same DD |
+| Friday tag (idea W) | 4 Fridays | 3 | +3.26 | - | - | 4 of 8 unseen Fridays: 3 winners, 1 loser |
+| N1 paper tag (NY fade; from 03-13) | 5 (12 days) | 1 | -3.34 | -0.67 | 3.34R | judge at 20 trades AND 8 A2-losing days. A2-losing days so far: 3; N1 on them: -2.02R |
+Days: ... 03-23 +2.52 | 03-24 +0.71 | 03-25 +0.89 | 03-26 -0.50 | 03-27 -1.00 (funded 1) | 03-30 +0.84 (funded 2).
+Loss tags, all live trades: valid setup, market disagreed 19 (-10.66R) | my mistake 0.
