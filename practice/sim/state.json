@@ -1,6 +1,6 @@
 {
- "clock": "2015-03-06T22:00:00+00:00",
- "next_id": 79,
+ "clock": "2015-03-10T00:00:00+00:00",
+ "next_id": 81,
  "orders": [],
  "positions": [],
  "challenge": {
@@ -8,12 +8,14 @@
   "phase": 2,
   "status": "active",
   "reason": "",
-  "balance": 25000.0,
+  "balance": 24811.529999999995,
   "phase_start": "2015-03-06T12:00:00+00:00",
-  "day": "2015-03-06",
-  "sod_balance": 25000.0,
-  "trading_days": [],
-  "low_equity": 25000.0
+  "day": "2015-03-10",
+  "sod_balance": 24811.529999999995,
+  "trading_days": [
+   "2015-03-09"
+  ],
+  "low_equity": 24811.529999999995
  },
  "attempts": []
 }
