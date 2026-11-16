@@ -15,12 +15,12 @@
 | Period | Trades | Win rate | Avg R | Net R | Max drawdown | Notes |
 |---|---|---|---|---|---|---|
 | LIVE sim 01-12..01-30 rule A2 | 14 | 71% | +0.72 | +10.04 (+$1,257) | 1.33R | 2 shock-day trades = +6.3R (luck tag); rest +3.7R in 12 |
-| Backtest A1 (07:00 entry) Jan 2015 | 18 | 72% | +0.57 | +10.28 | 1.47R | mechanical, no skip |
-| Backtest A2 (08:00 entry) Jan 2015 | 18 | 72% | +0.60 | +10.84 | 1.52R | the traded rule; live skipped 1 day (+1.1R missed) |
-| Backtest A3 (SL40 TP60, hold to 16:00) | 18 | 61% | +0.39 | +7.05 | 2.01R | |
-| Backtest B1 (Asia break, SL30, out 12:00) | 15 | 60% | +0.52 | +7.73 | 2.02R | |
-| Backtest B2 (SL30 TP45, out 16:00) | 15 | 60% | +0.51 | +7.58 | 2.02R | |
-| Backtest B3 (SL40, out 12:00) | 15 | 67% | +0.40 | +6.00 | 1.52R | |
+| Backtest A1 (07:00 entry, out 12:00) Jan 2015 | 19 | 68% | +0.56 | +10.64 | 3.02R | mechanical, no skip |
+| Backtest A2 (08:00 entry, out 12:00) Jan 2015 | 19 | 74% | +0.78 | +14.79 | 1.33R | the traded rule; includes 4 trades from the week I only watched and the 1 day I skipped live |
+| Backtest A3 (SL40 TP60, hold to 16:00) | 19 | 53% | +0.30 | +5.78 | 3.06R | |
+| Backtest B1 (Asia break, SL30, out 12:00) | 13 | 69% | +0.76 | +9.92 | 2.10R | |
+| Backtest B2 (SL30 TP45, out 16:00) | 13 | 62% | +0.53 | +6.89 | 2.10R | |
+| Backtest B3 (SL40, out 12:00) | 13 | 77% | +0.64 | +8.37 | 1.02R | |
 | Paper calls W01-W02 (direction of day) | 6 | 83% | - | - | - | one trend, not evidence |
 
 ## Honest read
