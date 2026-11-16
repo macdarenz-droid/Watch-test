@@ -117,6 +117,21 @@ Live day routine since 04-17: D1 / H4 / H1 / M15 walk in the call, then a note w
      Feeling: at 10:30 I expected the stop and was calm about it. Two days of -$5 and -$3 feel like nothing happened; in R they are two losses.
      Paper tags: F1, FR1 and Q1 traded (-0.02R); Q3 SKIPPED. UN3: first forward DISAGREE day - paper skips a -0.02R trade. One case, worth nothing as evidence.
      END OF RELEASED DATA (clock Thu 04-23 01:00 London).
+- **Thu 04-23 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID LOSS (scratch).
+  D1: three days of lower highs after 1.0849 (1.0821, 1.0781, then Wednesday's poke to 1.0801 that failed) and Wednesday closed 1.0725, near its low (0.17 of its range).
+      Daily closes 1.0737, 1.0735, 1.0725: a tight cluster inside the 1.066-1.085 range.
+  H4: Wednesday: London pushed to 1.0801, New York sold it to 1.0709, evening 1.0717-1.0743. Tonight a new leg down: 1.0691 at 03:xx.
+  H1: 01:00 hour fell 20 pips, 02:00 another 10 to 1.0692, 03:00 low 1.0691; since then a bounce to 1.0718 twice. Asia range 37 pips (ratio 0.80).
+  M15: 05:45 candle fell 15 pips to 1.0701 and came straight back to 1.0718; last candle down to 1.0705. Price 1.0708, mid-range of the night, 17 pips above its low.
+  Bias: SELL. 22:00 London closes: 04-22 1.07248 vs 04-17 1.08048 = -80 pips. Second day on the sell side.
+  UN3 PAPER TAG (never live): 5-day gap +41 pips -> BUY; 3-day says SELL -> DISAGREE: paper SKIPS. Forward day 3, disagree day 2 of 30. Live trade taken at full size.
+  Night count (count only, from today): night so far WITH my side (00:00 open 1.0719 -> 1.0708). Recorded at 08:00.
+  Levels: night low 1.0691; Wed low 1.0709; Tue low 1.0660; night high 1.0727; 1.0700.
+  Rejection-day check (parked observation): Wednesday closed in its bottom fifth - with a sell. Nothing.
+  Worry: none that I can name. That is not a signal either.
+  Paper tags: Q3 SKIP (Asia 36.5 vs 45.6 = 0.80), Q1 trade. F1 / FR1 read from the engine after the day.
+  Funded check: tracker balance $25,372.93, high-water $25,508.71, drawdown -0.53% (brakes -3% = $24,743.45 / -5% = $24,233.27) -> full size allowed.
+  Plan: SELL 08:00 London, SL 40 pips above the bid at 08:00, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$129 -> drawdown -1.0%. One trade, stop not moved.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
