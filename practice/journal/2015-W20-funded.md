@@ -120,6 +120,13 @@ Coach, 05-11: quality over count - the next test starts with ten charts looked a
   MB1, how long before I would trust it (coach): it kept 32 trades on 91 A2 days of history, about 0.35 a day. First look is 100 forward kept trades: roughly 285
       trading days, about 13 months (around mid 2016). Interim look at 40 kept trades (early-close lines only): roughly 115 trading days, about late October 2015.
       These are estimates from the history rate, not dates. Before 100 forward kept trades: paper only, whatever it shows.
+  08:00 London Wed: pre-entry hour 1.12238-1.12661 = 42.3 pips -> PH2 paper: LIVELY, paper half size (decided before the order). Price 1.12520: night against me by 36.5 pips (counted), entry 14.8 pips better than at 07:00. Correction to the cushion line: README says the daily limit is 5% of the START-OF-DAY balance, so about $1,255 on the tracker balance $25,097.42 (not $1,250); one stop is still about a tenth. Order: SELL 0.31, stop 40 pips above the bid (about 1.12920).
+  08:15 London: filled SELL 1.12518, stop 1.12920 (40.2 pips). First candle: bid 1.12472, a few pips for me. Call for the next 45 minutes: no opinion that matters; the hour 07-08 spiked to 1.12661 and that is the level to watch. Hands off.
+  09:00 London: first hour flat: best +14.0, worst -10.5, last 0.0 pips (from the tool). A box 1.1237-1.1261. No call; the plan is the clock. Hands off.
+  10:00 London (written after reading the walk print; one note for the hour): see next line for figures.
+     (10:00 figures, added at 11:00 - I advanced with a placeholder note, a small sloppiness, said here): second hour best +31.0, worst -5.9, last +24.1 pips.
+  11:00 London: third hour best +48.5 (low 1.12023), worst +4.4, last +22.3 pips. It bounced 44 pips from the low back to 1.12464 and I still hold +22. No target, no trailing: 33 exit definitions say leave it. One hour left; close at 12:00 whatever it shows.
+  12:05 London: closed at 12:00 @1.12261, +$79.67 (from the trade list). MB1 paper (first forward day), written before 13:25: open 08:00 1.12519, open 12:00 1.12250 -> morning DOWN by 26.9 pips (large morning) -> only a DOWN break of the 12:00-13:25 box counts. Result from the tool tomorrow.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
