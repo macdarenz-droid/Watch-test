@@ -65,3 +65,5 @@ Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 
 Loss tags, all live trades: valid loss 23 (-13.53R) | my mistake 0. Process mistakes (funded): 2.
 
 ## 04-14 research (before the next day): replay of week 04-06..04-10 + rejection-day test RV1/RV2/RV3 (journal/2015-replay-W15-and-idea-RV.md) - no survivor. Rule A2 and size 0.50% unchanged. Ideas 37, variants 98.
+
+## 04-15 research (before the next day): partial at +1R + break-even on all history, PM1/PM2/PM3 (journal/2015-idea-PM-partial-breakeven.md) - no survivor. Rule A2 and size 0.50% unchanged. Ideas 38, variants 101.

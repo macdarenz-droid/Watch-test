@@ -256,6 +256,9 @@ VARIANTS = {
  "RN00_15": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 15)),   # idea RN: round numbers ahead
  "RN00_25": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 25)),
  "RN50_15": dict(entry_h=8, exit_h=12, sl=40, rn=(50, 15)),
+ "PM1": dict(entry_h=8, exit_h=12, sl=40, scale=(40, True)),     # idea PM (all history): half off at +1R + runner to break-even (= SO40BE)
+ "PM2": dict(entry_h=8, exit_h=12, sl=40, scale=(40, False)),    # half off at +1R only (= SO40)
+ "PM3": dict(entry_h=8, exit_h=12, sl=40, be=40),                # whole position to break-even after +1R
  "RV1": dict(entry_h=8, exit_h=12, sl=40, rej="skip"),     # idea RV: yesterday closed against the signal
  "RV2": dict(entry_h=8, exit_h=12, sl=40, rej="ext"),
  "RV3": dict(entry_h=8, exit_h=12, sl=40, rej="flip"),
