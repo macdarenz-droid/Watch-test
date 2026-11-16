@@ -55,3 +55,34 @@ Check (March lived days without its four inspiring days) - the candidate passes 
   C3. max drawdown <= A2's; and it keeps at least 60% of the trades.
 A pass earns a FORWARD PAPER TAG only. It cannot change the funded rule.
 My guess: NM1 and NM3 skip too many trades (fail B3); NM2 survives January; March is a coin toss because its trend days had nights going with me anyway.
+
+# RESULTS of idea NM (run after commit c359ffe). NM1/NM2/NM3 = variants 60/61/62; ideas 25. Costs on, $125 risk, London time (bt/ab_drop.py).
+
+## Build - January, with its four inspiring days (01-15, 01-19, 01-23, 01-27) removed
+| Rule | Trades | Win rate | Avg R | Net R | Max DD | Kept | Skipped trades: n / win / avg R |
+|---|---|---|---|---|---|---|---|
+| A2 (before) | 15 | 80% | +0.70 | +10.52 | 0.51R | - | - |
+| NM1: skip if the night was against me at all | 6 | 83% | +0.71 | +4.28 | 0.02R | 40% | 9 / 78% / +0.69 |
+| NM2: skip if the night was 15+ pips against | 9 | 67% | +0.51 | +4.57 | 0.51R | 60% | 6 / 100% / +0.99 |
+| NM3: trade only if the night was 5+ pips with me | 3 | 100% | +1.01 | +3.02 | 0R | 20% | 12 / 75% / +0.63 |
+Skipped by NM2 (night clearly against): 01-07 +1.64, 01-13 +1.40, 01-14 +1.13, 01-22 +1.19, 01-26 +0.31, 01-28 +0.28 - six trades, six winners.
+
+## Kill lines, applied
+- NM1: B1 fails (+0.71 vs the +0.75 needed), B3 fails (keeps 40%).
+- NM2: B1 fails (+0.51, WORSE than A2), B2 fails (the trades it skips average +0.99R against +0.51R kept).
+- NM3: B3 fails (keeps 20%).
+=> NO SURVIVOR. The three variants are closed. As written beforehand, nothing is claimed from March - and I did NOT run March or February for this idea, so the clean month
+   has not been spent on it (March check uses stay at 2).
+
+## What it means
+- The hypothesis was not just unsupported, it was backwards for January: when the night had moved 15+ pips against my side, the trade won six times out of six.
+  That is the "sell the pop / buy the dip" entry - the overnight counter-move is what gives the London leg its room. It is the same thing my very first loser review called a
+  pullback entry, and the same reason "the first hour is often a fake".
+- So in my five worst trades "the night went against me" was true, and in the trend month it was just as true of some of my best ordinary winners. Looking at the ten most extreme
+  trades made a common condition look like a cause.
+- Third replay-style idea killed by the same check (G from the two worst days, Z from the worst stretch, NM from best-vs-worst). The lesson is about method and I am writing it
+  as a rule for myself: the extremes of a small sample do not describe the sample. From now on, before I pre-register anything that comes from "best N vs worst N", I state the
+  feature and count it on ALL trades of the build month first - as part of the pre-registration, not as a peek at results - and only test it if the extremes agree with the middle.
+- What still stands from the charts, as description only: the best and worst trades look alike at 08:00; they separate in the first hour after entry; and acting on that
+  first hour has already failed twice (T1, T2). At-entry information does not tell my good days from my bad ones. That is consistent with everything since idea R.
+- Counts: ideas 25, variants 62.

@@ -27,7 +27,7 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None):
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
     _a = m5[(m5.time.dt.hour < 7) & (m5.time.dt.date == m5.day)]; _g = _a.groupby('day'); arng = (_g['high'].max() - _g['low'].min()) / PIP   # Asia 00-07 range per day, pips
@@ -55,6 +55,9 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                 if go and midfilter:   # idea C: only trade on the trend side of yesterday's range midpoint
                     y = dlist[dlist.index(d) - 1]; mid = (hi[y] + lo[y]) / 2
                     if (side < 0 and b.open > mid) or (side > 0 and b.open < mid): go = False; done = True
+                if go and night is not None and len(asia):     # idea NM: the move from 00:00 London to the entry must not be against my side; night = minimum pips with me
+                    nm = (b.open - asia.open.iloc[0]) * side / PIP
+                    if nm < night: go = False; done = True
                 if go and weekbias is not None:      # idea Y: which side of the week's open / Monday's range
                     fd = _first[_wk[d]]; wopen = _dopen[fd]; wside = 1 if b.open > wopen else -1
                     if weekbias == "dir": side = wside
@@ -181,6 +184,9 @@ VARIANTS = {
  "CP1": dict(entry_h=9, exit_h=13, sl=40),    # clock shift +1h (09:00-13:00)
  "CM1": dict(entry_h=7, exit_h=11, sl=40),    # clock shift -1h (07:00-11:00)
  "C9": dict(entry_h=9, exit_h=12, sl=40),     # late entry 09:00, exit 12:00
+ "NM1": dict(entry_h=8, exit_h=12, sl=40, night=0),      # idea NM: skip if the night moved against me at all
+ "NM2": dict(entry_h=8, exit_h=12, sl=40, night=-14.999), # skip if -15 pips or worse
+ "NM3": dict(entry_h=8, exit_h=12, sl=40, night=5),      # trade only if +5 pips or better
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
