@@ -197,6 +197,26 @@ Coach, 05-18: no more risk-plan tests for now; the next backtest is about findin
      tomorrow, not from this line). Friday's trade decides.
      END OF RELEASED DATA (clock Fri 05-22 01:00 London).
 
+- **Fri 05-22 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID LOSS. Figures from `python bt/call_numbers.py 2015-05-22` and the bar prints.
+  D1 (London days): Tue 05-19 close 1.11493 (0.15, range 208.0); Wed 05-20 high 1.11522 low 1.10621 close 1.10937 (0.35); Thu 05-21 high 1.11813 low 1.10797
+      close 1.11117 (0.31, range 101.6): the first higher close after three falling ones; neither a 3-day high nor a 3-day low. The fall has paused for two days.
+  H4 (UTC bars): Thu 08:00 bar high 1.11813; 12:00 bar 1.11050-1.11476; 16:00 and 20:00 bars drifting to 1.11010; tonight 00:00 bar up 1.11092 -> 1.11463; 04:00 bar high 1.11524.
+  H1: the night (00:00-07:00 London): open 1.11080, high 1.11524, low 1.11069, last 1.11461: range 45.5 pips (ratio 1.15), net +38.1 pips - a rising night, against my side.
+  M15: flat 1.1139-1.1147, then a last candle 1.11338-1.11522 that closed where it began (1.11461).
+  Bias: SELL. 22:00 London closes: 05-21 1.11117 vs 05-18 1.13141 = -202 pips (3-day gap -202.4). Gap / ADR5 1.46: stretched.
+  UN3 PAPER TAG (never live): 5-day gap -298 pips -> SELL; agree: paper TRADES. Forward day 24, disagree days 6 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 16.
+  MB1 PAPER TAG (never live, forward day 8): morning direction written at 12:00, before 13:25.
+  Levels: night high 1.11524; Thu high 1.11813; night low 1.11069; Thu low 1.10797.
+  Rejection-day check: Thursday made neither the 3-day low nor the 3-day high. Not a rejection day. 10-day trend: DOWN (1.11117 vs 05-07 1.12662); the sell is with it.
+  SIZE RULE: tracker balance $25,009.69, high-water $25,349.14, drawdown -1.34%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
+  PAYOUT DATE today. Rule (read again before the day): after today's trade, on the tracker balance; below $26,000 -> half of what is above $25,000; nothing
+      at or below $25,000; none while a size trigger is on. Balance now $25,009.69. The payout does not touch the trade: same size, same stop, same clock.
+  FRIDAY GATES (list read): A2 alarm 59 / 100; UN3 6 / 30 disagree days; PH2 14 / 60 lively days; night count 13 / 40; up-trend line 10 / 40; MB1 2 / 100 kept;
+      +80 pip trades 0 / 15; personal stop held 5 of 20 days; payout today. None due except the payout.
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade. The release ends at 22:00 London.
+  Worry: fourth sell day; the last two were stopped and the night rose 38 pips. Normal worst is 6 in a row; I am at 2. I take the trade.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
