@@ -76,6 +76,12 @@ Coach, 05-18: no more risk-plan tests for now; the next backtest is about findin
       than 5.9R under the high. The half-size trigger (3% under the high-water) sits almost exactly on that 95th percentile: the plan already has this number in it.
   Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
   Worry: a small signal on a flip day, against UN3 and the 10-day trend, after two stops. SG and FL say neither small signals nor flip days are worse. I take the trade.
+  08:00 London Tue: pre-entry hour 1.12778-1.13162 = 38.4 pips -> PH2 paper: LIVELY, paper half size (decided before the order). Price 1.13041: the hour fell to a new low 1.12778 and bounced 26 pips; night with me by 10.9 pips (not counted); entry 12.1 pips worse than at 07:00. Order: SELL 0.31, stop 40 pips above the bid (1.13441).
+  08:15 London: filled SELL 1.13038, stop 1.13441 (40.3 pips). First candle read from the tool. No call that matters; hands off.
+  09:00 London: the first candle fell 90 pips (1.13043 -> 1.12125): a jump, and it was on my side. First hour best +142.6, worst -1.5, last +120.3 pips = about +3R open. I want to close it now, badly, after four stops. The plan has no target: 33 exit definitions, none beat the noon clock; 'don't let a big win change' anything. Stop stays at 1.13441. Had I been long, this candle is the DC/TS jump day. Hands off until 12:00.
+  10:00 London: second hour best +136.3, worst +107.3, last +107.4 pips: drifting back up 15 pips from the low. Still about +2.7R. No call; the clock is the exit. Hands off.
+  11:00 London: third hour best +120.9, worst +93.2, last +99.3 pips. A range 1.1182-1.1210 since 09:00. One hour left; close at 12:00 whatever it shows.
+  12:05 London: closed at 12:00 @1.12163, +$271.25 (from the trade list). MB1 paper (forward day 5), written before 13:25: open 08:00 1.13039, open 12:00 1.12152 -> morning DOWN by 88.7 pips (large morning) -> only a DOWN break of the 12:00-13:25 box counts. Result from the tool tomorrow.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
