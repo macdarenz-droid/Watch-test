@@ -174,8 +174,9 @@ Coach, 04-27: the decision lines did not trigger, so 0.50% stays; no size cut of
      Size rule after the day: triggers move up with the high-water: trigger 1 (-3%) $24,750.52, trigger 2 (-5%) $24,240.20. Full size tomorrow.
      What happened: 132 pips in the first 75 minutes (1.1249), then two hours of lower highs down to 1.1153 at 11:1x (+37), and a 35 pip bounce into noon. I closed
      +75 pips: 57% of the best open profit. The afternoon chopped 1.1116-1.1223 and the evening reached 1.1266.
-     What it felt like: +3.2R open at 09:15 and +1.3R at 11:00 is the hardest thing the noon rule asks. Every exit I have tested (trail, target, partial, break-even)
-     would have paid more TODAY and less over 82 trades. I held because of the 82, not because it felt right. It did not.
+     What it felt like: +3.2R open at 09:15 and +1.3R at 11:00 is the hardest thing the noon rule asks. A trailing stop would have paid more TODAY (about +2.2R at 40 pips behind the high); a +60 target or a partial
+     at +1R would have paid LESS (+1.5R, +1.4R); break-even the same. [Corrected the same hour: I first wrote "every exit I tested would have paid more today" - not true.]
+     All of them paid less over 82 trades. I held because of the 82, not because it felt right. It did not.
      The drawdown that started on 04-20 (deepest -1.63%, 3.23R, six losses in a row) is closed after eight trading days: -3.23R, then +1.61, +0.32, +1.83.
      Paper tags: F1, FR1, Q3 and Q1 all traded (+1.83R). UN3: agree day, paper trades = +1.83R.
      Night count: against me by 3 pips -> live trade 3 of the count (running: 3 trades, +3.28R).
