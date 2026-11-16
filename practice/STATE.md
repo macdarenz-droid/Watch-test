@@ -2,8 +2,8 @@
 
 | Field | Value |
 |---|---|
-| Sim clock | Fri 2015-03-06 22:00 UTC, weekend (END OF RELEASED DATA; one day at a time - each finished backtest test earns the next day) |
-| Phase | Challenge #1: PHASE 1 PASSED Fri 2015-03-06 (39 trades, 8 weeks, $27,083.04 = +8.33%, no breach). PHASE 2 ACTIVE: balance $25,000.00, target $26,250 (+5% = 6.7R at 0.75%), 0 trading days (min 5), max loss line $22,500 |
+| Sim clock | Tue 2015-03-10 00:00 UTC (END OF RELEASED DATA; one day at a time - each finished backtest test earns the next day) |
+| Phase | Challenge #1: PHASE 1 PASSED Fri 2015-03-06 (39 trades, $27,083.04 = +8.33%). PHASE 2 ACTIVE: balance $24,811.53 (-0.75%), target $26,250, 1 trading day (min 5), brakes at $24,000 / $23,500, max loss line $22,500 |
 | Current strategy | Rule A2 "London trend": 07:00 UTC write call; trend = yesterday's 22:00 close vs close 3 trading days earlier; 08:00 market order with trend; SL 40 pips; close 12:00 UTC; 1 trade/day; flat at weekend |
 | Risk | PHASE 2 (journal/PLAN-v2-phase-handling.md): $187.50 = 0.75% per trade (0.47 lots x 40 pips; `python trade_a.py sell/buy --risk 187.5`), 1 trade/day (worst day -0.77%); brakes: balance <= $24,000 -> back to 0.5% ($125); <= $23,500 -> stop and review; target hit before 5 trading days -> 0.01 lots until 5 logged; finishing size 0.10 lots when the target is within $47 |
 | Ideas tried | 15 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed], F efficiency regime [not adopted], G don't-fight-the-first-break [killed], T one-hour check exit [killed], K first-break direction [killed], L lookback 2/5/10 [no improvement; A2 robust], W no-Friday [pending forward test], X exits: break-even / runner / target [no survivor], R regime detectors [no survivor], Q dead-Asia filter [Q3 killed on Feb check]) |
@@ -17,7 +17,7 @@
 | LIVE Jan (01-12..01-30) A2 | 14 | 71% | +0.72 | +10.04 (+$1,257) | 1.33R | one big downtrend; 2 shock-day trades = +6.3R |
 | LIVE Feb (02-02..02-27) A2 | 20 | 55% | +0.23 | +4.64 (+$580) | 1.86R | box market; one coin-flip day = +2.14R |
 | LIVE total Jan-Feb | 34 | 62% | +0.43 | +14.69 (+$1,836) | 1.86R | |
-| LIVE March = FORWARD TALLY (unseen data, from 03-02) A2, in R = result / amount risked | 5 | 80% | +0.69 | +3.43 (+$246) | 1.00R | 03-02 -1.00R (valid setup, market disagreed), 03-03 +1.12R, 03-04 +1.17R, 03-05 +0.02R, 03-06 +2.12R (last two at 0.10 lots). One trend week. A2 forward kill test: 5 of 40 trades. F1 paper tag identical so far. Friday tag 1/8: +2.12R (win) |
+| LIVE March = FORWARD TALLY (unseen data, from 03-02) A2, in R = result / amount risked | 6 | 67% | +0.40 | +2.43 | 1.01R | 03-02 -1.00 (valid), 03-03 +1.12, 03-04 +1.17, 03-05 +0.02, 03-06 +2.12 (phase 1 passed), 03-09 -1.01 (phase 2 day 1, valid setup, market disagreed; stop missed by 2.4 pips). A2 forward kill test: 6 of 40. F1 tag identical. Friday tag 1/8: +2.12R |
 | Backtest Feb only (out-of-sample) A1 / A2 / A3 | 20 each | 50 / 55 / 40% | +0.18 / +0.23 / +0.00 | +3.60 / +4.64 / +0.10 | 2.2 / 1.9 / 3.1R | A2 = live exactly |
 | Backtest Feb only B1 / B2 / B3 | 13 / 14 / 13 | 54 / 57 / 54% | +0.32 / +0.34 / +0.23 | +4.10 / +4.79 / +2.98 | 1.1 / 1.7 / 1.0R | |
 | Backtest Feb only C1 (A2 + midpoint filter) | 13 | 38% | -0.08 | -1.04 | 1.5R | skipped 7 trades worth +5.68R: failing |
@@ -103,11 +103,15 @@
 - Feb check (contaminated): Q3 +0.46R on 9 vs A2 +0.23R on 20, drawdown 0.65R vs 1.86R, but skipped trades +0.05R (needed <= 0) and keeps only 45% (needed 60%) -> KILLED. Net R not higher.
 - Pattern noted (F1, W, Q): these filters remove zero-ish trades - same total, fewer trades, smaller drawdown. Not an improvement in profit.
 
-## Loss tags (running count, all live trades): valid setup, market disagreed 14 (-7.03R) | my mistake 0.
+## Phase 2 size test (bt/phase2_sim.py, journal/2015-phase2-size-test.md; decision rule committed before the run)
+- 20,000 reshuffles of my own results, brakes on. At 0.75%: all-40-trades edge -> pass 69% in 20 days / 97% in 40, median 15 days; Feb edge -> 30% / 77%, median 26; zero edge -> 13% pass, 3% brake-stop in 40 days; no true breach in any picture with brakes (1.2% at zero edge without them).
+- From today (-0.75%): Feb edge 69% within 40 days, median 30 days. Rule applied: no cut, no raise (1.00% adds only +10 points; forward test 6/40) -> KEEP 0.75% with brakes. Re-run at 20 and 40 forward trades.
+
+## Loss tags (running count, all live trades): valid setup, market disagreed 15 (-8.04R) | my mistake 0.
 
 ## Next step
-1. Day 03-06 traded (phase 1 passed); entry review + idea Q finished. When the next day (Mon 03-09, first phase 2 day, weekend gap possible) is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `./look.sh 3 0 9`; write the call in journal/2015-W10.md;
+1. Day 03-09 traded (phase 2 day 1, -1.01R); size test finished (keep 0.75%). When the next day (Tue 03-10) is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `./look.sh 3 0 9`; write the call in journal/2015-W11.md;
    `python trade_a.py sell|buy` (A2; PHASE 2 sizing `--risk 187.5` = 0.47 lots; check `python sim.py account` and the brakes before sizing); tag any loss; paper-tag F1 and Fridays (idea W).
 2. Keep backtesting on Jan-Feb only (never load March into a test: pass END <= 2015-03-01). Each test: hypothesis + kill test committed first, max 3 variants, counted, February labelled contaminated.
-3. Open idea: trend vs box before 08:00. Forward tests running (tally table at the end of journal/2015-W10.md): A2 kill test (5/40 trades, +3.43R), F1 paper tag (5 days, same), Friday tag (1/8: +2.12R).
+3. Open idea: trend vs box before 08:00. Forward tests running (tally table at the end of journal/2015-W11.md): A2 kill test (6/40 trades, +2.43R), F1 paper tag (6 days, same), Friday tag (1/8: +2.12R).
 Tools: look.sh, trade_a.py, bt/ab.py (filters), bt/ab_exit.py (exits), bt/ab_rule.py and bt/ab_same.py (own entries/direction), bt/pass_math.py, bt/risk_math.py, bt/review.py, bt/loser_charts.py. Tests: `python -m pytest -q`.
