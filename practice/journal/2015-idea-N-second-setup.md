@@ -75,3 +75,19 @@ N1 against the two lines: losing-day overlap 40% (limit 50%): passes. Correlatio
 Whether to pre-register a forward-only paper tag for N1 with profit AND "what it does on A2's losing days" as the questions. It costs nothing, uses no Jan-Feb data, and being mechanical
 it can be computed for any unseen day after the fact. Until told, nothing is tagged.
 Counts: ideas 18, variants 41.
+
+# N1 FORWARD PAPER TAG - kill test, written Fri 2015-03-13 00:00 UTC sim time, BEFORE the first forward day (coach approved: paper only, no real money)
+What is tagged: N1 exactly as defined above (at 13:00 UTC, if price is 30+ pips away from the 08:00 price, trade against that move; stop 40 pips; close 17:00; one a day; costs on:
+1.0 pip spread + 0.1 slippage, via the same backtest engine on closed candles, computed the morning after).
+Start: the first day I have not seen, Fri 03-13. The March days already behind me (03-02..03-12) are NOT counted: I watched those afternoons before N1 existed.
+
+When I judge: not before 20 forward N1 trades AND at least 8 forward days on which A2 lost. Whichever comes later. No peeking verdicts before that; the running numbers are just a tally.
+N1 passes only if ALL of these hold at that point:
+1. Profit: avg R >= +0.20R after costs (about half of what Jan-Feb showed, +0.42R; I expect shrinkage).
+2. Not one trade: net R still above 0 with its best trade removed.
+3. Own risk: max drawdown <= 4R.
+4. On A2's losing days (the reason to want a second setup): N1's net R over those days >= 0R, counting its no-trade days as 0. It does not have to rescue A2; it must not add to the hole.
+5. Independence: at most 50% of N1's losing days are also A2 losing days, and the correlation of daily R on shared days <= +0.30.
+Fails any line -> killed, no second threshold, no other hours.
+Hard limits whatever happens: N1 is never traded with money and cannot change A2's size, brakes or plan until it has passed AND a separate, pre-registered risk question
+(how two setups share one daily loss budget, and the 13:30 news risk the sim cannot show) has been answered.
