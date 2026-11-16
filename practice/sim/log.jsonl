@@ -632,3 +632,6 @@
 {"real_utc": "2026-11-16T11:36:21+00:00", "clock": "2015-03-31T11:00:00+00:00", "action": "exit", "id": 111, "side": -1, "lots": 0.31, "sl": 1.08259, "tp": null, "tag": "", "entry": 1.07858, "entry_time": "2015-03-31T07:00:00+00:00", "exit": 1.07401, "exit_time": "2015-03-31T11:00:00+00:00", "pnl": 141.67, "reason": "close", "attempt": 3, "phase": 1}
 {"real_utc": "2026-11-16T11:36:21+00:00", "clock": "2015-04-01T00:00:00+00:00", "action": "advance", "frm": "2015-03-31T11:00:00+00:00", "to": "2015-04-01T00:00:00+00:00", "note": "END OF RELEASED DATA: commit + push sim/ and your journal, then wait for your coach to release more and run `git pull origin main`."}
 {"real_utc": "2026-11-16T11:36:22+00:00", "clock": "2015-04-01T00:00:00+00:00", "action": "bars", "tf": "H1", "n": 18}
+{"real_utc": "2026-11-16T12:11:43+00:00", "clock": "2015-04-01T06:00:00+00:00", "action": "advance", "frm": "2015-04-01T00:00:00+00:00", "to": "2015-04-01T06:00:00+00:00", "note": ""}
+{"real_utc": "2026-11-16T12:11:44+00:00", "clock": "2015-04-01T06:00:00+00:00", "action": "bars", "tf": "D1", "n": 3}
+{"real_utc": "2026-11-16T12:11:44+00:00", "clock": "2015-04-01T06:00:00+00:00", "action": "bars", "tf": "H1", "n": 9}

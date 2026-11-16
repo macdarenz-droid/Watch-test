@@ -90,3 +90,33 @@ Loss tags, all live trades: valid setup, market disagreed 19 (-10.66R) | my mist
 ## Wed 04-01, before the day is released: test of the day
 F1 robustness (journal/2015-idea-FR-robustness.md): my most promising paper idea is NOT robust to its two numbers - one step stricter and its March lead of +0.33R becomes -3.10R.
 It stays a paper tag with a tougher gate; the funded rule is untouched. FR1 is tracked beside F1 from now on.
+
+## FIRST FUNDED MONTH-END CHECK - written Wed 04-01, 07:00 London, before today's entry
+March 2015 in the funded account (started Fri 03-27; three trading days: 03-27, 03-30, 03-31):
+| Item | March (funded) |
+|---|---|
+| Trades | 3 (2 wins, 1 loss) |
+| Net R | +0.98R (-1.00, +0.84, +1.14) |
+| P&L | +$124.31 (+0.50% of $25,000) |
+| Balance, month end | $25,124.31 = high-water mark |
+| Worst day | -$122.45 (-0.49%), Fri 03-27 |
+| Deepest drawdown from high-water | -0.49% (after day 1; recovered on day 3). Brake levels -3% / -5% never near; account line $22,500 |
+| TRADE tags | 3 valid setups (2 wins; 1 loss tagged "valid setup, market disagreed"); 0 "my mistake" |
+| PROCESS mistakes | 1 (P1, Mon 03-30: DST slip - call written at the entry time instead of before the bar) |
+| Payouts | none due (first payout date 04-10) |
+| Rule-level check | A2 forward test 22 of 40 trades, +12.10R, max drawdown 1.50R (limit 8R) |
+Honest reading: three days is not a month. The account is where it should be after three trades of a rule that wins two in three: slightly up, never in trouble.
+The one thing I did wrong in March was not a trade; it was not looking at the clock. Fixed in the process, logged in the tracker.
+Also recorded here because my coach asked: yesterday's test killed my own best filter (F1 is NOT robust to its two numbers; full write-up journal/2015-idea-FR-robustness.md).
+It stays a paper tag with a tougher gate; nothing from it touches this account.
+
+## Daily calls (Wed) - written at 07:00 London, before the entry bar
+- Wed 04-01 07:00 London @1.0780. Tue: sold off to 1.0713, closed 1.0731 on the lows. Asia has bounced 53 pips (1.0740 -> 1.0792) and is holding near its high.
+  TREND RULE: SELL. Tue close 1.0731 < Thu 03-26 close 1.0875, by 144 pips.
+  Read: five lower closes in six days; this morning is the first real bounce of the leg, back up toward the floors that broke yesterday (1.0801 / 1.0810, 20-30 pips above).
+  A night against the signal - which my test on Monday showed was six winners of six in January when I tried to filter it. So no worry attached; just noted.
+  Levels: 1.0792 Asia high, 1.0801 / 1.0810 old floors, 1.0845 Tue high; below 1.0740 Asia low, 1.0713 Tue low. Week's open 1.0886.
+  Wall note: nothing that has held for days sits inside the stop distance in front of this sell (Tue low is one day old).
+  Paper tags: F1 efficiency 0.59 (straight) -> trades; FR1 the same. Q3: Asia 61.4 vs 42.1 (1.46) -> trade. Q1: trade. N1 yesterday: +0.07R (6 trades, -3.27R). Friday n/a.
+  Funded check: balance $25,124.31 = high-water, drawdown 0% -> full size allowed.
+  Plan: SELL 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case -$129.
