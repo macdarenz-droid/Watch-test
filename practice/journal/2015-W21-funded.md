@@ -216,6 +216,12 @@ Coach, 05-18: no more risk-plan tests for now; the next backtest is about findin
       +80 pip trades 0 / 15; personal stop held 5 of 20 days; payout today. None due except the payout.
   Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade. The release ends at 22:00 London.
   Worry: fourth sell day; the last two were stopped and the night rose 38 pips. Normal worst is 6 in a row; I am at 2. I take the trade.
+  08:00 London Fri: pre-entry hour 1.11461-1.11700 = 23.9 pips -> PH2 paper: QUIET, paper full size (decided before the order; only the second quiet day since 05-01). Price 1.11532: night against me by 45.2 pips (counted); entry 7.1 pips better than at 07:00. Order: SELL 0.31, stop 40 pips above the bid (1.11932).
+  08:15 London: filled SELL 1.11529, stop 1.11932 (40.3 pips). First candle read from the tool. No call that matters; hands off.
+  09:00 London: a quiet first hour: best +5.9, worst -17.0, last -6.7 pips. No call; hands off.
+  10:00 London: second hour best +1.3, worst -24.4 (high 1.11763), last -17.3 pips. A 30 pip range above my entry all morning. No call; the stop and the clock. Hands off.
+  11:00 London: STOPPED in the 10:30-10:45 London candles (bid high 1.11955, 3.3 pips through my level after a 24 pip push in one candle). Sim balance from the tool $25,359.29. One trade a day: done. I watch to noon only for the stop-day routine.
+  12:00 London: price (bid, from the tool) 1.11854 = 32.5 pips against my entry, 7.8 pips inside the stop; the morning's highest bid was 1.12083, 15.1 pips through my level. Without the stop about -0.81R at noon instead of -1.00R (python). Neither a clean poke nor a clean real stop: the stop cost about 0.2R today. MB1 paper (forward day 8), written before 13:25: open 08:00 1.11530, price at 12:00 1.11854 -> morning UP by about 32 pips (large morning) -> only an UP break of the 12:00-13:25 box counts. Exact figures from the tool afterwards.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
