@@ -131,3 +131,8 @@ Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 52 done, avg +0.30R, m
 Counts only: live trades after a night (00:00->08:00) against my side, from 04-23: 10 (+2.29R; look at 40). 10-day-trend direction, paper line from 05-06: trend UP 5 trades -0.84R; trend DOWN 0 trades (look at 40 up-trend trades).
 
 ## 05-12 research (before the next day), the slow way: ten seeded random A2 charts written up, base rates counted, then the midday-box breakout BX1/BX2/BX3 pre-registered and run (journal/2015-ten-charts-and-idea-BX.md) - no survivor by the kill test (fails the period line and the drawdown line), though it is the first second setup to pass the average, the cost stress and independence. Parked, no tag. Rule A2 and size 0.50% unchanged. Ideas 56, variants 153.
+
+## 05-12 research after funded day 33 (coach: scroll the losers of the last 3 killed ideas first): 24 charts of the last 8 losers of BX1, SI1, TD1 written up
+(journal/2015-review-losers-of-3-killed-ideas-and-idea-MB.md), then idea MB pre-registered (K1-K8) and run once: MB1 (box break only with the morning) passes all
+eight lines on the set without the inspiring days (30 trades, +0.695R +-0.65); MB2 and MB3 killed. MB1 goes on PAPER (journal/MB1-paper-tag-rules.md) with five
+written reasons not to trust it. A2 and the live size: unchanged. Counts: 57 ideas, 156 variants.

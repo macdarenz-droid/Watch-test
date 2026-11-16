@@ -59,3 +59,55 @@ Hand-check before totals: two days' filter values against the candles (one kept,
 A survivor gets a forward PAPER tag only; nothing touches A2 or the live size.
 My guess, written now: kept about +0.30R, removed about 0.00R; MB1 passes K8 on the whole set but fails K3 or K5 because half of 74 trades is too few to be
 positive in three periods. I expect no survivor.
+
+## Mechanics hand-check (before totals; `python bt/morning_box.py 2015-05-13 --check 2015-04-28,2015-05-05`)
+- 04-28: open 08:00 1.08740, open 12:00 1.09414 -> morning +67.4 pips; break DOWN -> MB1 remove. The chart shows the same (08:00 near 1.0875, noon near 1.094).
+- 05-05: open 00:00 1.11456, 08:00 1.10905, 12:00 1.11266 -> morning +36.1, day so far -19.0; break UP -> MB1 keep, MB2 keep, MB3 remove. Chart agrees.
+
+## Results (run once; `python bt/morning_box.py 2015-05-13`; every figure copied from the print)
+DECISION SET: all A2 days before 2015-05-13 without the 8 inspiring days. BX1 there: 66 trades, +0.293R each, +19.33R.
+| variant | kept n | win | avg R (2 se) | net | max DD | worst 10 | Jan / Feb / Mar-now | without best 3 | stressed avg | corr A2 / on A2 losing days | REMOVED n, avg | kept minus removed: before 03-02 / from 03-02 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| MB1 with the morning | 30 | 50% | +0.695 (+-0.65) | +20.86 | 4.58R | -1.31 | +1.64 (7) / +12.50 (6) / +6.72 (17) | +8.61 | +0.592 | +0.01 / +5.32 | 36, -0.043 | +1.088 vs +0.051 / +0.395 vs -0.109 |
+| MB2 morning >= 20 pips | 16 | 31% | +0.120 (+-0.74) | +1.93 | 5.02R | -3.24 | +3.65 (5) / 0.00 (0) / -1.72 (11) | -5.63 | +0.019 | +0.08 / +0.65 | 50, +0.348 | +0.730 vs +0.490 / -0.157 vs +0.228 |
+| MB3 with the day so far | 29 | 45% | +0.581 (+-0.66) | +16.85 | 5.21R | -3.82 | +2.28 (9) / +10.71 (4) / +3.86 (16) | +4.60 | +0.481 | +0.11 / -1.72 | 37, +0.067 | +0.999 vs +0.128 / +0.241 vs +0.025 |
+Reported only, all days (8 inspiring days back in): MB1 32 trades +0.589R, net +18.86R, DD 4.58R, removed 42 trades -0.170R; MB2 18 trades -0.004R; MB3 30 trades +0.528R, DD 5.21R.
+Base rate for E1 (all 74 trades): losers against the morning 25 of 42; winners against the morning 17 of 32; all trades against 42 of 74.
+
+## Kill lines applied (decision set)
+| line | MB1 | MB2 | MB3 |
+|---|---|---|---|
+| K1 avg >= +0.15R | PASS | FAIL | PASS |
+| K2 stressed avg >= +0.05R | PASS | FAIL | PASS |
+| K3 every period positive | PASS | FAIL | PASS |
+| K4 without best 3 | PASS | FAIL | PASS |
+| K5 DD <= 5R, worst 10 >= -4R | PASS | FAIL | FAIL (DD 5.21R) |
+| K6 independent of A2 | PASS | PASS | FAIL (-1.72R on A2's losing days) |
+| K7 >= 30 trades | PASS (30: exactly on the line) | FAIL | FAIL (29) |
+| K8 removed trades clearly worse, both halves | PASS | FAIL | PASS |
+VERDICT: MB2 and MB3 KILLED. MB1 passes all eight lines I wrote before running. By my own rules that makes it a FORWARD PAPER TAG and nothing more.
+It is the first of 57 ideas to pass its kill test. That alone is a reason for suspicion, not for joy.
+
+## My guess against what happened
+"kept about +0.30R, removed about 0.00R": removed -0.043R (right), kept +0.695R (more than twice my guess). "MB1 fails K3 or K5": wrong, it passed both.
+"No survivor": wrong.
+
+## Why I do not trust it yet (written the same hour, before it can grow on me)
+1. THE DOSE GOES THE WRONG WAY. My reason was "the morning shows who controls the day". Then a bigger morning should be a better signal. MB2 says the opposite:
+   with-morning breaks after a morning of 20 pips or more made +1.93R in 16 trades; so the other 14 MB1 trades - mornings that had travelled LESS than 20 pips -
+   made +18.93R (20.86 - 1.93, arithmetic from the table, not a new run). The profit sits where my explanation is weakest. Either the real thing is something
+   else (a quiet morning, then the afternoon goes) or it is luck. I do not know which, and I will not run a 4th variant to find out: that is the forward tag's job.
+2. The win rate hardly moves: 50% kept, 47% removed. Losers are against the morning 25 of 42 (60%), winners 17 of 32 (53%), everything 57%. What I "saw" in
+   the 8 pictures (6 of 8 against) is mostly the base rate. The whole difference is the SIZE of a few kept winners (Feb: 6 trades, +12.50R).
+3. 30 trades, known to +-0.65R: the true average could be +0.05R. K7 passed on the line.
+4. It is the 4th to 6th cut of the same 74 trades, picked after looking at charts of them. Dropping the 8 days helps, it does not make the rest unseen:
+   I knew BX1's totals and its good February before I wrote the filter.
+5. Still on the other side: positive in all three periods and in both halves, positive without its best 3, positive at triple cost, no link to A2's results.
+   None of my 56 dead ideas could say that.
+
+## What I learned from the slow way
+- Looking at the losers of three ideas together showed me something the single reviews had not: I always act late, and SI/TD only re-price A2's bad days.
+- The eye found a pattern (6 of 8 against the morning) that was mostly a base rate (57%). The count, not the picture, has to carry the claim. Winners beside
+  losers: always.
+- One passing kill test after 56 failures is what chance alone would also give me now and then. The honest name for MB1 is "candidate".
+Counts: ideas 57, variants 156 (MB1 MB2 MB3). Second setups tried: 10; alive on paper: 1 (MB1); adopted: 0.

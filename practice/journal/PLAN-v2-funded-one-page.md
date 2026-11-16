@@ -48,7 +48,7 @@ Where it comes from (04-17, 74 trades): both sides earn - sells +0.61R (47), buy
 fell 1,200 pips. The smaller side is known only to +-0.40R. I have not yet traded a rising market; +0.18R is about what the weaker side has earned.
 PAPER LINE, not a basis for any live rule until live days confirm it (coach 05-06) - 05-06, 86 trades: with the 10-day trend UP the rule earned +0.375R on 29 trades (buys +0.30R on 19), with it DOWN +0.307R on 48. It has not needed a falling euro so far; 29 trades, longest up stretch three weeks.
 
-## 7. What is closed, so I do not reopen it on a bad day (56 ideas, 153 variants, none adopted)
+## 7. What is closed, so I do not reopen it on a bad day (57 ideas, 156 variants, none adopted; MB1 on paper only)
 Entry filters from chart reading (no-chase, first break, night against me (twice), gap size (small and large), round numbers, flip day, rejection day, dead Asia, Friday): the losers I look at have more winning twins.
 Exits (tighter / wider / structural stop, break-even, trail, target, runner, scale-out, partial at +1R, add at +1R, stop on a candle close, late profit lock, time-decay stop, 09:00 checks, other exit hours): 32 definitions, none beats noon. The noon exit is already my loss-cutter: most losing mornings end at -0.2 to -0.5R. The hour 11:00-12:00 adds +0.18R per in-profit trade.
 Entry time and price (07:00, 09:00, +-1h, limit orders, split entries 08:00 + 08:30 / 09:00); lookback 2 / 5 / 10; second setups tried (Asia break, ignition candle, NY fade, range fade, night continuation, afternoon trade in the rule's direction, night fade, direction of a lively pre-entry hour, midday-box breakout at 13:25 - the last one positive under cost stress but period-unstable with 6-7R drawdowns; parked). Size above 0.50%.
