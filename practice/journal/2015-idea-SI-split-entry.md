@@ -37,3 +37,45 @@ A variant survives only if ALL:
   K5. the worst single day not worse than A2's worst day by more than 0.05R (parts with their own stops must not create a bigger loss than one stop).
 My guess, written now: net R about 90% of A2's (later parts miss the first-hour run on the good days), drawdown about the same; K1 or K2 fails for all three.
 SI2 (the closest to A2) keeps the most profit and changes the least. No survivor.
+
+# RESULTS (kill test above pushed in commit bbd953d before any code; one run: `python bt/split_entry.py 2015-05-09`; figures copied from its output)
+89 A2 days 01-06..05-08, engine costs, per-day R of all parts together.
+
+## Mechanics check before the totals
+- My own "08:00 part" reproduces the engine's A2 on every day (largest difference 0.000R).
+- 05-08, a morning I walked by hand: the 08:00 part buys 1.11949 and closes at noon +0.47R; the 08:30 part buys 1.12178 (-0.10R); the 09:00 part buys 1.12172 (-0.08R).
+  SI1 and SI2 +0.19R, SI3 +0.10R, against A2's +0.47R. Later parts paid 22-23 pips more for the same exit.
+
+## Totals
+| | net R (of A2) | max DD | score net/DD (vs A2) | worst 10 days | worst day | backtest months: net, DD | live months: net, DD |
+|---|---|---|---|---|---|---|---|
+| A2: whole position at 08:00 | +37.45 | 3.28R | 11.4 | -1.70R | -1.03R | +19.56, 1.87R | +17.89, 3.28R |
+| single entry 08:30 (reported only) | +30.33 (81%) | 4.70R | 6.5 (0.57x) | -2.66R | -1.03R | +17.29, 1.90R | +13.04, 4.70R |
+| single entry 09:00 (reported only) | +22.78 (61%) | 4.21R | 5.4 (0.47x) | -3.72R | -1.03R | +16.29, 2.31R | +6.49, 4.21R |
+| SI1: half 08:00 + half 09:00 | +30.12 (80%) | 3.62R | 8.3 (0.73x) | -2.54R | -1.03R | +17.92 (92%), 2.09R | +12.19 (68%), 3.62R |
+| SI2: half 08:00 + half 08:30 | +33.89 (90%) | 3.99R | 8.5 (0.74x) | -2.18R | -1.03R | +18.42 (94%), 1.89R | +15.47 (86%), 3.99R |
+| SI3: thirds 08:00 / 08:30 / 09:00 | +30.19 (81%) | 3.98R | 7.6 (0.67x) | -2.45R | -1.03R | +17.71 (91%), 2.03R | +12.48 (70%), 3.98R |
+
+## Kill lines applied
+| line | SI1 | SI2 | SI3 |
+|---|---|---|---|
+| K1 net at least 95% of A2 | FAIL (80%) | FAIL (90%) | FAIL (81%) |
+| K2 score at least 1.15x | FAIL (0.73x) | FAIL (0.74x) | FAIL (0.67x) |
+| K3 both periods: net >= 90% and DD not above A2's | FAIL | FAIL | FAIL |
+| K4 worst 10 days not worse | FAIL (-2.54) | FAIL (-2.18) | FAIL (-2.45) |
+| K5 worst day | PASS | PASS | PASS |
+VERDICT: NO SURVIVOR. Idea closed. The entry stays one order at 08:00 London.
+
+## My guess against what happened
+"Net about 90%, drawdown about the same": net 80-90% - right for SI2, too kind for the others - and the drawdown is not the same, it is DEEPER (3.6-4.0R against 3.3R).
+I expected to give up profit for smoothness. The split gives up profit AND smoothness.
+
+## What I learned
+- The later the entry, the worse - on every measure, and much more so live: a single entry at 09:00 keeps 83% of A2's profit in the backtest months and 36% in the
+  live months; at 08:30, 88% and 73%. The first thirty to sixty minutes after 08:00 carry a large part of what the rule earns, especially lately.
+- Why the drawdown gets deeper instead of shallower: on a losing morning a later part usually loses too (its own stop is 40 pips from a different price), and on a
+  winning morning it wins less - so the losses stay and the cushion between them shrinks. Splitting does not diversify anything; it is the same bet, later.
+- It fits the other findings of the last weeks: the edge is 08:00-12:00 London (night and afternoon tests), the last hour adds for trades in profit (late lock),
+  and now the first hour is where much of it is made. Every part of that window that I give up costs.
+- Management side now: exits 32 definitions, entry timing and splitting 3 more ways, size rule tested. All of them say: one order at 08:00, 40 pip stop, out at noon.
+Counts: ideas 55, variants 150.
