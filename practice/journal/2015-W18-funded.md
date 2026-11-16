@@ -61,6 +61,21 @@ Coach, 04-27: the decision lines did not trigger, so 0.50% stays; no size cut of
      Paper tags: F1 traded (-0.16R), FR1 SKIPPED; Q3 SKIPPED (dead Asia); Q1 traded. UN3: agree day, paper trades = -0.16R.
      Night count: night against me (not one-way): live trade 1 of the count, -0.16R.
      END OF RELEASED DATA (clock Tue 04-28 01:00 London).
+- **Tue 04-28 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID LOSS.
+  D1: third rising day: Monday's low 1.0819 held above Friday's 1.0785, New York pushed through Friday's 1.0900 to 1.0927 and the day closed 1.0891.
+      Higher highs and higher lows for three days; price is above the whole 1.066-1.085 range of last week.
+  H4: Monday 12:00-20:00 London: 1.0819 -> 1.0927 -> 1.0877. Tonight flat: 1.0867-1.0888.
+  H1: night range 1.0870-1.0888, 18 pips - the deadest night in weeks (ratio 0.50). Last hour ticked up to the night high.
+  M15: 06:30 candle rose 12 pips to 1.0887; price 1.0882.
+  Bias: BUY. 22:00 London closes: 04-27 1.08909 vs 04-22 1.07248 = +166 pips. Third day on the buy side.
+  UN3 PAPER TAG (never live): 5-day gap +153 pips -> BUY; 3-day says BUY -> agree: paper TRADES. Forward day 6 (2 disagree days of 30 so far).
+  Levels: night high 1.0888; Mon high 1.0927; 1.0900; night low 1.0870; Mon London low 1.0819.
+  Rejection-day check (parked observation): Monday closed at 0.66 of its range - not in the far third. Nothing.
+  Worry: seventh trade after six losses, and both dead-Asia paper tags skip today. The afternoon test yesterday answered my other temptation. Order as the rule says.
+  Paper tags: Q3 SKIP and Q1 SKIP (Asia 18.0 vs 36.2 = 0.50). F1 / FR1 read from the engine after the day.
+  Funded check / SIZE RULE: tracker balance $25,037.05, high-water $25,451.83, drawdown -1.63%. Trigger 1 at $24,688.28, trigger 2 at $24,179.24: neither reached -> FULL size.
+  Plan: BUY 08:00 London, SL 40 pips under the bid at 08:00, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$131 -> drawdown -2.1%, still above trigger 1.
+     One trade, stop not moved.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
