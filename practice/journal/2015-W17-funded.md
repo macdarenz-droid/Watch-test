@@ -261,3 +261,6 @@ Count only (from 04-23, no look before 40): live trades after a night (00:00->08
 Count only, from 04-23: live trades after a night (00:00->08:00) against my side: 0 so far (no look before 40).
 
 ## 04-24 (before the next day): April month-end review so far (journal/2015-04-month-end-review-so-far.md) and the test of its chosen weakness, small signals SG1/SG2/SG3 (journal/2015-idea-SG-small-signal.md) - no survivor: small-gap days are the better ones. Rule A2 and size 0.50% unchanged. Ideas 45, variants 122.
+
+## 04-24 weekend: 40-trade alarm passed; survival and risk-size re-runs with the live trades and the corrected high-water rule (journal/2015-forward-40-and-sims.md) - no decision line triggered, 0.50% stays; at the planning edge my own -5% stop is reached more often than my 04-10 table said (14% of two-year runs, never a breach). Question to the coach: 0.50% or 0.25%. No new idea this weekend: counts stay 45 ideas, 122 variants.
+Running R by side (tracking only, engine, from 01-06): see bt/two_sided.py; live: sells 25 trades +0.44R each, buys 15 trades +0.11R each.

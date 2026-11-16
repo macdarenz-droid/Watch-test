@@ -10,6 +10,7 @@ no break-even. 12:00: close at market. One trade every weekday, no skips, no sec
 ## 2. Size
 0.50% of $25,000 = $125 per trade = 0.31 lots. Fixed. Not raised after wins, not raised to "make back" a loss.
 Why: risk-size test 04-10 - at the edge I plan with (+0.18R) 1.0% breaches about 1 two-year run in 10, 0.50% about 1 in 500; with my brakes nothing breached at any size.
+Re-run 04-24 (80 trades, corrected high-water rule): on my 40 live trades 0.50% is stopped by my own -5% brake in 1.1% of two-year runs; at the planning edge in about 14% (never a breach).
 A raise needs BOTH the 40-trade forward test passed (33 done) AND a re-run of that test in which the bigger size passes all five lines. Neither is close.
 
 ## 3. Daily stop, and the stops behind it
@@ -17,7 +18,7 @@ A raise needs BOTH the 40-trade forward test passed (33 done) AND a re-run of th
   I am done for the day. No re-entry, no "second chance", no afternoon trade. A day can only be worse than -1R through a gap past the stop; I cannot prevent that, the size covers it.
 - BRAKE 1: balance 3% below the high-water mark (now $24,657.75) -> half size ($62.50) until a new high-water.
 - BRAKE 2: balance 5% below the high-water mark (now $24,149.34) -> stop trading, full review, restart only with my coach.
-- RULE ALARM: after 40 forward trades the rule must average >= +0.10R with drawdown <= 8R, or I stop trading it for money (33 done: +15.03R, +0.46R, drawdown 2.00R).
+- RULE ALARM: PASSED 04-24 - 40 forward trades, +12.64R, +0.32R each, max drawdown 3.07R (lines: >= +0.10R, <= 8R). Next alarm look at 100 live trades, same lines.
 
 ## 4. Payout plan (dates every 14 days from 03-27: 04-10 done, 04-24, 05-08, ...)
 On the payout date, after the day's trade, on the tracker balance: below $26,000 -> request HALF of what is above $25,000; at or above $26,000 -> request everything above

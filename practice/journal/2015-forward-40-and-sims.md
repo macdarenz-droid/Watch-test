@@ -25,3 +25,53 @@ These are sizing runs on my own results; no rule variant, no new idea. Counts st
 Also reported: what the losing week did to the numbers (live average +0.46R a week ago, +0.32R now; planning edge +0.18R).
 My guess: D1 and D2 are not triggered (the stop is reached in a few percent of runs on the live list); the corrected high-water rule makes my stop slightly MORE frequent
 than the old reading; 1.0% still fails at the planning edge. 0.50% stays.
+
+# RESULTS (decision lines above pushed before the run; `python bt/funded_sim.py`, `python bt/risk_size.py 2015-04-25`, and the same with HW_RESET=1 for the old reading)
+
+## 1. Funded survival, 1,000 two-year reshuffles, corrected high-water rule (breached / ended by my -5% stop / alive, brakes ON; breached with brakes OFF)
+| list | 0.25% | 0.50% | 0.75% | 0.50% brakes OFF |
+|---|---|---|---|---|
+| L1 all my live trades since January, 74 (+0.37R) | 0 / 0 / 1000 | 0 / 0 / 1000 | 0 / 33 / 967 | 0 breached |
+| L2 the 40 forward trades (+0.32R) | 0 / 0 / 1000 | 0 / 11 / 989 | 0 / 162 / 838 | 0 breached |
+| L3 February at realistic costs (+0.18R) | 0 / 0 / 1000 | 0 / 0 / 1000 | 0 / 20 / 980 | 0 breached |
+| L4 zero edge | 0 / 157 / 843 | 0 / 676 / 324 | 0 / 936 / 64 | 339 breached |
+| L5 -0.10R | 0 / 959 / 41 | 0 / 999 / 1 | 0 / 1000 / 0 | 990 breached |
+On the 40 live trades at 0.50%: median two-year payout about 71% of the account ($14,283 to me), 9% of months negative.
+Old high-water reading on the same list: stop reached 5 times instead of 11.
+
+## 2. Risk size on the A2 list to today (79 trades, +0.41R; without January 60 trades, +0.29R), plain reshuffle, 0.50% only (1.0% and 1.5% are in the script output)
+| scenario | breach, brakes OFF | max DD 95th pct | my -5% stop reached, brakes ON | 5th-pct month |
+|---|---|---|---|---|
+| E1 full list (+0.41R) | 0.0% | 3.9% | 0.1% | +$108 |
+| E2 without January (+0.29R) | 0.0% | 4.9% | 0.4% | -$138 |
+| E3 planning edge (+0.18R, whole list shifted down) | 0.4% | 8.1% | 14.2% (block reshuffle 4.8%) | -$491 |
+1.0% at the planning edge: breach 14.5% with brakes off, own stop 92.9% with brakes on. 1.5%: breach 51.4%.
+
+## Decision lines applied
+- D1 (any breach with brakes ON at 0.50%): none, in any list of either script -> not triggered.
+- D2 (on the 40 live trades, own stop in more than 10% of runs at 0.50%): 1.1% -> not triggered.
+- D3 (raise): 1.0% fails by a wide margin at the planning edge -> not on the table, as written.
+- D4: 0.50% STAYS. Brakes unchanged.
+
+## What the losing week did
+A week ago the live average was +0.46R on 35 trades; now +0.32R on 40. The backtest-plus-live A2 list went from +0.46R (69 trades, 04-10) to +0.41R (79).
+The planning edge stays +0.18R; live is still above it, and the gap is far inside the +-0.34R I can measure.
+
+## What I did NOT expect, said plainly: the high-water correction matters in the simulations
+- With the old reading (high-water reset to the balance at every payout) a drawdown was forgotten each time a payout fell inside it - every 10 trading days in the
+  simulation. My 04-10 risk-size table was computed that way. It said: at the planning edge, 0.50% reaches my own -5% stop in 5.5% of two-year runs.
+- Same script today: old reading on the longer list 8.4% (the losing week alone moved it from 5.5%); CORRECTED reading 14.2% (plain) / 4.8% (block).
+  The 95th-percentile drawdown at the planning edge is 8.1%, not the 7.0% I reported on 04-10.
+- So the honest statement about 0.50% is worse than the one I made two weeks ago: IF my true edge is only the planning +0.18R AND losses come in the order a plain
+  reshuffle gives, then about one two-year run in seven ends with my own brake stopping me at -5%. Never a breach: with brakes on the lowest balance in any run was -5.3%.
+- The two ways I have of writing "planning edge" disagree a lot: February's own trades at realistic costs (L3) -> stop reached 0 times in 1,000; the whole list shifted
+  down to +0.18R (E3) -> 14%. Same average, different shape (February had many small losses; the shifted list has many full stops). I do not know which shape the
+  future has. The live record so far looks more like E3: 25% of my live trades are full stops.
+- My 04-10 line S4 ("own stop in at most 5% of runs at the planning edge") is now failed by 0.50% clearly, not narrowly. That test's rule was "if no size is acceptable,
+  0.50% stays", and today's lines say the same. But I do not want to hide behind my own wording: the alternative is 0.25%, which the first table shows almost never
+  reaches the stop even at zero edge for a long time, and which halves the income (about $185 a month to me at the planning edge instead of $370).
+QUESTION FOR MY COACH (the decision lines say 0.50% stays, and that is what I trade on Monday unless told otherwise): stay at 0.50%, accepting roughly a 1-in-7 chance over
+two years of being stopped by my own -5% brake if the edge is only the planning number - or cut to 0.25% until the live book is bigger? My own view: stay. Being
+stopped by the brake costs the account nothing but a pause and a review with you, a breach has not appeared in any run with brakes on, and the live record is above the
+planning edge. But it is a survival question and I would rather it were decided than assumed.
+No new idea, no variant: counts stay 45 ideas / 122 variants.

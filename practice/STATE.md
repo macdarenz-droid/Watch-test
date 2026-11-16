@@ -315,6 +315,12 @@
 - Chosen weakness: trading small 3-day signals at full size (week 17: -2.07R). Test on all 78 trades: gap < 50 pips = 21 trades at +0.62R (81% wins) vs +0.36R for the rest, better in all three periods; relative version no difference. SG1-SG3 fail K1-K3. No survivor.
 - Real open weaknesses, not testable now: the month is one week (regime), income is small (size capped by how badly I know the edge). Final April review on the first live day of May.
 
+## 40-trade alarm PASSED + survival re-runs (journal/2015-forward-40-and-sims.md; decision lines D1-D4 pushed before the run; no new idea after a losing week)
+- 40 live trades 03-02..04-24: 24 wins, +12.64R, +0.32R each, max DD 3.07R -> alarm (avg >= +0.10R, DD <= 8R) passed. Week W17: -3.07R, five losses in a row, all valid.
+- funded_sim on the 40 live trades at 0.50%: 0 breached / 11 stopped by my -5% brake / 989 alive of 1,000. No decision line triggered -> 0.50% STAYS.
+- HIGH-WATER CORRECTION (04-24): after a payout the high-water is lowered by the payout, not reset (plan + both scripts; HW_RESET=1 gives the old reading). With it, risk_size at the planning edge (+0.18R, shifted list) reaches my own -5% stop in 14.2% of two-year runs at 0.50% (block 4.8%; old reading 8.4%; 04-10 table said 5.5%). Never a breach with brakes on.
+- OPEN QUESTION TO COACH: stay at 0.50% (my view) or cut to 0.25% until the live book is bigger. Monday is traded at 0.50% unless told otherwise.
+
 ## LIVE vs BACKTEST, running (coach 04-20; `python bt/live_vs_bt.py END`; updated after every live day; the live column is the real out-of-sample)
 As of live day Fri 2015-04-24:
 | | Backtest Jan-Feb (engine) | LIVE from 03-02 (as traded) | Engine on the live days |

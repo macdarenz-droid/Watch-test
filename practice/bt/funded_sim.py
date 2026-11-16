@@ -7,6 +7,7 @@ full = t.R.values; fwd = t[t.entry_time >= "2015-03-01"].R.values; feb = t[(t.en
 lists = ((f"L1 full, {len(full)} trades ({full.mean():+.2f}R)", full), (f"L2 forward only, {len(fwd)} ({fwd.mean():+.2f}R)", fwd), (f"L3 February at realistic costs ({feb.mean()-0.05:+.2f}R)", feb - 0.05),
          ("L4 zero edge", feb - feb.mean()), ("L5 -0.10R", feb - feb.mean() - 0.10))
 N, DAYS = 1000, 500
+HW_RESET = os.environ.get('HW_RESET') == '1'   # old reading, kept only for comparison
 def run(R, risk, brakes, seed=31):
     rng = np.random.default_rng(seed); D = rng.choice(R, size=(N, DAYS)); res = dict(breach=0, stop=0, alive=0, paid=[], stopday=[], negm=[])
     for s in D:
@@ -22,7 +23,7 @@ def run(R, risk, brakes, seed=31):
             if (i + 1) % 10 == 0 and not half and bal > 0:
                 req = bal / 2 if bal < 4.0 else bal - 4.0
                 if bal >= 4.0 and bal / 2 > req: req = bal - 4.0
-                bal -= req; paid += req; hw = bal
+                bal -= req; paid += req; hw = bal if HW_RESET else hw - req      # corrected 04-24: lower the high-water by the payout, do not reset it
         res[end or "alive"] += 1; res["paid"].append(paid)
         if months: res["negm"].append(np.mean(np.array(months) < 0))
     return res

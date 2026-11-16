@@ -28,7 +28,7 @@ def sim(D, risk, brakes):
         if (i + 1) % 21 == 0: months.append(np.where(alive | True, bal + paid - mstart, np.nan)); mstart = bal + paid
         if (i + 1) % 10 == 0:
             ok = alive & (bal > 0) & ~(half & brakes); req = np.where(bal < 4.0, bal / 2, bal - 4.0); req = np.where(ok, req, 0.0)
-            bal = bal - req; paid = paid + req; hw = np.where(ok, bal, hw)
+            bal = bal - req; paid = paid + req; hw = np.where(ok, bal, hw) if os.environ.get('HW_RESET') == '1' else hw - req    # corrected 04-24
     M = np.array(months).T      # runs x months, % of 25k (months after a stop/breach are 0 and are excluded below)
     return dict(breach=breach.mean() * 100, stop=stop.mean() * 100, dd50=np.median(maxdd), dd95=np.percentile(maxdd, 95), ddmax=maxdd.max(), paid=np.median(paid), M=M, ended=breach | stop, low=low.min())
 for mode in ("plain", "block"):
