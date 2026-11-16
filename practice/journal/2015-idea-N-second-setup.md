@@ -35,3 +35,43 @@ What a pass earns: a forward paper tag as a possible second setup. Not money, an
 - Known danger: 13:30 UTC news. In this sim a stop fills at its price; in real life a fade position entered at 13:00 can be jumped. A pass here would still owe that question.
 - The independence numbers have never been computed. Because N trades against the morning and A2 mostly trades with it, I expect them to lose on different days - if N makes money at all.
 Nothing above has been run.
+
+# RESULTS of idea N (run after commit 1ed6797). N1/N2/N3 = variants 39/40/41; ideas 18. Costs on, $125 risk, stop 40. Jan-Feb only (bt/ny_fade.py); March not used.
+
+| Month | Variant | Trades | Win rate | Avg R | Net R | Max DD | Net R without its best trade |
+|---|---|---|---|---|---|---|---|
+| Jan (build) | N1: morning moved >= 30 pips, fade 13:00-17:00 | 15 | 47% | +0.42 | +6.31 | 3.45R | +0.93 (best +5.37R on 01-22) |
+| Jan (build) | N2: >= 50 pips, 13:00-17:00 | 7 | 57% | +1.07 | +7.49 | 1.00R | +2.12 |
+| Jan (build) | N3: >= 30 pips, 12:00-16:00 | 11 | 55% | +0.39 | +4.32 | 2.04R | -0.83 |
+| Feb (CONTAMINATED) | N1 | 9 | 78% | +0.43 | +3.85 | 1.02R | +2.48 |
+| Feb (CONTAMINATED) | N2 | 3 | 100% | +0.93 | +2.80 | 0R | +1.76 |
+| Feb (CONTAMINATED) | N3 | 7 | 57% | +0.18 | +1.24 | 1.12R | +0.13 |
+(A2 for scale: Jan 19 trades +0.78R, max DD 1.33R; Feb 20 trades +0.23R, max DD 1.86R.)
+
+## Build (January)
+- N1 SURVIVES: 15 trades, +0.42R, still +0.93R without its one giant trade. N2 fails on count (7 trades, needed 8). N3 fails: negative without its best trade.
+- Candidate: N1.
+## Check (February, contaminated) - N1
+9 trades (needed 6), +0.43R (needed +0.10R), +2.48R without its best trade: PASSES the profit lines. Not what I predicted ("about nothing in February").
+
+## Independence - the overlap check (Jan+Feb together)
+| Variant | Its losing days | ...that were also A2 losing days | Correlation of daily R with A2 | What it made on A2's LOSING days | What it made on A2's WINNING days |
+|---|---|---|---|---|---|
+| N1 | 10 | 4 (40%) | +0.31 on 23 shared days | -0.83R in 6 trades | +10.56R in 17 trades |
+| N2 | 3 | 1 (33%) | +0.33 on 9 | -1.00R in 1 | +10.86R in 8 |
+| N3 | 8 | 1 (12%) | -0.06 on 17 | -1.02R in 1 | +5.82R in 16 |
+N1 against the two lines: losing-day overlap 40% (limit 50%): passes. Correlation +0.31 (limit +0.30): FAILS, by 0.01.
+
+## Verdict: N1 does NOT pass as an independent second setup. Not tagged, not adopted. I am not rounding 0.31 down.
+- The miss is thin, but the table says the same thing in plain numbers: all of N1's profit came on days when A2 ALSO won (+10.56R), and on A2's six losing days it lost a little (-0.83R).
+  It does not lose on the same days much more than chance - but it does not earn on A2's bad days either. It is a second way to be paid on the same active days, not a cushion for the quiet ones.
+- Why that makes sense: N1 only trades when the morning travelled 30+ pips, and those are the mornings A2 tends to win. On A2's dead mornings N1 has no trade at all (15 of 39 days).
+- Its own risk is worse than A2's: January drawdown 3.45R, and a third of its two-month profit is one afternoon (01-22, +5.37R, a news crash I could not have counted on).
+- What is genuinely new: this is the first thing in 41 variants that was positive in BOTH months on its own profit test, in hours when A2 is flat. That is worth more than a shrug,
+  and less than a setup: it comes from January afternoons I watched, and February is contaminated.
+- I am not rescuing it with another threshold or other hours. N2 (bigger mornings only) looks even better per trade, on 10 trades in two months - which is how a mirage looks.
+
+## What I would ask my coach (not doing it on my own)
+Whether to pre-register a forward-only paper tag for N1 with profit AND "what it does on A2's losing days" as the questions. It costs nothing, uses no Jan-Feb data, and being mechanical
+it can be computed for any unseen day after the fact. Until told, nothing is tagged.
+Counts: ideas 18, variants 41.
