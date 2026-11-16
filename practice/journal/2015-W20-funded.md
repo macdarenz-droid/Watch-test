@@ -145,6 +145,28 @@ Coach, 05-11: quality over count - the next test starts with ten charts looked a
      Night count: against me by 36.5 pips -> live trade 11 of the count (running: 11 trades, +2.93R). 10-day-trend paper line: trend UP: 6 trades, -0.20R.
      END OF RELEASED DATA (clock Thu 05-14 01:00 London).
 
+- **Thu 05-14 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID WIN. Figures from `python bt/call_numbers.py 2015-05-14` and the bar prints.
+  D1 (London days): Mon 05-11 close 1.11546 (0.31); Tue 05-12 high 1.12787 low 1.11343 close 1.12127 (0.54); Wed 05-13 high 1.13827 low 1.12023 close 1.13536
+      (0.84, range 180.4): the widest day of the three, closed near its high and made the 3-day high. All of it came AFTER my noon exit (the 12:00 UTC H4 bar
+      1.12317 -> 1.13717). My sell was closed +0.64R an hour before a 160 pip rally against it. The noon clock did that, not me.
+  H4 (UTC bars): Wed 12:00 bar high 1.13827; 16:00 bar back to 1.13400; tonight 00:00 bar 1.13469 -> 1.13707; 04:00 bar high 1.13798.
+  H1: the night (00:00-07:00 London): open 1.13526, high 1.13798, low 1.13406, last 1.13776: range 39.2 pips (ratio 0.73), net +25.0 pips - a rising night, with my side.
+  M15: dip to 1.13600 at 06:00-06:30 London, then two rising candles to 1.13798; last close 1.13776.
+  Bias: BUY. 22:00 London closes: 05-13 1.13536 vs 05-08 1.12015 = +152 pips (3-day gap +152.1). Gap / ADR5 1.15: stretched (my best group over all history).
+  UN3 PAPER TAG (never live): 5-day gap +8 pips -> BUY; agree: paper TRADES. Forward day 18, disagree days 5 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 10.
+  MB1 PAPER TAG (never live, forward day 2; coach: one day is one day): morning direction written at 12:00, before 13:25. Day 1 was a removed +4.23R; it proves nothing either way.
+  Levels: night high 1.13798; Wed high 1.13827; night low 1.13406; Wed evening low 1.13400.
+  Rejection-day check: for a buy, Wednesday would need the 3-day high (True) AND a close in the bottom third; it closed at 0.84. Not a rejection day.
+  10-day-trend paper line: UP (1.13536 vs 04-29 1.11280); the buy is with it.
+  SIZE RULE: tracker balance $25,177.09, high-water $25,349.14, drawdown -0.68%; trigger 1 at $24,588.67 not reached -> FULL size, 0.31 lots.
+  WHEN MY OWN 1.25% BUFFER BITES (coach 05-14; written into the plan today): with ONE trade a day the firm's 5% daily limit is the line and 0.50% stays (worst
+      case seen 1.54%). The buffer is for a day with TWO trades: the losses of both add up inside the same 5% day, even if they are never open together (A2 is
+      flat at 12:00, a box trade would start after 13:25). Only for that case I size: the second trade must keep "A2 worst case + its own worst case" <= 2.0%
+      of the balance on the then history. Today no second trade exists (MB1 is paper), so the rule sizes nothing.
+  Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
+  Worry: buying 15 pips under yesterday's high after a 180 pip day. Stretched signals have been my best; written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
