@@ -103,3 +103,5 @@ Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 
 Loss tags, all live trades: valid loss 22 (-12.91R) | my mistake 0. Process mistakes (funded): 2.
 
 ## 04-09 research (no trading day): flip-day test FL1/FL2/FL3 on all history - no survivor (journal/2015-idea-FL-flip-days.md). Rule A2 and size 0.50% unchanged. Ideas 34, variants 89.
+
+## 04-10 research (before the next day): first-hour study + test FH1/FH2/FH3 on all history - no survivor (journal/2015-idea-FH-first-hour.md). Rule A2 and size 0.50% unchanged. Ideas 35, variants 92.

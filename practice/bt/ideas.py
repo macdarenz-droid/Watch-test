@@ -27,7 +27,7 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None, scale=None, rn=None, flip=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None, scale=None, rn=None, flip=None, fh=None):
     _best = {}
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
@@ -144,6 +144,11 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
             if hourcheck is not None and acct.positions and h == entry_h + 1 and b.time.minute == 0:   # idea T: one-hour check at this bar's open
                 p = acct.positions[0]; pips = ((b.open - p.entry) if p.side > 0 else (p.entry - (b.open + acct.spread))) / PIP
                 if pips < hourcheck: acct.close()
+            if fh is not None and acct.positions and h == entry_h + 1 and b.time.minute == 0:   # idea FH: shape of the first hour, checked once at this bar's open
+                p = acct.positions[0]; hh = g[g.time.dt.hour == entry_h]; hi = hh.high.max(); lo_ = hh.low.min()
+                pk = (hh.high.values.argmax() if p.side > 0 else hh.low.values.argmin()) * 5        # minute of my best price in the hour
+                loc = ((b.open - lo_) if p.side > 0 else (hi - b.open)) / (hi - lo_) if hi > lo_ else 0.5
+                if (fh == "early" and pk < 15) or (fh == "notlate" and pk < 40) or (fh == "low" and loc < 1/3): acct.close()
             if acct.positions and h >= exit_h:
                 p = acct.positions[0]
                 if runner is not None and not running and h == exit_h and b.time.minute == 0:      # idea X2: at the exit time, a trade >= +runner pips becomes a runner
@@ -243,6 +248,9 @@ VARIANTS = {
  "RN00_15": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 15)),   # idea RN: round numbers ahead
  "RN00_25": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 25)),
  "RN50_15": dict(entry_h=8, exit_h=12, sl=40, rn=(50, 15)),
+ "FH1": dict(entry_h=8, exit_h=12, sl=40, fh="early"),     # idea FH: first-hour shape, close at 09:00
+ "FH2": dict(entry_h=8, exit_h=12, sl=40, fh="notlate"),
+ "FH3": dict(entry_h=8, exit_h=12, sl=40, fh="low"),
  "FL1": dict(entry_h=8, exit_h=12, sl=40, flip="skip1"),     # idea FL: flip days
  "FL2": dict(entry_h=8, exit_h=12, sl=40, flip="skip2"),
  "FL3": dict(entry_h=8, exit_h=12, sl=40, flip="confirm"),

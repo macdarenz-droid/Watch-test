@@ -48,3 +48,34 @@ A variant survives only if ALL:
   K4. max drawdown not above A2's, and it closes early on at least 10 days.
 Also reported, not a kill line: how many of the closed days idea T1 (below zero at 09:00) would have closed too. If almost all, this is T under another name.
 My guess: FH2 closes too many winners and fails K1 and K3; FH1 and FH3 come out within +-0.05R of A2 and fail K1 - the same answer as T.
+
+## RESULTS (run once after the lines above were pushed: `python bt/ab_exit_period.py FH1,FH2,FH3 2015-04-10`; 68 trades 01-06..04-09, engine, full costs)
+"Given up" = A2's result minus the variant's result on the days the variant closes at 09:00 (positive = closing early cost money; K2 needs it NEGATIVE by 0.15R or more).
+
+| | closed at 09:00 | avg R / trade | vs A2 | net R | max DD | given up per closed day | Jan | Feb | Mar-now | also closed by T1 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| A2 | - | +0.445 | - | +30.26 | 2.03 | - | +14.89 | +4.67 | +10.71 | - |
+| FH1 best price in first 15 min | 20 days | +0.348 | -0.097 | +23.66 | 1.92 | +0.330R (sum +6.61R) | -0.73 | -2.60 | -3.27 | 19 of 20 |
+| FH2 best price not in last 20 min | 37 days | +0.322 | -0.123 | +21.92 | 1.86 | +0.225R (sum +8.34R) | -3.10 | -3.06 | -2.17 | 27 of 37 |
+| FH3 09:00 in my worst third | 19 days | +0.424 | -0.021 | +28.83 | 1.61 | +0.075R (sum +1.43R) | -1.49 | -0.98 | +1.03 | 17 of 19 |
+(Jan / Feb / Mar-now columns for the variants = variant net R minus A2 net R in that period.)
+
+## Kill lines applied
+- K1 (avg >= A2 + 0.05R): -0.097, -0.123, -0.021 -> all FAIL.
+- K2 (the part given up is a loss of >= 0.15R per closed day): it is a GAIN of +0.33R, +0.23R, +0.08R per closed day -> all FAIL. This is the line that matters.
+- K3 (ahead in >= 2 of 3 periods, never more than 1R behind): FH1 behind in all three; FH2 behind in all three; FH3 ahead in one, 1.49R behind in January -> all FAIL.
+- K4 (drawdown not above A2's, >= 10 days closed): all pass - drawdown is a little lower (1.61-1.92R vs 2.03R), paid for with 1.4R to 8.3R of profit.
+VERDICT: NO SURVIVOR. Idea closed, no forward tag. A2 unchanged. Both guesses were right. Exit side now: 19 exit variants, none beats "40 pips, whole position, out 12:00 London".
+
+## What I learned
+- The first hour describes the result; it does not predict the rest of the morning. Trades that looked like losers at 09:00 (best price early, then an hour against me)
+  made money on average from 09:00 to 12:00: +0.33R per trade for the FH1 group. Days like 03-23 (+2.62R given up), 02-17 (+2.19R), 02-05 (+1.29R) started exactly like my
+  losers and became some of my best trades. The bad first hour is the price of being in them.
+- It IS idea T under another name: 19 of FH1's 20 closed days and 17 of FH3's 19 are days T1 (below zero at 09:00) closes too. The order of best and worst inside the hour
+  adds nothing to "am I down at 09:00", and that was already killed. Same answer on 68 trades as on January alone.
+- Why the study table fooled the eye: it grouped by the FINAL result, which contains the first hour. Any trade sorted by how it ended will look, in hindsight, as if its
+  first hour "told" me. The honest question is always "from this moment on, what happens?" - and from 09:00 on, the weak starters are fine.
+- What it is worth keeping from the study: only 2 of 68 trades hit the stop inside the first hour, and the 9 full stops were -25 pips at 09:00 (median). FH3 cut
+  the drawdown to 1.61R for 1.4R of profit - that is a cheap-ish insurance, not an edge, and I do not need insurance at 0.50% risk with -1% drawdown.
+- Honest limits: 68 trades, in-sample thresholds; a failure in-sample with thresholds I picked after looking is about as clear as a build result gets.
+Counts: ideas 35, variants 92.
