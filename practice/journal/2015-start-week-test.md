@@ -32,3 +32,49 @@ Phase 1 at 0.5% needs 16R. January gave about 15R, February 4.6R, March so far a
 starts from 01-26 on will still be inside phase 1 when two months are up. I expect: within 1 month 0 of 8; within 2 months 1 or 2 of the 3-4 decided starts; no breach anywhere.
 If so, line 2 is on a knife-edge and line 3 fires.
 Nothing above has been run.
+
+# RESULTS (run after commit c713832). Mechanical A2 + my sizing/brakes/finishing size, costs on, 8 start weeks, data to Tue 03-24. 2 policy runs; variant count stays 56.
+
+## P-A: 0.5% in phase 1, 0.75% in phase 2 (as I traded attempt 1)
+| Start (Monday) | Trading days of data | Phase 1 passed | Both phases passed | Within 1 month (21 days) | Within 2 months (42 days) | Lowest point |
+|---|---|---|---|---|---|---|
+| 01-05 | 56 | day 25 (02-09) | day 44 = 61 calendar days (03-06) | no | no (by 2 trading days) | 0.00% |
+| 01-12 (my real start) | 52 | day 27 (02-17) | day 45 = 61 calendar days (03-13) | no | no (by 3 trading days) | -1.40% |
+| 01-19 | 47 | day 40 (03-13) | not yet: phase 2 at +2.8% after 47 days | no | no | -0.67% |
+| 01-26 | 42 | not yet | not yet: phase 1 at +7.8% after 42 days | no | no | -0.35% |
+| 02-02 | 37 | not yet | phase 1 at +7.8% after 37 days | no | undecided | -0.22% |
+| 02-09 | 32 | not yet | phase 1 at +7.5% after 32 days | no | undecided | 0.00% |
+| 02-16 | 27 | not yet | phase 1 at +6.3% after 27 days | no | undecided | -0.16% |
+| 02-23 | 22 | not yet | phase 1 at +6.3% after 22 days | no | undecided | 0.00% |
+## P-B: 0.5% in both phases (as attempt 2 is set)
+Same phase 1 column. Both phases: 01-05 start day 49 (68 calendar days, 03-13); 01-12 start day 51 (71 calendar days, 03-23); 01-19 start phase 2 at +1.9% after 47 days; the rest as above.
+
+| Summary | P-A | P-B |
+|---|---|---|
+| Passed both within 1 month | 0 of 8 | 0 of 8 |
+| Passed both within 2 months | 0 of 4 decided (4 undecided, all still in phase 1) | 0 of 4 decided |
+| Breach (5% daily / 10% max) | 0 of 8 | 0 of 8 |
+| Stopped by my -6% brake | 0 of 8 | 0 of 8 |
+| Lowest point of any start | -1.40% | -0.93% |
+| Trading days to pass both, starts that have passed | 44 and 45 (median 44.5) | 49 and 51 (median 50) |
+| Trading days to pass phase 1 alone | 25, 27, 40; five starts not yet after 22-42 days | same |
+
+## Kill test, line by line
+1. Safety: PASS. No start came near a limit or my brake; the worst any start ever stood was 1.4% under water. The rulebook does not breach.
+2. The goal "both phases within 1-2 months": FAIL, and the strict version of fail - NONE of the decided starts passes both phases within 42 trading days. The best two miss by 2 and 3
+   trading days (61 calendar days), and they are the two starts that got all of January's trend. Every start from 01-19 on is slower; four of eight have not even finished phase 1.
+   As written beforehand: this rulebook at this size cannot be described as a 1-2 month plan, and I say so plainly. This test does not justify a bigger size.
+3. Start-date luck: FIRES. My real start (01-12) is the second-fastest of the eight. A start one week later is still in phase 2 today; two weeks later, still in phase 1.
+   My ten weeks were close to the best the calendar offered.
+
+## Three things I did not expect
+- The mechanical rulebook from MY start date passes phase 1 on 02-17 (day 27). I passed it on 03-06 (day 39). The whole difference is my one discretionary skip (01-22, +1.18R):
+  with it the balance crosses $27,000 on 02-17; without it I was $154 short that day, and then the four February losses came. One skipped trade cost me not 1.2R but 12 trading days.
+  That is the strongest argument for "no skips" I have, and it is in my own account history.
+- Speed is almost all January. Starts in February sit at +6.3% to +7.8% of phase 1 after 22-37 days - not failing, just slow, carried by March's trend runs.
+- The lowest point of any start is tiny (-1.4%). The risk in this plan is not blowing up; it is taking a long time.
+
+## What changes
+- The plan's horizon line is rewritten: phase 1 about 5-8 weeks or more, both phases about 2 to 3.5 months, at 0.5% / 0.75%. "1-2 months" is retired as a description of this rulebook.
+- Attempt #2 (started 03-24 at 0.5%) should be expected to take 2-4 months. Nothing about its rules or size changes.
+- Reminder of what this was: eight overlapping windows of the same 57 days, half of them built or studied on. It removes one illusion (that my pass was typical) and proves nothing else.

@@ -18,7 +18,8 @@ Flat by noon, flat over weekends. Every trade journaled before the clock moves; 
 | January (the month the rule came from) | 19 | 74% | +0.78 | in-sample, one big downtrend |
 | February (frozen rule, new month) | 20 | 55% | +0.23 | my only box-month evidence |
 | March so far, traded forward one day at a time | 8 | 75% | +0.76 | unseen, but one straight fall |
-Planning number: +0.23R. At that edge and 0.75%, phase 2 takes a median ~26 trading days; if the edge is zero my -6% brake ends it about 1 time in 10 within 60 days, with no breach.
+HONEST HORIZON (start-week test, 2015-03-25): phase 1 takes about 5-8 weeks or more and both phases about 2 to 3.5 months at 0.5% / 0.75%; no start week in Jan-Feb passed both within 2 months, none breached. "1-2 months" is not what this rulebook delivers.
+Planning number: +0.18R at realistic costs (was +0.23R). At that edge and 0.75%, phase 2 takes a median ~26 trading days; if the edge is zero my -6% brake ends it about 1 time in 10 within 60 days, with no breach.
 
 ## What I have ruled out, and why (16 ideas, 35 variants; hypothesis and kill test committed before every run since idea H)
 | Tried | Result | Why it is out |
