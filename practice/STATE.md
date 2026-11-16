@@ -2,13 +2,13 @@
 
 | Field | Value |
 |---|---|
-| Sim clock | Fri 2015-03-27 00:00 UTC (END OF RELEASED DATA; one day at a time - each finished backtest test earns the next day) |
-| Phase | CHALLENGE #1 PASSED both phases (01-12..03-23, 50 trades, no breach). CHALLENGE ATTEMPT #2 ACTIVE since Tue 03-24: phase 1, balance $25,139.50 (+0.56%), target $27,000 ($1,861 = 14.9R away), 3 trading days, risk 0.5% = $125 = 0.31 lots, brakes $24,000 / $23,500. GOAL STAYS 1-2 MONTHS (coach) |
-| Current strategy | ONE-PAGE PLAN: journal/PLAN-v2-one-page.md. Rule A2 "London trend": 07:00 UTC write call; trend = yesterday's 22:00 close vs close 3 trading days earlier; 08:00 market order with trend; SL 40 pips; close 12:00 UTC; 1 trade/day; flat at weekend |
-| Risk | ATTEMPT #2: 0.5% = $125 per trade (`--risk 125`) UNTIL A2's forward test is complete (40 unseen trades; 19 done). Then re-run `python bt/reshuffle_breach.py` and apply the kill lines in journal/2015-reshuffle-breach-test.md (rehearsal today names 0.75%). 1 trade/day, brakes -4% / -6%, finishing size 0.10 lots within $31 of the target |
+| Sim clock | Fri 2015-03-27 21:00 UTC, weekend (END OF RELEASED DATA; one live day at a time until ~Mar 2017; each honest test earns the next day) |
+| Phase | FUNDED ACCOUNT ($25k FundedNext) since Fri 2015-03-27. Challenge #1 passed both phases 03-23 (no breach); attempt #2 cancelled by coach after 3 trades. Funded balance $24,877.55 (-0.49%) after day 1; high-water $25,000; account line $22,500; next payout date 04-10. Sim label "challenge #3" = the funded account (sim does not know payouts; MY tracker is journal/FUNDED-TRACKER.md) |
+| Current strategy | Rule A2 unchanged (journal/PLAN-v2-one-page.md): 07:00 UTC call; trend = last 22:00 close vs close 3 trading days earlier; 08:00 market order; SL 40 pips; close 12:00 UTC; 1 trade/day, no skips; flat at noon/weekends. FUNDED PLAN: journal/FUNDED-PLAN.md |
+| Risk | FUNDED: 0.50% = $125 = 0.31 lots (`python trade_a.py buy/sell --risk 125`); 1 trade/day (worst day -0.51%; 3% max-open rule never near). Funded brakes: 3% below high-water (or <= $24,250) -> 0.25% ($62.50, `--risk 62.5`) until a new high-water; 5% below (or <= $23,750) -> STOP + review. Payouts every 14 days: half of profit above $25,000 until a $1,000 buffer, then all above $26,000; none while a brake is on. Size cannot be raised by any test so far |
 | Ideas tried | 23 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed], F efficiency regime [not adopted], G don't-fight-the-first-break [killed], T one-hour check exit [killed], K first-break direction [killed], L lookback 2/5/10 [no improvement; A2 robust], W no-Friday [pending forward test], X exits: break-even / runner / target [no survivor], R regime detectors [no survivor], Q dead-Asia filter [Q3 killed on Feb check], M ignition-candle setup [no survivor], DD drawdown-goal re-scoring [Q3, Q1 to forward tag; F1 fails], N NY-fades-London second setup [N1 profitable both months, fails independence by 0.01; forward paper tag], Z bank-at-the-wall take-profit [almost never fires; closed], Y week-open side / Monday range [Y3 survives Jan, killed on Feb], V stop/size by volatility [no survivor; worse in Feb], E-time exit hour 10/11/13 [noon best in Jan, Feb and clean March], S wider stop 50/60/80 [no survivor; loses 14-53% of net R]) |
 | Variants tested | 56 (53 definitions incl. N1 N2 N3, Z1 Z2 Z3, Y1 Y2 Y3, V1 V2 V3, ET10 ET11 ET13, S50 S60 S80:A1 A2 A3, B1 B2 B3, C1, D1, E1, DE, H1 H2 H3, F1, G1, T1 T2, K1 K2, L1 L2 L3, W1, X1 X2 X3, R1 R2 R3, Q1 Q2 Q3, M1 M2 M3) + 3 re-scored for the drawdown goal (DD1=Q3, DD2=Q1, DD3=F1). A and B at the 3-variant cap; review round used its 3 |
-| Challenge attempts | 2. #1 PASSED both phases (no breach). #2 started Tue 2015-03-24, active |
+| Challenge attempts | #1 PASSED both phases (no breach). #2 cancelled by coach (3 trades). Now FUNDED (not an attempt) |
 | Last updated (real date) | 2026-11-16 |
 
 ## Results (costs on: 1.0 pip spread + 0.1 slippage)
@@ -17,7 +17,7 @@
 | LIVE Jan (01-12..01-30) A2 | 14 | 71% | +0.72 | +10.04 (+$1,257) | 1.33R | one big downtrend; 2 shock-day trades = +6.3R |
 | LIVE Feb (02-02..02-27) A2 | 20 | 55% | +0.23 | +4.64 (+$580) | 1.86R | box market; one coin-flip day = +2.14R |
 | LIVE total Jan-Feb | 34 | 62% | +0.43 | +14.69 (+$1,836) | 1.86R | |
-| LIVE March = FORWARD TALLY (unseen data, from 03-02) A2, in R = result / amount risked | 19 | 74% | +0.59 | +11.12 | 1.01R | ... 03-23 +2.52 (challenge #1 passed), 03-24 +0.71, 03-25 +0.89, 03-26 -0.50 (attempt #2 days 1-3). Losses: 03-02, 03-09, 03-12, 03-19, 03-26, all tagged valid. A2 forward kill test: 19 of 40 (21 to go). Paper tags: F1 17 trades +11.58R; Fridays 3/8, all winners; Q3 11 trades +4.00R (failing), Q1 18 trades +9.00R; N1: 4 trades, -2.34R |
+| LIVE March = FORWARD TALLY (unseen data, from 03-02) A2, in R = result / amount risked | 20 | 70% | +0.51 | +10.12 | 1.50R | ... 03-23 +2.52 (challenge passed), 03-24 +0.71, 03-25 +0.89, 03-26 -0.50, 03-27 -1.00 (FUNDED day 1, valid setup market disagreed). A2 forward kill test: 20 of 40 (20 to go). Paper tags: F1 17 trades +11.58R; Fridays 4/8: 3 wins 1 loss; Q3 11 trades +4.00R, Q1 19 trades +8.00R; N1: 5 trades, -3.34R |
 | Backtest Feb only (out-of-sample) A1 / A2 / A3 | 20 each | 50 / 55 / 40% | +0.18 / +0.23 / +0.00 | +3.60 / +4.64 / +0.10 | 2.2 / 1.9 / 3.1R | A2 = live exactly |
 | Backtest Feb only B1 / B2 / B3 | 13 / 14 / 13 | 54 / 57 / 54% | +0.32 / +0.34 / +0.23 | +4.10 / +4.79 / +2.98 | 1.1 / 1.7 / 1.0R | |
 | Backtest Feb only C1 (A2 + midpoint filter) | 13 | 38% | -0.08 | -1.04 | 1.5R | skipped 7 trades worth +5.68R: failing |
@@ -181,10 +181,15 @@
 - Kill lines: all three sizes alive; smallest size with >= 500 of 1,000 on the forward list = 0.75%. REHEARSAL ONLY: attempt #2 stays at 0.5% until the forward test completes, then re-run and let that run decide. If the forward test fails, size goes to 0.
 - Journal hygiene: when replacing the tally in a week file use the LAST "## Forward tally" (rindex); a first-match cut on 03-25 removed a section (restored from git).
 
-## Loss tags (running count, all live trades): valid setup, market disagreed 18 (-9.66R) | my mistake 0.
+## FUNDED survival test (journal/2015-funded-survival-test.md; kill lines S1-S3 committed before the run; bt/funded_sim.py)
+- 1,000 two-year reshuffles: at 0.50% my -5% stop ends trading in 0 (Feb realistic edge) / 0 (full list) / 1 (forward list) of 1,000; no breach even with brakes off on real-edge lists. Kill lines pass -> 0.50% STAYS.
+- If the edge is zero: stop reached in 655 of 1,000 (median day 231), breach 0 with brakes but 341 without; at -0.10R the stop comes after ~108 days. Worst case of the plan = lose 5% and stop; only if I obey the brake.
+- Expected over 2 years at 0.50%: my 80% is about $8,800 (Feb realistic edge) to about $22,000 (blend); about 1 losing month in 8 at the Feb edge.
+
+## Loss tags (running count, all live trades): valid setup, market disagreed 19 (-10.66R) | my mistake 0.
 
 ## Next step
-1. ATTEMPT #2 running (0.5%). When the next day (Fri 03-27, unseen Friday 4 of 8) is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `python sim.py advance --until DATE T07:00`; `./look.sh 3 0 9`; write the call in journal/2015-W13.md (attempt #2 section); `python trade_a.py buy|sell --risk 125`; TAG the result valid/mistake FIRST; then paper tags (F1, Q3/Q1 from look.sh, Friday, N1 via `python bt/ny_fade.py 2015-03-13 2100-01-01 --overlap | grep -A1 N1`); then the forward tally.
-2. Forward tests running: A2 kill test (19/40, +11.12R), F1 (19 days), Friday (3/8, all wins), Q3/Q1 drawdown tags, N1 (4 trades, -2.34R).
-3. Research rules: hypothesis + kill test committed first, max 3 variants, January = build, March lived days = clean check (uses: 1, exit time), February = reference only, inspiring days removed, everything counted. Each finished test earns the next day.
-Tools: look.sh, trade_a.py, bt/*.py (ab, ab_exit, ab_rule, ab_same, ab_score, regime, ignite, ny_fade, dd_goal, cost_stress, edge_compare, phase2_sim, last_stretch, start_weeks, pass_math, risk_math, review, loser_charts, entry_charts). Tests: `python -m pytest -q`.
+1. FUNDED, one live day at a time. When the next day (Mon 03-30; weekend gap possible) is released: `git fetch origin main && git merge --no-edit FETCH_HEAD`; `python sim.py advance --until DATE T07:00`; `./look.sh 3 0 9`; write the call in the week's funded journal (journal/2015-W14-funded.md); check brakes in FUNDED-TRACKER; `python trade_a.py buy|sell --risk 125`; TAG the result valid/mistake FIRST; update journal/FUNDED-TRACKER.md (daily log + status line; payout on the dates); paper tags (F1, Q3/Q1 from look.sh, Friday, N1 via `python bt/ny_fade.py 2015-03-13 2100-01-01 --overlap | grep -A1 N1`); forward tally. When replacing a tally in a file, cut at the LAST "## Forward tally".
+2. Forward tests running: A2 kill test (20/40, +10.12R) - when it completes re-run bt/reshuffle_breach.py and bt/funded_sim.py; F1 (20 days), Friday (4/8: 3W 1L), Q3/Q1, N1 (5 trades, -3.34R).
+3. Research rules: hypothesis + explicit kill lines committed first, max 3 variants, January = build, lived March+ days = clean check (uses: 1, exit time), February = reference only, inspiring days removed, everything counted. One honest test earns the next day.
+Tools: look.sh, trade_a.py, bt/*.py (ab, ab_exit, ab_rule, ab_same, ab_score, regime, ignite, ny_fade, dd_goal, cost_stress, edge_compare, phase2_sim, last_stretch, start_weeks, reshuffle_breach, funded_sim, pass_math, risk_math, review, loser_charts, entry_charts). Tests: `python -m pytest -q`.

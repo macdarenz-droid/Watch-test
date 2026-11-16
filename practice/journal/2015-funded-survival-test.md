@@ -24,3 +24,41 @@ If 0.25% also fails S1, I do not trade the funded account until the rule's forwa
 Nothing in this test can RAISE the size (0.75% is shown for comparison only).
 L4 and L5 are reported as the cost of being wrong about the edge: I expect my stop to end most of those runs - that is what it is for - and I want to know after how many days.
 My guess: 0.50% passes S2 and S3 easily and S1 with some room (a 5% drawdown from high-water needs roughly 14R of net losses with the half-size brake).
+
+# RESULTS (run after commit 0536d00). 1,000 reshuffled two-year runs (500 trading days) per cell. Sizing policies on my own results; variant count stays 56.
+
+| Trade list (drawn with replacement) | Risk | Breached the -10% line | Ended by my -5% stop | Alive after 2 years | Median payout requested over 2 years (my 80%) | Losing months | Median day my stop hit | Brakes OFF: breached |
+|---|---|---|---|---|---|---|---|---|
+| L1 full, 54 trades (+0.46R) | 0.25% | 0 | 0 | 1,000 | 55% of $25k ($11,080) | 2% | - | 0 |
+| | 0.50% | 0 | 0 | 1,000 | 112% ($22,358) | 2% | - | 0 |
+| | 0.75% | 0 | 2 | 998 | 168% ($33,528) | 2% | 221 | 0 |
+| L2 forward only, 20 trades (+0.50R) | 0.25% | 0 | 0 | 1,000 | 61% ($12,122) | 1% | - | 0 |
+| | 0.50% | 0 | 1 | 999 | 123% ($24,493) | 2% | 299 | 0 |
+| | 0.75% | 0 | 7 | 993 | 183% ($36,549) | 2% | 173 | 0 |
+| L3 February at realistic costs (+0.18R) | 0.25% | 0 | 0 | 1,000 | 22% ($4,448) | 12% | - | 0 |
+| | 0.50% | 0 | 0 | 1,000 | 44% ($8,772) | 13% | - | 0 |
+| | 0.75% | 0 | 6 | 994 | 64% ($12,821) | 13% | 343 | 0 |
+| L4 zero edge | 0.25% | 0 | 149 | 851 | 2% ($330) | 52% | 373 | 12 |
+| | 0.50% | 0 | 655 | 345 | 2% ($392) | 56% | 231 | 341 |
+| | 0.75% | 0 | 907 | 93 | 2% ($399) | 57% | 156 | 635 |
+| L5 -0.10R | 0.25% | 0 | 958 | 42 | 0% | 76% | 234 | 806 |
+| | 0.50% | 0 | 999 | 1 | 0% | 78% | 108 | 990 |
+| | 0.75% | 0 | 1,000 | 0 | 0% | 78% | 64 | 999 |
+"Breached with brakes on" is 0 everywhere by construction, as stated before the run - not a finding.
+
+## Kill lines, applied
+- S1 (February-at-realistic-costs list: my -5% stop in more than 100 of 1,000): 0.50% = 0 -> PASS.
+- S2 (full or forward list: my stop in more than 20 of 1,000): 0 and 1 -> PASS.
+- S3 (brakes OFF, February-at-realistic-costs list: breach in more than 10 of 1,000): 0 -> PASS. With a real edge the size does not lean on the brakes at all.
+=> 0.50% STAYS as the funded size. Nothing here can raise it; 0.75% is shown only for comparison (and it is the first size where my stop starts appearing on real-edge lists).
+
+## What the table says that I need to keep in front of me
+- If the edge is what February at realistic costs says (+0.18R), 0.50% keeps the account alive in 1,000 of 1,000 two-year runs, with about one losing month in eight,
+  and pays out roughly $8,800 to me over two years (about $370 a month). At the blended edge it is about $22,000. Somewhere in that range is "steady monthly profit".
+- If the edge is ZERO, the brakes are the account: without them 341 of 1,000 runs breach at 0.50%; with them none do, and my stop ends trading in 655 runs after a median of
+  231 trading days (11 months), having cost 5%. If the edge is slightly negative the stop arrives after about 108 days (five months).
+  So the honest worst case of this plan is: I lose 5% of the account over five to eleven months and stop. The account survives.
+- That worst case only holds if I obey the brake the day it triggers. The brake is now the most important rule I have, above the entry rule.
+- The earlier catch comes first: A2's forward test (20 of 40 trades). If the edge is zero or negative, that test should say so within the next 20 trades, months before the
+  account brake would.
+- Limits, as always: reshuffling assumes independent days and that 20-54 past results describe the future; real losing days cluster; a gap through a stop is not in the model.
