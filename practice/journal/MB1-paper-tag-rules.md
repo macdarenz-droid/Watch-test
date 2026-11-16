@@ -27,3 +27,4 @@ Source: journal/2015-review-losers-of-3-killed-ideas-and-idea-MB.md. PAPER ONLY.
 | Wed 2015-05-20 | +9.7 | UP | KEPT | -1.00 | 2, -0.24R, 1.00R | 3, +4.09R | 1 small / 1 large |
 | Thu 2015-05-21 | +63.6 | DOWN | removed | +0.00 | 2, -0.24R, 1.00R | 4, +4.09R | 1 small / 1 large |
 | Fri 2015-05-22 | +32.4 | DOWN | removed | +3.96 | 2, -0.24R, 1.00R | 5, +8.05R | 1 small / 1 large |
+| Mon 2015-05-25 | -28.7 | UP | removed | -0.35 | 2, -0.24R, 1.00R | 6, +7.70R | 1 small / 1 large |
