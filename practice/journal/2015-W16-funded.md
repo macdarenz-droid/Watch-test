@@ -78,6 +78,19 @@ Size note (coach, 04-13): Friday's +1.62R does not change the size. The risk-siz
      Paper tags: F1, FR1, Q3 and Q1 all traded (+1.48R each).
      END OF RELEASED DATA (clock Thu 04-16 01:00 London).
 
+- **Thu 04-16 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID WIN.
+  Bias: BUY - the signal flipped. 22:00 London closes: 04-15 1.06834 vs 04-10 1.06022 = +81 pips. First buy after six sell days.
+  Picture: two afternoon rallies in a row (Tue to 1.0707, Wed to 1.0702) with higher lows (1.0532, 1.0571). Just after the 22:00 close the night spiked to 1.0747 -
+  a new high for the week - and then gave ALL of it back in five hours: price 1.0678, on the night low (1.0673) and 5 pips under yesterday's close.
+  Asia range 74 pips (ratio 1.90): the liveliest night in weeks.
+  Levels: night low 1.0673; 1.0700 / Tue-Wed highs 1.0702-1.0707 now overhead; night high 1.0747. Below: Wed afternoon lows 1.0577-1.0583 are far outside the stop.
+  Notes from my tests, so I do not invent a skip: flip days earn about what other days earn (FL); "night against me" was not a warning (NM, backwards); yesterday closed
+  in its top third, with the buy - not a rejection day in my definition (that is about yesterday's 22:00-22:00 day; the failed spike is in TODAY's night).
+  Worry, honestly: I am buying under a failed spike, 70 pips off the night high, with five red hours behind me. If this is a mistake it is the rule's, not mine.
+  Paper tags: Q3 trade, Q1 trade. F1 / FR1 read from the engine after the day.
+  Funded check: tracker balance $25,420.36, high-water $25,420.36, drawdown 0.00% (brakes -3% = $24,657.75 / -5% = $24,149.34) -> full size allowed.
+  Plan: BUY 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$129 -> drawdown -0.5%. One trade, stop not moved.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
