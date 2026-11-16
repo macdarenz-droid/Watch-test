@@ -74,3 +74,5 @@ against 8% in the backtest, and the average loss is -0.79R against -0.46R - my l
 | Q1 dead-Asia tag (drawdown goal) | 34 (2 skips) | 22 | +12.54 | +0.37 | 2.00R | 85% of net, same DD |
 Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8) | 04-08 -1.00 (funded 9) | 04-09 +0.33 (funded 10) | 04-10 +1.62 (funded 11) | 04-13 +1.94 (funded 12) | 04-14 -0.62 (funded 13) | 04-15 +1.48 (funded 14) | 04-16 -1.00 (funded 15) | 04-17 +1.70 (funded 16) | 04-20 -1.00 (funded 17).
 Loss tags, all live trades: valid loss 25 (-15.53R) | my mistake 0. Process mistakes (funded): 3.
+
+## 04-21 research (before the next day): signal-agreement test UN1/UN2/UN3 (journal/2015-idea-UN-signal-agreement.md) - no survivor by the kill test. UN3 (skip when the 3-day and 5-day signals disagree) passes three lines and fails the profit line; question to the coach about a paper tag. Rule A2 and size 0.50% unchanged. Ideas 42, variants 113.
