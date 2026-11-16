@@ -87,3 +87,5 @@ Live minus backtest: -0.16R per trade (noise band +-0.46R) -> inside the noise. 
 Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 46 done, avg +0.34R, max DD 3.23R. Planning edge +0.18R: live is +0.16R above it.
 46 live trades is still a small book: the live average is known to about +-0.31R. What differs live: more full stops (24% vs 8%) and deeper average losses.
 Count only (no look before 40): live trades after a night (00:00->08:00) against my side, from 04-23: 4 (+2.28R).
+
+## 05-05 research (before the next day): one change to the size rule - when to restore full size after the -3% step, SZ1/SZ2/SZ3 by simulation on my own trades (journal/2015-idea-SZ-brake-restore.md) - no survivor: the rule of 04-27 stays; the half-size step is worth far more than I knew. Ideas 51, variants 140.

@@ -16,6 +16,7 @@ A raise needs BOTH the 40-trade forward test passed (33 done) AND a re-run of th
 ## 3. Daily stop, and the stops behind it (the two brakes are the ONLY size triggers - written out as a mechanical size rule on 04-27, journal/2015-W18-funded.md)
 - DAILY: one trade, one stop. The worst planned day is -1R = -$125 (-0.5%), ten times inside the firm's 5% daily line. After the trade is closed - win, loss or stop -
   I am done for the day. No re-entry, no "second chance", no afternoon trade. A day can only be worse than -1R through a gap past the stop; I cannot prevent that, the size covers it.
+- (Tested 05-05: restoring full size earlier, or dropping the half-size step, fails - the step cuts my own-stop odds from 49% to 15% at the planning edge. "Until a new high-water" stays.)
 - BRAKE 1: balance 3% below the high-water mark (now $24,657.75) -> half size ($62.50) until a new high-water.
 - BRAKE 2: balance 5% below the high-water mark (now $24,149.34) -> stop trading, full review, restart only with my coach.
 - RULE ALARM: PASSED 04-24 - 40 forward trades, +12.64R, +0.32R each, max drawdown 3.07R (lines: >= +0.10R, <= 8R). Next alarm look at 100 live trades, same lines.
@@ -46,7 +47,7 @@ account before the split; about one month in five negative at the planning edge;
 Where it comes from (04-17, 74 trades): both sides earn - sells +0.61R (47), buys +0.24R (27), each positive in all three periods - but 81% of the net R is sells in a market that
 fell 1,200 pips. The smaller side is known only to +-0.40R. I have not yet traded a rising market; +0.18R is about what the weaker side has earned.
 
-## 7. What is closed, so I do not reopen it on a bad day (50 ideas, 137 variants, none adopted)
+## 7. What is closed, so I do not reopen it on a bad day (51 ideas, 140 variants, none adopted)
 Entry filters from chart reading (no-chase, first break, night against me (twice), gap size (small and large), round numbers, flip day, rejection day, dead Asia, Friday): the losers I look at have more winning twins.
 Exits (tighter / wider / structural stop, break-even, trail, target, runner, scale-out, partial at +1R, add at +1R, stop on a candle close, late profit lock, 09:00 checks, other exit hours): 29 definitions, none beats noon. The hour 11:00-12:00 adds +0.18R per in-profit trade.
 Entry time and price (07:00, 09:00, +-1h, limit orders); lookback 2 / 5 / 10; second setups tried (Asia break, ignition candle, NY fade, range fade, night continuation, afternoon trade in the rule's direction, night fade). Size above 0.50%.
