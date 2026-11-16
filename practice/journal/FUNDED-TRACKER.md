@@ -35,6 +35,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | 29 | Wed 2015-05-06 | sell | 0.31 | +0.63 | +79.05 | 25,630.70 (sim 25,756.40) | 25,630.70 (new high) | 0.00% | +0.92 (May, from the log) | valid (win) | - |
 | 30 | Thu 2015-05-07 | buy | 0.31 | +0.07 | +8.99 | 25,639.69 (sim 25,765.39) | 25,639.69 (new high) | 0.00% | +1.00 (May, from the log) | valid (win) | - |
 | 31 | Fri 2015-05-08 | buy | 0.31 | +0.46 | +58.59 | 25,698.28 (25,349.14 after payout; sim 25,823.98) | 25,698.28 -> 25,349.14 (lowered by the payout) | 0.00% | +1.45 (May, from the log) | valid (win) | - |
+| 32 | Mon 2015-05-11 | buy | 0.31 | -1.00 | -127.10 | 25,222.04 (sim 25,696.88) | 25,349.14 | -0.50% | +0.45 (May, from the log) | valid setup, market disagreed | - |
 
 ## Monthly summary
 | Month | Trades | Wins | Net R | $ P&L | Worst day | Deepest drawdown | Valid / mistake tags | Payouts requested | My 80% |
@@ -62,4 +63,4 @@ Earlier record-keeping slips, for completeness (challenge stage, none changed a 
 pre-registration; worst losing run overstated as -2.17R (was -1.86R); a journal edit on 03-25 cut out a section (restored from git on 03-26).
 
 ## Status line (update every day)
-After funded day 31 (05-08) and payout 3 (figures from bt/daily_numbers.py 474.84 25349.14): tracker balance $25,349.14 (sim $25,823.98 minus $474.84 paid out) | high-water $25,349.14 | drawdown 0.00% (deepest so far -1.63%; SIZE RULE: trigger 1 half size at $24,588.67, trigger 2 stop at $24,081.68; account line $22,500) | funded total +6.59R in 31 trades (18 wins, 13 valid losses) | March +0.97R (3) | April +4.17R (22) | May MTD +1.45R (6 trades) | TRADE tags: 31 valid, 0 my mistake | PROCESS mistakes: 6 | payouts 3: $474.84 requested, $379.87 mine | next payout date Fri 05-22.
+After funded day 32 (05-11; figures from bt/daily_numbers.py 474.84 25349.14): tracker balance $25,222.04 (sim $25,696.88 minus $474.84 paid out) | high-water $25,349.14 | drawdown -0.50% (deepest so far -1.63%; SIZE RULE: trigger 1 half size at $24,588.67, trigger 2 stop at $24,081.68; account line $22,500) | funded total +5.59R in 32 trades (18 wins, 14 valid losses) | March +0.97R (3) | April +4.17R (22) | May MTD +0.45R (7 trades) | TRADE tags: 32 valid, 0 my mistake | PROCESS mistakes: 6 | payouts 3: $474.84 requested, $379.87 mine | next payout date Fri 05-22.
