@@ -85,6 +85,6 @@ VERDICT: NO SURVIVOR. The hypothesis "the night continues the prevailing directi
   test, with a cost stress in the kill lines; I am not starting it myself today.
 - It also explains two things in my own journal: why "the night went against me" was never a warning for A2 (NM test) - nights usually go against the last move, so it
   is the normal case - and why the trades after a day that "closed against me" were fine (RV test).
-- Sample, plainly: 76 nights per variant is the same size as my A2 book; an average of -0.21R with a spread of about 0.8R is roughly 2.3 standard errors from zero.
+- Sample, plainly: 76 nights per variant is the same size as my A2 book; an average of -0.21R with a spread of 0.61-0.64R per night (computed, not guessed: my first draft said "about 0.8R, 2.3 standard errors" from memory) is 2.8 to 3.0 standard errors from zero.
   Enough to kill "continuation". Not enough to bank a fade.
 Counts: ideas 43, variants 116.
