@@ -53,6 +53,18 @@ Size note (coach, 04-13): Friday's +1.62R does not change the size. The risk-siz
      Paper tags: F1, FR1, Q3 and Q1 all traded (-0.62R each).
      END OF RELEASED DATA (clock Wed 04-15 01:00 London).
 
+- **Wed 04-15 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID LOSS.
+  Bias: SELL - by 5 pips. 22:00 London closes: 04-14 1.06541 vs 04-09 1.06587 = -5 pips. Sixth day on the sell side; one more up-day like Tuesday flips it.
+  Picture: Tuesday afternoon rallied 175 pips from 1.0532 to 1.0707 and closed at 1.0654, in the upper third of its range. The night gave back 30 pips and went
+  sideways, 1.0617-1.0647; price 1.0633. Asia range 34 pips (ratio 0.87).
+  Levels: night low 1.0617; night high 1.0647; Tue high 1.0707; Tue low 1.0532.
+  Notes from my own tests, so I do not invent a reason to skip: a tiny gap is not a weak signal (GAP test: the small-gap days were winners); "yesterday closed
+  against me" mornings earned +0.60R on average (RV test); it is NOT a rejection day (Tuesday did not make the 3-day low). The rule says sell. I sell.
+  Worry, honestly: after Tuesday's rally this feels like selling a market that has turned. That feeling is exactly what the RV test measured, and it was wrong 7 times in 11.
+  Paper tags: Q3 trade, Q1 trade. F1 / FR1 read from the engine after the day.
+  Funded check: tracker balance $25,234.98, high-water $25,311.86, drawdown -0.30% (brakes -3% = $24,552.50 / -5% = $24,046.27) -> full size allowed.
+  Plan: SELL 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$129 -> drawdown -0.8%. One trade, stop not moved.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
