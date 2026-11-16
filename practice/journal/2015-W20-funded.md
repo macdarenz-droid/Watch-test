@@ -166,6 +166,12 @@ Coach, 05-11: quality over count - the next test starts with ten charts looked a
       of the balance on the then history. Today no second trade exists (MB1 is paper), so the rule sizes nothing.
   Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
   Worry: buying 15 pips under yesterday's high after a 180 pip day. Stretched signals have been my best; written, not a rule.
+  08:00 London Thu: pre-entry hour 1.13628-1.14222 = 59.4 pips -> PH2 paper: LIVELY, paper half size (decided before the order). Price 1.14114: the hour ran 34 pips away from me, above yesterday's high; night with me by 58.8 pips (not counted as against). I am buying after a spike, like 04-24 and 05-11, both full stops. The rule has no skip. Order: BUY 0.31, stop 40 pips below the bid (about 1.13714).
+  08:15 London: filled BUY 1.14125, stop 1.13714 (41.1 pips from the fill). First candle high 1.14286, close 1.14221. Call for the hour: none that matters; 1.1422 (the pre-entry high) is the level. Hands off.
+  09:00 London: first hour best +18.1, worst -37.6 (low 1.13749, 3.5 pips from the stop), last -22.3 pips. The spike is being sold. I want to do nothing and that is the plan: the stop is where it is, the clock is noon. No call.
+  10:00 London: second hour best +4.6, worst -33.5, last -9.1 pips. Survived twice within 8 pips of the stop. A TD-style tighter stop (25 pips from 09:00) would have taken me out at -0.63R in this hour: noted, already tested, not a rule. Hands off.
+  11:00 London: third hour best +22.4 (new high 1.14349), worst -14.0, last +7.6 pips. Back above my entry. One hour left; close at 12:00 whatever it shows.
+  12:05 London: closed at 12:00 @1.14336, +$65.41 (from the trade list). MB1 paper (forward day 2), written before 13:25: open 08:00 1.14114, open 12:00 1.14337 -> morning UP by 22.3 pips (large morning) -> only an UP break of the 12:00-13:25 box counts. Result from the tool tomorrow.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
