@@ -75,7 +75,12 @@
 - Chosen: 0.75% (cushion over speed): ~2.3 months at +0.23R. 1.0% is the smallest size that makes 2 months on expectation but its safety depends on an edge I cannot prove.
 - Correction: live max closed drawdown is 1.86R (3 losses, 02-18..02-20), not 2.17R as I wrote in W08/W09 (I had added four losers that were not consecutive).
 
+## Loss tags and next change (journal/2015-loss-tags-and-next-change.md)
+- 13 losses: 13 "valid setup, market disagreed" (-6.03R), 0 "my mistake". No pattern lost in BOTH months -> no rule change allowed; plan v2 stands.
+- Only repeat-loss group: Fridays (last 5 in a row lost, -1.80R; but Jan Fridays +5.35R). Next change to test = "no Friday trade" (idea W, would be variant 20): WRITTEN, NOT RUN.
+  Forward-only kill test on 8 unseen Fridays (net <= 0R, >= 5 losers, Mon-Thu avg > 0, still <= 0 without the worst Friday). Not testable on Jan-Feb (result already known from my trade list).
+
 ## Next step
-1. STOPPED after risk math. No new runs, no new candles until told. Traded rule is still A2 frozen at $125.
-2. When unseen data arrives: `git fetch origin main && git merge --no-edit FETCH_HEAD`; trade A2 per PLAN v2 sizing ($125 until phase 1 resolves, then $187.50); paper-tag F1 on every signal day; judge gate 2 only after 40 new signal days.
+1. STOPPED after loss tags. No new runs, no new candles until told. Traded rule is still A2 frozen at $125.
+2. When unseen data arrives: `git fetch origin main && git merge --no-edit FETCH_HEAD`; trade A2 per PLAN v2 sizing ($125 until phase 1 resolves, then $187.50); paper-tag F1 and Fridays (idea W) on every signal day; judge gate 2 only after 40 new signal days.
 Tools: look.sh, trade_a.py, bt/ideas.py [names] [--since=YYYY-MM-DD] (careful: with no names it runs EVERY variant on all months), bt/review.py, bt/loser_charts.py. Tests: `python -m pytest -q`.
