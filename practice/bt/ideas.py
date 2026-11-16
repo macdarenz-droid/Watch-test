@@ -23,7 +23,7 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None):
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
     _a = m5[(m5.time.dt.hour < 7) & (m5.time.dt.date == m5.day)]; _g = _a.groupby('day'); arng = (_g['high'].max() - _g['low'].min()) / PIP   # Asia 00-07 range per day, pips
@@ -88,7 +88,13 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                 if go:
                     # market order queued now fills at THIS bar's open via on_bar below
                     px = b.open
-                    s = px + side * -sl * PIP; t = px + side * tp * PIP if tp else None
+                    sl_d, mult = sl, 1.0       # idea V: stop or size by recent volatility; vol = ("atr", k) | ("yday", k) | ("size", ref)
+                    if vol is not None:
+                        i = dlist.index(d); dr = [(hi[x] - lo[x]) / PIP for x in dlist[max(0, i-5):i]]
+                        if vol[0] == "atr" and i >= 5: sl_d = min(70, max(25, vol[1] * sum(dr) / 5))
+                        elif vol[0] == "yday" and i >= 5: sl_d = min(70, max(25, vol[1] * dr[-1]))
+                        elif vol[0] == "size" and i >= 5: mult = min(1.5, max(0.6, vol[1] / (sum(dr) / 5)))
+                    s = px + side * -sl_d * PIP; t = px + side * tp * PIP if tp else None
                     if wall is not None:      # idea Z: take profit 2 pips in front of a standing N-day extreme (wall = (N days, min age in days))
                         N, minage = wall; i = dlist.index(d)
                         if i >= N:
@@ -99,7 +105,7 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                             else:
                                 w = min(lo[x] for x in win); age = i - max(k for k in range(i-N, i) if lo[dlist[k]] == w); cand = w + 2 * PIP
                                 if age >= minage and px - cand >= 10 * PIP: t = cand
-                    oid = acct.market(side, round(RISK / (sl * 10), 2), sl=s, tp=t, tag=str(d)); done = True
+                    oid = acct.market(side, round(mult * RISK / (sl_d * 10), 3), sl=s, tp=t, tag=str(d)); done = True
             if hourcheck is not None and acct.positions and h == entry_h + 1 and b.time.minute == 0:   # idea T: one-hour check at this bar's open
                 p = acct.positions[0]; pips = ((b.open - p.entry) if p.side > 0 else (p.entry - (b.open + acct.spread))) / PIP
                 if pips < hourcheck: acct.close()
@@ -159,6 +165,9 @@ VARIANTS = {
  "Y1": dict(entry_h=8, exit_h=12, sl=40, weekbias="dir"),        # idea Y: side of the week's opening price
  "Y2": dict(entry_h=8, exit_h=12, sl=40, weekbias="monrange"),   # idea Y: Tue-Fri, outside Monday's range
  "Y3": dict(entry_h=8, exit_h=12, sl=40, weekbias="agree"),      # idea Y: A2 only when it agrees with the week-open side
+ "V1": dict(entry_h=8, exit_h=12, sl=40, vol=("atr", 0.30)),    # idea V: stop = 0.30 x 5-day avg daily range (25-70 pips)
+ "V2": dict(entry_h=8, exit_h=12, sl=40, vol=("yday", 0.32)),   # idea V: stop = 0.32 x yesterday's range (25-70 pips)
+ "V3": dict(entry_h=8, exit_h=12, sl=40, vol=("size", 131)),    # idea V: 40 pip stop, size x 131 / 5-day avg range (0.6-1.5)
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
