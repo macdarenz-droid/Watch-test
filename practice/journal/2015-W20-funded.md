@@ -183,3 +183,8 @@ Counts only: live trades after a night (00:00->08:00) against my side, from 04-2
 (journal/2015-review-losers-of-3-killed-ideas-and-idea-MB.md), then idea MB pre-registered (K1-K8) and run once: MB1 (box break only with the morning) passes all
 eight lines on the set without the inspiring days (30 trades, +0.695R +-0.65); MB2 and MB3 killed. MB1 goes on PAPER (journal/MB1-paper-tag-rules.md) with five
 written reasons not to trust it. A2 and the live size: unchanged. Counts: 57 ideas, 156 variants.
+
+## 05-13 research after funded day 34 (coach: check the daily-loss cushion): idea DC pre-registered and run once (journal/2015-idea-DC-daily-cushion.md).
+A stop filled at the worst price of its minute: worst -1.33R (pass). The biggest morning minute in history (81.7 pips) on my stop: -3.07R = 1.54% of the balance -
+my own 1.25% line FAILS; the firm's 5% daily limit still has more than 3x cushion. Size unchanged (no trigger); proposal written for the coach.
+MB1's possible size cut to about 0.09% in its rules. Counts: 58 ideas, 159 variants.

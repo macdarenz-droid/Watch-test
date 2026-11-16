@@ -12,6 +12,9 @@ Source: journal/2015-review-losers-of-3-killed-ideas-and-idea-MB.md. PAPER ONLY.
 - To pass at 100: avg >= +0.15R; at 3.0 pip spread and 1.0 slippage >= +0.05R; max DD <= 6R; kept minus removed >= +0.20R; positive without its best 3.
 - Early close: forward DD of the kept trades above 6R at any time; or net below -3R after the first 20 kept trades; or at 40 kept trades an average below 0.
 - A pass is NOT a live trade. It is a proposal to the coach: quarter size (0.25%), second trade of the day, open risk checked against the 3% rule.
+- Added 05-13 from idea DC (K3 failed; written into DC's pre-registration before its result; it only tightens): the size in any proposal must keep
+  'A2 worst day + MB1 worst day' <= 2.0% of the balance on the then history (bt/day_cushion.py). On 05-13 that means about 0.09%, not 0.25%.
+- Forward days needed (coach 05-13): about 285 trading days for 100 kept trades at the history rate of 0.35 a day (roughly mid 2016); 40 kept about late October 2015.
 - A few good paper days change nothing. A bad A2 week changes nothing. No re-scoring, no new variant of it while the tag runs.
 ## Forward tally (from Wed 2015-05-13)
 | date | morning (pips) | break | kept / removed | R | kept total (n, R, DD) | removed total (n, R) | small / large morning (kept) |
