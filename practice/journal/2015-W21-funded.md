@@ -52,6 +52,31 @@ Coach, 05-18: no more risk-plan tests for now; the next backtest is about findin
      Night count: against me by 23.2 pips -> live trade 12 of the count (running: 12 trades, +1.93R). 10-day-trend paper line: trend UP: 9 trades, -1.69R.
      END OF RELEASED DATA (clock Tue 05-19 01:00 London).
 
+- **Tue 05-19 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID LOSS. Figures from `python bt/call_numbers.py 2015-05-19`, `python bt/streak_check.py 2015-05-19` and the bar prints.
+  D1 (London days): Thu 05-14 close 1.14097 (0.66); Fri 05-15 high 1.14669 close 1.14484 (0.87); Mon 05-18 high 1.14492 low 1.12987 close 1.13141 (0.10, range
+      150.5): after my noon the price fell 115 pips, closed at the bottom and made the 3-day low. A full reversal day after four rising closes.
+  H4 (UTC bars): Mon 12:00 bar 1.14054 -> 1.13541; 16:00 bar low 1.12987; tonight 00:00 bar low 1.12853; 04:00 bar 1.12988-1.13210.
+  H1: the night (00:00-07:00 London): open 1.13150, high 1.13264, low 1.12853, last 1.13162: range 41.1 pips (ratio 1.02), net +1.2 pips - down to a new low and back, flat.
+  M15: four small candles 1.13015-1.13210; last close 1.13162.
+  Bias: SELL. 22:00 London closes: 05-18 1.13141 vs 05-13 1.13536 = -39 pips (3-day gap -39.5). The signal FLIPPED to sell (flip day). Gap / ADR5 0.27: a small signal.
+  UN3 PAPER TAG (never live): 5-day gap +160 pips -> BUY; 3-day says SELL -> DISAGREE: paper SKIPS. Forward day 21, disagree day 6 of 30. Live trade at full size.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 13.
+  MB1 PAPER TAG (never live, forward day 5): morning direction written at 12:00, before 13:25.
+  Levels: night low 1.12853; Mon low 1.12987; night high 1.13264; Mon afternoon 1.13589.
+  Rejection-day check: for a sell, Monday would need the 3-day low (True) AND a close in the top third; it closed at 0.10. Not a rejection day.
+  10-day-trend paper line: UP (1.13141 vs 05-04 1.11454); the sell is against it.
+  SIZE RULE: tracker balance $24,987.68, high-water $25,349.14, drawdown -1.43%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
+  THE STREAK AGAINST THE BACKTEST (coach 05-19: check it and write the number down). Where I am: 2 losses in a row; 4 full stops in the last 6 trades; 2.85R
+      under my equity high (-1.00 -1.00 +0.64 +0.51 -1.00 -1.00). The worst of the live record so far: 6 losses in a row and a 3.23R drawdown (April).
+      What "normal worst" is for 56 trades, from 20,000 reshuffles (figures from the print):
+      - backtest list (Jan-Feb, 39 trades): longest losing run median 3, 95th percentile 6; max drawdown median 2.03R, 95th percentile 3.72R.
+      - all 95 A2 trades (the fairer list, it has the live stops in it): longest run median 4, 95th percentile 6; max drawdown median 3.09R, 95th percentile 5.92R.
+      THE NUMBER: up to 6 losses in a row and up to about 5.9R of drawdown (about 3% of the account at 0.50%) is inside the normal range of my own trades.
+      Today I am at 2 in a row and 2.85R: under the MEDIAN worst case. Nothing unusual has happened. Outside the range would be: 7 or more in a row, or more
+      than 5.9R under the high. The half-size trigger (3% under the high-water) sits almost exactly on that 95th percentile: the plan already has this number in it.
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
+  Worry: a small signal on a flip day, against UN3 and the 10-day trend, after two stops. SG and FL say neither small signals nor flip days are worse. I take the trade.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
