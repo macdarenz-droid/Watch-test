@@ -22,6 +22,7 @@ For the record, the trend direction today is the same under either reading.
 | F3 | Tue 03-31 08:00 London | sell | 0.31 | 1.07858 | 1.08259 | 1.07401 (12:00 London) | +1.14 | +$141.67 | VALID (win) | call written before the entry bar; wall case logged; F1 SKIP, Q3 trade, Q1 trade |
 | F4 | Wed 04-01 08:00 London | sell | 0.31 | 1.07618 | 1.08021 | 1.07581 (12:00 London) | +0.09 | +$11.47 | VALID (scratch win) | was +43 pips at 09:55 London, gave it back; F1, FR1, Q3, Q1 traded; N1 no trade |
 | F5 | Thu 04-02 08:00 London | sell | 0.31 | 1.08092 | 1.08492 | 1.08191 (12:00 London) | -0.25 | -$30.69 | valid setup, market disagreed | sold after the 07-08 hour broke 1.0800; 35 pips against at worst; F1, FR1, Q3, Q1 traded; N1 no trade |
+| F6 | Fri 04-03 08:00 London | buy | 0.31 | 1.08826 | 1.08414 | 1.08856 (12:00 London) | +0.07 | +$9.30 | VALID (scratch win) | Good Friday, dead morning; Friday tag 5/8 (win); F1, FR1, Q3, Q1 all SKIP; N1 traded: -1.00R |
 
 ## Daily calls
 - Mon 03-30 08:00 London (07:00 UTC) @1.0866. Fri: stopped me at 11:23, ran to 1.0949, closed 1.0887. Sunday opened flat; Asia 29 pips, slid to 1.0855 at midnight and has
@@ -144,19 +145,6 @@ Lesson kept: banking half of the best point is the price of staying in for the b
      Paper tags: F1 and FR1 traded (-0.25R each); Q3 and Q1 traded. N1: move +20 pips at 13:00 London, under 30 -> no trade. Friday n/a.
      END OF RELEASED DATA (clock Fri 04-03 01:00 London). Tomorrow: unseen Friday 5 of 8 - Good Friday, and the first Friday of the month.
 
-## Forward tally of the rule (unseen data only, from 03-02)
-| Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
-|---|---|---|---|---|---|---|
-| A2 as traded (R = result / amount risked) | 24 | 17 | +11.94 | +0.50 | 1.50R | kill test: 40 trades, avg >= +0.10R, DD <= 8R (24 of 40 done) |
-| F1 paper tag | 20 (4 skips) | 15 | +12.26 | +0.61 | 1.01R | gate 2 at 40 signal days (24 done); NOT robust: needs FR1 within 1R of A2 at day 40 |
-| FR1 (tracked only to judge F1) | 18 (6 skips) | 13 | +8.95 | +0.50 | 1.03R | 3.1R behind A2 |
-| Q3 dead-Asia tag (drawdown goal) | 14 (10 skips) | 9 | +4.98 | +0.36 | 1.01R | 42% of A2's net (needs 85%) |
-| Q1 dead-Asia tag (drawdown goal) | 23 (skip 03-06) | 16 | +9.82 | +0.43 | 1.50R | 82% of net, same DD |
-| Friday tag (idea W) | 4 Fridays | 3 | +3.26 | - | - | 4 of 8 unseen Fridays: 3 winners, 1 loser |
-| N1 paper tag (NY fade; London time from 03-30) | 6 (16 days) | 2 | -3.27 | -0.55 | 3.34R | judge at 20 trades AND 8 A2-losing days. A2-losing days so far: 4; N1 on them: -2.02R |
-Days: ... 03-30 +0.84 (funded 2) | 03-31 +1.14 (funded 3) | 04-01 +0.09 (funded 4) | 04-02 -0.25 (funded 5).
-Loss tags, all live trades: valid setup, market disagreed 20 (-10.91R) | my mistake 0. Process mistakes (funded): 1.
-
 ## Daily calls (Fri) - written at 07:00 London, before the entry bar
 - Fri 04-03 07:00 London @1.0881. Thu: squeezed up 150 pips after my exit (1.0750 -> 1.0905), closed 1.0880. Asia 19 pips - dead flat, drifting up 15. Good Friday: much of
   Europe is closed, and it is the first Friday of the month (US jobs report 13:30 London). I expect a thin, waiting morning.
@@ -170,3 +158,29 @@ Loss tags, all live trades: valid setup, market disagreed 20 (-10.91R) | my mist
   All four filters would sit this one out. FRIDAY TAG: unseen Friday 5 of 8. N1 yesterday: no trade.
   Funded check: balance $25,105.09, high-water $25,135.78, drawdown -0.12% -> full size allowed.
   Plan: BUY 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case -$129. Flat for the long weekend.
+  -> Fri result, TAG FIRST: VALID (not a mistake). Checked: call written and committed at 07:00 London, before the entry bar; entry 08:00 London, 0.31 lots, stop 40 pips
+     (41.2 from the fill), BUY per the trend rule (47 pip gap), one trade, closed at 12:00 London, stop never moved. Process on the trade: clean.
+     Result: bought 1.08826, closed @1.08856, +$9.30 = +0.07R. Funded balance $25,114.39 (+0.46%), drawdown -0.09% from high-water. Flat for the long weekend.
+     What happened: a holiday morning as expected: 25 pip range, 13 pips against at worst, noon exit +3 pips. At 13:30 London the US jobs report moved it 144 pips in one hour
+     (1.0870 -> 1.1014) and it closed the week near 1.0977. I was flat 90 minutes before.
+     Paper tags: all four filters skipped today (F1, FR1, Q3, Q1) and miss +0.07R. Friday tag 5 of 8: winner (4 wins, 1 loss). N1: morning +33 pips -> sold the fade at 13:00 London,
+     straight into the jobs spike: -1.00R (7 trades, -4.27R).
+     END OF RELEASED DATA (clock Fri 04-03 22:00 London, weekend).
+
+## WEEK 14 SUMMARY (funded days 2-6)
+5 trades, 4 wins (two scratches), +1.89R, +$236.84. One loss (Thu -0.25R), tagged valid setup, market disagreed. Balance $25,114.39, high-water $25,135.78, drawdown -0.09%.
+Trade tags to date: 6 valid, 0 my mistake. Process mistakes: 2 (P1 DST slip on Monday; P2 today, see tracker - a research slip, not a trading one).
+
+## Forward tally of the rule (unseen data only, from 03-02)
+| Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
+|---|---|---|---|---|---|---|
+| A2 as traded (R = result / amount risked) | 25 | 18 | +12.01 | +0.48 | 1.50R | kill test: 40 trades, avg >= +0.10R, DD <= 8R (25 of 40 done) |
+| F1 paper tag | 20 (5 skips) | 15 | +12.26 | +0.61 | 1.01R | gate 2 at 40 signal days (25 done); NOT robust: needs FR1 within 1R of A2 at day 40 |
+| FR1 (tracked only to judge F1) | 18 (7 skips) | 13 | +8.95 | +0.50 | 1.03R | 3.1R behind A2 |
+| Q3 dead-Asia tag (drawdown goal) | 14 (11 skips) | 9 | +4.98 | +0.36 | 1.01R | 41% of A2's net (needs 85%) |
+| Q1 dead-Asia tag (drawdown goal) | 23 (2 skips) | 16 | +9.82 | +0.43 | 1.50R | 82% of net, same DD |
+| Friday tag (idea W) | 5 Fridays | 4 | +3.33 | - | - | 5 of 8 unseen Fridays: 4 winners, 1 loser. "No Friday" needs >= 5 losers of 8: now impossible -> KILLED early (3 Fridays cannot change it) |
+| N1 paper tag (NY fade; London time from 03-30) | 7 (17 days) | 2 | -4.27 | -0.61 | 4.27R | judge at 20 trades AND 8 A2-losing days; its own limit is a 4R drawdown: BREACHED (4.27R) -> KILLED now |
+Days: ... 03-31 +1.14 (funded 3) | 04-01 +0.09 (funded 4) | 04-02 -0.25 (funded 5) | 04-03 +0.07 (funded 6).
+Loss tags, all live trades: valid setup, market disagreed 20 (-10.91R) | my mistake 0. Process mistakes (funded): 2.
+Two paper tags end today by their own pre-registered lines: idea W "no Friday" (cannot reach 5 losers in 8) and N1 "NY fade" (drawdown past its 4R limit; 2 wins in 7).
