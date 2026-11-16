@@ -66,7 +66,7 @@ From May: a number written from memory and corrected later is logged as a proces
 | UN3 paper tag (never live; rules: journal/UN3-paper-tag-rules.md; forward from 04-21) | 10 days, 2 disagree days of 30 | - | A2 on the disagree days -1.02R; on the agree days +2.00R | - | - | first look only at 30 disagree days AND 200 forward days |
 | PH2 paper tag (never live; rules: journal/PH2-paper-tag-rules.md; forward from 05-01) | 2 days, 2 lively days of 60 | - | A2 on the lively days -0.56R (1 full-stop morning); PH2 -0.28R | - | - | first look only at 200 forward days AND 60 lively days |
 Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8) | 04-08 -1.00 (funded 9) | 04-09 +0.33 (funded 10) | 04-10 +1.62 (funded 11) | 04-13 +1.94 (funded 12) | 04-14 -0.62 (funded 13) | 04-15 +1.48 (funded 14) | 04-16 -1.00 (funded 15) | 04-17 +1.70 (funded 16) | 04-20 -1.00 (funded 17) | 04-21 -0.04 (funded 18) | 04-22 -0.02 (funded 19) | 04-23 -1.00 (funded 20) | 04-24 -1.00 (funded 21) | 04-27 -0.16 (funded 22) | 04-28 +1.61 (funded 23) | 04-29 +0.32 (funded 24) | 04-30 +1.83 (funded 25) | 05-01 +0.44 (funded 26) | 05-04 -1.00 (funded 27).
-Loss tags, all live trades: valid loss 31 (-18.75R) | my mistake 0. Process mistakes (funded): 3.
+Loss tags, all live trades: valid loss 31 (-18.75R) | my mistake 0. Process mistakes (funded): 4.
 
 ## LIVE vs BACKTEST, running (coach 04-20; `python bt/live_vs_bt.py END`; updated after every live day; the live column is the real out-of-sample)
 As of live day Mon 2015-05-04:
@@ -89,3 +89,4 @@ Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 46 done, avg +0.34R, m
 Count only (no look before 40): live trades after a night (00:00->08:00) against my side, from 04-23: 4 (+2.28R).
 
 ## 05-05 research (before the next day): one change to the size rule - when to restore full size after the -3% step, SZ1/SZ2/SZ3 by simulation on my own trades (journal/2015-idea-SZ-brake-restore.md) - no survivor: the rule of 04-27 stays; the half-size step is worth far more than I knew. Ideas 51, variants 140.
+Process mistake P4 (05-05): two counts written from memory in the size-rule note, corrected the same hour (first case under the May rule).

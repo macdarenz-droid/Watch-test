@@ -12,7 +12,7 @@ Coach, 05-04: "5 kills in a row on new filters - next test go back to your best 
   for months while the rule is working again - or it could be exactly what keeps the stop from being reached. I do not know.
 
 ## Why this has to be a simulation, said plainly
-In 88 lived trading days the account has never been 3% under its high (deepest: 1.63%). The real sequence of my trades cannot test a rule that has never fired.
+In my 80 live trading days (27 of them on the funded account) the account has never been 3% under its high (funded deepest: 1.63%). [Corrected 05-05: I first wrote "88 lived trading days" from memory; my trade log has 80. Logged as process mistake P4.] The real sequence of my trades cannot test a rule that has never fired.
 So this is 2,000 two-year reshuffles of my own trade results - the same tool as the size tests - comparing restore rules on the SAME shuffled sequences.
 A reshuffle is not new evidence about the edge; it is arithmetic on a rule under stated assumptions. I count it as one idea with three variants.
 
@@ -88,5 +88,5 @@ thin I am at half size on 30% of all days, so the rule matters much more than I 
   in which to notice. That is what a brake is for.
 - An uncomfortable number to keep in view: at the planning edge I would spend 30% of my days at half size. If the live edge drifts down toward +0.18R, "0.50%" is
   in practice closer to 0.42% on average. Income expectations in the plan should be read with that in mind.
-- Limits: reshuffles assume independent days drawn from the lists I have; the lists are 46 and 87 trades; the payout policy is modelled every 10 trading days.
+- Limits: reshuffles assume independent days drawn from the lists I have; the lists are 46 (live) and 85 (A2 engine) trades [first written as 87, from memory; P4]; the payout policy is modelled every 10 trading days.
 Counts: ideas 51, variants 140.
