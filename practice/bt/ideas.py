@@ -8,7 +8,9 @@ RISK = 125.0  # $ per trade = 0.5% of 25k
 
 def days(m5):
     """trading day = UTC date after shifting +2h (Sunday evening belongs to Monday)."""
-    m5 = m5.copy(); m5["day"] = (m5["time"] + pd.Timedelta(hours=2)).dt.date
+    m5 = m5.copy(); t = m5["time"] + pd.Timedelta(hours=2)
+    t = t + pd.to_timedelta((t.dt.weekday == 6).astype(int), unit="D")   # any Sunday bar belongs to Monday (fix: a 21:00 Sunday bar made a fake day)
+    m5["day"] = t.dt.date
     return m5
 
 def trend_map(m5, look=3):
@@ -20,8 +22,9 @@ def trend_map(m5, look=3):
         elif i >= 2: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None):
     tr = trend_map(m5, look); acct = Account(); risk_of = {}
+    hi = m5.groupby('day')['high'].max(); lo = m5.groupby('day')['low'].min(); dlist = list(hi.index)
     for d, g in m5.groupby("day"):
         if d not in tr or g["time"].iloc[0].weekday() == 6 and len(g) < 100: continue
         side = tr[d]; done = False
@@ -35,6 +38,9 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3):
                 elif mode == "break" and len(asia):   # previous bar closed beyond Asia range, with trend
                     prev = g[g.time < b.time].iloc[-1]
                     go = prev.close < asia.low.min() if side < 0 else prev.close > asia.high.max()
+                if go and midfilter:   # idea C: only trade on the trend side of yesterday's range midpoint
+                    y = dlist[dlist.index(d) - 1]; mid = (hi[y] + lo[y]) / 2
+                    if (side < 0 and b.open > mid) or (side > 0 and b.open < mid): go = False; done = True
                 if go:
                     # market order queued now fills at THIS bar's open via on_bar below
                     px = b.open
@@ -43,6 +49,7 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3):
             if acct.positions and h >= exit_h: acct.close()
             acct.on_bar(b)
     t = pd.DataFrame(acct.trades)
+    if not t.empty and since: t = t[t.entry_time >= pd.Timestamp(since, tz="UTC")].reset_index(drop=True)
     if t.empty: print(name, "no trades"); return t
     t["R"] = t.pnl / RISK
     eq = t.R.cumsum(); dd = (eq.cummax().clip(lower=0) - eq).max()
@@ -57,8 +64,11 @@ VARIANTS = {
  "B1": dict(mode="break", exit_h=12, sl=30),              # Asia range break with trend
  "B2": dict(mode="break", exit_h=16, sl=30, tp=45),
  "B3": dict(mode="break", exit_h=12, sl=40),
+ "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
     m5 = days(history("M5"))
     print("history:", m5.time.iloc[0], "->", m5.time.iloc[-1])
-    for k in (sys.argv[1:] or VARIANTS): run(k, m5, **VARIANTS[k])
+    args = [a for a in sys.argv[1:] if not a.startswith("--since=")]
+    since = next((a.split("=")[1] for a in sys.argv[1:] if a.startswith("--since=")), None)
+    for k in (args or VARIANTS): run(k, m5, since=since, **VARIANTS[k])
