@@ -33,3 +33,26 @@ Check (March lived days) - the candidate passes only if ALL:
   C3. max drawdown <= A2's.
 A pass earns a FORWARD PAPER TAG only; the funded entry stays a market order at 08:00 London.
 My guess: LE5 gains a little on the dip days and loses a little on the runaway days - about a wash; LE10x misses the best days and fails B2 badly; LE10 in between. No survivor.
+
+# RESULTS of idea LE (run after commit 21caf99). LE5/LE10/LE10x = variants 63/64/65; ideas 26. Costs on, $125 risk, London time (bt/limit_entry.py).
+
+## Build - January (19 signal days)
+| Entry | Trades taken | Win rate | Avg R per trade | Avg R per signal day | Net R | Max DD | Full stops |
+|---|---|---|---|---|---|---|---|
+| A2: market order at 08:00 (before) | 19 | 74% | +0.78 | +0.784 | +14.89 | 1.34R | 2 |
+| LE5: limit 5 pips better, else market at 08:30 | 19 | 79% | +0.71 | +0.712 | +13.52 | 1.31R | 2 |
+| LE10: limit 10 pips better, else market at 08:30 | 19 | 79% | +0.73 | +0.727 | +13.81 | 1.26R | 2 |
+| LE10x: limit 10 pips better, else no trade | 12 | 67% | +0.70 | +0.444 | +8.44 | 1.26R | 2 |
+
+## Kill lines, applied
+- B1 (avg R per signal day at least +0.05R above A2): LE5 -0.07, LE10 -0.06, LE10x -0.34 -> all fail.
+- B2 (net R at least A2's): 13.52, 13.81, 8.44 against 14.89 -> all fail.
+=> NO SURVIVOR. The three variants are closed. As written beforehand, March was NOT run for this idea (clean-month uses stay at 2).
+
+## What it says
+- The better price is real on the days it fills, and it costs more than it gives: the days when price never comes back are the big ones, and on those the limit versions either
+  enter half an hour later at a worse price (LE5, LE10) or miss the day entirely (LE10x: seven of nineteen days missed, including winners worth 6.5R).
+- Both stop-outs stay stop-outs with any entry: a few pips of better price do not save a trade that goes 40+ against.
+- The win rate goes UP (74% -> 79%) while the profit goes DOWN. A nice illustration of why I do not judge a rule by win rate.
+- Same conclusion as the exit tests from the other end: paying the spread at 08:00 London sharp is part of the edge. Entry stays a market order.
+- Counts: ideas 26, variants 65.
