@@ -135,3 +135,8 @@ Normal worst for 56 trades (bt/streak_check.py 2015-05-19, all 95 A2 trades resh
 mornings worked by hand first, declared and dropped; kill lines with a quiet-day control pushed; one run. 08:15 / 08:30 / 09:00 on lively days: 7.57R /
 5.70R / 4.78R behind A2, with as many or more full stops. All killed. Side finding: 36 of the 42 lively days are from March on, so "lively against quiet"
 is nearly "March-May against January-February"; a reading rule for PH2's first look was added to its file. Counts: 66 ideas, 185 variants.
+
+## 05-26 research after funded day 43 (coach: my single best idea on my lived days only, costs on): MB1 chosen by rule (the only idea of 66 that passed
+its kill test), lines and consequences pushed first, one run (journal/2015-MB1-lived-days-check.md). Lived days 03-02..05-26: kept 21 trades at +0.213R
+(+0.141R at triple costs) against A2's +0.232R; kept minus removed +0.191R. Two of four lines fail by a hair: the claim "holds on lived days" is dead.
+Backtest +0.695R became +0.213R on the days I lived. MB1 stays on paper under its own rules; A2 unchanged. Counts: 66 ideas, 186 variants.

@@ -16,6 +16,9 @@ Source: journal/2015-review-losers-of-3-killed-ideas-and-idea-MB.md. PAPER ONLY.
   'A2 worst day + MB1 worst day' <= 2.0% of the balance on the then history (bt/day_cushion.py). On 05-13 that means about 0.09%, not 0.25%.
 - Forward days needed (coach 05-13): about 285 trading days for 100 kept trades at the history rate of 0.35 a day (roughly mid 2016); 40 kept about late October 2015.
 - A few good paper days change nothing. A bad A2 week changes nothing. No re-scoring, no new variant of it while the tag runs.
+## Lived-days check, 2015-05-26 (coach-directed; journal/2015-MB1-lived-days-check.md; lines written first)
+DOES NOT HOLD ON LIVED DAYS: 03-02..05-26 kept 21 trades +0.213R (stressed +0.141R) against A2 +0.232R on the same days; kept minus removed +0.191R (line was +0.20R); on the 10 true forward days kept 2 (-0.24R), removed 7 (+8.64R). The tag continues under the rules above (no early-close line reached); it is no longer described as 'the idea that passed'.
+
 ## Forward tally (from Wed 2015-05-13)
 | date | morning (pips) | break | kept / removed | R | kept total (n, R, DD) | removed total (n, R) | small / large morning (kept) |
 |---|---|---|---|---|---|---|---|
