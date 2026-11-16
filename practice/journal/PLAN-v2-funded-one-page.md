@@ -51,6 +51,8 @@ Entry filters from chart reading (no-chase, first break, night against me (twice
 Exits (tighter / wider / structural stop, break-even, trail, target, runner, scale-out, partial at +1R, add at +1R, stop on a candle close, 09:00 checks, other exit hours): 26 definitions, none beats noon.
 Entry time and price (07:00, 09:00, +-1h, limit orders); lookback 2 / 5 / 10; second setups tried (Asia break, ignition candle, NY fade, range fade, night continuation, afternoon trade in the rule's direction). Size above 0.50%.
 Ruled out about myself: discretionary skips and rules made from one replayed day.
+KEEP IN MIND (XS test 04-29, coach: do not filter winners away): the most STRETCHED signals (3-day gap >= 1.25 average days' range) are my best trades, 24 at +0.625R each.
+"It is extended, be careful" is not supported by my record; skipping them would have cost 15R of 34R.
 
 ## 8. How I work
 One live day at a time. Result tagged before anything else. One honest test earns the next day: hypothesis and explicit kill test pushed BEFORE the run, max 3 variants, all lived
