@@ -156,6 +156,22 @@ Live day routine since 04-17: D1 / H4 / H1 / M15 walk in the call, then a note w
      I notice how good "UN3 would have saved me" feels. Written down as a feeling. The promotion rule does not have a line for it.
      Night count (from 04-23): night with me today -> not counted. 0 night-against live trades so far.
      END OF RELEASED DATA (clock Fri 04-24 01:00 London).
+- **Fri 04-24 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID LOSS.
+  D1: Thursday was an outside day: low 1.0666 (below Wed and Tue), then a 180 pip rally to 1.0845 and a close at 1.0823 - its range 179 pips, close in the top eighth.
+      It closed above the three previous days' highs and 4 pips under the 04-17 top (1.0849). The 1.066-1.085 range is being tested at its upper edge.
+  H4: Thursday 08:00-20:00 London: three rising H4 candles 1.0686 -> 1.0825. Tonight: dip to 1.0785 at 03:xx, recovered to 1.0813.
+  H1: 00:00 hour up to 1.0829, then three falling hours to 1.0785, then two rising hours back to 1.0814. Asia range 44 pips (ratio 1.16).
+  M15: four small rising candles 1.0794 -> 1.0813, last close on the hour's high. Price 1.0813, in the upper half of the night range.
+  Bias: BUY. 22:00 London closes: 04-23 1.08234 vs 04-20 1.07374 = +86 pips. The signal flipped back to buy after two sell days.
+  UN3 PAPER TAG (never live): 5-day gap +63 pips -> BUY; 3-day says BUY -> agree: paper TRADES. Forward day 4 (2 disagree days of 30 so far).
+  Levels: night high 1.0829; Thu high 1.0845; 04-17 high 1.0849; night low 1.0785; 1.0800.
+  Rejection-day check (parked observation): Thursday closed at 0.88 of its range, with a buy. Nothing.
+  Coach, this morning: -1.05% drawdown is fine, valid losses happen, no rule changes off a losing week. Agreed and nothing is changed: same rule, same size, same stop.
+  Worry: buying 30 pips under a double top after a 180 pip day; third signal flip in six days. Written; not acted on.
+  Paper tags: Q3 trade, Q1 trade. F1 / FR1 read from the engine after the day.
+  Funded check: tracker balance $25,242.11, high-water $25,508.71, drawdown -1.05% (brakes -3% = $24,743.45 / -5% = $24,233.27) -> full size allowed.
+  PAYOUT DATE today: handled after the trade, on the tracker balance, by the plan (half of what is above $25,000; nothing if at or below; no brake is on).
+  Plan: BUY 08:00 London, SL 40 pips under the bid at 08:00, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$131 -> drawdown -1.6%. One trade, stop not moved, flat for the weekend.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
