@@ -83,3 +83,8 @@ As of live day Mon 2015-05-18:
 Live minus backtest: -0.24R per trade (noise band +-0.43R) -> inside the noise. Live vs February alone (+0.23R, 20 trades): +0.03R. As traded vs engine on the same days: -0.13R over 56 trades (fills and rounding).
 Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 56 done, avg +0.26R, max DD 3.23R. Planning edge +0.18R: live is +0.08R above it.
 Counts only: live trades after a night (00:00->08:00) against my side, from 04-23: 12 (+1.93R; look at 40). 10-day-trend direction, paper line from 05-06: trend UP 9 trades -1.69R; trend DOWN 0 trades (look at 40 up-trend trades). MB1 paper from 05-13: 4 days, kept 0 trades; removed 3 (+4.09R); no break 1.
+
+## 05-18 research after funded day 37 (coach: an entry edge, starting from my own A2 losers and winners): the last 12 losers beside the last 12 winners at
+entry time (journal/2015-losers-winners-table-and-idea-MO.md). Nothing separates them except the weekday (5 Mondays among the losers, none among the winners).
+Idea MO pre-registered with my expectation of a kill and run once: without the 24 table days Mondays are +0.397R (14 trades, 9 wins) against +0.485R for
+Tuesday-Friday; both variants killed. The five losing Mondays were a streak. A2 and size unchanged. Counts: 61 ideas, 170 variants.

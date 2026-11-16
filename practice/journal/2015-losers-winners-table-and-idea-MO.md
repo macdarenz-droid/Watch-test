@@ -45,3 +45,38 @@ Kill lines (decision set = history without the 24 table days; one failure kills)
 Reported beside, not used: the same numbers with the 24 days back in.
 Hand-check before totals: two Mondays - the weekday, the weekend move and its sign against the bars.
 My guess, written now: on the decision set Mondays make about +0.2R each; K1 fails; both variants killed; the five losing Mondays were a streak.
+
+## Mechanics hand-check (`python bt/mondays.py 2015-05-19 --check 2015-05-18,2015-03-09`)
+- 05-18 Mon, buy: last close before = Fri 05-15 1.14484 (the same figure as my 07:00 call), open 08:00 1.14167 (the sim's bar) -> weekend move -31.7 pips for a buy -> MO2 removes it.
+- 03-09 Mon, sell: Fri 03-06 close 1.08440, open 08:00 1.08642 -> -20.2 pips for a sell -> MO2 removes it.
+
+## Results (run once; `python bt/mondays.py 2015-05-19`; figures copied from the print)
+DECISION SET (24 table days dropped): A2 71 trades, +0.468R each, +33.21R, max DD 2.03R.
+| | n | wins | avg R | before 03-02 | from 03-02 |
+|---|---|---|---|---|---|
+| Mondays | 14 | 9 | +0.397 | +0.265 (7) | +0.529 (7) |
+| Tuesday-Friday | 57 | - | +0.485 | +0.553 | +0.398 |
+By weekday: Mon +0.40 (14) | Tue +0.58 (15) | Wed +0.46 (14) | Thu +0.32 (14) | Fri +0.58 (14).
+| variant | net R (A2 +33.21) | max DD (A2 2.03R) | K1 Mondays <= 0 and 0.30R below | K2 below in both halves | K3 costs no money | K4 n >= 12 | extra |
+|---|---|---|---|---|---|---|---|
+| MO1 Tuesday-Friday only | +27.65 | 2.48R | FAIL | FAIL | FAIL | PASS | - |
+| MO2 Mondays only with the weekend move | +27.53 | 2.03R | FAIL | FAIL | FAIL | PASS | FAIL: kept Mondays -0.019R (6), removed +0.709R (8) |
+Reported only, all 95 days: Mondays 19 trades, 9 wins, +0.068R (from 03-02: -0.048R in 12); Tue-Fri +0.437R. MO1 net +33.24R against A2's +34.53R.
+VERDICT: both variants KILLED. No tag.
+
+## My guess against what happened
+"Mondays about +0.2R on the decision set": +0.397R. "K1 fails, both killed, a streak": yes.
+
+## What I learned
+- Outside the five losing Mondays, Mondays are an ordinary A2 day: 9 wins in 14, +0.40R, and in March-April they were BETTER than the rest of the week
+  (+0.529R against +0.398R). Thursday is the weakest day of the decision set, and nobody would build a rule on that either.
+- The mechanism I wrote ("the signal is stale after the weekend") is not just unproven, it points the wrong way: the Mondays where the weekend had moved WITH
+  the signal made -0.02R, those where it had moved AGAINST made +0.71R (6 and 8 trades: a dozen cases, noise either way). A story is cheap; this one cost
+  ten minutes to write and would have cost 5.6R on the decision set to follow.
+- With all days in, Mondays look bad (+0.07R) only because of the five I had just been looking at. That is exactly the trap: the table showed me the
+  streak, and the streak is the whole effect.
+- So the look-first table gave an honest answer and it is the same as before: at 08:00 I cannot tell a winner from a loser. Six reviews, about 16 entry
+  filters, none adopted. If there is more entry edge to find, it is not in a filter on A2's own trades; it would have to be a different signal or a
+  different market hour - and the afternoon (AF, BX/MB on paper) and the night (NT, NF) are where I have already looked.
+- Monday mornings from now: the plan, without a second thought. The next five Mondays are not owed to me either way.
+Counts: ideas 61, variants 170 (MO1 MO2). Adopted trading ideas: 0. On paper: UN3, PH2, MB1.
