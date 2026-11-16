@@ -9,7 +9,11 @@ RISK = 125.0  # $ per trade = 0.5% of 25k
 
 def days(m5):
     """trading day = UTC date after shifting +2h (Sunday evening belongs to Monday)."""
-    m5 = m5.copy(); t = m5["time"] + pd.Timedelta(hours=2)
+    m5 = m5.copy()
+    # LONDON CLOCK (decided 2015-03-30): every hour in my rules is London local time. Re-label each candle with London wall-clock time (kept tz-"UTC" for the engine).
+    # In winter London = UTC, so nothing changes for Jan-Mar 27; in summer time 08:00 here means 08:00 London = 07:00 UTC.
+    m5["time"] = m5["time"].dt.tz_convert("Europe/London").dt.tz_localize(None).dt.tz_localize("UTC")
+    t = m5["time"] + pd.Timedelta(hours=2)
     t = t + pd.to_timedelta((t.dt.weekday == 6).astype(int), unit="D")   # any Sunday bar belongs to Monday (fix: a 21:00 Sunday bar made a fake day)
     m5["day"] = t.dt.date
     return m5
@@ -174,6 +178,9 @@ VARIANTS = {
  "S50": dict(entry_h=8, exit_h=12, sl=50),   # idea S: wider fixed stop, same $ risk
  "S60": dict(entry_h=8, exit_h=12, sl=60),
  "S80": dict(entry_h=8, exit_h=12, sl=80),
+ "CP1": dict(entry_h=9, exit_h=13, sl=40),    # clock shift +1h (09:00-13:00)
+ "CM1": dict(entry_h=7, exit_h=11, sl=40),    # clock shift -1h (07:00-11:00)
+ "C9": dict(entry_h=9, exit_h=12, sl=40),     # late entry 09:00, exit 12:00
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
