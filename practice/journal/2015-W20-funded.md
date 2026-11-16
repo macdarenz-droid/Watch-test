@@ -98,6 +98,29 @@ Coach, 05-11: quality over count - the next test starts with ten charts looked a
      Night count: against me by 35.1 pips -> live trade 10 of the count (running: 10 trades, +2.29R). 10-day-trend paper line: trend UP: 5 trades, -0.84R.
      END OF RELEASED DATA (clock Wed 05-13 01:00 London).
 
+- **Wed 05-13 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID LOSS. Figures from `python bt/call_numbers.py 2015-05-13` and the bar prints.
+  D1 (London days): Fri 05-08 high 1.12880 low 1.11790 close 1.12015 (0.21); Mon 05-11 high 1.12065 low 1.11310 close 1.11546 (0.31); Tue 05-12 high 1.12787
+      low 1.11343 close 1.12127 (0.54, range 144.4): a wide up day that gave back about half. Tuesday made neither the 3-day high nor the 3-day low.
+  H4 (UTC bars): Tue 08:00 bar high 1.12787; 12:00 bar 1.12225-1.12666; 16:00 bar down to 1.12105; tonight 00:00 bar 1.12187 -> 1.12395; 04:00 bar high 1.12548.
+  H1: the night (00:00-07:00 London): open 1.12155, high 1.12548, low 1.12128, last 1.12372: range 42.0 pips (ratio 0.72), net +21.7 pips - a rising night again.
+  M15: six small candles under 1.12548, then the last one fell 1.12469 -> 1.12372.
+  Bias: SELL. 22:00 London closes: 05-12 1.12127 vs 05-07 1.12662 = -53 pips (3-day gap -53.5). Gap / ADR5 0.39: not stretched.
+  UN3 PAPER TAG (never live): 5-day gap +28 pips -> BUY; 3-day says SELL -> DISAGREE: paper SKIPS. Forward day 17, disagree day 5 of 30. Live trade at full size.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 9.
+  MB1 PAPER TAG (never live, first forward day): morning direction written at 12:00 London, before 13:25.
+  Levels: night high 1.12548; Tue high 1.12787; night low 1.12128; Tue afternoon low 1.12057.
+  Rejection-day check: Tuesday did not make the 3-day low or high. Not a rejection day. 10-day-trend paper line: UP (1.12127 vs 04-28 1.09802); the sell is against it.
+  SIZE RULE: tracker balance $25,097.42, high-water $25,349.14, drawdown -0.99%; trigger 1 at $24,588.67 not reached -> FULL size, 0.31 lots.
+  DAILY-LOSS CUSHION (coach: check after two valid losses in a row): one trade a day, risk $125; my worst live loss is -1.03R, about $129. The daily limit is 5%:
+      $1,250 counted on the starting $25,000 (the most careful base; I am not certain which base the firm uses, so I take the smallest). One full stop uses about a
+      tenth of it. There is no second trade, so one day cannot lose more than one stop plus slippage. Account line $22,500 is $2,597 under the tracker balance: about
+      20 full stops; my own brakes come first (half size 4 stops from here, stop trading at $24,081.68). Two losses do not change the size: the rule's trigger does.
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
+  Worry: same list as yesterday (night up, UN3 skip, trend up) and yesterday that list was right. One each way last week. Written; not a rule. I take the trade.
+  MB1, how long before I would trust it (coach): it kept 32 trades on 91 A2 days of history, about 0.35 a day. First look is 100 forward kept trades: roughly 285
+      trading days, about 13 months (around mid 2016). Interim look at 40 kept trades (early-close lines only): roughly 115 trading days, about late October 2015.
+      These are estimates from the history rate, not dates. Before 100 forward kept trades: paper only, whatever it shows.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
