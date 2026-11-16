@@ -42,8 +42,10 @@ Score so far (funded): 14 trades, 14 valid (9 wins, 5 valid losses), 0 trade mis
 | March to now, traded forward one day at a time | 33 | 70% | +0.46 |
 Planning number: +0.18R. On 72 trades my average is only known to about +-0.25R. At 0.50%: roughly +$460 (planning edge) to +$890 (February-to-now edge) a month on the
 account before the split; about one month in five negative at the planning edge; a bad month about -$450. Drawdowns of 3-4% will happen and are not a signal to change anything.
+Where it comes from (04-17, 74 trades): both sides earn - sells +0.61R (47), buys +0.24R (27), each positive in all three periods - but 81% of the net R is sells in a market that
+fell 1,200 pips. The smaller side is known only to +-0.40R. I have not yet traded a rising market; +0.18R is about what the weaker side has earned.
 
-## 7. What is closed, so I do not reopen it on a bad day (40 ideas, 107 variants, none adopted)
+## 7. What is closed, so I do not reopen it on a bad day (41 ideas, 110 variants, none adopted)
 Entry filters from chart reading (no-chase, first break, night, gap size, round numbers, flip day, rejection day, dead Asia, Friday): the losers I look at have more winning twins.
 Exits (tighter / wider / structural stop, break-even, trail, target, runner, scale-out, partial at +1R, add at +1R, stop on a candle close, 09:00 checks, other exit hours): 26 definitions, none beats noon.
 Entry time and price (07:00, 09:00, +-1h, limit orders); lookback 2 / 5 / 10; second setups tried (Asia break, ignition candle, NY fade, range fade). Size above 0.50%.

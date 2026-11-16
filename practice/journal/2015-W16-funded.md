@@ -170,3 +170,6 @@ Loss tags, all live trades: valid loss 24 (-14.53R) | my mistake 0. Process mist
 ## 04-16 research (before the next day): add-at-+1R test AD1/AD2/AD3 run on the coach's go (journal/2015-idea-AD-add-to-winner.md) - no survivor: more net R, deeper drawdown. Rule A2 and size 0.50% unchanged. Ideas 39, variants 104.
 
 ## 04-17 research (before the next day): close-stop test CS1/CS2/CS3 (journal/2015-idea-CS-close-stop.md) - no survivor: 0 of 7 clean stop-outs were wicks. Found and corrected an error in my 04-08 journal note (process mistake P3). Rule A2 and size 0.50% unchanged. Ideas 40, variants 107.
+
+## 04-17 weekend research: two-sided test (journal/2015-idea-SD-two-sided.md) - hypothesis survives: buys +0.243R (27 trades), sells +0.614R (47); variants SD1-SD3 no survivor. Rule A2 and size 0.50% unchanged. Ideas 41, variants 110.
+Running R by side (tracking only, from 01-06, engine): sells 47 trades +28.84R | buys 27 trades +6.56R.
