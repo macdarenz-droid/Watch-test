@@ -54,6 +54,24 @@ From May: a number written from memory and corrected later is logged as a proces
      "It halved today's loss" is written here as a feeling; the promotion rule has no line for it.
      Night count: against me by 2 pips -> live trade 4 of the count (running: 4 trades, +2.28R).
      END OF RELEASED DATA (clock Tue 05-05 01:00 London).
+- **Tue 05-05 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID LOSS. (Coach, today: read numbers from the tool before
+  writing them, every time. Every figure in this call is copied from the look output of this morning.)
+  D1 (22:00-22:00 London days, from the tool): Thu 04-30 high 1.12662 low 1.10712 close 1.12236; Fri 05-01 high 1.12900 low 1.11746 close 1.11948 (0.18 of its range);
+      Mon 05-04 high 1.12245 low 1.11228 close 1.11454 (0.22 of its range). Two days closing near their lows with lower highs: the six-day rise has turned into a pullback.
+  H4 (UTC bars): Monday 08:00 fell to 1.11228; 12:00 bounced to 1.11901; 16:00 and 20:00 held 1.11316-1.11648. Tonight 00:00 bar 1.11498 -> 1.11348, 04:00 bar low 1.11242.
+  H1: the night (00:00-07:00 London) high 1.11509, low 1.11242: Asia range 26.7 pips (5-day average 25.6, ratio 1.04). Four falling hours in a row to 05:xx London, then a small bounce.
+  M15: last four candles 1.11258-1.11391; last close 1.11310. Price 1.1131, 7 pips above the night low.
+  Bias: BUY - by 17 pips. 22:00 London closes: 05-04 1.11454 vs 04-29 1.11280 = +17 pips. Eighth day on the buy side; one more down day flips it.
+  UN3 PAPER TAG (never live): 5-day gap +255 pips -> BUY; 3-day says BUY -> agree: paper TRADES. Forward day 11 (2 disagree days of 30 so far).
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 3.
+  Levels: night low 1.11242; Mon low 1.11228; night high 1.11509; Mon afternoon high 1.11901.
+  Rejection-day check (parked observation): Monday closed at 0.22 of its range - the far third against a buy - but did not make the 3-day high (1.12245 against Friday's
+     1.12900). 'Closed against me', not a rejection day. Those mornings earned +0.60R on average in the RV test (11 cases).
+  Small-signal note: a 17 pip gap. Small gaps are not weak signals in my record (SG test: gap under 50 pips, 21 trades, +0.62R).
+  Worry: buying the third day of a pullback, 9 pips above yesterday's low, on a 17 pip signal. Written; not a rule.
+  Paper tags: Q3 trade, Q1 trade. F1 / FR1 read from the engine after the day.
+  Funded check / SIZE RULE: tracker balance $25,443.46, high-water $25,571.80, drawdown -0.50%. Trigger 1 at $24,804.65, trigger 2 at $24,293.21: neither reached -> FULL size.
+  Plan: BUY 08:00 London, SL 40 pips under the bid at 08:00, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$131 -> drawdown -1.0%. One trade, stop not moved.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
