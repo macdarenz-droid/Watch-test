@@ -104,6 +104,24 @@ Coach, 05-18: no more risk-plan tests for now; the next backtest is about findin
      Night count: with me today, not counted (12 trades, +1.93R). 10-day-trend paper line: trend UP: 10 trades, +0.48R (today's sell was against it).
      END OF RELEASED DATA (clock Wed 05-20 01:00 London).
 
+- **Wed 05-20 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID WIN. Figures from `python bt/call_numbers.py 2015-05-20` and the bar prints.
+  D1 (London days): Fri 05-15 close 1.14484 (0.87); Mon 05-18 high 1.14492 low 1.12987 close 1.13141 (0.10); Tue 05-19 high 1.13264 low 1.11184 close 1.11493
+      (0.15, range 208.0): the widest day I have traded, second close at the bottom, new 3-day low. 330 pips down from Friday's close in two days.
+  H4 (UTC bars): Tue 08:00 bar 1.11665-1.12166; 12:00 bar down to 1.11184; 16:00 and 20:00 bars flat 1.1131-1.1159; tonight 00:00 bar low 1.11220; 04:00 bar low 1.10982.
+  H1: the night (00:00-07:00 London): open 1.11469, high 1.11522, low 1.10982, last 1.10993: range 54.0 pips (ratio 1.44), net -47.6 pips - a falling night, with my side.
+  M15: quiet 1.1130-1.1146 until the last candle, which fell 44 pips (1.11431 -> 1.10993) to a new low just before 07:00.
+  Bias: SELL. 22:00 London closes: 05-19 1.11493 vs 05-14 1.14097 = -260 pips (3-day gap -260.4). Gap / ADR5 1.66: stretched (my best group over all history).
+  UN3 PAPER TAG (never live): 5-day gap -63 pips -> SELL; agree: paper TRADES. Forward day 22, disagree days 6 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 14.
+  MB1 PAPER TAG (never live, forward day 6): morning direction written at 12:00, before 13:25.
+  Levels: night low 1.10982; Tue low 1.11184 (now above the price); night high 1.11522.
+  Rejection-day check: for a sell, Tuesday would need the 3-day low (True) AND a close in the top third; it closed at 0.15. Not a rejection day.
+  10-day-trend paper line: now DOWN (1.11493 vs 05-05 1.11848); the sell is with it. First DOWN-trend day of the count.
+  SIZE RULE: tracker balance $25,258.93, high-water $25,349.14, drawdown -0.36%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
+  After a +2.17R day: same 0.31 lots, same plan. I notice I feel clever this morning; yesterday's candle was luck and is written down as luck.
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
+  Worry: selling 510 pips... correction, I have not computed that; selling far below Friday's close after two wide down days and a 44 pip drop a minute ago. Stretched signals have been my best. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
