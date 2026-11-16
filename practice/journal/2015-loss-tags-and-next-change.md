@@ -73,3 +73,34 @@ Kill test (forward only, on candles I have not seen; fixed now, no rescue):
 - Any other outcome: killed, and I do not come back with "first Fridays only" or "month-end Fridays only".
 - It can only be judged on a month it was not built on, which is exactly what unseen Fridays are.
 Nothing in section 5 has been run.
+
+# Idea W "no Friday trade" - RUN on Jan-Feb at the coach's request (Tue 2015-03-03 sim time). W1 = variant 23; ideas 12. Costs on, $125 risk. March not used.
+The kill test is applied EXACTLY as pre-registered in section 5: it is forward-only (8 unseen Fridays). The Jan-Feb table below is the honest record of what the rule does on
+months I already know; as I wrote before running, it cannot adopt or validate anything.
+
+| Month | Rule | Trades | Win rate | Avg R | Net R | Max DD |
+|---|---|---|---|---|---|---|
+| Jan (in-sample) | A2 before | 19 | 74% | +0.78 | +14.79 | 1.33R |
+| Jan (in-sample) | W1 Mon-Thu only | 15 | 80% | +0.66 | +9.88 | 1.33R |
+| Jan (in-sample) | the Fridays W1 skips | 4 | 50% | +1.23 | +4.92 | - |
+| Feb (CONTAMINATED - the pattern was found here) | A2 before | 20 | 55% | +0.23 | +4.64 | 1.86R |
+| Feb (CONTAMINATED) | W1 Mon-Thu only | 16 | 69% | +0.40 | +6.42 | 0.83R |
+| Feb (CONTAMINATED) | the Fridays W1 skips | 4 | 0% | -0.44 | -1.78 | - |
+| Both | A2 before | 39 | 64% | +0.50 | +19.43 | 1.86R |
+| Both | W1 Mon-Thu only | 31 | 74% | +0.53 | +16.30 | 1.33R |
+Fridays: 01-09 -0.43, 01-16 +1.10, 01-23 +4.27, 01-30 -0.02, 02-06 -0.19, 02-13 -0.34, 02-20 -1.02, 02-27 -0.23 (8 Fridays: 2 wins, 6 losses, +3.14R, of which +4.27R is one day).
+
+Reading, exactly as predicted before the run: skipping Fridays costs 4.92R in January and saves 1.78R in February. On a January build it fails (avg R +0.66 vs +0.78, net R down a third);
+February looks good (+0.40 vs +0.23R, drawdown halved) only because February is where I found the pattern. Jan+Feb together: 3.1R less profit for a slightly better average. No evidence.
+Without the single 01-23 shock day, the eight Fridays net -1.13R - which is why the forward test has the "remove the single worst/best day" line.
+
+## Kill test status (as written, forward only)
+| Condition (all four needed to adopt) | Needed | So far |
+|---|---|---|
+| Unseen Fridays traded and tagged | 8 | 0 (first one is Fri 03-06) |
+| Friday trades net R | <= 0R | - |
+| Friday losers | >= 5 of 8 | - |
+| Mon-Thu trades of the same period, avg R | > 0R | +0.06R (2 trades) |
+| Friday total without the single worst Friday | still <= 0R | - |
+VERDICT: PENDING - neither adopted nor killed. A2 keeps trading Fridays for real. Nothing I saw on Jan-Feb is allowed to change that.
+I am not calling this a finished test: the Jan-Feb half is done and tabled, the deciding half needs eight Fridays I have not lived yet.
