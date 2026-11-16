@@ -60,3 +60,38 @@ A variant survives only if ALL:
 RV2 changes 5 days after the removal: it FAILS K4 before it is run. I run it only to see whether "made the extreme" adds anything to RV1, and whatever it shows is an
 observation for the parked list, not a result.
 My guess: RV1 fails K2 or K3 (the pullback-day history says these days are not bad on average); RV3 fails K1; RV2's five days look bad and prove nothing.
+
+## RESULTS (run once after the lines above were pushed: `python bt/ab_period.py RV1,RV2,RV3 2015-04-14 2015-04-07`; all history 01-06..04-13 WITHOUT 04-07, costs on)
+A skipped day counts 0R. "Gap" = A2's avg R on the days left alone minus A2's avg R on the days the variant changes (positive = the changed days are the bad ones).
+
+| | days changed | avg R / signal day | net R | max DD | gap all | gap Jan | gap Feb | gap Mar-now |
+|---|---|---|---|---|---|---|---|---|
+| A2 (69 days) | - | +0.505 | +34.85 | 1.87 | - | - | - | - |
+| RV1 skip after "closed against me" | 11 (84% left) | +0.410 | +28.29 | 1.51 | -0.11 | +0.59 | -0.39 | -0.57 |
+| RV2 skip after a rejection day | 5 (93% left) | +0.510 | +35.21 | 1.51 | +0.62 | +1.89 (1 day) | +1.01 (2 days) | -0.52 (2 days) |
+| RV3 trade the other side on RV1 days | 11 (84% left) | +0.326 | +22.51 | 2.79 | -0.11 | +0.59 | -0.39 | -0.57 |
+
+A2 on the 11 "closed against me" days: 01-12 +1.35, 01-27 -1.00, 01-29 +0.53, 02-05 +1.09, 02-16 -0.32, 02-17 +2.16, 02-20 -1.03, 02-25 +0.74, 03-13 +1.09, 03-20 +1.07, 03-25 +0.91
+= +6.59R, +0.60R each - BETTER than the other 58 days (+0.49R each). The five rejection days: -1.00, -0.32, -1.03, +1.09, +0.91 = -0.35R.
+
+## Kill lines applied
+- K1 (avg >= A2 + 0.05R): RV1 -0.095, RV2 +0.005, RV3 -0.179 -> all FAIL.
+- K2 (changed days worse by >= 0.3R): RV1 -0.11 (they are better), RV3 same -> FAIL. RV2 +0.62 passes on five days.
+- K3 (true in >= 2 of 3 periods; never better by > 0.3R): RV1 and RV3 true only in January, and the changed days are better by 0.39R (Feb) and 0.57R (Mar-now) -> FAIL.
+  RV2 true in Jan and Feb (3 days together), better by 0.52R in Mar-now -> FAIL.
+- K4 (>= 10 days, >= 60% left alone): RV1, RV3 pass; RV2 FAILS (5 days), as written before the run.
+VERDICT: NO SURVIVOR. Idea closed, no forward tag. A2 unchanged. All three guesses were right.
+
+## What I learned
+- "Yesterday closed against the signal" is not a warning for this rule. Those mornings made +0.60R per trade - above my average - and include two of my best days
+  (02-17 +2.16, 01-12 +1.35). It is the pullback-day finding (idea D) again, now on 69 days instead of 39: the rule buys dips inside a trend, and that is where it earns.
+  Tuesday 04-07 looked obviously wrong on the chart BECAUSE I knew the ending. On 11 mornings that looked the same way, skipping would have cost me 6.6R.
+- The narrower "rejection day" (new extreme, then closed on the wrong end): 3 losers in January-February, 2 winners in March, 6th case Tuesday. Six cases in three and
+  a half months, split 4-2. It cannot be tested on my history and will not be testable for a long time (about 20 cases a year). Parked as an observation, NOT a rule:
+  "after a rejection day the trade has been -0.46R on average in 6 cases". I will note it in the call when it happens, and trade the rule anyway.
+- What the better trader really had on Tuesday was not a filter but a reading of ONE chart, and I cannot count how often that reading is right. Every time I have turned
+  such a reading into a rule (H no-chase, G first break, NM night, GAP, RN round numbers, FL flip days, FH first hour, now RV) the count over all days said the losers I
+  was looking at had more winning twins than losing ones. Eight for eight. That is the lesson of the replay: the rule's losses are not avoidable by anything visible at 07:00
+  that I have been able to define.
+- The other two lessons of the week (Wednesday: stopped by 2 pips; Thursday: the move came after noon) were already tested in every mechanical form I can think of.
+Counts: ideas 37, variants 98.

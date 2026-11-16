@@ -27,7 +27,7 @@ def trend_map(m5, look=3, strict=False):
         elif i >= 2 and not strict: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None, scale=None, rn=None, flip=None, fh=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None, nofight=False, hourcheck=None, strict=False, nofri=False, be=None, runner=None, asiamin=None, asiarel=None, costs=None, wall=None, weekbias=None, vol=None, night=None, effchase=0.6, trail=None, mingap=None, sstop=None, scale=None, rn=None, flip=None, fh=None, rej=None):
     _best = {}
     tr = trend_map(m5, look, strict); acct = Account() if costs is None else Account(spread=costs[0] * PIP, slippage=costs[1] * PIP); risk_of = {}   # costs = (spread pips, slippage pips)
     cl = m5.groupby('day')['close'].last()
@@ -45,6 +45,14 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
             if flip == "skip1" and f1: continue
             if flip == "skip2" and (f1 or f2): continue
             if flip == "confirm" and f1: side = p1
+        if rej is not None:            # idea RV: yesterday closed in the far third of its range against the signal (and, for "ext", made the 3-day extreme on my side)
+            _i = dlist.index(d)
+            if _i >= 3:
+                _y = dlist[_i-1]; _pos = (cl[_y] - lo[_y]) / (hi[_y] - lo[_y]) if hi[_y] > lo[_y] else 0.5; _p = _pos if side > 0 else 1 - _pos
+                _ext = hi[_y] >= max(hi[dlist[_i-3]], hi[dlist[_i-2]]) if side > 0 else lo[_y] <= min(lo[dlist[_i-3]], lo[dlist[_i-2]])
+                _hit = _p < 1/3 and (_ext or rej != "ext")
+                if _hit and rej in ("skip", "ext"): continue
+                if _hit and rej == "flip": side = -side
         asia = g[(g.time.dt.hour < 7) & (g.time.dt.date == d)]
         for _, b in g.iterrows():
             h = b.time.hour
@@ -248,6 +256,9 @@ VARIANTS = {
  "RN00_15": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 15)),   # idea RN: round numbers ahead
  "RN00_25": dict(entry_h=8, exit_h=12, sl=40, rn=(100, 25)),
  "RN50_15": dict(entry_h=8, exit_h=12, sl=40, rn=(50, 15)),
+ "RV1": dict(entry_h=8, exit_h=12, sl=40, rej="skip"),     # idea RV: yesterday closed against the signal
+ "RV2": dict(entry_h=8, exit_h=12, sl=40, rej="ext"),
+ "RV3": dict(entry_h=8, exit_h=12, sl=40, rej="flip"),
  "FH1": dict(entry_h=8, exit_h=12, sl=40, fh="early"),     # idea FH: first-hour shape, close at 09:00
  "FH2": dict(entry_h=8, exit_h=12, sl=40, fh="notlate"),
  "FH3": dict(entry_h=8, exit_h=12, sl=40, fh="low"),

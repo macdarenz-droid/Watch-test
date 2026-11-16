@@ -39,3 +39,5 @@ Size note (coach, 04-13): Friday's +1.62R does not change the size. The risk-siz
 | Q1 dead-Asia tag (drawdown goal) | 29 (2 skips) | 20 | +11.98 | +0.41 | 2.00R | 85% of net, same DD |
 Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8) | 04-08 -1.00 (funded 9) | 04-09 +0.33 (funded 10) | 04-10 +1.62 (funded 11) | 04-13 +1.94 (funded 12).
 Loss tags, all live trades: valid loss 22 (-12.91R) | my mistake 0. Process mistakes (funded): 2.
+
+## 04-14 research (before the next day): replay of week 04-06..04-10 + rejection-day test RV1/RV2/RV3 (journal/2015-replay-W15-and-idea-RV.md) - no survivor. Rule A2 and size 0.50% unchanged. Ideas 37, variants 98.
