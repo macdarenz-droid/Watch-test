@@ -286,3 +286,8 @@ stops instead of worsening them): process mistake P7, T1 void, no re-run. Size a
 Method fix and hand-worked expected averages pushed before the run; the print matched them (+0.166 / +0.131 / +0.096R). K1 PASS (0.0% breached), K2 FAIL
 (own -5% stop 13.4% -> 43.9% under one jump per 92 days), K3 FAIL (payout 55% of base). Same verdict, three times the size the flawed run showed.
 Size and rules unchanged; proposal to the coach written. Counts: 59 ideas, 165 variants.
+
+## 05-15 research after funded day 36: idea WS (journal/2015-idea-WS-wider-stop.md). The choice (stop 7%, size 0.50%) was made and written before the trade;
+the simulation was pre-registered with hand-worked regression and floor figures, both matched, then run once. WS1 passes safety (0.0% breached, lowest
+-7.73%), cuts the own-stop odds under a jump day per 92 from 43.5% to 7.4%, and beats the smaller size (0.40%: 20.2%, lower payout) in all four cases.
+Held for funded days 36-55. Counts: 60 ideas, 168 variants.
