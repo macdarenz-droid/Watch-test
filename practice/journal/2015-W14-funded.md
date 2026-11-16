@@ -156,3 +156,17 @@ Lesson kept: banking half of the best point is the price of staying in for the b
 | N1 paper tag (NY fade; London time from 03-30) | 6 (16 days) | 2 | -3.27 | -0.55 | 3.34R | judge at 20 trades AND 8 A2-losing days. A2-losing days so far: 4; N1 on them: -2.02R |
 Days: ... 03-30 +0.84 (funded 2) | 03-31 +1.14 (funded 3) | 04-01 +0.09 (funded 4) | 04-02 -0.25 (funded 5).
 Loss tags, all live trades: valid setup, market disagreed 20 (-10.91R) | my mistake 0. Process mistakes (funded): 1.
+
+## Daily calls (Fri) - written at 07:00 London, before the entry bar
+- Fri 04-03 07:00 London @1.0881. Thu: squeezed up 150 pips after my exit (1.0750 -> 1.0905), closed 1.0880. Asia 19 pips - dead flat, drifting up 15. Good Friday: much of
+  Europe is closed, and it is the first Friday of the month (US jobs report 13:30 London). I expect a thin, waiting morning.
+  TREND RULE FLIPS TO BUY: Thu close 1.0880 > Mon 03-30 close 1.0833, by 47 pips.
+  Read: yesterday's rally broke the week's run of lower highs. Price sits in the top fifth of yesterday's range, 22 pips under its high.
+  A holiday morning before big news is exactly when I would like to skip. The plan says no skips, and my tests of "dead Asia" (Q) and "Fridays" (W) do not support one:
+  three of four unseen Fridays were winners. Risk is one stop; I am flat 90 minutes before the data.
+  Levels: 1.0883 Asia high, 1.0905 Thu high, 1.0949 the 03-27 high; 1.0864 Asia low, 1.0800 below. Week's open 1.0886.
+  Wall note: 1.0949 (five days old, standing) is 60+ pips above - outside reach. Thursday's high is one day old.
+  Paper tags: F1 efficiency 0.02 (crooked) -> no-chase applies; price 0.84 up yesterday's range -> F1 SKIPS; FR1 SKIPS. Q3: Asia 18.9 vs 47.7 (0.40) -> SKIP. Q1: SKIP (under 20 pips).
+  All four filters would sit this one out. FRIDAY TAG: unseen Friday 5 of 8. N1 yesterday: no trade.
+  Funded check: balance $25,105.09, high-water $25,135.78, drawdown -0.12% -> full size allowed.
+  Plan: BUY 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case -$129. Flat for the long weekend.
