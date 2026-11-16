@@ -93,3 +93,5 @@ Live minus backtest: -0.20R per trade (noise band +-0.47R) -> inside the noise. 
 Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 41 done, avg +0.30R, max DD 3.23R. Planning edge +0.18R: live is +0.12R above it.
 41 live trades is still a small book: the live average is known to about +-0.33R. What differs live: more full stops (24% vs 8%) and deeper average losses.
 Count only (from 04-23, no look before 40): live trades after a night (00:00->08:00) against my side: 1 (-0.16R).
+
+## 04-28 research (before the next day): new idea, a separate afternoon trade in the rule's direction, AF1/AF2/AF3 (journal/2015-idea-AF-afternoon.md) - no survivor: 75 afternoons at -0.11R each. Rule A2 and size 0.50% unchanged. Ideas 46, variants 125.

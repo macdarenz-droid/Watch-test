@@ -42,3 +42,47 @@ A variant survives only if ALL:
 My guess, written now: AF2 is about zero (between -0.10R and +0.10R per trade); AF1 without its inspiring days is no better than AF2; AF3 is the worst of the three
 (after a morning that already ran, the afternoon gives some back - that is why the noon exit works). No survivor. If AF2 is clearly positive in all three periods
 I will be surprised, because the exit tests said the opposite on the same hours.
+
+# RESULTS (kill test above pushed in commit 07786e0 before any code; one run: `python bt/afternoon.py 2015-04-28 2015-04-09,2015-04-16,2015-04-21,2015-04-22,2015-04-27`)
+80 A2 days 01-06..04-27, costs on, R of $125. The five inspiring days are out of every number.
+
+## Mechanics checked by hand on two days that are NOT inspiring days, before the totals
+- 04-10 (sell day): 13:30 open bid 1.05846 -> sold 1.05845, stop 1.06246; the 13:30-17:00 high is 1.06352 -> stopped 14:45, -1.00R. Engine = candles.
+- 04-17 (buy day): 13:30 open 1.08205 -> bought 1.08216, stop 1.07805; the low is 1.07335 -> stopped in the first five minutes, -1.02R (the 110 pip drop after my +1.70R
+  morning that my journal of that day describes). Engine = candles.
+
+## Totals
+| | trades | win rate | avg R (+- 2 SE) | net R | full stops | max DD | worst 10 | Jan | Feb | Mar-now | without best 3 | corr with A2's morning | net on A2's losing days |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| AF2 every day | 75 | 39% | -0.106 (+-0.26) | -7.94 | 32 | 11.41R | -9.53R | -4.94 (19) | +3.26 (20) | -6.26 (36) | -16.35 | 0.00 | -7.86 (27 days) |
+| AF1 after a scratch morning | 18 | 50% | +0.092 (+-0.60) | +1.65 | 8 | 4.26R | -1.63R | -0.65 (3) | +3.86 (6) | -1.56 (9) | -5.50 | +0.12 | -2.17 (6 days) |
+| AF3 after a morning win | 36 | 36% | -0.108 (+-0.38) | -3.90 | 14 | 6.28R | -6.28R | -1.55 (12) | -0.36 (8) | -1.99 (16) | -11.57 | -0.06 | n/a |
+The five inspiring days, shown only: 04-09 +2.40, 04-16 -1.02, 04-21 +1.08, 04-22 +0.24, 04-27 +1.33 = +4.03R in five afternoons.
+
+## Kill lines applied
+| line | AF2 | AF1 | AF3 |
+|---|---|---|---|
+| K1 avg >= +0.15R | FAIL (-0.11) | FAIL (+0.09) | FAIL (-0.11) |
+| K2 positive in each period | FAIL | FAIL (only February) | FAIL (negative in all three) |
+| K3 positive without best 3 | FAIL | FAIL (-5.50) | FAIL |
+| K4 DD <= 5R, worst 10 >= -4R | FAIL (DD 11.4R) | PASS | FAIL |
+| K5 independent of A2 | FAIL (-7.86R on A2's losing days) | FAIL (-2.17R) | PASS |
+| K6 at least 0.10R above AF2 | - | PASS (+0.20) | FAIL |
+VERDICT: NO SURVIVOR. An afternoon trade in my rule's direction loses money: 75 afternoons, 39% winners, 32 full stops, -7.94R. Idea closed. No tag. A2 unchanged.
+
+## My guess against what happened
+"AF2 about zero, between -0.10R and +0.10R": -0.106R - at the edge of my range, on the losing side. "AF1 no better than AF2": it is 0.20R better on 18 trades with a noise
+band of +-0.60R, and all of it is six February afternoons. "AF3 the worst": equal worst with AF2. Close enough; the direction of every guess was right.
+
+## What I learned
+- The five afternoons I wrote about in my journal made +4.03R. The other seventy-five made -7.94R. My memory was accurate about what happened on those five days and
+  completely wrong about what they meant. I remembered the afternoons I had been made to watch; I had no reason to remember the forty-six that lost.
+- It is the same answer as the three exit tests and the night test, now for a separate entry: the 3-day signal has an edge between 08:00 and 12:00 London and has
+  none at 13:30. With 32 full stops in 75 trades the afternoon is where a 40 pip stop gets run over - the New York open moves further and in both directions.
+  "Hold past noon" would not have been the fix for last week; it would have been a second way to lose.
+- Useful for the next losing stretch: when the urge is "the move came after I got out", the sentence to write is "75 afternoons, -0.11R each, 43% of them a full stop".
+- The scratch-morning version (+0.09R on 18 trades) is not evidence of anything, and I am not parking it: its whole profit is February, and it loses on the days
+  A2 loses.
+- Method note: this is the first idea I built with the base rate (AF2) and a contrast (AF3) inside the test from the start. It made the result easy to read:
+  the idea did not fail against zero, it failed against "every afternoon".
+Counts: ideas 46, variants 125.
