@@ -1,0 +1,19 @@
+/* HT-3: the How-to sheet chrome around the golden block (plan 2.4, 2.5). `.ht` is the sheet's dialog. */
+/* ht-tokens:start */
+.ht { }
+/* ht-tokens:end */
+/* D-HT2: the header is app chrome; only the eyebrow and title text styles equal the golden's .sheet-eyebrow and h3
+   (the title's colour too: the app's dialog leaves it at the UA CanvasText, the gallery's band sets var(--text)). */
+.ht .sheet-head h2 { line-height: var(--lh-title); color: var(--text); }
+.ht .sheet-eyebrow { display: block; margin-bottom: 2px; color: var(--text-2); }
+/* Critic fix 1: the sheet panel's content box is 2 px narrower than the gallery card's (16 px padding vs 15), so the
+   whole golden block, plate top to tempo bottom, bleeds 1 px each side and gets the golden width at every width. */
+.ht .ht-golden { margin-inline: -1px; }
+/* D-HT3-sections: the same 356 vs 358 px gap for every section below the golden block (golden B's sections sit in the
+   gallery card's 358 px content box), so each section bleeds 1 px each side like the golden block. */
+.ht [data-section] { margin-inline: -1px; }
+/* The gallery's app band (#sheets) sets these for the block to inherit; the app's dialog does not (its UA colour is
+   CanvasText), so the golden block sets them itself, with the band's values. */
+.ht .ht-golden { color: var(--text); font-family: var(--font); font-size: var(--fs-body); line-height: var(--lh-body); letter-spacing: var(--ls-body); }
+/* The app's .sr-only adds margin: -1px; the gallery's has none. Inside the golden block the gallery's values hold. */
+.ht .ht-golden .sr-only { margin: 0; }

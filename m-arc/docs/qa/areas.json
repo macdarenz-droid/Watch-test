@@ -1,0 +1,4594 @@
+{
+ "state": {
+  "features": [
+   {
+    "name": "Persistence (debounced save, flush on hide, backup key)",
+    "entry_points": "store.update/persistNow/flushSave; main.tsx visibilitychange+pagehide",
+    "status": "partial",
+    "notes": "Works on happy path. Unreadable state is overwritten by fresh state and lost after one edit (ST-01). The backup copy doubles storage use, and a failed backup write shows a false save error (ST-10). Nothing handles multiple tabs (ST-19)."
+   },
+   {
+    "name": "Boot load + normalize",
+    "entry_points": "store.loadState/normalize, escobarState.normalizeEscobar/normalizeUnits",
+    "status": "partial",
+    "notes": "escobar and units blocks are repaired well. The top-level normalize does not validate enums or array elements (ST-11)."
+   },
+   {
+    "name": "Legacy import (dailyTrackerPremium) and convert-backup CLI",
+    "entry_points": "migrate.convertLegacy, loadState legacy branch, Settings restore, scripts/convert-legacy-backup.ts",
+    "status": "partial",
+    "notes": "Idempotent (runs only when no saved or backup key exists). lb users get a kg gym (ST-09). Date-only strings shift a day (ST-18). Fuzzy name mapping (ST-13) and the muscle classifier (ST-12) mis-attribute data."
+   },
+   {
+    "name": "Backup restore",
+    "entry_points": "Settings.restore -> replaceState",
+    "status": "partial",
+    "notes": "Checks only version and sessions. HR series are never included in backups (ST-21)."
+   },
+   {
+    "name": "Service worker / offline PWA",
+    "entry_points": "public/sw.js, main.tsx register, scripts/sw-version.mjs",
+    "status": "broken",
+    "notes": "Cache-first index plus deleting old caches plus caching 404s leaves users on a stale build and makes lazy chunks fail (ST-03). Assets are not precached, so offline fails after only one visit (ST-04). Not used in the Capacitor APK."
+   },
+   {
+    "name": "Crash handler",
+    "entry_points": "index.html window.__marcCrash",
+    "status": "partial",
+    "notes": "Fires for any error after boot and offers a destructive reset while saying the data is untouched (ST-02)."
+   },
+   {
+    "name": "Theme engine",
+    "entry_points": "theme/engine.installThemeEngine, index.html pre-paint",
+    "status": "partial",
+    "notes": "Switching works. Tokens exist only after JS runs, so the first paint is unthemed (ST-20)."
+   },
+   {
+    "name": "Router / App shell / panels",
+    "entry_points": "app/router.go/showPanel, App.Panels",
+    "status": "partial",
+    "notes": "The muscle panel param is not validated (ST-14). The lazy Escobar import has no catch (ST-15)."
+   },
+   {
+    "name": "Clock & derived selectors",
+    "entry_points": "selectors.today/nowMs/setTicking/recovery/coachContext",
+    "status": "broken",
+    "notes": "Recovery and insight 'now' freeze whenever no session or rest is ticking (ST-05). The ticker is not ref-counted (ST-06). recoveryStatus runs every second during a session (ST-07)."
+   },
+   {
+    "name": "Dates",
+    "entry_points": "core/dates",
+    "status": "partial",
+    "notes": "DST-safe. The cache goes stale after a timezone change (ST-08). dayKey mis-parses YYYY-MM-DD strings (ST-18)."
+   },
+   {
+    "name": "Units kg/lb",
+    "entry_points": "core/units",
+    "status": "working",
+    "notes": "Typed values round-trip exactly through entered. lb display rounding hides 0.25-lb steps (ST-24)."
+   },
+   {
+    "name": "Exercise library lookup/search",
+    "entry_points": "core/exercises.findExercise/searchExercises",
+    "status": "partial",
+    "notes": "Exact name/alias lookup is correct for all 123 exercises. The fuzzy substring fallback maps generic names wrongly (ST-13)."
+   },
+   {
+    "name": "Heart series store",
+    "entry_points": "core/heartStore",
+    "status": "partial",
+    "notes": "Store and LRU work. Series are not deleted with their session, not included in backups, and reads are not shape-validated (ST-21)."
+   },
+   {
+    "name": "Static data integrity (exercises, templates, goals, knowledge)",
+    "entry_points": "src/data/*",
+    "status": "working",
+    "notes": "Validated by script: 0 issues."
+   },
+   {
+    "name": "Coach cues data",
+    "entry_points": "src/data/coachCues.json via brain/coach/cues.pickCue",
+    "status": "partial",
+    "notes": "27 of 422 cues can never be selected (ST-17)."
+   }
+  ],
+  "improvements": [
+   {
+    "title": "Quarantine unreadable state, validate deeply in normalize, and add a store test suite",
+    "kind": "add",
+    "rationale": "Nothing tests store.ts (no test imports initStore/persistNow). ST-01, ST-10, ST-11 and ST-19 are silent-loss paths.",
+    "files": "src/core/store.ts, tests/store.test.ts (new), src/slices/settings/Settings.tsx",
+    "size": "M",
+    "priority": "P0"
+   },
+   {
+    "title": "Make the crash handler non-destructive after boot and add an export-first reset",
+    "kind": "improve",
+    "rationale": "ST-02: any error after boot currently offers a full wipe while saying the data is untouched.",
+    "files": "index.html, src/main.tsx",
+    "size": "S",
+    "priority": "P0"
+   },
+   {
+    "title": "Rewrite the service worker: network-first navigations, cache only OK responses, precache the asset list, prompt for update",
+    "kind": "refactor",
+    "rationale": "ST-03/ST-04: stale builds, cached 404s and offline blank screens for PWA users.",
+    "files": "public/sw.js, scripts/sw-version.mjs, src/main.tsx, .github/workflows (assert __ASSETS__ stamped)",
+    "size": "M",
+    "priority": "P0"
+   },
+   {
+    "title": "Single clock module: minuteNow signal, ref-counted ticker, visibility refresh, timezone-change reset",
+    "kind": "refactor",
+    "rationale": "ST-05/06/07/08/16 all come from the ad-hoc clock in selectors.ts plus pageshow. One refresh path fixes stale recovery, the frozen rest banner, per-second recompute and timezone drift.",
+    "files": "src/app/selectors.ts, src/core/dates.ts, src/main.tsx, src/slices/workout/Train.tsx",
+    "size": "M",
+    "priority": "P1"
+   },
+   {
+    "title": "Move bulk data off localStorage (IndexedDB or Capacitor Filesystem) or at least drop the per-save full backup for a daily snapshot",
+    "kind": "improve",
+    "rationale": "State + a full backup copy + 60 HR series + Escobar conversations share the ~5 MB origin quota. At roughly 2-3 KB per session, heavy users reach quota within a few years, then every save fails.",
+    "files": "src/core/store.ts, src/core/heartStore.ts, src/escobar/store.ts",
+    "size": "L",
+    "priority": "P1"
+   },
+   {
+    "title": "Add a schemaRev field and an ordered migration runner",
+    "kind": "add",
+    "rationale": "The version is fixed at 1. Schema evolution relies on additive spreads in normalize, and field renames or semantic changes (e.g. units per gym) have no hook. Legacy lb import (ST-09) shows how easily fresh defaults leak in.",
+    "files": "src/core/models.ts, src/core/store.ts",
+    "size": "M",
+    "priority": "P2"
+   },
+   {
+    "title": "Wire reason-* coach cues to progression reasons and fix/remove unreachable cues",
+    "kind": "improve",
+    "rationale": "ST-17: 15 authored 'why this suggestion' explanations are never shown. They would make suggestNext's decisions visible to the user.",
+    "files": "src/data/coachCues.json, src/brain/coach/cues.ts, src/slices/workout/Train.tsx",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Include HR series in backup/restore and delete with the session",
+    "kind": "improve",
+    "rationale": "ST-21: series are lost on device migration and orphaned on delete.",
+    "files": "src/core/heartStore.ts, src/slices/settings/Settings.tsx, src/slices/history/History.tsx",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Show 'Recovered from backup' when bootSource is 'backup'",
+    "kind": "add",
+    "rationale": "Boot from backup currently shows only 'Loaded from: backup' deep in Settings, so the user never learns that the latest edits may be missing.",
+    "files": "src/main.tsx",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Strict id lookup for tool arguments; unique-only fuzzy name matching",
+    "kind": "improve",
+    "rationale": "ST-13: fuzzy substring matching mis-maps generic names in migration and in Escobar tool validation.",
+    "files": "src/core/exercises.ts, src/escobar/tools/actions.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Static first-paint theme CSS in index.html",
+    "kind": "improve",
+    "rationale": "ST-20: unthemed flash before the bundle executes.",
+    "files": "index.html, tests/theme.test.ts",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Remove dead exports and deduplicate damage constants; single-source app version",
+    "kind": "remove",
+    "rationale": "ST-22/ST-23.",
+    "files": "src/core/store.ts, src/core/dates.ts, src/core/exercises.ts, src/data/recovery.ts, vite.config.ts, src/slices/settings/Settings.tsx, scripts/convert-legacy-backup.ts, tsconfig.json",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "User-selectable week start (Mon/Sun)",
+    "kind": "add",
+    "rationale": "weekStart is hard-coded to Monday, while weekly review keys, week summaries and volume weeks all use it. US users see weeks split differently from their calendar.",
+    "files": "src/core/dates.ts, src/core/models.ts (Preferences.weekStart), consumers of weekStart",
+    "size": "M",
+    "priority": "P3"
+   },
+   {
+    "title": "Use newId('custom') in makeCustomExercise and unify the custom pattern ('other' vs Escobar's 'custom')",
+    "kind": "refactor",
+    "rationale": "`custom_${Date.now().toString(36)}` can collide within one ms. escobar/apply.ts uses pattern 'custom' while makeCustomExercise uses 'other', so pattern-based cues and rules treat them differently.",
+    "files": "src/core/exercises.ts, src/escobar/apply.ts",
+    "size": "S",
+    "priority": "P3"
+   }
+  ],
+  "module_map": [
+   {
+    "file": "src/core/store.ts",
+    "purpose": "AppState signal, load (saved->backup->legacy->fresh), normalize, debounced persist + one-step backup key",
+    "key_exports": "state, update, replaceState, initStore, flushSave, persistNow, loadState, STATE_KEY, bootSource, saveError",
+    "unused_exports": "sessions, splits, preferences, customExercises, allExercisesLookup (computed; zero importers in src/tests)"
+   },
+   {
+    "file": "src/core/models.ts",
+    "purpose": "All persisted types, freshState/freshEscobar/freshUnits, newId",
+    "key_exports": "AppState, Session, LoggedSet, freshState, freshUnits, freshEscobar, newId, WEEKDAYS, SHOW_COMPONENT_IDS, MEMORY_KINDS, MAX_*",
+    "unused_exports": "none found"
+   },
+   {
+    "file": "src/core/migrate.ts",
+    "purpose": "Read-only import of legacy dailyTrackerPremium root/backup into AppState",
+    "key_exports": "LEGACY_KEY, asLegacyRoot, readLegacy, convertLegacy",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/core/escobarState.ts",
+    "purpose": "Field-by-field repair of escobar and units blocks on load",
+    "key_exports": "normalizeEscobar, normalizeUnits, normalizeProfile, DEVICE_ID",
+    "unused_exports": "none (normalizeProfile used once outside)"
+   },
+   {
+    "file": "src/core/exercises.ts",
+    "purpose": "Library typing (mode/role), damage factors, name normalisation + memoised lookup, search, custom builder, starting loads",
+    "key_exports": "LIBRARY, findExercise, searchExercises, makeCustomExercise, normalizeName, roleOf, exerciseDamage, setDamage, startingLoadKg",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/core/dates.ts",
+    "purpose": "Local day keys, cached local-midnight parse, week start (Monday), formatting",
+    "key_exports": "dayKey, todayKey, parseDay, addDays, weekdayOf, weekStart, daysBetween, formatDay, formatClock, formatHours, WEEKDAY_LABEL",
+    "unused_exports": "hoursSince (0 callers)"
+   },
+   {
+    "file": "src/core/units.ts",
+    "purpose": "kg/lb conversion, entered-value preservation",
+    "key_exports": "KG_PER_LB, kgToDisplay, displayToKg, formatLoad, setLoadIn, formatSetLoad, approxIn, enteredLoad",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/core/heartStore.ts",
+    "purpose": "Per-session HR series under marc.heart.v1, LRU cap 60",
+    "key_exports": "storeSeries, exportHeart, getSeries, deleteSeries, restoreHeart",
+    "unused_exports": "getSeries, deleteSeries, restoreHeart (tests only, no src callers)"
+   },
+   {
+    "file": "src/data/muscles.ts",
+    "purpose": "24-muscle vocabulary, groups/buckets, free-text classifier",
+    "key_exports": "MUSCLES, MUSCLE_BY_ID, MUSCLE_IDS, isMuscleId, muscleLabel, classifyMuscleText",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/data/goals.ts",
+    "purpose": "Goal policy objects",
+    "key_exports": "GOALS, GOAL_BY_ID, isGoalId",
+    "unused_exports": "DEFAULT_GOAL (0 callers)"
+   },
+   {
+    "file": "src/data/templates.ts",
+    "purpose": "Starter split templates",
+    "key_exports": "SPLIT_TEMPLATES",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/data/recovery.ts",
+    "purpose": "Recovery-model parameter table",
+    "key_exports": "EFFORT_IMPULSE, repFactor, TAU_*, etc.",
+    "unused_exports": "DAMAGE_HIGH, DAMAGE_LOW, DAMAGE_HEAVY_MAIN, DAMAGE_DEFAULT (0 callers; values hard-coded again in core/exercises.ts)"
+   },
+   {
+    "file": "src/data/volume.ts",
+    "purpose": "Weekly set landmarks",
+    "key_exports": "VOLUME_BANDS, VOLUME_OFFSET",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/data/sparks.ts",
+    "purpose": "Daily quotes",
+    "key_exports": "SPARKS",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/data/deload.ts",
+    "purpose": "Deload constants",
+    "key_exports": "DELOAD_DAYS, DELOAD_SET_FACTOR, DELOAD_LOAD_FACTOR",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/data/exercises.json",
+    "purpose": "123 library exercises",
+    "key_exports": "(data)",
+    "unused_exports": "n/a - validated: no dup ids, all muscles valid, no alias collisions, every name/alias round-trips via findExercise, templates reference valid ids"
+   },
+   {
+    "file": "src/data/knowledge.json",
+    "purpose": "47 evidence cards",
+    "key_exports": "(data)",
+    "unused_exports": "n/a - validated: unique ids, valid ratings, numeric values, sources present"
+   },
+   {
+    "file": "src/data/coachCues.json",
+    "purpose": "422 coaching cues",
+    "key_exports": "(data)",
+    "unused_exports": "27 cues unreachable by pickCue (15 reason-*, 2 equipment 'Dumbbell', 10 kind 'mindset')"
+   },
+   {
+    "file": "src/theme/themes.ts",
+    "purpose": "5 themes, token contract, CSS generation",
+    "key_exports": "THEMES, THEME_IDS, DEFAULT_THEME, isThemeId, themeToCss, allThemesCss",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/theme/engine.ts",
+    "purpose": "Inject token CSS, sync data-theme/meta theme-color/localStorage",
+    "key_exports": "themeId, setTheme, installThemeEngine",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/app/App.tsx",
+    "purpose": "Shell: tabs, nav, panels switch, lazy Escobar sheet, save-error banner, onboarding, toast",
+    "key_exports": "App",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/app/router.ts",
+    "purpose": "Tab + panel signals, hash sync",
+    "key_exports": "tab, go, TABS, openPanel, showPanel, closePanel, PANEL_IDS, settingsOpen, profileOpen, bodyView, historySeg",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/app/selectors.ts",
+    "purpose": "today/nowMs clocks and memoised brain views (recovery, readiness, week, streak, insights, deload)",
+    "key_exports": "today, nowMs, setTicking, unit, recovery, todayReadiness, week, streak, insights, activeDeload, deloadSuggestion, sessionsToday, onboardingTrigger, scheduledSplit",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/app/toast.ts",
+    "purpose": "Toast signal",
+    "key_exports": "toast, showToast",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/main.tsx",
+    "purpose": "Boot: theme, store, native listeners, render, flush-on-hide, resync hooks, SW registration",
+    "key_exports": "(entry)",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": "src/svg/bodyMuscles.ts",
+    "purpose": "Generated muscle-map paths",
+    "key_exports": "FRONT_PARTS, BACK_PARTS, FRONT_VIEWBOX, BACK_VIEWBOX",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/svg/logo.ts",
+    "purpose": "Logo SVG strings",
+    "key_exports": "markSvg, lockupSvg",
+    "unused_exports": "none"
+   },
+   {
+    "file": "index.html",
+    "purpose": "Pre-paint theme attr, global crash handler with reset button",
+    "key_exports": "window.__marcCrash",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": "public/sw.js",
+    "purpose": "PWA cache-first service worker",
+    "key_exports": "(worker)",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": "public/manifest.webmanifest",
+    "purpose": "PWA manifest",
+    "key_exports": "(data)",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": "scripts/sw-version.mjs",
+    "purpose": "Stamp cache name in www/sw.js",
+    "key_exports": "(script)",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": "scripts/convert-legacy-backup.ts",
+    "purpose": "CLI legacy backup -> current backup JSON",
+    "key_exports": "(script)",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": "vite.config.ts / tsconfig.json / package.json",
+    "purpose": "Build/test config",
+    "key_exports": "n/a",
+    "unused_exports": "n/a"
+   }
+  ],
+  "coverage": [
+   {
+    "file": "src/core/store.ts",
+    "lines": 127,
+    "read_fully": true
+   },
+   {
+    "file": "src/core/models.ts",
+    "lines": 541,
+    "read_fully": true
+   },
+   {
+    "file": "src/core/migrate.ts",
+    "lines": 258,
+    "read_fully": true
+   },
+   {
+    "file": "src/core/escobarState.ts",
+    "lines": 161,
+    "read_fully": true
+   },
+   {
+    "file": "src/core/exercises.ts",
+    "lines": 186,
+    "read_fully": true
+   },
+   {
+    "file": "src/core/dates.ts",
+    "lines": 80,
+    "read_fully": true
+   },
+   {
+    "file": "src/core/units.ts",
+    "lines": 46,
+    "read_fully": true
+   },
+   {
+    "file": "src/core/heartStore.ts",
+    "lines": 48,
+    "read_fully": true
+   },
+   {
+    "file": "src/data/muscles.ts",
+    "lines": 101,
+    "read_fully": true
+   },
+   {
+    "file": "src/data/goals.ts",
+    "lines": 63,
+    "read_fully": true
+   },
+   {
+    "file": "src/data/templates.ts",
+    "lines": 92,
+    "read_fully": true
+   },
+   {
+    "file": "src/data/recovery.ts",
+    "lines": 76,
+    "read_fully": true
+   },
+   {
+    "file": "src/data/volume.ts",
+    "lines": 21,
+    "read_fully": true
+   },
+   {
+    "file": "src/data/sparks.ts",
+    "lines": 13,
+    "read_fully": true
+   },
+   {
+    "file": "src/data/deload.ts",
+    "lines": 4,
+    "read_fully": true
+   },
+   {
+    "file": "src/data/exercises.json",
+    "lines": 2265,
+    "read_fully": false
+   },
+   {
+    "file": "src/data/knowledge.json",
+    "lines": 1383,
+    "read_fully": false
+   },
+   {
+    "file": "src/data/coachCues.json",
+    "lines": 1,
+    "read_fully": false
+   },
+   {
+    "file": "src/theme/themes.ts",
+    "lines": 264,
+    "read_fully": true
+   },
+   {
+    "file": "src/theme/engine.ts",
+    "lines": 42,
+    "read_fully": true
+   },
+   {
+    "file": "src/app/App.tsx",
+    "lines": 97,
+    "read_fully": true
+   },
+   {
+    "file": "src/app/router.ts",
+    "lines": 57,
+    "read_fully": true
+   },
+   {
+    "file": "src/app/selectors.ts",
+    "lines": 60,
+    "read_fully": true
+   },
+   {
+    "file": "src/app/toast.ts",
+    "lines": 7,
+    "read_fully": true
+   },
+   {
+    "file": "src/main.tsx",
+    "lines": 46,
+    "read_fully": true
+   },
+   {
+    "file": "src/svg/bodyMuscles.ts",
+    "lines": 12,
+    "read_fully": true
+   },
+   {
+    "file": "src/svg/logo.ts",
+    "lines": 38,
+    "read_fully": true
+   },
+   {
+    "file": "index.html",
+    "lines": 57,
+    "read_fully": true
+   },
+   {
+    "file": "public/sw.js",
+    "lines": 9,
+    "read_fully": true
+   },
+   {
+    "file": "public/manifest.webmanifest",
+    "lines": 31,
+    "read_fully": true
+   },
+   {
+    "file": "vite.config.ts",
+    "lines": 23,
+    "read_fully": true
+   },
+   {
+    "file": "tsconfig.json",
+    "lines": 22,
+    "read_fully": true
+   },
+   {
+    "file": "package.json",
+    "lines": 45,
+    "read_fully": true
+   },
+   {
+    "file": "scripts/sw-version.mjs",
+    "lines": 6,
+    "read_fully": true
+   },
+   {
+    "file": "scripts/convert-legacy-backup.ts",
+    "lines": 27,
+    "read_fully": true
+   }
+  ]
+ },
+ "platform": {
+  "features": [
+   {
+    "name": "Worker /health",
+    "entry_points": "escobar-worker/src/handler.ts:50",
+    "status": "working",
+    "notes": "Returns protocol/model/modes/quotas/key; deploy workflow asserts key:true. Advertises quotas:false (quotas off) to anyone."
+   },
+   {
+    "name": "Worker /v2/turn SSE relay",
+    "entry_points": "handler.ts:44-106, anthropic.ts:180-229",
+    "status": "working",
+    "notes": "start/thinking/text/tool/tool_input/final/refusal/error + 10 s ping, 60 s idle abort; client disconnect does not abort upstream (PL-05)."
+   },
+   {
+    "name": "Request validation",
+    "entry_points": "validate.ts:88",
+    "status": "working",
+    "notes": "Strict user blocks; allows arbitrary client system text and effort up to max (PL-06); allows cache_control on user text (PL-12)."
+   },
+   {
+    "name": "System-role fold retry",
+    "entry_points": "handler.ts:87-91, anthropic.ts:68-80,160-164",
+    "status": "working",
+    "notes": "One retry, remembered per instance."
+   },
+   {
+    "name": "Fallback pruning / error mapping",
+    "entry_points": "anthropic.ts:117-157",
+    "status": "working",
+    "notes": "API 400 text passed to client as detail (deliberate per decisions)."
+   },
+   {
+    "name": "CORS allowlist",
+    "entry_points": "handler.ts:26-48",
+    "status": "partial",
+    "notes": "Correct for browsers but not an access control: requests without Origin are always allowed."
+   },
+   {
+    "name": "Per-device rate limit",
+    "entry_points": "handler.ts:66-68, wrangler.toml:26-29",
+    "status": "partial",
+    "notes": "Keyed on client-minted x-escobar-device; rotating ids bypasses it."
+   },
+   {
+    "name": "Daily quotas (KV)",
+    "entry_points": "quota.ts, handler.ts:69-71,93-97",
+    "status": "broken",
+    "notes": "QUOTA KV binding is commented out in wrangler.toml, so checkQuota always returns ok in production; when enabled, undercounts (PL-07)."
+   },
+   {
+    "name": "Worker deploy CI",
+    "entry_points": ".github/workflows/deploy-worker.yml",
+    "status": "partial",
+    "notes": "Deploys only from the feature branch, not gated by source-gate, wrangler unpinned."
+   },
+   {
+    "name": "Health Connect summary sync",
+    "entry_points": "HealthConnectNativePlugin.readSummary, src/native/health.ts syncHealth",
+    "status": "broken",
+    "notes": "Single-thread executor deadlock: every read times out after 20 s (PL-03); even if fixed, steps/calories are 48 h raw sums (PL-04)."
+   },
+   {
+    "name": "Health Connect diagnose",
+    "entry_points": "HealthConnectNativePlugin.diagnose",
+    "status": "dead",
+    "notes": "No TS caller; also affected by the deadlock."
+   },
+   {
+    "name": "Health Connect permissions + rationale",
+    "entry_points": "requestPermissions, patch_manifest.py:80-107, PermissionsRationaleActivity",
+    "status": "working",
+    "notes": "Includes READ_RESTING_HEART_RATE; rationale text inaccurate about data leaving device (PL-10)."
+   },
+   {
+    "name": "Watch BLE scan/connect/live HR",
+    "entry_points": "WatchBridgePlugin, WatchService, DeviceScanner, core/*",
+    "status": "partial",
+    "notes": "Works functionally; plugin methods touch main-thread-only state from Capacitor's plugin thread (PL-08); event flood per scan result (PL-13)."
+   },
+   {
+    "name": "Watch foreground service (connectedDevice)",
+    "entry_points": "WatchService.connect, patch_manifest.py:68-78",
+    "status": "working",
+    "notes": "FGS type + FOREGROUND_SERVICE_CONNECTED_DEVICE declared; BLUETOOTH_SCAN neverForLocation; legacy perms capped at 30."
+   },
+   {
+    "name": "Rest/training notifications exact timing",
+    "entry_points": "patch_manifest.py:24, src/native/notifications.ts:42",
+    "status": "partial",
+    "notes": "SCHEDULE_EXACT_ALARM declared but never checked/requested; inexact on Android 14+ (PL-09)."
+   },
+   {
+    "name": "Gate CI (web + visual + debug APK)",
+    "entry_points": ".github/workflows/build-apk.yml, scripts/screenshot-gate.mjs",
+    "status": "working",
+    "notes": "Green; embeds a private debug signing key (PL-02); some TZ/timing fragility."
+   },
+   {
+    "name": "Signed release APK",
+    "entry_points": ".github/workflows/release-apk.yml",
+    "status": "working",
+    "notes": "Secrets-based signing; versionCode/versionName hard-coded 37 prefix; no gate run."
+   },
+   {
+    "name": "Tool schema sync",
+    "entry_points": "scripts/escobar-tools.mjs, tests/escobar/tools-sync.test.ts",
+    "status": "working",
+    "notes": "Relies on transitive esbuild."
+   },
+   {
+    "name": "Legacy backup converter",
+    "entry_points": "scripts/convert-legacy-backup.ts",
+    "status": "untested",
+    "notes": "Hard-codes version '37.0.0' instead of APP_VERSION."
+   },
+   {
+    "name": "Logo/body-muscle/legacy extractors",
+    "entry_points": "scripts/render-logo.mjs, extract-body-muscles.mjs, extract-legacy-data.mjs",
+    "status": "untested",
+    "notes": "Dev-only generators; extract-legacy-data would overwrite src/data/*.json."
+   }
+  ],
+  "improvements": [
+   {
+    "title": "Worker access control: signed device ids + per-IP limits + bound QUOTA (see PL-01)",
+    "kind": "add",
+    "rationale": "Only thing preventing unlimited spend of the Anthropic key; current CORS/device checks are not authentication and quotas are unbound in wrangler.toml.",
+    "files": "escobar-worker/src/handler.ts, quota.ts, anthropic.ts (Env), wrangler.toml, src/escobar/session.ts, src/escobar/transport.ts",
+    "size": "M",
+    "priority": "P0"
+   },
+   {
+    "title": "Rotate and move the debug keystore to a secret (see PL-02)",
+    "kind": "remove",
+    "rationale": "Private signing key in repo allows in-place update hijack of installed debug builds.",
+    "files": ".github/workflows/build-apk.yml",
+    "size": "S",
+    "priority": "P0"
+   },
+   {
+    "title": "Fix Health Connect threading and switch to aggregate reads for today",
+    "kind": "improve",
+    "rationale": "Health sync is fully broken by the executor deadlock and would report 48 h sums once unblocked (PL-03, PL-04).",
+    "files": "native/HealthConnectNativePlugin.java, src/native/health.ts",
+    "size": "M",
+    "priority": "P0"
+   },
+   {
+    "title": "Atomic quota counters in a Durable Object and per-step accounting",
+    "kind": "refactor",
+    "rationale": "KV read-modify-write loses updates and the 1 write/s/key limit on the global key silently drops increments; tool loops are uncounted (PL-07).",
+    "files": "escobar-worker/src/quota.ts, handler.ts, wrangler.toml",
+    "size": "M",
+    "priority": "P1"
+   },
+   {
+    "title": "Propagate client disconnect/Stop to the upstream stream",
+    "kind": "improve",
+    "rationale": "Saves billed tokens on every Stop/closed sheet (PL-05).",
+    "files": "escobar-worker/src/handler.ts, anthropic.ts, wrangler.toml",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Tighten client-controlled system text and effort (decision-review)",
+    "kind": "improve",
+    "rationale": "Caps abuse of decision 8 while keeping the brief design (PL-06).",
+    "files": "escobar-worker/src/validate.ts, prompt/policy.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Run Watch plugin work on the main thread and throttle device events",
+    "kind": "improve",
+    "rationale": "Removes CME crash risk and bridge flooding (PL-08, PL-13).",
+    "files": "native/watch/WatchBridgePlugin.java, native/watch/DeviceScanner.java, src/native/watch.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Exact-alarm check/request flow for rest timer",
+    "kind": "add",
+    "rationale": "Rest-done alert timing is a core live-session feature; exact alarms are denied by default on Android 14+ (PL-09).",
+    "files": "src/native/notifications.ts, native/patch_manifest.py",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Accurate Health Connect privacy rationale",
+    "kind": "improve",
+    "rationale": "Play review and user trust; current text contradicts Escobar data sharing (PL-10).",
+    "files": "native/PermissionsRationaleActivity.java",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Deploy Worker from main after a green gate, pin wrangler",
+    "kind": "improve",
+    "rationale": "Current trigger points at a feature branch and ignores the app-side tools-sync test (PL-11).",
+    "files": ".github/workflows/deploy-worker.yml, escobar-worker/package.json",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Deduplicate the Android project generation between gate and release workflows",
+    "kind": "merge",
+    "rationale": "The 'Generate/Configure Android project' and verification blocks are copy-pasted in build-apk.yml:82-146 and release-apk.yml:87-165 and have already drifted (icon background #08090A vs #06131B). Move into scripts/prepare-android.sh (minSdk patch, cap sync, copy native/*.java, patch_manifest.py, icons, greps) called by both.",
+    "files": ".github/workflows/build-apk.yml, .github/workflows/release-apk.yml, new scripts/prepare-android.sh",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Proper adaptive launcher icon",
+    "kind": "improve",
+    "rationale": "Both workflows copy the 512 px full icon as ic_launcher_foreground into every density; adaptive masks crop it and APK carries 15 copies. Render a 432 px foreground with the mark inside the 66% safe zone via scripts/render-logo.mjs and copy per density.",
+    "files": "scripts/render-logo.mjs, workflows",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Reuse the gated web build in android-gate",
+    "kind": "improve",
+    "rationale": "android-gate re-runs npm ci + npm run build instead of downloading the MARC-www artifact, so the APK is not byte-proven to be the gated build and CI time doubles.",
+    "files": ".github/workflows/build-apk.yml",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Validator/size hardening and remove unused client cache_control",
+    "kind": "improve",
+    "rationale": "PL-12, PL-14: cheap input hardening.",
+    "files": "escobar-worker/src/validate.ts, handler.ts",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Remove or wire dead native diagnostics; delete worker MODE_ADDENDUM",
+    "kind": "remove",
+    "rationale": "PL-15; a 'Copy watch diagnostics' button would help owner field reports (Huawei GT6 HR broadcast issues).",
+    "files": "native/watch/WatchService.java, WatchBridgePlugin.java, core/LiveSession.java, HealthConnectNativePlugin.java, escobar-worker/src/prompt/modes.ts",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Make patch_manifest.py enforce attributes idempotently",
+    "kind": "improve",
+    "rationale": "PL-16.",
+    "files": "native/patch_manifest.py",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Derive release version from package.json and gate releases",
+    "kind": "improve",
+    "rationale": "PL-17.",
+    "files": ".github/workflows/release-apk.yml",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Make gate TZ-independent and de-flake timing check",
+    "kind": "improve",
+    "rationale": "PL-18; replace fixed waitForTimeout sleeps with locator waits where possible.",
+    "files": "scripts/screenshot-gate.mjs",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Add direct devDependency on esbuild; use APP_VERSION in convert-backup",
+    "kind": "improve",
+    "rationale": "scripts/escobar-tools.mjs imports esbuild and package.json scripts call the esbuild CLI, but esbuild is only a transitive dep of vite; convert-legacy-backup.ts hard-codes version '37.0.0'.",
+    "files": "package.json, scripts/convert-legacy-backup.ts",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Worker observability without PII",
+    "kind": "add",
+    "rationale": "Only console.error of upstream detail exists; add one structured log line per step {requestId, mode, model, stop_reason, in/out/cache tokens, steps, ms} (no device id or content) to track cost and detect abuse via wrangler tail / Logpush.",
+    "files": "escobar-worker/src/handler.ts",
+    "size": "S",
+    "priority": "P2"
+   }
+  ],
+  "module_map": [
+   {
+    "file": "escobar-worker/src/index.ts",
+    "purpose": "Worker entry; wires real Anthropic SDK client (maxRetries 1), clock, uuid, waitUntil into handle()",
+    "key_exports": "default {fetch}",
+    "unused_exports": "none"
+   },
+   {
+    "file": "escobar-worker/src/handler.ts",
+    "purpose": "Routing (/health, /v2/turn), CORS, device-id check, body validation, RATE limit, KV quota check, SSE stream with heartbeat, one model step + system-role fold retry, recordTurn",
+    "key_exports": "handle, corsHeaders, PROTOCOL, DEVICE_ID, HEARTBEAT_MS, Deps",
+    "unused_exports": "none (DEVICE_ID/HEARTBEAT_MS only used internally/tests)"
+   },
+   {
+    "file": "escobar-worker/src/anthropic.ts",
+    "purpose": "Request assembly (model, adaptive thinking, per-mode effort/max_tokens, tools per mode, structured formats, cache markers, betas, fallbacks), fallback pruning, SDK error mapping, runStep SSE relay with idle timeout",
+    "key_exports": "buildParams, runStep, mapError, errorDetail, isSystemRoleRejection, foldSystemMessages, pruneFallback, effortFor, TOOLS, READ_TOOLS, FORMATS, MODE_CONFIG, noSystemRole, supportsSystemMessages, DEFAULT_MODEL, IDLE_TIMEOUT_MS, Env, ClientLike, StreamLike, SseEvent, ErrorCode",
+    "unused_exports": "errorDetail/supportsSystemMessages only used inside module"
+   },
+   {
+    "file": "escobar-worker/src/quota.ts",
+    "purpose": "Daily per-device turns/steps/output-token caps and global step cap in KV (read-modify-write, best effort)",
+    "key_exports": "checkQuota, recordTurn, limits, dayKey, resetInSec, DEFAULTS, DeviceUsage",
+    "unused_exports": "none"
+   },
+   {
+    "file": "escobar-worker/src/validate.ts",
+    "purpose": "Strict validation of POST /v2/turn body: top keys, blocked PII keys, modes, manifest size, message roles/blocks, images, tool_use/tool_result pairing, size caps, step ceiling",
+    "key_exports": "validateTurn, stepsSinceUser, TurnBody, TOOL_NAMES, MAX_* constants, REPAIR_MARKER",
+    "unused_exports": "none"
+   },
+   {
+    "file": "escobar-worker/src/prompt/policy.ts",
+    "purpose": "WORKER_POLICY persona/safety/tool policy system text (cached)",
+    "key_exports": "WORKER_POLICY",
+    "unused_exports": "none"
+   },
+   {
+    "file": "escobar-worker/src/prompt/manifest.ts",
+    "purpose": "Deterministic, escaped <palace_manifest> rendering for the 1 h cache",
+    "key_exports": "renderManifest",
+    "unused_exports": "none"
+   },
+   {
+    "file": "escobar-worker/src/prompt/modes.ts",
+    "purpose": "Mode type/list; re-exports generated mode addenda",
+    "key_exports": "Mode, MODES, MODE_ADDENDUM",
+    "unused_exports": "MODE_ADDENDUM (zero callers in escobar-worker/src or test)"
+   },
+   {
+    "file": "escobar-worker/src/tools.generated.json",
+    "purpose": "Generated API tool list (45 tools, 8 strict) + mode addenda, from app schema via scripts/escobar-tools.mjs",
+    "key_exports": "tools, modes",
+    "unused_exports": "modes (only consumed by dead MODE_ADDENDUM)"
+   },
+   {
+    "file": "native/HealthConnectNativePlugin.java",
+    "purpose": "Capacitor plugin over platform Health Connect (API 34+): availability, permissions, 48 h summary read, 7-day diagnose",
+    "key_exports": "isAvailable, openPermissions, requestPermissions, readSummary, diagnose",
+    "unused_exports": "diagnose and isAvailable have no TS callers (src/native/health.ts only calls readSummary/requestPermissions/openPermissions)"
+   },
+   {
+    "file": "native/MainActivity.java",
+    "purpose": "Registers HealthConnectNative and WatchBridge plugins",
+    "key_exports": "MainActivity",
+    "unused_exports": "none"
+   },
+   {
+    "file": "native/PermissionsRationaleActivity.java",
+    "purpose": "Static Health Connect privacy rationale screen (target of VIEW_PERMISSION_USAGE alias)",
+    "key_exports": "PermissionsRationaleActivity",
+    "unused_exports": "none"
+   },
+   {
+    "file": "native/patch_manifest.py",
+    "purpose": "Adds permissions (notifications, exact alarm, health, BLE, FGS), BLE feature, WatchService, rationale activity and alias to the generated AndroidManifest",
+    "key_exports": "script",
+    "unused_exports": "none"
+   },
+   {
+    "file": "native/watch/WatchBridgePlugin.java",
+    "purpose": "Capacitor adapter: BLE permissions, scan, connect/disconnect, status + measurement events from bound WatchService",
+    "key_exports": "isSupported, permissionState, requestPermissions, startScan, stopScan, connect, disconnect, status; events watchStatus/watchMeasurement/watchDevice",
+    "unused_exports": "none"
+   },
+   {
+    "file": "native/watch/WatchService.java",
+    "purpose": "Foreground connectedDevice service: GATT connect, HR (0x2A37) + battery subscribe queue, retries, notification",
+    "key_exports": "WatchService, LocalBinder, HR_SERVICE, HR, STOP",
+    "unused_exports": "diagnostics() (zero callers), batteryReceivedAt/services/logs only feed diagnostics"
+   },
+   {
+    "file": "native/watch/DeviceScanner.java",
+    "purpose": "Unfiltered LE scan with bonded-device seeding, 80-device cap, sort HR-first",
+    "key_exports": "DeviceScanner, Found",
+    "unused_exports": "message field is never read by the plugin"
+   },
+   {
+    "file": "native/watch/core/HeartRateMeasurement.java",
+    "purpose": "Pure parser for BLE Heart Rate Measurement packets",
+    "key_exports": "parse",
+    "unused_exports": "none"
+   },
+   {
+    "file": "native/watch/core/LiveSession.java",
+    "purpose": "Per-connection sample buffer (900 points) and freshness classification",
+    "key_exports": "accept, freshness, Point",
+    "unused_exports": "average(), min/max/total, lastReceivedAt (write-only)"
+   },
+   {
+    "file": ".github/workflows/build-apk.yml",
+    "purpose": "Gate: worker check, app check/build, web validation, Playwright screenshot gate, then Android debug APK build with committed debug keystore",
+    "key_exports": "jobs source-gate, android-gate",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": ".github/workflows/release-apk.yml",
+    "purpose": "Manual signed release APK with secrets keystore, versionCode 37000000+run",
+    "key_exports": "job release",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": ".github/workflows/deploy-worker.yml",
+    "purpose": "Deploys marc-coach Worker on push to the feature branch; /health check",
+    "key_exports": "job deploy",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": "scripts/screenshot-gate.mjs",
+    "purpose": "Playwright visual/migration/feature gate over vite preview in 5 themes",
+    "key_exports": "script (npm run gate)",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": "scripts/escobar-tools.mjs",
+    "purpose": "Regenerates escobar-worker/src/tools.generated.json from app schema",
+    "key_exports": "script (npm run escobar:tools)",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": "scripts/render-logo.mjs",
+    "purpose": "Renders per-theme icons/lockups to branding/ via Playwright",
+    "key_exports": "script (npm run logo)",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": "scripts/extract-body-muscles.mjs",
+    "purpose": "Generates src/svg/bodyMuscles.ts from body-muscles package",
+    "key_exports": "script (not in package.json scripts)",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": "scripts/extract-legacy-data.mjs",
+    "purpose": "One-off extraction of exercises/cues/sparks from legacy/v36/index.html",
+    "key_exports": "script (not wired; would overwrite src/data/*.json)",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": "scripts/convert-legacy-backup.ts",
+    "purpose": "CLI converting an old-app backup into the current backup JSON",
+    "key_exports": "script (npm run convert-backup)",
+    "unused_exports": "n/a"
+   },
+   {
+    "file": "capacitor.config.json",
+    "purpose": "appId com.mrcdrnzz.dailytracker, webDir www",
+    "key_exports": "config",
+    "unused_exports": "n/a"
+   }
+  ],
+  "coverage": [
+   {
+    "file": "escobar-worker/src/index.ts",
+    "lines": 15,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/src/handler.ts",
+    "lines": 106,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/src/anthropic.ts",
+    "lines": 229,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/src/quota.ts",
+    "lines": 53,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/src/validate.ts",
+    "lines": 156,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/src/prompt/manifest.ts",
+    "lines": 15,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/src/prompt/modes.ts",
+    "lines": 6,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/src/prompt/policy.ts",
+    "lines": 29,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/src/tools.generated.json",
+    "lines": 3114,
+    "read_fully": false
+   },
+   {
+    "file": "escobar-worker/test/anthropic.test.ts",
+    "lines": 122,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/test/handler.test.ts",
+    "lines": 126,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/test/helpers.ts",
+    "lines": 92,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/test/schema.test.ts",
+    "lines": 47,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/test/validate.test.ts",
+    "lines": 66,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/wrangler.toml",
+    "lines": 35,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/README.md",
+    "lines": 37,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/package.json",
+    "lines": 23,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/tsconfig.json",
+    "lines": 16,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/vitest.config.ts",
+    "lines": 3,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/package-lock.json",
+    "lines": 1703,
+    "read_fully": false
+   },
+   {
+    "file": "native/HealthConnectNativePlugin.java",
+    "lines": 355,
+    "read_fully": true
+   },
+   {
+    "file": "native/MainActivity.java",
+    "lines": 14,
+    "read_fully": true
+   },
+   {
+    "file": "native/PermissionsRationaleActivity.java",
+    "lines": 39,
+    "read_fully": true
+   },
+   {
+    "file": "native/patch_manifest.py",
+    "lines": 111,
+    "read_fully": true
+   },
+   {
+    "file": "native/watch/WatchBridgePlugin.java",
+    "lines": 220,
+    "read_fully": true
+   },
+   {
+    "file": "native/watch/WatchService.java",
+    "lines": 259,
+    "read_fully": true
+   },
+   {
+    "file": "native/watch/DeviceScanner.java",
+    "lines": 75,
+    "read_fully": true
+   },
+   {
+    "file": "native/watch/core/HeartRateMeasurement.java",
+    "lines": 42,
+    "read_fully": true
+   },
+   {
+    "file": "native/watch/core/LiveSession.java",
+    "lines": 41,
+    "read_fully": true
+   },
+   {
+    "file": "native/.placeholder",
+    "lines": 1,
+    "read_fully": true
+   },
+   {
+    "file": ".github/workflows/build-apk.yml",
+    "lines": 199,
+    "read_fully": true
+   },
+   {
+    "file": ".github/workflows/release-apk.yml",
+    "lines": 224,
+    "read_fully": true
+   },
+   {
+    "file": ".github/workflows/deploy-worker.yml",
+    "lines": 50,
+    "read_fully": true
+   },
+   {
+    "file": ".github/workflows/.placeholder",
+    "lines": 1,
+    "read_fully": true
+   },
+   {
+    "file": "scripts/screenshot-gate.mjs",
+    "lines": 573,
+    "read_fully": true
+   },
+   {
+    "file": "scripts/escobar-tools.mjs",
+    "lines": 19,
+    "read_fully": true
+   },
+   {
+    "file": "scripts/render-logo.mjs",
+    "lines": 44,
+    "read_fully": true
+   },
+   {
+    "file": "scripts/extract-body-muscles.mjs",
+    "lines": 38,
+    "read_fully": true
+   },
+   {
+    "file": "scripts/extract-legacy-data.mjs",
+    "lines": 66,
+    "read_fully": true
+   },
+   {
+    "file": "scripts/convert-legacy-backup.ts",
+    "lines": 27,
+    "read_fully": true
+   },
+   {
+    "file": "capacitor.config.json",
+    "lines": 5,
+    "read_fully": true
+   }
+  ]
+ },
+ "brain": {
+  "features": [
+   {
+    "name": "Effort-aware e1RM",
+    "entry_points": "e1rm.effectiveOneRm via history.summarizeSets",
+    "status": "partial",
+    "notes": "Epley+RIR works; spec foundations (trend = median of last 3, 7-10 rep half weight via e1rmWeight, isRealChange, RIR bias) are not wired"
+   },
+   {
+    "name": "Next-session progression",
+    "entry_points": "progression.suggestNext (Train, Coach, Escobar)",
+    "status": "working",
+    "notes": "Rules sound; Coach tab and Escobar call it without readiness/recovery so they can differ from Train"
+   },
+   {
+    "name": "Plate Sense (equipment snapping, plate math)",
+    "entry_points": "units.loadableNear/plateBreakdown/resolveProfile",
+    "status": "partial",
+    "notes": "Greedy plateBreakdown disagrees with DP loadableValues for custom plate sets (BR-24)"
+   },
+   {
+    "name": "Muscle recovery v2",
+    "entry_points": "recovery.recoveryStatus (selectors.recovery, Body, Today, Escobar)",
+    "status": "partial",
+    "notes": "pct/hoursLeft correct; readyInHours/fullInHours wrong reference time (BR-02); O(S^2) cost recomputed every second in sessions (BR-23)"
+   },
+   {
+    "name": "Daily readiness",
+    "entry_points": "readiness.readiness (selectors.todayReadiness, rules.derive, readinessSeries)",
+    "status": "broken",
+    "notes": "Different check-in windows per call site give contradictory bands (BR-03); new-user load score 0 (BR-19)"
+   },
+   {
+    "name": "Session energy",
+    "entry_points": "energy.sessionEnergy",
+    "status": "working",
+    "notes": "watch/HC energy sources unused (pickEnergy, energyFromWatch dead)"
+   },
+   {
+    "name": "Heart analytics (zones, HRmax, rest target, drift, mismatch)",
+    "entry_points": "heart.*",
+    "status": "partial",
+    "notes": "Observed HRmax picks first plateau not highest (BR-12)"
+   },
+   {
+    "name": "Deload offer",
+    "entry_points": "rules.deloadOffer -> deload.deloadTrigger",
+    "status": "partial",
+    "notes": "Fires on abandoned lifts (BR-05) and assisted lifts (BR-06); 5x recoveryStatus per call"
+   },
+   {
+    "name": "Volume status and programming.volume insight",
+    "entry_points": "volume.muscleVolumeStatus",
+    "status": "broken",
+    "notes": "Partial current week judged against band: 'under' for every muscle each Monday (BR-07)"
+   },
+   {
+    "name": "Training balance",
+    "entry_points": "balance.trainingBalance",
+    "status": "broken",
+    "notes": "Upper/lower inflated by multi-muscle upper exercises (BR-17)"
+   },
+   {
+    "name": "Plateau / decline detection",
+    "entry_points": "trend.plateauStatus, rules progress.*",
+    "status": "partial",
+    "notes": "No recency gate (BR-05), assisted mode inverted (BR-06), duplicate plateau + plateau-lever (BR-27)"
+   },
+   {
+    "name": "Plateau lever",
+    "entry_points": "rules progress.plateau-lever",
+    "status": "broken",
+    "notes": "1.5%/week threshold instead of 1.5% over 8 weeks; fires on rising lifts (BR-04)"
+   },
+   {
+    "name": "Effort calibration (RIR bias)",
+    "entry_points": "effortBias.*, rules readiness.effort-calibration",
+    "status": "broken",
+    "notes": "Promised e1RM adjustment never applied (BR-10); pairs over-counted (BR-11)"
+   },
+   {
+    "name": "Logging fidelity",
+    "entry_points": "fidelity.*",
+    "status": "working",
+    "notes": "midnight_crossing computed on UTC dates (BR-25)"
+   },
+   {
+    "name": "Weekly review",
+    "entry_points": "weeklyReview.weeklyReviewInsights (Coach, Escobar)",
+    "status": "partial",
+    "notes": "Pace label wrong for falling lifts (BR-13), weight rate lag (BR-14), TZ adherence (BR-15), stabilizer sets (BR-16)"
+   },
+   {
+    "name": "Pre-session brief",
+    "entry_points": "pre.preSessionInsights (Train PreSessionSheet)",
+    "status": "broken",
+    "notes": "Hardcoded 8 reps, ignores goal/deload/equipment (BR-08); warm-up heavier than working load (BR-09)"
+   },
+   {
+    "name": "Live autoregulation",
+    "entry_points": "live.autoregulationSuggestion (Train, Escobar)",
+    "status": "partial",
+    "notes": "Works with equipment; without it (Escobar) suggests the same load (BR-18)"
+   },
+   {
+    "name": "Post-session debrief",
+    "entry_points": "post.postSessionInsights (FinishScreen, Escobar)",
+    "status": "partial",
+    "notes": "Density mixes exercises (BR-20); unrounded e1RM text (BR-21)"
+   },
+   {
+    "name": "Week summary, grade, streak",
+    "entry_points": "weekly.weekSummary/trainingStreak",
+    "status": "partial",
+    "notes": "Grade wrong for <3 planned days (BR-22)"
+   },
+   {
+    "name": "Personal records",
+    "entry_points": "prs.allRecords/isLiveRecord",
+    "status": "working",
+    "notes": "allRecords O(E*S) recomputed in weekSummary"
+   },
+   {
+    "name": "Onboarding trigger",
+    "entry_points": "onboarding.shouldShowOnboarding",
+    "status": "working",
+    "notes": ""
+   },
+   {
+    "name": "Plan evaluator",
+    "entry_points": "plan.evaluatePlan (Escobar)",
+    "status": "working",
+    "notes": "0.55 secondary weight is a logged decision"
+   },
+   {
+    "name": "Substitutes and cues",
+    "entry_points": "substitute.substitutesFor, cues.pickCue",
+    "status": "working",
+    "notes": ""
+   },
+   {
+    "name": "Navy body fat",
+    "entry_points": "bodyfat.navyBodyFat (Body tab)",
+    "status": "broken",
+    "notes": "Metric constants applied to inches (BR-01); no tests"
+   }
+  ],
+  "improvements": [
+   {
+    "title": "Single readiness source for Train, Coach and Escobar",
+    "kind": "refactor",
+    "rationale": "Three call sites pass different check-in windows and get opposite bands (BR-03); window must live inside readiness()",
+    "files": "src/brain/readiness.ts, src/brain/coach/rules.ts, src/app/selectors.ts",
+    "size": "S",
+    "priority": "P0"
+   },
+   {
+    "title": "Fix Navy body-fat formula and add reference tests",
+    "kind": "improve",
+    "rationale": "Every body-fat number shown is wrong (BR-01); no test exists",
+    "files": "src/brain/bodyfat.ts, tests/bodyfat.test.ts",
+    "size": "S",
+    "priority": "P0"
+   },
+   {
+    "title": "Recovery times relative to now",
+    "kind": "improve",
+    "rationale": "Body tab and Escobar show since-training hours as time remaining (BR-02)",
+    "files": "src/brain/recovery.ts, tests/recovery.test.ts",
+    "size": "S",
+    "priority": "P0"
+   },
+   {
+    "title": "Active-lift recency gate shared by rules, deload and weekly review",
+    "kind": "add",
+    "rationale": "Abandoned lifts drive insights and deload offers forever (BR-05)",
+    "files": "src/brain/history.ts, src/brain/coach/rules.ts, src/brain/deload.ts, src/brain/coach/weeklyReview.ts",
+    "size": "S",
+    "priority": "P0"
+   },
+   {
+    "title": "Mode-aware trend/e1RM (assisted, bodyweight)",
+    "kind": "improve",
+    "rationale": "Assisted progress read as decline (BR-06); e1RM on assistance kg is meaningless",
+    "files": "src/brain/trend.ts, src/brain/coach/rules.ts, src/brain/deload.ts, src/brain/progression.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "One insight per lift and cross-cadence conflict resolver",
+    "kind": "add",
+    "rationale": "plateau vs plateau-lever vs weekly 'rising' vs pre target vs suggestNext disagree (BR-04, BR-08, BR-27); a resolver keyed by exerciseId/muscle should keep the most specific insight and suppress 'add load' advice when readiness is red or a deload is active",
+    "files": "src/brain/coach/rules.ts, src/brain/coach/pre.ts, src/brain/coach/weeklyReview.ts",
+    "size": "M",
+    "priority": "P1"
+   },
+   {
+    "title": "Pre-session brief driven by suggestNext",
+    "kind": "refactor",
+    "rationale": "Pre sheet recomputes a target with hardcoded 8 reps; reuse suggestNext output (goal, deload, readiness, equipment) and base warm-ups on the working load (BR-08, BR-09)",
+    "files": "src/brain/coach/pre.ts, src/slices/workout/Train.tsx",
+    "size": "M",
+    "priority": "P1"
+   },
+   {
+    "title": "Wire the RIR bias into e1RM, or change the insight copy",
+    "kind": "improve",
+    "rationale": "The calibration insight promises a behaviour that does not exist (BR-10, BR-11)",
+    "files": "src/brain/history.ts, src/brain/effortBias.ts, src/brain/coach/rules.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Unify weekly effective/hard-set counting",
+    "kind": "merge",
+    "rationale": "exposure (1/0.5/0), weeklyReview (1/0.55/0.25 x effort) and balance (sum of all muscles) count sets differently and contradict each other; one effectiveSets(sessions, range, {effortFraction}) in exposure.ts (plan.ts keeps 0.55 by decision)",
+    "files": "src/brain/exposure.ts, src/brain/coach/weeklyReview.ts, src/brain/balance.ts, src/brain/volume.ts",
+    "size": "M",
+    "priority": "P1"
+   },
+   {
+    "title": "Judge volume on completed weeks",
+    "kind": "improve",
+    "rationale": "Partial current week produces Monday nagging and weekday-dependent deload condition (b) (BR-07)",
+    "files": "src/brain/volume.ts, src/brain/deload.ts, src/brain/coach/rules.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Memoise heavy brain derivations",
+    "kind": "improve",
+    "rationale": "exerciseHistory is rebuilt 5+ times per exercise per coachInsights; systemicFactor is O(S^2); readinessSeries recomputes recovery 5x; selectors recompute every second (BR-23). Add a WeakMap<Session[], Map<id, history>> cache in history.ts and a per-minute signal in selectors",
+    "files": "src/brain/history.ts, src/brain/recovery.ts, src/brain/coach/rules.ts, src/app/selectors.ts",
+    "size": "M",
+    "priority": "P1"
+   },
+   {
+    "title": "Timezone-safe date helpers everywhere in brain plus a TZ test run",
+    "kind": "improve",
+    "rationale": "new Date('YYYY-MM-DD') and ISO slices break adherence and flags west/east of UTC (BR-15, BR-25); run vitest once with TZ=America/New_York and once with TZ=Asia/Manila in CI",
+    "files": "src/brain/coach/weeklyReview.ts, src/brain/heart.ts, src/brain/energy.ts, src/brain/fidelity.ts, vitest config/CI",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Unit-aware coach copy",
+    "kind": "improve",
+    "rationale": "lb users see kg strings from every brain module (BR-28)",
+    "files": "src/brain/progression.ts, src/brain/prs.ts, src/brain/coach/*.ts, src/core/units.ts",
+    "size": "M",
+    "priority": "P2"
+   },
+   {
+    "title": "Weight-trend rate by regression",
+    "kind": "improve",
+    "rationale": "EWMA lag halves the reported rate (BR-14)",
+    "files": "src/brain/coach/weeklyReview.ts",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Surface rule failures instead of silently swallowing",
+    "kind": "improve",
+    "rationale": "coachInsights wraps each rule in try/catch returning []; a thrown rule disappears without trace. Log in dev builds and count failures for Escobar diagnostics",
+    "files": "src/brain/coach/rules.ts",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Add loadForReps(e1rm, reps, rir = 0) parameter",
+    "kind": "improve",
+    "rationale": "Escobar calc uses loadForReps without RIR (failure-level load); pre adds +2 by hand. An explicit rir argument prevents misuse",
+    "files": "src/brain/e1rm.ts, src/brain/coach/pre.ts, src/escobar/tools/calc.ts",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Remove dead brain code",
+    "kind": "remove",
+    "rationale": "withinDaysOfSession, weeklyEnergy, dailyActiveKcal, isDuplicateSession, and either wire or delete isRealChange/e1rmWeight/pickEnergy/energyFromWatch (BR-30)",
+    "files": "src/brain/recovery.ts, src/brain/energy.ts, src/brain/e1rm.ts, src/brain/fidelity.ts",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Live PR check should include earlier sets of the current session",
+    "kind": "improve",
+    "rationale": "isLiveRecord compares only against saved history, so every set at the new best load in the same session is also flagged as a record",
+    "files": "src/brain/prs.ts, src/slices/workout/Train.tsx",
+    "size": "S",
+    "priority": "P3"
+   }
+  ],
+  "module_map": [
+   {
+    "file": "src/brain/index.ts",
+    "purpose": "Barrel re-export of core brain modules",
+    "key_exports": "re-exports exposure, recovery, history, prs, trend, progression, balance, effort, weekly, bodyfat, coach/rules, coach/cues",
+    "unused_exports": "none (barrel)"
+   },
+   {
+    "file": "src/brain/substitute.ts",
+    "purpose": "Exercise substitutes by shared primary muscle, ranked by pattern then equipment group",
+    "key_exports": "substitutesFor",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/bodyfat.ts",
+    "purpose": "US Navy circumference body-fat estimate (Body tab)",
+    "key_exports": "navyBodyFat",
+    "unused_exports": "none; no unit test exists"
+   },
+   {
+    "file": "src/brain/effort.ts",
+    "purpose": "Effort-rating drift (harder/easier) over the last 6 sessions of a lift",
+    "key_exports": "effortDrift",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/e1rm.ts",
+    "purpose": "Effort-aware Epley e1RM, rounding, load-for-reps",
+    "key_exports": "effectiveOneRm, RIR_BY_EFFORT, EPLEY_DIVISOR, roundToStep, loadForReps",
+    "unused_exports": "isRealChange, e1rmWeight (tests only); effectiveOneRm's rirBias param is never passed by any caller"
+   },
+   {
+    "file": "src/brain/volume.ts",
+    "purpose": "Weekly effective sets per muscle vs 4-week median and level band",
+    "key_exports": "volumeBands, muscleVolumeStatus",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/effortBias.ts",
+    "purpose": "RIR bias from same-load max vs non-max set pairs within 14 days",
+    "key_exports": "rirObservations, effortBiasByLabel",
+    "unused_exports": "none (only used by rules.readiness.effort-calibration; result never feeds e1RM)"
+   },
+   {
+    "file": "src/brain/trend.ts",
+    "purpose": "Recency-weighted regression trend and plateau status",
+    "key_exports": "trend, plateauStatus, PLATEAU_WINDOW, PLATEAU_MIN_SESSIONS",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/balance.ts",
+    "purpose": "Push/pull and upper/lower imbalance over 3 weeks",
+    "key_exports": "trainingBalance, BALANCE",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/onboarding.ts",
+    "purpose": "Profile completeness, onboarding sheet trigger, weight typo guard",
+    "key_exports": "profileCompleteness, shouldShowOnboarding, isWeightTypo",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/coach/cues.ts",
+    "purpose": "Coaching cue picker and equipment grouping",
+    "key_exports": "CUES, pickCue, equipmentGroup",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/coach/live.ts",
+    "purpose": "In-session autoregulation after set 1",
+    "key_exports": "autoregulationSuggestion",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/deload.ts",
+    "purpose": "Reactive deload trigger (plateau x2, effort drift + rising volume, over-band 2 weeks, 3 red readiness days)",
+    "key_exports": "deloadTrigger",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/history.ts",
+    "purpose": "Per-exercise session summaries (topKg, bestE1rm, effort coverage) used by every engine",
+    "key_exports": "summarizeSets, exerciseHistory, modeOf, daysSinceLast",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/weekly.ts",
+    "purpose": "Week summary/grade, schedule-aware streak, days since last session, weekly volume history",
+    "key_exports": "weekSummary, trainingStreak, daysSinceLastSession, weeklyVolumeHistory",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/coach/pre.ts",
+    "purpose": "Pre-session brief: working-load target, warm-up ramp, masters note",
+    "key_exports": "preSessionInsights, workingLoadTarget, warmupSets, warmupRamp, mastersDefaults, WARMUP_PCTS, WARMUP_REPS",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/prs.ts",
+    "purpose": "Personal records (heaviest, strength, reps at load, reps, duration, distance)",
+    "key_exports": "recordsFor, allRecords, recordsInWeek, isLiveRecord, PR_LABEL",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/energy.ts",
+    "purpose": "BMR, Keytel HR calories, session energy sources",
+    "key_exports": "age, bmrKcalPerDay, grossKcalPerMin, sessionEnergy",
+    "unused_exports": "energyFromWatch, pickEnergy, dailyActiveKcal, weeklyEnergy (tests only); energyFromHealthConnect (unused by decision P1)"
+   },
+   {
+    "file": "src/brain/exposure.ts",
+    "purpose": "Role/effort weights, working-set test, session emphasis, weekly effective sets, training levels",
+    "key_exports": "ROLE_WEIGHT, EFFORT_MULT, SET_WEIGHT, rolesFor, isWorkingSet, sessionEmphasis, toPercents, weeklyMuscleSets, trainingLevels, LEVELS",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/coach/post.ts",
+    "purpose": "Post-session debrief: records, effort mix, rest/density, duration drift",
+    "key_exports": "postSessionInsights, recordsInsight, effortMixInsight, restAndDensityInsight, durationDriftInsight",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/fidelity.ts",
+    "purpose": "Logging fidelity classification and plausibility flags",
+    "key_exports": "classifySetFidelity, liveSessionLogging, retroSessionLogging, legacySessionLogging, flagsForSet, unitSuspect, suspectAlternative",
+    "unused_exports": "isDuplicateSession (tests only)"
+   },
+   {
+    "file": "src/brain/plan.ts",
+    "purpose": "Programme draft evaluator for Escobar (volume, balance, recovery conflicts, session length)",
+    "key_exports": "evaluatePlan, hasBlockingIssues",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/units.ts",
+    "purpose": "Plate Sense: equipment profiles, loadable values, snapping, plate breakdown, gym inference",
+    "key_exports": "defaultProfile, resolveProfile, loadableValues, loadableNear, plateBreakdown, formatPerSide, formatLoadable, inferGym",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/readiness.ts",
+    "purpose": "Daily readiness 0-100 from check-in, sleep, recovery, RHR, HRV, load",
+    "key_exports": "readiness, readinessBaselines, READINESS_WEIGHTS, readinessSummaryText",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/progression.ts",
+    "purpose": "Next-session suggestion per exercise with readiness/recovery/deload/equipment/loadFactor hooks",
+    "key_exports": "suggestNext, repRange, loadStep, previousSet, REENTRY_DAYS, RECOVERY_HOLD_PCT",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/heart.ts",
+    "purpose": "HRmax, zones, HR summaries, rest target, effort mismatch, intra-session drift",
+    "key_exports": "hrMax, observedHrMaxFromSeries, bestObservedHrMax, restingHr, zones, sessionHeartSummary, restTarget, effortMismatch, intraSessionDrift",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/brain/coach/weeklyReview.ts",
+    "purpose": "Weekly review catalogue rows (volume, frequency, failure share, e1RM trend/pace, staleness, adherence, rep mix, weight trend)",
+    "key_exports": "weeklyReviewInsights, hardSetsThisWeek, e1rmTrend, failureShare, isStale, adherenceRate, weightTrendPctPerWeek, weekHasEnoughData",
+    "unused_exports": "expectedMonthlyRatePct exported but only used internally"
+   },
+   {
+    "file": "src/brain/recovery.ts",
+    "purpose": "Impulse-response per-muscle recovery, systemic factor, calibration",
+    "key_exports": "recoveryStatus, systemicFactor, sessionRpeLoad, calibrateAfterSession, recoveryPctFor, recoveryTier, trainingAgeMonths",
+    "unused_exports": "withinDaysOfSession (private, zero callers)"
+   },
+   {
+    "file": "src/brain/coach/rules.ts",
+    "purpose": "Now-cadence insight rules, coachInsights ranking/snooze, readinessSeries, deloadOffer",
+    "key_exports": "RULES, coachInsights, readinessSeries, deloadOffer, CATEGORY_LABEL, Insight, CoachContext",
+    "unused_exports": "none"
+   }
+  ],
+  "coverage": [
+   {
+    "file": "src/brain/index.ts",
+    "lines": 12,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/substitute.ts",
+    "lines": 13,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/bodyfat.ts",
+    "lines": 17,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/effort.ts",
+    "lines": 25,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/e1rm.ts",
+    "lines": 40,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/volume.ts",
+    "lines": 40,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/effortBias.ts",
+    "lines": 57,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/trend.ts",
+    "lines": 57,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/balance.ts",
+    "lines": 58,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/onboarding.ts",
+    "lines": 58,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/coach/cues.ts",
+    "lines": 61,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/coach/live.ts",
+    "lines": 63,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/deload.ts",
+    "lines": 67,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/history.ts",
+    "lines": 74,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/weekly.ts",
+    "lines": 99,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/coach/pre.ts",
+    "lines": 100,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/prs.ts",
+    "lines": 101,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/energy.ts",
+    "lines": 120,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/exposure.ts",
+    "lines": 124,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/coach/post.ts",
+    "lines": 138,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/fidelity.ts",
+    "lines": 158,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/plan.ts",
+    "lines": 159,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/units.ts",
+    "lines": 186,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/readiness.ts",
+    "lines": 225,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/progression.ts",
+    "lines": 235,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/heart.ts",
+    "lines": 250,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/coach/weeklyReview.ts",
+    "lines": 338,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/recovery.ts",
+    "lines": 381,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/coach/rules.ts",
+    "lines": 503,
+    "read_fully": true
+   }
+  ]
+ },
+ "regression": {
+  "features": [
+   {
+    "name": "v36 parity: Fully recovered list",
+    "entry_points": "Body.tsx:73",
+    "status": "working",
+    "notes": "present"
+   },
+   {
+    "name": "v36 parity: live PR badge",
+    "entry_points": "Train.tsx isLiveRecord",
+    "status": "working",
+    "notes": "present"
+   },
+   {
+    "name": "v36 parity: Test haptic + haptic support label",
+    "entry_points": "Settings.tsx:96-97",
+    "status": "working",
+    "notes": "present"
+   },
+   {
+    "name": "v36 parity: reminder pref separate from scheduling health, pageshow repair",
+    "entry_points": "reminders.ts, notifications.ts, main.tsx:33",
+    "status": "working",
+    "notes": "present"
+   },
+   {
+    "name": "v36 parity: rest alert exact/allowWhileIdle",
+    "entry_points": "notifications.ts:37-50",
+    "status": "working",
+    "notes": "present; SCHEDULE_EXACT_ALARM patched"
+   },
+   {
+    "name": "v36 parity: 'Test 5s' rest notification + 'Precise alerts' control",
+    "entry_points": "legacy dtRestAlertTest",
+    "status": "broken",
+    "notes": "missing in base (RG-18)"
+   },
+   {
+    "name": "v36 parity: Health Connect diagnostic",
+    "entry_points": "legacy 'Diagnostic' box",
+    "status": "broken",
+    "notes": "missing; only Sync button (RG-18)"
+   },
+   {
+    "name": "v36 parity: Visual PNG / Excel export by period",
+    "entry_points": "legacy dtExport*",
+    "status": "broken",
+    "notes": "missing; JSON full backup only (RG-17)"
+   },
+   {
+    "name": "v36 parity: Day Off / Rest Day marking",
+    "entry_points": "legacy 'Day Off / Rest Day'",
+    "status": "broken",
+    "notes": "missing; only schedule-driven rest days (RG-19)"
+   },
+   {
+    "name": "v36 parity: History 'Show earlier weeks'",
+    "entry_points": "History.tsx:48 (30 recent) + calendar",
+    "status": "working",
+    "notes": "superseded by month calendar"
+   },
+   {
+    "name": "v36 parity: debugger (Mark Bug Now, debug bundle)",
+    "entry_points": "legacy dtMarkBugNow",
+    "status": "dead",
+    "notes": "not ported; boot crash overlay is the only diagnostics"
+   },
+   {
+    "name": "v36 parity: APK byte parity + Haptics plugin guard",
+    "entry_points": "build-apk.yml:132-146,182-185",
+    "status": "working",
+    "notes": "kept; native class dex check absent"
+   },
+   {
+    "name": "Legacy (dailyTrackerPremium) import",
+    "entry_points": "store.ts:64, migrate.ts",
+    "status": "working",
+    "notes": "gate verifies >=25 sessions, 3 splits"
+   },
+   {
+    "name": "Escobar-line carry-over (coach.askThread import, readiness[], session notes, 30 lib ids)",
+    "entry_points": "escobarState.ts:101, session.ts:48",
+    "status": "broken",
+    "notes": "only deviceId reused (RG-03, RG-04)"
+   },
+   {
+    "name": "Backup/restore incl. Escobar",
+    "entry_points": "Settings.tsx:34-58",
+    "status": "partial",
+    "notes": "heart series not included; untested (RG-08)"
+   },
+   {
+    "name": "Boot crash overlay",
+    "entry_points": "index.html:27-50",
+    "status": "partial",
+    "notes": "also fires post-boot, destructive reset (RG-01)"
+   },
+   {
+    "name": "Resolve session timing (when did you train?)",
+    "entry_points": "session.ts:213, Train.tsx:620",
+    "status": "partial",
+    "notes": "array not re-sorted (RG-05)"
+   },
+   {
+    "name": "Rest banner countdown on other tabs",
+    "entry_points": "Train.tsx:766, 308",
+    "status": "partial",
+    "notes": "freezes after leaving Train (RG-07, pre-existing)"
+   },
+   {
+    "name": "Branch coach-brain: backtest harness, detectors (habit/sleep/notes), planners, principles.json",
+    "entry_points": "origin/claude/coach-brain src/brain/coach/*",
+    "status": "untested",
+    "notes": "not in base; planners superseded by Escobar evaluate_plan/propose_*; backtest harness worth porting"
+   },
+   {
+    "name": "Branch coach-brain/phase-9: session notes + note flags",
+    "entry_points": "models Session.note/noteFlags",
+    "status": "stub",
+    "notes": "not in base"
+   },
+   {
+    "name": "Branch phase-9: 30 functional/home exercises",
+    "entry_points": "exercises.json (a62d329)",
+    "status": "dead",
+    "notes": "removed by revert 4d8ff4e; not in base"
+   },
+   {
+    "name": "Branch phase-9: near-miss records, reachable rep record, chronic skips, consistency drift, lift trajectory, effort repair on finish, weekly volume chart",
+    "entry_points": "detectors/nearmiss.ts, skips.ts, consistency.ts, brain/trajectory.ts, History Stats",
+    "status": "untested",
+    "notes": "not in base; worth porting selectively"
+   },
+   {
+    "name": "Branch phase-9: graded rest by effort",
+    "entry_points": "b0c6715",
+    "status": "untested",
+    "notes": "base only grades rest in heart mode (minRestSec)"
+   },
+   {
+    "name": "Branch phase-9: live rack swap, morning verdict, debrief, warm-up, autoregulation, weekly review",
+    "entry_points": "-",
+    "status": "working",
+    "notes": "superseded in base (substituteEntry, readiness, post.ts, pre.ts, live.ts, weeklyReview.ts)"
+   },
+   {
+    "name": "Branch smartwatch: allowBackup=false, dex-level native class CI check, native HR recorder DB",
+    "entry_points": "96285d1, d69b22e",
+    "status": "untested",
+    "notes": "CI dex check + allowBackup worth porting; recorder superseded by WatchBridge"
+   }
+  ],
+  "improvements": [
+   {
+    "title": "Make the boot crash overlay boot-only and non-destructive; catch lazy-import and photo errors",
+    "kind": "improve",
+    "rationale": "RG-01: post-boot errors show 'could not start' with a reset that deletes all data",
+    "files": "index.html, src/main.tsx, src/app/App.tsx, src/escobar/ui/open.ts, src/escobar/ui/Composer.tsx, src/escobar/ui/SettingsSection.tsx",
+    "size": "S",
+    "priority": "P0"
+   },
+   {
+    "title": "Backfill `entered` lb values for pre-Plate-Sense lb users",
+    "kind": "add",
+    "rationale": "RG-02: 82% of typed lb values now display off by 0.1-0.3 lb",
+    "files": "src/core/units.ts, src/core/store.ts, tests/units-migration.test.ts",
+    "size": "S",
+    "priority": "P0"
+   },
+   {
+    "title": "Unit tests for session finish/commit/logPast/resolveTiming, store backup fallback, restore parser",
+    "kind": "add",
+    "rationale": "RG-15: main write paths only covered by the screenshot gate",
+    "files": "tests/session.test.ts, tests/store.test.ts, src/slices/settings/backup.ts (extract), tests/restore.test.ts",
+    "size": "M",
+    "priority": "P1"
+   },
+   {
+    "title": "Escobar-line carry-over: import coach.askThread once, readiness[] -> checkIns, show session notes",
+    "kind": "add",
+    "rationale": "RG-03: spec §6.3/decision 12 unimplemented; owner's phone ran that line",
+    "files": "src/escobar/session.ts, src/escobar/store.ts, src/core/store.ts, src/slices/history/History.tsx",
+    "size": "M",
+    "priority": "P1"
+   },
+   {
+    "title": "Re-add the 30 functional/home exercises removed by the revert",
+    "kind": "add",
+    "rationale": "RG-04: ids from the Escobar line resolve to nothing",
+    "files": "src/data/exercises.json, src/core/exercises.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Sort sessions after resolveSessionTiming and once in normalize",
+    "kind": "improve",
+    "rationale": "RG-05 reproduced",
+    "files": "src/slices/workout/session.ts, src/core/store.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "minuteNow computed + reference-counted ticker",
+    "kind": "refactor",
+    "rationale": "RG-06 per-second recompute; RG-07 frozen rest banner",
+    "files": "src/app/selectors.ts, src/slices/workout/Train.tsx",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Include heart series in backup/restore/reset; resync reminders after restore/reset",
+    "kind": "improve",
+    "rationale": "RG-08",
+    "files": "src/slices/settings/Settings.tsx, src/core/heartStore.ts, src/slices/history/History.tsx",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Port CI dex-level native class check (d69b22e) and decide allowBackup (96285d1)",
+    "kind": "merge",
+    "rationale": "RG-20; the native layer silently missing already shipped once",
+    "files": ".github/workflows/build-apk.yml, .github/workflows/release-apk.yml, native/patch_manifest.py",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Diagnostics: rest alert 5 s test, Health Connect diagnostic sheet",
+    "kind": "add",
+    "rationale": "RG-18 v36 parity; owner's 'Could not read' report",
+    "files": "src/slices/settings/Settings.tsx, src/native/health.ts",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "CSV export for a period",
+    "kind": "add",
+    "rationale": "RG-17 v36 parity",
+    "files": "src/slices/settings/exportCsv.ts, src/slices/settings/Settings.tsx",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Port near-miss records + 'one rep from a record' hint on finish",
+    "kind": "merge",
+    "rationale": "phase-9 detectors/nearmiss.ts (87a92e9, 6b660a8); base post.ts only reports achieved records",
+    "files": "src/brain/prs.ts, src/brain/coach/post.ts",
+    "size": "M",
+    "priority": "P2"
+   },
+   {
+    "title": "Port chronic-skip detection (exercise repeatedly skipped from its split) as a coach rule",
+    "kind": "merge",
+    "rationale": "phase-9 detectors/skips.ts; base has no rule for skipped template exercises",
+    "files": "src/brain/coach/rules.ts",
+    "size": "M",
+    "priority": "P2"
+   },
+   {
+    "title": "Weekly volume chart in History > Stats using existing weeklyVolumeHistory",
+    "kind": "add",
+    "rationale": "phase-9 e76c2cf; brain function already exists in weekly.ts but only Escobar uses it",
+    "files": "src/slices/history/History.tsx, src/ui/Sparkline.tsx",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Effort repair prompt on finish when working sets lack effort",
+    "kind": "merge",
+    "rationale": "phase-9 482ad39; base only has the data.effort-missing insight after the fact",
+    "files": "src/slices/workout/Train.tsx (FinishScreen), src/slices/workout/session.ts",
+    "size": "M",
+    "priority": "P2"
+   },
+   {
+    "title": "Android back button closes the top sheet/panel instead of exiting",
+    "kind": "add",
+    "rationale": "router uses replaceState, no @capacitor/app listener; back exits app with a sheet open",
+    "files": "package.json (@capacitor/app), src/main.tsx, src/app/router.ts",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Day off marking",
+    "kind": "add",
+    "rationale": "RG-19 v36 parity; needs owner's streak decision",
+    "files": "src/core/models.ts, src/brain/weekly.ts, src/slices/today/Today.tsx",
+    "size": "M",
+    "priority": "P3"
+   },
+   {
+    "title": "Port the backtest harness (planted events) for coach rules",
+    "kind": "merge",
+    "rationale": "coach-brain cbb29a7 scripts/backtest.ts + brain/coach/backtest.ts; base rules have unit tests but no calibration harness",
+    "files": "scripts/backtest.ts, src/brain/coach/backtest.ts",
+    "size": "M",
+    "priority": "P3"
+   },
+   {
+    "title": "Lift trajectory projection in Exercise progress",
+    "kind": "merge",
+    "rationale": "phase-9 brain/trajectory.ts; base shows trend chip only",
+    "files": "src/brain/trajectory.ts, src/slices/history/History.tsx",
+    "size": "M",
+    "priority": "P3"
+   },
+   {
+    "title": "Remove dead exports and merge DAMAGE_* constants",
+    "kind": "remove",
+    "rationale": "RG-13",
+    "files": "src/data/recovery.ts, src/core/exercises.ts, src/core/dates.ts, src/core/store.ts, src/data/goals.ts, src/ui/primitives.tsx, src/ui/icons.tsx, src/escobar/*, src/brain/index.ts",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Harden screenshot gate (local dates, waitFor instead of fixed waits, backup/restore pass)",
+    "kind": "improve",
+    "rationale": "RG-14",
+    "files": "scripts/screenshot-gate.mjs",
+    "size": "M",
+    "priority": "P3"
+   },
+   {
+    "title": "Update README/ARCHITECTURE; bump APP_VERSION from package.json",
+    "kind": "improve",
+    "rationale": "RG-11, RG-12, RG-16",
+    "files": "README.md, docs/ARCHITECTURE.md, src/slices/settings/Settings.tsx, vite.config.ts",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Delete superseded branches after porting",
+    "kind": "remove",
+    "rationale": "coach-brain/phase-9/smartwatch planners, AskSheet, proxy/ are superseded by Escobar v2 + escobar-worker; keep only the items listed above",
+    "files": "origin/claude/coach-brain, origin/claude/phase-9-readiness-preference-ckw91g, origin/claude/smartwatch-connector-integration-j42yb5",
+    "size": "S",
+    "priority": "P3"
+   }
+  ],
+  "module_map": [
+   {
+    "file": "src/app/App.tsx",
+    "purpose": "shell: tabs, Panels switch, lazy Escobar mount, dock, onboarding, toast",
+    "key_exports": "UNTESTED (gate only)",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/app/router.ts",
+    "purpose": "tab + single openPanel signal, bodyView/historySeg",
+    "key_exports": "tested by: escobar/palace.test.ts",
+    "unused_exports": "PANEL_IDS test-only"
+   },
+   {
+    "file": "src/app/selectors.ts",
+    "purpose": "computed views: today, nowMs ticker, recovery, readiness, insights, deload, onboarding",
+    "key_exports": "UNTESTED",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/app/toast.ts",
+    "purpose": "toast signal",
+    "key_exports": "UNTESTED",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/balance.ts",
+    "purpose": "push/pull upper/lower imbalance",
+    "key_exports": "tested by: balance-weekly.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/bodyfat.ts",
+    "purpose": "body-fat estimate",
+    "key_exports": "UNTESTED",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/coach/cues.ts",
+    "purpose": "coaching cue picker (422 cues)",
+    "key_exports": "UNTESTED (transitive only)",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/coach/live.ts",
+    "purpose": "in-session autoregulation",
+    "key_exports": "tested by: live.test.ts, plate-sense.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/coach/post.ts",
+    "purpose": "post-session debrief insights",
+    "key_exports": "tested by: post.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/coach/pre.ts",
+    "purpose": "pre-session brief, warm-up ramp",
+    "key_exports": "tested by: pre.test.ts, plate-sense.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/coach/rules.ts",
+    "purpose": "RULES pipeline, coachInsights, deloadOffer",
+    "key_exports": "tested by: coach.test.ts, balance-weekly.test.ts, plan.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/coach/weeklyReview.ts",
+    "purpose": "weekly review insights",
+    "key_exports": "tested by: weeklyReview.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/deload.ts",
+    "purpose": "deload trigger",
+    "key_exports": "tested by: deload.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/e1rm.ts",
+    "purpose": "effort-aware Epley",
+    "key_exports": "tested by: e1rm.test.ts",
+    "unused_exports": "e1rmWeight,isRealChange test-only"
+   },
+   {
+    "file": "src/brain/effort.ts",
+    "purpose": "effort drift",
+    "key_exports": "UNTESTED (transitive only)",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/effortBias.ts",
+    "purpose": "RIR bias per person",
+    "key_exports": "tested by: effortBias.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/energy.ts",
+    "purpose": "kcal estimates",
+    "key_exports": "tested by: energy.test.ts",
+    "unused_exports": "energyFromWatch,energyFromHealthConnect,pickEnergy,dailyActiveKcal,weeklyEnergy test-only (decided)"
+   },
+   {
+    "file": "src/brain/exposure.ts",
+    "purpose": "muscle exposure, effective sets",
+    "key_exports": "tested by: exposure.test.ts",
+    "unused_exports": "toPercents test-only"
+   },
+   {
+    "file": "src/brain/fidelity.ts",
+    "purpose": "set/session logging fidelity",
+    "key_exports": "tested by: fidelity.test.ts, plate-sense.test.ts",
+    "unused_exports": "isCompressed,implausibleLoad,implausibleReps,isDuplicateSession,futureTime test-only"
+   },
+   {
+    "file": "src/brain/heart.ts",
+    "purpose": "HR aggregates, zones, rest target, drift",
+    "key_exports": "tested by: heart.test.ts",
+    "unused_exports": "observedHrMaxFromSeries,minRestSec,restReadyBpm test-only"
+   },
+   {
+    "file": "src/brain/history.ts",
+    "purpose": "per-exercise session summaries",
+    "key_exports": "tested by: effortBias/pre/weeklyReview tests",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/index.ts",
+    "purpose": "barrel",
+    "key_exports": "UNTESTED",
+    "unused_exports": "whole file (no importer found)"
+   },
+   {
+    "file": "src/brain/onboarding.ts",
+    "purpose": "onboarding trigger",
+    "key_exports": "tested by: onboarding.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/plan.ts",
+    "purpose": "evaluatePlan for Escobar",
+    "key_exports": "tested by: plan.test.ts",
+    "unused_exports": "MIN_RECOVERY_HOURS"
+   },
+   {
+    "file": "src/brain/progression.ts",
+    "purpose": "suggestNext + snapping/loadFactor",
+    "key_exports": "tested by: progression/goal/plan/plate-sense tests",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/prs.ts",
+    "purpose": "records",
+    "key_exports": "tested by: prs.test.ts (no 2.5% edge test)",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/readiness.ts",
+    "purpose": "readiness score",
+    "key_exports": "tested by: readiness.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/recovery.ts",
+    "purpose": "impulse recovery model + calibration",
+    "key_exports": "tested by: recovery/readiness/plan tests",
+    "unused_exports": "recoveryTier,calibrateTauScale test-only"
+   },
+   {
+    "file": "src/brain/substitute.ts",
+    "purpose": "substitutes",
+    "key_exports": "tested by: substitute.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/trend.ts",
+    "purpose": "trend + plateau",
+    "key_exports": "UNTESTED directly (transitive via 23)",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/units.ts",
+    "purpose": "plate math, loadables, slip, gym inference",
+    "key_exports": "tested by: plate-sense.test.ts",
+    "unused_exports": "LB_BAR_KG test-only"
+   },
+   {
+    "file": "src/brain/volume.ts",
+    "purpose": "volume bands",
+    "key_exports": "tested by: volume.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/brain/weekly.ts",
+    "purpose": "week summary, streak, weeklyVolumeHistory",
+    "key_exports": "tested by: balance-weekly.test.ts, plan.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/core/dates.ts",
+    "purpose": "day keys (memoised)",
+    "key_exports": "tested by: dates.test.ts",
+    "unused_exports": "hoursSince"
+   },
+   {
+    "file": "src/core/escobarState.ts",
+    "purpose": "normalizeEscobar/normalizeUnits",
+    "key_exports": "tested by: escobar/state.test.ts, plate-sense.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/core/exercises.ts",
+    "purpose": "library, role/damage, findExercise memo",
+    "key_exports": "tested by: substitute.test.ts (+transitive)",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/core/heartStore.ts",
+    "purpose": "HR series store marc.heart.v1",
+    "key_exports": "tested by: heartStore.test.ts",
+    "unused_exports": "getSeries,deleteSeries,restoreHeart test-only"
+   },
+   {
+    "file": "src/core/migrate.ts",
+    "purpose": "v36 legacy import",
+    "key_exports": "tested by: migrate.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/core/models.ts",
+    "purpose": "types + freshState",
+    "key_exports": "tested by: 18 files",
+    "unused_exports": "DEFAULT_GYM_ID test-only"
+   },
+   {
+    "file": "src/core/store.ts",
+    "purpose": "load/normalize/persist/backup key",
+    "key_exports": "tested by: migrate, escobar/state, plate-sense, reorder, escobar/ui (backup fallback + persistNow rotation UNTESTED)",
+    "unused_exports": "allExercisesLookup"
+   },
+   {
+    "file": "src/core/units.ts",
+    "purpose": "kg<->display, entered loads",
+    "key_exports": "tested by: plate-sense.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/data/goals.ts",
+    "purpose": "goal policies",
+    "key_exports": "tested by: goal.test.ts, escobar/ui.test.ts",
+    "unused_exports": "DEFAULT_GOAL"
+   },
+   {
+    "file": "src/data/recovery.ts",
+    "purpose": "recovery constants",
+    "key_exports": "UNTESTED directly",
+    "unused_exports": "DAMAGE_HIGH,DAMAGE_LOW,DAMAGE_HEAVY_MAIN,DAMAGE_DEFAULT (duplicated as literals in core/exercises.ts)"
+   },
+   {
+    "file": "src/data/templates.ts",
+    "purpose": "starter splits",
+    "key_exports": "UNTESTED directly (ids verified by script: all resolve)",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/data/muscles.ts",
+    "purpose": "muscle table",
+    "key_exports": "UNTESTED directly",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/data/sparks.ts",
+    "purpose": "daily quotes",
+    "key_exports": "UNTESTED",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/data/deload.ts",
+    "purpose": "deload factors",
+    "key_exports": "UNTESTED directly",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/data/volume.ts",
+    "purpose": "volume bands data",
+    "key_exports": "UNTESTED directly",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/apply.ts",
+    "purpose": "apply/undo every proposal kind",
+    "key_exports": "tested by: escobar/ui.test.ts (goal, split, programme, setting, schedule, check-in, gym only)",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/context/brief.ts",
+    "purpose": "brief builder",
+    "key_exports": "tested by: escobar/brief.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/context/manifest.ts",
+    "purpose": "palace manifest",
+    "key_exports": "tested by: escobar/brief.test.ts, loop.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/context/modes.ts",
+    "purpose": "mode addenda",
+    "key_exports": "tested by: escobar/brief.test.ts, tools-sync.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/hash.ts",
+    "purpose": "hash",
+    "key_exports": "UNTESTED directly",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/images.ts",
+    "purpose": "IndexedDB photo store",
+    "key_exports": "UNTESTED",
+    "unused_exports": "loadImage"
+   },
+   {
+    "file": "src/escobar/knowledge/cards.ts",
+    "purpose": "knowledge cards",
+    "key_exports": "tested by: escobar/knowledge.test.ts",
+    "unused_exports": "searchCards test-only"
+   },
+   {
+    "file": "src/escobar/knowledge/methods.ts",
+    "purpose": "explain_method",
+    "key_exports": "tested by: escobar/knowledge.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/ledger.ts",
+    "purpose": "fact ledger",
+    "key_exports": "tested by: escobar/ledger.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/loop.ts",
+    "purpose": "agent loop",
+    "key_exports": "tested by: escobar/loop.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/mock/transport.ts",
+    "purpose": "dev/gate mock",
+    "key_exports": "UNTESTED (gate only)",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/palace/navigate.ts",
+    "purpose": "goTo/spotlight",
+    "key_exports": "UNTESTED (gate only)",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/palace/registry.ts",
+    "purpose": "71 palace entries",
+    "key_exports": "tested by: palace, palace-anchors, knowledge tests",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/session.ts",
+    "purpose": "UI binding of loop, deviceId, send",
+    "key_exports": "UNTESTED",
+    "unused_exports": "setTransport"
+   },
+   {
+    "file": "src/escobar/store.ts",
+    "purpose": "conversation store marc.escobar.v1",
+    "key_exports": "tested by: escobar/store, loop, ui tests",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/tools/actions.ts",
+    "purpose": "proposal validation",
+    "key_exports": "tested by: escobar/actions.test.ts, ui.test.ts",
+    "unused_exports": "equipmentGroupOf"
+   },
+   {
+    "file": "src/escobar/tools/read.ts",
+    "purpose": "read tools",
+    "key_exports": "tested by: escobar/read.test.ts",
+    "unused_exports": "weeklySetsFor,e1rmOf"
+   },
+   {
+    "file": "src/escobar/tools/show.ts",
+    "purpose": "show summaries",
+    "key_exports": "tested by: escobar/show.test.ts",
+    "unused_exports": "weeklyTotals"
+   },
+   {
+    "file": "src/escobar/tools/{calc,executor,schema,context,plan}.ts",
+    "purpose": "calc, executor, schema, ctx",
+    "key_exports": "tested by: calc/executor/schema/tools-sync tests; plan.ts UNTESTED",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/transport.ts",
+    "purpose": "SSE transport",
+    "key_exports": "tested by: escobar/transport.test.ts, loop.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/verify.ts",
+    "purpose": "number grounding",
+    "key_exports": "tested by: escobar/verify.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/escobar/ui/*.tsx (Sheet, Composer, Dock, Hall, Escalation, SettingsSection, Thinking, AskAbout, MemoryPlaceholder, components)",
+    "purpose": "chat UI",
+    "key_exports": "UNTESTED (gate only); Message.tsx/PlanBoard.tsx/present.ts/prompts.ts tested by escobar/ui.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/native/health.ts",
+    "purpose": "Health Connect bridge",
+    "key_exports": "tested by: health-bridge.test.ts (mapHealthSummary only; syncHealth UNTESTED)",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/native/notifications.ts",
+    "purpose": "rest + training reminders",
+    "key_exports": "UNTESTED",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/native/{capacitor,haptics,share,photo,watch}.ts",
+    "purpose": "native bridges",
+    "key_exports": "UNTESTED",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/slices/workout/session.ts",
+    "purpose": "live session: start/commit/finish/logPast/resolveTiming",
+    "key_exports": "tested by: reorder.test.ts (moveEntry only) - finish/commit/logPast/resolve UNTESTED",
+    "unused_exports": "restRemainingSec"
+   },
+   {
+    "file": "src/slices/workout/{splits,units,heart,reorder}.ts",
+    "purpose": "split CRUD, unit prefs, heart capture, drag",
+    "key_exports": "UNTESTED",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/slices/**/*.tsx (Today, Train, History, Body, Coach, Settings, Profile, Onboarding, Gyms, Watch, ExercisePicker)",
+    "purpose": "screens",
+    "key_exports": "UNTESTED (gate only; Settings restore/reset, History edit/delete, Gyms never exercised)",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/slices/{profile/profile,settings/health,settings/reminders,readiness/checkIn,coach/coach}.ts",
+    "purpose": "slice mutations",
+    "key_exports": "UNTESTED",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/theme/themes.ts",
+    "purpose": "5 themes",
+    "key_exports": "tested by: theme.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "src/theme/engine.ts, src/svg/*, src/ui/{Logo,MuscleMap,PulseLine,Sparkline,icons,primitives}.tsx",
+    "purpose": "theme engine, svg, primitives",
+    "key_exports": "UNTESTED",
+    "unused_exports": "primitives: Ring; icons: IconSpark,IconClock,IconMoon,IconHeart"
+   },
+   {
+    "file": "escobar-worker/src/anthropic.ts",
+    "purpose": "request assembly + SSE relay",
+    "key_exports": "tested by: w:anthropic, handler, schema tests",
+    "unused_exports": "-"
+   },
+   {
+    "file": "escobar-worker/src/handler.ts",
+    "purpose": "routes, CORS, health",
+    "key_exports": "tested by: w:handler.test.ts",
+    "unused_exports": "-"
+   },
+   {
+    "file": "escobar-worker/src/validate.ts",
+    "purpose": "input validation",
+    "key_exports": "tested by: w:validate, anthropic tests",
+    "unused_exports": "-"
+   },
+   {
+    "file": "escobar-worker/src/quota.ts",
+    "purpose": "per-device quotas",
+    "key_exports": "UNTESTED directly (via handler)",
+    "unused_exports": "-"
+   },
+   {
+    "file": "escobar-worker/src/index.ts, prompt/modes.ts",
+    "purpose": "entry, modes",
+    "key_exports": "UNTESTED directly",
+    "unused_exports": "-"
+   }
+  ],
+  "coverage": [
+   {
+    "file": "scripts/screenshot-gate.mjs",
+    "lines": 573,
+    "read_fully": true
+   },
+   {
+    "file": "src/core/store.ts",
+    "lines": 127,
+    "read_fully": true
+   },
+   {
+    "file": "src/core/escobarState.ts",
+    "lines": 161,
+    "read_fully": true
+   },
+   {
+    "file": "src/core/heartStore.ts",
+    "lines": 48,
+    "read_fully": true
+   },
+   {
+    "file": "src/brain/e1rm.ts",
+    "lines": 40,
+    "read_fully": true
+   },
+   {
+    "file": "src/main.tsx",
+    "lines": 46,
+    "read_fully": true
+   },
+   {
+    "file": "src/app/App.tsx",
+    "lines": 97,
+    "read_fully": true
+   },
+   {
+    "file": "src/app/router.ts",
+    "lines": 57,
+    "read_fully": true
+   },
+   {
+    "file": "src/app/selectors.ts",
+    "lines": 60,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/settings/Settings.tsx",
+    "lines": 138,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/history/History.tsx",
+    "lines": 225,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/settings/reminders.ts",
+    "lines": 19,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/settings/health.ts",
+    "lines": 18,
+    "read_fully": true
+   },
+   {
+    "file": "src/native/haptics.ts",
+    "lines": 31,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/open.ts",
+    "lines": 19,
+    "read_fully": true
+   },
+   {
+    "file": "public/sw.js",
+    "lines": 9,
+    "read_fully": true
+   },
+   {
+    "file": "README.md",
+    "lines": 34,
+    "read_fully": true
+   },
+   {
+    "file": "docs/ARCHITECTURE.md",
+    "lines": 84,
+    "read_fully": true
+   },
+   {
+    "file": "legacy/v36/MASTER_SELF_HANDOFF_2026-08-24.txt",
+    "lines": 566,
+    "read_fully": true
+   },
+   {
+    "file": "legacy/v36/FRESH_GITHUB_UPLOAD_INSTRUCTIONS.txt",
+    "lines": 130,
+    "read_fully": true
+   },
+   {
+    "file": "legacy/v36/PATCH_MANIFEST.json",
+    "lines": 18,
+    "read_fully": true
+   },
+   {
+    "file": "legacy/v36/index.html",
+    "lines": 36046,
+    "read_fully": false
+   },
+   {
+    "file": "docs/COACHING-DECISIONS.md",
+    "lines": 402,
+    "read_fully": false
+   },
+   {
+    "file": "index.html",
+    "lines": 57,
+    "read_fully": false
+   },
+   {
+    "file": "src/slices/workout/session.ts",
+    "lines": 265,
+    "read_fully": false
+   },
+   {
+    "file": "src/slices/workout/Train.tsx",
+    "lines": 803,
+    "read_fully": false
+   },
+   {
+    "file": "src/native/notifications.ts",
+    "lines": 106,
+    "read_fully": false
+   },
+   {
+    "file": "src/native/health.ts",
+    "lines": 86,
+    "read_fully": false
+   },
+   {
+    "file": "src/native/photo.ts",
+    "lines": 75,
+    "read_fully": false
+   },
+   {
+    "file": "src/native/watch.ts",
+    "lines": 104,
+    "read_fully": false
+   },
+   {
+    "file": "src/slices/coach/Coach.tsx",
+    "lines": 337,
+    "read_fully": false
+   },
+   {
+    "file": "src/core/models.ts",
+    "lines": 541,
+    "read_fully": false
+   },
+   {
+    "file": "src/core/migrate.ts",
+    "lines": 258,
+    "read_fully": false
+   },
+   {
+    "file": "src/core/units.ts",
+    "lines": 46,
+    "read_fully": true
+   },
+   {
+    "file": "src/core/dates.ts",
+    "lines": 80,
+    "read_fully": false
+   },
+   {
+    "file": "src/core/exercises.ts",
+    "lines": 186,
+    "read_fully": false
+   },
+   {
+    "file": "src/data/goals.ts",
+    "lines": 63,
+    "read_fully": false
+   },
+   {
+    "file": "src/data/templates.ts",
+    "lines": 92,
+    "read_fully": false
+   },
+   {
+    "file": "src/data/muscles.ts",
+    "lines": 101,
+    "read_fully": false
+   },
+   {
+    "file": "src/brain/progression.ts",
+    "lines": 235,
+    "read_fully": false
+   },
+   {
+    "file": "src/brain/prs.ts",
+    "lines": 101,
+    "read_fully": false
+   },
+   {
+    "file": "src/brain/balance.ts",
+    "lines": 58,
+    "read_fully": false
+   },
+   {
+    "file": "src/brain/trend.ts",
+    "lines": 57,
+    "read_fully": false
+   },
+   {
+    "file": "src/brain/history.ts",
+    "lines": 74,
+    "read_fully": false
+   },
+   {
+    "file": "src/brain/weekly.ts",
+    "lines": 99,
+    "read_fully": false
+   },
+   {
+    "file": "src/escobar/session.ts",
+    "lines": 232,
+    "read_fully": false
+   },
+   {
+    "file": "src/escobar/apply.ts",
+    "lines": 212,
+    "read_fully": false
+   },
+   {
+    "file": "src/escobar/tools/actions.ts",
+    "lines": 391,
+    "read_fully": false
+   },
+   {
+    "file": "src/escobar/images.ts",
+    "lines": 51,
+    "read_fully": false
+   },
+   {
+    "file": "src/data/recovery.ts",
+    "lines": 76,
+    "read_fully": false
+   },
+   {
+    "file": ".github/workflows/build-apk.yml",
+    "lines": 199,
+    "read_fully": false
+   },
+   {
+    "file": ".github/workflows/release-apk.yml",
+    "lines": 0,
+    "read_fully": false
+   },
+   {
+    "file": "native/patch_manifest.py",
+    "lines": 111,
+    "read_fully": false
+   },
+   {
+    "file": "tests/prs.test.ts",
+    "lines": 40,
+    "read_fully": true
+   },
+   {
+    "file": "tests/substitute.test.ts",
+    "lines": 22,
+    "read_fully": true
+   },
+   {
+    "file": "tests/escobar/palace-anchors.test.ts",
+    "lines": 16,
+    "read_fully": true
+   }
+  ]
+ },
+ "escobar": {
+  "features": [
+   {
+    "name": "Agent loop (staging, tool round trips, orphan closing, step budget, max_tokens cut-off)",
+    "entry_points": "loop.ts EscobarLoop.send",
+    "status": "partial",
+    "notes": "Core pairing correct; bugs: repair-round error/abort flagged notSent (ES-10), concurrent sends null the controller (ES-09), pendingDecisions wiped mid-turn (ES-20)"
+   },
+   {
+    "name": "SSE transport + retry",
+    "entry_points": "transport.ts httpTransport/parseSse; loop.step",
+    "status": "working",
+    "notes": "Chunk/UTF-8 splits handled (TextDecoder stream, blank-line framing); one retry for busy/timeout before first visible event; no client idle timer (relies on 150 s wall clock + Worker 60 s)"
+   },
+   {
+    "name": "Online/offline detection + offline palace reply",
+    "entry_points": "session.checkOnline, loop.offlineReply",
+    "status": "broken",
+    "notes": "One network error latches offline for the life of the sheet (ES-08); findInApp substring scoring misroutes (ES-18)"
+   },
+   {
+    "name": "History window / compaction",
+    "entry_points": "loop.windowMessages",
+    "status": "partial",
+    "notes": "Single halving by count can still exceed Worker 400 KB (ES-14); rollingSummary never written (EV7 not built)"
+   },
+   {
+    "name": "Fact ledger + citations",
+    "entry_points": "ledger.captureFacts, Message.AnswerText, present.splitCitations",
+    "status": "working",
+    "notes": "Markers are stripped from display and used only by the number check; no citation chip or popover (ESC-NC, owner decision LR-23)"
+   },
+   {
+    "name": "Numeric verification + repair round",
+    "entry_points": "verify.checkGrounding, loop repair branch",
+    "status": "partial",
+    "notes": "Bullet sentences never marked unverified (ES-16); ±1 lb tolerance across whole ledger is weak"
+   },
+   {
+    "name": "Safety pre-screen + escalation cards",
+    "entry_points": "verify.safetySignals, session.onSafety, Escalation.tsx",
+    "status": "partial",
+    "notes": "Crisis false positives on 'hurt myself', 'end it' (ES-11)"
+   },
+   {
+    "name": "Read tools",
+    "entry_points": "tools/read.ts via executor",
+    "status": "partial",
+    "notes": "get_exercise_history truncates newest sessions (ES-01); live/equipment targets differ from Train (ES-21)"
+   },
+   {
+    "name": "Show components",
+    "entry_points": "tools/show.ts, ui/components",
+    "status": "partial",
+    "notes": "Only lift_trend drawn; others generic; lift_trend first/best wrong for long windows (ES-15); readiness_gauge leaks health drivers (ES-12); re-summarize per streamed delta (ES-22)"
+   },
+   {
+    "name": "Proposals → apply → undo",
+    "entry_points": "actions.buildProposal, apply.decide/onProposal, ProposalCard",
+    "status": "broken",
+    "notes": "Undo restores whole slices at any time incl. `active` (ES-03), no-op after reload/cross-conversation (ES-04), programme/split delete wipe live session (ES-05)"
+   },
+   {
+    "name": "Today override (propose_today)",
+    "entry_points": "apply.propose_today",
+    "status": "broken",
+    "notes": "Stored but never consumed by Train/startSession (ES-02)"
+   },
+   {
+    "name": "Plan mode",
+    "entry_points": "escobarUi.mode 'plan'",
+    "status": "dead",
+    "notes": "No UI sets mode 'plan'; programme requests run with chat budget/effort/addendum (ES-17)"
+   },
+   {
+    "name": "Memory (remember/forget/recall, What Escobar knows)",
+    "entry_points": "executor memory kind, session.applyEffect, MemoryPlaceholder",
+    "status": "partial",
+    "notes": "Tools work; panel is read-only (no edit/delete/forget-all), cap silently drops oldest (ES-30)"
+   },
+   {
+    "name": "Pinned cards",
+    "entry_points": "apply.pin_card, Hall PlansAndAgreements",
+    "status": "stub",
+    "notes": "Stored; only title listed in Hall; never rendered on Today; `until` never enforced (ES-26)"
+   },
+   {
+    "name": "Daily brief / moments / proactive / episodic summaries",
+    "entry_points": "Hall TodaysBrief, Settings proactive toggle",
+    "status": "stub",
+    "notes": "escobar.brief never generated; proactive toggle has no effect; summarize/moment modes unused"
+   },
+   {
+    "name": "Conversation store + backup/restore/reset",
+    "entry_points": "store.ts, session.persist, Settings backup/restore/reset",
+    "status": "broken",
+    "notes": "Reset/restore overwritten by in-memory storeSig (ES-07); active conversation can be pruned (ES-19); switch/new/reset mid-turn race (ES-06)"
+   },
+   {
+    "name": "Photos",
+    "entry_points": "Composer.attach, images.ts, loop.toRequestMessages",
+    "status": "partial",
+    "notes": "3 allowed client-side vs 2 server-side (ES-13); IndexedDB connection per call, not cleared on reset (ES-28)"
+   },
+   {
+    "name": "Privacy gates",
+    "entry_points": "executor gate, brief sharing line, read.ts health checks",
+    "status": "partial",
+    "notes": "explain_method, show(readiness_gauge) and replayed history ignore sharing toggles (ES-12)"
+   },
+   {
+    "name": "Palace navigation/spotlight/focus",
+    "entry_points": "palace/navigate.goTo, focus.usePalaceFocus, navigate tool",
+    "status": "working",
+    "notes": "Model params unvalidated for bodyView (ES-29)"
+   },
+   {
+    "name": "Situation brief",
+    "entry_points": "context/brief.buildBrief",
+    "status": "working",
+    "notes": "Unsanitised strings in system channel (ES-23), float training age, stale pending proposals (ES-31)"
+   },
+   {
+    "name": "Mock transport (gate)",
+    "entry_points": "session.getTransport devMode",
+    "status": "working",
+    "notes": "Separate lazy chunk transport-*.js (2.4 KB) shipped but unreachable without marc.dev=1"
+   },
+   {
+    "name": "Usage meter",
+    "entry_points": "session.recordUsage, SettingsSection",
+    "status": "working",
+    "notes": "Cost always priced as claude-opus-5 regardless of final.model"
+   }
+  ],
+  "improvements": [
+   {
+    "title": "Rebuild Undo as targeted inverse operations with an 8 s window, keyed per conversation",
+    "kind": "refactor",
+    "rationale": "ES-03/04/05: whole-slice snapshots wipe live sessions and later edits; undo is a no-op after reload yet reported 'undone'.",
+    "files": "src/escobar/apply.ts, src/escobar/ui/Message.tsx, src/escobar/types.ts, src/escobar/tools/actions.ts",
+    "size": "M",
+    "priority": "P0"
+   },
+   {
+    "title": "Session ownership for loops (detached loops never touch active state) + store-replaced listener",
+    "kind": "improve",
+    "rationale": "ES-06/07: new/switch/reset mid-turn and Reset everything/Restore are undone by stale in-memory state.",
+    "files": "src/escobar/session.ts, src/escobar/store.ts, src/slices/settings/Settings.tsx",
+    "size": "M",
+    "priority": "P0"
+   },
+   {
+    "title": "Single privacy redaction layer applied to tool outputs, explain_method, show and request replay",
+    "kind": "add",
+    "rationale": "ES-12: sharing gates are enforced ad hoc per tool; three paths leak health/body data.",
+    "files": "src/escobar/tools/context.ts, tools/show.ts, knowledge/methods.ts, loop.ts (toRequestMessages)",
+    "size": "M",
+    "priority": "P0"
+   },
+   {
+    "title": "Fix online-state lifecycle (auto recheck, 'online' event, success resets)",
+    "kind": "improve",
+    "rationale": "ES-08: one transient error disables Escobar until the sheet is reopened after 60 s.",
+    "files": "src/escobar/session.ts",
+    "size": "S",
+    "priority": "P0"
+   },
+   {
+    "title": "Wire todayOverride into startSession/Train (or disable propose_today Apply)",
+    "kind": "add",
+    "rationale": "ES-02: applied proposals have no effect; model believes they did.",
+    "files": "src/slices/workout/session.ts, src/slices/workout/Train.tsx, src/core/models.ts, src/escobar/apply.ts",
+    "size": "M",
+    "priority": "P1"
+   },
+   {
+    "title": "Busy guard + controller ownership in loop/session",
+    "kind": "improve",
+    "rationale": "ES-09/ES-10: concurrent sends and repair-round failures corrupt UI state and duplicate messages.",
+    "files": "src/escobar/loop.ts, src/escobar/session.ts, src/escobar/ui/open.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Make capJson order-aware and audit all chronological arrays",
+    "kind": "improve",
+    "rationale": "ES-01: truncation removes the most relevant data; add a unit test per read tool on the 6-month fixture asserting newest data survives.",
+    "files": "src/escobar/tools/read.ts, tests/escobar/read.test.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Enable plan mode entry (intent detection or explicit 'Plan with Escobar' chip)",
+    "kind": "add",
+    "rationale": "ES-17: 12-step budget, high effort and the evaluate→revise addendum are unreachable.",
+    "files": "src/escobar/session.ts, src/escobar/ui/prompts.ts, src/escobar/ui/open.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Real 'What Escobar knows' screen (edit, delete, forget everything, expired-injury review)",
+    "kind": "add",
+    "rationale": "Memory is sent every turn but the user cannot remove items except via chat; spec §17.2.",
+    "files": "src/escobar/ui/MemoryPlaceholder.tsx (→ MemoryScreen.tsx)",
+    "size": "M",
+    "priority": "P1"
+   },
+   {
+    "title": "Iterative history window measured in request bytes + forced full brief after trim",
+    "kind": "improve",
+    "rationale": "ES-14: conversations can exceed the Worker 400 KB limit and become unusable.",
+    "files": "src/escobar/loop.ts, src/escobar/context/brief.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Tighten safety regexes with a regression phrase table",
+    "kind": "improve",
+    "rationale": "ES-11: false crisis cards on everyday gym language; add ~30 positive/negative phrases to verify.test.ts.",
+    "files": "src/escobar/verify.ts, tests/escobar/verify.test.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Align client photo cap with Worker (2) and stub excess images",
+    "kind": "improve",
+    "rationale": "ES-13 contract mismatch.",
+    "files": "src/escobar/ui/Composer.tsx, src/escobar/loop.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Add session.ts / apply.ts integration tests (race, reset, offline latch, undo semantics)",
+    "kind": "add",
+    "rationale": "No tests cover session.ts; the confirmed races (ES-06/07/08) were reproducible with a 30-line harness.",
+    "files": "tests/escobar/session.test.ts (new), tests/escobar/ui.test.ts",
+    "size": "M",
+    "priority": "P1"
+   },
+   {
+    "title": "Shared progression context helper for all tools",
+    "kind": "merge",
+    "rationale": "ES-21: four call sites build ProgressionContext differently from Train.",
+    "files": "src/escobar/tools/context.ts, tools/read.ts, tools/show.ts",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Render pinned cards on Today with expiry; hide Proactive toggle until moments ship",
+    "kind": "improve",
+    "rationale": "ES-26: visible controls with no effect.",
+    "files": "src/slices/today/Today.tsx, src/escobar/ui/SettingsSection.tsx",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Memoise show summaries and turn rendering during streaming",
+    "kind": "improve",
+    "rationale": "ES-22 perf during streaming on phones.",
+    "files": "src/escobar/ui/components/index.tsx, src/escobar/ui/Message.tsx, src/escobar/ui/EscobarSheet.tsx",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Remove dead exports and merge duplicate directive/title/decision logic; single APP_VERSION",
+    "kind": "remove",
+    "rationale": "ES-24: zero-caller exports and duplicated logic invite drift.",
+    "files": "src/escobar/verify.ts, loop.ts, store.ts, apply.ts, images.ts, tools/read.ts, tools/show.ts, tools/actions.ts, tools/context.ts, session.ts, slices/settings/Settings.tsx",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Word-bounded keyword scoring for palace and knowledge search",
+    "kind": "improve",
+    "rationale": "ES-18 misrouting in find_in_app and offline guide.",
+    "files": "src/escobar/palace/registry.ts, src/escobar/knowledge/cards.ts",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Health check should require `key: true` and surface misconfiguration",
+    "kind": "improve",
+    "rationale": "checkHealth treats a Worker without ANTHROPIC_API_KEY as online; every turn then fails upstream_auth.",
+    "files": "src/escobar/transport.ts, src/escobar/session.ts",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Price the usage meter by final.model and persist per-model usage",
+    "kind": "improve",
+    "rationale": "estimateCost always assumes claude-opus-5; fallbacks/Opus 5.5 misprice.",
+    "files": "src/escobar/state.ts, src/escobar/session.ts, src/escobar/loop.ts",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Strip the mock transport from production builds behind a Vite define",
+    "kind": "remove",
+    "rationale": "transport-*.js (2.4 KB) ships in the APK though only the gate uses it; gate can build with a flag.",
+    "files": "src/escobar/session.ts, vite.config.ts, scripts/screenshot-gate.mjs",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Implement rolling summary (EV7) so trimmed history keeps context",
+    "kind": "add",
+    "rationale": "rollingSummary/summarisedAt are declared but never written; trimming currently loses early context entirely.",
+    "files": "src/escobar/loop.ts, src/escobar/session.ts",
+    "size": "M",
+    "priority": "P3"
+   }
+  ],
+  "module_map": [
+   {
+    "file": "src/escobar/loop.ts",
+    "purpose": "Agent loop: staged user+brief, SSE steps, local tool execution, orphan closing, repair round, history window, offline reply",
+    "key_exports": "EscobarLoop, toRequestMessages, windowMessages, offlineReply, STEP_BUDGET, REPAIR_TEXT",
+    "unused_exports": "none (HISTORY_* consts only internal/tests)"
+   },
+   {
+    "file": "src/escobar/session.ts",
+    "purpose": "Glue: active conversation signals, transport choice (mock when marc.dev), persistence, memory effects+Undo, usage, online check, device id",
+    "key_exports": "send, stop, prepare, startNewConversation, selectConversation, resetConversations, updateConversation, setEscobarEnabled, storeSig, activeConversation, lastTurn, pendingUser, safetyCards",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/transport.ts",
+    "purpose": "POST /v2/turn over fetch, SSE parser (chunk-safe, TextDecoder stream), /health check",
+    "key_exports": "httpTransport, parseSse, checkHealth, StreamEvent, Transport",
+    "unused_exports": "ErrorCode 'offline' member never produced"
+   },
+   {
+    "file": "src/escobar/store.ts",
+    "purpose": "Conversation store marc.escobar.v1: sanitize, caps, size guard, backup/restore",
+    "key_exports": "loadStore, saveStore, sanitizeStore, fitToBudget, upsertConversation, newConversation, exportAllEscobar, restoreEscobar, clearStore, memoryStorage, setEscobarStorage",
+    "unused_exports": "appendMessages, recordDecision (tests only; logic duplicated in loop.commit / apply.withDecision)"
+   },
+   {
+    "file": "src/escobar/verify.ts",
+    "purpose": "Directive grammar, numeric grounding check, repair instruction, safety pre-screen regexes",
+    "key_exports": "parseDirectives, checkGrounding, repairInstruction, safetySignals",
+    "unused_exports": "DirectiveBuffer (tests only; re-implemented inline at loop.ts:234-235)"
+   },
+   {
+    "file": "src/escobar/ledger.ts",
+    "purpose": "Fact ledger: flatten tool JSON to numbered facts, extractNumbers",
+    "key_exports": "captureFacts, addFact, flatten, extractNumbers, factText",
+    "unused_exports": "factText (no callers found outside module)"
+   },
+   {
+    "file": "src/escobar/apply.ts",
+    "purpose": "Apply/dismiss/undo proposals via slice mutations, fingerprint staleness check, decision queue",
+    "key_exports": "decide, onProposal, canApply",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/types.ts",
+    "purpose": "Stored message/conversation/fact/proposal types",
+    "key_exports": "StoredMessage, Conversation, Fact, ProposalRecord, ImageBlockRef",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/state.ts",
+    "purpose": "UI signals (escobarUi, loopView, online, quotaResetAt), proxy URL, price table",
+    "key_exports": "escobarUi, loopView, online, quotaResetAt, ESCOBAR_PROXY_URL, estimateCost, proxyUrlOf",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/images.ts",
+    "purpose": "Photo bytes in memory + IndexedDB (never localStorage)",
+    "key_exports": "putImage, imageData, clearImages",
+    "unused_exports": "loadImage (zero callers)"
+   },
+   {
+    "file": "src/escobar/hash.ts",
+    "purpose": "FNV-1a hash for fingerprints/manifest",
+    "key_exports": "fnv",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/context/brief.ts",
+    "purpose": "Per-turn situation brief (system message), diffed, fact ids inline, gated",
+    "key_exports": "buildBrief, memoryForBrief, BRIEF_CAP",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/context/modes.ts",
+    "purpose": "Mode addenda (copied into Worker JSON)",
+    "key_exports": "MODE_ADDENDUM, EscobarMode",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/context/manifest.ts",
+    "purpose": "Palace manifest + method index + card titles, hashed (~16.7 KB)",
+    "key_exports": "buildManifest",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/tools/schema.ts",
+    "purpose": "Single source of tool JSON schemas, strict set, API subset",
+    "key_exports": "TOOLS, TOOL_BY_NAME, apiTools, STRICT_TOOLS, COMPONENT_PARAMS, CALC_OPS",
+    "unused_exports": "READ_TOOL_NAMES (tests only; brief mode not built)"
+   },
+   {
+    "file": "src/escobar/tools/executor.ts",
+    "purpose": "Dispatch tool_use: gates, validation, ledger capture, proposals/effects/show/navigate outcomes",
+    "key_exports": "executeTool, statusLabel, genericLabel, MemoryEffect, ToolOutcome",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/tools/read.ts",
+    "purpose": "Pure read tools over state+brain with capJson byte caps",
+    "key_exports": "getOverview..getEquipment, findInAppTool, capJson, loadOf, ToolError",
+    "unused_exports": "weeklySetsFor, e1rmOf (zero callers)"
+   },
+   {
+    "file": "src/escobar/tools/actions.ts",
+    "purpose": "Proposal validation, previews, fingerprints",
+    "key_exports": "buildProposal, buildAction, fingerprint, touchedState, planDraftArg",
+    "unused_exports": "equipmentGroupOf (zero callers)"
+   },
+   {
+    "file": "src/escobar/tools/show.ts",
+    "purpose": "Show component summaries (data drawn = tool result)",
+    "key_exports": "summarize, COMPONENT_GATE",
+    "unused_exports": "weeklyTotals (zero callers)"
+   },
+   {
+    "file": "src/escobar/tools/calc.ts",
+    "purpose": "calculate tool ops",
+    "key_exports": "calculate",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/tools/plan.ts",
+    "purpose": "evaluate_plan adapter",
+    "key_exports": "evaluatePlanTool",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/tools/context.ts",
+    "purpose": "ToolCtx + memoised derived views (recovery, readiness, coach ctx)",
+    "key_exports": "makeCtx, recoveryAt, readinessToday, coachCtx, scheduledSplitFor, todayOverrideOf, activeDeloadOf, exerciseOf, exerciseName",
+    "unused_exports": "plannedPerWeek, displayUnit (no callers found)"
+   },
+   {
+    "file": "src/escobar/knowledge/cards.ts",
+    "purpose": "Knowledge cards (47) search/lookup",
+    "key_exports": "lookupKnowledge, searchCards, KNOWLEDGE, CARD_BY_ID",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/knowledge/methods.ts",
+    "purpose": "explain_method content from brain constants + personal values",
+    "key_exports": "explainMethod, METHOD_INDEX",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/knowledge/methodIds.ts",
+    "purpose": "MethodId enum",
+    "key_exports": "METHOD_IDS, MethodId",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/palace/registry.ts",
+    "purpose": "71 palace entries + keyword search",
+    "key_exports": "PALACE, PALACE_BY_ID, findInApp",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/palace/navigate.ts",
+    "purpose": "goTo (close sheets, tab, panel, spotlight), aria announcement",
+    "key_exports": "goTo, spotlight, resolvePanelParams, palaceAnnouncement",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/palace/focus.ts",
+    "purpose": "Screen focus stack",
+    "key_exports": "usePalaceFocus, currentFocus, pushFocus",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/palace/dev.ts",
+    "purpose": "marc.dev gate hooks (__palace, __pulse, __escobar)",
+    "key_exports": "installPalaceDevHooks",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/mock/transport.ts",
+    "purpose": "Gate mock Worker, separate 2.4 KB lazy chunk (transport-*.js) loaded only with marc.dev",
+    "key_exports": "mockTransport",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/EscobarSheet.tsx",
+    "purpose": "Chat dialog: detents, header/menu, thread, explainer, past conversations",
+    "key_exports": "EscobarSheet, Explainer, EMPTY_LINE",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/Message.tsx",
+    "purpose": "Turn grouping, answer text (markers stripped) + unverified marks, proposal/nav/escalation cards, drawer",
+    "key_exports": "turnsOf, EscobarTurnView, AnswerText, UserBubble, ProposalCard",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/Composer.tsx",
+    "purpose": "Textarea, photo attach (max 3), send/stop",
+    "key_exports": "Composer, MAX_CHARS",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/Hall.tsx",
+    "purpose": "Coach tab top: composer chips, brief (brain fallback), plans, knows row",
+    "key_exports": "Hall",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/Dock.tsx",
+    "purpose": "Floating screen-aware prompt pill",
+    "key_exports": "Dock",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/PlanBoard.tsx",
+    "purpose": "Live plan whiteboard during plan-building turns",
+    "key_exports": "PlanBoard, currentTurn, isPlanWork",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/Escalation.tsx",
+    "purpose": "Fixed safety cards + remember-injury",
+    "key_exports": "Escalation, ESCALATION_COPY",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/SettingsSection.tsx",
+    "purpose": "Settings → Escobar (enable, sharing, tone, proactive, memory, server, usage, reset)",
+    "key_exports": "EscobarSettings",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/MemoryPlaceholder.tsx",
+    "purpose": "Read-only list of memory items (EV7 placeholder)",
+    "key_exports": "MemoryPlaceholder",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/components/index.tsx",
+    "purpose": "Show components (lift_trend drawn; others generic)",
+    "key_exports": "ShowComponent",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/Thinking.tsx",
+    "purpose": "Rotating thinking line",
+    "key_exports": "ThinkingLine, THINKING_LINES",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/typewriter.ts",
+    "purpose": "Placeholder typewriter hook",
+    "key_exports": "useTypewriter",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/prompts.ts",
+    "purpose": "Starter chips, dock prompt, context ref",
+    "key_exports": "starterChips, dockPromptFor, contextRefFor",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/present.ts",
+    "purpose": "pastTense, splitCitations (strips every marker), drawerView (hides sources, rating and escalate notes, LR-23)",
+    "key_exports": "pastTense, splitCitations, drawerView",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/open.ts",
+    "purpose": "Light entry points (openEscobar, askAbout, openAndSend)",
+    "key_exports": "openEscobar, askAbout, openAndSend",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/escobar/ui/AskAbout.tsx",
+    "purpose": "Ask-about-this button",
+    "key_exports": "AskAbout",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/core/escobarState.ts",
+    "purpose": "normalizeEscobar / normalizeUnits / normalizeProfile field repair",
+    "key_exports": "normalizeEscobar, normalizeUnits, normalizeProfile, DEVICE_ID",
+    "unused_exports": "none"
+   },
+   {
+    "file": "escobar-worker/src/validate.ts",
+    "purpose": "Worker request validation (2 images max, 400 KB text, 15 steps, system placement)",
+    "key_exports": "validateTurn, stepsSinceUser, MAX_IMAGES",
+    "unused_exports": "none"
+   }
+  ],
+  "coverage": [
+   {
+    "file": "src/escobar/hash.ts",
+    "lines": 6,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/knowledge/methodIds.ts",
+    "lines": 9,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/tools/plan.ts",
+    "lines": 9,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/AskAbout.tsx",
+    "lines": 14,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/context/modes.ts",
+    "lines": 15,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/MemoryPlaceholder.tsx",
+    "lines": 17,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/open.ts",
+    "lines": 19,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/palace/dev.ts",
+    "lines": 24,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/palace/focus.ts",
+    "lines": 28,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/context/manifest.ts",
+    "lines": 29,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/present.ts",
+    "lines": 29,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/Dock.tsx",
+    "lines": 32,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/typewriter.ts",
+    "lines": 34,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/Escalation.tsx",
+    "lines": 36,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/knowledge/cards.ts",
+    "lines": 41,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/state.ts",
+    "lines": 43,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/Thinking.tsx",
+    "lines": 48,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/components/index.tsx",
+    "lines": 48,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/images.ts",
+    "lines": 51,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/SettingsSection.tsx",
+    "lines": 57,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/prompts.ts",
+    "lines": 64,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/mock/transport.ts",
+    "lines": 72,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/palace/navigate.ts",
+    "lines": 73,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/tools/context.ts",
+    "lines": 75,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/Hall.tsx",
+    "lines": 88,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/tools/calc.ts",
+    "lines": 89,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/Composer.tsx",
+    "lines": 91,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ledger.ts",
+    "lines": 99,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/PlanBoard.tsx",
+    "lines": 100,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/types.ts",
+    "lines": 116,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/transport.ts",
+    "lines": 121,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/palace/registry.ts",
+    "lines": 153,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/verify.ts",
+    "lines": 159,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/context/brief.ts",
+    "lines": 163,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/store.ts",
+    "lines": 188,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/tools/schema.ts",
+    "lines": 188,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/tools/show.ts",
+    "lines": 188,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/apply.ts",
+    "lines": 212,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/knowledge/methods.ts",
+    "lines": 212,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/tools/executor.ts",
+    "lines": 223,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/Message.tsx",
+    "lines": 224,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/session.ts",
+    "lines": 232,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/ui/EscobarSheet.tsx",
+    "lines": 236,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/tools/actions.ts",
+    "lines": 391,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/loop.ts",
+    "lines": 406,
+    "read_fully": true
+   },
+   {
+    "file": "src/escobar/tools/read.ts",
+    "lines": 446,
+    "read_fully": true
+   },
+   {
+    "file": "src/core/escobarState.ts",
+    "lines": 161,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/src/validate.ts",
+    "lines": 156,
+    "read_fully": true
+   },
+   {
+    "file": "escobar-worker/src/tools.generated.json",
+    "lines": 3114,
+    "read_fully": false
+   },
+   {
+    "file": "scripts/escobar-tools.mjs",
+    "lines": 19,
+    "read_fully": true
+   },
+   {
+    "file": "docs/ESCOBAR-ARCHITECTURE.md",
+    "lines": 957,
+    "read_fully": true
+   },
+   {
+    "file": "docs/COACHING-DECISIONS.md",
+    "lines": 402,
+    "read_fully": false
+   }
+  ]
+ },
+ "ui": {
+  "features": [
+   {
+    "name": "Live session timer, pause/resume",
+    "entry_points": "Train.tsx LiveSession, session.ts elapsedSec/pauseSession/resumeSession",
+    "status": "working",
+    "notes": "Wall-clock based so background drift is fine; per-second full re-render of all EntryCards is expensive (UI-10)."
+   },
+   {
+    "name": "Set logging + commit/fidelity",
+    "entry_points": "Train.tsx EntryCard inputs onBlur -> session.ts commitSet",
+    "status": "broken",
+    "notes": "Every blur re-commits an already committed set (UI-01, reproduced)."
+   },
+   {
+    "name": "Rest timer banner + rest-done notification",
+    "entry_points": "Train.tsx RestBanner, session.ts startRest/adjustRest, notifications.ts scheduleRestDone",
+    "status": "partial",
+    "notes": "Banner freezes off the Train tab (UI-03); exact-alarm settings screen may pop on each schedule on Android 14+ (UI-02); adjust while paused inconsistent (UI-19)."
+   },
+   {
+    "name": "Heart-guided rest / live heart capture",
+    "entry_points": "heart.ts startHeartCapture, RestBanner heartMode",
+    "status": "partial",
+    "notes": "Duplicate samples on any state change (UI-07), wrong time base after restart (UI-08)."
+   },
+   {
+    "name": "Hold-and-drag reorder",
+    "entry_points": "reorder.ts useReorder, Train.tsx LiveSession",
+    "status": "untested",
+    "notes": "Logic sound on read; needs device check for touch-action pan-y + pointercancel on Android."
+   },
+   {
+    "name": "Finish flow + time question",
+    "entry_points": "Train.tsx FinishChoice/TimeQuestionSheet/FinishScreen, session.ts finishSession/resolveSessionTiming",
+    "status": "partial",
+    "notes": "Fallback day uses UTC date with local time (UI-04, reproduced); empty date crashes (UI-13)."
+   },
+   {
+    "name": "Log a past session",
+    "entry_points": "Train.tsx PastSessionEntry, session.ts logPastSession",
+    "status": "partial",
+    "notes": "No validation of future date/negative duration, silent no-op when empty (UI-13)."
+   },
+   {
+    "name": "Split templates / editor",
+    "entry_points": "Train.tsx Splits/SplitEditor/CreateSplit, splits.ts",
+    "status": "working",
+    "notes": "Rename on blur only (UI-27); deleteSplit clears active session (UI-11)."
+   },
+   {
+    "name": "Plate Sense (gyms, entry units, suspect chip, plates)",
+    "entry_points": "Train.tsx GymSheet/PlateSheet/SuspectChip, units.ts, Gyms.tsx",
+    "status": "working",
+    "notes": "Storage canonical kg with entered verbatim; conditioning mode ignores gym unit (UI-20)."
+   },
+   {
+    "name": "History log/calendar/edit/delete",
+    "entry_points": "History.tsx Log, SessionEditor",
+    "status": "partial",
+    "notes": "Edit/delete does not touch recoveryModel or heart series (UI-12, UI-14); empty session can remain (UI-24); misleading 'kg here' hint (UI-25)."
+   },
+   {
+    "name": "History stats (week, trend, records)",
+    "entry_points": "History.tsx Stats",
+    "status": "working",
+    "notes": "Volume shown in metric tonnes for lb users (UI-25)."
+   },
+   {
+    "name": "Body map, muscle detail, body fat",
+    "entry_points": "Body.tsx Body/MuscleDetail/BodyFat",
+    "status": "partial",
+    "notes": "MuscleDetail crashes on unknown muscle param from Escobar navigate (UI-05); cm-only inputs (UI-18)."
+   },
+   {
+    "name": "Today dashboard",
+    "entry_points": "Today.tsx",
+    "status": "partial",
+    "notes": "Recovery numbers freeze when no ticker (UI-09); Start bypasses check-in/pre-brief (UI-17)."
+   },
+   {
+    "name": "Coach tab (insights, goal, schedule, weekly review, deload)",
+    "entry_points": "Coach.tsx",
+    "status": "working",
+    "notes": "Conditional hook in WeeklyReviewCard (UI-30)."
+   },
+   {
+    "name": "Backup export / restore / reset",
+    "entry_points": "Settings.tsx backup/restore/reset, share.ts",
+    "status": "partial",
+    "notes": "Restore overwrites without confirm (UI-06); heart series never backed up (UI-14); stale active + weak validation (UI-15)."
+   },
+   {
+    "name": "Training reminders",
+    "entry_points": "reminders.ts, notifications.ts syncTrainingReminders",
+    "status": "partial",
+    "notes": "Default isExactNotification=true opens Alarms & reminders screen when exact alarms denied (UI-02)."
+   },
+   {
+    "name": "Health Connect sync",
+    "entry_points": "settings/health.ts, native/health.ts",
+    "status": "partial",
+    "notes": "Re-prompts permission on every boot/pageshow/session start after denial (UI-16)."
+   },
+   {
+    "name": "Watch connect",
+    "entry_points": "Watch.tsx, native/watch.ts",
+    "status": "partial",
+    "notes": "Scanning state never resets; silent permission denial (UI-21)."
+   },
+   {
+    "name": "Profile / onboarding",
+    "entry_points": "Profile.tsx, Onboarding.tsx, profile.ts",
+    "status": "partial",
+    "notes": "Per-keystroke history writes, no range checks, kg-only weight (UI-18, UI-22)."
+   },
+   {
+    "name": "Numeric input parsing",
+    "entry_points": "primitives.tsx WeightInput, Train.tsx reps/duration inputs, History.tsx editor",
+    "status": "partial",
+    "notes": "Negative/huge accepted, comma badInput silently clears (UI-13)."
+   },
+   {
+    "name": "Haptics",
+    "entry_points": "native/haptics.ts",
+    "status": "working",
+    "notes": "Not re-applied after restore/reset (minor)."
+   },
+   {
+    "name": "Photo pick/compress",
+    "entry_points": "native/photo.ts",
+    "status": "working",
+    "notes": "Handles cancel; share.ts pickFile does not (UI-29)."
+   },
+   {
+    "name": "Themes / CSS / safe areas",
+    "entry_points": "styles.css",
+    "status": "partial",
+    "notes": "Safe-area insets handled; set-grid load input clips at <=360px (UI-23)."
+   }
+  ],
+  "improvements": [
+   {
+    "title": "Commit-once set semantics with explicit 'edited' path",
+    "kind": "improve",
+    "rationale": "UI-01: timing, rest and fidelity must be set once per set; edits should not re-time. Fixes false 'compressed' sessions.",
+    "files": "src/slices/workout/session.ts, src/slices/workout/Train.tsx",
+    "size": "S",
+    "priority": "P0"
+   },
+   {
+    "title": "Non-intrusive exact-alarm handling for rest/reminder notifications",
+    "kind": "improve",
+    "rationale": "UI-02: plugin 8.3 opens system settings on each schedule; reminders should be inexact, precise rest alerts opt-in from Settings.",
+    "files": "src/native/notifications.ts, src/slices/settings/Settings.tsx",
+    "size": "S",
+    "priority": "P0"
+   },
+   {
+    "title": "Validate panel params at the router boundary",
+    "kind": "add",
+    "rationale": "UI-05: model-supplied params reach components unchecked; add per-panel validators (muscle -> isMuscleId, sessionId exists, exerciseId exists) in showPanel/goTo.",
+    "files": "src/app/router.ts, src/app/App.tsx, src/slices/body/Body.tsx",
+    "size": "S",
+    "priority": "P0"
+   },
+   {
+    "title": "Safe restore: confirm, preview counts, undo, drop stale active, include heart series",
+    "kind": "improve",
+    "rationale": "UI-06, UI-14, UI-15: restore is destructive and incomplete today.",
+    "files": "src/slices/settings/Settings.tsx, src/core/heartStore.ts",
+    "size": "M",
+    "priority": "P0"
+   },
+   {
+    "title": "Ref-counted ticker + minute clock for derived selectors",
+    "kind": "refactor",
+    "rationale": "UI-03, UI-09: boolean ticker breaks the rest banner; per-second recompute of recovery/insights wastes CPU and stale values when idle.",
+    "files": "src/app/selectors.ts, src/slices/workout/Train.tsx",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Isolate the live clock and memoize EntryCard computations",
+    "kind": "refactor",
+    "rationale": "UI-10: measured ~26 ms of history scans per render, every second.",
+    "files": "src/slices/workout/Train.tsx",
+    "size": "M",
+    "priority": "P1"
+   },
+   {
+    "title": "Shared numeric parsing/clamping helpers (comma decimals, ranges) for all inputs",
+    "kind": "add",
+    "rationale": "UI-13, UI-22: same parseInt/parseFloat patterns repeated in Train, History, Profile, Onboarding, Body without validation.",
+    "files": "src/core/parse.ts (new), src/ui/primitives.tsx, src/slices/workout/Train.tsx, src/slices/history/History.tsx, src/slices/profile/*.tsx, src/slices/body/Body.tsx",
+    "size": "M",
+    "priority": "P1"
+   },
+   {
+    "title": "Heart capture robustness (dedupe, restart-safe time base)",
+    "kind": "improve",
+    "rationale": "UI-07, UI-08: heart-guided rest and per-set HR are wrong in common situations.",
+    "files": "src/slices/workout/heart.ts",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Recompute recovery calibration after history edits/deletes",
+    "kind": "add",
+    "rationale": "UI-12: persisted tauScale can only drift from typos; a replay function keeps it consistent.",
+    "files": "src/slices/workout/session.ts, src/slices/history/History.tsx",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "One start flow (check-in -> pre-brief -> start) for Today, Train and Escobar",
+    "kind": "merge",
+    "rationale": "UI-17: Today bypasses the check-in and brief; export requestStart from Train.",
+    "files": "src/slices/workout/Train.tsx, src/slices/today/Today.tsx",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Health Connect: explicit connect, no background prompts",
+    "kind": "improve",
+    "rationale": "UI-16: repeated permission screens after denial.",
+    "files": "src/native/health.ts, src/slices/settings/health.ts, src/slices/workout/session.ts, src/main.tsx",
+    "size": "S",
+    "priority": "P1"
+   },
+   {
+    "title": "Unit-aware body inputs (lb, inches)",
+    "kind": "improve",
+    "rationale": "UI-18: lb users must convert body weight and tape measurements manually.",
+    "files": "src/slices/profile/Profile.tsx, src/slices/profile/Onboarding.tsx, src/slices/body/Body.tsx",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Session editor: change date/time, remove an exercise, add a set; auto-delete empty sessions",
+    "kind": "improve",
+    "rationale": "History editing today can only change existing numbers; wrong-day sessions (e.g. from UI-04) cannot be fixed.",
+    "files": "src/slices/history/History.tsx, src/slices/workout/session.ts (reuse resolveSessionTiming)",
+    "size": "M",
+    "priority": "P2"
+   },
+   {
+    "title": "History 'Recent' pagination beyond 30 sessions",
+    "kind": "add",
+    "rationale": "Log shows only the last 30; older sessions reachable only through the calendar.",
+    "files": "src/slices/history/History.tsx",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Conditioning mode distance/time inputs",
+    "kind": "add",
+    "rationale": "UI-20: model supports distanceM, UI does not.",
+    "files": "src/slices/workout/Train.tsx, src/brain/progression.ts",
+    "size": "M",
+    "priority": "P2"
+   },
+   {
+    "title": "Watch sheet state from watchStatus + forget when disconnected",
+    "kind": "improve",
+    "rationale": "UI-21.",
+    "files": "src/slices/settings/Watch.tsx",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Keyboard/a11y pass: Row/Card-press activation on Enter/Space, Segmented aria-selected, live regions, 44px effort targets",
+    "kind": "improve",
+    "rationale": "Row sets role=button+tabIndex without key handler (primitives.tsx:40); clickable Cards and EntryCard header are not focusable; Segmented uses aria-pressed on role=tab; UI-26.",
+    "files": "src/ui/primitives.tsx, src/ui/PulseLine.tsx, src/slices/workout/Train.tsx, src/ui/styles.css",
+    "size": "M",
+    "priority": "P2"
+   },
+   {
+    "title": "Responsive set grid for <=380px",
+    "kind": "improve",
+    "rationale": "UI-23.",
+    "files": "src/ui/styles.css",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Confirm destructive in-session actions (remove exercise, substitute with logged sets)",
+    "kind": "improve",
+    "rationale": "removeEntry and substituteEntry (session.ts:126,131) drop logged sets with one tap in the menu.",
+    "files": "src/slices/workout/Train.tsx",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Reset everything should also clear heart store, health-asked key and resync reminders/haptics",
+    "kind": "improve",
+    "rationale": "Settings.tsx:130 leaves marc.heart.v1 and scheduled reminders; haptics flag not re-applied after restore/reset.",
+    "files": "src/slices/settings/Settings.tsx, src/core/heartStore.ts",
+    "size": "S",
+    "priority": "P2"
+   },
+   {
+    "title": "Remove dead code and fix undefined token",
+    "kind": "remove",
+    "rationale": "UI-32.",
+    "files": "src/ui/primitives.tsx, src/ui/icons.tsx, src/ui/styles.css, src/slices/workout/session.ts, src/slices/profile/profile.ts",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Merge file pickers",
+    "kind": "merge",
+    "rationale": "UI-29.",
+    "files": "src/native/share.ts, src/native/photo.ts",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Show local times in Settings/Coach sync hints",
+    "kind": "improve",
+    "rationale": "Settings.tsx:110 shows lastSync.slice(0,16) (UTC ISO); Coach.tsx:318 same; Profile updatedHint uses UTC date.",
+    "files": "src/slices/settings/Settings.tsx, src/slices/coach/Coach.tsx, src/slices/profile/Profile.tsx",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Skip saving an all-empty check-in",
+    "kind": "improve",
+    "rationale": "CheckInSheet save (Train.tsx:564) creates a row with no values, making todayCheckIn truthy and 'check-in added'.",
+    "files": "src/slices/workout/Train.tsx",
+    "size": "S",
+    "priority": "P3"
+   },
+   {
+    "title": "Stable toast timer",
+    "kind": "improve",
+    "rationale": "UI-28.",
+    "files": "src/ui/primitives.tsx, src/app/toast.ts",
+    "size": "S",
+    "priority": "P3"
+   }
+  ],
+  "module_map": [
+   {
+    "file": "src/slices/workout/Train.tsx",
+    "purpose": "Train tab: split list/editor, gym sheet, plate sheet, live session UI (EntryCard, SuspectChip, SubstituteSheet), check-in, pre-session brief, time question, past-session entry, finish screen, global RestBanner",
+    "key_exports": "Train, CheckInSheet, RestBanner",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/workout/session.ts",
+    "purpose": "Active-session mutations: start/pause/resume, set edit/commit, rest timer, reorder, finish/discard, retro timing, log past session",
+    "key_exports": "startSession, commitSet, setSet, startRest, adjustRest, stopRest, finishSession, resolveSessionTiming, logPastSession, discardSession, elapsedSec, moveEntry",
+    "unused_exports": "REST_STEP (0 refs), restRemainingSec (0 refs; logic duplicated inline in Train.tsx RestBanner:769)"
+   },
+   {
+    "file": "src/slices/workout/reorder.ts",
+    "purpose": "Hold-and-drag reorder hook for live-session cards",
+    "key_exports": "useReorder",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/workout/heart.ts",
+    "purpose": "In-memory BLE heart sample capture for the active session; per-set heart windows; finish summary + series store",
+    "key_exports": "startHeartCapture, resetHeartCapture, heartForSet, finishHeartCapture, latestLiveBpm, recentLiveBpms, discardHeartCapture",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/workout/units.ts",
+    "purpose": "Plate Sense gym/equipment unit profile mutations",
+    "key_exports": "profileFor, setExerciseUnit, setEquipmentUnit, saveProfile, resetProfile, addGym, renameGym, deleteGym, setActiveGym, setGymDefaultUnit",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/workout/splits.ts",
+    "purpose": "Split template CRUD and custom exercise save",
+    "key_exports": "createSplit, addTemplates, deleteSplit, renameSplit, setFocus, addExerciseToSplit, moveExercise, setSplitSets, saveCustomExercise, MAX_SPLITS",
+    "unused_exports": "SPLIT_COLORS only used internally"
+   },
+   {
+    "file": "src/slices/workout/ExercisePicker.tsx",
+    "purpose": "Search library / create custom exercise sheet",
+    "key_exports": "ExercisePicker",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/history/History.tsx",
+    "purpose": "History tab: calendar log, session cards, SessionEditor panel (edit/delete with undo), Stats (week, exercise trend, records)",
+    "key_exports": "History, SessionEditor, UnitTag",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/body/Body.tsx",
+    "purpose": "Body tab: muscle map (recovery/week/levels), MuscleDetail panel, Navy body-fat estimate",
+    "key_exports": "Body, MuscleDetail",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/today/Today.tsx",
+    "purpose": "Today tab: session card, readiness, week, recovery, top insight, daily spark",
+    "key_exports": "Today",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/coach/Coach.tsx",
+    "purpose": "Escobar tab: Hall, weekly review, deload card, insights+feedback, goal, schedule, cue, what-coach-sees",
+    "key_exports": "Coach, GoalSheet, ScheduleSheet, WeeklyReviewSheet, INSIGHT_COLOR",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/coach/coach.ts",
+    "purpose": "Insight feedback + accept deload mutations",
+    "key_exports": "saveInsightFeedback, acceptDeload",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/settings/Settings.tsx",
+    "purpose": "Settings sheet: theme, training prefs, reminders, haptics, profile link, health/watch, Escobar settings, backup export/restore/reset",
+    "key_exports": "Settings, APP_VERSION",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/settings/Gyms.tsx",
+    "purpose": "Gyms and equipment profiles sheet",
+    "key_exports": "GymsSheet",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/settings/Watch.tsx",
+    "purpose": "BLE watch scan/connect/forget sheet",
+    "key_exports": "WatchSheet",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/settings/health.ts",
+    "purpose": "Health Connect sync into healthDays",
+    "key_exports": "syncAndStoreHealth",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/settings/reminders.ts",
+    "purpose": "Resync training reminders with readiness summary",
+    "key_exports": "resyncReminders, reminderHealth",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/profile/Profile.tsx",
+    "purpose": "Profile sheet: birth year, sex, height, weigh-in, training since, planned days",
+    "key_exports": "Profile",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/profile/Onboarding.tsx",
+    "purpose": "Onboarding / 90-day review / watch-connected profile prompt",
+    "key_exports": "OnboardingSheet",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/slices/profile/profile.ts",
+    "purpose": "Profile field setters with change history; goal change; onboarding markers",
+    "key_exports": "setBirthYear, setHeight, setSex, setTrainingSince, setPlannedDays, logWeight, changeGoal, applyGoalRest, addGoalTemplates, lastChangeAt, dismissOnboarding, completeOnboarding, reviewOnboarding, markWatchPrompted",
+    "unused_exports": "setName (0 callers; Settings.tsx:103 writes profile.name inline)"
+   },
+   {
+    "file": "src/slices/readiness/checkIn.ts",
+    "purpose": "Merge/save daily check-in",
+    "key_exports": "saveCheckIn",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/ui/primitives.tsx",
+    "purpose": "Shared UI primitives incl. Sheet (dialog), Toast, WeightInput",
+    "key_exports": "Card, Button, Chip, Segmented, Toggle, Stat, Row, Sheet, Toast, Empty, Section, Field, WeightInput, openSheets",
+    "unused_exports": "Bar, Ring (0 JSX uses)"
+   },
+   {
+    "file": "src/ui/MuscleMap.tsx",
+    "purpose": "SVG front/back body map with theme-token fills",
+    "key_exports": "MuscleMap, MapLegend, fillFor",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/ui/PulseLine.tsx",
+    "purpose": "Heart-beat edge glow + HeartBpm pill",
+    "key_exports": "PulseLine, HeartBpm, beatEnvelope",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/ui/Sparkline.tsx",
+    "purpose": "Tiny trend SVG",
+    "key_exports": "Sparkline",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/ui/Logo.tsx",
+    "purpose": "Theme-coloured logo mark/lockup",
+    "key_exports": "LogoMark, Logo",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/ui/icons.tsx",
+    "purpose": "Stroke icon set + Escobar mask icon",
+    "key_exports": "Icon*",
+    "unused_exports": "IconClock, IconMoon, IconHeart, IconSpark (0 refs)"
+   },
+   {
+    "file": "src/ui/styles.css",
+    "purpose": "Global styles/tokens usage",
+    "key_exports": "n/a",
+    "unused_exports": ".ring rules (Ring unused), .watch-pill .dot.live (class never applied); var(--text-1) undefined token"
+   },
+   {
+    "file": "src/native/capacitor.ts",
+    "purpose": "isNative()",
+    "key_exports": "isNative",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/native/haptics.ts",
+    "purpose": "Haptics with vibrate fallback + global enable flag",
+    "key_exports": "haptic, setHapticsEnabled, hapticSupport",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/native/share.ts",
+    "purpose": "Export text via share sheet/download; pick a JSON file",
+    "key_exports": "exportText, pickFile",
+    "unused_exports": "none (pickFile duplicates photo.ts pickFile minus cancel handling)"
+   },
+   {
+    "file": "src/native/notifications.ts",
+    "purpose": "Rest-done and training-day local notifications",
+    "key_exports": "scheduleRestDone, cancelRestDone, syncTrainingReminders, ensurePermission, onNotificationTap",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/native/health.ts",
+    "purpose": "Health Connect plugin bridge",
+    "key_exports": "syncHealth, healthAvailable, mapHealthSummary",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/native/watch.ts",
+    "purpose": "WatchBridge BLE plugin bridge + signals",
+    "key_exports": "watchStatus, latestMeasurement, scannedDevices, startWatchListeners, scanForWatch, connectWatch, disconnectWatch, requestWatchPermissions, watchPermissionState",
+    "unused_exports": "none"
+   },
+   {
+    "file": "src/native/photo.ts",
+    "purpose": "Pick + downscale photo to JPEG base64",
+    "key_exports": "pickAndCompressPhoto",
+    "unused_exports": "none"
+   }
+  ],
+  "coverage": [
+   {
+    "file": "src/slices/workout/Train.tsx",
+    "lines": 803,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/workout/session.ts",
+    "lines": 265,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/workout/reorder.ts",
+    "lines": 90,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/workout/heart.ts",
+    "lines": 81,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/workout/units.ts",
+    "lines": 98,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/workout/splits.ts",
+    "lines": 73,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/workout/ExercisePicker.tsx",
+    "lines": 75,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/history/History.tsx",
+    "lines": 225,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/body/Body.tsx",
+    "lines": 190,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/today/Today.tsx",
+    "lines": 169,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/coach/Coach.tsx",
+    "lines": 337,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/coach/coach.ts",
+    "lines": 15,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/settings/Settings.tsx",
+    "lines": 138,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/settings/Gyms.tsx",
+    "lines": 55,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/settings/Watch.tsx",
+    "lines": 62,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/settings/health.ts",
+    "lines": 18,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/settings/reminders.ts",
+    "lines": 19,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/profile/Profile.tsx",
+    "lines": 94,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/profile/Onboarding.tsx",
+    "lines": 92,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/profile/profile.ts",
+    "lines": 104,
+    "read_fully": true
+   },
+   {
+    "file": "src/slices/readiness/checkIn.ts",
+    "lines": 12,
+    "read_fully": true
+   },
+   {
+    "file": "src/ui/primitives.tsx",
+    "lines": 151,
+    "read_fully": true
+   },
+   {
+    "file": "src/ui/MuscleMap.tsx",
+    "lines": 98,
+    "read_fully": true
+   },
+   {
+    "file": "src/ui/PulseLine.tsx",
+    "lines": 41,
+    "read_fully": true
+   },
+   {
+    "file": "src/ui/Sparkline.tsx",
+    "lines": 10,
+    "read_fully": true
+   },
+   {
+    "file": "src/ui/Logo.tsx",
+    "lines": 13,
+    "read_fully": true
+   },
+   {
+    "file": "src/ui/icons.tsx",
+    "lines": 41,
+    "read_fully": true
+   },
+   {
+    "file": "src/ui/styles.css",
+    "lines": 391,
+    "read_fully": true
+   },
+   {
+    "file": "src/native/capacitor.ts",
+    "lines": 5,
+    "read_fully": true
+   },
+   {
+    "file": "src/native/haptics.ts",
+    "lines": 31,
+    "read_fully": true
+   },
+   {
+    "file": "src/native/share.ts",
+    "lines": 33,
+    "read_fully": true
+   },
+   {
+    "file": "src/native/notifications.ts",
+    "lines": 106,
+    "read_fully": true
+   },
+   {
+    "file": "src/native/health.ts",
+    "lines": 86,
+    "read_fully": true
+   },
+   {
+    "file": "src/native/watch.ts",
+    "lines": 104,
+    "read_fully": true
+   },
+   {
+    "file": "src/native/photo.ts",
+    "lines": 75,
+    "read_fully": true
+   }
+  ]
+ }
+}

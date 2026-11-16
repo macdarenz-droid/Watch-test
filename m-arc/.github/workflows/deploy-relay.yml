@@ -1,0 +1,56 @@
+name: Deploy Relay
+
+# Deploys relay/ as the `relay` Worker (one SQLite Durable Object holds all data).
+# Needs the repo secret CLOUDFLARE_API_TOKEN (and CLOUDFLARE_ACCOUNT_ID when the token sees more than one
+# account). RELAY_OWNER_KEY, when set, becomes the Worker's OWNER_KEY secret (the owner sign-in).
+on:
+  push:
+    branches: ['main']
+    paths: ['relay/**', '.github/workflows/deploy-relay.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-relay
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: relay
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - name: Typecheck and tests
+        run: npm run check
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          RELAY_OWNER_KEY: ${{ secrets.RELAY_OWNER_KEY }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then echo "::error::Add the CLOUDFLARE_API_TOKEN repository secret"; exit 1; fi
+          if [ -n "$ACCOUNT_ID" ]; then export CLOUDFLARE_ACCOUNT_ID="$ACCOUNT_ID"; fi
+          npx --no-install wrangler deploy
+          if [ -n "$RELAY_OWNER_KEY" ]; then
+            printf '%s' "$RELAY_OWNER_KEY" | npx --no-install wrangler secret put OWNER_KEY
+          else
+            echo "::warning::RELAY_OWNER_KEY is not set. Set the owner key once with: npx wrangler secret put OWNER_KEY"
+          fi
+      - name: Check /health answers as Relay
+        run: |
+          for i in 1 2 3 4 5 6; do
+            body=$(curl -fsS https://relay.mmarcdarenz.workers.dev/health || true)
+            echo "$body"
+            if echo "$body" | grep -q '"app":"relay"'; then exit 0; fi
+            sleep 5
+          done
+          echo "::error::/health did not answer as Relay"; exit 1

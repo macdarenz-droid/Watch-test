@@ -1,0 +1,28 @@
+{
+  "env": {
+    "CLAUDE_CODE_RESUME_INTERRUPTED_TURN": "1",
+    "CLAUDE_CODE_RESUME_INTERRUPTED_TURN_MAX_AGE_MS": "7200000"
+  },
+  "permissions": {
+    "deny": [
+      "Edit(/native/wear/**)",
+      "Edit(/src/native/wearEngine.ts)",
+      "Edit(/src/slices/settings/WatchLab.tsx)",
+      "Agent(model:*haiku*)",
+      "Agent(model:*fable*)",
+      "Agent(Explore)",
+      "Agent(claude-code-guide)"
+    ]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      { "hooks": [ { "type": "command", "command": "cat \"$CLAUDE_PROJECT_DIR/.claude/owner-rules.md\"" } ] }
+    ],
+    "SessionStart": [
+      { "matcher": "startup|resume|clear|compact", "hooks": [ { "type": "command", "command": "cat \"$CLAUDE_PROJECT_DIR/.claude/owner-rules.md\"" } ] }
+    ],
+    "PreToolUse": [
+      { "matcher": "Bash", "hooks": [ { "type": "command", "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard-before-push.sh\"" } ] }
+    ]
+  }
+}
