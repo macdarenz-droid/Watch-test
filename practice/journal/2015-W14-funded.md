@@ -131,3 +131,19 @@ It stays a paper tag with a tougher gate; nothing from it touches this account.
 | N1 paper tag (NY fade; London time from 03-30) | 6 (15 days) | 2 | -3.27 | -0.55 | 3.34R | judge at 20 trades AND 8 A2-losing days. A2-losing days so far: 3; N1 on them: -2.02R |
 Days: ... 03-27 -1.00 (funded 1) | 03-30 +0.84 (funded 2) | 03-31 +1.14 (funded 3) | 04-01 +0.09 (funded 4).
 Loss tags, all live trades: valid setup, market disagreed 19 (-10.66R) | my mistake 0. Process mistakes (funded): 1.
+
+## Thu 04-02, before the day: yesterday's test, for the record in this journal
+Trailing stop (journal/2015-idea-TR-trailing-stop.md): trail 20 once +20 / 30 once +30 / 20 once +40, built on January. All three WORSE than the fixed stop and noon exit
+(+0.46 / +0.67 / +0.61R against +0.78R), drawdown unchanged at 1.34R. No survivor; March not run. The exit stays: 40 pips, out at 12:00 London.
+Lesson kept: banking half of the best point is the price of staying in for the big days; a trail protects open profit, not the account.
+
+## Daily calls (Thu) - written at 07:00 London, before the entry bar
+- Thu 04-02 07:00 London @1.0783. Wed: 1.0718-1.0800 chop around US data, closed 1.0762. Asia 41 pips, dipped to 1.0750 at midnight and has climbed 40 pips, last hour +10.
+  TREND RULE: SELL. Wed close 1.0762 < Fri 03-27 close 1.0887, by 125 pips.
+  Read: lower highs all week (1.0895, 1.0845, 1.0800); price is pressing into yesterday's high from below. Long Easter weekend ahead and tomorrow is the first Friday (US jobs),
+  so today may be people squaring up. No rule about that.
+  Levels: 1.0791 Asia high, 1.0800 Wed high, 1.0810 / 1.0845 above; 1.0750 Asia low, 1.0718 Wed low, 1.0713 Tue low. Week's open 1.0886.
+  Wall note: nothing that has held for days sits inside the stop distance in front of this sell.
+  Paper tags: F1 efficiency 0.70 (straight) -> trades; FR1 the same. Q3: Asia 41.0 vs 47.7 (0.86) -> trade. Q1: trade. N1 yesterday: no trade. Friday n/a.
+  Funded check: balance $25,135.78 = high-water, drawdown 0% -> full size allowed.
+  Plan: SELL 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case -$129.
