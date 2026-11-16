@@ -8,6 +8,7 @@ Coach, 05-18: no more risk-plan tests for now; the next backtest is about findin
 | F# | Entry (London) | Side | Lots | Entry | Stop | Exit | R | $ | Tag | Note |
 |---|---|---|---|---|---|---|---|---|---|---|
 | F37 | Mon 05-18 08:00 | buy | 0.31 | 1.14178 | 1.13769 | 1.13768 (stop, 09:08) | -1.00 | -$127.10 | VALID LOSS (valid setup, market disagreed) | first hour to 3.1 pips from the stop, stopped in the second (low 1.13666, 10.3 pips through); price at 12:00 London 1.14172 = 0.6 pips under entry, 40.3 ABOVE the stop: NOT a real stop, a poke; PH2 paper half size; UN3 agree; MB1 paper day 4: break DOWN against a flat morning, removed, +0.86R |
+| F38 | Tue 05-19 08:00 | sell | 0.31 | 1.13038 | 1.13441 | 1.12163 (12:00 close) | +2.17 | +$271.25 | VALID WIN | flip day, small signal; the first M15 candle fell 90 pips (a jump, on my side); best +142.6 pips at 08:45, closed +87.5; no target, held to noon; PH2 paper half size; UN3 DISAGREE (paper skips my biggest winner of the month); MB1 paper day 5: first KEPT trade, +0.76R |
 
 ## Daily calls - each written at 07:00 London and committed before the entry bar; then a note before every advance
 - **Mon 05-18 call, written 07:00 London (06:00 UTC), before the entry bar.** Friday's tag stands: VALID LOSS. Figures from `python bt/call_numbers.py 2015-05-18` and the bar prints.
@@ -82,38 +83,59 @@ Coach, 05-18: no more risk-plan tests for now; the next backtest is about findin
   10:00 London: second hour best +136.3, worst +107.3, last +107.4 pips: drifting back up 15 pips from the low. Still about +2.7R. No call; the clock is the exit. Hands off.
   11:00 London: third hour best +120.9, worst +93.2, last +99.3 pips. A range 1.1182-1.1210 since 09:00. One hour left; close at 12:00 whatever it shows.
   12:05 London: closed at 12:00 @1.12163, +$271.25 (from the trade list). MB1 paper (forward day 5), written before 13:25: open 08:00 1.13039, open 12:00 1.12152 -> morning DOWN by 88.7 pips (large morning) -> only a DOWN break of the 12:00-13:25 box counts. Result from the tool tomorrow.
+  -> Tue result, TAG FIRST: VALID WIN (valid setup, followed the plan). Checked: size rule read, no trigger, full size; call with the streak number committed
+     at 07:00 London; PH2's range written at 08:00 before the order; SELL 0.31 at 08:00, stop never moved, no early exit at +3R open, closed 12:00, one trade;
+     a note before every advance. Process: clean.
+     All figures from `python bt/daily_numbers.py 474.84 25349.14`, the walk prints and the trade list.
+     Result: sold 1.13038, stop 1.13441 (40.3 pips, risk $124.93), closed 12:00 London @1.12163, +$271.25 = +2.17R. My biggest funded win.
+     Tracker balance $25,258.93 (sim $25,733.77 minus $474.84 paid out), high-water $25,349.14 (not a new high), drawdown -0.36%. Triggers $24,588.67 / $23,574.70: not reached -> full size.
+     Funded totals from the log: 38 trades, 21 wins, 17 valid losses, +5.91R (March +0.97R, April +4.17R, May +0.77R in 13 trades). This week: -1.00, +2.17 = +1.17R.
+     LUCK, said plainly: about 2R of this came from one 15-minute candle of 90 pips that began two minutes after my fill. I did nothing to deserve the timing.
+     It is the same kind of minute I stress-tested last week as a -3R day; this time I was on the right side of it, as on 01-15. One trade took the month from
+     -1.40R to +0.77R. That is what a 55% setup with a fat right tail looks like, in both directions - and why yesterday's losing run was not a reason to
+     touch anything. A big win changes the size as little as four stops did: 0.31 lots tomorrow.
+     What the noon exit cost: best was +142.6 pips, I closed at +87.5. Every lock and trail I tested (LK, TR, PM) would have kept more TODAY and less overall.
+     Paper tags: UN3 - sixth forward DISAGREE day - paper skips a +2.17R winner (disagree days: -0.02, -1.00, +0.63, -1.00, +0.64, +2.17 = +1.42R; n = 6 of 30).
+     The disagree days were "working" for UN3 a week ago (-1.39R after four); now A2 is ahead on them. This is why its look is at 30.
+     PH2 (paper, forward day 13): lively (38.4) -> paper half = about +1.09R against the live +2.17R. Tally: 13 days, 12 lively (live +0.31R, 5 full-stop
+     mornings), 1 quiet (+0.46R); PH2 total about +0.62R against A2's +0.77R.
+     MB1 (paper, forward day 5; `python bt/morning_box.py 2015-05-20 --check 2015-05-19`): morning -88.7 pips (DOWN, large); the box broke DOWN -> WITH the
+     morning -> first KEPT trade: +0.76R. Five forward days: kept 1 (+0.76R, large morning), removed 3 (+4.09R), no break 1. One trade.
+     Night count: with me today, not counted (12 trades, +1.93R). 10-day-trend paper line: trend UP: 10 trades, +0.48R (today's sell was against it).
+     END OF RELEASED DATA (clock Wed 05-20 01:00 London).
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
-| A2 as traded (R = result / amount risked) | 56 | 34 | +14.84 | +0.26 | 3.23R | 40-trade alarm PASSED 04-24; next alarm look at 100 live trades; real statement at 200 |
+| A2 as traded (R = result / amount risked) | 57 | 35 | +17.01 | +0.30 | 3.23R | 40-trade alarm PASSED 04-24; next alarm look at 100 live trades; real statement at 200 |
 | F1 paper tag | 35 (12 skips) | 23 | +18.51 | +0.53 | 1.28R | CLOSED 05-06 at its day-40 gate (journal/2015-paper-tag-gates-day40.md); no longer updated |
 | FR1 (tracked only to judge F1) | 32 (15 skips) | 21 | +15.36 | +0.48 | 1.28R | CLOSED 05-06 at its day-40 gate (journal/2015-paper-tag-gates-day40.md); no longer updated |
 | Q3 dead-Asia tag (drawdown goal) | 26 (21 skips) | 15 | +6.06 | +0.23 | 1.01R | CLOSED 05-06 at its day-40 gate (journal/2015-paper-tag-gates-day40.md); no longer updated |
 | Q1 dead-Asia tag (drawdown goal) | 43 (4 skips) | 25 | +12.32 | +0.29 | 3.23R | CLOSED 05-06 at its day-40 gate (journal/2015-paper-tag-gates-day40.md); no longer updated |
-| UN3 paper tag (never live; rules: journal/UN3-paper-tag-rules.md; forward from 04-21) | 20 days, 5 disagree days of 30 | - | A2 on the disagree days -0.75R; on the agree days +0.89R | - | - | first look only at 30 disagree days AND 200 forward days |
-| PH2 paper tag (never live; rules: journal/PH2-paper-tag-rules.md; forward from 05-01) | 12 days, 11 lively days of 60 | - | A2 on the lively days -1.86R (5 full-stop mornings), on the 1 quiet day +0.46R; PH2 about -0.47R vs A2 -1.40R | - | - | first look only at 200 forward days AND 60 lively days |
-Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8) | 04-08 -1.00 (funded 9) | 04-09 +0.33 (funded 10) | 04-10 +1.62 (funded 11) | 04-13 +1.94 (funded 12) | 04-14 -0.62 (funded 13) | 04-15 +1.48 (funded 14) | 04-16 -1.00 (funded 15) | 04-17 +1.70 (funded 16) | 04-20 -1.00 (funded 17) | 04-21 -0.04 (funded 18) | 04-22 -0.02 (funded 19) | 04-23 -1.00 (funded 20) | 04-24 -1.00 (funded 21) | 04-27 -0.16 (funded 22) | 04-28 +1.61 (funded 23) | 04-29 +0.32 (funded 24) | 04-30 +1.83 (funded 25) | 05-01 +0.44 (funded 26) | 05-04 -1.00 (funded 27) | 05-05 +0.85 (funded 28) | 05-06 +0.63 (funded 29) | 05-07 +0.07 (funded 30) | 05-08 +0.46 (funded 31) | 05-11 -1.00 (funded 32) | 05-12 -1.00 (funded 33) | 05-13 +0.64 (funded 34) | 05-14 +0.51 (funded 35) | 05-15 -1.00 (funded 36) | 05-18 -1.00 (funded 37).
+| UN3 paper tag (never live; rules: journal/UN3-paper-tag-rules.md; forward from 04-21) | 21 days, 6 disagree days of 30 | - | A2 on the disagree days +1.42R; on the agree days +0.89R | - | - | first look only at 30 disagree days AND 200 forward days |
+| PH2 paper tag (never live; rules: journal/PH2-paper-tag-rules.md; forward from 05-01) | 13 days, 12 lively days of 60 | - | A2 on the lively days +0.31R (5 full-stop mornings), on the 1 quiet day +0.46R; PH2 about +0.62R vs A2 +0.77R | - | - | first look only at 200 forward days AND 60 lively days |
+Days: ... 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8) | 04-08 -1.00 (funded 9) | 04-09 +0.33 (funded 10) | 04-10 +1.62 (funded 11) | 04-13 +1.94 (funded 12) | 04-14 -0.62 (funded 13) | 04-15 +1.48 (funded 14) | 04-16 -1.00 (funded 15) | 04-17 +1.70 (funded 16) | 04-20 -1.00 (funded 17) | 04-21 -0.04 (funded 18) | 04-22 -0.02 (funded 19) | 04-23 -1.00 (funded 20) | 04-24 -1.00 (funded 21) | 04-27 -0.16 (funded 22) | 04-28 +1.61 (funded 23) | 04-29 +0.32 (funded 24) | 04-30 +1.83 (funded 25) | 05-01 +0.44 (funded 26) | 05-04 -1.00 (funded 27) | 05-05 +0.85 (funded 28) | 05-06 +0.63 (funded 29) | 05-07 +0.07 (funded 30) | 05-08 +0.46 (funded 31) | 05-11 -1.00 (funded 32) | 05-12 -1.00 (funded 33) | 05-13 +0.64 (funded 34) | 05-14 +0.51 (funded 35) | 05-15 -1.00 (funded 36) | 05-18 -1.00 (funded 37) | 05-19 +2.17 (funded 38).
 Loss tags, all live trades: valid loss 35 (-22.73R, from the log) | my mistake 0. Process mistakes (funded): 4.
 
 ## LIVE vs BACKTEST, running (coach 04-20; `python bt/live_vs_bt.py END`; updated after every live day; the live column is the real out-of-sample)
-As of live day Mon 2015-05-18:
+As of live day Tue 2015-05-19:
 | | Backtest Jan-Feb (engine) | LIVE from 03-02 (as traded) | Engine on the live days |
 |---|---|---|---|
-| Trades | 39 | 56 | 56 |
+| Trades | 39 | 57 | 57 |
 | Win rate | 64% | 61% | 61% |
-| Avg R | +0.50 | +0.26 | +0.27 |
-| +- 2 standard errors | 0.33 | 0.27 | 0.28 |
-| Net R | +19.56 | +14.84 | +14.97 |
-| Avg win / avg loss | +1.04 / -0.46 | +0.93 / -0.76 | +0.94 / -0.77 |
-| Full stops | 3 (8%) | 15 (27%) | 15 (27%) |
+| Avg R | +0.50 | +0.30 | +0.30 |
+| +- 2 standard errors | 0.33 | 0.28 | 0.28 |
+| Net R | +19.56 | +17.01 | +17.16 |
+| Avg win / avg loss | +1.04 / -0.46 | +0.96 / -0.76 | +0.98 / -0.77 |
+| Full stops | 3 (8%) | 15 (26%) | 15 (26%) |
 | Max drawdown | 1.87R | 3.23R | 3.28R |
 | Worst 10 trades in a row | +0.56R | -1.66R | -1.70R |
-| Sells: n, avg R | 24, +0.70 | 28, +0.40 | 28, +0.40 |
+| Sells: n, avg R | 24, +0.70 | 29, +0.46 | 29, +0.46 |
 | Buys: n, avg R | 15, +0.18 | 28, +0.13 | 28, +0.13 |
-Live minus backtest: -0.24R per trade (noise band +-0.43R) -> inside the noise. Live vs February alone (+0.23R, 20 trades): +0.03R. As traded vs engine on the same days: -0.13R over 56 trades (fills and rounding).
-Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 56 done, avg +0.26R, max DD 3.23R. Planning edge +0.18R: live is +0.08R above it.
-Counts only: live trades after a night (00:00->08:00) against my side, from 04-23: 12 (+1.93R; look at 40). 10-day-trend direction, paper line from 05-06: trend UP 9 trades -1.69R; trend DOWN 0 trades (look at 40 up-trend trades). MB1 paper from 05-13: 4 days, kept 0 trades; removed 3 (+4.09R); no break 1.
+Live minus backtest: -0.20R per trade (noise band +-0.43R) -> inside the noise. Live vs February alone (+0.23R, 20 trades): +0.06R. As traded vs engine on the same days: -0.14R over 57 trades (fills and rounding).
+Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 57 done, avg +0.30R, max DD 3.23R. Planning edge +0.18R: live is +0.12R above it.
+Counts only: live trades after a night (00:00->08:00) against my side, from 04-23: 12 (+1.93R; look at 40). 10-day-trend direction, paper line from 05-06: trend UP 10 trades +0.48R; trend DOWN 0 trades (look at 40 up-trend trades). MB1 paper from 05-13: 5 days, kept 1 trade (+0.76R); removed 3 (+4.09R); no break 1.
+Normal worst for 56 trades (bt/streak_check.py 2015-05-19, all 95 A2 trades reshuffled): longest losing run median 4, 95th pct 6; max drawdown median 3.09R, 95th pct 5.92R. Live worst so far: 6 in a row, 3.23R.
 
 ## 05-18 research after funded day 37 (coach: an entry edge, starting from my own A2 losers and winners): the last 12 losers beside the last 12 winners at
 entry time (journal/2015-losers-winners-table-and-idea-MO.md). Nothing separates them except the weekday (5 Mondays among the losers, none among the winners).

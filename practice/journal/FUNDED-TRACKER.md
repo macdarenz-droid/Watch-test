@@ -41,6 +41,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | 35 | Thu 2015-05-14 | buy | 0.31 | +0.51 | +65.41 | 25,242.50 (sim 25,717.34) | 25,349.14 | -0.42% | +0.60 (May, from the log) | valid win | - |
 | 36 | Fri 2015-05-15 | buy | 0.31 | -1.00 | -127.72 | 25,114.78 (sim 25,589.62) | 25,349.14 | -0.92% | -0.40 (May, from the log) | valid setup, market disagreed | - |
 | 37 | Mon 2015-05-18 | buy | 0.31 | -1.00 | -127.10 | 24,987.68 (sim 25,462.52) | 25,349.14 | -1.43% | -1.40 (May, from the log) | valid setup, market disagreed | - |
+| 38 | Tue 2015-05-19 | sell | 0.31 | +2.17 | +271.25 | 25,258.93 (sim 25,733.77) | 25,349.14 | -0.36% | +0.77 (May, from the log) | valid win | - |
 
 ## Monthly summary
 | Month | Trades | Wins | Net R | $ P&L | Worst day | Deepest drawdown | Valid / mistake tags | Payouts requested | My 80% |
@@ -69,4 +70,4 @@ Earlier record-keeping slips, for completeness (challenge stage, none changed a 
 pre-registration; worst losing run overstated as -2.17R (was -1.86R); a journal edit on 03-25 cut out a section (restored from git on 03-26).
 
 ## Status line (update every day)
-After funded day 37 (05-18; figures from bt/daily_numbers.py 474.84 25349.14): tracker balance $24,987.68 (sim $25,462.52 minus $474.84 paid out) | high-water $25,349.14 | drawdown -1.43% (deepest so far -1.63%; SIZE RULE: trigger 1 half size at $24,588.67; trigger 2 stop trading at 7% under the high-water = $23,574.70, fixed for funded days 36-55; account line $22,500) | funded total +3.74R in 37 trades (20 wins, 17 valid losses) | March +0.97R (3) | April +4.17R (22) | May MTD -1.40R (12 trades) | TRADE tags: 37 valid, 0 my mistake | PROCESS mistakes: 7 | payouts 3: $474.84 requested, $379.87 mine | next payout date Fri 05-22 (balance is under $25,000: as it stands, nothing to request).
+After funded day 38 (05-19; figures from bt/daily_numbers.py 474.84 25349.14): tracker balance $25,258.93 (sim $25,733.77 minus $474.84 paid out) | high-water $25,349.14 | drawdown -0.36% (deepest so far -1.63%; SIZE RULE: trigger 1 half size at $24,588.67; trigger 2 stop trading at 7% under the high-water = $23,574.70, fixed for funded days 36-55; account line $22,500) | funded total +5.91R in 38 trades (21 wins, 17 valid losses) | March +0.97R (3) | April +4.17R (22) | May MTD +0.77R (13 trades) | TRADE tags: 38 valid, 0 my mistake | PROCESS mistakes: 7 | payouts 3: $474.84 requested, $379.87 mine | next payout date Fri 05-22 | normal worst for 56 trades by reshuffle: 6 losses in a row, about 5.9R drawdown (95th pct).
