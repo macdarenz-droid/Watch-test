@@ -22,7 +22,7 @@ def trend_map(m5, look=3):
         elif i >= 2: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None):
     tr = trend_map(m5, look); acct = Account(); risk_of = {}
     cl = m5.groupby('day')['close'].last()
     hi = m5.groupby('day')['high'].max(); lo = m5.groupby('day')['low'].min(); dlist = list(hi.index)
@@ -42,6 +42,9 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                 if go and midfilter:   # idea C: only trade on the trend side of yesterday's range midpoint
                     y = dlist[dlist.index(d) - 1]; mid = (hi[y] + lo[y]) / 2
                     if (side < 0 and b.open > mid) or (side > 0 and b.open < mid): go = False; done = True
+                if go and chase is not None:   # idea H: no trade if price already sits in the far part of yesterday's range, in my direction
+                    y = dlist[dlist.index(d) - 1]; pos = (b.open - lo[y]) / (hi[y] - lo[y]); pos = pos if side > 0 else 1 - pos
+                    if pos >= chase: go = False; done = True
                 if go and pullback:    # idea D: yesterday must have closed AGAINST the trend (a pullback day)
                     i = dlist.index(d)
                     if (cl.iloc[i-1] - cl.iloc[i-2]) * side >= 0: go = False; done = True
@@ -72,6 +75,9 @@ VARIANTS = {
  "D1": dict(entry_h=8, exit_h=12, sl=40, pullback=True),   # idea D v1: A2 only after a pullback day
  "E1": dict(entry_h=8, exit_h=12, sl=30),                  # idea E v1: A2 with a 30 pip stop (same $ risk, bigger size)
  "DE": dict(entry_h=8, exit_h=12, sl=30, pullback=True),   # D1 + E1 together
+ "H1": dict(entry_h=8, exit_h=12, sl=40, chase=0.6),   # idea H: A2 + no-chase filter
+ "H2": dict(entry_h=8, exit_h=12, sl=40, chase=0.7),
+ "H3": dict(entry_h=8, exit_h=12, sl=40, chase=0.8),
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":

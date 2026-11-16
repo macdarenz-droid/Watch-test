@@ -31,3 +31,37 @@ Adopt only if ALL hold on February: kept avg R >= A2 February avg R + 0.15R; ski
   So a February "pass" here is weaker evidence than a real unseen month. A February fail is still a real fail.
 - I already suspect the build fails: January was a trend, and in a trend the chasing entries won (my #9, +4.27R, was a pos 0.91 sell). I'm running it anyway because that is the test.
 - 19-20 trades a month: differences under ~0.3R per trade are noise either way.
+
+# RESULTS (run after the text above was committed, commit 168b28d). Costs on, $125 risk.
+
+## Build - January only
+| Rule | Trades | Win rate | Avg R | Net R | Max DD | Skipped trades: n / avg R | Build rule |
+|---|---|---|---|---|---|---|---|
+| A2 (before) | 19 | 74% | +0.78 | +14.79 | 1.33R | - | - |
+| H1 T=0.6 | 12 | 75% | +0.58 | +6.90 | 1.00R | 7 / +1.13 | FAIL (a), (b) |
+| H2 T=0.7 | 13 | 77% | +0.55 | +7.18 | 1.00R | 6 / +1.27 | FAIL (a), (b) |
+| H3 T=0.8 | 16 | 69% | +0.48 | +7.76 | 1.33R | 3 / +2.35 | FAIL (a), (b) |
+No variant survives. In January the "chasing" entries were the BEST trades (01-07 +1.63, 01-08 +1.14, 01-16 +1.10, 01-23 +4.27): in a trend, selling near yesterday's low is just selling the trend.
+The hypothesis is dead on the build month. As pre-registered, the least-bad variant (H1, highest kept avg R) goes to February once, for information only.
+
+## Check - February, H1 only, one run (H2 and H3 were not run on February)
+| Rule | Trades | Win rate | Avg R | Net R | Max DD |
+|---|---|---|---|---|---|
+| A2 (before) | 20 | 55% | +0.23 | +4.64 | 1.86R |
+| H1 (after) | 10 | 70% | +0.50 | +5.01 | 1.50R |
+| trades H1 skipped | 10 | 40% | -0.04 | -0.37 | - |
+February kill test on its own: kept avg R +0.50 >= +0.38 yes; skipped avg <= 0 yes (-0.04); drawdown lower yes; kept >= 10 yes (exactly 10). All four pass.
+
+## Both months together
+| Rule | Trades | Win rate | Avg R | Net R | Max DD |
+|---|---|---|---|---|---|
+| A2 (before) | 39 | 64% | +0.50 | +19.43 | 1.86R |
+| H1 (after) | 22 | 73% | +0.54 | +11.91 | 1.50R |
+
+## Verdict: KILLED - not adopted. A2 stays.
+- It failed the build rule I wrote first, so the February pass does not count for adoption. And February was not truly unseen for this lesson (the lesson came partly from February's losers),
+  so its pass is exactly what I should expect from data I had already looked at.
+- What the two months do say, clearly and in opposite directions: in the trend month the no-chase filter threw away the best trades (-7.9R); in the box month it removed ten trades worth nothing (-0.4R).
+  The lesson "don't chase" is a BOX lesson, not a general one. My loser review was dominated by February (20 of 34 trades, 9 of 13 losers), which is why it looked general.
+- So the same wall again: the right entry depends on trend vs box, and I have no tested way to know which I am in at 08:00.
+- Counts now: ideas 6 (A B C D E H), variants 13.
