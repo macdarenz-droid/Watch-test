@@ -329,7 +329,7 @@
 ## Streak check (journal/2015-streak-check.md; coach 04-28; inside/outside line written before the numbers; bt/streak_check.py END)
 - Backtest Jan-Feb: longest losing run 3, max DD 1.87R, never a 6+ run. Live: run of 6 (-3.23R), max DD 3.23R. Reshuffles of the backtest list over 42 trades: 6+ run 4.9% (line 5% -> just OUTSIDE), DD >= 3.23R 7.6% (inside); against all A2 trades 7.4% / 26.3%.
 - What changed (one thing): mornings going 40+ pips AGAINST my entry: 7.7% in Jan-Feb, 26.2% live (Mar 23%, Apr 30%). Morning range unchanged (65 vs 66 pips); winners unchanged (+1.03R, 60%); losers the same share (40% vs 36%) but deeper (-0.69R vs -0.46R). The direction call fails harder, not more often.
-- The plan already holds it (planning edge +0.18R vs live +0.34R; sims use the real loss side). Expectation now: 1 trade in 4 is a full stop; a 6-loss run every few months; 5R drawdown inside two months is within the 95th percentile. Keep trading the plan; no change.
+- The plan already holds it (planning edge +0.18R vs live +0.34R; sims use the real loss side). Expectation now: 1 trade in 4 is a full stop; a 6-loss run every few months; about 5R of drawdown inside two months is the 95th percentile (4.94R). Keep trading the plan; no change.
 
 ## LIVE vs BACKTEST, running (coach 04-20; `python bt/live_vs_bt.py END`; updated after every live day; the live column is the real out-of-sample)
 As of live day Tue 2015-04-28:

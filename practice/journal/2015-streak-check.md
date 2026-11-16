@@ -61,7 +61,7 @@ Does my plan already allow for it? Yes, with nothing to spare in the story I tel
 - The risk-size and survival runs since 04-10 use the full list, stops included; the weekend re-run used the 40 live trades as they are (own stop reached in 1.1% of
   two-year runs at 0.50%). The plan's sentence "drawdowns of 3-4% will happen" was written for percent of the account; the worst so far is 1.63%.
 - What I had NOT priced in is the January-February picture of my losers as mostly small. For expectations I now use the live loss side: one trade in four is a
-  full stop, a six-loss run is a once-in-a-few-months event, and a drawdown of 5R inside any two months is within the 95th percentile of the all-trades list (4.94R).
+  full stop, a six-loss run is a once-in-a-few-months event, and a drawdown of about 5R inside any two months is the 95th percentile of the all-trades list (4.94R): one two-month stretch in twenty is worse.
 
 ## Decision
 Keep trading the plan: same rule, same size, the two triggers as written. No change follows from this check, as stated before it was run.
