@@ -78,3 +78,29 @@ Nothing in this section has been run.
 - Coach allowed up to 3 variants. I pre-registered ONE (E >= 0.5, 5-day lookback, H1 filter) and "no other thresholds", so I run one: F1 = variant 14. Ideas -> 7.
 - E needs six earlier daily closes, so it does not exist before Mon 01-12. Days without E are left out for BOTH A2 and F1 (same days compared). Decided now, before seeing any E.
 - Order: gate 1 (does E label Jan straight / Feb crooked), build on January, then February ONCE. February is CONTAMINATED for this idea (the no-chase half was shaped on it): not validation.
+
+## 6. RESULTS of idea F (variant 14 = F1; ideas 7, variants 14). Costs on, $125 risk. Same days for both rules (01-12 onward).
+### Gate 1 - does the measure tell my trend month from my box month? PASS
+January: E >= 0.5 on 10 of 15 trade days (67%, needed 60%). February: E < 0.5 on 17 of 20 (85%, needed 60%).
+
+### Before vs after
+| Period | Rule | Trades | Win rate | Avg R | Net R | Max DD |
+|---|---|---|---|---|---|---|
+| Jan (build) | A2 before | 15 | 73% | +0.75 | +11.23 | 1.33R |
+| Jan (build) | F1 after | 13 | 77% | +0.84 | +10.97 | 1.33R |
+| Feb (CONTAMINATED, not validation) | A2 before | 20 | 55% | +0.23 | +4.64 | 1.86R |
+| Feb (CONTAMINATED, not validation) | F1 after | 12 | 58% | +0.37 | +4.46 | 1.50R |
+| Both | A2 before | 35 | 63% | +0.45 | +15.87 | 1.86R |
+| Both | F1 after | 25 | 68% | +0.62 | +15.42 | 1.50R |
+Trades F1 skipped: Jan 2 (avg +0.13R: 01-28 +0.28, 01-30 -0.02); Feb 8 (avg +0.02R: -0.24 -0.19 +0.77 +0.34 -0.34 -0.36 +0.19 +0.01).
+
+### Honest reading
+- F1 fixes what killed H: it no longer throws away January's trend trades (it kept 01-16 and 01-23). That part of the idea works as designed.
+- But it adds nothing: it removes 10 trades worth +0.44R in total, i.e. trades that averaged zero. Avg R rises only because the divisor shrinks; net R is slightly LOWER in both months.
+  Drawdown 1.86R -> 1.50R is the one real difference, on 35 trades.
+- Even on contaminated February it would miss my own bar: +0.14R per trade better (needed +0.15) and skipped trades averaged +0.02R (needed <= 0).
+- The premise underneath is NOT supported: A2 was no better on "straight" days than "crooked" ones (Jan +0.72R vs +0.81R; Feb +0.06R on 3 days vs +0.26R on 17).
+  E recognises the month, but does not pick the good days. So I still cannot tell trend from box in a way that pays.
+- Verdict: NOT a genuine improvement. Not adopted. Per the pre-registration F1 passed gate 1, so it stays alive only as a paper tag for gate 2 on unseen months; I expect it to fail there.
+- Where two months and 14 variants leave me: one frozen rule family with a small positive out-of-sample result (+0.2 to +0.3R per trade, unproven), zero execution mistakes,
+  and no filter that survives its own test. More filters cut from these same 39 days would just be fitting. Stopped here; no new candles.

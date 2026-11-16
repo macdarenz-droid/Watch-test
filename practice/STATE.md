@@ -2,12 +2,12 @@
 
 | Field | Value |
 |---|---|
-| Sim clock | Fri 2015-02-27 22:00 UTC (END OF RELEASED DATA - waiting for coach) |
+| Sim clock | Fri 2015-02-27 22:00 UTC (END OF RELEASED DATA - stopped, waiting for coach) |
 | Phase | Challenge #1, phase 1 ACTIVE: balance $26,836.44 (+7.35%), target $27,000 (+$163.56 = 1.3R to go), 34 trading days, no breach |
 | Current strategy | Rule A2 "London trend": 07:00 UTC write call; trend = yesterday's 22:00 close vs close 3 trading days earlier; 08:00 market order with trend; SL 40 pips; close 12:00 UTC; 1 trade/day; flat at weekend |
 | Risk | $125/trade = 0.5% (0.31 lots x 40 pips). Own max daily loss 0.5% (1 trade/day). Reason: unproven rule; 20 straight losses to hit max loss |
-| Ideas tried | 6 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed]) |
-| Variants tested | 13 (A1 A2 A3, B1 B2 B3, C1, D1, E1, DE, H1 H2 H3). A and B at the 3-variant cap; review round used its 3 |
+| Ideas tried | 7 (A London trend-follow, B Asia-range breakout with trend, C yesterday-midpoint filter [dropped], D pullback-day filter, E 30 pip stop, H no-chase filter [killed], F efficiency regime [not adopted]) |
+| Variants tested | 14 (A1 A2 A3, B1 B2 B3, C1, D1, E1, DE, H1 H2 H3, F1). A and B at the 3-variant cap; review round used its 3 |
 | Challenge attempts | 1 (active) |
 | Last updated (real date) | 2026-11-16 |
 
@@ -48,9 +48,9 @@
 ## Audit (journal/2015-audit-feb-and-next-hypothesis.md)
 - Feb is NOT unused: clean only for the live trades, frozen A/B and C1. D, E, H are in-sample on both months. H2/H3 were run on Feb by my own scripting error (recorded). No unseen data is left.
 - All 13 live losses tagged: 13 "valid setup, market disagreed", 0 "my mistake" (34/34 trades followed every execution rule). One real mistake: the 01-22 skip.
-- Idea F ("straight or crooked": 5-day efficiency >= 0.5 -> A2 every day, else A2 + no-chase H1) is WRITTEN with a two-gate kill test and NOT RUN. It will be variant 14.
+- Idea F1 (5-day efficiency >= 0.5 -> A2 every day, else A2 + no-chase 0.6) RUN once: gate 1 pass (Jan 67% straight, Feb 85% crooked). Jan build +0.84R (13) vs A2 +0.75R (15); Feb (contaminated) +0.37R (12) vs +0.23R (20); both months net R 15.42 vs 15.87, max DD 1.50R vs 1.86R. Skipped trades averaged ~0. NOT adopted; paper tag only for gate 2.
 
 ## Next step
-1. Waiting for the coach's go: run gate 1 of idea F on Jan-Feb (measure only), exactly as written, one variant.
+1. STOPPED by coach instruction after idea F. No new runs, no new candles until told.
 2. When unseen data arrives: `git fetch origin main && git merge --no-edit FETCH_HEAD`; trade A2 at $125; paper-tag F (and H1) on every signal day; judge gate 2 only after 40 new signal days.
 Tools: look.sh, trade_a.py, bt/ideas.py [names] [--since=YYYY-MM-DD] (careful: with no names it runs EVERY variant on all months), bt/review.py, bt/loser_charts.py. Tests: `python -m pytest -q`.

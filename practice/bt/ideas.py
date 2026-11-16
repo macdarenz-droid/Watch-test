@@ -4,6 +4,7 @@ import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import pandas as pd
 from backtest import history, Account, PIP
+EFF = {}
 RISK = 125.0  # $ per trade = 0.5% of 25k
 
 def days(m5):
@@ -22,7 +23,7 @@ def trend_map(m5, look=3):
         elif i >= 2: out[d] = 1 if cl.iloc[i-1] > cl.iloc[0] else -1
     return out
 
-def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None):
+def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, midfilter=False, since=None, pullback=False, ret=False, chase=None, eff=None):
     tr = trend_map(m5, look); acct = Account(); risk_of = {}
     cl = m5.groupby('day')['close'].last()
     hi = m5.groupby('day')['high'].max(); lo = m5.groupby('day')['low'].min(); dlist = list(hi.index)
@@ -42,6 +43,14 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                 if go and midfilter:   # idea C: only trade on the trend side of yesterday's range midpoint
                     y = dlist[dlist.index(d) - 1]; mid = (hi[y] + lo[y]) / 2
                     if (side < 0 and b.open > mid) or (side > 0 and b.open < mid): go = False; done = True
+                if go and eff is not None:    # idea F: 5-day efficiency decides whether the no-chase filter applies today
+                    i = dlist.index(d)
+                    if i < 6: go = False; done = True
+                    else:
+                        c = cl.iloc[i-6:i]; E = abs(c.iloc[-1] - c.iloc[0]) / c.diff().abs().sum(); EFF[d] = E
+                        if E < eff:
+                            y = dlist[i - 1]; pos = (b.open - lo[y]) / (hi[y] - lo[y]); pos = pos if side > 0 else 1 - pos
+                            if pos >= 0.6: go = False; done = True
                 if go and chase is not None:   # idea H: no trade if price already sits in the far part of yesterday's range, in my direction
                     y = dlist[dlist.index(d) - 1]; pos = (b.open - lo[y]) / (hi[y] - lo[y]); pos = pos if side > 0 else 1 - pos
                     if pos >= chase: go = False; done = True
@@ -78,6 +87,7 @@ VARIANTS = {
  "H1": dict(entry_h=8, exit_h=12, sl=40, chase=0.6),   # idea H: A2 + no-chase filter
  "H2": dict(entry_h=8, exit_h=12, sl=40, chase=0.7),
  "H3": dict(entry_h=8, exit_h=12, sl=40, chase=0.8),
+ "F1": dict(entry_h=8, exit_h=12, sl=40, eff=0.5),      # idea F: straight week -> A2 every day; crooked week -> A2 + no-chase(0.6)
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
