@@ -9,7 +9,8 @@ that fit a story. M15 charts from the previous day 12:00 to the trade day 20:00 
 The draw: 01-08, 01-12, 02-06, 02-26, 03-05, 03-25, 04-16, 04-20, 04-21, 04-24. Results: +1.14, +1.35, -0.19, +0.01, +0.02, +0.91, -1.03, -1.03, -0.04, -1.03:
 5 on the plus side, average +0.011R. All 90 trades: 57 wins, average +0.405R. So this draw is an UNLUCKY ten (three April full stops in it) and I read it knowing that.
 
-What I see, chart by chart (written while looking, before any counting):
+What I see, chart by chart (written while looking, before any counting; the pip sizes of moves in these ten notes are read off the chart BY EYE and are approximate -
+they are descriptions, not measurements; every figure in Parts 2 and 4 is from a tool print):
 1. Thu 01-08 SELL +1.14R. Night drifts down gently, lower highs from midnight - with my side. Quiet hour before entry. From 08:00 a steady slide for two and a half
    hours, flat into noon. After 13:00 the whole morning is retraced.
 2. Mon 01-12 SELL +1.35R. Flat-to-soft night. The entry candle itself is the breakdown. Falls until 11:00. From 13:00 a 50 pip rally.
@@ -78,3 +79,57 @@ A variant survives only if ALL:
 My guess, written now: BX1 about zero at the sim's costs (between -0.10R and +0.10R) and clearly negative under the stress; BX2 a little better per trade because the
 structural stop is wider than the whip; BX3 under 50 trades. No survivor. If so, the lesson of the ten charts is the one Part 2 already gave: the afternoon is big,
 and big in both directions.
+
+## Part 4 - RESULTS (Parts 1-3 pushed in commit b85c9f2 before any code; one run: `python bt/box_break.py 2015-05-12`; figures copied from its output)
+90 A2 days 01-06..05-11; a trade only when the 13:25-14:30 window leaves the 12:00-13:25 box.
+
+### Simulator checked by hand on two of the ten chart days, raw candles printed beside the fills (`--check 2015-02-26,2015-03-05`)
+- 02-26: box 1.13107-1.13522 (41.5 pips). The 13:30 candle's low is 1.13031 -> sell stop filled at 1.13106 (box low less slippage), stop 1.13406; never touched;
+  17:00 open 1.12105 + spread + slippage -> +99.0 pips = +3.30R (BX2, stop at the box high: +2.38R; BX3: no trade, the box is wider than 30 pips).
+- 03-05: box 1.10472-1.10766 (29.4 pips). The 13:30 candle's high is 1.10875 -> buy stop filled at 1.10777; the 13:35 candle reaches 1.11142 (+36 pips) and by the
+  13:50 candle price is at 1.10351: stopped at 1.10477, -30.1 pips = -1.00R in all three variants. The fills match the candles.
+
+### Totals
+| | trades | win rate | avg R (+- 2 SE) | net R | full stops | max DD | worst 10 | Jan | Feb | Mar-now | without best 3 | STRESSED avg (3.0 spread, 1.0 slip) | corr with A2 | net on A2's losing days |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| BX1: 30 pip stop | 73 | 44% | +0.174 (+-0.33) | +12.72 | 32 (44%) | 7.41R | -4.66R | +3.50 (16) | +11.41 (12) | -2.20 (45) | +0.47 | +0.085 | +0.03 | +2.19 (24 days) |
+| BX2: stop on the other side of the box | 63 | 48% | +0.227 (+-0.37) | +14.32 | 26 (41%) | 5.90R | -3.51R | -2.13 (13) | +8.21 (11) | +8.24 (39) | +0.54 | +0.103 | -0.09 | +8.29 (22 days) |
+| BX3: 30 pip stop, box <= 30 pips | 37 | 46% | +0.343 (+-0.50) | +12.69 | 14 (38%) | 5.72R | -4.82R | -3.82 (9) | +7.26 (9) | +9.25 (19) | +0.71 | +0.243 | -0.04 | +5.41 (13 days) |
+
+### Kill lines applied
+| line | BX1 | BX2 | BX3 |
+|---|---|---|---|
+| K1 avg >= +0.15R | PASS (+0.174) | PASS (+0.227) | PASS (+0.343) |
+| K2 stressed avg >= +0.05R | PASS (+0.085) | PASS (+0.103) | PASS (+0.243) |
+| K3 positive in each period | FAIL (Mar-now -2.20R on 45 trades) | FAIL (Jan -2.13R) | FAIL (Jan -3.82R) |
+| K4 positive without best 3 | PASS (+0.47R) | PASS (+0.54R) | PASS (+0.71R) |
+| K5 max DD <= 5R, worst 10 >= -4R | FAIL (7.41R, -4.66R) | FAIL (5.90R) | FAIL (5.72R, -4.82R) |
+| K6 independent of A2 | PASS | PASS | PASS |
+| K7 at least 50 trades | PASS | PASS | FAIL (37) |
+VERDICT BY THE KILL TEST AS WRITTEN: NO SURVIVOR. Each variant fails the period line and the drawdown line. Idea closed; no paper tag awarded. A2 unchanged.
+
+### My guess against what happened
+I guessed "about zero at the sim's costs and clearly negative under the stress". Wrong on both: +0.17R to +0.34R at the sim's costs, still positive at a 3 pip
+spread with a pip of slippage. It is the first second setup of nine that passes my average line, my cost stress AND independence from A2 (correlation about zero;
+it MADE money on the days my morning lost).
+
+### What this is and is not - carefully
+For it: positive average, survives a harsh cost stress, unrelated to A2, came from an unbiased look at random charts and was pre-registered with its costs.
+Against it, and these are the lines it failed:
+- It is three trades. "Without best 3" leaves +0.47R of +12.72R (BX1), +0.54R of +14.32R (BX2). 44% of the trades are full stops. The profit is a handful of
+  news afternoons - 02-26 alone is +3.30R - and I cannot know from 73 trades whether such afternoons come at this rate.
+- No period consistency: BX1 made +11.41R in 12 February trades and LOST 2.20R in the 45 trades since March - the live period. BX2 and BX3 lose in January.
+  The three variants do not even agree on which months are bad.
+- Drawdowns of 5.7R to 7.4R, against A2's 3.3R: at 0.50% that is 3-4% of the account from this trade alone - my half-size trigger.
+- Average known to +-0.33R on 73 trades: indistinguishable from zero.
+- The fills are my own simulator's and the cost stress is my guess of release-time conditions. Real slippage through a stop order at 13:30 can be worse than a pip.
+What I do with it: nothing live, and no paper tag - it failed two of seven lines, and I do not hand out tags to results I like. It goes on the parked list as the
+one stand-alone observation that survived costs: "the first break of the midday box after 13:25: +0.17R, lumpy, period-unstable".
+If my coach thinks a nine-out-of-nine record of dead second setups makes this one worth a forward paper line, it would need its own rules written first
+(a frozen variant - BX1, the plain one - and a promotion rule), as for UN3 and PH2. I am not asking for it; I am reporting that it is the only candidate there has been.
+
+### What the slow way gave me
+Ten charts drawn by a seed showed me one thing I had not tested, and the base rates cut it down to size before the test (one day in five, not six in ten).
+The pre-registration then made me write the cost stress and the period line BEFORE I saw a number I liked - which is the only reason this note says "no survivor"
+instead of "found a second setup".
+Counts: ideas 56, variants 153.

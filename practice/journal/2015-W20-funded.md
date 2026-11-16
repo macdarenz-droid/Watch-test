@@ -88,3 +88,5 @@ As of live day Mon 2015-05-11:
 Live minus backtest: -0.17R per trade (noise band +-0.44R) -> inside the noise. Live vs February alone (+0.23R, 20 trades): +0.09R. As traded vs engine on the same days: -0.17R over 51 trades (fills and rounding).
 Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 51 done, avg +0.33R, max DD 3.23R. Planning edge +0.18R: live is +0.15R above it.
 Counts only: live trades after a night (00:00->08:00) against my side, from 04-23: 9 (+3.29R; look at 40). 10-day-trend direction, paper line from 05-06: trend UP 4 trades +0.16R; trend DOWN 0 trades (look at 40 up-trend trades).
+
+## 05-12 research (before the next day), the slow way: ten seeded random A2 charts written up, base rates counted, then the midday-box breakout BX1/BX2/BX3 pre-registered and run (journal/2015-ten-charts-and-idea-BX.md) - no survivor by the kill test (fails the period line and the drawdown line), though it is the first second setup to pass the average, the cost stress and independence. Parked, no tag. Rule A2 and size 0.50% unchanged. Ideas 56, variants 153.
