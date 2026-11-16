@@ -610,3 +610,7 @@
 {"real_utc": "2026-11-16T10:37:19+00:00", "clock": "2015-03-27T12:00:00+00:00", "action": "close", "target": null}
 {"real_utc": "2026-11-16T10:37:19+00:00", "clock": "2015-03-27T21:00:00+00:00", "action": "advance", "frm": "2015-03-27T12:00:00+00:00", "to": "2015-03-27T21:00:00+00:00", "note": "END OF RELEASED DATA: commit + push sim/ and your journal, then wait for your coach to release more and run `git pull origin main`."}
 {"real_utc": "2026-11-16T10:37:21+00:00", "clock": "2015-03-27T21:00:00+00:00", "action": "bars", "tf": "H1", "n": 15}
+{"real_utc": "2026-11-16T10:48:07+00:00", "clock": "2015-03-30T07:00:00+00:00", "action": "advance", "frm": "2015-03-27T21:00:00+00:00", "to": "2015-03-30T07:00:00+00:00", "note": ""}
+{"real_utc": "2026-11-16T10:48:08+00:00", "clock": "2015-03-30T07:00:00+00:00", "action": "bars", "tf": "D1", "n": 3}
+{"real_utc": "2026-11-16T10:48:08+00:00", "clock": "2015-03-30T07:00:00+00:00", "action": "bars", "tf": "H1", "n": 10}
+{"real_utc": "2026-11-16T10:48:09+00:00", "clock": "2015-03-30T07:00:00+00:00", "action": "bars", "tf": "H1", "n": 150}
