@@ -96,8 +96,10 @@ Against it:
 - It failed the lines I wrote beforehand: E3 (46% < 50%) and K1 for every variant. The gap in average R is inside its noise band (0.43 against +-0.47).
 - The backtest side rests on SIX lively days. "Stable in both periods" means 6 trades agree with 24.
 - Without its three worst trades the lively group averages +0.28R; without its three best -0.06R. Thirty trades.
-- It is my twelfth conditional split of the same 82 trades. One in twelve looking like this is not rare.
-- The coach's warning stands: these 30 days include 15 winners (04-10, 04-13, 04-15, 04-17 among them). Skipping is out by K5; I would not skip them.
+- It is roughly my twelfth conditional split of the same trades (rejection day, side, 10-day trend, signal agreement twice, night twice, gap size twice, stretch, afternoon
+  morning-type, and this). One in a dozen looking like this is not rare.
+- The coach's warning stands: these 30 days include 15 winners. (Corrected the same hour: I first named 04-10, 04-13, 04-15 and 04-17 from memory; 04-10 and 04-13 had pre-entry hours
+  of 27 pips and are NOT in the group. Read from the tool, the bigger winners inside it are 03-23 +2.58, 04-17 +1.73, 03-10 +1.72, 04-15 +1.49, 02-05 +1.09, 03-13 +1.09, 03-20 +1.07.) Skipping is out by K5; I would not skip them.
 What I do: nothing to the rule or the size. The threshold, the definition and this table are frozen here.
 QUESTION FOR MY COACH: this is the UN3 situation again, with a stronger explanation part and a failed profit line. May I log PH2 (half size after a 30+ pip pre-entry
 hour) as a second forward PAPER tag under the same discipline as UN3 - its line written in the 08:00 note before the order (it is only known at 08:00), counting from the

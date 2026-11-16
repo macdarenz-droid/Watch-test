@@ -339,7 +339,7 @@
 ## Idea PH lively hour before entry (journal/2015-idea-PH-pre-entry-hour.md; pre-registered before touching any result; bt/pre_hour.py END [--check])
 - Feature: 07:00-08:00 London range 30+ pips: 6 of 39 backtest days, 24 of 43 live days. Quiet-hour mornings: 52 trades +0.572R (69% wins; +0.565 backtest, +0.583 live). Lively-hour mornings: 30 trades +0.146R (50% wins; +0.150 / +0.144). Gap 0.43R, noise +-0.47R.
 - Full-stop mornings: lively 9 of 30 (30%) vs quiet 5 of 52 (9.6%), ratio 3.12 (live 2.11). E1, E2 PASS; E3 FAIL (explains 46% of the rise, needed 50%). Backtest averages on the live mix give +0.33R = the live average.
-- PH1 skip (87% of net R, DD 1.87): fails K1, K5. PH2 half size (94%, DD 1.87) and PH3 skip at 40+ (93%): fail K1 only. NO SURVIVOR, no tag awarded. Six backtest lively days; twelfth split of the same trades.
+- PH1 skip (87% of net R, DD 1.87): fails K1, K5. PH2 half size (94%, DD 1.87) and PH3 skip at 40+ (93%): fail K1 only. NO SURVIVOR, no tag awarded. Six backtest lively days; roughly the twelfth split of the same trades.
 - OPEN QUESTION TO COACH: PH2 as a second paper tag under UN3's discipline, or a count only.
 - KEEP (coach): most-stretched signals are my best trades (+0.625R on 24); do not filter winners away - PH1 would remove 15 winners.
 
