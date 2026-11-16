@@ -33,6 +33,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | 27 | Mon 2015-05-04 | buy | 0.31 | -1.00 | -128.34 | 25,443.46 (sim 25,569.16) | 25,571.80 | -0.50% | -0.56 (May) | valid setup, market disagreed | - |
 | 28 | Tue 2015-05-05 | buy | 0.31 | +0.85 | +108.19 | 25,551.65 (sim 25,677.35) | 25,571.80 | -0.08% | +0.29 (May, from the log) | valid (win) | - |
 | 29 | Wed 2015-05-06 | sell | 0.31 | +0.63 | +79.05 | 25,630.70 (sim 25,756.40) | 25,630.70 (new high) | 0.00% | +0.92 (May, from the log) | valid (win) | - |
+| 30 | Thu 2015-05-07 | buy | 0.31 | +0.07 | +8.99 | 25,639.69 (sim 25,765.39) | 25,639.69 (new high) | 0.00% | +1.00 (May, from the log) | valid (win) | - |
 
 ## Monthly summary
 | Month | Trades | Wins | Net R | $ P&L | Worst day | Deepest drawdown | Valid / mistake tags | Payouts requested | My 80% |
@@ -59,4 +60,4 @@ Earlier record-keeping slips, for completeness (challenge stage, none changed a 
 pre-registration; worst losing run overstated as -2.17R (was -1.86R); a journal edit on 03-25 cut out a section (restored from git on 03-26).
 
 ## Status line (update every day)
-After funded day 29 (05-06; figures from bt/daily_numbers.py): tracker balance $25,630.70 (sim $25,756.40 minus $125.70 paid out) | high-water $25,630.70 (new) | drawdown 0.00% (deepest so far -1.63%; SIZE RULE: trigger 1 half size at $24,861.78, trigger 2 stop at $24,349.17; account line $22,500) | funded total +6.07R in 29 trades (16 wins, 13 valid losses) | March +0.97R (3) | April +4.17R (22) | May MTD +0.92R (4 trades) | TRADE tags: 29 valid, 0 my mistake | PROCESS mistakes: 6 | payouts 2: $125.70 requested, $100.56 mine | next payout date Fri 05-08.
+After funded day 30 (05-07; figures from bt/daily_numbers.py): tracker balance $25,639.69 (sim $25,765.39 minus $125.70 paid out) | high-water $25,639.69 (new) | drawdown 0.00% (deepest so far -1.63%; SIZE RULE: trigger 1 half size at $24,870.50, trigger 2 stop at $24,357.71; account line $22,500) | funded total +6.14R in 30 trades (17 wins, 13 valid losses) | March +0.97R (3) | April +4.17R (22) | May MTD +1.00R (5 trades) | TRADE tags: 30 valid, 0 my mistake | PROCESS mistakes: 6 | payouts 2: $125.70 requested, $100.56 mine | next payout date Fri 05-08 (tomorrow).
