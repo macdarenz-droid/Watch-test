@@ -63,6 +63,21 @@ Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 36 done, avg +0.41R, m
 Reading (04-20): live average is 0.09R below the backtest, far inside the noise, and above February and the planning edge. What IS different live: full stops 22% of trades
 against 8% in the backtest, and the average loss is -0.79R against -0.46R - my live losses are deeper, paid for by the same size of wins. Both columns: sells earn more than buys.
 36 live trades is still a small book: the live average is known to +-0.36R.
+- **Tue 04-21 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID LOSS.
+  D1: Monday broke the run of higher lows: high 1.0821 (below Friday's 1.0849), low 1.0712, close 1.0737 - a 109 pip range closing in its bottom quarter.
+      The four-day bounce from 1.0520 topped at 1.0849; price is back to the middle of it.
+  H4: Monday 08:00-12:00 fell 1.0797 -> 1.0723; afternoon bounced to 1.0768 twice and failed; evening 1.0735-1.0752. Tonight lower again: 1.0720, then 1.0714.
+  H1: night highs 1.0749 (00:xx), 1.0744, 1.0732, 1.0734, 1.0737 - lower highs; lows 1.0730, 1.0720, 1.0714. Asia range 38 pips (ratio 0.77).
+  M15: 05:15 candle fell 20 pips (1.0737 -> 1.0717); two more small red candles; price 1.0719, 5 pips above the night low (1.0714) and 7 above Monday's low (1.0712).
+  Bias: BUY. 22:00 London closes: 04-20 1.07374 vs 04-15 1.06834 = +54 pips. Fourth day on the buy side.
+  UN3 PAPER TAG (never live; rules in journal/UN3-paper-tag-rules.md, written before this call): 5-day gap +171 pips -> BUY; 3-day says BUY -> agree: paper TRADES. Forward day 1.
+  Levels: night low 1.0714; Mon low 1.0712; 1.0700; night high 1.0749; Mon afternoon highs 1.0768. A stop from here would sit near 1.0680.
+  Rejection-day check (parked observation): Monday closed at 0.23 of its range - in the far third against a buy - but did not make the 3-day high. 'Closed against me',
+  not a rejection day. Those mornings earned +0.60R on average in the RV test.
+  Worry: I am buying a market that made lower highs for a day and a half and sits on yesterday's low. Yesterday the same call lost 1R. The rule buys dips; this is one.
+  Paper tags: Q3 SKIP (Asia 38.0 vs 49.5 = 0.77), Q1 trade. F1 / FR1 read from the engine after the day.
+  Funded check: tracker balance $25,380.99, high-water $25,508.71, drawdown -0.50% (brakes -3% = $24,743.45 / -5% = $24,233.27) -> full size allowed.
+  Plan: BUY 08:00 London, SL 40 pips under the bid at 08:00, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case about -$129 -> drawdown -1.0%. One trade, stop not moved.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
