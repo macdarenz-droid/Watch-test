@@ -50,3 +50,4 @@ A few good paper days, a losing week, or "it would have halved today's stop" are
 | Thu 2015-05-07 | 5 | 5 | +0.99R / 1 | - | +0.49R / 0.50R | +0.99R / 1.00R |
 | Fri 2015-05-08 | 6 | 5 | +0.99R / 1 | +0.46R / 0 (1 quiet day) | +0.95R / 0.50R | +1.45R / 1.00R |
 | Mon 2015-05-11 | 7 | 6 | -0.01R / 2 | +0.46R / 0 (1 quiet day) | +0.45R / 0.50R | +0.45R / 1.00R |
+| Tue 2015-05-12 | 8 | 7 | -1.01R / 3 | +0.46R / 0 (1 quiet day) | -0.05R / 1.00R | -0.55R / 2.00R |
