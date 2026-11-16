@@ -12,15 +12,15 @@
 | Last updated (real date) | 2026-11-16 |
 
 ## FUNDED SCOREBOARD (update after every funded day; source of truth: journal/FUNDED-TRACKER.md)
-| Item | Value (after funded day 7, Mon 2015-04-06) |
+| Item | Value (after funded day 8, Tue 2015-04-07) |
 |---|---|
-| Funded trades | 7 (5 wins, 2 valid losses) |
-| Total R | +1.16R (March +0.98R in 3 trades; April +0.18R in 4 trades) |
-| Balance | $25,148.18 (+0.59%) |
+| Funded trades | 8 (5 wins, 3 valid losses) |
+| Total R | +0.16R (March +0.98R in 3 trades; April -0.82R in 5 trades) |
+| Balance | $25,021.08 (+0.08%) |
 | High-water mark | $25,148.18 |
-| Drawdown now / deepest | 0.00% / -0.49% (brake at -3%, stop at -5%, account line $22,500) |
+| Drawdown now / deepest | -0.51% / -0.51% (brake at -3%, stop at -5%, account line $22,500) |
 | Payouts taken | 0 ($0). Next payout date Fri 2015-04-10 |
-| Trade tags | 7 valid, 0 my mistake |
+| Trade tags | 8 valid, 0 my mistake |
 | Process mistakes | 2 (P1 DST slip 03-30; P2 research script touched March 04-03) |
 
 ## Results (costs on: 1.0 pip spread + 0.1 slippage)
