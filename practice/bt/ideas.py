@@ -40,6 +40,10 @@ def run(name, m5, entry_h=7, exit_h=12, sl=40, tp=None, mode="open", look=3, mid
                 elif mode == "break" and len(asia):   # previous bar closed beyond Asia range, with trend
                     prev = g[g.time < b.time].iloc[-1]
                     go = prev.close < asia.low.min() if side < 0 else prev.close > asia.high.max()
+                elif mode == "anybreak" and len(asia):   # idea K: previous bar closed beyond the Asia range on EITHER side -> that side
+                    prev = g[g.time < b.time].iloc[-1]
+                    if prev.close > asia.high.max(): side, go = 1, True
+                    elif prev.close < asia.low.min(): side, go = -1, True
                 if go and midfilter:   # idea C: only trade on the trend side of yesterday's range midpoint
                     y = dlist[dlist.index(d) - 1]; mid = (hi[y] + lo[y]) / 2
                     if (side < 0 and b.open > mid) or (side > 0 and b.open < mid): go = False; done = True
@@ -97,6 +101,8 @@ VARIANTS = {
  "G1": dict(entry_h=8, exit_h=12, sl=40, nofight=True),   # idea G: A2, skip when the first London hour broke the Asia range against me
  "T1": dict(entry_h=8, exit_h=12, sl=40, hourcheck=0),     # idea T: close at 09:00 if not in profit
  "T2": dict(entry_h=8, exit_h=12, sl=40, hourcheck=-10),   # idea T: close at 09:00 if worse than -10 pips
+ "K1": dict(mode="anybreak", entry_h=7, exit_h=12, sl=40),   # idea K: first break of the Asia range from 07:00, either side
+ "K2": dict(mode="anybreak", entry_h=8, exit_h=12, sl=40),   # idea K: same, watching from 08:00
  "C1": dict(entry_h=8, exit_h=12, sl=40, midfilter=True),  # idea C v1: A2 + yesterday-midpoint filter
 }
 if __name__ == "__main__":
