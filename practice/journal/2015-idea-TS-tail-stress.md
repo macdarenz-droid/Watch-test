@@ -32,3 +32,45 @@ If a line fails: no size change by me. It becomes a written proposal to the coac
 Limits said now: one jump day in 92 is one observation, so "1/92" is a guess with a wide error; T3 is there because of that. Reshuffles ignore that bad
 days cluster beyond 5-day blocks.
 My guess, written now: breach 0% everywhere (K1 pass); T2 own-stop odds about 8 points above T0 (K2 FAIL); payout about 75% of T0 (K3 FAIL).
+
+## Results (run once; `python bt/tail_stress.py 2015-05-15`; figures copied from the print)
+List: 93 A2 trades, avg +0.393R, shifted to +0.180R; 16 full stops; DC1 results avg -1.096R, worst -1.33R; jump day -3.07R.
+| scenario | reshuffle | list avg | account line breached | own -5% stop | median payout | lowest balance, any run | worst single day | days at half size |
+|---|---|---|---|---|---|---|---|---|
+| T0 base | plain | +0.180R | 0.0% | 13.4% | 36.0% | -5.1% | -0.62% | 27% |
+| T1 stops replaced by DC1 | plain | +0.203R | 0.0% | 5.1% | 43.9% | -4.7% | -0.67% | 20% |
+| T2 + jump 1/92 (5.4 a run) | plain | +0.167R | 0.0% | 22.9% | 30.9% | -5.4% | -1.54% | 29% |
+| T3 + jump 2/92 (10.8 a run) | plain | +0.132R | 0.0% | 45.6% | 20.1% | -5.7% | -1.54% | 34% |
+| T0 base | block | +0.182R | 0.0% | 5.5% | 38.3% | -4.8% | -0.62% | 22% |
+| T1 | block | +0.205R | 0.0% | 2.4% | 45.5% | -4.6% | -0.67% | 14% |
+| T2 | block | +0.169R | 0.0% | 14.2% | 33.4% | -5.3% | -1.54% | 28% |
+| T3 | block | +0.134R | 0.0% | 34.9% | 21.8% | -5.6% | -1.54% | 35% |
+Kill lines by the letter: K1 PASS (0.0% breached) | K2 FAIL (own stop +9.6 points under T2) | K3 PASS (86% of T0).
+
+## A FLAW IN MY OWN METHOD, found in the result (process mistake P7)
+T1 made the list BETTER (+0.180R -> +0.203R; own-stop odds down from 13.4% to 5.1%). A stress cannot improve things, so the construction is wrong:
+shifting the list to +0.18R takes 0.213R off every trade, so a full stop in the shifted list is already about -1.24R. Replacing those with DC1's results
+(average -1.096R) made the stops MILDER. I wrote "after the shift" into the pre-registration without working one number by hand; a single line of arithmetic
+would have shown it. The rule "hand-check the mechanics before totals" was skipped because this was "only a simulation". Logged as P7.
+What that does to the lines (no re-run: three variants are used and the run was the run):
+- T1 is VOID as a stress. What it does show: my planning-edge sims have always carried stops of about -1.24R, harsher than the badly filled stop DC1
+  measured (-1.10R). The badly-filled-stop part of the tail was already inside my planning.
+- T2 and T3 sit on top of the eased T1, so they UNDERSTATE. K2 fails even so, so the failure is safe to read. K3's "PASS at 86%" is not: against T1
+  (its real base) T2's payout is 30.9 / 43.9 = 70% plain and 33.4 / 45.5 = 73% block. Honest reading: K3 FAILS too.
+- K1 does not depend on the flaw: the lowest balance in 16,000 two-year runs is -5.7%.
+
+## Verdict: the claim "the plan holds with the down-tail in" is KILLED on K2 (and on K3, read honestly)
+## My guess against what happened
+Breach 0%: right. Own stop +8 points: +9.5 plain, +8.7 block (understated). Payout 75%: 86% by the letter, 70-73% honestly. Close - but I did not foresee the flaw.
+
+## What it means, said plainly
+- The firm's line is not the thing at risk. With a jump against me every 92 days for two years, or twice that, no run got near -10%: my own -5% stop ends
+  the run first, and one day never cost more than 1.54%. The coach's reading of DC stands: keep the size.
+- What the tail threatens is my OWN stop. One jump day costs 3R at once = about a third of the way from a fresh high to half size. At one a quarter, the
+  chance of hitting my -5% stop inside two years goes from about 13% to about 23% at the planning edge; at two a quarter, to about 46%.
+- These jump rates are deliberately one-sided: in my 92 days the one morning jump PAID me. A fair coin would halve them. I do not know the true rate; one
+  observation cannot tell me.
+- Nothing here asks for a rule change. A smaller size would cut payouts for a risk that ends at my own stop, not at the account. No size trigger was reached.
+- For the coach, as a note and not a proposal: my -5% stop is the line most likely to end this account's trading, and the plan says "stop" without saying
+  what happens after. That sentence should exist before I ever need it. I will write it into the plan only if the coach wants it.
+Counts: ideas 59, variants 162 (T1 T2 T3; T1 void). Adopted: 0. Process mistakes: 7.

@@ -232,3 +232,8 @@ written reasons not to trust it. A2 and the live size: unchanged. Counts: 57 ide
 A stop filled at the worst price of its minute: worst -1.33R (pass). The biggest morning minute in history (81.7 pips) on my stop: -3.07R = 1.54% of the balance -
 my own 1.25% line FAILS; the firm's 5% daily limit still has more than 3x cushion. Size unchanged (no trigger); proposal written for the coach.
 MB1's possible size cut to about 0.09% in its rules. Counts: 58 ideas, 159 variants.
+
+## 05-14 research after funded day 35: idea TS, tail stress of the funded plan (journal/2015-idea-TS-tail-stress.md). Looked at the 16 stop days and the jump
+day minute by minute first, then kill lines, then one run. Account line never breached (lowest -5.7% in any run); my own -5% stop is reached about 9 points more
+often with a jump day per 92 days: K2 fails, the claim "the plan holds with the tail in" is killed. Found a flaw in my own method in the result (T1 eased the
+stops instead of worsening them): process mistake P7, T1 void, no re-run. Size and rules unchanged. Counts: 59 ideas, 162 variants; process mistakes 7.
