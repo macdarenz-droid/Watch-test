@@ -56,3 +56,13 @@ Start of week: balance $25,114.39, high-water $25,135.78, drawdown -0.09%. Payou
 | Q1 dead-Asia tag (drawdown goal) | 25 (2 skips) | 17 | +9.09 | +0.36 | 1.50R | 81% of net, same DD |
 Days: ... 04-02 -0.25 (funded 5) | 04-03 +0.07 (funded 6) | 04-06 +0.27 (funded 7) | 04-07 -1.00 (funded 8).
 Loss tags, all live trades: valid loss 21 (-11.91R) | my mistake 0. Process mistakes (funded): 2.
+
+- Wed 04-08 07:00 London @1.0850. Tue: stopped me in the second hour and fell all day, 1.0955 -> 1.0803, close 1.0814. Asia 35 pips, a steady climb of 30 from the low.
+  (Coach on Tuesday's -1R: valid, do not change the rule for it. Agreed; nothing changed.)
+  TREND RULE FLIPS TO SELL: Tue close 1.0814 < Thu 04-02 close 1.0880, by 65 pips.
+  Read: the jobs-day rally has been fully given back in two sessions. This morning is a bounce inside yesterday's fall - the "pullback before the entry" picture.
+  Levels: 1.0854 Asia high, 1.0880, 1.0910; 1.0821 Asia low, 1.0803 Tue low, 1.0800. Week's open 1.1000.
+  Wall note: nothing that has held for days sits inside the stop distance in front of this sell (Tue low is one day old).
+  Paper tags: F1 efficiency 0.21 (crooked) -> no-chase applies; price 0.69 down yesterday's range -> F1 SKIPS; FR1 SKIPS. Q3: Asia 35.4 vs 39.6 (0.89) -> trade. Q1: trade.
+  Funded check: balance $25,021.08, high-water $25,148.18, drawdown -0.51% (brakes at -3% / -5%) -> full size allowed.
+  Plan: SELL 08:00 London, SL 40, out 12:00 London, 0.31 lots ($125 = 0.50%). Worst case -$129.
