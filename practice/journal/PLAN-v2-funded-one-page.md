@@ -71,4 +71,15 @@ max 3 variants, costs on, everything counted in STATE.md (151 ideas, 403 variant
   skip days AND in the SECOND HALF". Split by date at the 15th forward skip day (of 30): half 1 = all forward days up to and including that
   day (its 15 skips + the kept days among them), half 2 = all later days up to the 30th skip. K1, K3, K4 unchanged. Same line is in
   journal/NC1-forward-record.md.
+- INACTIVITY (coach 09-02; written Wed 2015-09-02 01:00 London, before it matters, before any 09-02 candle). Assumption: the firm closes a
+  funded account after 30 days with no trade. I count CALENDAR days from the last live trade's close (stricter than weekdays).
+  AT DAY 25, if still flat by rule: ONE A2 trade at the MINIMUM size, 0.01 lots (risk 0.01 x 40 pips x $10 = $4.00), on the first
+  weekday morning whose paper call is complete and committed before the bell: A2's own side, 08:00 market, stop 40, out 12:00, nothing
+  else changed. Tag "INACTIVITY TRADE"; VALID only if it follows A2's rule exactly. It is not a route back (A, B, C unchanged), it changes
+  no size and no gate, and it only resets the counter. If days 25-28 pass without a complete call, the same trade on day 29 at the latest.
+  NEVER: a bigger size, no stop, a setup that is not A2's rule, a second trade, or a trade on a morning whose call was not committed
+  before the bell. A2 is always computable, so a valid minimum trade always exists; I do not need a bad one.
+  NOW (09-02): 57 calendar days (41 weekdays) since 07-07: past 30 on either count. Asked the coach which start applies. Until then
+  NO live trade: both readings agree for today (if the count ran from 07-07 the account would already be closed and a trade cannot help;
+  if it runs from 09-02, day 25 is 2015-09-27 (Sun), so the first eligible morning is the next weekday).
 - A RANGE OR VOLATILITY NUMBER goes into a call only if it came from a tool (08-27, after a by-eye "twice July" that was true of three days only).
