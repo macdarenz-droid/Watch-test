@@ -90,3 +90,9 @@ Live minus backtest: -0.29R per trade (noise band +-0.42R) -> inside the noise. 
 Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 71 done, avg +0.21R, max DD 4.45R. Planning edge +0.18R: live is +0.03R above it.
 Counts only: live trades after a night (00:00->08:00) against my side, from 04-23: 20 (+2.50R; look at 40). 10-day-trend direction, paper line from 05-06: trend UP 14 trades +0.71R; trend DOWN 10 trades -2.24R (look at 40 up-trend trades). MB1 paper from 05-13: 19 days, kept 7 trades (-1.87R, DD 4.00R); removed 11 (+9.27R); no break 1. +80 pip trades from 05-22: 2 of 15. Pre-entry hour 80+ pips: 4 of 10 (0 wins, -3.18R).
 Normal worst for 56 trades (bt/streak_check.py 2015-05-19, all 95 A2 trades reshuffled): longest losing run median 4, 95th pct 6; max drawdown median 3.09R, 95th pct 5.92R. Live worst: 6 in a row (April), 4.45R (06-01). Now: 2 in a row, 2.71R under the high.
+
+## 06-08 research after funded day 52 (coach: a different part of the plan - which days to sit out; one test): idea SO, sit out the day after a full stop
+(journal/2015-idea-SO-sit-out-after-a-stop.md). What I had already seen (the day after my last 11 stops: +0.34R a trade) added up in the pre-registration;
+worked expectation and kill lines pushed; one run. The day after a full stop averages +0.416R (24 trades), better than an average A2 day; sitting out
+costs 9.97R and deepens the drawdown. After two losing days: +0.481R. Killed on four lines. Stops cluster a little (29% against 23%) and it does not
+matter. Counts: 77 ideas, 216 variants. June corrections after a push: 0.
