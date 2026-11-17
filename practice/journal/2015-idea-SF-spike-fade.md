@@ -36,3 +36,11 @@ Power: about 300 trades, spread about 1R -> error about 0.06R; a no-edge rule cl
 My guess: about zero or slightly negative after costs (-0.05R); K1 fails.
 
 ## Counts and worked case (tool, before outcomes)
+Tool: `python bt/spike_fade.py 2015-08-06 count` / `check 2015-07-13` (no outcomes).
+- SF1: 409 trades (157 before 04-07, 252 from) on 136 different days; the 5 busiest days hold 37 of them (06-10: 8, 06-29: 8, 01-27: 7,
+  03-23: 7, 04-16: 7); 214 up spikes, 195 down. SF2: 179 trades (72 / 107) on 93 days. Judgeable by my line (150 / 60).
+- Worked case Mon 07-13 (four signals that day): the 07:45 candle rose 64.7 pips (body +52.4) -> SF1 SELLS at the 08:00 open, stop 20
+  pips above, out at the 09:00 open. That is the minute my A2 paper buy went in and was stopped by 08:05 as the price fell 132 pips, so
+  this one should be a large winner for the fade (several R, since the stop is 20 pips and there is no target) and a full stop for the follow.
+
+## Result (one run)
