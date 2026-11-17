@@ -109,3 +109,8 @@ YN's own 13 unseen trades since its test lost ~3.9R: +0.070R -> +0.032R. Ideas 1
      How it feels: the paper buy came within 1.6 pips of its stop and closed small. Nothing to act on.
   Evening: near-miss rule re-applied (journal/2015-YN-exits-and-management.md): no candidate left outside the forward counts; question to the coach
   (an exit twin for YM1 judged on forward days only?). No test run, nothing counted today.
+
+## 09-02 evening: three hypotheses from two months of journal and charts -> idea 152 FM (journal/2015-09-02-three-hypotheses-from-two-months.md)
+Compression (H1) and Monday (H3) fail the sample by definition; H2 picked by a written rule. FM: fade the first 45 minutes (X = 15 by counts,
+83 trades): -0.053R, stressed -0.140R, against follow +0.109R, p 0.52 -> KILLED on all four (R after costs 1.0 + 0.1). Ideas 152, variants 406.
+Inactivity: count from 09-02 (coach); day 25 = Sun 09-27, first eligible Mon 09-28.

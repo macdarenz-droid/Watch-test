@@ -38,3 +38,18 @@ Worked case 09-01 (tool check line, matches my walk: 08:00 open about 1.1283, 08
     a2                             -1
 -> the first 45 minutes ran +35.1 pips -> FM1 and FM2 SELL at the 08:45 open (A2 also sold that day).
 One run next: `python bt/first45.py 2015-09-03 run 15 20`.
+
+## Result (one run; ALL R AFTER COSTS spread 1.0 + slippage 0.1; stressed 2.0 + 0.5) - tool output pasted by this command
+    FM1 fade, |move| >= 15.0: trades 83 | wins 43% | avg -0.053R (+-0.26) | net -4.44 | stops 39 | before 2015-04-07: -4.16 | from: -0.28 | stressed avg -0.140 | on A2's side 51%
+    FM2 fade, |move| >= 20.0: trades 60 | wins 42% | avg -0.100R (+-0.29) | net -6.00 | stops 28 | before 2015-04-07: -2.75 | from: -3.25 | stressed avg -0.165 | on A2's side 52%
+    FM0 with the move, >= 15.0 (control): trades 83 | wins 46% | avg +0.109R (+-0.29) | net +9.06 | stops 35 | before 2015-04-07: +7.88 | from: +1.18 | stressed avg +0.046 | on A2's side 49%
+    (R after costs 1.0 + 0.1; stressed 2.0 + 0.5) FM1 minus FM0 -0.163R, sign-flip p 0.5154
+    KILL LINES FM1: K1 FAIL | K2 FAIL | K3 FAIL | K4 FAIL
+Kill lines, each value against its threshold (FM1), read from the lines above:
+K1 average R >= +0.10R: FM1 avg -0.053R -> FAIL.
+K2 net above zero before AND from 04-07: -4.16R / -0.28R -> FAIL.
+K3 stressed average above zero: -0.140R -> FAIL.
+K4 FM1 minus FM0 above zero with p < 0.10: -0.163R, p 0.515 -> FAIL.
+VERDICT: KILLED on all four (idea 152; variants FM1 FM2 FM0 counted). The dose (FM2, bigger first moves) is worse, not better.
+The control (FOLLOW the first 45 minutes) printed +0.109R, but +7.88R of its +9.06R is before 04-07 and it is the mirror of a killed idea
+on the same data: NOT promoted, not tested further (coach: no mirror on the same data). My two mornings (08-28, 09-01) were the exception.
