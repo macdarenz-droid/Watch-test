@@ -36,3 +36,16 @@ Tool: `python bt/weekly_open.py 2015-07-21 count` / `check 2015-07-14` (no outco
   below -> WO1 SELL at 08:00, stop 40, out 20:00. Monday's close was 91.6 pips below -> WO3 SELL too.
 
 ## Result (one run)
+Tool: `python bt/weekly_open.py 2015-07-21 test`. Mechanics check (`hand 2015-07-14`): my sell 08:00-12:00 = the engine's A2 trade, -1.0034R both.
+| variant | trades | avg R | net | wins | before 04-07 | from 04-07 | without best 2 | vs opposite side (p) | stressed avg | max DD | on A2's side |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| WO1 away from the weekly open, out 20:00 | 94 | +0.205 | +19.28 | 39% | 39: +24.18 | 55: -4.91 | +9.50 | +0.429 (0.098) | +0.156 | 16.72R | 78% |
+| WO2 the same, out 12:00 | 94 | +0.135 | +12.67 | 47% | 39: +17.42 | 55: -4.75 | +5.42 | +0.245 (0.20) | +0.092 | 9.28R | 78% |
+| WO3 Monday's side, out 20:00 | 80 | +0.112 | +8.98 | 40% | 32: +11.95 | 48: -2.98 | -0.50 | +0.247 (0.38) | +0.063 | 12.33R | 59% |
+WO1: K1 PASS | **K2 FAIL** (-4.91R from 04-07) | K3 PASS | **K4 FAIL** (p 0.098) | K5 PASS | **K6 FAIL** (16.72R) | K7 PASS (78%, just).
+**WO IS KILLED.** My guess was right: all of it is before 04-07.
+What I learned: 1. The weekly open is not a level with its own information: "which side of the weekly open" is 78% the same thing as
+A2's 3-day direction, and it died on the same date. 2. Sixth follow rule with the same shape (profit before 04-07, loss after):
+RG, WM, DF, DH, BK, WO. Only the slow SW1 did not show the break, and it could not be told from a coin. 3. The power check written
+first was honest: +0.43R against the opposite side still gave p 0.098 on 94 trades, because one side's -1R is often the other's +2R.
+Counts: idea 108; variants 301-303; second setups tried 18, none alive.

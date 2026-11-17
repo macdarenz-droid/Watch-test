@@ -32,3 +32,7 @@ SW1 paper shadow from Mon 07-20 (journal/SW1-paper-shadow-rules.md): a count onl
      For Tuesday (tool): MO1 -0.299R -> paper; MO3 -0.112R -> paper.
 
 ## Forward tally
+
+## 07-20 test: idea WO, the weekly open (journal/2015-idea-WO-weekly-open.md)
+WO1 (Tue-Fri 08:00 away from the weekly open, stop 40, out 20:00): 94 trades +0.205R, but +24.18R before 04-07 and -4.91R after; DD 16.72R;
+78% on A2's side. KILLED (K2, K4, K6). Idea 108, variants 303.

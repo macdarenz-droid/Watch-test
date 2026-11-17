@@ -32,6 +32,7 @@ def trade(day, side, xh, costs=None):
         acct.on_bar(bar)
     if acct.positions: acct.close(); acct.on_bar(x.iloc[-1].to_dict())
     return acct.trades[-1]["pnl"] / RISK
+if MODE == "hand": d = sys.argv[3]; print(d, 'sell out 12:00:', round(trade(d, -1, 12), 4), '| engine A2:', round(float(ta[ta.tag == d].R.sum()), 4), 'side', int(a2[d])); sys.exit()
 def dd(r): eq = r.cumsum(); return (eq.cummax().clip(lower=0) - eq).max()
 for k, (m, s, xh) in VAR.items():
     J = F[m].copy(); J["side"] = s[m].astype(int); J["R"] = [trade(r.day, r.side, xh) for r in J.itertuples()]; J["O"] = [trade(r.day, -r.side, xh) for r in J.itertuples()]; J["Rs"] = [trade(r.day, r.side, xh, (2.0, 0.5)) for r in J.itertuples()]
