@@ -123,3 +123,7 @@ Three options put to the coach; nothing started. Idea 119, variants 331.
 ## 08-05 test: idea SF, fade a sharp 15-minute spike (journal/2015-idea-SF-spike-fade.md)
 409 trades: fade -0.048R, follow -0.039R, difference p 0.93; negative in both periods. Killed on all seven lines.
 A sample that could judge, and a clean no: a coin minus costs. Idea 120, variants 334.
+
+## 08-06 test: idea RT, the first touch of a round number (journal/2015-idea-RT-round-number-touch.md)
+228 first touches: the bounce lost -0.159R a trade (00 levels -0.279R); the break control +0.034R. Killed on all seven lines.
+Round numbers are information in my calls, not walls. Idea 121, variants 337.

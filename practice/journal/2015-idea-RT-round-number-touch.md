@@ -40,3 +40,20 @@ Tool: `python bt/round_touch.py 2015-08-07 count` / `check 2015-07-13` (no outco
   was open, so it is skipped and used up for the day; the second signal is 1.1050 at 13:05.
 
 ## Result (one run)
+Tool: `python bt/round_touch.py 2015-08-07 test`. Hand check 07-13: the bounce bought 1.11475 at 08:10 and was stopped at 1.11163, -1.04R;
+the break sold 1.11463, out 10:10 at 1.10760, +2.35R. As I wrote first.
+| variant | trades | wins | avg R | net | full stops | before 04-07 | from 04-07 | without best 5 | without 5 busiest days | stressed avg | max DD |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| RT1 bounce, 50-pip levels (JUDGED) | 228 | 40% | -0.159 (+-0.12) | -36.34 | 90 | -9.99 | -26.35 | -51.13 | -31.61 | -0.212 | 42.18R |
+| RT2 bounce, 100-pip levels | 136 | 35% | -0.279 (+-0.15) | -37.91 | 64 | -16.17 | -21.74 | -46.63 | -33.57 | -0.350 | 39.51R |
+| RT0 break on RT1's signals (control) | 228 | 48% | +0.034 (+-0.13) | +7.71 | 70 | -1.52 | +9.22 | -5.61 | +3.16 | -0.032 | 10.52R |
+Bounce minus break -0.193R (sign-flip p 0.096). RT1: all seven kill lines FAIL. **RT IS KILLED.**
+What I learned:
+1. My hypothesis was backwards, the fourth wrong-way guess in a fortnight (SR, EV, MF's dropped window, RT). On the first touch of the
+   day the price does NOT bounce off a round number; the bounce lost 0.16R a trade, far more than the 0.04R the costs take, and it was
+   worse at the "rounder" 00 levels (-0.28R). If anything the level is a place the price goes THROUGH.
+2. The break side made +0.034R, under my line, negative before 04-07 and at stressed costs, and the difference has p 0.096. It was the
+   control, it is the mirror on the same data, and my coach has told me not to test that. Noted, not promoted.
+3. Practical, for every call I write: a round number in front of a trade is not a reason to expect it to stop. My calls have called
+   them "landmarks"; from now on I write them as information, never as a target or a wall.
+Counts: idea 121; variants 335-337; second setups tried 23, none alive.
