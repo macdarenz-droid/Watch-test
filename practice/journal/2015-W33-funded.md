@@ -86,6 +86,17 @@ the two are not confused.)
      MO PAPER RULE (day 32 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +1.69R (running -3.69R).
      For Thursday (tool): MO1 -0.337R -> paper; MO3 -0.218R -> paper.
 
+## Thu 08-13
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-13`:
+- 3-day gap +192.7 pips -> A2 side BUY. 5-day gap +251.8 -> UN3 agree. Night 00:00-07:00: 1.11316-1.11890, last 1.11429 (range 57.4, net -12.6).
+- Wednesday's London day: 1.10242-1.12133, close 1.11574 (range 189.1); it made the 3-day high.
+- Monitor for today -0.337R (MO1), -0.218R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); routes B and C empty. NO ORDER.
+- A2 paper plan: buy at the 08:00 open, stop 40 pips below, out 12:00.
+- SW1 SHADOW trade 7 (tool `bt/sw1_shadow.py 2015-08-13 signal`): Wed close 1.11574 vs 07-29 close 1.09818 = +175.6 pips -> paper BUY at the
+  08:00 open, stop 120 below, target 240 above, else out 12:00 Thu 08-20. Running -5.36R after 6 of 20; a full stop on this one closes it for good.
+- Coach 08-13 on EN2: "a hint not a result: if you want it, prereg it as its own idea and let lived days judge it." Written after today's close.
+- How I feel: fine.
+
 ## Forward tally
 
 ## 08-10 test: idea AR, Asia-hours reversion to midnight's price (journal/2015-idea-AR-asia-reversion.md; 3 variants named up front)
