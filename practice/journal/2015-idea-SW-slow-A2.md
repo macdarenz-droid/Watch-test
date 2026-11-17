@@ -31,3 +31,10 @@ Idea 107 on the same six months; EURUSD fell 1.20 -> 1.05 in Jan-Mar, so any "fo
 My guess: positive before 04-07, negative after, K2 fails.
 
 ## Counts and worked case (tool, before outcomes)
+Tool: `python bt/slow_a2.py 2015-07-18 count` / `first` (trade counts and the first entry only; no results).
+- SW1 39 finished trades (16 before 04-07, 23 from), 1 still open at the end of data (not counted). SW2 39 (16 / 23), 1 open. SW3 69 (29 / 40).
+  Judgeable by my line (>= 30, >= 12 late). First possible entry 01-19 (10-day warm-up).
+- Worked case, first trade Mon 01-19: 10-day gap -439.1 pips -> SELL at the 08:00 open 1.15590; stop 1.16790 (120 pips), target 1.13190
+  (240 pips), else out 12:00 on Mon 01-26.
+
+## Result (one run)
