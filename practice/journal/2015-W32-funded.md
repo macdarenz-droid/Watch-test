@@ -133,3 +133,7 @@ A sample that could judge, and a clean no: a coin minus costs. Idea 120, variant
 ## 08-06 test: idea RT, the first touch of a round number (journal/2015-idea-RT-round-number-touch.md)
 228 first touches: the bounce lost -0.159R a trade (00 levels -0.279R); the break control +0.034R. Killed on all seven lines.
 Round numbers are information in my calls, not walls. Idea 121, variants 337.
+
+## 08-06 evening test: idea EF, evening follow on days EV never used (journal/2015-idea-EF-evening-follow-unseen.md)
+FB retracted before code (a re-cut of PD3). EF: 56 unseen days, follow -0.187R, negative in both periods; EV's +0.099R control did not
+replicate. Killed on all seven lines. Idea 122, variants 340.

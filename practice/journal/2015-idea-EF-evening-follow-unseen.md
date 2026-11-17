@@ -37,3 +37,17 @@ for byte (first attempt failed on my own import slice; no outcome printed).
   the stop is 30 pips, so a full stop (-1R) if 1.09976 was hit before 21:00, which a close at 1.0983 makes likely.
 
 ## Result (one run)
+Tool: `python bt/evening_follow.py 2015-08-07 test`. Hand checks (bt/evening_fade.py check): 07-30 the follow sold 1.09143, out 21:00 at
+1.09345, -0.67R (I wrote "a small loss"; it was two thirds of R). 07-31 the follow bought 1.10287 and was stopped at 1.09975, -1.04R: as written.
+| variant | trades | wins | avg R | net | full stops | before 04-07 | from 04-07 | without best 3 | stressed avg | max DD |
+|---|---|---|---|---|---|---|---|---|---|---|
+| EF1 follow, days EV never used (JUDGED) | 56 | 38% | -0.187 (+-0.21) | -10.45 | 16 | -5.19 | -5.26 | -15.59 | -0.245 | 10.90R |
+| EF2 follow, 40-60 pip days | 32 | 28% | -0.235 (+-0.30) | -7.53 | 9 | -1.83 | -5.70 | -12.42 | -0.297 | 8.77R |
+| EF0 fade on the same days (control) | 56 | 48% | +0.011 (+-0.24) | +0.62 | 15 | +1.24 | -0.63 | -6.36 | -0.050 | 5.01R |
+EF1: all seven lines FAIL. **EF IS KILLED.** EV's follow control (+0.099R on the 51 biggest days) did NOT replicate on 56 days it had
+never seen: -0.187R, negative in both periods. It was the right call not to promote it on 07-29.
+What I learned: 1. This is the first time I tested a promising control on separate data instead of promoting it, and it fell over.
+That is the clearest proof in my log of why my coach's "no mirror on the same data" rule exists. 2. The late session has no
+direction I can find, with or against the day, on any size of day. 3. My selection step needs reading, not searching: FB nearly went
+to code as a re-cut of PD3; I caught it by reading PD's variant list, and I wrote that habit into FB's file.
+Counts: idea 122; variants 338-340 (FB retracted before code, not counted); second setups tried 24, none alive.
