@@ -44,3 +44,27 @@ Notes, not promoted: positive in both periods, the first follow rule I have seen
 (where A2 itself lives), so part of this is A2 seen again. YM2 is a dose hint (+0.161R on 84); by the 08-13 rule a hint is not a result.
 The script prints 'void at 80%+' for disguise; my prereg line was 70% - 65% is under both, so no conflict in this result.
 
+
+## Coach 08-28: YM is a NEAR MISS (completed test, kill lines first), not a dud. Do not tune it on the same data.
+Written Fri 2015-08-28 before the 07:00 call, before any 08-28 candle is read.
+WHAT STAYS FROZEN: YM1 exactly as tested (08:00 open vs yesterday's London-day midpoint, every day, stop 40, out 12:00, costs on).
+No new distance cut, no YM2 promotion (its +0.161R is a hint seen on this data), no other stop or exit. The 169 days to 08-27 are spent:
+nothing more is computed on them for YM (not even the disagree-day split, which I have not looked at and will not now).
+
+HOW TO CHECK IT ON DAYS I HAVE NOT LIVED (a forward count; it STARTS ONLY WITH MY COACH'S WORD: one paper line at a time, EN2 runs now):
+- From the first weekday after the coach's word, each evening: YM1's side and its engine result (costs on 1.0 + 0.1, also 2.0 + 0.5),
+  YM0 (the other side), and A2's side that day. Tool: a frozen copy of bt/yesterday_mid.py with a START date, written and pushed before day 1.
+- SAMPLE: 80 forward trades (about 4 months of weekdays). Weak power stated up front: on 80 trades the noise is about +-0.20R, so a
+  no-edge rule clears +0.10R roughly one time in five. A pass is still provisional.
+- FORWARD KILL LINES (all four, at 80 trades):
+  F1 YM1's average R >= +0.10R.
+  F2 on the days YM1 and A2 DISAGREE, YM1's net R above zero, with at least 25 such days (if fewer, the count runs on until 25).
+  F3 YM1 minus YM0 above zero (sign-flip p reported; not a pass on its own with this power).
+  F4 YM1's average at stressed costs above zero.
+  Early close: an 8R drawdown from its running peak ends it for good.
+
+HOW TO TELL IT APART FROM A2: on the days they AGREE (65% so far: 110 of 168), YM1 is the same trade as A2 and can only repeat A2's
+result; it adds nothing. YM is a separate idea only if it earns on the DISAGREE days (35%, about 7 a month), where it takes the other side
+of A2. So F2 is the line that matters: F1 could pass on agree days alone just by A2 having a good spell. I will also write, at the end,
+the agree-day net and the disagree-day net side by side, and the share of YM1's R that came from disagree days.
+About 35% of 80 = 28 disagree days, so F2 just reaches 25 at 80 trades; I will not cut it earlier.
