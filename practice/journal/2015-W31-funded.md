@@ -119,3 +119,7 @@ Lean dismissed (K1). Idea 113, variants 313.
 ## 07-28 test: idea SR, what happens after A2's stop (journal/2015-idea-SR-after-the-stop.md)
 34 stops before 11:00. Other side to noon -0.169R; to 16:00 -0.214R; my own side again +0.029R. Killed on all six lines.
 After the stop the move is spent; flat is right. Idea 114, variants 316.
+
+## 07-29 test: idea EV, evening fade 17:00-21:00 (journal/2015-idea-EV-evening-fade.md)
+Fade a 60+ pip day move at 17:00, stop 30, out 21:00: 51 trades -0.139R, negative in both periods. Killed (K1-K6).
+The follow control made +0.099R: noted, not promoted. Idea 115, variants 319.

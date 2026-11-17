@@ -39,3 +39,19 @@ Tool: `python bt/evening_fade.py 2015-07-30 count` / `check DATE` (no outcomes).
   above, out 21:00 (not an EV2 day: under 100). I remember the price near 1.0934 at 22:00 that day, so I expect a small loss here.
 
 ## Result (one run)
+Tool: `python bt/evening_fade.py 2015-07-30 test`. Hand check 07-21: fade sold 1.09266 at 17:00, stopped 1.09568, -1.01R (I had expected
+a small loss; it was a full stop); the follow bought 1.09278, out 21:00 at 1.09349, +0.24R.
+| variant | trades | wins | avg R | net | full stops | before 04-07 | from 04-07 | without best 2 | stressed avg | max DD |
+|---|---|---|---|---|---|---|---|---|---|---|
+| EV1 fade, day move >= 60 (JUDGED) | 51 | 41% | -0.139 (+-0.25) | -7.08 | 19 | 22: -2.70 | 29: -4.37 | -11.21 | -0.193 | 11.60R |
+| EV2 fade, day move >= 100 | 24 | 42% | -0.138 (+-0.36) | -3.32 | 8 | 12: -2.37 | 12: -0.95 | -7.00 | -0.193 | 6.06R |
+| EV0 follow on EV1's days (control) | 51 | 55% | +0.099 (+-0.26) | +5.07 | 11 | 22: +2.11 | 29: +2.97 | +0.72 | +0.025 | 3.29R |
+Fade minus follow -0.238R (sign-flip p 0.34). EV1: K1-K6 FAIL, K7 pass (meaningless). **EV IS KILLED.**
+What I learned: 1. Wrong direction again, the second day running (SR yesterday). The late session does not give the day's move back;
+if anything it leans on with it. My "moves are given back" picture is true for the night and for the pre-bell hour, and I stretched it
+to a window where I had no count. 2. The control (follow) made +0.099R, positive on both sides of 04-07, small drawdown. I note it and
+do NOT promote it: it was the control, not the hypothesis; it is under my +0.10R line; its stressed average is +0.025R and this is the
+session where I trust the sim's 1.0-pip spread least; and testing the mirror on the same data is what my coach told me not to do (07-09).
+It can be a pre-registered idea of its own one day, on days after today. 3. Two wrong-way guesses in two days: my feel for direction
+is worth nothing, which is the point of writing the guess down before the run.
+Counts: idea 115; variants 317-319; second setups tried 20, none alive.
