@@ -57,3 +57,44 @@ Worked expectation, written now: the study says about +5 pips an hour before cos
 not eat it (it will eat some: the next hour's median range is 35 pips against a 30 pip stop). My own record says what happens next: N1 passed its
 build and died forward. I expect the study months near +0.05R to +0.10R and the unseen months near zero: KILLED on K2, probably K1. MH3 worst (afternoon reversals).
 Counts when run: idea 88, variants 245-247.
+
+## Mechanics check (rule pushed first in commit 67dbf83; `python bt/momentum_hour.py 2015-06-24 --check 2015-03-06`)
+MH1: 12:00 sell -> stop 12:50 -1.00R | 14:00 sell -> 15:00 +1.30R | 15:00 sell -> stop 15:40 -1.00R = -0.70R. MH2: -1.00R, +1.14R = +0.13R.
+Exactly the hand-worked day (hand: -0.70R and about +0.14R). MH3 on that day: -1.00R, +1.49R.
+
+## RESULTS (one run: `python bt/momentum_hour.py 2015-06-24`; 168 signals on 94 days; costs on; figures copied from the print)
+| variant | trades | avg R | net | wins | full stops | STUDY months Jan-Mar | UNSEEN Apr-Jun | without 3 best | max DD | stressed avg | corr with A2 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| MH1 hold 1 hour | 168 | +0.017 | +2.82 | 48% | 17% | 77 trades, +0.094R, +7.21 | 91 trades, -0.048R, -4.39 | -6.06 | 9.19R | -0.055 | -0.01 |
+| MH2 hold 2 hours | 146 | -0.016 | -2.32 | 42% | 29% | 65, +0.093R, +6.05 | 81, -0.103R, -8.37 | -15.16 | 12.53R | -0.099 | +0.05 |
+| MH3 hold to 21:00 | 114 | +0.124 | +14.18 | 45% | 45% | 49, +0.404R, +19.81 | 65, -0.087R, -5.64 | -3.98 | 9.91R | -0.046 | +0.02 |
+By month, net R: MH1 +3.8 -0.5 +3.8 | -1.8 -5.2 +2.6. MH2 +2.9 +0.5 +2.7 | -4.9 -4.3 +0.9. MH3 +2.4 +2.9 +14.5 | -0.9 -6.9 +2.1.
+| line | MH1 | MH2 | MH3 |
+|---|---|---|---|
+| K1 average >= +0.10R, all history | FAIL | FAIL | PASS (+0.124) |
+| K2 UNSEEN months >= +0.05R | FAIL (-0.048) | FAIL (-0.103) | FAIL (-0.087) |
+| K3 positive without 3 best trades | FAIL | FAIL | FAIL |
+| K4 max DD <= 8R | FAIL | FAIL | FAIL |
+| K5 stressed >= +0.05R | FAIL | FAIL | FAIL |
+| K6 sample 100 / 40 unseen | PASS | PASS | PASS |
+| K7 correlation with A2 <= +0.30 | PASS | PASS | PASS |
+VERDICT: all three KILLED. No paper line. Second setups tried: 12, none alive.
+
+## Expectation against the run
+"Study months near +0.05 to +0.10R": MH1 +0.094R, MH2 +0.093R - yes; MH3 +0.404R - far above my guess, and I had called it the worst. "Unseen months
+near zero": -0.05R to -0.10R: a little worse than zero. "Killed on K2, probably K1": K2 for all three; MH3 passes K1 on the strength of March alone.
+
+## What this test answered - and this time it could
+- The sample was there: 168 signals, 91 to 65 trades in months the study never saw. The answer is clear: what the study found in January-March
+  (+0.09R to +0.40R a trade) is NOT there in April-June (-0.05R to -0.10R). The observation was true of the months I looked at and of nothing else.
+- MH3 is the lesson in one row: +14.18R on all history, K1 passed, +14.5R of it in March - the month of the dollar's biggest afternoons - and
+  -5.64R in the 65 trades since. Without three trades it is negative; at a slightly wider spread it is negative. Had I studied all six months and
+  tested on the same six, I would be writing "+0.12R a trade, 114 trades, independent of A2" and asking for a paper tag. Keeping April-June unseen
+  is the only reason I know better. That is the method I keep for every second-setup try from now on: study on one part, judge on the other.
+- "Big follows big" stays true as a description (movement clusters; the quiet-before-the-storm picture is wrong). It does not give a side.
+  Knowing that the next hour will be large is not knowing which way.
+- Independence is cheap: all three are uncorrelated with A2 (-0.01 to +0.05). A coin is also uncorrelated with A2.
+- On the coach's aim: 12 second setups, none alive. What they have in common: each was a pattern I SAW first and then measured. The one rule that
+  works, A2, was not seen on a chart either; it came out of a plain comparison of closes and survived five months forward. If there is a second
+  one, I expect it to look as dull as that - and to need an unseen period to prove itself, as this one did not.
+Counts: ideas 88, variants 247 (MH1, MH2, MH3). Adopted trading ideas: 0. Numbers or rules corrected after a push in June: 3 (none today).

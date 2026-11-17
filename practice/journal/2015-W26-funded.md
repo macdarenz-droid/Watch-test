@@ -148,3 +148,10 @@ Three ideas written with their samples counted without outcomes (weekend gap 17 
 gap picked; its two inspiring weekends hand-worked first (-1.00R and -0.10R) and dropped; rules and kill lines K1-K7 pushed before the code; the
 simulator matched the hand-worked cases; one run. 15 judged weekends: +0.087R / -0.018R / +0.022R a trade by deadline; negative at a 3 pip Sunday
 spread; correlation with A2 +0.02. All killed (K1, K5). Second setups tried: 11, none alive. Counts: 87 ideas, 244 variants. June corrections after a push: 3.
+
+## 06-23 research after funded day 63 (coach: a second-setup try with 100+ cases; study how big moves start, one observation as a rule):
+journal/2015-idea-MH-momentum-hour-second-setup.md. Study on January-March only (549 afternoon hours): big hours follow wide hours going the same way,
+not quiet ones. Rule from one line of it: follow a 20+ pip hour that closes outside the three hours before; hand-worked day and kill lines K1-K7 (with
+April-June as an unseen period) pushed before the code; the simulator matched the hand-worked day; one run, 168 signals. Study months +0.09R to +0.40R
+a trade; unseen months -0.05R to -0.10R: all three killed. The unseen split is what caught it (MH3 was +14.18R on all history). Second setups tried:
+12, none alive. Counts: 88 ideas, 247 variants. June corrections after a push: 3.
