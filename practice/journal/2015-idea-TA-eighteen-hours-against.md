@@ -39,3 +39,20 @@ Worked cases against my eye: of the six lesson-[A] days, TA skips 07-08 (-85.8),
 08-26 (+23.0), 07-24 (+25.7): on those three the 18-hour NET ran with A2; what I saw was lower highs inside it, not a net move against.
 So the rule catches 3 of my 6. Written before the run; the rule is not changed.
 One run next: `python bt/eighteen_hours.py 2015-09-05 test 40 50`.
+
+## Result (one run; R = engine A2 R AFTER COSTS spread 1.0 + slippage 0.1; tool output pasted by this command)
+    TA1 skip when the last 18 h ran against A2 by >= 40: skipped 27 avg +0.107 net +2.89 | kept 146 avg +0.160 net +23.29 | gap (kept - skipped) +0.052 | before 2015-04-07: gap -0.750 (skipped 7) | from: gap +0.256 (skipped 20) | A2 all +26.18 -> kept +23.29
+    TA2 skip at >= 50: skipped 22 avg +0.170 net +3.75 | kept 151 avg +0.149 net +22.43 | gap (kept - skipped) -0.022 | before 2015-04-07: gap -0.832 (skipped 5) | from: gap +0.115 (skipped 17) | A2 all +26.18 -> kept +22.43
+    TA0 skip when they ran WITH A2 by >= 40 (control): skipped 51 avg +0.203 net +10.33 | kept 122 avg +0.130 net +15.85 | gap (kept - skipped) -0.073 | before 2015-04-07: gap -0.095 (skipped 15) | from: gap -0.158 (skipped 36) | A2 all +26.18 -> kept +15.85
+    (R = engine A2 R after costs 1.0 + 0.1) TA1 gap shuffle p 0.4147 | TA0 gap -0.073
+    KILL LINES TA1: K1 FAIL | K2 FAIL | K3 PASS | K4 FAIL
+Kill lines, each value against its threshold (TA1), read from the lines above:
+K1 skipped average below zero AND 0.30R+ below kept: skipped +0.107R (above zero), gap +0.052R -> FAIL.
+K2 same sign before AND from 04-07: -0.750 (7 skipped) / +0.256 (20 skipped) -> FAIL (sign flips at 04-07).
+K3 TA1's gap larger than TA0's: +0.052 vs -0.073 -> PASS.
+K4 shuffle p < 0.10: 0.415 -> FAIL.
+VERDICT: KILLED (K1 K2 K4; idea 156; variants TA1 TA2 TA0 counted). The days A2 traded against the last 18 hours made +0.107R on
+average - worse than the rest from 04-07 (gap +0.256 on 20 days) but much better before; the same 04-07 flip as every follow/fade rule.
+What the replay taught, said plainly: 11 of 11 worst paper days were valid; my eye's "lesson" fitted 3 of its own 6 cases by the numbers;
+the rest of the bleed is the RG finding (A2's 3-day direction stopped choosing the safe side in spring), and no filter I can see at
+08:00 recovers it. The rule that is already working is the one in force: A2 stays on paper.

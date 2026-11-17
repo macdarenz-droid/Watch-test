@@ -190,3 +190,8 @@ day wider. My chart sighting was small bodies, not small ranges. Ideas 153, vari
 
 09-04 evening: H3 = idea 154 MA (Monday weekend fade) KILLED FOR SAMPLE at the count (35 Mondays, 21 from 04-07). Ideas 154, variants 409.
 09-04 evening: idea 155 NP (night position filter, from the 08-11 losers review) KILLED AS A REPEAT of NC at the count (85% overlap); no run. Ideas 155, variants 409.
+
+## 09-04 evening (coach: replay + one rule earns Mon 09-07): replay of A2's 11 worst paper days (journal/2015-09-04-replay-11-worst-paper-days.md)
+11 of 11 VALID (tie at 10th place, all 11 replayed); lessons: [A] against the last 18 hours 6, [B] pre-bell spike 4, [C] stop then back 4.
+Rule from [A] = idea 156 TA: X = 40 by counts, 27 skips, 59% NA overlap; R = engine A2 after costs 1.0 + 0.1: skipped +0.107R vs kept
++0.160R, sign flips at 04-07, p 0.41 -> KILLED (K1 K2 K4). Ideas 156, variants 412. My eye's lesson fitted 3 of its own 6 cases.
