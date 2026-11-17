@@ -66,3 +66,4 @@ max 3 variants, costs on, everything counted in STATE.md (146 ideas, 391 variant
 - EVERY TEST REPORT lists each kill line in full with its threshold BEFORE the results, then each line's value against it (coach 08-19).
 - ONCE-A-DAY PRE-REGISTRATIONS START WITH the expected share of days the condition holds, from its definition, before any count (needs about 55%+ of
   the days to reach 80 trades on this history). Added 08-25 after ND was registered without it.
+- A RANGE OR VOLATILITY NUMBER goes into a call only if it came from a tool (08-27, after a by-eye "twice July" that was true of three days only).

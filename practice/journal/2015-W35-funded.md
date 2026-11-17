@@ -88,6 +88,35 @@ STATE.md now opens with "WHAT MUST CHANGE BEFORE A LIVE TRADE" (coach 08-25): ro
      MO PAPER RULE (day 42 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.03R (running -4.72R).
      For Thursday (tool): MO1 -0.232R -> paper; MO3 -0.178R -> paper.
 
+## Range check before Thursday's call (coach 08-26: "check it with numbers before it shapes any call")
+On 08-26 I wrote the 5-day average range was "about twice its July level (my reading; not re-checked)". Checked now, history before 08-27:
+| | median London-day range (22:00 -> 22:00) | median 08:00-12:00 range | A2 full-stop share (engine) |
+|---|---|---|---|
+| July (23 days) | 117.1 pips | 59.4 pips | 39% |
+| August to 08-26 (18 days) | 116.2 pips | 52.5 pips | 17% |
+| last 10 days | 126.9 (mean 159.5) | 52.9 | - |
+The remark was TRUE ONLY for the last-5-day mean (ADR5 227.2 pips), and three days carry it (08-24: 344.7, 08-25: 225.0, 08-26: 269.5). The typical August day is
+the same size as July's, and the London MORNING, the only window A2 trades, is narrower. My eye read the last three days as the month. The
+remark had not shaped a call (A2's rule has no range input), and it is now replaced by these numbers. (Correction after a push: August tally.)
+What bigger ranges would mean for stop and risk, said before anything changes:
+- Money at risk per trade does not grow with ranges: the stop is a fixed 40 pips and the size is fixed in dollars ($15.63 under route C / the
+  first 40 trades of route A), so a full stop costs the same. What grows is (a) how OFTEN a 40-pip stop is hit and (b) the chance of a fill
+  beyond the stop on a jump. This month (a) went the other way (17% full stops) and (b) did not show: the stopped paper trades on the two
+  wildest days filled at -1.03R, the normal cost.
+- So nothing to change. My plan closes stop sizes (S50/S60/S80 tested in spring); a change would need a pre-registered test on lived days and
+  my coach's word. What I WILL do: the August review on 09-01 reports full-stop share and the worst fill per trade, and I keep "a range
+  number in a call only if it came from a tool".
+
+## Thu 08-27
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-27`:
+- 3-day gap -70.2 pips -> A2 side SELL. 5-day gap +192.8 -> UN3 DISAGREE (disagree day 21 of 30). Night 00:00-07:00: 1.13220-1.13569, last 1.13520 (range 34.9, net +14.5).
+- Wednesday's London day: 1.12914-1.15609, close 1.13126 (range 269.5); it made the 3-day low. ADR5 227.2 pips (tool), carried by three wide days.
+- Monitor for today -0.232R (MO1), -0.178R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); routes B and C empty. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
+- SW1 SHADOW trade 11 (tool `bt/sw1_shadow.py ... signal`): Wed close 1.13126 vs 08-12 close 1.11574 = +155.2 pips -> paper BUY at the 08:00 open,
+  stop 120 below, target 240 above, else out 12:00 Thu 09-03. Running -5.07R after 10 of 20; 0.93R from its close line.
+- How I feel: fine. The range remark is checked and written above; no range number enters a call unless it came from a tool.
+
 ## Forward tally
 
 ## 08-24 test: idea FH, the 07:00-08:00 hour with the night (journal/2015-idea-FH-the-frankfurt-hour.md)
