@@ -28,7 +28,7 @@ Coach 08-21 on RS: "RS1 flipped from losing to winning across your two halves, t
      SW1 SHADOW trade 8 (tool `bt/sw1_shadow.py 2015-08-25`): buy 1.12814 (Fri) -> TARGET 1.15214 at 12:40 Mon, +1.99R, 3 nights, financing -0.025R,
      net +1.96R. Running -3.06R after 8 of 20 (max DD 5.36R; early-close line 6R).
      Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
-     How it feels: a very wide day (the price about 330 pips above Friday's 12:00 level by tonight) and I was flat. No regret is allowed and none is felt: a 40-pip
+     How it feels: a very wide day (Monday's last price 1.16176 against Friday's close 1.13828: +234.8 pips, both from the tools; I first wrote "about 330 pips above Friday's 12:00 level", a figure I had not read from any tool, corrected the same evening) and I was flat. No regret is allowed and none is felt: a 40-pip
      stop in that night's range was a coin, and the rule said paper.
      Paper lines: UN3 agreed, +0.62R (agree days -9.58R in 70; disagree +4.67R in 20; day 90). PH2 (day 82): lively (53.1) -> half = +0.31R;
      48 lively days -7.81R, 21 full-stop mornings; 34 quiet +1.36R; PH2 about -2.54R against A2's -6.47R.
