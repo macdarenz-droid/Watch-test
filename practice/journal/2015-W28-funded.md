@@ -131,6 +131,26 @@ Coach 07-06: next brick - position sizing math: how the half-size / full-size la
      +80 pip trades: none (3 of 15). 80+ pip pre-entry hours: none (5 of 10).
      END OF RELEASED DATA (clock Wed 07-08 01:00 London).
 
+- **Wed 07-08 call, written 07:00 London (06:00 UTC), before the entry bar.** JULY GOAL read first. Figures from `python bt/call_numbers.py 2015-07-08`, `./look.sh`, `python bt/side_monitor.py 2015-07-08 --state` or a bar print. Yesterday's tag stands: VALID LOSS.
+  Coach 07-08: size rule v3 written before the trade was the right way. The 8R drawdown alarm is crossed: report it honestly in the plan and FOLLOW WHAT
+      IT SAYS. A2's edge has faded per RG, so the next brick: by eye, the last 30 days on D1 / H4 / H1, three fresh observations about how the market
+      moves now, the best one turned into a new setup with 100+ historical cases and a kill test.
+  >>> THE RULE ALARM (written March: "if it averages below +0.10R or its drawdown passes 8R, I stop trading the rule for money"): drawdown 8.08R at 92
+      lived trades. CROSSED. Decision written and pushed before this call (journal/2015-07-08-rule-alarm-A2-stops-for-money.md):
+      A2 IS NOT TRADED FOR MONEY FROM TODAY. IT CONTINUES ON PAPER, call and walk as always. The funded account is flat.
+  PAPER call for A2 (paper day 1):
+  D1 (London days): Fri 07-03 close 1.11092 (0.84); Mon 07-06 close 1.10556 (0.69); Tue 07-07 high 1.10584 low 1.09163 close 1.10107 (0.66, range 142.1):
+      down 140 pips to 1.0916 by the afternoon, then about 100 pips back in the evening. A lower close.
+  H4 (UTC bars): Tue 08:00 bar down to 1.09462; 12:00 bar low 1.09163; 16:00 bar up to 1.10517, close 1.10173; tonight 00:00 bar down to 1.09743; 04:00 bar up to 1.10175, last 1.10077.
+  H1: the night (00:00-07:00 London): open 1.10045, high 1.10175, low 1.09743, last 1.10077: range 43.2 pips (ratio 1.05), net +3.2 pips - down 30 and back: flat.
+  Bias (paper): SELL. 22:00 London closes: 07-07 1.10107 vs 07-02 1.10832 = -72 pips (3-day gap -72.5). Gap / ADR5 0.67. Flip from yesterday's buy.
+  UN3 PAPER TAG: 5-day gap -134 pips (-133.8) -> SELL; agree. Forward day 57, disagree days 13 of 30.
+  PH2 PAPER TAG: decided at 08:00. Forward day 49.
+  MO PAPER RULE (day 7 of 60): MO1 monitor -0.171R -> paper; MO3 monitor -0.048R -> paper. (From today the live rule and both monitors say the same thing.)
+  Levels: night high 1.10175; Tue evening high 1.10517; night low 1.09743; Tue low 1.09163.
+  10-day trend: DOWN (1.10107 vs 06-23 1.11677); the paper sell is with it.
+  PAPER plan: SELL at 08:00 London, stop 40 pips above the bid, close 12:00. No order in the account. The walk is written as on a live day.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|

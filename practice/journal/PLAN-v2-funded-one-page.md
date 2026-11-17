@@ -1,10 +1,13 @@
 # TRADING PLAN v2 - FUNDED - ONE PAGE (rewritten Wed 2015-06-17 after funded day 59; coach's brick)
+>>> STATUS FROM WED 2015-07-08: THE RULE ALARM IS CROSSED (drawdown 8.08R at 92 lived trades; line 8R; written in March: "if it averages below +0.10R or
+>>> its drawdown passes 8R, I stop trading the rule for money"). A2 IS NOT TRADED FOR MONEY. It continues ON PAPER every weekday (call, walk, result).
+>>> THE FUNDED ACCOUNT IS FLAT until a restart rule, written in advance and agreed with my coach, says otherwise. journal/2015-07-08-rule-alarm-A2-stops-for-money.md
 The long version with every "why" and date is journal/PLAN-v2-funded-long-history-to-2015-06-16.md. Nothing in the rules changed in this rewrite.
 Account: FundedNext funded $25,000. Firm's lines: 5% daily loss, 10% max loss ($22,500), 3% max risk open, 80% split, payout every 14 days.
 Goal: steady monthly profit, safe payouts, never a breach.
 
 ## 1. The trade (rule A2, frozen since 2015-01-09; all times London)
-- EURUSD only. One trade every weekday. No skips. No second trade.
+- (ON PAPER ONLY since 07-08.) EURUSD only. One trade every weekday. No skips. No second trade.
 - 07:00: look at D1 / H4 / H1 / M15, write the call (bias, levels, plan, risk) and commit it before the entry bar.
 - Direction: the last 22:00 close against the 22:00 close three trading days earlier. Lower -> SELL, higher -> BUY. Any gap counts.
 - 08:00: market order. Stop 40 pips from the bid at 08:00. Never moved. No target, no partial, no break-even, no trail.
