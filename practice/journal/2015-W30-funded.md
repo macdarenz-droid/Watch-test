@@ -108,6 +108,16 @@ confirmed with a new seed: no-edge rule 2.2% on a single morning, 16.1% at least
      MO PAPER RULE (day 18 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +1.65R (running -4.86R).
      For Friday (tool): MO1 -0.346R -> paper; MO3 -0.226R -> paper.
 
+## Fri 07-24
+BEFORE THE BELL: gate stays +0.60R (coach 07-24); the one condition that may change it is written in the return rule (no-edge rule above 5% of single mornings).
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-24`:
+- 3-day gap +157.7 pips -> A2 side BUY. 5-day gap +109.6 -> UN3 agree. Night 00:00-07:00: 1.09652-1.09934, last 1.09752 (range 28.2, net -8.9).
+- Thursday's London day: 1.09216-1.10179, close 1.09827 (range 96.3); it made the 3-day high.
+- Monitor for today -0.346R (MO1), -0.226R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); route B: no tested setup. NO ORDER.
+- A2 paper plan: buy at the 08:00 open, stop 40 pips below, out 12:00.
+- SW1 shadow trade 2: open from Wed (sell 1.09560, stop 1.10760, target 1.07160, clock 12:00 Wed 07-29). Nothing to do.
+- How I feel: corrected, fairly. Wanting +0.80R the day after +0.60R was the same reflex as wanting a rule change after a loss, pointed the other way.
+
 ## Forward tally
 
 ## 07-20 test: idea WO, the weekly open (journal/2015-idea-WO-weekly-open.md)

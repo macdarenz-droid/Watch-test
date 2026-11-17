@@ -59,3 +59,8 @@ Confirmed again this morning with a new random seed (`GATE_SEED=723 python bt/ga
   The coach's instruction is +0.60R; I have written +0.60R and I report the 16% beside it.
 - Limits: days resampled as independent; the no-edge pool is 77 days (04-07..07-22, mean shifted to zero).
 The old +0.30R text above is left as it was written, for the record. This amendment is the rule from today.
+
+NOTE to Amendment 1, Fri 2015-07-24 07:00 London (coach's decision, 07-24): THE GATE STAYS +0.60R. I offered +0.80R the day after setting
++0.60R; my coach said no: raising it again after one paper winner is moving the goalposts. Accepted. The only thing that may change the
+gate from now on, written here first: a resampling run (bt/gate_check.py, 20,000 resamples, no-edge pool) in which +0.60R lets a no-edge
+rule through on MORE THAN 5% OF SINGLE MORNINGS. Today's figure is 2.2%. I re-run it at each month-end review, not in between.
