@@ -26,3 +26,19 @@ Healthy pool 65 trades (01-06..04-06). Window 72 trades (04-07..07-15). Losing r
 The 7 is there (06-19..06-29), as my journal says. Current run at the end: 4 losses (07-10, 07-13, 07-14, 07-15).
 
 ## Result (one run)
+Tool: `python bt/losing_runs.py 2015-07-16 test` (20,000 resamples each).
+OBSERVED, window 04-07..07-15, 72 engine trades (lived + paper): avg -0.081R, 60% losses, longest run 7, three runs of 5+, max drawdown 11.34R.
+(11.34R is the engine list incl. the 6 paper days, measured from the window's peak; the alarm's 8.08R was the lived list on 07-07.)
+| reference pool | run of 5+ per 100 trades | run of 10+ per 100 | normal max drawdown per 100 (median / 95% under) | window: run >= 7 | window: 3 runs of 5+ | window: drawdown >= 11.34R |
+|---|---|---|---|---|---|---|
+| healthy A2 (65 trades, +0.492R, 32% losses) | 20.4% | 0.10% | 2.58R / 4.53R | 1.54% | 0.03% | 0.00% (none in 20,000) |
+| all trades (137, +0.191R, 47% losses) - soft test | 71.1% | 2.19% | 5.93R / 11.29R | 15.96% | 3.89% | 2.92% |
+
+**VERDICT BY THE LINE WRITTEN FIRST: WARNING SIGN.** Under healthy A2 the drawdown never appears and a 7-run appears in 1.5% of cases.
+Even the soft pool, which contains the bad stretch itself, gives this drawdown under 3% of the time.
+What it means: 1. This is not healthy A2 having bad luck; it is a different A2 (60% losses against 32%). Same answer as RG, by another road.
+2. For a healthy A2 a 5-loss run is ordinary (1 in 5 per 100 trades), a 10-loss run is not (1 in 1,000): the 8R alarm was the right size.
+3. Nothing changes: A2 stays on paper, route A stays as written (not before 09-21, monitor >= +0.30R). The current paper run of 4 is
+itself ordinary; the warning is the whole window, not these four days.
+Limit: resamples treat trades as independent; clumping would make long runs a little more likely. It cannot turn 0 in 20,000 into normal.
+Counts: idea 105; variants 293-294.

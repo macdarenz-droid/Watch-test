@@ -85,3 +85,7 @@ By eye: flat box before the move. Counted: wrong (15% of big days against 27% of
 
 ## 07-14 test: idea BK, night-box breakout after a big day (journal/2015-idea-BK-breakout-after-big-day.md)
 BK1 50 trades +0.141R, but -3.67R from 04-07; control after normal days +0.144R; DD 9.66R. KILLED (K2, K4, K6, K7). Idea 104, variants 292.
+
+## 07-15 test: idea LR, losing runs normal or warning (journal/2015-idea-LR-losing-runs-normal-or-warning.md)
+Window 04-07..07-15: 72 trades, longest run 7, DD 11.34R. Healthy A2 resampled 20,000 times: that drawdown never, a 7-run in 1.54%.
+WARNING SIGN by the line written first. A2 stays on paper; nothing else changes. Idea 105, variants 294.
