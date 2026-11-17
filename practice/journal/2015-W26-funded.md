@@ -57,6 +57,28 @@ Coach 06-22: A2 has been filtered enough. Next brick: from my own chart notes, 3
      +80 pip trades: none (3 of 15). 80+ pip pre-entry hours: none (4 of 10).
      END OF RELEASED DATA (clock Tue 06-23 01:00 London).
 
+- **Tue 06-23 call, written 07:00 London (06:00 UTC), before the entry bar.** June goal read first: every figure below is from `python bt/call_numbers.py 2015-06-23`, `./look.sh` or a bar print. Yesterday's tag stands: VALID LOSS.
+  Coach 06-23: right to kill WG, 15 weekends cannot prove anything either way. Next second-setup try: one that gives 100+ cases in my history. Study
+      first how the big moves on my charts start (what the hour before looked like), then turn one observation into a rule.
+  Plan line read (BD): the only way to lose the best days is not to trade the day or not to hold it to 12:00.
+  D1 (London days): Thu 06-18 close 1.13600 (0.28); Fri 06-19 close 1.13487 (0.53); Mon 06-22 high 1.14102 low 1.13120 close 1.13402 (0.29, range 98.2):
+      down in my morning, up to 1.1410 in the afternoon, back down by the evening. Third close in a row a little lower than the one before.
+  H4 (UTC bars): Mon 12:00 bar up to 1.14102; 16:00 bar back to 1.13210; 20:00 bar flat; tonight 00:00 bar 1.13450 -> low 1.12549, close 1.12646: a 90 pip fall in the night; 04:00 bar 1.12601-1.12828, last 1.12826.
+  H1: the night (00:00-07:00 London): open 1.13416, high 1.13472, low 1.12549, last 1.12826: range 92.3 pips (ratio 2.58: the widest night for a long time), net -59.0 pips - a falling night, AGAINST a buy.
+  M15: a slow lift off the low for three hours: 1.1260 -> 1.1283.
+  Bias: BUY. 22:00 London closes: 06-22 1.13402 vs 06-17 1.13372 = +3 pips (3-day gap +3.0). Gap / ADR5 0.03: the smallest signal there is. The rule says any gap counts.
+      The price now is 55 pips UNDER the close the signal was read from: the night has already erased it. Idea FS (06-08) looked at exactly this - a
+      signal read at 07:00 instead of 22:00 - and it did not beat the 22:00 reading. The rule is the 22:00 closes. BUY.
+  UN3 PAPER TAG (never live): 5-day gap +58 pips (57.6) -> BUY; agree: paper TRADES. Forward day 46, disagree days 11 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 38.
+  MB1 PAPER TAG (never live, forward day 30): morning direction written at 12:00, before 13:25. Kept drawdown 5.63R; early-close line 6R.
+  Levels: night low 1.12549; Fri low 1.12920 (now above the price); Mon low 1.13120; night high 1.13472.
+  Rejection-day check: for a buy, Monday did not make the 3-day high. Not a rejection day. 10-day trend: UP (1.13402 vs 06-08 1.12906); the buy is WITH it.
+  SIZE RULE (the real safety rule): tracker balance $24,895.79, high-water $25,256.94, drawdown -1.43%; trigger 1 (half size) $24,499.23 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,488.95.
+  Two stops in a row behind me. Same size.
+  Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
+  Worry: a 3 pip signal against a 90 pip night. This is the kind of morning on which I most want to skip - and BD's line is in front of me. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
