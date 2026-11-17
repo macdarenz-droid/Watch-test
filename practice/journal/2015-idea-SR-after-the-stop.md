@@ -36,3 +36,18 @@ Tool: `python bt/after_stop.py 2015-07-29 count` / `check 2015-07-24` (no outcom
   SR1 SELLS at the 08:35 open, stop 40 pips above, out 12:00; SR3 would BUY again there.
 
 ## Result (one run)
+Tool: `python bt/after_stop.py 2015-07-29 test`. Hand check 07-24: SR1 sold 1.09479 at 08:35, out 12:00 at 1.09555, -0.19R; SR3 bought 1.09491,
+out 1.09543, +0.13R (the price sat still after the stop).
+| variant | trades | wins | avg R | net | full stops | first half | second half | without best 2 | stressed avg | max DD |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SR1 against A2 after its stop, out 12:00 | 34 | 38% | -0.169 (+-0.25) | -5.74 | 9 | -2.86 | -2.89 | -8.69 | -0.210 | 8.40R |
+| SR2 against, out 16:00 | 34 | 32% | -0.214 (+-0.40) | -7.29 | 17 | -1.57 | -5.72 | -13.47 | -0.251 | 13.63R |
+| SR3 A2's side again, out 12:00 (control) | 34 | 53% | +0.029 (+-0.28) | +0.98 | 8 | +0.33 | +0.65 | -2.29 | -0.025 | 2.79R |
+SR1: all six kill lines FAIL. **SR IS KILLED.**
+What I learned: 1. My hypothesis was wrong in its direction. After the stop the move does NOT carry on: taking the other side lost
+0.17R a trade in both halves. "The stopped trades were never in doubt" described the path TO the stop, not what came after it.
+2. Re-entering on my own side after the stop is a coin (+0.03R, negative after stressed costs). So "never re-enter" costs nothing and
+saves the risk of a second -1R on the same morning; the rule stays, now with a number behind it.
+3. Put together: by the time a 40-pip stop is hit, the morning's move is mostly spent. That fits the MC facts (moves are taken back)
+and it says there is nothing to manage after the stop: flat is the right state.
+Counts: idea 114; variants 314-316; second setups tried 19, none alive.

@@ -87,3 +87,7 @@ prints its window in minutes and clock times; I use 8 and 16. July goal: "number
 ## 07-27 test: idea BS2, A2's buys against its sells (journal/2015-idea-BS2-buys-against-sells.md)
 Outside the funded span: sells better by +0.278R, p 0.147; only January-February carries it; the paper days point the other way.
 Lean dismissed (K1). Idea 113, variants 313.
+
+## 07-28 test: idea SR, what happens after A2's stop (journal/2015-idea-SR-after-the-stop.md)
+34 stops before 11:00. Other side to noon -0.169R; to 16:00 -0.214R; my own side again +0.029R. Killed on all six lines.
+After the stop the move is spent; flat is right. Idea 114, variants 316.
