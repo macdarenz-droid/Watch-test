@@ -35,3 +35,19 @@ Worked cases, Wed 08-26, read from the candles (R after costs 1.0 + 0.1):
 - 09:00 hour: 08-25's moved +27.3 -> SH1 BUYS at about 1.15144 (ask), stop about 1.14944. The hour's low 1.14713 passes it: FULL STOP, about -1.0R.
 
 ## Step 3, result (one run: `test 15 20`)
+Tool: `python bt/same_hour.py 2015-08-27 test 15 20`. Hand check, 08-26 08:00 hour: SH1 sold 1.14967, stopped 1.15169, -1.01R (worked: a full stop). As written.
+| variant (R after costs: spread 1.0 + slippage 0.1 pips; stressed 2.0 + 0.5) | trades | wins | avg R | net | stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| SH1 repeat yesterday's same hour, |move| >= 15 (JUDGED) | 653 | 44% | -0.014 (+-0.08) | -8.85 | 223 | -11.00 | +2.15 | -0.107 |
+| SH2 repeat, |move| >= 20 | 461 | 43% | -0.016 (+-0.10) | -7.27 | 170 | -11.62 | +4.35 | -0.113 |
+| SH0 against yesterday's same hour (control) | 653 | 42% | -0.098 (+-0.08) | -64.27 | 238 | -40.81 | -23.46 | -0.183 |
+Kill lines, each against its written threshold:
+K1 SH1's average >= +0.10R: -0.014R. FAIL.
+K2 SH1's net above zero before AND from 04-07: -11.00R / +2.15R. FAIL.
+K3 SH1's stressed average above zero: -0.107R. FAIL.
+K4 SH1 minus SH0 above zero, p < 0.05: +0.085R, p 0.24 (and the p is optimistic, see the dependence note). FAIL.
+**SH IS KILLED.**
+What I learned: with 653 trades the answer is narrow and clear: an hour does not repeat yesterday's same hour after costs (-0.014R, +-0.08).
+Both directions lose about the cost of trading; the "against" side loses more, so if anything there is a faint lean to repeat, worth far
+less than the 5.5% of R a one-hour trade pays to the spread. Time-of-day flows, if they exist here, are smaller than my costs.
+Counts: idea 146; variants 389-391; second setups tried 39, none alive.

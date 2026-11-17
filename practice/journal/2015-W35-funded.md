@@ -100,3 +100,6 @@ Counts 17/30/46 at Q 0.7/0.8/0.9: under 80, killed for sample, outcomes unseen. 
 ## 08-25 evening test: idea WN, skip A2 after a wide night, from my 08-24 note (journal/2015-idea-WN-wide-night-skip.md)
 R after costs. A2 after a wide night +0.108R (37 days) vs the rest +0.085R; the sign flips at 04-07. Killed on all four lines.
 The note was a feeling, not a fact. Ideas 145, variants 388.
+
+## 08-26 test: idea SH, each hour repeats yesterday's same hour (journal/2015-idea-SH-same-hour-tomorrow.md)
+R after costs. 653 one-hour trades: -0.014R (+-0.08); against -0.098R. Killed on all four lines. Ideas 146, variants 391.
