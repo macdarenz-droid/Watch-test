@@ -23,3 +23,14 @@ K2 MG1's net R above zero BOTH before 04-07 AND from 04-07.
 K3 MG1's average R at stressed costs above zero.
 K4 MG1 minus MG0, trade by trade, above zero with sign-flip p < 0.10.
 My guess: a coin (the target is close, so wins are small and stops are big): K1 fails.
+
+## Step 1, counts only (tool `python bt/magnet.py 2015-08-21 count`)
+165 days. W = 15: 35 trades (16 / 19), 51% on A2's side. W = 20: 50 (20 / 30), 56%. W = 30: 81 (34 / 47), 52%. W = 40: 108 (45 / 63), 55%.
+## Step 2: smallest W with 80+ and 35+ from 04-07 = **W = 30** (81 / 47). Disguise check: 52% on A2's side -> not A2 or its mirror.
+MG1 = W 30; MG2 = W 20 (the next smaller); MG0 = away at W 30.
+Worked case, Tue 08-18 (read from that morning's A2 walk, which used the same 08:00-12:00 window): 08:00 open 1.10730, nearest 00 level 1.1100,
+27.0 pips above -> MG1 BUYS, target 1.1100, stop 30 below. The window went up to about 1.1095 (A2's sell had a worst of -21.7 pips) and
+down to about 1.1056, last about 1.1063 at noon: the target is not reached, the stop not hit; out at noon about -10 pips less costs =
+about -0.37R. The control (sell, target 27 below at about 1.1046) is not reached either: about +0.30R.
+
+## Step 3, result (one run: `test 30 20`)
