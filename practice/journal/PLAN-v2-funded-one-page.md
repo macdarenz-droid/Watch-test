@@ -79,6 +79,8 @@ max 3 variants, costs on, everything counted in STATE.md (151 ideas, 403 variant
   no size and no gate, and it only resets the counter. If days 25-28 pass without a complete call, the same trade on day 29 at the latest.
   NEVER: a bigger size, no stop, a setup that is not A2's rule, a second trade, or a trade on a morning whose call was not committed
   before the bell. A2 is always computable, so a valid minimum trade always exists; I do not need a bad one.
+  COACH 09-02 ANSWER: the count runs from 2015-09-02 (one-time grace). Day 25 = 2015-09-27 (Sun): the minimum A2 trade goes on the first
+  complete-call morning from 2015-09-28 (Mon), at the latest 2015-10-01 (Thu). (Text below kept as written before the answer.)
   NOW (09-02): 57 calendar days (41 weekdays) since 07-07: past 30 on either count. Asked the coach which start applies. Until then
   NO live trade: both readings agree for today (if the count ran from 07-07 the account would already be closed and a trade cannot help;
   if it runs from 09-02, day 25 is 2015-09-27 (Sun), so the first eligible morning is the next weekday).
