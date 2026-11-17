@@ -31,3 +31,19 @@ Worked case read from its own window (R after costs 1.0 + 0.1): Thu 08-20, the R
 1.11715 + spread: about +4 pips = about +0.2R.
 
 ## Step 3, result (one run: `RS_L=30 RS_L2=25 python bt/rsi_extremes.py 2015-08-22 test`)
+Hand check 08-20: RS1 sold 1.11765, out 15:00 at 1.11726, +0.19R (worked about +0.2R). As written.
+| variant (R after costs: spread 1.0 + slippage 0.1 pips; stressed 2.0 + 0.5) | trades | wins | avg R | net | stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| RS1 against the RSI extreme, L 30 (JUDGED) | 143 | 40% | +0.026 (+-0.24) | +3.78 | 75 | -13.88 | +17.66 | -0.060 |
+| RS2 against, L 25 | 97 | 41% | +0.010 (+-0.28) | +0.96 | 51 | -12.75 | +13.70 | -0.081 |
+| RS0 with the move (control) | 143 | 28% | -0.206 (+-0.24) | -29.40 | 88 | -10.61 | -18.79 | -0.290 |
+Kill lines, each against its written threshold:
+K1 RS1's average >= +0.10R: +0.026R. FAIL.
+K2 RS1's net above zero before AND from 04-07: -13.88R / +17.66R. FAIL.
+K3 RS1's stressed average above zero: -0.060R. FAIL.
+K4 RS1 minus RS0 above zero, p < 0.05: +0.232R, p 0.245. FAIL.
+**RS IS KILLED.**
+What I learned: 1. Fading an hourly RSI extreme is the 04-07 split once more: lost before (-13.88R), paid after (+17.66R). A calendar, not a rule.
+2. The control repeats TH's lesson in another form: going WITH an overbought/oversold move lost -0.206R in both periods. Every way I have
+entered after a move has already happened, at any scale, loses about a fifth to a quarter of R.
+Counts: idea 142; variants 380-382; second setups tried 37, none alive.

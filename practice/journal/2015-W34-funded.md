@@ -160,3 +160,6 @@ Ideas 140, variants 376.
 
 ## 08-20 test: idea MG, the round-number magnet (journal/2015-idea-MG-round-number-magnet.md)
 R after costs (1.0 + 0.1). Toward the nearer 00 level: 81 trades -0.067R; away from it -0.065R; the same trade. Killed. Ideas 141, variants 379.
+
+## 08-21 (weekend) test: idea RS, hourly RSI extremes (journal/2015-idea-RS-hourly-rsi-extremes.md)
+R after costs (1.0 + 0.1). Fade the extreme: 143 trades +0.026R (lost before 04-07, paid after); with the move -0.206R. Killed. Ideas 142, variants 382.
