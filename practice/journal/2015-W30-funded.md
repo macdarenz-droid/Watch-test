@@ -5,6 +5,7 @@ SW1 paper shadow from Mon 07-20 (journal/SW1-paper-shadow-rules.md): a count onl
 ## Funded trades
 | # | time (London) | side | lots | entry | stop | exit | R | $ | tag | note |
 |---|---|---|---|---|---|---|---|---|---|---|
+| (paper) | Mon 07-20 08:00 | sell | NO LIVE TRADE (monitor -0.260R) | paper | paper | paper clock exit | (+0.04 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 9: flat morning; SW1 shadow opened (sell 1.08414) |
 
 ## Mon 07-20
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-20`:
@@ -15,5 +16,19 @@ SW1 paper shadow from Mon 07-20 (journal/SW1-paper-shadow-rules.md): a count onl
 - SW1 SHADOW, first entry (tool `bt/sw1_shadow.py 2015-07-21 signal`): Fri close 1.08279 vs 07-03 close 1.11092 = -281.3 pips -> paper SELL at
   the 08:00 open, stop 120 pips above, target 240 below, else out 12:00 Mon 07-27. Rules file written before this entry.
 - How I feel: two paper sells after a 280-pip fall feels late. That feeling is not in either rule.
+  08:00 London (PAPER): pre-entry hour 1.08247-1.08482 = 23.5 pips (PH2 quiet: full unit on paper). A2 paper SELL near 1.08415 (engine fixes the fill), paper stop about 1.08815. SW1 shadow SELL at the same open, stop about 1.09615, target about 1.06015. No order in the account.
+  10:00 London (PAPER): A2 paper sell best +20.1, worst -24.1, last -8.8. Both ways inside two hours. Before advancing to noon: the clock decides.
+  12:00 London (PAPER): A2 paper sell closed by the clock about flat (walk: best +20.1, worst -24.1, last +2.1).
+  -> Mon result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.260R -> paper). Checked: call and shadow rules committed before the bell; no order;
+     trade list still ends with #230 of 07-07; sim balance $24,926.03 unchanged.
+     PAPER A2, day 9 (engine, `python bt/coin_control.py 2015-07-21 --check 2015-07-20`): sell, clock exit, +0.04R; the other side -0.10R.
+     A2 paper running from 07-08: 9 days, -1.94R.
+     SW1 SHADOW (tool `bt/sw1_shadow.py 2015-07-21`): OPEN, sell 1.08414, stop 1.09614, target 1.06014, clock exit 12:00 Mon 07-27. Day's last price 1.08250. Not managed.
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     How it feels: quiet. Two flat paper mornings in a row.
+     Paper lines: UN3 agreed, +0.04R (agree days -9.87R in 51; disagree +2.88R in 14; day 65). PH2 (day 57): quiet (23.5) -> full = +0.04R;
+     40 lively days -6.23R, 19 full-stop mornings; 17 quiet -2.30R; PH2 about -5.40R against A2's -8.55R.
+     MO PAPER RULE (day 15 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.04R (running -4.74R).
+     For Tuesday (tool): MO1 -0.299R -> paper; MO3 -0.112R -> paper.
 
 ## Forward tally
