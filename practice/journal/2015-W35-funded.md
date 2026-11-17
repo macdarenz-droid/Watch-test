@@ -9,6 +9,7 @@ Coach 08-21 on RS: "RS1 flipped from losing to winning across your two halves, t
 | (paper) | Mon 08-24 08:00 | buy | NO LIVE TRADE (monitor -0.151R) | paper | paper | paper clock exit | (+0.62 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 34; SW1 shadow trade 8 hit its target (+1.96R net) |
 | (paper) | Tue 08-25 08:00 | buy | NO LIVE TRADE (monitor -0.067R) | paper | paper | paper stop | (-1.03 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 35; SW1 shadow trade 9 stopped (-1.01R) |
 | (paper) | Wed 08-26 08:00 | buy | NO LIVE TRADE (monitor -0.175R) | paper | paper | paper stop | (-1.03 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 36; SW1 shadow trade 10 stopped (-1.01R) |
+| (paper) | Thu 08-27 08:00 | sell | NO LIVE TRADE (monitor -0.232R) | paper | paper | paper clock exit | (+1.05 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 37; SW1 shadow trade 11 stopped: SW1 CLOSED by its 6R line; EN2 forward count starts Fri 08-28 |
 
 ## Mon 08-24
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-24`:
@@ -116,6 +117,26 @@ What bigger ranges would mean for stop and risk, said before anything changes:
 - SW1 SHADOW trade 11 (tool `bt/sw1_shadow.py ... signal`): Wed close 1.13126 vs 08-12 close 1.11574 = +155.2 pips -> paper BUY at the 08:00 open,
   stop 120 below, target 240 above, else out 12:00 Thu 09-03. Running -5.07R after 10 of 20; 0.93R from its close line.
 - How I feel: fine. The range remark is checked and written above; no range number enters a call unless it came from a tool.
+  08:00 London (PAPER): pre-entry hour 1.13284-1.13644 = 36.0 pips (PH2 lively: half on paper), net about -22 with the sell. A2 paper SELL near 1.13299 (engine fixes the fill), paper stop about 1.13699. SW1 shadow BUY at the same open, stop about 1.12099, target about 1.15699. No order.
+  10:00 London (PAPER; window 07:00-08:45 UTC): A2 paper sell best +51.9, worst -11.8, last +46.7. Before advancing to noon: clock only.
+  12:00 London (PAPER; 16 candles, 08:00-12:00): A2 paper sell closed by the clock about 43 pips ahead (best +53.2, worst -11.8, last +42.6).
+  -> Thu result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.232R -> paper). VALID: no order placed. Checked: call committed before the bell;
+     trade list still ends with #230 of 07-07; sim balance $24,926.03 unchanged. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 37 (engine, costs on 1.0 + 0.1; `python bt/coin_control.py 2015-08-28 --check 2015-08-27`): sell, clock exit, +1.05R; the other side -1.03R (stopped).
+     A2 paper running from 07-08: 37 days, -0.87R.
+     SW1 SHADOW trade 11 (tool `bt/sw1_shadow.py 2015-08-28`): buy 1.13297 -> STOPPED 1.12096 at 15:55 the same day, -1.01R. Running -6.08R after 11 of 20:
+     the running drawdown is above 6R -> BY ITS LINE E1 (written 07-20), SW1 IS CLOSED FOR GOOD. Record: 11 trades, 2 winners (+0.34R, +1.96R),
+     9 losers, -6.08R including -0.18R of assumed financing. It is never reopened.
+     EN2 FORWARD COUNT: by its rule (written 08-13) it starts on the first weekday after SW1's shadow closes = FRI 2015-08-28. From tomorrow its
+     signals are computed by `python bt/en2_forward.py 2015-08-28 END` after each day; no verdict before 120 trades; early close at an 8R drawdown.
+     NC1: still waits for my coach's word (one line at a time: EN2 is that line now).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     How it feels: SW1 dying by its own rule is the system working, not a failure. The slow trend follower bought every big up-move this month
+     after it had happened; that is the same lesson as TH and RS0, seen live on paper.
+     Paper lines: UN3 DISAGREED (day 93): disagree days +5.72R in 21; agree days -11.64R in 72. PH2 (day 85): lively (36.0) -> half = +0.53R;
+     51 lively days -7.80R, 23 full-stop mornings; 34 quiet +1.36R; PH2 about -3.05R against A2's -7.48R.
+     MO PAPER RULE (day 43 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +1.05R (running -3.67R).
+     For Friday (tool): MO1 -0.185R -> paper; MO3 -0.209R -> paper. Friday is a payout date: balance under $25,000 -> $0.
 
 ## Forward tally
 

@@ -21,3 +21,4 @@ SAMPLE AND LINES (several trades a week -> the 120 rule):
   F4 EN2 minus the same signals traded the other way above zero with sign-flip p < 0.05.
 - A pass is a lived-days pass by my coach's line: it would make EN2 ELIGIBLE for route C (probation $15.63 a trade = 0.08 lots at 20 pips),
   and only with my coach's word. A fail closes it for good.
+STARTED: SW1's shadow closed Thu 2015-08-27 by its E1 line, so by the rule above the EN2 count starts FRI 2015-08-28. Signals on or after 2015-08-28 only.
