@@ -345,3 +345,10 @@ kill lines K1-K4 and worked cases pushed first; the control reproduces engine A2
 29.3% -> 37.7% (K1 fails by 0.4 points: the mornings did get harder); my side 10.3% -> 36.9%; the other side 48.3% -> 38.5%. Two thirds of the rise
 is the signal; in May and June my side is no safer than a coin's. Hypothesis as written KILLED on K1; no live rule changes; W3's redraw proposed
 to the coach. Counts: 91 ideas, 255 variants. June corrections after a push: 3.
+
+## 06-26 research after funded day 66 (coach: is the lost side advantage a regime change or noise; periods, kill test first, max 3 variants): idea RG
+(journal/2015-idea-RG-regime-or-noise.md). One number a day (my side's R minus the other side's), three splits fixed before any run (halves, calendar
+pairs, a slide), permutation tests with a multiple-looks line; mechanics matched; one run on 124 days. First half +0.982R a day, last half +0.044R;
+May-June -0.073R. p = 0.0019 / 0.0404 / 0.0009: all three lines pass; "regime change, not noise" SURVIVES. Not established: why, for how long, or that
+the edge is exactly zero. No live rule changes; three ways to go on put to the coach, my leaning a tested monitor as the next backtest.
+Counts: 92 ideas, 258 variants. June corrections after a push: 3.

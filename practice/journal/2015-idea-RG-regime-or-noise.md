@@ -7,7 +7,7 @@ June goal: every number and every test rule gets one worked case before it is pu
 From idea CO's control (both sides traded from the 08:00 open, 40 pip stop, noon exit, costs on), one number per day:
 SIDE ADVANTAGE = R of my side minus R of the other side. It is what the signal is worth that morning over a coin.
 Worked case from CO's table: before funding my side averaged +0.531R and the other side -0.467R -> side advantage +0.998R a day; on the funded days
-+0.037R and -0.055R -> +0.092R a day. Wed 06-23: -1.03R against +1.08R -> -2.11R for that day.
++0.037R and -0.055R -> +0.092R a day. Tue 06-23: -1.03R against +1.08R -> -2.11R for that day.
 All 124 A2 days to END 2015-06-27.
 
 ## The two stories
@@ -44,3 +44,59 @@ Either way a test on 124 days decides between stories, not between futures: a re
 Worked expectation, written now: halves about +1.0R against about +0.1R -> p about 0.01; the slide clearly negative; the calendar pairs significant.
 I expect the claim to SURVIVE - and I do not like it.
 Counts when run: idea 92, variants 256-258.
+
+## Mechanics check (kill test pushed first in commit 2cf34dd; a weekday label in the worked case corrected there: 06-23 was a Tuesday)
+My side against the engine's A2: largest difference per day 0.000R on 124 days. `--check 2015-06-23`: -1.03R against +1.08R = -2.11R, as worked.
+Side advantage over all 124 days: mean +0.513R a day, standard deviation 1.80R (I had worked with about 2R).
+
+## RESULTS (one run: `python bt/regime_or_noise.py 2015-06-27`; 20,000 re-orderings per test; figures copied from the print)
+| period | days | side advantage a day | my side | the other side | stop asymmetry (other stopped minus mine, per day) |
+|---|---|---|---|---|---|
+| first half 01-06 .. 04-01 | 62 | +0.982R | | | +0.39 |
+| last half 04-02 .. 06-26 | 62 | +0.044R | | | -0.02 |
+| Jan-Feb | 39 | +0.898R | +0.502R | -0.396R | +0.33 |
+| Mar-Apr | 44 | +0.718R | +0.373R | -0.345R | +0.30 |
+| May-Jun | 41 | -0.073R | -0.071R | +0.002R | -0.07 |
+By month: Jan +1.30 (19 days) | Feb +0.52 (20) | Mar +1.12 (22) | Apr +0.31 (22) | May -0.07 (21) | Jun -0.08 (20).
+| variant | statistic | permutation p | p with 5-day blocks | kill line |
+|---|---|---|---|---|
+| RG1 halves, first minus last | +0.938R | 0.0019 | 0.0014 | K1 PASS |
+| RG2 calendar pairs, largest minus smallest | +0.970R | 0.0404 | 0.0247 | K2 PASS |
+| RG3 slide (correlation with the day number, sign turned) | 0.263 | 0.0009 | 0.0005 | K3 PASS |
+Three of three pass; the smallest p (0.0009) is far under the multiple-looks line (0.0167).
+VERDICT: the claim "REGIME CHANGE, not noise" SURVIVES its kill test. Dealt at random into the two halves, the same 124 days would differ this much
+about once in 500 times.
+
+## Expectation against the run
+"Halves about +1.0R against +0.1R, p about 0.01": +0.98R against +0.04R, p 0.002. "The slide clearly negative, the pairs significant": yes, yes.
+"I expect the claim to survive - and I do not like it": it did.
+
+## What it means, said as plainly as I can
+- The 3-day signal was worth about +0.9R a morning over a coin from January to about mid-April, and it has been worth about nothing since: in May and June
+  my side made -0.07R a day and the other side 0.00R. That fall is not the luck of which days fell where. It is the first time in 92 ideas that
+  a test of mine has come out against the rule itself rather than against a change to it.
+- What the test does NOT establish, and I will not let the word "regime" claim more than it has earned:
+  (1) WHY. It could be the market (the euro fell one way for three months and has gone sideways since - I wrote on 04-17 that I had not yet traded
+  anything but a falling market); it could be that the rule was partly FOUND on early January, so that month is flattered (but February and March
+  were traded with the rule frozen and were +0.52R and +1.12R a day over the coin, so selection is not the whole story).
+  (2) THE FUTURE. Two periods are not a law. A sideways market can start trending again and the signal's worth with it; or not. 124 days cannot say
+  which state is the usual one for this rule - only that the state changed.
+  (3) That the edge is zero now. 41 days at -0.07R with a standard deviation of 1.8R are known to about +-0.56R. "About a coin" is the centre, not a proof.
+- As written BEFORE the run for this outcome: the honest expectation for A2 today is the recent one, not the planning edge of +0.18R. The size test
+  and the money guard already carry that case: at a zero edge the guard stops the account at about -5% in roughly three two-year runs out of
+  four (GD, SG). So the account is protected against exactly this; what is not protected is my time and the payouts I planned with.
+- NO LIVE RULE CHANGES. The coach's instruction is "not until a test says so", and this test says what has happened, not what to do. Monday is
+  SELL or BUY by the 22:00 closes, 0.31 lots, 40 pips, noon.
+
+## The question this puts to the coach (I do not decide it)
+I trade a rule whose advantage over a coin has been absent for two months, with a size rule that limits the cost of finding out to about 5%.
+Three honest ways to go on, none of them adopted:
+(a) As now: full plan, judged by the worry lines W1 (lived average) and the size rule. Cost if the edge is gone: slow - W1 at 150 trades is months away.
+(b) Write a MONITOR now, before more data: the side advantage over the last 60 trades (today: about -0.07R a day on the last 41, +0.04R on the last 62),
+    with a line fixed in advance at which A2 goes to PAPER (traded in the journal, not in the account) until the monitor recovers. It would have to be
+    tested on history first like any rule (does a monitor like that help or just whipsaw?) - that is a backtest I can do next, kill line first.
+(c) Half size until the monitor recovers: a size change, and the plan says size changes only by a trigger written in advance - so it too needs writing and testing first.
+My own leaning is (b) as the NEXT TEST, not as an action: it is the first idea in a long time that would change what I do for a reason found by a test
+rather than by a feeling, and it must earn that with its own kill line. Until the coach says otherwise I trade (a).
+Counts: ideas 92, variants 258 (RG1, RG2, RG3). Adopted trading ideas: 0. Numbers or rules corrected after a push in June: 3 (none today; a weekday
+label in this file's worked case was fixed before the results were written - a label, not a number, said here anyway).

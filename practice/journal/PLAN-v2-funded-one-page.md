@@ -51,10 +51,12 @@ Goal: steady monthly profit, safe payouts, never a breach.
   not yet distinguishable from zero. Worry lines W1-W6 are in STATE (gates list) and are read at every month-end.
 - Full stops (06-25, idea CO): before funding my side was stopped 10% of the time and the other side 48%; since funding 37% and 38%. The stops are
   the direction being wrong as often as a coin's, not the stop or the entry. Watched monthly; the worry lines and the size rule are the response.
+- REGIME (06-26, idea RG): the signal's advantage over a coin was about +0.9R a morning to mid-April and about zero since (May-June -0.07R); a test
+  says that is not noise. Why, and for how long, is not known. No rule changed; the question of a monitor is with the coach.
 - The edge is judged after a few hundred lived trades over 2-3 years (coach 06-02), not from an alarm at 100 and not from any one month.
 
 ## 8. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
-max 3 variants, costs on, everything counted in STATE.md (91 ideas, 255 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+max 3 variants, costs on, everything counted in STATE.md (92 ideas, 258 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
 Closed, so that I do not reopen it on a bad day: entry filters from chart reading, entry time and price, the lookback, every exit except noon,
 second setups, day filters. The list with results is in the long version, section 7.
