@@ -41,3 +41,17 @@ Tool: `python bt/morning_chop.py 2015-07-17 count` / `check 2015-07-16` (no outc
 - Worked case 07-16: mean of the last 10 mornings' eff = 0.499 -> MC1 ON (last 5: 0.695 -> MC2 ON; 1 whip morning in 10 -> MC3 ON).
 
 ## 6. Result
+Tool: `python bt/morning_chop.py 2015-07-17 step1` (one run; Jan-Apr only).
+| variant | ON days: n, avg R, net | OFF days: n, avg R, net | gap ON - OFF |
+|---|---|---|---|
+| MC1 (10 days) | 39, +0.430, +16.75 | 36, +0.269, +9.69 | +0.160 |
+| MC2 (5 days) | 39, +0.441, +17.21 | 36, +0.256, +9.23 | +0.185 |
+| MC3 (whip count) | 71, +0.320, +22.74 | 4, +0.924, +3.70 | not judgeable |
+MC1: K1 FAIL (gap +0.16R, line 0.30R) | K2 FAIL (OFF days still earned +0.27R each: switching off would have cost +9.69R).
+**MC IS KILLED at step 1. Step 2 (lived months) NOT run**, as written.
+What I learned: 1. The facts stand: day size is unchanged, holding is what broke (night->morning 58% -> 40%; 08-10 -> 10-12 48% -> 30%;
+whip mornings 6% -> 23%). That is a description of the regime. 2. It is not a switch: inside Jan-Apr, A2 earned after choppy mornings
+too. The recent mornings do not tell A2's good days from its bad ones; the lean (+0.16R) is the right way and too small for 75 days.
+3. Same ending as EF (the daily version). I can describe the change after the fact; I have no market measure that announces it.
+The instruments stay as they are: MO on paper (it watches A2's own side advantage), the alarm, the return rule.
+Counts: idea 106; variants 295-297.
