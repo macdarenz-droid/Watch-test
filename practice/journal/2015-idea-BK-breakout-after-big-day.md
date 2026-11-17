@@ -29,3 +29,16 @@ Tool: `python bt/breakout_big.py 2015-07-15 count` / `check 2015-06-03` (facts o
 - Worked case 06-03: yesterday's range 278.3 > median 101.4 -> big. Box 1.11341-1.11896. The 08:10 candle closed under the box -> SELL at the 08:15 open, stop 40 pips, out 20:00.
 
 ## Result (one run)
+Tool: `python bt/breakout_big.py 2015-07-15 test`. Hand check 06-03: sell 1.11336, stopped 1.11738, -1.00R (the price fell first, then the afternoon rally took the stop).
+| variant | trades | avg R | net | wins | full stops | before 04-07 | from 04-07 | without best 2 | stressed avg | max DD |
+|---|---|---|---|---|---|---|---|---|---|---|
+| BK1 after a big day | 50 | +0.141 | +7.07 | 40% | 48% | 24: +10.74 | 26: -3.67 | +0.16 | +0.091 | 9.66R |
+| BK0 after other days | 59 | +0.144 | +8.50 | 42% | 49% | 23: +8.61 | 36: -0.11 | -1.86 | +0.106 | 7.77R |
+| BK2 big x1.3 | 30 | +0.094 | +2.83 | 40% | 50% | 14: +8.60 | 16: -5.77 | -3.97 | +0.053 | 9.50R |
+BK1: K1 PASS | K2 FAIL (-3.67R from 04-07) | K3 PASS (by +0.16R) | K4 FAIL (the control is as good: +0.144R) | K5 PASS | K6 FAIL (9.66R) | K7 FAIL (bigger day, worse).
+**BK IS KILLED.**
+What I learned: 1. The big-day flag adds nothing to a breakout: after normal days the same trade did the same. Clustering of size is
+real and I found no way to earn from it. 2. The breakout of the night box made its whole profit before 04-07 (+19.35R in 47 trades) and
+lost after (-3.78R in 62): the same break in the market as RG, WM, DF, DH. That is now five rules that follow a move and die on the same
+date. 3. The all-history average (+0.14R) would have passed K1 alone; the two-regime line did its job.
+Counts: idea 104; variants 290-292; second setups tried 16, none alive.

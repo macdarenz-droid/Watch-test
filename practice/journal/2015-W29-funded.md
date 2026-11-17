@@ -60,3 +60,6 @@ Idea 103, variant 289.
 ## 07-14 study: how the 20 biggest days start (journal/2015-07-14-study-how-big-days-start.md)
 By eye: flat box before the move. Counted: wrong (15% of big days against 27% of other days). Only difference: the day before was above its
 10-day median range on 65% against 38%. Size, not direction. Nothing tested; no idea counted.
+
+## 07-14 test: idea BK, night-box breakout after a big day (journal/2015-idea-BK-breakout-after-big-day.md)
+BK1 50 trades +0.141R, but -3.67R from 04-07; control after normal days +0.144R; DD 9.66R. KILLED (K2, K4, K6, K7). Idea 104, variants 292.
