@@ -9,6 +9,7 @@ Size rule v3 (0.16 lots) applies only if a route of the return rule opens. Payou
 | (paper) | Tue 07-14 08:00 | sell | NO LIVE TRADE (monitor -0.302R) | paper | paper | paper stop | (-1.00 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 5: stopped before 10:00 |
 | (paper) | Wed 07-15 08:00 | sell | NO LIVE TRADE (monitor -0.433R) | paper | paper | paper clock exit | (-0.48 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 6: within 5 pips of the stop, out at noon |
 | (paper) | Thu 07-16 08:00 | sell | NO LIVE TRADE (monitor -0.425R) | paper | paper | paper clock exit | (+1.09 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 7: winner on paper, not traded by rule |
+| (paper) | Fri 07-17 08:00 | sell | NO LIVE TRADE (monitor -0.308R) | paper | paper | paper clock exit | (+0.05 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 8: flat morning; payout date $0 |
 
 ## Mon 07-13
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-13`:
@@ -102,6 +103,26 @@ Size rule v3 (0.16 lots) applies only if a route of the return rule opens. Payou
 - Paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00. I do nothing in the account.
 - Payout date: tracker balance $24,358.99 is under $25,000 -> request $0, by my payout rule. Logged after the close.
 - How I feel: fine. Mistake to avoid: wanting yesterday's paper winner back.
+  08:00 London (PAPER): pre-entry hour 1.08800-1.08963 = 16.3 pips (PH2 quiet: full unit on paper). Paper SELL near 1.08853 (last price; engine fixes the fill), paper stop about 1.09253. No order. Before advancing: watch only.
+  10:00 London (PAPER): best +5.7, worst -22.6, last -5.9. A dull morning so far. Before advancing to noon: the clock decides.
+  12:00 London (PAPER): closed by the clock about flat (walk: best +13.6, worst -22.6, last +2.8).
+  -> Fri result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.308R -> paper). Checked: call committed before the bell; no order; trade list
+     still ends with #230 of 07-07; sim balance $24,926.03 unchanged.
+     PAPER A2, day 8 (engine, `python bt/coin_control.py 2015-07-18 --check 2015-07-17`): sell, clock exit, +0.05R; the other side -0.11R.
+     A2 paper running from 07-08: 8 days, -1.98R (-1.00, +1.39, -1.00, -1.03, -1.00, -0.48, +1.09, +0.05).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     PAYOUT DATE (eighth): balance $24,358.99 is not above $25,000 -> request $0. Totals unchanged: $567.04 requested, $453.63 mine. Next date Fri 07-31.
+     THE WEEK (W29): no live trade on any day, by rule. Paper A2: -1.03, -1.00, -0.48, +1.09, +0.05 = -1.37R. Five tests/studies (NA, big-days study,
+     BK, LR, MC): all killed or warning; no rule changed. No trade mistake, no process mistake found.
+     How it feels: a week without an order. Less itch than I expected; the itch shows up as wanting a new setup to pass.
+     Paper lines: UN3 agreed, +0.05R (agree days -9.91R in 50; disagree +2.88R in 14; day 64). PH2 (day 56): quiet (16.3) -> full = +0.05R;
+     40 lively days -6.23R, 19 full-stop mornings; 16 quiet -2.34R; PH2 about -5.44R against A2's -8.59R.
+     MO PAPER RULE (day 14 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.05R (running -4.78R).
+     For Monday (tool): MO1 -0.260R -> paper; MO3 -0.119R -> paper.
+     FRIDAY GATES LIST READ (07-17): payout $0 (done). Return rule: review day Mon 09-21; route A monitor -0.260R (needs +0.30R and MO's judging);
+     route B: no setup has passed a test (16 tried). MO day 14 of 60. UN3 14 of 30 disagree days / 64 of 200. PH2 40 of 60 lively / 56 of 200.
+     Live-trade counts frozen. Month-end review: first trading day of August.
+     END OF RELEASED DATA (clock Fri 07-17 22:00 London; weekend).
 
 ## Forward tally
 
