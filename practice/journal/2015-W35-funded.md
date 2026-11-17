@@ -126,7 +126,7 @@ What bigger ranges would mean for stop and risk, said before anything changes:
      A2 paper running from 07-08: 37 days, -0.87R.
      SW1 SHADOW trade 11 (tool `bt/sw1_shadow.py 2015-08-28`): buy 1.13297 -> STOPPED 1.12096 at 15:55 the same day, -1.01R. Running -6.08R after 11 of 20:
      the running drawdown is above 6R -> BY ITS LINE E1 (written 07-20), SW1 IS CLOSED FOR GOOD. Record: 11 trades, 2 winners (+0.34R, +1.96R),
-     9 losers, -6.08R including -0.18R of assumed financing. It is never reopened.
+     9 losers, -6.08R including -0.22R of assumed financing (I first wrote -0.18R without reading it; the rows sum to -0.216R, corrected the same evening). It is never reopened.
      EN2 FORWARD COUNT: by its rule (written 08-13) it starts on the first weekday after SW1's shadow closes = FRI 2015-08-28. From tomorrow its
      signals are computed by `python bt/en2_forward.py 2015-08-28 END` after each day; no verdict before 120 trades; early close at an 8R drawdown.
      NC1: still waits for my coach's word (one line at a time: EN2 is that line now).

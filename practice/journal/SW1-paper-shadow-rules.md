@@ -35,4 +35,4 @@ I note the entry in the week file before the 08:00 bar, and do not manage the po
 | 9 | Tue 2015-08-25 | buy | 1.15680 | 1.14479 (stop, Tue 08-25 15:15) | -1.01 | 0 | 0.000 | -1.01 | -4.07 | 5.36R |
 | 10 | Wed 2015-08-26 | buy | 1.14968 | 1.13767 (stop, Wed 08-26 13:30) | -1.01 | 0 | 0.000 | -1.01 | -5.07 | 5.36R |
 | 11 | Thu 2015-08-27 | buy | 1.13297 | 1.12096 (stop, Thu 08-27 15:55) | -1.01 | 0 | 0.000 | -1.01 | -6.08 | 6.08R |
-CLOSED FOR GOOD Thu 2015-08-27 by E1 (running drawdown 6.08R, line 6R) after 11 of 20 trades: 2 winners, 9 losers, -6.08R incl. -0.18R assumed financing. Never reopened.
+CLOSED FOR GOOD Thu 2015-08-27 by E1 (running drawdown 6.08R, line 6R) after 11 of 20 trades: 2 winners, 9 losers, -6.08R incl. -0.22R assumed financing (rows sum to -0.216R; first written as -0.18R, corrected the same evening). Never reopened.
