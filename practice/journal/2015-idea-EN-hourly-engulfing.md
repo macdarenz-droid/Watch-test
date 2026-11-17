@@ -28,3 +28,17 @@ open, stop 20 below, out 11:00. My A2 walk had +55.9 pips at 10:00 and +68.9 at 
 a winner unless 09:00 was near the morning's top. Two more signals that day (11:00, 14:00), both bullish.
 
 ## Result (one run)
+Tool: `python bt/engulfing.py 2015-08-13 test`. Hand check 08-12: EN1 bought 1.11168 at 09:00, out 11:00 at 1.11251, +0.41R (a winner, as written,
+but small: 09:00 was already well up the morning); the control was stopped, -1.01R.
+| variant | trades | wins | avg R | net | stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| EN1 with every engulfing (JUDGED) | 241 | 37% | -0.077 (+-0.17) | -18.52 | 120 | +5.89 | -24.42 | -0.167 |
+| EN2 strong engulfing only (range >= 1.5x) | 116 | 44% | +0.182 (+-0.31) | +21.11 | 48 | +13.27 | +7.84 | +0.085 |
+| EN0 against EN1's signals (control) | 241 | 46% | +0.049 (+-0.16) | +11.84 | 105 | +3.48 | +8.36 | -0.040 |
+EN1 minus EN0 -0.126R (p 0.39). EN1: all four kill lines FAIL. **EN IS KILLED.**
+The one thing I must not do with this table: EN2 (+0.182R, positive before AND after 04-07, positive at stressed costs) was the DOSE
+line, not the judged rule; it has 116 trades (under my 120), an error of +-0.31R, and I picked "1.5x" before the run but have now seen its
+result. Promoting it would be choosing the variant after the outcome. The only honest way to look at it again is forward, on lived days
+it has not seen, pre-registered exactly as written here. I start nothing: SW1's shadow is still running and my coach's rule is one at a time.
+I note it in STATE as the first variant in a long while that held across 04-07, and nothing more.
+Counts: idea 130; variants 353-355; second setups tried 29, none alive.
