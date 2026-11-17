@@ -26,3 +26,9 @@ Whatever comes out is a description. It opens no route and changes no rule.
 My guess: weak positive, around +0.2, not past the line.
 
 ## Counts and worked case (tool, before outcomes)
+Tool: `python bt/quiet_week.py 2015-07-24 count` (no outcomes).
+- Full Mon-Fri weeks: 28 (01-05..07-13), 27 consecutive pairs. Wed-Tue weeks: 28, 27 pairs. QW2: 23 weeks have a 4-week median and a
+  next week: 11 quiet, 12 other. Judgeable by my line (>= 20 pairs).
+- Worked case: the first full week, Mon 01-05 .. Fri 01-09, range 221.9 pips (high minus low of the whole week).
+
+## Result (one run)
