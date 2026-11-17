@@ -21,3 +21,9 @@ K2 YM1's net R above zero BOTH before 04-07 AND from 04-07.
 K3 YM1's average R at stressed costs above zero.
 K4 YM1 minus YM0, trade by trade, above zero with sign-flip p < 0.10.
 My guess: mostly A2's direction (killed as disguise), or the usual split.
+
+## Counts (before outcomes; `python bt/yesterday_mid.py 2015-08-28 count`, history 2015-01-05..2015-08-27)
+YM1: 169 trades (66 before 04-07, 103 from) | buys 84 sells 85 | same side as A2 110 of 168 = 65% -> under the 70% disguise line, goes on.
+YM2 (dist >= 0.25): 84 trades (29 / 55) -> clears 80 | same side as A2 56 of 83 = 67%.
+Worked case 08-26 (from the tool's check line, no outcome): open 08:00 sits 0.056 of 08-25's range BELOW the mid -> YM1 SELL; YM2 skips (0.056 < 0.25); A2 was a buy that day.
+One run next: `python bt/yesterday_mid.py 2015-08-28 run 0.0 0.25`.
