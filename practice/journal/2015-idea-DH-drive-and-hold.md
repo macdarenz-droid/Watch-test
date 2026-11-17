@@ -50,3 +50,14 @@ still need the 40 forward paper trades of B2. A fail = killed; no fourth variant
 Multiple looks: this is idea 102 on the same 6 months. One pass at p<0.05 is expected by luck every ~20 ideas; I will say so if it passes.
 
 ## 5. Worked case and counts (filled in from the tool BEFORE the test run)
+Tool: `python bt/drive_hold.py 2015-07-11 count` and `... check 2015-06-04` (facts only; no trade result computed or seen yet).
+- WORKED CASE 06-04: 06-03 12:00 open 1.11214, 20:00 open 1.12514 -> drive +130.0 pips; 06-04 08:00 open 1.12391 ->
+  kept = (1.12391 - 1.11214) / 0.01300 = 0.905 -> DH1 yes, DH2 yes, DH3 yes -> BUY at 08:00, stop 40, out 12:00. (A2 also said buy.)
+- CORRECTION OF MY EYE by the tool: I wrote "8 of 10 had the drive". The tool: 7 of the 12 are DH1 days in A2's direction, 1 is a DH1
+  day against A2 (06-16), 4 are not DH1 days (03-06 drive only -22.7; 03-10 -5.3; 04-13 +23.7 and against the sell; 04-17 kept 0.43).
+- BASE RATE: of the 87 A2 days of March-June, 32 = 37% are DH1 days in A2's direction. Among the 12 best: 7 = 58%. That is 7 where
+  about 4.4 would be expected by the base rate: a lean, from 12 hand-picked days. Not much. Written before the outcomes.
+- CASES (inspiring days dropped): 135 days with facts. DH1 58 judged (P1 19, P2 10, P3 29); DH2 40 (9 / 8 / 23); DH3 70 (22 / 14 / 34).
+  DH1 points the same way as A2 on 35 of 57 days. Judgeable by my line (>= 40 in all, >= 15 in P3): yes. P1 with 19 cases can kill, not prove.
+
+## 6. Result (one run, after the lines above were pushed)
