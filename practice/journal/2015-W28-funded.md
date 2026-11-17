@@ -170,3 +170,10 @@ my own stop from about 23% to 2% at the planning edge (65% to 18% at +0.10R) for
 From today: a new high-water within 60 / 120 / 250 days in 40 / 79 / 96% of runs at +0.18R, median day 70. The ladder fails two of its five lines:
 price (79% against 80%) and, the real one, that permanent half size is 16 points safer at a zero edge. Question put to the coach; nothing changes
 (and nothing would until the next high-water). Counts: 98 ideas, 276 variants. July corrections after a push: 1.
+
+## 07-07 after funded day 73: (1) BEFORE the call: SIZE RULE v3 decided by my own kill line K5 of idea LF and pushed with its start date (today):
+0.16 lots as the base size, no return to 0.31 at a new high-water (journal/2015-07-07-size-rule-v3-decision.md). (2) The old rule alarm's 8R drawdown
+line crossed (8.08R), reported the same day. (3) One test about the market (coach: not sizing again): idea WM (journal/2015-idea-WM-where-in-the-day.md):
+has the 3-day direction moved to another part of the day? The CO control run for windows 04-08, 12-16, 16-20 against 08-12; kill lines pushed first;
+mechanics exact; one run. Second half of the history: -0.02R (my window), +0.05R, -0.12R, -0.21R: all killed. It did not move; it went.
+Counts: 99 ideas, 279 variants. July corrections after a push: 1.
