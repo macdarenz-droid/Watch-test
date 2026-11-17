@@ -43,7 +43,7 @@ Today: tracker $24,358.99, high-water $25,256.94, drawdown -3.56%, FLAT since 07
 - My near misses (BX, SW1, WG) are small positive averages with wide error bars. Six months of one pair cannot tell +0.15R from zero.
   More tests on this history make more "almost". Forward time decides.
 - What worked every time: line first, worked case first, cases before outcomes, a part never looked at, a control, read-back of every file.
-- 73 funded trades, 73 valid, 0 trade mistakes; 11 process mistakes, each one a number or a file, never an order.
+- 73 funded trades, 73 valid, 0 trade mistakes; 12 process mistakes, each one a number or a file, never an order.
 
 ## 8. What I never do
 - Never trade without the committed call. Never move, widen or remove a stop. Never add, average or re-enter. Never change size.
@@ -52,4 +52,4 @@ Today: tracker $24,358.99, high-water $25,256.94, drawdown -3.56%, FLAT since 07
 
 ## 9. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
-max 3 variants, costs on, everything counted in STATE.md (112 ideas, 311 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+max 3 variants, costs on, everything counted in STATE.md (113 ideas, 313 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.

@@ -56,3 +56,7 @@ prices from BEFORE the 08:00 entry. No result, tag, tally or decision is affecte
 | 07-27 buy | worst -29.7, then -59.1 | worst -12.9; best +85.1 as written |
 (07-17: figures as written.) Cause: after a break in my work I assumed the candle size instead of reading the tool's first line. Fix: the tool now
 prints its window in minutes and clock times; I use 8 and 16. July goal: "numbers corrected after a push" goes from 1 to 2 (one incident, ten days).
+
+## 07-27 test: idea BS2, A2's buys against its sells (journal/2015-idea-BS2-buys-against-sells.md)
+Outside the funded span: sells better by +0.278R, p 0.147; only January-February carries it; the paper days point the other way.
+Lean dismissed (K1). Idea 113, variants 313.

@@ -35,3 +35,19 @@ Tool: `python bt/buys_sells.py 2015-07-28 count` (no outcomes).
 - Worked check: the engine's list for the funded span has 35 buys and 38 sells, the same as my own trade list of 73 funded trades.
 
 ## Result (one run)
+Tool: `python bt/buys_sells.py 2015-07-28 test` (10,000 shuffles each).
+| part | buys: n, avg R, stop rate | sells: n, avg R, stop rate | sells - buys (p) | stop rate buys - sells (p) |
+|---|---|---|---|---|
+| P+Q (JUDGED) | 27, +0.224, 19% | 45, +0.502, 16% | +0.278R (0.147) | +3 points (0.50) |
+| January-February | 15, +0.183, 7% | 24, +0.700, 8% | +0.517R (0.063) | -2 points |
+| March to 03-26 | 7, +0.541, 14% | 12, +0.620, 17% | +0.079R (0.46) | -2 points |
+| Q paper days 07-08..07-27 | 5, -0.098, 60% | 9, -0.183, 33% | -0.085R (0.55) | +27 points (0.34) |
+| funded span (where I saw it; reference) | 35, -0.083, 46% | 38, +0.036, 32% | +0.119R (0.31) | +14 points (0.16) |
+K1 **FAIL** (p 0.147; line 0.05). K2 pass by sign only (March +0.079R is nothing). K3: the paper days point the OTHER way.
+**THE LEAN IS DISMISSED. I stop looking at sides.**
+What I learned: 1. Sells were better only where I expected and for the reason I expected: January-February, when the euro was falling
+(+0.52R). In March, in the funded months and on the paper days the two sides are the same within noise. 2. "9 of 10 worst were buys"
+came from ranking identical full stops by pennies; even where I saw it, on the 73 funded trades, the difference has p 0.31. 3. Buys
+were NOT bad before funding (+0.224R, 19% stops): both sides worked while the rule worked and both stopped working together. That
+fits RG: the signal's direction failed, not one side of it.
+Counts: idea 113; variants 312-313.
