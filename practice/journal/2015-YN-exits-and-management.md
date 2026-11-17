@@ -64,3 +64,14 @@ Reading: exits cannot rescue an entry with no edge; the later clock (E2) only ad
 The A2 lesson holds here too: management does not make an edge.
 CORRECTION (September correction 2, found before the coach read it, after the push of 27fa895): I wrote YN's test end as 08-14 from
 memory; its own journal says END 2015-08-13. Fixed in three places above. Trade counts and R were from tool output and stand.
+
+## 09-02 (coach: "back to exits/management on your best near-miss"): the rule of 09-01 applied again, facts from STATE.md's ideas row
+Rule (written 09-01): positive in BOTH periods AND positive at stressed costs, and not frozen, closed, or already counted forward.
+- YN: base now +0.032R, stressed -0.010R (09-01 run) -> no longer meets the rule.
+- YM1 (+0.113R, stressed +0.063R): FROZEN in its forward count; coach 08-28 "don't tune it on the same data".
+- NC1 (filter) and EN2: forward counts running. SW (+3.60R / +3.04R): SW1 shadow closed for good 08-27 by its line E1.
+- LM2: closed for good by the coach (08-05). BX2: dead for good (07-21). WO: -4.91R after 04-07. MPG2: a dose hint on 41 trades.
+RESULT: NO candidate is left outside the forward counts. I do not pick a dead or closed line to have something to work on.
+The one honest option I see, NOT started (it would change a forward count, and the coach said no changes to them): give YM1's forward count
+a pre-registered exit twin judged ONLY on forward days - same entries, one named exit change written before its first day, compared
+trade by trade with YM1 at its 80th trade. Which exit, and whether at all, is the coach's call. Until then: no exits test today.

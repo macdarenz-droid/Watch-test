@@ -107,3 +107,5 @@ YN's own 13 unseen trades since its test lost ~3.9R: +0.070R -> +0.032R. Ideas 1
      MO PAPER RULE (day 47 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.36R (running -5.72R).
      For Thursday (tool): MO1 -0.137R -> paper; MO3 -0.191R -> paper.
      How it feels: the paper buy came within 1.6 pips of its stop and closed small. Nothing to act on.
+  Evening: near-miss rule re-applied (journal/2015-YN-exits-and-management.md): no candidate left outside the forward counts; question to the coach
+  (an exit twin for YM1 judged on forward days only?). No test run, nothing counted today.
