@@ -35,3 +35,9 @@ Step 2 only after a pass, 05-01..07-16: K3 ON days above OFF days and ON days ab
 Pass = paper line beside MO, never a live change now. My guess: K1 fails; EF (the daily version) died the same way.
 
 ## 5. Counts and worked case (tool, before outcomes)
+Tool: `python bt/morning_chop.py 2015-07-17 count` / `check 2015-07-16` (no outcomes).
+- 130 A2 days with a state (01-16..07-16; the warm-up ended 01-16, not 01-20 as I wrote): Jan-Apr 75, from 05-01 55.
+- MC1: Jan-Apr ON 39 / OFF 36; from 05-01 ON 22 / OFF 33. MC2: 39 / 36; 24 / 31. MC3: 71 / 4 (NOT judgeable in Jan-Apr: 4 OFF days); 31 / 24.
+- Worked case 07-16: mean of the last 10 mornings' eff = 0.499 -> MC1 ON (last 5: 0.695 -> MC2 ON; 1 whip morning in 10 -> MC3 ON).
+
+## 6. Result
