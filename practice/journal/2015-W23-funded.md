@@ -150,6 +150,24 @@ Paper tags, never live: UN3 (07:00), PH2 (08:00, before the order), MB1 (12:00, 
      Payout date Friday 06-05: the balance is under $25,000; as it stands the request is $0.
      END OF RELEASED DATA (clock Thu 06-04 01:00 London).
 
+- **Thu 06-04 call, written 07:00 London (06:00 UTC), before the entry bar.** June goal read first: every figure below is from `python bt/call_numbers.py 2015-06-04`, `./look.sh` or a bar print. Yesterday's tag stands: VALID LOSS.
+  Coach 06-04: one test earns one day; one at a time. (Yesterday I ran one fresh test and closed two old gates; from today: one.)
+  D1 (London days): Mon 06-01 close 1.09259 (0.38); Tue 06-02 high 1.11942 close 1.11504 (0.84, range 278.3); Wed 06-03 high 1.12850 low 1.10794 close 1.12740
+      (0.95, range 205.6): it stopped me at the open, fell to 1.10794 by early afternoon and then rallied 205 pips to close on the high. New 3-day high.
+  H4 (UTC bars): Wed 12:00 bar 1.10794 -> 1.12830; 16:00 bar 1.12430-1.12850; tonight 00:00 bar 1.12531-1.12749; 04:00 bar 1.12625-1.12742.
+  H1: the night (00:00-07:00 London): open 1.12656, high 1.12749, low 1.12531, last 1.12674: range 21.8 pips (ratio 0.59, quiet), net +1.8 pips - flat.
+  M15: a 12 pip band 1.1263-1.1274 for the last hour and a half.
+  Bias: BUY. 22:00 London closes: 06-03 1.12740 vs 05-29 1.09831 = +291 pips (3-day gap +290.9). Gap / ADR5 1.92: stretched.
+  UN3 PAPER TAG (never live): 5-day gap +370 pips -> BUY; agree: paper TRADES. Forward day 33, disagree days 8 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 25.
+  MB1 PAPER TAG (never live, forward day 17): morning direction written at 12:00, before 13:25.
+  Levels: night high 1.12749; Wed high 1.12850; night low 1.12531; Wed evening low 1.12430.
+  Rejection-day check: Wednesday made the 3-day high (True) and closed at 0.95, not in the bottom third. Not a rejection day. 10-day trend: UP (1.12740 vs 05-20 1.10937); the buy is with it.
+  Second wide day in a row behind me. GA (yesterday's test): mornings after a wide day are A2's best group, and the two that hurt were its failures. No weight on the worry.
+  SIZE RULE (the real safety rule): tracker balance $24,852.83, high-water $25,349.14, drawdown -1.96%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
+  Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
+  Worry: buying the top of a two-day rally. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
