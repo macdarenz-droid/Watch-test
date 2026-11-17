@@ -2392,3 +2392,4 @@
 {"real_utc": "2026-11-17T21:06:26+00:00", "clock": "2015-09-02T11:00:00+00:00", "action": "advance", "frm": "2015-09-02T09:00:00+00:00", "to": "2015-09-02T11:00:00+00:00", "note": ""}
 {"real_utc": "2026-11-17T21:06:26+00:00", "clock": "2015-09-02T11:00:00+00:00", "action": "bars", "tf": "M15", "n": 16}
 {"real_utc": "2026-11-17T21:06:31+00:00", "clock": "2015-09-02T21:00:00+00:00", "action": "advance", "frm": "2015-09-02T11:00:00+00:00", "to": "2015-09-02T21:00:00+00:00", "note": ""}
+{"real_utc": "2026-11-17T21:08:16+00:00", "clock": "2015-09-03T00:00:00+00:00", "action": "advance", "frm": "2015-09-02T21:00:00+00:00", "to": "2015-09-03T00:00:00+00:00", "note": "END OF RELEASED DATA: commit + push sim/ and your journal, then wait for your coach to release more and run `git pull origin main`."}
