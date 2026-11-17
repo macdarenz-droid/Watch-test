@@ -89,6 +89,15 @@ under 0.00R. I will write the day-20 verdict (Tue 08-04) against exactly these a
      MO PAPER RULE (day 22 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.10R (running -5.51R).
      For Thursday (tool): MO1 -0.302R -> paper; MO3 -0.280R -> paper.
 
+## Thu 07-30
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-30`:
+- 3-day gap +0.6 pips -> A2 side BUY (any gap counts; the thinnest signal there is). 5-day gap +53.2 -> UN3 agree. Night 00:00-07:00: 1.09592-1.09891, last 1.09730 (range 29.9, net -16.0).
+- Wednesday's London day: 1.09669-1.10840, close 1.09818 (range 117.1); it made the 3-day low.
+- Monitor for today -0.302R (MO1), -0.280R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); route B: no tested setup. NO ORDER.
+- A2 paper plan: buy at the 08:00 open, stop 40 pips below, out 12:00.
+- SW1 shadow trade 3: open (buy 1.10562, stop 1.09362, target 1.12962, clock 12:00 Tue 08-04); about 83 pips against at the night's last price. Nothing to do.
+- How I feel: fine. A buy on a 0.6-pip gap after a 117-pip down day looks silly; "looks silly" is not a rule.
+
 ## Forward tally
 
 ## CORRECTION written Mon 2015-07-27 (PROCESS MISTAKE P12; found by me on 07-27 when the walk tool and the engine disagreed)
