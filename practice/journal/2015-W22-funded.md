@@ -200,6 +200,11 @@ Friday 05-29 is the last trading day of May: the month-end review is due on the 
       None due. LAST TRADING DAY OF MAY: the month-end review is written after today's trade, before the next test (coach 05-29), with one process goal for June.
   Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade. The release ends at 22:00 London.
   Worry: a small signal after two rising days. SG says small signals are no worse. Written, not a rule.
+  08:00 London Fri: pre-entry hour 1.09260-1.09665 = 40.5 pips -> PH2 paper: LIVELY, paper half size (decided before the order). Price 1.09284, near the low of the hour: night with me by 40.7 pips (not counted); entry 22.3 pips worse than at 07:00. Order: SELL 0.31, stop 40 pips above the bid (1.09684).
+  08:15 London: filled SELL 1.09284, stop 1.09684 (40.0 pips). First candle: worst -16.1, close -14.1 pips: a bounce off the hour's low. No call that matters; hands off.
+  09:00 London: first hour best +1.6, worst -35.1, last -35.1 pips: four rising candles, closing on its high 4.9 pips from my stop. I expect the stop. Nothing to do: it is where it is. No call.
+  10:00 London: STOPPED in the 09:00 London candle (bid high 1.09737, 5.3 pips through my level). Sim balance from the tool $25,389.36. One trade a day: done. I watch to noon only for the stop-day routine.
+  12:00 London: price (bid, from the tool) 1.09589 = 30.5 pips against my entry, 9.5 pips inside the stop; the morning's highest bid was 1.09901, 21.7 pips through my level. Without the stop about -0.76R at noon instead of -1.00R (python): the stop cost about a quarter of an R. MB1 paper (forward day 13), written before 13:25: open 08:00 1.09285, price at 12:00 1.09589 -> morning UP by about 30 pips (large morning) -> only an UP break of the 12:00-13:25 box counts. Exact figures from the tool afterwards.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
