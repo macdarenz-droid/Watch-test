@@ -325,3 +325,9 @@ then an entry on the side the day refused), banked part of Wednesday's spike (GB
 definitions, worked cases and kill lines K1-K6 pushed first; the loop's 12:00 version reproduces the engine exactly; one run on 118 days. 42% of A2
 trades reach +1R open (50 trades, +64.54R); 34 of them still close at +1R or more and only 2 at or below zero. A fixed exit at 11:00 / 11:30 / 12:30:
 -8.03R / -8.96R / -3.02R against 12:00, behind in both periods: all killed. Noon stays. Counts: 85 ideas, 238 variants. June corrections after a push: 3.
+
+## 06-19 research after funded day 61 and the payout (coach: volatility - do A2 results change with the size of the prior days' ranges; one test):
+idea VL (journal/2015-idea-VL-volatility-level.md). Three features in pips (5-day mean, yesterday, 10-day mean), thirds cut from the feature values
+alone, worked cases against my daily call figures (which caught a wrong day window before the push), kill lines K1-K4 pushed first; one run on 119 days.
+HIGH minus LOW: +0.03R / +0.20R / -0.07R with error bands of about 0.5R; all nine groups positive; no order. NOT SHOWN: killed. The 40 pip stop is not
+hit more often in wide markets. Nothing changes. Counts: 86 ideas, 241 variants. June corrections after a push: 3.

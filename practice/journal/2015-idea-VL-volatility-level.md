@@ -37,3 +37,42 @@ costs 2.2R on average. If every group is positive, there is nothing to skip anyw
 Worked expectation, written now: V2 leans HIGH better by 0.2-0.4R (GA's finding in another unit) and fails K4. V1 and V3: differences under 0.3R, sign
 unstable between the periods: fail K1 and K2. Full-stop share higher after high-range days (same 40 pips in a bigger market), paid for by bigger winners.
 Counts when run: idea 86, variants 239-241.
+
+## RESULTS (lines and cut points pushed first in commit 292e0e8; one run: `python bt/vol_level.py 2015-06-20 test 125.4 145.2 106.6 151.4 132.2 147.7`; costs on)
+A2 to 06-19: 119 days, +35.54R, +0.299R a day, 28 full stops (24%). Figures copied from the print.
+| feature | group | days | avg R | net | win | full stops | avg win / avg loss | best days (>= +1.6R) |
+|---|---|---|---|---|---|---|---|---|
+| V1 5-day mean | LOW (< 125.4) | 39 | +0.336 | +13.09 | 62% | 18% | +0.95 / -0.65 | 5 |
+| | MID | 38 | +0.114 | +4.31 | 47% | 34% | +1.10 / -0.77 | 5 |
+| | HIGH (>= 145.2) | 39 | +0.362 | +14.12 | 64% | 21% | +0.96 / -0.70 | 4 |
+| V2 yesterday | LOW (< 106.6) | 40 | +0.149 | +5.97 | 52% | 25% | +0.92 / -0.71 | 2 |
+| | MID | 39 | +0.399 | +15.56 | 64% | 18% | +0.98 / -0.64 | 7 |
+| | HIGH (>= 151.4) | 40 | +0.350 | +14.02 | 60% | 28% | +1.11 / -0.79 | 6 |
+| V3 10-day mean | LOW (< 132.2) | 37 | +0.246 | +9.10 | 57% | 24% | +1.00 / -0.75 | 6 |
+| | MID | 37 | +0.277 | +10.25 | 51% | 32% | +1.26 / -0.76 | 6 |
+| | HIGH (>= 147.7) | 37 | +0.180 | +6.65 | 62% | 19% | +0.67 / -0.63 | 1 |
+| feature | HIGH minus LOW | 2 standard errors | before 03-02 | lived | K1 size | K2 both periods | K3 order | K4 noise |
+|---|---|---|---|---|---|---|---|---|
+| V1 | +0.027R | 0.488 | +0.229 | +0.013 | FAIL | PASS | FAIL | FAIL |
+| V2 | +0.201R | 0.497 | +0.126 | +0.352 | FAIL | PASS | FAIL | FAIL |
+| V3 | -0.066R | 0.444 | -0.052 | -0.110 | FAIL | PASS | FAIL | FAIL |
+Every one of the nine groups is positive.
+VERDICT: KILLED, all three, on size, order and noise. The claim "A2's results change with the size of the prior days' ranges" is NOT SHOWN.
+
+## Expectation against the run
+V2 "leans HIGH better by 0.2-0.4R and fails K4": +0.201R, fails K4 (and K1 by a hair). V1 and V3 "under 0.3R": +0.03R and -0.07R. "Sign unstable
+between the periods": WRONG - the sign held in both periods for all three; the differences are simply small. "More full stops after high-range days,
+paid for by bigger winners": NOT in the data (V1 18% low / 21% high; V3 24% / 19%); only V2 leans that way (25% / 28%, average win +0.92 / +1.11).
+
+## The answer to the coach's question
+- No - not that I can show. Over 5 or 10 days the level of the market's range makes no visible difference to A2: +0.34R in the quietest third against
+  +0.36R in the wildest (V1). The rule earned in a 100-pip market and in a 170-pip market, and the fixed 40 pip stop was not hit more often in the wild one.
+- After a small yesterday the rule earns less (+0.15R against +0.35-0.40R; 2 best days against 6-7). That is idea GA and the BS look again, in pips
+  instead of a ratio: best days follow days that moved. It is 0.2R on 40 days with an error band of 0.5R, so it is a leaning, and the LOW group is
+  still positive: nothing to skip.
+- The middle groups are the odd ones (V1's MID is the worst, V2's MID the best). A real effect of volatility would be ordered; this is what noise looks like.
+- What the test could not see, as written before the run: an effect smaller than about 0.5R between thirds. 119 days are 119 days.
+- For the plan: nothing changes. The fixed stop and the fixed size stay (idea V said so on 35 days; this says so on 119). The practical meaning:
+  a quiet week is not a reason to expect less and a wild week is not a reason to cut size - which I have wanted to do on both kinds of mornings.
+Counts: ideas 86, variants 241 (V1, V2, V3). Adopted trading ideas: 0. Numbers or rules corrected after a push in June: 3 (none today; one definition
+slip caught by its worked case before the push - the June goal doing its job).
