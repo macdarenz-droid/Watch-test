@@ -104,3 +104,11 @@ Live minus backtest: -0.38R per trade (noise band +-0.40R) -> inside the noise. 
 Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 91 done, avg +0.12R, max DD 7.07R. Planning edge +0.18R: live is -0.06R above it.
 Counts only: live trades after a night (00:00->08:00) against my side, from 04-23: 32 (-0.46R; look at 40). 10-day-trend direction, paper line from 05-06: trend UP 25 trades -0.41R; trend DOWN 19 trades -5.47R (look at 40 up-trend trades). MB1: CLOSED 06-30. MO paper rule from 06-30: day 5 of 60 (MO1 0.00R, MO3 -1.80R, A2 -1.80R). +80 pip trades from 05-22: 3 of 15 (net trail +0.82R). Pre-entry hour 80+ pips: 5 of 10 (0 wins, -4.18R).
 Normal worst, re-read 06-24 (bt/streak_check.py 2015-06-24, all 121 engine A2 trades reshuffled over 82 trades): longest losing run median 4, 95th pct 7; max drawdown median 4.52R, 95th pct 8.55R. Live worst: 7 in a row (06-19 .. 06-29), 7.07R (07-06, now). Now: 2 in a row, 7.07R under the high. HALF SIZE ON since 07-06.
+
+## 07-06 research after funded day 72 (coach: position sizing math - the half / full ladder against flat sizing, drawdown and recovery time): idea LF
+(journal/2015-idea-LF-ladder-against-flat.md). Three policies (ladder, flat full, flat half), lines K1-K5 for the ladder, worked arithmetic and a regression
+pushed before the code; regression exact; one run, 2,000 x 500 days from a fresh start and from today's state. The ladder cuts the odds of ending at
+my own stop from about 23% to 2% at the planning edge (65% to 18% at +0.10R) for 21% of the income and a longer time under water (121 days against 70).
+From today: a new high-water within 60 / 120 / 250 days in 40 / 79 / 96% of runs at +0.18R, median day 70. The ladder fails two of its five lines:
+price (79% against 80%) and, the real one, that permanent half size is 16 points safer at a zero edge. Question put to the coach; nothing changes
+(and nothing would until the next high-water). Counts: 98 ideas, 276 variants. July corrections after a push: 1.

@@ -15,6 +15,9 @@ Goal: steady monthly profit, safe payouts, never a breach.
 - HALF size (0.16 lots) from a day's CLOSE at or below 3% under the high-water mark, until a new high-water.
 - STOP TRADING from a day's close at or below 7% under the high-water mark: written review, restart only with my coach.
 - The high-water moves up with new highs and down only by a payout. After the 06-19 payout: high-water $25,256.94; half size at $24,499.23; stop at $23,488.95.
+- Ladder against flat (idea LF, 07-06): the half step cuts my own-stop odds from about 23% to 2% at the planning edge for a fifth of the income; the
+  way back to a new high-water from here is a median 70 trading days at +0.18R, about 100 at +0.10R. Expect months at half size. (Open question with
+  the coach: a pre-written condition for returning to full size.)
 - >>> HALF SIZE IS ON since the close of Fri 2015-07-03 ($24,489.07, $10.16 under the line): 0.16 lots from Mon 07-06 until the balance is above $25,256.94.
 - Size changes ONLY by a trigger written in advance. None is written. Sizing test 06-17 (idea SG): no size breaches (the 7% stop sees to it); at the planning
   edge 0.75% pays 28% more and meets my own stop in 22% of two-year runs against 3%; at +0.10R it pays nothing more. 0.50% stays.
@@ -61,6 +64,6 @@ Goal: steady monthly profit, safe payouts, never a breach.
 
 ## 8. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
-max 3 variants, costs on, everything counted in STATE.md (97 ideas, 273 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+max 3 variants, costs on, everything counted in STATE.md (98 ideas, 276 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
 Closed, so that I do not reopen it on a bad day: entry filters from chart reading, entry time and price, the lookback, every exit except noon,
 second setups, day filters. The list with results is in the long version, section 7.
