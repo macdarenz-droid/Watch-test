@@ -111,6 +111,35 @@ Coach 06-22: A2 has been filtered enough. Next brick: from my own chart notes, 3
      +80 pip trades: none (3 of 15). 80+ pip pre-entry hours: none (42.4; 4 of 10).
      END OF RELEASED DATA (clock Wed 06-24 01:00 London).
 
+- **Wed 06-24 call, written 07:00 London (06:00 UTC), before the entry bar.** June goal read first: every figure below is from `python bt/call_numbers.py 2015-06-24`, `./look.sh`, `python bt/streak_check.py 2015-06-24` or a bar print. Yesterday's tag stands: VALID LOSS.
+  Coach 06-24: MH counted honestly; the unseen period did its job. 3 valid stops in a row: before changing anything, write down what worst losing streak
+      the backtest says to expect and compare. Next brick: review my funded-day winners - what do they share at entry? One shared trait as a testable rule with a kill test.
+  THE STREAK, WRITTEN DOWN FIRST (coach; `python bt/streak_check.py 2015-06-24`, read from the print, nothing changed before or after reading it):
+      - Now: 3 losses in a row (all full stops), 3.83R under the equity high.
+      - Lived record, 82 trades: longest losing run 6 (April), deepest drawdown 4.85R (06-11).
+      - What the record says to expect over 82 trades (all 121 engine A2 trades reshuffled): longest losing run median 4, 95th percentile 7; a run of
+        6 or more in 22.3% of reshuffles; max drawdown median 4.52R, 95th percentile 8.55R.
+      - My written number of 05-19 (for 56 trades): 6 in a row, about 5.9R.
+      COMPARE: 3 in a row is BELOW the median worst run (4). 3.83R is BELOW the median worst drawdown (4.52R). This is an ordinary stretch for a rule
+      that stops out one trade in three. Nothing changes. For the record, so that I do not move it later: over this many trades a run of 7 and a
+      drawdown of about 8.5R are still inside the 95% range; my half-size trigger (3% = about 6R under the high-water) would come on before that.
+  Plan line read (BD): the only way to lose the best days is not to trade the day or not to hold it to 12:00.
+  D1 (London days): Fri 06-19 close 1.13487 (0.53); Mon 06-22 close 1.13402 (0.29); Tue 06-23 high 1.13472 low 1.11351 close 1.11677 (0.15, range 212.1):
+      a 212 pip day, down from the first hour of the night to the afternoon, a close near the low. The widest day since March on my charts.
+  H4 (UTC bars): Tue 08:00 bar 1.12596 -> 1.12025; 12:00 bar low 1.11351, close 1.11886; 16:00 bar back to 1.11653; tonight 00:00 bar 1.11597-1.11877; 04:00 bar up to 1.12092, last 1.11961.
+  H1: the night (00:00-07:00 London): open 1.11713, high 1.12092, low 1.11597, last 1.11961: range 49.5 pips (ratio 0.99), net +24.8 pips - a rising night, against a sell.
+  M15: three candles up from 1.1171 to 1.1209 since 06:00 London, the last one back to 1.1196.
+  Bias: SELL. 22:00 London closes: 06-23 1.11677 vs 06-18 1.13600 = -192 pips (3-day gap -192.3). Gap / ADR5 1.42: STRETCHED (my best group in XS). FLIP DAY after four buys.
+      The morning after a giant day (range 212 against a 5-day mean of 135): GA's best group and its two fastest stops.
+  UN3 PAPER TAG (never live): 5-day gap -79 pips (-79.4) -> SELL; agree: paper TRADES. Forward day 47, disagree days 11 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 39.
+  MB1 PAPER TAG (never live, forward day 31): morning direction written at 12:00, before 13:25. Kept drawdown 5.66R; early-close line 6R.
+  Levels: night high 1.12092; Tue 08:00 open about 1.1260; night low 1.11597; Tue low 1.11351.
+  Rejection-day check: for a sell, Tuesday made the 3-day low (True) and closed at 0.15, not in the top third. Not a rejection day. 10-day trend: DOWN (1.11677 vs 06-09 1.12822); the sell is WITH it.
+  SIZE RULE (the real safety rule): tracker balance $24,764.97, high-water $25,256.94, drawdown -1.95%; trigger 1 (half size) $24,499.23 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,488.95.
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade. Same size as on every day.
+  Worry: selling 60 pips above yesterday's low after a night that bounced. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
