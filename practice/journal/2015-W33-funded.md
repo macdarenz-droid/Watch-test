@@ -109,3 +109,7 @@ Quieter mornings +0.195R on 59, all of it before 04-07: not promoted. Idea 127, 
 
 ## 08-12 test: idea GC2, the night faded at the bell, counted first (journal/2015-idea-GC2-back-to-close-counted-first.md)
 Counts at N = 10/15/20: 115/93/74 days; none reaches the pre-written 120. Killed for sample, outcomes never run. Idea 128.
+
+## 08-12 evening test: idea NR, New York turns the London morning (journal/2015-idea-NR-new-york-turns-the-morning.md)
+Counts N = 20/30/40: 102/85/72 days; none reaches 120. Killed for sample, no outcome run. Idea 129.
+Structural fact: 159 weekdays; the 120 line rules out nearly every once-a-day idea with a condition. Question (a)/(b) put to the coach.

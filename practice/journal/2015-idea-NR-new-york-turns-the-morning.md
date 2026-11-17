@@ -21,3 +21,15 @@ NR0 (control) NR1's days traded WITH the morning.
 K1 average >= +0.10R after costs (1.0 + 0.1). K2 net above zero before 04-07 AND from 04-07. K3 stressed (2.0 + 0.5) average above zero.
 K4 NR1 minus NR0 above zero, sign-flip p < 0.05.
 My guess: positive after 04-07, negative before (K2 fails).
+
+## Step 1, counts only (tool `python bt/ny_turn.py 2015-08-13 count`)
+159 days (01-02..08-12); median |morning move| 33.4 pips. N = 20: 102 days (45 before 04-07, 57 from). N = 30: 85 (37 / 48). N = 40: 72 (30 / 42).
+## Step 2: no grid value meets 120+ trades. KILLED FOR SAMPLE, `test` NOT run, outcomes unseen.
+A STRUCTURAL FACT I SHOULD HAVE SEEN BEFORE THE LAST TWO PRE-REGISTRATIONS: the history holds 159 weekdays. A once-a-day setup reaches
+120 trades only if its condition holds on 75% of days or more. GC2 and NR (and GC) all needed a move of some size, so all failed the
+count. My 120 line (set after FD) therefore rules out almost every once-a-day idea with a condition, on this history. Two honest ways
+on, for my coach to choose; I change nothing myself:
+ (a) keep 120 and test only setups that can trade several times a day (SF, RT, DT, MB2 were of that kind; all killed on outcomes); or
+ (b) allow once-a-day ideas at 80+ trades with the weaker power stated in each file (about +-0.22R; a no-edge rule clears +0.10R about
+     one time in four), knowing a pass there is weak evidence and could only lead to a forward count, never to route C directly.
+Counts: idea 129 (killed for sample); variants none run.
