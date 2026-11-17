@@ -26,3 +26,8 @@ written rule first. It also says nothing about which setup: today I have none th
 My guess: $62.50 fails the first line (about 7R of room), $31.25 passes.
 Worked case first: the pool's size and its mean before shifting must match what LR printed for the window (04-07..07-15: 72 trades,
 -0.081R) plus the days since.
+
+## Facts and worked case (tool `python bt/probation_size.py 2015-08-04 facts`, before the runs)
+Pool: 85 trades (04-07..08-03), mean -0.065R, spread 1.02R. The part to 07-15 is 72 trades at -0.081R: the same as LR printed on 07-15.
+
+## Result (one run)
