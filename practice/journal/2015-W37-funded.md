@@ -36,3 +36,7 @@ Payout date Fri 09-11.
      MO PAPER RULE (day 50 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.00R (running -6.80R).
      For the next day (tool): MO1 -0.046R; MO3 -0.222R -> paper.
      How it feels: a sell that went 40 against; the engine's line above says it was stopped (-1.00R), and by noon price was back to about -12 pips: a [C] day.
+
+## 09-07 evening test: idea 157 GS, a grace period for A2's stop (journal/2015-idea-GS-grace-stop.md; coach: one exit rule from lesson C)
+My chart-read worked case was wrong (GS1 saves none of the four C days; the tool showed it before the run). R after costs 1.0 + 0.1, paired
+against A2 on 174 days: GS1 -0.017R, GS2 -0.007R, GS3 -0.010R, all deeper drawdowns -> KILLED on all five lines. Ideas 157, variants 415.

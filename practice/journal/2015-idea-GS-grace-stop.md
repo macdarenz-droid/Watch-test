@@ -54,3 +54,21 @@ MY WORKED CASE WAS WRONG: on 09-01 price was still 40+ pips against at 09:00 Lon
 I misread my own M15 chart. On the four [C] days GS1 saves NONE (all still beyond 40 at 09:00, or stopped later: 07-08 at 10:10);
 GS2 (grace to 10:00) saves 09-01 and 08-21 (+0.26R each) and cuts 08-28 to -0.43R. The judged rule stays GS1 as registered.
 One run next: `python bt/grace_stop.py 2015-09-05 run` (history to 09-04; the base line must match the engine's A2 list).
+
+## Result (one run; ALL R AFTER COSTS spread 1.0 + slippage 0.1; stressed 2.0 + 0.5; tool output pasted by this command)
+    A2 days 174 (2015-01-06..2015-09-04); before 2015-04-07: 65, from: 109
+    base A2 (stop 40 from 08:00): avg +0.151R | net +26.25 | before 2015-04-07: +31.96 | from: -5.71 | stressed avg +0.104 | max DD 12.45R | worst trade -1.03R | mechanics: engine A2 net +26.25, largest day difference 0.000R
+    GS1 grace to 09:00, disaster 80: avg +0.134R | net +23.35 | before 2015-04-07: +29.64 | from: -6.29 | stressed avg +0.092 | max DD 13.46R | worst trade -2.03R | minus base -0.017R (before -2.32, from -0.58), p 0.2171, days changed 46 | K1 FAIL K2 FAIL K3 FAIL K4 FAIL K5 FAIL
+    GS2 grace to 10:00, disaster 80: avg +0.144R | net +25.05 | before 2015-04-07: +30.58 | from: -5.52 | stressed avg +0.099 | max DD 14.38R | worst trade -2.03R | minus base -0.007R (before -1.39, from +0.19), p 0.7426, days changed 45 | K1 FAIL K2 FAIL K3 FAIL K4 FAIL K5 FAIL
+    GS3 grace to 09:00, disaster 60: avg +0.141R | net +24.48 | before 2015-04-07: +29.96 | from: -5.48 | stressed avg +0.096 | max DD 12.65R | worst trade -1.53R | minus base -0.010R (before -2.00, from +0.23), p 0.3475, days changed 46 | K1 FAIL K2 FAIL K3 FAIL K4 FAIL K5 FAIL
+    (all R after costs 1.0 + 0.1; stressed 2.0 + 0.5; 1R = $125 = 40 pips) script reached its end
+Kill lines, each value against its threshold (GS1), read from the lines above:
+K1 GS1 average at least +0.05R above base: -0.017R -> FAIL.
+K2 GS1 minus base above zero before AND from 04-07: -2.32 / -0.58 -> FAIL.
+K3 stressed average at least base's: +0.092 vs +0.104 -> FAIL.
+K4 paired p < 0.10 with a positive difference: -0.017R, p 0.217 -> FAIL.
+K5 max drawdown no deeper than base: 13.46R vs 12.45R -> FAIL.
+VERDICT: KILLED on all five (idea 157; variants GS1 GS2 GS3 counted). GS2 and GS3 are also below base and deeper in drawdown.
+The base line matches the engine's A2 list exactly (net +26.25R, largest day difference 0.000R).
+Reading: the 'stopped then came back' days are real, but a wide early stop pays for them with -2R days on the mornings that keep going
+(worst trade -2.03R). It is the S80 result again, now limited to the first hour: the 40-pip stop at 08:00 is not where A2 leaks.
