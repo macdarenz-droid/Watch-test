@@ -153,6 +153,25 @@ Coach 06-15: enough forward re-tests of killed ideas (LK is dead twice). Next te
      +80 pip trades: none (3 of 15). 80+ pip pre-entry hours: none (4 of 10).
      END OF RELEASED DATA (clock Thu 06-18 01:00 London).
 
+- **Thu 06-18 call, written 07:00 London (06:00 UTC), before the entry bar.** June goal read first: every figure below is from `python bt/call_numbers.py 2015-06-18`, `./look.sh` or a bar print. Yesterday's tag stands: VALID WIN.
+  Coach 06-18: plan v2 and SG done properly, keep 0.50%. Next brick: replay my worst week (week 24, the 5-loss run) by eye on the charts, write what a
+      better trader would have done each day, and only turn it into a test if a mistake repeats.
+  Plan line read (BD): the only way to lose the best days is not to trade the day or not to hold it to 12:00.
+  D1 (London days): Mon 06-15 close 1.12826 (0.89); Tue 06-16 close 1.12471 (0.34); Wed 06-17 high 1.13578 low 1.12065 close 1.13372 (0.86, range 151.3):
+      flat in my morning, a low in the afternoon, then about 150 pips up in the evening to a new 3-day high. The highest close since 06-10.
+  H4 (UTC bars): Wed 12:00 bar down to 1.12247; 16:00 bar 1.12065 -> 1.13578, close 1.13421; 20:00 bar up to 1.13702; tonight 00:00 bar 1.13506-1.13718; 04:00 bar high 1.13756, last 1.13541.
+  H1: the night (00:00-07:00 London): open 1.13412, high 1.13756, low 1.13387, last 1.13541: range 36.9 pips (ratio 1.06), net +12.9 pips - up a little, holding the evening's gain.
+  M15: the last candle fell 15 pips from 1.13695 to 1.13515.
+  Bias: BUY. 22:00 London closes: 06-17 1.13372 vs 06-12 1.12648 = +72 pips (3-day gap +72.4). Gap / ADR5 0.54. FLIP DAY after four sells.
+  UN3 PAPER TAG (never live): 5-day gap +13 pips (13.5) -> BUY; agree: paper TRADES. Forward day 43, disagree days 11 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 35.
+  MB1 PAPER TAG (never live, forward day 27): morning direction written at 12:00, before 13:25. Kept drawdown 5.63R; early-close line 6R.
+  Levels: night high 1.13756; Wed 06-10 high 1.13865 (the top of the last two weeks); night low 1.13387; Wed low 1.12065.
+  Rejection-day check: for a buy, Wednesday made the 3-day high (True) and closed at 0.86, not in the bottom third. Not a rejection day. 10-day trend: UP (1.13372 vs 06-03 1.12740); the buy is WITH it.
+  SIZE RULE (the real safety rule): tracker balance $25,022.52, high-water $25,280.44, drawdown -1.02%; trigger 1 (half size) $24,522.03 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,510.81.
+  Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
+  Worry: buying 30 pips under the two-week high, where last week's three buys failed. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
