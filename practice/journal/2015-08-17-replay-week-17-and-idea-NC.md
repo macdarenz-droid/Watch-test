@@ -44,3 +44,14 @@ K2 the same sign (skipped below kept) before 04-07 AND from 04-07.
 K3 NC1's skipped-minus-kept gap larger than NC0's (chasing is the problem, not any big hour).
 K4 label shuffle (10,000) of NC1's gap: p < 0.10.
 My guess: K1 passes (the week told me so), K2 fails: chasing paid in the trend months (H's "hurts in a trend").
+
+## Step 1, counts only (tool `python bt/no_chase_hour.py 2015-08-18 count`; no outcomes)
+160 A2 days (01-06..08-17). Skipped days (hour ran A2's way): X 10: 41 = 26% (14 before 04-07, 27 from); X 15: 33 = 21% (11 / 22);
+X 20: 24 = 15% (7 / 17); X 25: 16 = 10%. Control skips (ran against): 53 / 37 / 24 / 14.
+## Step 2, by the line written first: largest X skipping 15%+ AND 25+ days = **X = 15** (X = 20 has 24 days). NC1 = 15, NC2 = 20, NC0 = against at 15.
+My eye against the tool on week 17 (net 07:00 -> 08:00 open, signed by A2): Mon +13.5 (I wrote "jumped about 30": that was the hour's
+range, not its net), Tue -36.9, Wed -29.0, Thu +21.6, Fri +60.6. So at X = 15, NC1 would have skipped Thu and Fri, not Mon. Written before
+the run so I cannot pretend the rule saw all three.
+Note on the before-04-07 part: only 11 skipped days there; K2's first half rests on 11 trades.
+
+## Step 3, result (one run: `test 15 20`)
