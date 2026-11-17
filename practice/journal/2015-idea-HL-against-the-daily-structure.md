@@ -1,0 +1,28 @@
+# Idea HL: skip A2 when the daily lows (highs) are already turning against it (idea 150; coach 08-31: next backtest from my notes)
+Written Mon 2015-08-31 22:00 London, before any count or outcome.
+FROM MY NOTES: W06 (2015-02-02), carried from the W05 replay: "I sold into higher lows (Mon/Tue) and bought mid-range under resistance
+(Fri). Hindsight, untested." The second half became idea C (midpoint; failed). The FIRST half was never tested.
+Searched ("higher low", "lower high", "structure", "swing"): only a word in NT's prereg about nights. A2 reads 3-day CLOSES; this reads
+daily LOWS for a sell and HIGHS for a buy - related but not the same fact (the XD lesson: check it does not just repeat A2; as a filter
+on A2 it cannot be "A2 in disguise", but it can be empty if it never fires).
+
+## Hypothesis
+When A2 says sell but yesterday's low held above the day before's (buyers stepping in higher), the fall is tiring and A2's sell does worse;
+mirror for buys under falling highs. Background, no source I can cite. Against it: SG/XS found stretched or small signals were NOT worse.
+
+## Rule (an A2 filter; it changes only which days A2 trades; London days 22:00-22:00)
+Steps against A2: for a SELL count rising lows in a row going back from yesterday (L1 > L2 = 1 step; also L2 > L3 = 2 steps);
+for a BUY count falling highs (H1 < H2; H2 < H3). Skip A2 when steps >= N.
+ORDER OF WORK: counts first for N = 1 and 2 (skipped days, before / from 04-07). N = the LARGEST that skips at least 15% of A2's days and
+at least 25 days (the NC rule, reused unchanged). If neither does: killed for sample, no outcome run.
+EXPECTED SAMPLE: about 160 A2 days; my guess N = 1 skips ~25-35%, N = 2 ~8-12% -> N = 1 likely.
+THE THREE VARIANTS (named now): HL1 (judged) skip at the chosen N; HL2 (dose) skip at N = 2 (if the chosen is 2, HL2 = N = 3);
+HL0 (control) skip when the steps go WITH A2 (falling lows for a sell / rising highs for a buy) >= the chosen N.
+Power (once-a-day): a skipped group of 25-50 days has an error of about +-0.3R to +-0.4R. ANY PASS IS PROVISIONAL.
+## KILL LINES (four, all must pass, for HL1). R = the engine's A2 R, after costs: spread 1.0 + slippage 0.1 pips (engine default).
+K1 the skipped days' A2 average is below zero AND at least 0.30R below the kept days' average.
+K2 the same sign (skipped below kept) before 04-07 AND from 04-07.
+K3 HL1's kept-minus-skipped gap larger than HL0's.
+K4 label shuffle (10,000) of HL1's gap: p < 0.10.
+(No stressed-cost line: a filter only removes trades, each at A2's own costs; same frame as NC.)
+My guess: K1 fails - A2's skipped days look like everyone else's.
