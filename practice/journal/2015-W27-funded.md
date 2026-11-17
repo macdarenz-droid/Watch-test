@@ -378,3 +378,9 @@ journal/2015-07-02-replay-last-20-exits-and-idea-BE.md. Replay: 5 of the 8 full 
 ended at zero or worse. Rule from it: stop to the entry after +25 / +30 / +20 pips. Judged on the 108 days BEFORE the replayed twenty; four
 hand-worked cases matched; kill lines pushed first; one run. -3.87R / -3.60R / -6.88R against A2 (5 better, 10 worse for the +25 version); +2.37R on
 the twenty I had looked at. All killed. Break-even is closed at every level. Counts: 96 ideas, 270 variants.
+
+## 07-03 research after funded day 71 (coach: day-of-week, pre-registered, max 3 variants, strict about small samples): idea WD
+(journal/2015-idea-WD-day-of-week.md). One spread statistic over all five weekdays per variant and a permutation test instead of pairwise looks; kill
+lines pushed first; the spread function hand-checked; one run on 129 days (25-26 per weekday). A2's R: spread 0.59R against 0.47R typical with no
+effect, p 0.27; side advantage p 0.34; full-stop rate p 0.11. Killed. Monday is the worst day in both halves (44% full stops): written down with
+the reasons it is not carried. Weekday closed. Counts: 97 ideas, 273 variants. July corrections after a push: 1.
