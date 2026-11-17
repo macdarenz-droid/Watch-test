@@ -44,3 +44,17 @@ day before the 08-20 rise (08-19) was the WIDEST of five (08-20 is a WR5-follow 
 the rule measures RANGES. The expansion came two to three days after compression, not the next day. Written before Part B's run; Part B
 is run as registered (next day only), not changed to fit this.
 One run next: `python bt/squeeze.py 2015-09-04 runB`.
+
+## PART B result (one run; tool output pasted by this command; a size study, no costs apply)
+    SQ1 after NR5: n 42 (before 2015-04-07 15, from 27) | mean ratio 1.014 (+-0.19) vs others 1.161 | gap -0.147 | before -0.044 / from -0.210 | one-sided p 0.9401 | big days (>= 1.5) 10% vs 24%
+    SQ2 after NR7: n 29 (before 2015-04-07 9, from 20) | mean ratio 1.011 (+-0.15) vs others 1.147 | gap -0.136 | before -0.147 / from -0.133 | one-sided p 0.8912 | big days (>= 1.5) 10% vs 22%
+    SQ0 after WR5 (control): n 34 (before 2015-04-07 10, from 24) | mean ratio 1.216 (+-0.20) vs others 1.095 | gap +0.121 | before +0.138 / from +0.115 | one-sided p 0.1311 | big days (>= 1.5) 29% vs 17%
+    (a size study: ranges in pips, bid; no costs apply) KILL LINES SQ1: K1 FAIL | K2 FAIL | K3 FAIL | K4 FAIL
+Kill lines, each value against its threshold (SQ1), read from the lines above:
+K1 mean ratio >= 1.15 AND >= 0.15 above others: 1.014 vs 1.161, gap -0.147 -> FAIL.
+K2 above others in both periods: -0.044 / -0.210 -> FAIL.
+K3 shuffle p < 0.10: 0.940 -> FAIL.
+K4 bigger share of big days: 10% vs 24% -> FAIL.
+VERDICT: KILLED on all four (idea 153; variants SQ1 SQ2 SQ0 counted; part A killed for sample, not run). The claim is backwards on this
+history: after a narrow day the next day is SMALLER than usual, after a wide day it is WIDER (SQ0 +0.121, p 0.13, both periods). Ranges
+persist day to day, the same thing QW saw week to week. 'Big moves start out of compression' was a story I read from bodies on a chart.

@@ -145,3 +145,7 @@ Inactivity: count from 09-02 (coach); day 25 = Sun 09-27, first eligible Mon 09-
      MO PAPER RULE (day 48 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.06R (running -5.66R).
      For the next day (tool): MO1 -0.193R; MO3 -0.157R -> paper.
      How it feels: a +23 morning faded to a few pips by noon. Ordinary.
+
+## 09-03 evening test: idea 153 SQ, compression before big days (H1; journal/2015-idea-SQ-squeeze-before-big-days.md)
+Trade form killed for sample (29 trades). Size claim killed on all four lines: the day after a narrow day is smaller than usual, after a wide
+day wider. My chart sighting was small bodies, not small ranges. Ideas 153, variants 409.
