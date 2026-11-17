@@ -29,3 +29,10 @@ Pass = route B step B1 candidate, then 40 forward paper trades. Fail = killed. M
 like every follow rule on the morning scale.
 
 ## Counts and worked case (tool, before outcomes)
+Tool: `python bt/weekly_open.py 2015-07-21 count` / `check 2015-07-14` (no outcomes).
+- 112 Tue-Fri days with a weekly open (01-06..07-17). WO1 and WO2: 94 trades (39 before 04-07, 55 from). WO3: 80 (32 / 48). Judgeable.
+- Same side as A2: WO1 73 of 94 = 78% (just under my 80% line: it is mostly A2's direction; written before the outcomes). WO3 47 of 80 = 59%.
+- Worked case Tue 07-14: weekly open 1.10922 (Sunday evening, after a gap down from Friday's 1.11519), 08:00 open 1.09786 -> 113.6 pips
+  below -> WO1 SELL at 08:00, stop 40, out 20:00. Monday's close was 91.6 pips below -> WO3 SELL too.
+
+## Result (one run)
