@@ -115,6 +115,17 @@ under 0.00R. I will write the day-20 verdict (Tue 08-04) against exactly these a
      MO PAPER RULE (day 23 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.11R (running -5.62R).
      For Friday (tool): MO1 -0.405R -> paper; MO3 -0.300R -> paper. Friday is a payout date: balance under $25,000 -> $0.
 
+## Fri 07-31 (payout date; last trading day of July)
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-31`:
+- 3-day gap -156.1 pips -> A2 side SELL. 5-day gap -51.7 -> UN3 agree. Night 00:00-07:00: 1.09311-1.09486, last 1.09342 (range 17.5, net +2.9).
+- Thursday's London day: 1.08933-1.09891, close 1.09310 (range 95.8); it made the 3-day low.
+- Monitor for today -0.405R (MO1), -0.300R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); route B: no tested setup. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
+- SW1 SHADOW trade 4 (tool `bt/sw1_shadow.py 2015-08-01 signal`): Thu close 1.09310 vs 07-16 close 1.08731 = +57.9 pips -> paper BUY at the 08:00
+  open, stop 120 below, target 240 above, else out 12:00 Fri 08-07. Running -3.08R after 3 of 20. (It buys while A2 sells.)
+- Payout date: tracker $24,358.99 is under $25,000 -> request $0. July month-end check after the close.
+- How I feel: fine. Mistake to avoid: rushing the month-end numbers; every one from a tool or the trade list.
+
 ## Forward tally
 
 ## CORRECTION written Mon 2015-07-27 (PROCESS MISTAKE P12; found by me on 07-27 when the walk tool and the engine disagreed)
