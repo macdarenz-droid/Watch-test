@@ -46,3 +46,17 @@ Tool: `python bt/mid_morning_fade.py 2015-07-31 count` / `check 2015-07-28` (no 
   high already behind. So MF1 SELLS at 10:00, stop 30 above, out 12:00, and should make about +10 pips less costs = about +0.3R.
 
 ## 7. Result (one run)
+Tool: `python bt/mid_morning_fade.py 2015-07-31 test`. Hand check 07-27: the fade sold 1.10777 at 10:00, out 12:00 at 1.10683, +0.31R: as I worked it out first.
+| variant | judged trades | wins | avg R | net | before 04-07 | 04-07..06-04 | without best 2 | stressed avg | max DD | dropped window (NOT judged) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| MF1 fade, move >= 25 (JUDGED) | 58 | 45% | -0.040 (+-0.20) | -2.33 | 30: -1.83 | 28: -0.50 | -6.42 | -0.123 | 4.38R | 18 trades, -0.008R each |
+| MF2 fade, move >= 40 | 28 | 36% | -0.154 (+-0.25) | -4.30 | 15: -3.47 | 13: -0.83 | -6.61 | -0.265 | 4.63R | 10 trades, +0.150R each |
+| MF0 follow on MF1's days | 58 | 45% | -0.063 (+-0.20) | -3.65 | 30: -1.67 | 28: -1.98 | -7.38 | -0.120 | 8.46R | 18 trades, -0.138R each |
+MF1: K1, K2, K3, K5, K7 FAIL (K4, K6 pass and mean nothing). **MF IS KILLED.**
+What I learned: 1. On the judged days neither side of the mid-morning pays: fade -0.04R, follow -0.06R. After 10:00 the rest of the
+morning is a coin that costs the spread. 2. The surprise is the dropped window: even in the very weeks where I "saw it most", the fade
+made -0.008R a trade on the days the rule trades. My guess ("the dropped window clearly positive") was wrong. The picture in my notes
+was real as a description (10 of 14 mornings turned) and worthless as a trade: the turns were small, the mornings that did not turn
+ran, and a 30-pip stop plus costs ate the rest. 3. What I see most in my notes is what my own position did (a small profit handed
+back), not what the market offers. A note written with a position in mind is not a count.
+Counts: idea 116; variants 320-322; second setups tried 21, none alive.

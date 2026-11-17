@@ -149,3 +149,7 @@ After the stop the move is spent; flat is right. Idea 114, variants 316.
 ## 07-29 test: idea EV, evening fade 17:00-21:00 (journal/2015-idea-EV-evening-fade.md)
 Fade a 60+ pip day move at 17:00, stop 30, out 21:00: 51 trades -0.139R, negative in both periods. Killed (K1-K6).
 The follow control made +0.099R: noted, not promoted. Idea 115, variants 319.
+
+## 07-30 test: idea MF, the first two hours given back by noon (journal/2015-idea-MF-mid-morning-fade.md)
+From three weeks of notes (8 of 14 mornings). Fade the 08-10 move at 10:00, judged before 06-05: 58 trades -0.040R; follow -0.063R.
+Even the weeks where I saw it: -0.008R. Killed. Idea 116, variants 322.
