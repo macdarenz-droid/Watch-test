@@ -10,6 +10,7 @@ Pending this week: MPG's outcome run (pre-registered and counted 08-17 before th
 | (paper) | Tue 08-18 08:00 | sell | NO LIVE TRADE (monitor -0.300R) | paper | paper | paper clock exit | (+0.23 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 30 |
 | (paper) | Wed 08-19 08:00 | sell | NO LIVE TRADE (monitor -0.234R) | paper | paper | paper clock exit | (+0.64 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 31 |
 | (paper) | Thu 08-20 08:00 | buy | NO LIVE TRADE (monitor -0.196R) | paper | paper | paper clock exit | (+1.01 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 32; SW1 shadow trade 7 clock exit (+0.34R net) |
+| (paper) | Fri 08-21 08:00 | buy | NO LIVE TRADE (monitor -0.139R) | paper | paper | paper stop | (-1.03 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 33; SW1 shadow trade 8 opened (buy 1.12814) |
 
 ## Mon 08-17
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-17`:
@@ -118,6 +119,26 @@ the report also lists every line with its threshold before the table, and each l
 - SW1 SHADOW trade 8 (tool `bt/sw1_shadow.py 2015-08-21 signal`): Thu close 1.12400 vs 08-06 close 1.09240 = +316.0 pips -> paper BUY at the
   08:00 open, stop 120 below, target 240 above, else out 12:00 Fri 08-28. Running -5.02R after 7 of 20.
 - How I feel: a buy after a 316-pip ten-day rise and a 50-pip night: it feels late. Feelings are not in either rule.
+  08:00 London (PAPER): pre-entry hour 1.12721-1.12908 = 18.7 pips (PH2 quiet: full unit on paper). A2 paper BUY near 1.12835 (engine fixes the fill), paper stop about 1.12435. SW1 shadow BUY at the same open, stop about 1.11635, target about 1.15235. No order.
+  10:00 London (PAPER; window 07:00-08:45 UTC): A2 paper buy best -1.5, worst -42.6: through the paper stop. Nothing to manage.
+  12:00 London (PAPER): the A2 paper buy was stopped before 10:00 (worst -42.6 pips in the first two hours). The afternoon then rose about 100 pips to 1.13828: after the exit.
+  -> Fri result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.139R -> paper). VALID: no order placed. Checked: call committed before the bell;
+     trade list still ends with #230 of 07-07; sim balance $24,926.03 unchanged. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 33 (engine, costs on 1.0 + 0.1; `python bt/coin_control.py 2015-08-22 --check 2015-08-21`): buy, stopped, -1.03R; the other side -0.32R.
+     A2 paper running from 07-08: 33 days, -0.48R.
+     SW1 SHADOW trade 8: OPEN (buy 1.12814, stop 1.11614, target 1.15214, clock 12:00 Fri 08-28); last price 1.13828, about 100 pips ahead. Held over the weekend. Running -5.02R (7 of 20).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     THE WEEK (W34): no live trade on any day, by rule (5 days, all valid; 0 trade mistakes, 0 process mistakes). Paper A2: -0.32, +0.23, +0.64,
+     +1.01, -1.03 = +0.53R. SW1 shadow: trade 7 +0.34R; trade 8 open. Tests: MPG (re-registered with a grid), NC (replay of week 17: PROVISIONAL
+     PASS, fragile; forward count only with the coach's word), UD, TH, MG. Plan rules added: cost basis in every table; kill lines in full before results.
+     How it feels: both monitors are at their best readings since early July and still well below zero. Patience is the whole job this month.
+     Paper lines: UN3 agreed, -1.03R (agree days -10.20R in 69; disagree +4.67R in 20; day 89). PH2 (day 81): quiet (18.7) -> full = -1.03R;
+     47 lively days -8.43R, 21 full-stop mornings; 34 quiet +1.36R; PH2 about -2.85R against A2's -7.09R.
+     MO PAPER RULE (day 39 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.03R (running -3.28R).
+     For Monday (tool): MO1 -0.151R -> paper; MO3 -0.127R -> paper.
+     FRIDAY GATES LIST READ (08-21): nothing due. Next payout date Fri 08-28. Review day Mon 09-21 (gate +0.60R; monitor -0.151R). MO day 39 of 60.
+     UN3 20 of 30 disagree / 89 of 200. PH2 47 of 60 lively / 81 of 200. SW1 shadow 7 of 20. EN2 and NC1 forward counts: waiting for the coach.
+     August review: first trading day of September (Tue 09-01). END OF RELEASED DATA (clock Fri 08-21 22:00 London; weekend).
 
 ## Forward tally
 
