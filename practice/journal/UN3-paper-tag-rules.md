@@ -71,3 +71,4 @@ is to be written in the journal as a feeling, like every other such thought.
 | Wed 2015-05-27 | 27 | 6 | +1.42R (6 trades) | -0.96R (21 trades) | -0.96R / 5.00R | +0.44R / 3.69R (from the trade list) |
 | Thu 2015-05-28 | 28 | 6 | +1.42R (6 trades) | -0.86R (22 trades) | -0.86R / 5.00R | +0.54R / 3.69R (from the trade list) |
 | Fri 2015-05-29 | 29 | 6 | +1.42R (6 trades) | -1.86R (23 trades) | -1.86R / 5.00R | -0.46R / 3.69R (from the trade list) |
+| Mon 2015-06-01 | 30 | 7 | +0.42R (7 trades) | -1.86R (23 trades) | -1.86R / 5.00R | -1.46R / 4.45R (from the trade list) |
