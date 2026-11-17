@@ -5,3 +5,4 @@ JUDGING (fixed 06-29, before the run): after 60 lived days from 06-30, a variant
 A2-always's and (b) A2 averaged below +0.10R on the days the variant had it off. Otherwise closed. The live trade is A2 as always throughout.
 | day | MO1 monitor -> state | MO3 monitor -> state | A2 live R | MO1 R (running) | MO3 R (running) | A2 R (running) |
 |---|---|---|---|---|---|---|
+| Tue 2015-06-30 (1) | -0.086R -> PAPER | +0.011R -> as usual | +0.48 | 0.00 (0.00) | +0.48 (+0.48) | +0.48 (+0.48) |
