@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| >>> STATUS | FROM WED 2015-07-08: RULE ALARM CROSSED (max drawdown 8.08R, line 8R) -> A2 NOT TRADED FOR MONEY; A2 ON PAPER every weekday; FUNDED ACCOUNT FLAT at $24,358.99. RETURN-TO-LIVE RULE (journal/2015-07-09-return-to-live-rule.md, written 07-09 before the call): ROUTE A = A2 at 0.16 lots on or after Mon 09-21 if MO passed its judging lines AND the 40-day monitor >= +0.30R that morning; ROUTE B = a new setup after a passed pre-registered test + 40 forward paper trades (avg >= +0.10R, DD <= 6R, positive without best two) + coach's agreement. REVIEW DAY Mon 2015-09-21. Unknown: an inactivity rule of the firm (asked twice). |
+| >>> STATUS | FROM WED 2015-07-08: RULE ALARM CROSSED (max drawdown 8.08R, line 8R) -> A2 NOT TRADED FOR MONEY; A2 ON PAPER every weekday; FUNDED ACCOUNT FLAT at $24,358.99. RETURN-TO-LIVE RULE (journal/2015-07-09-return-to-live-rule.md, written 07-09 before the call): ROUTE A = A2 at 0.16 lots on or after Mon 09-21 if MO passed its judging lines AND the 40-day monitor >= +0.60R (gate raised 07-23, Amendment 1; was +0.30R) that morning; ROUTE B = a new setup after a passed pre-registered test + 40 forward paper trades (avg >= +0.10R, DD <= 6R, positive without best two) + coach's agreement. REVIEW DAY Mon 2015-09-21. Unknown: an inactivity rule of the firm (asked twice). |
 | Sim clock | Wed 2015-07-22 21:00 UTC = 22:00 London (END OF RELEASED DATA; one live day at a time until ~Mar 2017). London on summer time (UTC+1) |
 | Phase | FUNDED ACCOUNT ($25k FundedNext) since Fri 2015-03-27 - see FUNDED SCOREBOARD below. Sim label "challenge #3" = the funded account; MY tracker is journal/FUNDED-TRACKER.md; this week's journal journal/2015-W20-funded.md |
 | Current strategy | Rule A2 unchanged, IN LONDON TIME (decision 2015-03-30, journal/2015-W14-funded.md; confirmed by the clock-shift test): 07:00 London call; trend = last 22:00 London close vs the close 3 trading days earlier; 08:00 London market order; SL 40 pips; close 12:00 London; 1 trade/day, no skips. In UTC during summer time: call 06:00, entry 07:00, exit 11:00. FUNDED PLAN: journal/FUNDED-PLAN.md |
@@ -460,7 +460,7 @@
 
 ## Plan rewrite 07-22 + idea RA route A's gate (journal/PLAN-v2-funded-one-page.md rewritten, old page kept as ...-to-2015-07-21.md; journal/2015-idea-RA-is-route-A-gate-strong-enough.md; coach 07-22; bt/gate_check.py END facts|test)
 - No-edge A2 (days from 04-07, mean shifted to zero, spread 1.89R): the +0.30R gate opens on 15.8% of single mornings, 59.9% of 60-morning runs. TOO WEAK. 5% single-morning threshold +0.49R; +0.60R meets both lines (2.2% / 16.0%); healthy A2 passes +0.60R on 91.8% of mornings; a third-strength A2 only 11%.
-- OPEN PROPOSAL TO THE COACH: raise route A's gate to +0.60R (stricter only). Return rule not edited by me. Not yet tested: the back-to-paper line (0.00R) and MO's own lines.
+- ADOPTED 07-23 (coach agreed): ROUTE A's GATE IS +0.60R (Amendment 1 in journal/2015-07-09-return-to-live-rule.md, written before the bell; confirmed with a new seed: no-edge 2.2% single morning, 16.1% in 60 mornings; healthy A2 91.9%). Not yet tested: the back-to-paper line (0.00R) and MO's own lines.
 
 ## Step back 07-21: closest misses + BX2 out of sample (journal/2015-07-21-closest-misses-and-BX-out-of-sample.md; coach 07-21; bt/box_break_oos.py END count|facts DATE|test [DATE]; box_break.py untouched)
 - Closest misses: BX (independent of A2, a believable reason, frozen since 05-11), SW1 (shadow), WG, GB1, MB1. WO/BK/DH/DF are one miss: the 04-07 break.

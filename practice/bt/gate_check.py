@@ -8,7 +8,7 @@ import numpy as np
 D = ns["D"]; adv = D.adv; MID = "2015-04-07"; flat = adv[adv.index >= MID]; old = adv[adv.index < MID]
 if MODE == "facts":
     print(f"days {len(adv)} ({adv.index[0]}..{adv.index[-1]}) | last-40 mean (monitor for the next morning) {adv.iloc[-40:].mean():+.3f}R | pool from {MID}: {len(flat)} days mean {flat.mean():+.3f} sd {flat.std(ddof=1):.2f} | pool before: {len(old)} days mean {old.mean():+.3f} sd {old.std(ddof=1):.2f}"); sys.exit()
-rng = np.random.default_rng(21); N = 20000
+SEED = int(os.environ.get('GATE_SEED', 21)); rng = np.random.default_rng(SEED); N = 20000; print('seed', SEED)
 def single(pool, thr): return (rng.choice(pool, (N, 40)).mean(1) >= thr).mean()
 def sixty(pool, thr):
     x = rng.choice(pool, (N, 100)); c = np.cumsum(np.insert(x, 0, 0, axis=1), axis=1); roll = (c[:, 40:] - c[:, :-40]) / 40; return (roll[:, :60] >= thr).any(1).mean()

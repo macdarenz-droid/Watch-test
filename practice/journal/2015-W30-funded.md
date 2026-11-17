@@ -81,6 +81,17 @@ SW1 paper shadow from Mon 07-20 (journal/SW1-paper-shadow-rules.md): a count onl
      MO PAPER RULE (day 17 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.03R (running -6.51R).
      For Thursday (tool): MO1 -0.406R -> paper; MO3 -0.222R -> paper.
 
+## Thu 07-23
+BEFORE THE BELL: return-to-live rule AMENDMENT 1 written and dated today (route A's gate +0.30R -> +0.60R; coach agreed 07-23; resampling
+confirmed with a new seed: no-edge rule 2.2% on a single morning, 16.1% at least once in 60 mornings; healthy A2 91.9%).
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-23`:
+- 3-day gap +100.7 pips -> A2 side BUY. 5-day gap -19.9 -> UN3 DISAGREE (disagree day 16 of 30). Night 00:00-07:00: 1.09216-1.09556, last 1.09409 (range 34.0, net +10.9).
+- Wednesday's London day: 1.08693-1.09666, close 1.09286 (range 97.3).
+- Monitor for today -0.406R (MO1), -0.222R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate now +0.60R); route B: no tested setup. NO ORDER.
+- A2 paper plan: buy at the 08:00 open, stop 40 pips below, out 12:00.
+- SW1 shadow trade 2: open from Wed (sell 1.09560, stop 1.10760, target 1.07160, clock 12:00 Wed 07-29). Nothing to do.
+- How I feel: good about the gate: a hole found on paper costs nothing. Mistake to avoid: none special today; the usual one, an order.
+
 ## Forward tally
 
 ## 07-20 test: idea WO, the weekly open (journal/2015-idea-WO-weekly-open.md)

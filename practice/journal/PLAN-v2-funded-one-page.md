@@ -11,8 +11,8 @@ Today: tracker $24,358.99, high-water $25,256.94, drawdown -3.56%, FLAT since 07
 
 ## 2. What brings money back (return-to-live rule, 07-09; nothing else does)
 - ROUTE A: A2 at 0.16 lots, on or after Mon 2015-09-21, if the MO monitor passed its 60-day judging AND the 40-day side-advantage monitor
-  reads >= +0.30R that morning. Back to paper when it reads under 0.00R.
-  (07-22, idea RA: a no-edge rule passes +0.30R on 1 morning in 6. Proposed to my coach: +0.60R. Not changed until the coach agrees.)
+  reads >= +0.60R that morning (AMENDMENT 1, 07-23, agreed by my coach; was +0.30R, which a no-edge rule passes on 1 morning in 6;
+  +0.60R: 2.2% of mornings, 16% at least once in 60 mornings). Back to paper when it reads under 0.00R.
 - ROUTE B: a new setup with a passed pre-registered test incl. a never-seen part, then 40 forward paper trades (avg >= +0.10R, DD <= 6R,
   positive without its best two), then my coach's agreement. Tried: 18 setups, none alive.
 - REVIEW DAY Mon 2015-09-21, whatever happens.

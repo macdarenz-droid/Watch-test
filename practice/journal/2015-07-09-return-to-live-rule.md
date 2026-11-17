@@ -46,3 +46,16 @@ Interim reading without decisions: each month-end review (first live day of Augu
 - Not negotiable on a good day. If the monitor reads +0.29R on the morning of 09-21 after a run of paper winners, A2 stays on paper.
 - UNKNOWN, asked again: whether the firm requires a minimum of activity on a funded account. If the coach tells me it does, the smallest order the
   platform accepts, in A2's direction with A2's stop and clock, tagged "activity trade", meets it; that would be bookkeeping, not a return.
+
+## AMENDMENT 1, Thu 2015-07-23 07:00 London (before the bell; agreed by my coach on 07-23: "yes, raise route A's gate to +0.60R")
+ROUTE A's gate is raised: wherever this rule says the 40-day monitor must stand "at or above +0.30R" (the first return, and every return
+after a fall back to paper), it now says **at or above +0.60R**. Nothing else changes: not before Mon 2015-09-21, MO must have passed its
+60-day judging, the 40 days must lie after the alarm, 0.16 lots, back to paper under 0.00R. Stricter only.
+Why (idea RA, 07-22, journal/2015-idea-RA-is-route-A-gate-strong-enough.md): a rule with no edge reads +0.30R on about 1 morning in 6.
+Confirmed again this morning with a new random seed (`GATE_SEED=723 python bt/gate_check.py 2015-07-23 test`, 20,000 resamples):
+- +0.60R: a NO-EDGE rule opens the gate on 2.2% of single mornings (aim: under 5% - met); the healthy January-April A2 passes on 91.9%.
+- Said plainly, so that nobody reads more into it: if I look every morning for 60 mornings, a no-edge rule still gets through at least once
+  in 16.1% of runs. Under 5% on that count would need about +0.80R (3.9%), where the healthy A2 passes on 71.6% of single mornings.
+  The coach's instruction is +0.60R; I have written +0.60R and I report the 16% beside it.
+- Limits: days resampled as independent; the no-edge pool is 77 days (04-07..07-22, mean shifted to zero).
+The old +0.30R text above is left as it was written, for the record. This amendment is the rule from today.
