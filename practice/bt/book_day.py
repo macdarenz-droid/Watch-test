@@ -47,7 +47,7 @@ ysd = int(re.search(r"YM1 side ([+-]\d)", yl).group(1)); ysum = float(re.search(
 app("journal/YM-forward-record.md", f"| {run('date -d '+DAY+' +%a').strip()} {DAY} | {ysd:+d} | {side:+d} | {'agree' if ysd == side else 'DISAGREE'} | {y1:+.2f} | {y0:+.2f} | {yst:+.2f} | {ysum:+.2f} |")
 nsk = len([l for l in open("journal/NC1-forward-record.md") if "SKIP" in l and l.startswith("| ")]) + (1 if ncskip else 0)
 app("journal/NC1-forward-record.md", f"| {run('date -d '+DAY+' +%a').strip()} {DAY} | {side:+d} | {hour:+.1f} | {'SKIP ('+str(nsk)+' of 30)' if ncskip else 'kept'} | {'yes' if nc0 else 'no'} | {R:+.2f} |")
-t = open("journal/FUNDED-TRACKER.md").read(); m = re.search(r"A2 paper \d+ days [+-]\d+\.\d+R \(after \w+ \d\d-\d\d; monitor for \d\d-\d\d [+-]\d\.\d+R;", t)
+t = open("journal/FUNDED-TRACKER.md").read(); m = re.search(r"A2 paper \d+ days [+-]\d+\.\d+R \(after (?:\w+ )?\d\d-\d\d; monitor for \d\d-\d\d [+-]\d\.\d+R;", t)
 sub("journal/FUNDED-TRACKER.md", m.group(0), f"A2 paper {n} days {prev + R:+.2f}R (after {DAY[5:]}; monitor for {NXT[5:]} {mv[0]:+.3f}R;")
 st = open("STATE.md").read(); m = re.search(r"\| Sim clock \| \w+ 2015-\d\d-\d\d 21:00 UTC", st)
 sub("STATE.md", m.group(0), f"| Sim clock | {run('date -d '+DAY+' +%a').strip()} {DAY} 21:00 UTC")
