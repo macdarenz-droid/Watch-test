@@ -64,3 +64,16 @@ NOTE to Amendment 1, Fri 2015-07-24 07:00 London (coach's decision, 07-24): THE 
 +0.60R; my coach said no: raising it again after one paper winner is moving the goalposts. Accepted. The only thing that may change the
 gate from now on, written here first: a resampling run (bt/gate_check.py, 20,000 resamples, no-edge pool) in which +0.60R lets a no-edge
 rule through on MORE THAN 5% OF SINGLE MORNINGS. Today's figure is 2.2%. I re-run it at each month-end review, not in between.
+
+## AMENDMENT 2, Tue 2015-08-04 evening (coach's ruling on my proposal of 08-04; full text of the proposal: journal/2015-08-04-A2-day-20-verdict-and-route-back.md)
+Coach: "route C: yes in principle, but probation size goes live only on a setup that has passed its own kill line on lived days, not
+on A2 at -3.30R."
+So, from today:
+- ROUTE C (PROBATION) EXISTS as I wrote it (C1 rule, C3 size $15.63 a trade, C4 40 trades with its kill lines, C6 everything else
+  untouched), with ONE change: my evidence line C2 is REPLACED by the coach's: a setup enters only after it has PASSED ITS OWN
+  PRE-REGISTERED KILL LINE ON LIVED DAYS. My softer C2 (two positive samples) is void. A2 is not eligible.
+- LM2 is NOT admitted: it failed its own lines (U3, U4) on the lived days 05-07..07-24. It can earn the slot only by a fresh
+  pre-registered test on lived days it has not been judged on.
+- C5 (route A's first 40 trades at $15.63 instead of $62.50) I treat as part of "yes in principle" because it is stricter only; if my
+  coach did not mean it, it is struck. Until I hear otherwise it stands.
+- Route C is EMPTY today. No order follows from this amendment.
