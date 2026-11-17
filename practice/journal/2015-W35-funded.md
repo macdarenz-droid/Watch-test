@@ -138,6 +138,17 @@ What bigger ranges would mean for stop and risk, said before anything changes:
      MO PAPER RULE (day 43 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +1.05R (running -3.67R).
      For Friday (tool): MO1 -0.185R -> paper; MO3 -0.209R -> paper. Friday is a payout date: balance under $25,000 -> $0.
 
+## Fri 08-28 (payout date)
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-28`:
+- 3-day gap -371.8 pips -> A2 side SELL. 5-day gap +5.8 -> UN3 DISAGREE (disagree day 22 of 30). Night 00:00-07:00: 1.12319-1.12682, last 1.12567 (range 36.3, net +14.8, against the sell).
+- Thursday's London day: 1.12030-1.13644, close 1.12458 (range 161.4, close position 0.27); it made the 3-day low. ADR5 232.0 (tool). 10-day trend UP.
+- Monitor for today -0.185R (MO1), -0.209R (MO3) -> BOTH PAPER. Route A closed until 09-21; routes B and C empty. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
+- SW1: closed for good 08-27. EN2 forward count: day 1 today (signals read after the day with `bt/en2_forward.py 2015-08-28 END`).
+- YM: frozen near miss; forward check written this morning, NOT started (coach's word needed). I do not note YM's side today.
+- Payout date: balance $24,926.03 sim / tracker $24,358.99 is under $25,000 -> $0 expected.
+- How I feel: fine. A 372-pip 3-day fall after a 500-pip rise: the signal swung hard. The rule does not change with the weather.
+
 ## Forward tally
 
 ## 08-24 test: idea FH, the 07:00-08:00 hour with the night (journal/2015-idea-FH-the-frankfurt-hour.md)
