@@ -32,3 +32,46 @@ Worst case inside one M5 candle: if a candle triggers the entry AND reaches the 
 - K5: at stressed costs (2.0 pip spread, 1.0 slippage on the stop-entry and exits) CF2 is still not behind A2 at the same costs.
 A survivor gets the lived-days table first and then at most a forward paper tag.
 My guess = the worked table minus 2R to 4R: killed on K1 and K2.
+
+## Hand-checks before the totals (`python bt/confirm_entry.py 2015-06-05 --check 2015-06-04`)
+- Worked mechanics case, 06-04, X = 10: entered in the 08:00 candle, fill 1.12502, noon exit 1.13583, +2.63R. The pre-registration's figures exactly.
+- Regression, X = 0 against engine A2: the stop days are identical (24 of 24), but the largest difference per day printed 0.074R, not zero. I found the
+  reason before running any variant: the engine divides a result by a nominal 40 pips, my simulator by the real fill-to-stop distance (41.1 pips for a
+  buy). Ratio of the two on non-stop days: buys 0.9748 (40 / 41.1 = 0.9732), sells 0.9991 (40 / 40.1 = 0.9975); sums +36.14R against +36.39R. Same
+  trades, a 3% difference in the unit. So the baseline in the table below is MY OWN X = 0 run (same unit as the variants) - decided and written into
+  the script after the regression print and before any variant total was seen.
+
+## Results (run once; `python bt/confirm_entry.py 2015-06-05`; costs on; figures copied from the print)
+A2 (X = 0): 108 days, net +36.14R, max DD 4.44R, 24 full stops; before 03-02 +19.47R, from 03-02 +16.66R; at stressed costs +27.60R.
+| variant | net R (vs A2) | before 03-02 | lived days from 03-02 | entered / no entry | A2 on the no-entry days | full stops (new ones) | max DD | wins | at stressed costs vs A2 stressed |
+|---|---|---|---|---|---|---|---|---|---|
+| CF1 +5 pips | +36.94 (+0.80) | -2.99 | +3.79 | 91 / 17 | -12.36R (11 full stops, 2 winners) | 15 (2) | 3.49R | 52% | +2.42 |
+| CF2 +10 pips | +33.26 (-2.88) | -6.12 | +3.25 | 79 / 29 | -18.92R (18 full stops, 5 winners) | 11 (5) | 3.41R | 48% | -0.62 |
+| CF3 +15 pips | +26.36 (-9.78) | -8.70 | -1.08 | 72 / 36 | -18.90R (18 full stops, 8 winners) | 13 (7) | 4.01R | 40% | -8.37 |
+
+## Kill lines for CF2
+| line | worked expectation | result | verdict |
+|---|---|---|---|
+| K1 net at least +2.0R above A2 | crude +2.22R, "too kind by 2R to 4R" | -2.88R | FAIL |
+| K2 not behind before 03-02 and +1.0R ahead on lived days | crude -2.62R before 03-02 | -6.12R before; +3.25R lived | FAIL |
+| K3 at least 5 fewer full stops, drawdown not larger | 18 avoided minus new ones | 11 against 24; 3.41R against 4.44R | PASS |
+| K4 neighbours not more than 1.0R behind A2 | CF3 expected behind | CF1 +0.80R; CF3 -9.78R | FAIL |
+| K5 not behind at stressed costs | - | -0.62R | FAIL |
+VERDICT: CF2 KILLED on four lines. No tag for any variant.
+
+## Worked prediction against the run
+Crude +2.22R with a stated bias of 2R to 4R -> expected about -1.8R to +0.2R; the run says -2.88R. The direction and the reason were right (the closer
+stop makes new full stops: 5 of them at +10 pips), the size of the bias a little larger than I allowed. No pushed figure needed correcting.
+
+## What I learned
+- The idea does exactly what the log promised on the loss side: 18 of 24 full stops never trigger a +10 pip entry, and the days it skips made -18.92R
+  for A2. Fewer stops, lower drawdown (3.41R against 4.44R).
+- And it pays for that on every trade it takes: 10 pips worse on 79 entries is about 19R, more than it saved. The winners are where the money
+  is, and a confirmation entry taxes every one of them.
+- The split by period is the same picture as PH and LD: before March (few stops, clean trends) the tax is pure cost (-6.12R); on my lived days (30%
+  full stops) it pays (+3.25R, and +3.79R for the 5 pip version). An entry that only helps when A2 is being stopped a lot is not an improvement of
+  A2; it is a bet that the next months look like April-June and not like January-February. I cannot know that, and by my lines it is dead.
+- I note for the record, without a tag or a count line (one thing at a time): the 5 pip version is ahead on lived days, at stressed costs, with a third
+  fewer full stops, and behind only in the backtest months. If the coach ever wants ONE more paper line, this is the candidate I would name. I do
+  not open it myself: its main variant failed four lines I wrote first.
+Counts: ideas 75, variants 210 (CF1 CF2 CF3). Adopted trading ideas: 0. On paper: UN3, PH2, MB1. Numbers or rules corrected after a push in June: 0.

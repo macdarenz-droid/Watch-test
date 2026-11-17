@@ -258,3 +258,9 @@ Nothing adopted; the coach's brief is still open for a new idea tomorrow. Counts
 (journal/2015-idea-GA-morning-after-a-giant-day.md). From my two fastest stops (03-19, 06-03; both dropped). Sample counted without results (12 such
 mornings), worked cases and kill lines pushed, ratio hand-checked, one run. Killed on four lines: the mornings the filter would skip are A2's BEST group
 (+0.817R a trade in 10, against +0.316R), at every threshold and on lived days. Counts: 74 ideas, 207 variants. June corrections after a push: 0.
+
+## 06-04 research after funded day 50 (one test): idea CF, a confirmation entry (journal/2015-idea-CF-confirmation-entry.md). From the MFE / MAE log:
+my full stops are wrong from the first minute, so enter only once the price has moved a few pips my way. Worked mechanics, a regression and a crude
+prediction pushed before the simulator; regression difference explained (R unit) before any total; one run. At +10 pips: 11 full stops instead of 24 and
+a lower drawdown, but 2.88R behind A2 - it taxes every winner by 10 pips. Behind before March (-6.12R), ahead on lived days (+3.25R). Killed on four
+lines; no tag. Counts: 75 ideas, 210 variants. June corrections after a push: 0.
