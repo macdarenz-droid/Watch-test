@@ -85,6 +85,15 @@ until something earns it." Recorded: LM2 CLOSED FOR GOOD. No shadow, no tally, n
      MO PAPER RULE (day 27 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.11R (running -5.99R).
      For Thursday (tool): MO1 -0.333R -> paper; MO3 -0.280R -> paper.
 
+## Thu 08-06
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-06`:
+- 3-day gap -77.4 pips -> A2 side SELL. 5-day gap -76.2 -> UN3 agree. Night 00:00-07:00: 1.09007-1.09338, last 1.09255 (range 33.1, net +23.4, against the sell).
+- Wednesday's London day: 1.08481-1.09342, close 1.09056 (range 86.1).
+- Monitor for today -0.333R (MO1), -0.280R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); routes B and C empty. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
+- SW1 shadow trade 4: open (buy 1.09535, stop 1.08335, target 1.11935, clock 12:00 Fri 08-07). Nothing to do.
+- How I feel: steady.
+
 ## Forward tally
 
 ## 08-03 test: idea PS, a probation size (journal/2015-idea-PS-probation-size.md)
