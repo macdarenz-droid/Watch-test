@@ -8,6 +8,7 @@ Coach 08-21 on RS: "RS1 flipped from losing to winning across your two halves, t
 |---|---|---|---|---|---|---|---|---|---|---|
 | (paper) | Mon 08-24 08:00 | buy | NO LIVE TRADE (monitor -0.151R) | paper | paper | paper clock exit | (+0.62 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 34; SW1 shadow trade 8 hit its target (+1.96R net) |
 | (paper) | Tue 08-25 08:00 | buy | NO LIVE TRADE (monitor -0.067R) | paper | paper | paper stop | (-1.03 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 35; SW1 shadow trade 9 stopped (-1.01R) |
+| (paper) | Wed 08-26 08:00 | buy | NO LIVE TRADE (monitor -0.175R) | paper | paper | paper stop | (-1.03 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 36; SW1 shadow trade 10 stopped (-1.01R) |
 
 ## Mon 08-24
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-24`:
@@ -71,6 +72,21 @@ STATE.md now opens with "WHAT MUST CHANGE BEFORE A LIVE TRADE" (coach 08-25): ro
 - SW1 SHADOW trade 10 (tool `bt/sw1_shadow.py 2015-08-26 signal`): Tue close 1.15141 vs 08-11 close 1.10416 = +472.5 pips -> paper BUY at the
   08:00 open, stop 120 below, target 240 above, else out 12:00 Wed 09-02. Running -4.07R after 9 of 20.
 - How I feel: steady.
+  08:00 London (PAPER): pre-entry hour 1.14650-1.15043 = 39.3 pips (PH2 lively: half on paper), net about +22 with the buy. A2 paper BUY near 1.14970 (engine fixes the fill), paper stop about 1.14570. SW1 shadow BUY at the same open, stop about 1.13770, target about 1.17370. No order.
+  10:00 London (PAPER; window 07:00-08:45 UTC): A2 paper buy best +22.2, worst -25.7, last -23.6. Before advancing to noon: clock only.
+  12:00 London (PAPER): the A2 paper buy was stopped before noon (16 candles: best +22.2, worst -79.4).
+  -> Wed result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.175R -> paper). VALID: no order placed. Checked: call committed before the bell;
+     trade list still ends with #230 of 07-07; sim balance $24,926.03 unchanged. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 36 (engine, costs on 1.0 + 0.1; `python bt/coin_control.py 2015-08-27 --check 2015-08-26`): buy, stopped, -1.03R; the other side +1.86R.
+     A2 paper running from 07-08: 36 days, -1.92R.
+     SW1 SHADOW trade 10 (tool `bt/sw1_shadow.py 2015-08-27`): buy 1.14968 -> STOPPED 1.13767 at 13:30 the same day, -1.01R, net -1.01R. Running
+     -5.07R after 10 of 20; drawdown from the start 5.07R (max 5.36R); the early-close line (6R) is 0.93R away.
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     How it feels: A2 and the slow shadow both bought into a falling market and were both stopped. Both by rule, both on paper.
+     Paper lines: UN3 agreed, -1.03R (agree days -11.64R in 72; disagree +4.67R in 20; day 92). PH2 (day 84): lively (39.3) -> half = -0.52R;
+     50 lively days -8.85R, 23 full-stop mornings; 34 quiet +1.36R; PH2 about -3.58R against A2's -8.53R.
+     MO PAPER RULE (day 42 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.03R (running -4.72R).
+     For Thursday (tool): MO1 -0.232R -> paper; MO3 -0.178R -> paper.
 
 ## Forward tally
 
