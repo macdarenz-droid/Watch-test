@@ -236,3 +236,9 @@ ten worst). Four cases: no rule change; a counts-only line, look at 10. Counts: 
 run on all 102 days, costs on. At 60+ pips: 4 skipped trades, 0 wins, -3.18R, rule +3.18R above A2 - and KILLED: move the line to 50 pips and the skipped
 group wins (+0.115R in 14; the ten mornings at 50-59 pips made +4.79R), and 4 trades is under my sample line of 10. No rule, no tag. A flawed reading rule
 of mine logged as P9. Counts: 68 ideas, 189 variants; process mistakes 9.
+
+## 05-28 research after funded day 45 (coach: MFE and MAE of every A2 trade, then one exit idea, kill line first): journal/2015-mfe-mae-study-and-idea-XT.md.
+Log of all 103 trades written (journal/mfe-mae-log.csv). Reading: full stops are wrong from the first minute (MFE median 6 pips), winners take 10-20 pips
+of heat, +30 almost never comes back, and half the winners make their best price in the last hour. From that last fact one idea: a later exit clock.
+Pre-registered, 12:00 version checked against A2, one run: 12:30 / 13:00 / 13:25 keep 93% / 83% / 73% of A2's net, behind in both halves, and trades in
+profit at noon get worse with more time. All killed; noon stays. Counts: 69 ideas, 192 variants.
