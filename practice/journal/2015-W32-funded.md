@@ -6,6 +6,7 @@ SW1 paper shadow: 3 of 20 done (-3.08R), trade 4 open. Day-20 A2 verdict due Tue
 | # | time (London) | side | lots | entry | stop | exit | R | $ | tag | note |
 |---|---|---|---|---|---|---|---|---|---|---|
 | (paper) | Mon 08-03 08:00 | sell | NO LIVE TRADE (monitor -0.406R) | paper | paper | paper clock exit | (+0.73 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 19; SW1 shadow trade 4 open |
+| (paper) | Tue 08-04 08:00 | sell | NO LIVE TRADE (monitor -0.338R) | paper | paper | paper clock exit | (-0.53 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 20: verdict written, A2 stays on paper; route C proposed |
 
 ## Mon 08-03
 Coach 08-03, straight talk: "careful is good, frozen isn't." At the day-20 verdict (tomorrow) I also write what it would take to get
@@ -41,6 +42,22 @@ BEFORE THE BELL: the yardstick for tonight's day-20 verdict is written and commi
 - A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
 - SW1 shadow trade 4: open (buy 1.09535, stop 1.08335, target 1.11935, clock 12:00 Fri 08-07). Nothing to do.
 - How I feel: clear. The verdict is decided by arithmetic before the day; the day is still walked properly.
+  08:00 London (PAPER): pre-entry hour 1.09532-1.09663 = 13.1 pips (PH2 quiet: full unit on paper). A2 paper SELL near 1.09564 (engine fixes the fill), paper stop about 1.09964. SW1 shadow untouched. No order.
+  10:00 London (PAPER; window 07:00-08:45 UTC): A2 paper sell best +4.2, worst -23.2, last -15.2. Before advancing to noon: clock only.
+  12:00 London (PAPER; 16 candles, 08:00-12:00): A2 paper sell closed by the clock about 21 pips against (best +4.2, worst -26.2, last -21.2). The afternoon then fell about 75 pips: after the exit.
+  -> Tue result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.338R -> paper). Checked: yardstick and call committed before the bell; no order;
+     trade list still ends with #230 of 07-07; sim balance $24,926.03 unchanged.
+     PAPER A2, day 20 (engine, `python bt/coin_control.py 2015-08-05 --check 2015-08-04`): sell, clock exit, -0.53R; the other side +0.47R.
+     A2 paper from 07-08: 20 days, -3.30R, average -0.165R, 8 wins, 6 full stops, deepest drawdown 4.09R.
+     DAY-20 VERDICT written (journal/2015-08-04-A2-day-20-verdict-and-route-back.md): below L1's +0.10R, monitor -0.319R against the +0.60R gate;
+     A2 STAYS ON PAPER. ROUTE BACK proposed to my coach as ROUTE C (probation at $15.63 a trade, 40 trades, kill lines); nothing adopted by me.
+     SW1 SHADOW trade 4: still OPEN (buy 1.09535, stop 1.08335, target 1.11935, clock 12:00 Fri 08-07); last price 1.08806, 47 pips above its stop. Running -3.08R (3 of 20 done).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     How it feels: lighter for having written the route down. Wary of how much I want Q2 answered yes.
+     Paper lines: UN3 agreed, -0.53R (agree days -12.58R in 59; disagree +4.23R in 17; day 76). PH2 (day 68): quiet (13.1) -> full = -0.53R;
+     45 lively days -8.13R, 21 full-stop mornings; 23 quiet -1.76R; PH2 about -5.82R against A2's -9.91R.
+     MO PAPER RULE (day 26 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.53R (running -6.10R).
+     For Wednesday (tool): MO1 -0.319R -> paper; MO3 -0.257R -> paper.
 
 ## Forward tally
 
