@@ -31,3 +31,12 @@ Pass = a pre-registered rule that passed on lived days: eligible for route C aft
 My guess: a coin minus costs again (about -0.04R), like SF; K1 fails.
 
 ## Counts and worked case (tool, before outcomes)
+Tool: `python bt/round_touch.py 2015-08-07 count` / `check 2015-07-13` (no outcomes).
+- RT1 (50-pip levels): 228 trades (97 before 04-07, 131 from) on 146 days; the 5 busiest days hold 15; 110 touches from below, 118 from above.
+  RT2 (100-pip levels): 136 trades (63 / 73) on 120 days. Judgeable by my line (150 / 60).
+- Worked case Mon 07-13: the price fell from 1.1186 after 08:00; the 08:05 candle reached 1.1150 from above (fresh: it was 15+ pips
+  higher in the hour before) -> RT1 BUYS at the 08:10 open (bounce), stop 30 below, out 10:10. I know that morning fell 132 pips by
+  10:00, so this must be a full stop for the bounce and a winner for the break. The next level, 1.1100, was reached while that trade
+  was open, so it is skipped and used up for the day; the second signal is 1.1050 at 13:05.
+
+## Result (one run)
