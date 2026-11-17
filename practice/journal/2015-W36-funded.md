@@ -187,3 +187,5 @@ day wider. My chart sighting was small bodies, not small ranges. Ideas 153, vari
 - August review done 09-01. Research: HL, YN exits, FM, SQ killed; ideas 153, variants 409.
 - Process: September corrections after a push so far 2 (both 09-01). One booking script stopped halfway tonight (book_day.py pattern after
   my own line edit); caught by the missing "script reached its end" before any commit, finished in the next command.
+
+09-04 evening: H3 = idea 154 MA (Monday weekend fade) KILLED FOR SAMPLE at the count (35 Mondays, 21 from 04-07). Ideas 154, variants 409.
