@@ -27,3 +27,9 @@ usable N. If none is usable, the answer is "no forward test of 40 mornings or fe
 best trade-off to my coach instead of running a test that cannot decide.
 My guess: N = 20 lets a coin through too often (about 25%); N = 40 is usable.
 Worked case first: the pool must be 73 trades with the two sample means I already published (+0.204R on 35 by this script, +0.186R on 38).
+
+## Facts and worked case (tool `python bt/forward_design.py 2015-08-05 facts`, before the runs)
+Pool: 73 lively mornings 01-19..07-24. To 05-06: 35, fade +0.204R, chase -0.224R. 05-07..07-24: 38, fade +0.186R, chase -0.213R.
+The published figures. All 73: fade +0.195R (spread 1.08R), chase -0.218R.
+
+## Result (one run)
