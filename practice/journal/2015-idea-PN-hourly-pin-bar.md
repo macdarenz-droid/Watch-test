@@ -26,3 +26,16 @@ buy-back). By hand: about +32 pips = about +1.6R for PN1, and the control (a buy
 1.11718, about 1.11518, and the window's low was 1.11254, so the control is a full stop, about -1.0R.
 
 ## Result (one run)
+Tool: `python bt/pin_bar.py 2015-08-15 test`. Hand check 08-14: PN1 sold 1.11705, out 15:00 at 1.11385, +1.60R; the control was stopped at
+1.11505, -1.06R. Both as worked out by hand from the window's candles before the run.
+| variant | trades | wins | avg R | net | stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| PN1 away from the wick, W 60% (JUDGED) | 223 | 35% | -0.133 (+-0.17) | -29.76 | 117 | -11.09 | -18.67 | -0.216 |
+| PN2 away from the wick, W 75% | 73 | 41% | -0.049 (+-0.29) | -3.61 | 36 | +5.66 | -9.28 | -0.125 |
+| PN0 against PN1's signals (control) | 223 | 45% | +0.059 (+-0.17) | +13.10 | 87 | -1.43 | +14.53 | -0.028 |
+PN1 minus PN0 -0.192R (sign-flip p 0.20). PN1: all four kill lines FAIL. **PN IS KILLED.**
+What I learned: the "refused push" does not get refused again: trading away from an hourly wick lost -0.133R, more than costs, in both
+periods; going WITH the wick's direction (the control) made +0.059R, all of it after 04-07 and negative at stressed costs. Another
+textbook picture that my data does not support. With EN1 and IB, three hourly candle patterns, all killed; EN2's forward count remains
+the only pattern line, and it waits.
+Counts: idea 135; variants 362-364; second setups tried 32, none alive.

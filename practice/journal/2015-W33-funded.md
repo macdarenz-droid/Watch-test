@@ -186,3 +186,6 @@ YN: fade yesterday's NY afternoon at the next 08:00: 114 trades +0.070R, positiv
 ## 08-13: EN2 pre-registered for a forward count (journal/EN2-forward-count-rules.md) + idea IB, hourly inside bar (journal/2015-idea-IB-hourly-inside-bar.md)
 EN2: frozen exactly, judged only on signals from its start, 120 trades; starts after SW1's shadow unless the coach says both may run.
 IB: 131 trades, -0.026R; fade control -0.128R. Killed on all four lines. Ideas 134, variants 361.
+
+## 08-14 (weekend) test: idea PN, the hourly pin bar (journal/2015-idea-PN-hourly-pin-bar.md)
+223 trades: away from the wick -0.133R, negative in both periods; with the wick +0.059R. Killed on all four lines. Ideas 135, variants 364.
