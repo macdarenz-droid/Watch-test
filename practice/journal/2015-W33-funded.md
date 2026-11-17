@@ -35,3 +35,7 @@ the two are not confused.)
      For Tuesday (tool): MO1 -0.396R -> paper; MO3 -0.274R -> paper.
 
 ## Forward tally
+
+## 08-10 test: idea AR, Asia-hours reversion to midnight's price (journal/2015-idea-AR-asia-reversion.md; 3 variants named up front)
+117 nights: -0.024R, and -0.170R at a 2.5-pip night spread; follow -0.157R. Killed on all four lines. Reversion lost before 04-07 and paid
+after, at night too: the regime, not a rule. Idea 124, variants 346.

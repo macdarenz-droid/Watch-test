@@ -35,3 +35,18 @@ Tool: `python bt/asia_reversion.py 2015-08-11 count` / `check DATE` (no outcomes
   about 25 pips after 01:45 before coming back, so I expect a full stop here unless the target came first.
 
 ## Result (one run)
+Tool: `python bt/asia_reversion.py 2015-08-11 test`. Hand check 08-05: AR1 bought 1.08751 at 01:45 and was stopped at 1.08589, -1.08R; AR0 sold
+1.08739 and hit its target 1.08590, +0.99R. As I wrote first.
+| variant | trades | wins | avg R | net | targets / stops / time | before 04-07 | from 04-07 | stressed (2.5 + 0.5) avg |
+|---|---|---|---|---|---|---|---|---|
+| AR1 back to midnight, 15 / 15 (JUDGED) | 117 | 50% | -0.024 (+-0.16) | -2.75 | 32 / 36 / 49 | -7.96 | +5.21 | -0.170 |
+| AR2 back to midnight, 20 / 20 | 85 | 55% | +0.093 (+-0.17) | +7.87 | 18 / 16 / 51 | -2.48 | +10.35 | -0.040 |
+| AR0 follow AR1's signals (control) | 117 | 43% | -0.157 (+-0.16) | -18.35 | 32 / 45 / 40 | -2.45 | -15.89 | -0.304 |
+AR1 minus AR0 +0.133R (sign-flip p 0.39). AR1: all four kill lines FAIL. **AR IS KILLED.**
+What I learned: 1. The night has no reversion I can trade at a believable spread: AR1 is a coin, AR2's small plus disappears at a 2.5-pip
+spread (-0.040R), and the stressed line was the one I said in advance would matter. 2. The same split as everywhere: reversion did
+NOT pay before 04-07 and did after (AR1 -7.96R / +5.21R; AR2 -2.48R / +10.35R). Following lost after 04-07 (-15.89R). The market
+changed from "moves carry" to "moves come back" around 04-07, and it changed at night too. That is a fact about the regime, now seen in
+A2, MC, the burst chases and here. It is not a rule: a rule built on "after 04-07" is a calendar, and the date it changes back will not
+be announced (my MC and EF tests could not find a market measure that announces it).
+Counts: idea 124; variants 344-346 (three, named up front); second setups tried 26, none alive.
