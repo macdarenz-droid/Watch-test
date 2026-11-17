@@ -24,3 +24,4 @@ I note the entry in the week file before the 08:00 bar, and do not manage the po
 
 | # | entry day | side | entry | exit (why, when) | R | nights | financing | net R | running | max DD so far |
 |---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Mon 2015-07-20 | sell | 1.08414 | 1.09615 (stop, Tue 07-21 17:55) | -1.00 | 1 | -0.008 | -1.01 | -1.01 | 1.01R |
