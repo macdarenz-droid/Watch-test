@@ -112,6 +112,17 @@ the two are not confused.)
      MO PAPER RULE (day 33 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.37R (running -4.06R).
      For Friday (tool): MO1 -0.409R -> paper; MO3 -0.186R -> paper. Friday is a payout date: balance under $25,000 -> $0.
 
+## Fri 08-14 (payout date)
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-14`:
+- 3-day gap +130.6 pips -> A2 side BUY. 5-day gap +225.1 -> UN3 agree. Night 00:00-07:00: 1.11372-1.11611, last 1.11505 (range 23.9, net -2.9).
+- Thursday's London day: 1.10800-1.11890, close 1.11491 (range 109.0).
+- Monitor for today -0.409R (MO1), -0.186R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); routes B and C empty. NO ORDER.
+- A2 paper plan: buy at the 08:00 open, stop 40 pips below, out 12:00.
+- SW1 shadow trade 7: open (buy 1.11272, stop 1.10072, target 1.13672, clock 12:00 Thu 08-20). Nothing to do.
+- EN2 forward count: not started (waits for SW1 or the coach's word).
+- Payout date: tracker $24,358.99 is under $25,000 -> request $0.
+- How I feel: fine.
+
 ## Forward tally
 
 ## 08-10 test: idea AR, Asia-hours reversion to midnight's price (journal/2015-idea-AR-asia-reversion.md; 3 variants named up front)
