@@ -31,3 +31,11 @@ Pass = route B step B1 candidate, then 40 forward paper trades. Fail = killed.
 My guess: a small positive average under +0.10R, like the night fade (NF): K1 fails.
 
 ## Counts and worked case (tool, before outcomes)
+Tool: `python bt/evening_fade.py 2015-07-30 count` / `check DATE` (no outcomes).
+- 146 days with 08:00, 17:00 and 21:00 candles (01-02..07-29); median |day move| 45 pips. EV1 (>= 60): 51 days (22 before 04-07,
+  29 from; 24 up days, 27 down). EV2 (>= 100): 24 days (12 / 12). Judgeable by my line, only just (50).
+- Worked case, no trade: today 07-29, 08:00 open 1.10466, 17:00 open 1.10237, move -22.9 pips -> under 60, nothing.
+- Worked case with a trade: Tue 07-21, 08:00 open 1.08297, 17:00 open 1.09267, move +97.0 pips -> EV1 SELLS at 17:00, stop 30 pips
+  above, out 21:00 (not an EV2 day: under 100). I remember the price near 1.0934 at 22:00 that day, so I expect a small loss here.
+
+## Result (one run)
