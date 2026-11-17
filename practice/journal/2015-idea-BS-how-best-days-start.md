@@ -47,3 +47,42 @@ A survivor becomes a counts-only line in the daily call; nothing live changes (A
 Worked expectation, written now: BS1 has about 9 yes days after the drop -> K3 FAIL. BS2 and BS3: the lively hour was good before March and bad since, so
 I expect a difference near zero that changes sign between the periods -> K1 and K2 FAIL. No survivor.
 Counts when run: idea 82, variants 229-231.
+
+## Mechanics check (pre-registration pushed first in commit d1efca7)
+03-11 (`check`): sell, volume ratio 1.78, yesterday ratio 1.46, no break either way: a yes day for all three variants, as in the study table.
+
+## RESULTS (one run: `python bt/best_start.py 2015-06-16 test`; figures copied from the print)
+115 A2 days, +33.61R. The 15 best days dropped (+32.51R) and the 8 early days without a 10-day volume mean dropped -> 92 days, -4.82R (-0.052R a day);
+days of +1R or more among them: 11 (12%).
+| variant | yes days: n, avg R, win | no days: n, avg R, win | difference | before 03-02 (yes / no, diff) | lived (yes / no, diff) | stressed diff | +1R days among yes (lift) |
+|---|---|---|---|---|---|---|---|
+| BS1 volume >= 1.30x | 9, -0.381, 22% | 83, -0.017, 53% | -0.365 | 1 / 26, +0.631 | 8 / 57, -0.449 | -0.361 | 0 (0.00) |
+| BS2 >= 1.15x | 25, -0.350, 28% | 67, +0.059, 58% | -0.409 | 4 / 23, +0.375 | 21 / 44, -0.554 | -0.399 | 2 (0.67) |
+| BS3 >= 1.05x | 41, -0.181, 41% | 51, +0.051, 57% | -0.232 | 8 / 19, +0.150 | 33 / 32, -0.313 | -0.246 | 5 (1.02) |
+| line | BS1 | BS2 | BS3 |
+|---|---|---|---|
+| K1 yes at least +0.25R above no | FAIL | FAIL | FAIL |
+| K2 positive in both periods | FAIL | FAIL | FAIL |
+| K3 20 / 20 days | FAIL (9) | PASS | PASS |
+| K4 +1R days 1.5x as frequent | FAIL | FAIL | FAIL |
+| K5 K1 at stressed costs | FAIL | FAIL | FAIL |
+VERDICT: KILLED, all three, and the wrong way round: without my best 15 days a busy pre-entry hour is a WORSE start, not a better one. No counts line.
+
+## Worked expectation against the run
+BS1 fails the sample line (9 yes days): as written. BS2 / BS3: I wrote "a difference near zero that changes sign between the periods". The sign change
+is there (+0.38 / +0.15 before March, -0.55 / -0.31 on the lived days); "near zero" was wrong: it is -0.41R and -0.23R. I under-guessed the size.
+
+## What I take from it, and what I do NOT do with it
+- The three busy days among my best 15 were exactly that: three days. On the other 92 the busy hour loses. A feature read off the best days and
+  the same feature on ordinary days pointed in opposite directions. That is what "the losers I look at have winning twins" looks like from the other side.
+- I do NOT turn it round into "skip busy hours". That is idea PH with a different ruler (25 of 28 busy days are lively hours), PH already has its
+  paper tag with its own gate (60 lively days AND 200 days), and the sign flips between the two periods here just as it did there. No new line, no new tag.
+- The number that matters most came out as a by-product, and I had never printed it this way: A2 is +33.61R on 115 days; its 15 best days are +32.51R.
+  The other 100 days together make about +1.1R. (On the 92 days of this test: -4.82R.) My whole edge is thirteen percent of my days, and nothing I can
+  see at 08:00 - not a break, not a coil, not volume - tells me which they are. That is why every filter kills winners, why targets and locks cost
+  (they cut exactly those days), and why "no skips, hold to noon" is the rule. It is also why the edge is so hard to measure: it is a count of rare days.
+- Not luck-proof either way: 15 days carrying everything is also what a lucky run with no edge would look like. The coach's line stands: judged
+  after a few hundred lived trades.
+Counts: ideas 82, variants 231 (BS1, BS2, BS3). Hypotheses A and B were looked at on the 15 best days only and not tested: not counted as variants,
+written here so they are not forgotten. Adopted trading ideas: 0. On paper: UN3, PH2, MB1; forward count with a judging rule: GB1 (3 of 15).
+Numbers or rules corrected after a push in June: 1 (none today).

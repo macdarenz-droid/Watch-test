@@ -91,3 +91,10 @@ Live minus backtest: -0.32R per trade (noise band +-0.41R) -> inside the noise. 
 Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 76 done, avg +0.18R, max DD 4.85R. Planning edge +0.18R: live is +0.00R above it.
 Counts only: live trades after a night (00:00->08:00) against my side, from 04-23: 22 (+1.73R; look at 40). 10-day-trend direction, paper line from 05-06: trend UP 19 trades -0.35R; trend DOWN 10 trades -2.24R (look at 40 up-trend trades). MB1 paper from 05-13: 24 days, kept 9 trades (-3.87R, DD 4.63R); removed 14 (+10.77R); no break 1. +80 pip trades from 05-22: 3 of 15 (net trail +0.82R). Pre-entry hour 80+ pips: 4 of 10 (0 wins, -3.18R).
 Normal worst for 56 trades (bt/streak_check.py 2015-05-19, all 95 A2 trades reshuffled): longest losing run median 4, 95th pct 6; max drawdown median 3.09R, 95th pct 5.92R. Live worst: 6 in a row (April), 4.85R (06-11). Now: 0 in a row, 3.77R under the high.
+
+## 06-15 research after funded day 57 (coach: 3 fresh hypotheses about how my best A2 days START, the strongest pre-registered, max 3 variants): idea BS
+(journal/2015-idea-BS-how-best-days-start.md). Notes re-read; three hypotheses known at 08:00: a break-out start, a coil start, a busy start (volume,
+never used before). Look at the 15 best days against base rates counted without outcomes: break-out nothing (33% against 37%); coil the wrong way (best
+days follow WIDE days: idea GA, known); busy hour 3 of 13 against 11%: picked by default, said so. Kill lines pushed first; one run with the 15 best
+dropped from both sides: busy-hour days are 0.23R to 0.41R WORSE than the rest, the sign flips between the periods: killed on four lines, not turned
+into a filter (it is PH again). By-product: the 15 best days are +32.51R of A2's +33.61R. Counts: 82 ideas, 231 variants. June corrections after a push: 1.
