@@ -15,6 +15,7 @@ Goal: steady monthly profit, safe payouts, never a breach.
 - HALF size (0.16 lots) from a day's CLOSE at or below 3% under the high-water mark, until a new high-water.
 - STOP TRADING from a day's close at or below 7% under the high-water mark: written review, restart only with my coach.
 - The high-water moves up with new highs and down only by a payout. After the 06-19 payout: high-water $25,256.94; half size at $24,499.23; stop at $23,488.95.
+- >>> HALF SIZE IS ON since the close of Fri 2015-07-03 ($24,489.07, $10.16 under the line): 0.16 lots from Mon 07-06 until the balance is above $25,256.94.
 - Size changes ONLY by a trigger written in advance. None is written. Sizing test 06-17 (idea SG): no size breaches (the 7% stop sees to it); at the planning
   edge 0.75% pays 28% more and meets my own stop in 22% of two-year runs against 3%; at +0.10R it pays nothing more. 0.50% stays.
 
@@ -24,11 +25,11 @@ Goal: steady monthly profit, safe payouts, never a breach.
 - There is no weekly stop: the size rule does that job. Stress test 06-30 (idea ST): from -2.4% under the high-water it takes 16 full stops in a row to
   reach my own stop, $933 above the firm's line; no breach in 24,000 two-year runs down to a -0.20R edge, with jump days; worst day 1.57%.
 
-## 4. Payout rule (every 14 days from 03-27; next Fri 07-03)
+## 4. Payout rule (every 14 days from 03-27; next Fri 07-17)
 - On the date, after the day's trade, on the tracker balance (sim balance minus everything paid out):
   below $26,000 -> request HALF of what is above $25,000 (half-cents rounded down); at or above $26,000 -> request everything above $26,000.
 - No request while half size or the stop is on. The high-water is lowered by the amount requested. I keep 80%.
-- Applied exactly as written, no exceptions either way. So far: $567.04 requested on 6 dates, $453.63 mine.
+- Applied exactly as written, no exceptions either way. So far: $567.04 requested on 7 dates (07-03: $0), $453.63 mine.
 
 ## 5. What I never do
 - Never trade without the committed call. Never skip a weekday. Never move, widen or remove the stop. Never close before 12:00 by choice. Never hold past 12:00.
