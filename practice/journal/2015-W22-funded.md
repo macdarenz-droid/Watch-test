@@ -182,6 +182,25 @@ Friday 05-29 is the last trading day of May: the month-end review is due on the 
      Tomorrow, Fri 05-29, is the last trading day of May and a Friday: gates list; the month-end review is due on the first live day of June.
      END OF RELEASED DATA (clock Fri 05-29 01:00 London).
 
+- **Fri 05-29 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID WIN (scratch). Figures from `python bt/call_numbers.py 2015-05-29` and the bar prints.
+  D1 (London days): Tue 05-26 close 1.08719 (0.07); Wed 05-27 low 1.08192 close 1.09038 (0.77); Thu 05-28 high 1.09584 low 1.08671 close 1.09474 (0.88,
+      range 91.3): a second rising close off the 1.0819 low; neither a 3-day high nor a 3-day low. After my noon exit it dipped to 1.08671 and rallied 90 pips.
+  H4 (UTC bars): Thu 12:00 bar 1.08671-1.09281; 16:00 bar up to 1.09584; 20:00 bar high 1.09742; tonight 00:00 bar 1.09513-1.09645; 04:00 bar low 1.09427.
+  H1: the night (00:00-07:00 London): open 1.09691, high 1.09691, low 1.09427, last 1.09507: range 26.4 pips (ratio 0.59, quiet), net -18.4 pips - a slightly falling night, with my side.
+  M15: drifted down from 1.0965 to 1.09427, last two candles back to 1.09507.
+  Bias: SELL. 22:00 London closes: 05-28 1.09474 vs 05-25 1.09766 = -29 pips (3-day gap -29.2). Gap / ADR5 0.25: a small signal, almost gone.
+  UN3 PAPER TAG (never live): 5-day gap -164 pips -> SELL; agree: paper TRADES. Forward day 29, disagree days 6 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 21.
+  MB1 PAPER TAG (never live, forward day 13): morning direction written at 12:00, before 13:25.
+  Levels: night high 1.09691; Thu evening high 1.09742; night low 1.09427; Thu low 1.08671.
+  Rejection-day check: Thursday made neither the 3-day low nor the 3-day high. Not a rejection day. 10-day trend: DOWN (1.09474 vs 05-14 1.14097); the sell is with it.
+  SIZE RULE: tracker balance $25,038.83, high-water $25,349.14, drawdown -1.22%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
+  FRIDAY GATES (list read): A2 alarm 64 / 100; UN3 6 / 30 disagree days; PH2 16 / 60 lively days; night count 17 / 40; up-trend line 10 / 40; MB1 4 / 100 kept
+      (early-close lines not reached); +80 pip trades 0 / 15; 80+ pip pre-entry hours 4 / 10; personal stop held 10 of 20 days; next payout date Fri 06-05.
+      None due. LAST TRADING DAY OF MAY: the month-end review is written after today's trade, before the next test (coach 05-29), with one process goal for June.
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade. The release ends at 22:00 London.
+  Worry: a small signal after two rising days. SG says small signals are no worse. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
