@@ -6,6 +6,7 @@ Next payout date Fri 09-11.
 ## Funded trades
 | # | time (London) | side | lots | entry | stop | exit | R | $ | tag | note |
 |---|---|---|---|---|---|---|---|---|---|---|
+| (paper) | Wed 09-02 08:00 | buy | NO LIVE TRADE (monitor -0.143R) | paper | paper | paper clock exit | (-0.36 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 41; YM1 agree; NC1 kept |
 | (paper) | Tue 09-01 08:00 | sell | NO LIVE TRADE (monitor -0.177R) | paper | paper | paper stop | (-1.00 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 40; YM1 day 2 DISAGREE (buy -0.32R); NC1 kept |
 | (paper) | Mon 08-31 08:00 | sell | NO LIVE TRADE (monitor -0.203R) | paper | paper | paper clock exit | (+0.31 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 39; NC1 day 1 = SKIP tag; YM1 day 1 agree |
 
@@ -90,3 +91,19 @@ YN's own 13 unseen trades since its test lost ~3.9R: +0.070R -> +0.032R. Ideas 1
 - A2 paper plan: buy at the 08:00 open, stop 40 pips, out 12:00.
 - Forward counts (paper): EN2, YM1 day 3, NC1 day 3 - from their tools after the day.
 - How I feel: fine.
+  08:00 London (PAPER): pre-entry hour 1.12668-1.12876 = 20.8 pips (quiet: PH2 full), net about -4 against the buy. A2 paper BUY near 1.12807,
+     paper stop about 1.12407. NC1: hour -4.5 (tool, signed by A2) -> kept. No order.
+  10:00 London (PAPER; 8 candles): best +10.0, worst -38.4 (1.6 pips from the stop), last -0.5.
+  12:00 London (PAPER; 16 candles): clock exit about -13.7 (best +13.3, worst -38.4).
+  -> Wed result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.143R -> paper; inactivity start-date question open). VALID: no order placed.
+     Checked: call committed before the bell (16e594a); sim balance unchanged, trading days 73. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 41 (engine, costs on 1.0 + 0.1; coin_control): buy, clock exit, -0.36R; the other side +0.30R. Running from 07-08: 41 days, -2.92R.
+     NC1 FORWARD day 3: kept (hour -4.5); skip days 1 of 30.
+     YM1 FORWARD (tool): 2015-09-02 YM1 side +1 | A2 side +1 | AGREE | YM1 -0.36R (close) | YM0 +0.30R | YM1 stressed -0.40R
+       YM1 FORWARD (R after costs 1.0 + 0.1; stressed 2.0 + 0.5): 3 of 80 trades | avg -0.122R | net -0.37 | disagree days 1 net -0.32 | agree days 2 net -0.04 | YM1 - YM0 +0.237R | stressed avg -0.167 | drawdown 0.68R (early close at 8R)
+     EN2 FORWARD (tool): 0 trades so far.
+     Paper lines: UN3 DISAGREED (day 97): disagree days +4.36R in 23. PH2 (day 89): quiet (20.8) -> full = -0.36R;
+     38 quiet -0.69R; PH2 about -5.10R against A2's -9.53R.
+     MO PAPER RULE (day 47 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.36R (running -5.72R).
+     For Thursday (tool): MO1 -0.137R -> paper; MO3 -0.191R -> paper.
+     How it feels: the paper buy came within 1.6 pips of its stop and closed small. Nothing to act on.
