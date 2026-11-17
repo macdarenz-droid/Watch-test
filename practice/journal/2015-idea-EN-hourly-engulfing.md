@@ -19,3 +19,12 @@ MIN SAMPLE: EN1 needs 120+ trades and 50+ from 04-07; else killed for sample wit
 K1 average >= +0.10R after costs (1.0 + 0.1 = 5.5% of a 20-pip risk). K2 net above zero before 04-07 AND from 04-07.
 K3 stressed (2.0 + 0.5) average above zero. K4 EN1 minus EN0 above zero, sign-flip p < 0.05.
 My guess: a coin minus costs, about -0.05R.
+
+## Counts (tool `python bt/engulfing.py 2015-08-13 count`; no outcomes)
+EN1: 241 trades (105 before 04-07, 136 from) on 138 days; 132 bullish, 109 bearish; the 5 busiest days hold 19. EN2: 116 (48 / 68) on 96 days.
+EN1 meets the minimum (120 / 50). EN2 is the dose line and is reported, not judged.
+Worked case Wed 08-12: the 08:00 H1 candle was a bullish engulfing (the morning of the +83-pip A2 paper buy) -> EN1 BUYS at the 09:00
+open, stop 20 below, out 11:00. My A2 walk had +55.9 pips at 10:00 and +68.9 at noon from 1.10745, so the 09:00-11:00 window should be
+a winner unless 09:00 was near the morning's top. Two more signals that day (11:00, 14:00), both bullish.
+
+## Result (one run)
