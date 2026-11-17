@@ -118,3 +118,7 @@ Structural fact: 159 weekdays; the 120 line rules out nearly every once-a-day id
 EN: 241 trades, -0.077R: killed; its dose line EN2 (+0.182R on 116, held across 04-07) noted, not promoted.
 SAMPLE RULE written into the plan (coach: option 2, 80 for once-a-day ideas, weak power up front, any pass provisional until lived days).
 CS, the first once-a-day idea under it: 78 trades at its loosest threshold, under 80: killed for sample, no outcome run. Ideas 131, variants 355.
+
+## 08-12 evening: correction (NR repeated January's idea N) + idea YN (journal/2015-idea-YN-yesterdays-new-york-for-the-morning.md)
+YN: fade yesterday's NY afternoon at the next 08:00: 114 trades +0.070R, positive before and after 04-07 and at stressed costs, but under
++0.10R and no better than its control (p 0.66). Killed; nearest miss in weeks; not promoted. Ideas 132, variants 358.

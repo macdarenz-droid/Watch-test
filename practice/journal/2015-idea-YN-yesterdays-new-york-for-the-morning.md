@@ -37,3 +37,19 @@ that morning A2's paper buy made +1.66R, so the sell should be a full stop. Mon 
 there, so the sell should win about that much less costs.
 
 ## Step 3, result (one run: `test 20 30`)
+Tool: `python bt/ny_to_london.py 2015-08-13 test 20 30`. Hand checks: 08-11 the fade sold 1.09666, stopped 1.10068, -1.00R (as written); 08-10 the
+fade sold 1.09628, out 12:00 at 1.09333, +0.74R (as written: A2's -0.80R less costs on the other side).
+| variant | trades | wins | avg R | net | stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| YN1 fade yesterday's NY move, N 20 (JUDGED) | 114 | 48% | +0.070 (+-0.17) | +8.01 | 32 | +3.66 | +4.35 | +0.028 |
+| YN2 the same, N 30 | 87 | 49% | +0.091 (+-0.20) | +7.92 | 26 | +6.13 | +1.79 | +0.049 |
+| YN0 follow, N 20 (control) | 114 | 44% | -0.008 (+-0.20) | -0.90 | 42 | -0.65 | -0.25 | -0.049 |
+YN1 minus YN0 +0.078R (sign-flip p 0.66). YN1: K1 FAIL (+0.070R, line +0.10R) | K2 PASS | K3 PASS | K4 FAIL. **YN IS KILLED.**
+Said straight, because it is the nearest miss in weeks:
+1. YN1 is positive before AND after 04-07 and at stressed costs, the first judged rule in a month to hold across the regime date. Its
+   dose line goes the right way (N 30: +0.091R). But its average is under my +0.10R line, it does not beat its own control by more than
+   noise (p 0.66), and the error bar (+-0.17R) is twice the average. By my lines it is dead, and a pass would only have been provisional.
+2. I do not lower K1 to +0.07R after seeing +0.070R, and I do not pick YN2 as the "real" rule.
+3. What it would need, if my coach ever wants it: a pre-registered forward count on lived days, frozen exactly as YN1, after SW1's shadow
+   ends. I start nothing.
+Counts: idea 132; variants 356-358; second setups tried 30, none alive.
