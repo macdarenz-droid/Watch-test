@@ -34,6 +34,18 @@ SW1 paper shadow: 1 of 20 done, trade 2 open. Payout date Fri 07-31 ($0 unless b
      MO PAPER RULE (day 20 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.95R (running -4.94R).
      For Tuesday (tool): MO1 -0.267R -> paper; MO3 -0.204R -> paper.
 
+## Tue 07-28
+Coach 07-28: no LM2 shadow while SW1 is 2 of 20 ("one shadow at a time"). LM2 stays dead; a fresh pre-registered re-test on new lived days only after SW1 finishes, if I still believe in it.
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-28`:
+- 3-day gap +158.5 pips -> A2 side BUY. 5-day gap +262.1 -> UN3 agree. Night 00:00-07:00: 1.10716-1.10996, last 1.10793 (range 28.0, net -6.9).
+- Monday's London day: 1.09689-1.11292, close 1.10871 (range 160.3); it made the 3-day high.
+- Monitor for today -0.267R (MO1), -0.204R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); route B: no tested setup. NO ORDER.
+- A2 paper plan: buy at the 08:00 open, stop 40 pips below, out 12:00.
+- SW1 SHADOW trade 3 (tool `bt/sw1_shadow.py 2015-07-29 signal`): Mon close 1.10871 vs 07-13 close 1.10006 = +86.5 pips -> paper BUY at the 08:00
+  open, stop 120 below, target 240 above, else out 12:00 Tue 08-04. Running -2.05R after 2 of 20.
+- Walk notes today with the tool's window line read first: 8 candles at 10:00, 16 at 12:00.
+- How I feel: fine. Mistake to avoid: P12's cousin, assuming a tool instead of reading its first line.
+
 ## Forward tally
 
 ## CORRECTION written Mon 2015-07-27 (PROCESS MISTAKE P12; found by me on 07-27 when the walk tool and the engine disagreed)
