@@ -29,3 +29,10 @@ Whatever SR3 shows, rule "never re-enter" does not change off one test; I report
 My guess: SR1 about zero (K1 fails); SR3 negative.
 
 ## Counts and worked case (tool, before outcomes)
+Tool: `python bt/after_stop.py 2015-07-29 count` / `check 2015-07-24` (no outcomes).
+- A2 engine trades 146; full stops 40; stopped early enough for an entry candle at or before 11:00: 34 cases (17 from 01-19..05-21,
+  17 from 05-22..07-24); only 6 are before 04-07. Judgeable (>= 30). It is a test of the bad regime, as I wrote.
+- Worked case Fri 07-24: A2 paper buy, stop 1.09505 touched in the 08:30 candle (the same minute as my corrected walk table) ->
+  SR1 SELLS at the 08:35 open, stop 40 pips above, out 12:00; SR3 would BUY again there.
+
+## Result (one run)
