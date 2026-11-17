@@ -33,3 +33,18 @@ stop 20 below (about 1.14173). The hour's low 1.14202 stays 3 pips above the sto
 about +1.35R. The fade would be stopped? Its stop about 20 above 1.14353 = 1.14553 on the ask; the hour's high 1.14733: yes, a full stop.
 
 ## Step 3, result (one run: `test 10 20`)
+Hand check 08-24: follow +1.375R (worked about +1.35R); fade stopped -1.01R (worked: a full stop). As written.
+| variant (R after costs: spread 1.0 + slippage 0.1 pips; stressed 2.0 + 0.5) | trades | wins | avg R | net | stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| FH1 follow the night, 07:00-08:00, N 10 (JUDGED) | 106 | 46% | +0.048 (+-0.22) | +5.07 | 33 | +6.46 | -1.39 | -0.034 |
+| FH2 follow, N 20 | 61 | 39% | -0.082 (+-0.29) | -5.00 | 25 | -2.78 | -2.22 | -0.161 |
+| FH0 fade, N 10 (control) | 106 | 42% | -0.146 (+-0.17) | -15.50 | 39 | -4.06 | -11.44 | -0.242 |
+Kill lines, each against its written threshold:
+K1 FH1's average >= +0.10R: +0.048R. FAIL.
+K2 FH1's net above zero before AND from 04-07: +6.46R / -1.39R. FAIL.
+K3 FH1's stressed average above zero: -0.034R. FAIL.
+K4 FH1 minus FH0 above zero, p < 0.10: +0.194R, p 0.28. FAIL.
+**FH IS KILLED.**
+What I learned: the 07:00 hour is a coin after costs whichever way it is traded from the night's move; the bigger-night version (FH2) is
+worse, so there is no dose. One-hour trades with a 20-pip stop start 5.5% of R behind and have little room to earn it back.
+Counts: idea 143; variants 383-385; second setups tried 38, none alive.

@@ -36,3 +36,7 @@ Coach 08-21 on RS: "RS1 flipped from losing to winning across your two halves, t
      For Tuesday (tool): MO1 -0.067R -> paper; MO3 -0.076R -> paper.
 
 ## Forward tally
+
+## 08-24 test: idea FH, the 07:00-08:00 hour with the night (journal/2015-idea-FH-the-frankfurt-hour.md)
+R after costs (1.0 + 0.1). Follow the night in the hour before the bell: 106 trades +0.048R, negative after 04-07, negative at stressed costs.
+Killed on all four lines. Ideas 143, variants 385.
