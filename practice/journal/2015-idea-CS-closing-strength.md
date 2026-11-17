@@ -25,3 +25,13 @@ K1 average >= +0.10R after costs (1.0 + 0.1). K2 net above zero before 04-07 AND
 K4 CS1 minus CS0 above zero, sign-flip p < 0.10 (one-day-a-day sample; looser than the intraday 0.05, written now).
 A2 IN DISGUISE: if 80%+ of CS1's trades are on A2's side, a pass is void (it would be A2's old edge again).
 My guess: positive before 04-07, negative after, like every follow rule; K2 fails.
+
+## Step 1, counts only (tool `python bt/closing_strength.py 2015-08-13 count`; no outcomes)
+158 days. Q = 0.10: 22 trades (10 / 12). Q = 0.15: 47 (19 / 28). Q = 0.20: 64 (26 / 38). Q = 0.25: 78 (30 / 48).
+Same side as A2: 17 of 21, 35 of 46, 48 of 63, 55 of 77 (71-81%: at or near my 80% "A2 in disguise" line at every Q).
+## Step 2: no grid value meets 80+ trades (Q = 0.25 has 78). KILLED FOR SAMPLE, `test` NOT run, outcomes unseen.
+I do not add Q = 0.30 after seeing 78. Two facts make the kill cheap anyway: a "strong close" is mostly A2's own direction (3 in 4 trades),
+and the closes are lopsided (46 sells to 32 buys at Q = 0.25), so CS would largely have been A2 again.
+Lesson for the next once-a-day idea: its condition must hold on at least about 55% of the 158 days to reach 80, and it must not be A2's
+3-day direction in another form. I check both on paper BEFORE writing the rule.
+Counts: idea 131 (killed for sample); variants none run.

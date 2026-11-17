@@ -113,3 +113,8 @@ Counts at N = 10/15/20: 115/93/74 days; none reaches the pre-written 120. Killed
 ## 08-12 evening test: idea NR, New York turns the London morning (journal/2015-idea-NR-new-york-turns-the-morning.md)
 Counts N = 20/30/40: 102/85/72 days; none reaches 120. Killed for sample, no outcome run. Idea 129.
 Structural fact: 159 weekdays; the 120 line rules out nearly every once-a-day idea with a condition. Question (a)/(b) put to the coach.
+
+## 08-12 evening: idea EN (hourly engulfing) and idea CS (closing strength) - journal files of the same names
+EN: 241 trades, -0.077R: killed; its dose line EN2 (+0.182R on 116, held across 04-07) noted, not promoted.
+SAMPLE RULE written into the plan (coach: option 2, 80 for once-a-day ideas, weak power up front, any pass provisional until lived days).
+CS, the first once-a-day idea under it: 78 trades at its loosest threshold, under 80: killed for sample, no outcome run. Ideas 131, variants 355.
