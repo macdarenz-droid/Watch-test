@@ -27,3 +27,10 @@ Step 1, PRE-MAY (independent of this review; but I have run NM2 on most of it be
  Any fail -> KILLED again, and no look at the lived days' outcomes (my April rule stands; the coach's order was "pre-May first, then").
 Step 2, only after a pass: lived days 05-01..07-13, reported as CONTAMINATED (the picture was found there): skipped vs kept average,
  and the feature's share among winners against losers. A pass in both = a paper tag with 30 forward cases, never a live rule now.
+
+## 4. Counts and worked case (tool, before any outcome): `python bt/night_filter.py 2015-07-14 count` / `check 2015-07-10`
+- Worked case 07-10: sell, night -25.0 pips against (tool; my live note said 24.5 from the last price) -> NA skips. As expected.
+- Mechanics: my skipped days equal the days the engine's NM2 leaves out: 0 differences.
+- Pre-May: 83 A2 days, NA on 24 = 29%. From 05-01: 52 days, NA on 24 = 46%. (Nights against me became more frequent; a fact, no outcome.)
+
+## 5. Result
