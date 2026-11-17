@@ -51,3 +51,56 @@ If all three variants are killed: I say so, nothing changes, and the size rule a
 Worked expectation, written now: real history - the monitor goes below zero somewhere in late May or June and saves 1-3R: K4 pass. ALIVE: about 4% of
 days off, K1 pass. SWITCH: K3 pass. DEAD: MO1 near the K2 line, MO2 (half size) FAILS K2 (it only halves), MO3 slower than MO1.
 Counts when run: idea 93, variants 259-261.
+
+## Mechanics check (rule and kill test pushed first in commit b6fb05e)
+My side against the engine's A2: largest difference per day 0.000R on 125 days. The rolling-weight function, by hand on six days
+(+1, -2, -1, +3, -5, +1 with N = 2): days 3, 4 and 6 off, day 5 on - the script printed exactly that before any result was read.
+
+## RESULTS (one run: `python bt/side_monitor.py 2015-06-30`; figures copied from the print)
+(1) REAL HISTORY 01-06 .. 06-29 (125 days): A2 always +32.05R, max drawdown 5.40R.
+| variant | net R | against A2 always | max DD | days not at full size | A2 on those days |
+|---|---|---|---|---|---|
+| MO1 N=40 pause | +33.15R | +1.10R | 4.54R | 5, all in June (first 06-11, last 06-29) | -1.10R |
+| MO2 N=40 half | +32.60R | +0.55R | 4.85R | the same 5 | -1.10R |
+| MO3 N=60 pause | +32.05R | 0.00R | 5.40R | 0 | - |
+Pools: ALIVE = all 125 days (my side +0.256R a day, side advantage +0.495R); DEAD = the 42 days from 05-01 (my side -0.093R, side advantage -0.112R).
+(2)-(4) BUILT WORLDS, 2,000 runs x 500 days, medians:
+| world | policy | total R (10th pct) | max drawdown | days not at full size |
+|---|---|---|---|---|
+| ALIVE | A2 always | +128.1R (+97.8) | 7.8R | - |
+| ALIVE | MO1 / MO2 / MO3 | +123.5R / +125.9R / +126.3R | 7.8R / 7.6R / 7.8R | 4% / 4% / 1% |
+| DEAD | A2 always | -46.5R (-75.7) | 55.1R | - |
+| DEAD | MO1 / MO2 / MO3 | -19.0R / -33.3R / -18.6R | 25.3R / 40.6R / 24.6R | 60% each |
+| SWITCH (250 alive, 250 dead) | A2 always | +40.9R (+10.2) | 31.8R | - |
+| SWITCH | MO1 / MO2 / MO3 | +52.3R / +46.2R / +53.5R | 15.8R / 24.1R / 15.8R | 31% / 31% / 30% (3% / 3% / 1% of the alive half; 59% / 59% / 58% of the dead half) |
+| line | MO1 N=40 pause | MO2 N=40 half | MO3 N=60 pause |
+|---|---|---|---|
+| K1 ALIVE keeps at least 85% | PASS (96%) | PASS (98%) | PASS (99%) |
+| K2 DEAD drawdown at most 70% of A2's | PASS (46%) | FAIL (74%) | PASS (45%) |
+| K3 SWITCH total higher than A2's | PASS (+11.4R) | PASS (+5.4R) | PASS (+12.6R) |
+| K4 real history not more than 1R worse | PASS (+1.10R) | PASS (+0.55R) | PASS (0.00R) |
+VERDICT: MO1 and MO3 SURVIVE the kill test. MO2 (half size) is KILLED on K2: halving a dead rule only halves the damage.
+
+## Expectation against the run
+Real history "saves 1-3R": +1.10R (MO1). ALIVE "about 4% of days off": 4%. SWITCH pass: yes. DEAD "MO1 near the 70% line": WRONG - 46%, well inside:
+I had the monitor off 60% of the time right, and forgot that the drawdown is cut by more than the share of days. "MO2 fails K2": yes. "MO3 slower": it is
+not slower in the built worlds; on real history it has not triggered at all yet.
+
+## What the survivors are worth - read strictly
+- For: the cost of false alarms is small (4-5R of 128R when the edge is alive) and the saving when the edge dies is large (a dead two-year run
+  loses 19R instead of 46R; a switch run makes 52R instead of 41R with half the drawdown). The asymmetry is the reason to have such a rule.
+- Against, not hidden: (1) REAL HISTORY has one fade and the monitor has been off for FIVE days of it. +1.10R on five days is nothing. Everything
+  else in the table is my own days re-dealt: it shows that the rule does what its arithmetic says, not that the future looks like either pool.
+  (2) In the DEAD world the monitor still LOSES 19R and still has a 25R drawdown - it is off only 60% of the time, because a 40-day average
+  cannot tell -0.1R from +0.1R reliably. A 25R drawdown is 12.5% at my size. THE MONITOR IS NOT A SURVIVAL RULE. The survival rule is the one
+  already live - half size at 3%, stop at 7% - which ends a dead run at about -5%. The monitor would only make the walk to that line slower and cheaper.
+  (3) The DEAD pool is the 42 worst-defined days I have (chosen because they are the fade). A real dead edge might be 0.00R, not -0.09R.
+  (4) Two variants of three passing lines that I wrote yesterday with the answer half in view (I knew June was bad) is weaker than it looks.
+- So, exactly as written before the run: NOTHING GOES LIVE. MO1 and MO3 become PRE-SET PAPER RULES from the next live day. Each morning
+  `python bt/side_monitor.py END --state` prints both monitors and the state each would put A2 in; it is written in the 07:00 call, before the entry bar;
+  the live trade is A2 as always. The daily row goes in journal/MO-monitor-paper-rule.md.
+- OUT-OF-SAMPLE JUDGING, as fixed before the run: after 60 lived days from 06-30 (about 09-21), a variant goes to the coach as a proposal only if (a) over
+  those 60 days its R is not below A2-always's by more than 1.0R and (b) A2 averaged below +0.10R on the days the variant had it off. Otherwise closed.
+- State for the next live day (tool): MO1 monitor -0.086R -> PAUSE on paper. MO3 monitor +0.011R -> as usual. LIVE: A2 at the size the size rule gives.
+Counts: ideas 93, variants 261 (MO1, MO2, MO3). Adopted trading ideas: 0. On paper: UN3, PH2, MB1, MO1, MO3; forward count with a judging rule: GB1.
+Numbers or rules corrected after a push in June: 3 (none today).

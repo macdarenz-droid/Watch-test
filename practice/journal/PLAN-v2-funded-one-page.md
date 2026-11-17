@@ -33,7 +33,7 @@ Goal: steady monthly profit, safe payouts, never a breach.
 - Never add, average, re-enter or take a second trade. Never change the size except by rule 2.
 - Never change a rule because of a losing day, week or month, or because of a big win. Never change a rule from fewer than a few hundred lived trades
   unless the idea has beaten A2 on history AND on lived forward days, with its kill lines written first, and the coach has agreed.
-- Never let a paper tag (UN3, PH2, MB1, the +80 trail count) touch a live trade.
+- Never let a paper tag (UN3, PH2, MB1, the +80 trail count, the MO monitor) touch a live trade.
 - Never write a number that I did not read from the tool. Never open the feed directly; never look past the released clock.
 
 ## 6. What a mistake is
@@ -52,11 +52,12 @@ Goal: steady monthly profit, safe payouts, never a breach.
 - Full stops (06-25, idea CO): before funding my side was stopped 10% of the time and the other side 48%; since funding 37% and 38%. The stops are
   the direction being wrong as often as a coin's, not the stop or the entry. Watched monthly; the worry lines and the size rule are the response.
 - REGIME (06-26, idea RG): the signal's advantage over a coin was about +0.9R a morning to mid-April and about zero since (May-June -0.07R); a test
-  says that is not noise. Why, and for how long, is not known. No rule changed; the question of a monitor is with the coach.
+  says that is not noise. Why, and for how long, is not known. No rule changed. A monitor (side advantage of the last 40 / 60 days below zero -> A2 on paper) passed its backtest on 06-29 and runs ON PAPER
+  from 06-30, judged after 60 lived days; it is not a survival rule - the size rule is.
 - The edge is judged after a few hundred lived trades over 2-3 years (coach 06-02), not from an alarm at 100 and not from any one month.
 
 ## 8. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
-max 3 variants, costs on, everything counted in STATE.md (92 ideas, 258 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+max 3 variants, costs on, everything counted in STATE.md (93 ideas, 261 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
 Closed, so that I do not reopen it on a bad day: entry filters from chart reading, entry time and price, the lookback, every exit except noon,
 second setups, day filters. The list with results is in the long version, section 7.

@@ -110,3 +110,11 @@ Live minus backtest: -0.36R per trade (noise band +-0.40R) -> inside the noise. 
 Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 86 done, avg +0.14R, max DD 5.27R. Planning edge +0.18R: live is -0.04R above it.
 Counts only: live trades after a night (00:00->08:00) against my side, from 04-23: 28 (+0.34R; look at 40). 10-day-trend direction, paper line from 05-06: trend UP 25 trades -0.41R; trend DOWN 14 trades -3.67R (look at 40 up-trend trades). MB1 paper from 05-13: 34 days, kept 11 trades (-4.90R, DD 5.66R); removed 20 (+12.58R); no break 3. +80 pip trades from 05-22: 3 of 15 (net trail +0.82R). Pre-entry hour 80+ pips: 5 of 10 (0 wins, -4.18R).
 Normal worst, re-read 06-24 (bt/streak_check.py 2015-06-24, all 121 engine A2 trades reshuffled over 82 trades): longest losing run median 4, 95th pct 7; max drawdown median 4.52R, 95th pct 8.55R. (Written 05-19 for 56 trades: 6 in a row, 5.92R.) Live worst: 7 in a row (now), 5.27R (06-29, now). Now: 7 in a row = AT the 95th percentile; 5.27R under the high. An 8th loss = worry line W4.
+
+## 06-29 research after funded day 67 (coach: a pre-set rule for when the side advantage fades, backtest first with a kill test, lived days as the
+out-of-sample check; survival first): idea MO (journal/2015-idea-MO-side-advantage-monitor.md). Rule (rolling average of the side advantage below zero
+-> A2 on paper / half size), three variants, four tests (real history and three worlds built from my own days) and the out-of-sample judging rule pushed
+before any code; the rolling function hand-checked; one run. Real history: +1.10R for the 40-day pause (five days off, all June), 0.00R for the
+60-day one. Built worlds: alive keeps 96-99% of A2's R; dead halves the drawdown but still loses 19R; switch +11 to +13R. MO1 and MO3 pass all four
+lines; the half-size variant fails. NOTHING LIVE: both run on paper from 06-30 and are judged after 60 lived days. The survival rule stays the size
+rule. Counts: 93 ideas, 261 variants. June corrections after a push: 3.
