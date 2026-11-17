@@ -80,3 +80,4 @@ is to be written in the journal as a feeling, like every other such thought.
 | Tue 2015-06-09 | 36 | 9 | +0.93R (9 trades) | -1.63R (27 trades) | -1.63R / 5.75R | -0.73R / 4.45R (from the trade list) |
 | Wed 2015-06-10 | 37 | 9 | +0.93R (9 trades) | -1.77R (28 trades) | -1.77R / 5.75R | -0.86R / 4.45R (from the trade list) |
 | Thu 2015-06-11 | 38 | 9 | +0.93R (9 trades) | -2.77R (29 trades) | -2.77R / 5.75R | -1.87R / 4.85R (from the trade list) |
+| Fri 2015-06-12 | 39 | 10 | +1.78R (10 trades) | -2.77R (29 trades) | -2.77R / 5.75R | -1.02R / 4.85R (yesterday's figures plus 0.85) |

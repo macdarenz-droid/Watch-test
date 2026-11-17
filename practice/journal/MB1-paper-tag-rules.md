@@ -44,3 +44,4 @@ DOES NOT HOLD ON LIVED DAYS: 03-02..05-26 kept 21 trades +0.213R (stressed +0.14
 | Tue 2015-06-09 | -30.6 | DOWN | KEPT | -1.00 | 8, -2.87R, 4.00R | 11, +9.27R | 2 small / 6 large |
 | Wed 2015-06-10 | -4.6 | UP | removed | -1.00 | 8, -2.87R, 4.00R | 12, +8.27R | 2 small / 6 large |
 | Thu 2015-06-11 | -32.3 | DOWN | KEPT | -1.00 | 9, -3.87R, 4.63R | 12, +8.27R | 2 small / 7 large |
+| Fri 2015-06-12 | -35.4 | UP | removed | +1.22 | 9, -3.87R, 4.63R | 13, +9.49R | 2 small / 7 large |
