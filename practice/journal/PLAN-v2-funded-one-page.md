@@ -55,7 +55,7 @@ Today: tracker $24,358.99, high-water $25,256.94, drawdown -3.56%, FLAT since 07
 
 ## 9. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
-max 3 variants, costs on, everything counted in STATE.md (143 ideas, 385 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+max 3 variants, costs on, everything counted in STATE.md (144 ideas, 385 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
 - SAMPLE RULE (coach 08-12, option 2; written Wed 2015-08-12 evening): a setup that trades several times a day needs 120+ trades and
   50+ from 04-07. A ONCE-A-DAY setup needs 80+ trades and 35+ from 04-07, and its pre-registration must state the weak power up front
   (about +-0.22R on the average at 80 trades; a rule with no edge clears +0.10R about one time in four). Thresholds are chosen from counts
@@ -64,3 +64,5 @@ max 3 variants, costs on, everything counted in STATE.md (143 ideas, 385 variant
 - EVERY RESULTS TABLE states its cost basis in its header (coach 08-18), e.g. "R after costs: spread 1.0 + slippage 0.1 pips, no commission"
   and, where run, "stressed: 2.0 + 0.5". The engine's default account is 1.0 + 0.1 (backtest.py, Account).
 - EVERY TEST REPORT lists each kill line in full with its threshold BEFORE the results, then each line's value against it (coach 08-19).
+- ONCE-A-DAY PRE-REGISTRATIONS START WITH the expected share of days the condition holds, from its definition, before any count (needs about 55%+ of
+  the days to reach 80 trades on this history). Added 08-25 after ND was registered without it.

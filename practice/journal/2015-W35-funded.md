@@ -67,3 +67,6 @@ STATE.md now opens with "WHAT MUST CHANGE BEFORE A LIVE TRADE" (coach 08-25): ro
 ## 08-24 test: idea FH, the 07:00-08:00 hour with the night (journal/2015-idea-FH-the-frankfurt-hour.md)
 R after costs (1.0 + 0.1). Follow the night in the hour before the bell: 106 trades +0.048R, negative after 04-07, negative at stressed costs.
 Killed on all four lines. Ideas 143, variants 385.
+
+## 08-25 test: idea ND, breakout after a narrow day (journal/2015-idea-ND-narrow-day-breakout.md)
+Counts 17/30/46 at Q 0.7/0.8/0.9: under 80, killed for sample, outcomes unseen. My slip: skipped the paper frequency check; now a plan rule. Idea 144.
