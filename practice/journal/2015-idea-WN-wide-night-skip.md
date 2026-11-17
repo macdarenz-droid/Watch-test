@@ -28,3 +28,12 @@ K2 skipped below kept BOTH before 04-07 AND from 04-07.
 K3 WN1's kept-minus-skipped gap larger than WN0's.
 K4 label shuffle (10,000) of WN1's gap: p < 0.10.
 My guess: no difference: K1 fails. A2 made +0.62R on the widest night of all.
+
+## Step 1, counts only (tool `python bt/wide_night.py 2015-08-26 count`; built from bt/no_chase_hour.py, its docstring's first lines are the old NC text)
+148 A2 days with a 20-night median (01-30..08-25). W = 1.3: skip 37 = 25% (16 before 04-07, 21 from). W = 1.5: 24 = 16% (9 / 15).
+W = 1.8: 21 = 14%. W = 2.0: 14 = 9%.
+## Step 2: largest W skipping 15%+ AND 25+ days = **W = 1.3** (37; W = 1.5 has 24). WN1 = 1.3, WN2 = 1.5, WN0 = skip the 37 narrowest nights.
+Worked cases (tool `check`, ratio = night range / its 20-night median): 08-24 ratio 4.04 (skipped; A2 made +0.62R), 08-25 2.32 (skipped;
+-1.03R), 08-11 2.47 (skipped; +1.66R). All three of my note's days are skip days; together +1.25R: the note's own days argue AGAINST the idea.
+
+## Step 3, result (one run: `test 1.3 1.5`)
