@@ -213,3 +213,9 @@ not quiet ones. Rule from one line of it: follow a 20+ pip hour that closes outs
 April-June as an unseen period) pushed before the code; the simulator matched the hand-worked day; one run, 168 signals. Study months +0.09R to +0.40R
 a trade; unseen months -0.05R to -0.10R: all three killed. The unseen split is what caught it (MH3 was +14.18R on all history). Second setups tried:
 12, none alive. Counts: 88 ideas, 247 variants. June corrections after a push: 3.
+
+## 06-24 research after funded day 64 (coach: the streak written down and compared first - done in the 07:00 call; then: what do my funded-day winners
+share at entry, one trait as a rule with a kill test): journal/2015-idea-PZ-winners-share-a-price-zone.md. 31 winners against 33 losers on fifteen
+entry-time lines: one stood out (08:00 price in the outer quarter of yesterday's range on my side: 11 winners of 14 days). Kill test on the 58 days before
+funding, lines K1-K4 pushed first: funded days +0.65R for the zone, held-out days -0.07R (wider zones -0.10R, -0.08R): all killed. My winners share
+nothing at entry that my losers do not. Counts: 89 ideas, 250 variants. June corrections after a push: 3.

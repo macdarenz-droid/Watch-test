@@ -45,3 +45,34 @@ A survivor: a count in the daily call (never a skip, never a size: A2 has no ski
 Worked expectation, written now: on the funded days the zone will show a large difference (it was picked for it: 11 winners of 14). On the held-out days
 I expect a difference near zero, sign unknown: KILLED on K1 and K4 - the eighth winner-trait or loser-trait that has twins. I would be glad to be wrong.
 Counts when run: idea 89, variants 248-250.
+
+## RESULTS (review and kill lines pushed first in commit 6e5a955; `python bt/winners_review.py 2015-06-25 test LO HI`, once per zone; figures copied from the prints)
+| zone | FUNDED days (where it was found): in / outside | difference | HELD-OUT 58 days before 03-27: in / outside | difference (2 standard errors) |
+|---|---|---|---|---|
+| PZ1 0.75-1.00 | 14 days +0.548R, 79% wins / 50 days -0.102R, 40% | +0.650R | 14 days +0.475R, 50% wins / 44 days +0.549R, 73% | -0.074R (0.819) |
+| PZ2 0.50-1.00 | 35 days +0.301R, 60% / 29 days -0.274R, 34% | +0.575R | 34 days +0.489R, 62% / 24 days +0.589R, 75% | -0.100R (0.543) |
+| PZ3 0.75 and above | 21 days +0.231R, 62% / 43 days -0.053R, 42% | +0.283R | 17 days +0.474R, 53% / 41 days +0.554R, 73% | -0.081R (0.717) |
+| line (held-out days) | PZ1 | PZ2 | PZ3 |
+|---|---|---|---|
+| K1 in the zone at least +0.20R better | FAIL | FAIL | FAIL |
+| K2 higher win rate in the zone | FAIL | FAIL | FAIL |
+| K3 sample 10 / 15 | PASS | PASS | PASS |
+| K4 at least half of the funded difference | FAIL | FAIL | FAIL |
+VERDICT: all three KILLED. On the days it was not found on, the trait points slightly the OTHER way (-0.07R to -0.10R; win rate 50-62% in the zone
+against 73-75% outside). No count in the daily call.
+
+## Expectation against the run
+"A large difference on the funded days (picked for it)": +0.65R. "Near zero on the held-out days, sign unknown": -0.07R. "Killed on K1 and K4": and K2.
+For once the guess was right in every part - because by now I know what a trait read off my winners is worth.
+
+## What I take from it
+- What my funded-day winners share at entry: nothing I can find that my losers do not share. Fifteen lines, one stood out (11 winners of 14 days in
+  the outer quarter of yesterday's range), and on 58 other days the same zone was a coin leaning the wrong way. One in fifteen is what chance gives.
+- This is the same answer as BS (how best days start), VL (volatility), BD (no rule cuts them) and the eight filters before: at 08:00 a winning A2 day and
+  a losing A2 day look alike. The edge is in the average of all of them, and the only way to collect an average is to take every one.
+- Something the table shows without my asking: on the 58 days before funding A2 averaged about +0.53R a day; on the 64 funded days about +0.04R
+  (engine: +29.51R - 26.93R = +2.58R). The rule did not get a new entry problem on 03-27. It has had a much leaner three months. Whether that is the
+  normal state and January-March the lucky one, or the other way round, 122 days cannot say; the plan already assumes the lean one (+0.18R) and
+  the coach's rule is to judge after a few hundred lived trades.
+- No change to anything. The streak (4 losses, 3.96R) was compared with its numbers this morning and is at the median, not beyond.
+Counts: ideas 89, variants 250 (PZ1, PZ2, PZ3). Adopted trading ideas: 0. Numbers or rules corrected after a push in June: 3 (none today).
