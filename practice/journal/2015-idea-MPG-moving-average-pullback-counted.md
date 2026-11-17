@@ -22,3 +22,8 @@ S = 0: 183 trades (72 before 04-07, 111 from) on 116 days. S = 3: 145 (55 / 90) 
 Script check before any outcome: my first copy of the script stored all three variants under one key ("MPG"), which would have made the
 control comparison K4 compare MPG1 with itself. Fixed (keys MPG1 / MPG2 / MPG0) before the run; found by reading the script's lines back.
 Outcome run: `MPG_S=3 python bt/ma_pullback_grid.py 2015-08-15 test`, AFTER Monday 08-17 is journaled.
+Worked case (read from its own window's candles, written after Monday was journaled, before the outcome run): Fri 08-14, the 07:00 H1
+candle touched a rising SMA20 and closed above it -> MPG1 BUYS at the 08:00 open (1.11630 bid + spread), stop 20 below (about 1.11441).
+The window 08:00-11:00 had a low of 1.11242, below the stop: a FULL STOP, about -1.0R. (A2's 40-pip paper stop that morning survived by 1.3 pips.)
+
+## Step 3, result (one run: `MPG_S=3 python bt/ma_pullback_grid.py 2015-08-15 test`)
