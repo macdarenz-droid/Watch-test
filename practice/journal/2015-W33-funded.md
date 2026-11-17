@@ -12,6 +12,7 @@ the two are not confused.)
 | (paper) | Tue 08-11 08:00 | buy | NO LIVE TRADE (monitor -0.396R) | paper | paper | paper clock exit | (+1.66 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 25; SW1 shadow trade 5 stopped (-1.01R net) |
 | (paper) | Wed 08-12 08:00 | buy | NO LIVE TRADE (monitor -0.395R) | paper | paper | paper clock exit | (+1.69 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 26; SW1 shadow trade 6 stopped (-1.00R) |
 | (paper) | Thu 08-13 08:00 | buy | NO LIVE TRADE (monitor -0.337R) | paper | paper | paper clock exit | (-0.37 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 27; SW1 shadow trade 7 opened (buy 1.11272) |
+| (paper) | Fri 08-14 08:00 | buy | NO LIVE TRADE (monitor -0.409R) | paper | paper | paper clock exit | (+0.25 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 28; payout date $0 |
 
 ## Mon 08-10
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-10`:
@@ -122,6 +123,28 @@ the two are not confused.)
 - EN2 forward count: not started (waits for SW1 or the coach's word).
 - Payout date: tracker $24,358.99 is under $25,000 -> request $0.
 - How I feel: fine.
+  08:00 London (PAPER): pre-entry hour 1.11398-1.11643 = 24.5 pips (PH2 quiet: full unit on paper). A2 paper BUY near 1.11629 (engine fixes the fill), paper stop about 1.11229. SW1 shadow untouched. No order.
+  10:00 London (PAPER; window 07:00-08:45 UTC): A2 paper buy best +8.5, worst -38.7 (1.3 pips from the paper stop), last -23.4. Before advancing to noon: clock only.
+  12:00 London (PAPER; 16 candles, 08:00-12:00): A2 paper buy closed by the clock about 11 pips ahead after coming within 1.3 pips of the stop (best +13.9, worst -38.7, last +11.5).
+  -> Fri result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.409R -> paper). VALID: no order placed. Checked: call committed before the bell;
+     trade list still ends with #230 of 07-07; sim balance $24,926.03 unchanged. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 28 (engine, `python bt/coin_control.py 2015-08-15 --check 2015-08-14`): buy, clock exit, +0.25R; the other side -0.31R.
+     A2 paper running from 07-08: 28 days, -1.01R.
+     SW1 SHADOW trade 7: still OPEN (buy 1.11272, stop 1.10072, target 1.13672, clock 12:00 Thu 08-20); last price 1.11079, held over the weekend. Running -5.36R (6 of 20 done).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     PAYOUT DATE (tenth): balance $24,358.99 is not above $25,000 -> request $0. Totals unchanged: $567.04 requested, $453.63 mine. Next date Fri 08-28.
+     THE WEEK (W33): no live trade on any day, by rule (5 days, all valid; 0 trade mistakes, 0 process mistakes). Paper A2: -0.80, +1.66, +1.69, -0.37,
+     +0.25 = +2.43R. SW1 shadow: trades 5 and 6 stopped (-1.01R, -1.00R), trade 7 open. Written: sample rule in the plan (coach, option 2); EN2
+     pre-registered as a forward count (not started). Tests: AR, GC, DT, MB2, GC2, NR (+ correction: it repeated idea N), EN, CS, YN, IB.
+     All killed or killed for sample. Nearest miss YN (+0.070R across both periods).
+     How it feels: the best paper week since the alarm (+2.43R), and the monitor still reads -0.34R. One good week moves it little; that is the point of 40 days.
+     Paper lines: UN3 agreed, +0.25R (agree days -9.49R in 66; disagree +3.43R in 18; day 84). PH2 (day 76): quiet (24.5) -> full = +0.25R;
+     47 lively days -8.43R, 21 full-stop mornings; 29 quiet +0.83R; PH2 about -3.38R against A2's -7.62R.
+     MO PAPER RULE (day 34 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.25R (running -3.81R).
+     For Monday (tool): MO1 -0.342R -> paper; MO3 -0.147R -> paper.
+     FRIDAY GATES LIST READ (08-14): payout $0 (done). Review day Mon 09-21 (gate +0.60R; monitor -0.342R). MO day 34 of 60. UN3 18 of 30 disagree /
+     84 of 200. PH2 47 of 60 lively / 76 of 200. SW1 shadow 6 of 20 (0.64R from its close line). EN2 forward: waiting. August review: first trading day of September.
+     END OF RELEASED DATA (clock Fri 08-14 22:00 London; weekend).
 
 ## Forward tally
 
