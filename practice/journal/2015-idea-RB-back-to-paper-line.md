@@ -22,3 +22,9 @@ weeks to fall from +0.60R to zero.
 - If it passes both: the exit stands as written.
 My guess: no-edge live share under 10% (the gate is hard to pass), but each lucky spell lasts 30+ days; passes the line, with a warning.
 Worked case first: the tool's last-40 mean for the morning of 08-03 must equal side_monitor's -0.406R.
+
+## Facts and worked case (tool `python bt/exit_line_check.py 2015-08-01 facts`, before the runs)
+149 days. Last-40 mean -0.406R = side_monitor's monitor for 08-03: the same series. No-edge pool: 84 days from 04-07 (advantage -0.127R,
+my side -0.074R a day before shifting to zero). Healthy pool: 65 days to 04-06 (advantage +0.942R, my side +0.492R a day).
+
+## Result (one run)
