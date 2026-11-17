@@ -8,4 +8,5 @@ for r in rows:
     print(f"  {r[1][:5]} UTC  high {h:.5f} low {l:.5f} close {c:.5f} | best {best:+.1f} worst {worst:+.1f} close {f(c):+.1f} pips")
 hs = max(float(r[3]) for r in rows); ls = min(float(r[4]) for r in rows); last = float(rows[-1][5])
 best = f(hs) if s > 0 else f(ls); worst = f(ls) if s > 0 else f(hs)
+print(f"  WINDOW: {n} M15 candles = {n*15} minutes, {rows[0][1][:5]}..{rows[-1][1][:5]} UTC (candle open times). Use 8 for 08:00-10:00, 16 for 08:00-12:00.")
 print(f"  over these {n}: best {best:+.1f} | worst {worst:+.1f} | last {f(last):+.1f} | stop distance from fill {abs(e-sl)*1e4:.1f} | worst-to-stop {(abs(e-sl)*1e4 + worst):.1f} pips left")

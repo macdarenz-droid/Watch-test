@@ -149,3 +149,24 @@ Facts: day size unchanged; moves no longer hold (whip mornings 6% -> 23%). On/of
 ## 07-17 (weekend) test: idea SW, slow A2 on the daily scale (journal/2015-idea-SW-slow-A2.md)
 SW1 (10-day direction, stop 120, target 240, 5 days): 39 trades +0.170R, positive before and after 04-07, DD 5.40R. Five lines pass;
 K4 fails (against the opposite side on the same days +0.294R, p 0.44). KILLED by its own line. Idea 107, variants 300.
+
+## CORRECTION written Mon 2015-07-27 (PROCESS MISTAKE P12; found by me on 07-27 when the walk tool and the engine disagreed)
+From Mon 07-13 to Mon 07-27 I called `bt/walk_numbers.py ... 24` and `... 48` for my 10:00 and 12:00 notes, believing the tool counted
+M5 candles. It counts M15 candles: my windows were 6 and 12 hours, not 2 and 4, so some "best / worst" figures in the notes above include
+prices from BEFORE the 08:00 entry. No result, tag, tally or decision is affected: every result came from the engine. The statements
+"within 5 pips of the stop" (07-15), "1 pip from the stop" (07-21) and all "stopped" notes are true. Wrong figures, with the true ones
+(08:00-10:00 | 08:00-12:00, pips from the engine's entry, recomputed from history):
+| day | I wrote | true |
+|---|---|---|
+| 07-13 buy | best +10.5 | best +0.5; worst -132.3 as written; stopped 08:05 |
+| 07-14 sell | best +12.2 | best +7.1; worst -60.6 / -65.8; stopped 09:25 |
+| 07-15 sell | best +13.8 | best +8.1; worst -34.9 as written |
+| 07-16 sell | worst -17.4, then -31.8 ("8.2 pips left") | worst -8.0 all morning; best +34.4 / +51.4 as written |
+| 07-20 sell | best +20.1 at 10:00 | best -0.6 by 10:00, +15.0 by noon; worst -24.2 as written |
+| 07-21 sell | best +17.1 | best +9.0; worst -34.3 / -39.0 as written |
+| 07-22 buy | best +10.5 | best 0.0; worst -31.3 / -40.2; stopped 11:25 |
+| 07-23 buy | worst -5.5 / -7.4 | worst -1.8; best +76.1 as written |
+| 07-24 buy | best +5.1 | best 0.0; worst -59.5; stopped 08:30 |
+| 07-27 buy | worst -29.7, then -59.1 | worst -12.9; best +85.1 as written |
+(07-17: figures as written.) Cause: after a break in my work I assumed the candle size instead of reading the tool's first line. Fix: the tool now
+prints its window in minutes and clock times; I use 8 and 16. July goal: "numbers corrected after a push" goes from 1 to 2 (one incident, ten days).
