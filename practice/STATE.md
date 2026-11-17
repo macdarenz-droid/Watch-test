@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Sim clock | Fri 2015-05-29 21:00 UTC = 22:00 London (END OF RELEASED DATA; one live day at a time until ~Mar 2017; quality over speed: one honest piece of work earns the next day). London on summer time (UTC+1) |
+| Sim clock | Mon 2015-06-01 00:00 UTC = 01:00 London (END OF RELEASED DATA: Monday's candles not released yet; no call written) (END OF RELEASED DATA; one live day at a time until ~Mar 2017; quality over speed: one honest piece of work earns the next day). London on summer time (UTC+1) |
 | Phase | FUNDED ACCOUNT ($25k FundedNext) since Fri 2015-03-27 - see FUNDED SCOREBOARD below. Sim label "challenge #3" = the funded account; MY tracker is journal/FUNDED-TRACKER.md; this week's journal journal/2015-W20-funded.md |
 | Current strategy | Rule A2 unchanged, IN LONDON TIME (decision 2015-03-30, journal/2015-W14-funded.md; confirmed by the clock-shift test): 07:00 London call; trend = last 22:00 London close vs the close 3 trading days earlier; 08:00 London market order; SL 40 pips; close 12:00 London; 1 trade/day, no skips. In UTC during summer time: call 06:00, entry 07:00, exit 11:00. FUNDED PLAN: journal/FUNDED-PLAN.md |
 | Risk | FUNDED: 0.50% = $125 = 0.31 lots. COMMANDS: `python sim.py advance --until DATE T06:00` (= 07:00 London in summer time; T07:00 in winter), `./look.sh 3 0 9`, WRITE THE CALL (before 08:00 London, or no trade that day), then `python trade_a.py buy/sell --risk 125 --london` (08:00 -> 12:00 London, converted automatically). Funded brakes: 3% below high-water (or <= $24,250) -> 0.25% (`--risk 62.5`); 5% below (or <= $23,750) -> STOP + review. Payouts every 14 days: half of profit above $25,000 until a $1,000 buffer, then all above $26,000; none while a brake is on |

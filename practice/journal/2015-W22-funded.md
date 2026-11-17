@@ -299,3 +299,9 @@ after a push; May had 5).
 June goal: one live trade worked by hand at each cost level and a predicted result for every kill line, in the pushed pre-registration; the script then
 reproduced the worked case to the last digit. Lived average +0.221R -> +0.180R at double costs (predicted +0.175R) -> +0.134R at triple (predicted
 +0.125R); no extra full stops; all four lines pass. Break-even 8.9 pips of extra round-trip cost. A health check: nothing changes. Counts: 70 ideas, 195 variants.
+
+## Mon 06-01, 01:00 London: NO CALL, NO TRADE YET. After `git pull origin main` the release file reads "released through 2015-06-01 00:00 UTC": that is
+the Sunday-evening candles only, up to 01:00 London on Monday. `python sim.py advance --until 2015-06-01T06:00` stopped at END OF RELEASED DATA. The 07:00
+call needs the night to 07:00 and the entry bar at 08:00; they are not in the feed. The look.sh / call_numbers lines printed at this point were built on a
+night that ends at 01:00 and are NOT used for anything (June goal: no figure without a complete print behind it). I did not open any feed file and did
+not look for the data anywhere else. Sim state committed; waiting for the coach to release Monday.
