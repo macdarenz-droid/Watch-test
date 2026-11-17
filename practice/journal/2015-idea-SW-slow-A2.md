@@ -38,3 +38,24 @@ Tool: `python bt/slow_a2.py 2015-07-18 count` / `first` (trade counts and the fi
   (240 pips), else out 12:00 on Mon 01-26.
 
 ## Result (one run)
+Tools: `python bt/slow_a2.py 2015-07-18 test`, then `python bt/slow_a2_mirror.py 2015-07-18`.
+Hand check, first trade: SELL 1.15590 on 01-19, stopped 1.16791 on 01-21 14:45, -1.00R.
+CODE DEVIATION, disclosed: K4 was written as "same days, opposite side, same stops". My first code let the mirror run its own sequence
+(only 17 shared entry days; difference -0.308R, p 0.57). That was not the written line. I wrote bt/slow_a2_mirror.py to do the line as
+written (stand-alone opposite trade on each of my entry days; the same-side stand-alone trade reproduces the run to 0.0000R). The line
+itself was not changed. K4 fails either way.
+| variant | trades | avg R | net | wins | sl / tp / time | before 04-07 | from 04-07 | without best 2 | stressed avg | max DD | my side - opposite (p) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| SW1 N=10, stop 120, 5 days | 39 | +0.170 | +6.64 | 46% | 21 / 10 / 8 | 16: +3.60 | 23: +3.04 | +2.65 | +0.161 | 5.40R | +0.294 (0.44) |
+| SW2 N=3, stop 120, 5 days | 39 | +0.078 | +3.05 | 41% | 22 / 11 / 6 | 16: +0.63 | 23: +2.43 | -0.94 | +0.096 | 6.77R | +0.186 (0.61) |
+| SW3 N=10, stop 80, 2 days | 69 | +0.132 | +9.09 | 48% | 33 / 16 / 20 | 29: +7.28 | 40: +1.81 | +5.10 | +0.116 | 5.62R | +0.294 (0.27) |
+SW1: K1 PASS | K2 PASS | K3 PASS | **K4 FAIL** (p 0.44; line p < 0.05) | K5 PASS | K6 PASS. All had to pass. **SW IS KILLED by its own line.**
+What I learned, without softening and without dressing up:
+1. It is the first follow-the-direction rule of mine that is above zero on BOTH sides of 04-07. That is worth writing down.
+2. And it is not evidence: 39 trades, +0.17R each, cannot be told from a coin (p 0.44). To see a +0.17R edge at this spread of results
+   I would need several hundred trades; my history has 39. The test could not have passed K4 unless the edge were far bigger. I should
+   have seen that before running: the sample line (>= 30 trades) was too soft for a p-value line. A method note, not an excuse.
+3. Not in the numbers: overnight financing; trades overlap in time with each other's signals, so they are less independent than 39 sounds.
+4. I do not re-cut it, add a fourth variant or lower the line. If the coach agrees, the one honest use is a forward paper count of SW1
+   exactly as written (about 7 trades a month), which proves nothing before 2016. I start nothing on my own.
+Counts: idea 107; variants 298-300; second setups tried 17, none alive.

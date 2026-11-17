@@ -145,3 +145,7 @@ WARNING SIGN by the line written first. A2 stays on paper; nothing else changes.
 ## 07-16 test: idea MC, what changed + morning-chop on/off (journal/2015-idea-MC-morning-chop-on-off.md)
 Facts: day size unchanged; moves no longer hold (whip mornings 6% -> 23%). On/off rule by the last 10 mornings: inside Jan-Apr the gap is
 +0.16R and OFF days still earned +0.27R. KILLED at step 1; lived months not run. Idea 106, variants 297.
+
+## 07-17 (weekend) test: idea SW, slow A2 on the daily scale (journal/2015-idea-SW-slow-A2.md)
+SW1 (10-day direction, stop 120, target 240, 5 days): 39 trades +0.170R, positive before and after 04-07, DD 5.40R. Five lines pass;
+K4 fails (against the opposite side on the same days +0.294R, p 0.44). KILLED by its own line. Idea 107, variants 300.
