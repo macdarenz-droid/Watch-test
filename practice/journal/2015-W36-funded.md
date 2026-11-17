@@ -35,3 +35,7 @@ Next payout date Fri 09-11.
      MO PAPER RULE (day 45 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.31R (running -4.36R).
      For Tuesday (tool): MO1 -0.177R -> paper; MO3 -0.183R -> paper. Tuesday 09-01: August month-end review.
      How it feels: calm. First NC1 skip tag was a winner; one day says nothing.
+
+## 08-31 evening test: idea 150 HL, skip A2 against the daily lows/highs (journal/2015-idea-HL-against-the-daily-structure.md)
+From my W06 note ("sold into higher lows"). Prereg, counts (N = 1 by rule, 50 skips) and worked case pushed before the run. R = engine A2 after
+costs 1.0 + 0.1: skipped days +0.212R vs kept +0.121R, gap -0.091R, p 0.71 -> KILLED on all four lines. Ideas 150, variants 400.

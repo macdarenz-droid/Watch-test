@@ -35,3 +35,19 @@ skip. That is how it was written; I do not change it.
 Worked case 08-31 (my hand reading of the call numbers, then the tool): A2 SELL; lows Tue 1.13968 > Wed 1.12914 > Thu 1.12030 > Fri 1.11559
 = three falling lows, WITH the sell -> against 0, with 3 (tool: ag 0, wi 3). HL1 keeps the day.
 One run next: `python bt/daily_structure.py 2015-09-01 test 1 2`.
+
+## Result (one run; `python bt/daily_structure.py 2015-09-01 test 1 2`; R = the engine's A2 R AFTER COSTS spread 1.0 + slippage 0.1)
+| variant | skipped: n, avg, net | kept: n, avg, net | gap (kept - skipped) | before 04-07 (skipped n) | from 04-07 (skipped n) |
+|---|---|---|---|---|---|
+| HL1 skip when 1+ step against A2 (JUDGED) | 50, +0.212, +10.59 | 118, +0.121, +14.22 | -0.091 | -0.155 (21) | +0.005 (29) |
+| HL2 skip at 2+ steps (dose) | 12, +0.133, +1.60 | 156, +0.149, +23.22 | +0.016 | -0.310 (6) | +0.461 (6) |
+| HL0 skip when 1+ step WITH A2 (control) | 118, +0.121, +14.22 | 50, +0.212, +10.59 | +0.091 | +0.155 (42) | -0.005 (76) |
+A2 on all 168 days +24.82R; with HL1 +14.22R. HL1 shuffle p 0.712.
+Kill lines, each value against its threshold (HL1):
+K1 skipped average below zero AND 0.30R+ below kept: skipped +0.212R (above zero), gap -0.091R -> FAIL.
+K2 same sign (skipped below kept) before AND from 04-07: -0.155 / +0.005 -> FAIL.
+K3 HL1's gap larger than HL0's: -0.091 vs +0.091 -> FAIL.
+K4 shuffle p < 0.10: 0.712 -> FAIL.
+VERDICT: KILLED on all four (idea 150; variants HL1 HL2 HL0 counted). The W06 note was wrong: A2's sells into higher lows (buys under lower
+highs) made MORE than its other days (+0.212R vs +0.121R). At N = 1 the control is just the other side of the same split (every day has
+either a higher or a lower low), which I should have seen at the counts; it changes nothing in the verdict.
