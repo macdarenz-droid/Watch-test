@@ -311,3 +311,15 @@ followed" (journal/2015-idea-DF-big-days-are-not-followed.md): fade yesterday's 
 judged), a hand-worked case and kill lines K1-K7 pushed before the code; one run. -0.016R / -0.076R / -0.141R a trade; positive before April, negative
 April to early June, positive only again in the window I had looked at; the dose goes the wrong way. KILLED. Counts: 101 ideas, 285 variants; second
 setups tried 14, none alive. July corrections after a push: 1.
+
+## 07-10 (weekend): idea DH "drive and hold" (coach: biggest winners March-June by eye -> one rule)
+Full write-up: journal/2015-idea-DH-drive-and-hold.md. Review, rule and kill lines pushed before code; cases counted and a worked case
+pushed before the outcome run; one run.
+By eye the 12 best days shared a one-way afternoon the day before and a flat night that kept it. The tool: 7 of 12 (I had written 8 of
+10), base rate 37%. Test (08:00 with the drive, stop 40, out 12:00; inspiring days dropped):
+| variant | judged | avg R | net | P1 | P2 | P3 | max DD |
+|---|---|---|---|---|---|---|---|
+| DH1 | 58 | -0.135 | -7.81 | +1.27 | -1.75 | -7.33 | 11.34R |
+| DH2 | 40 | -0.130 | -5.19 | +4.28 | -2.92 | -6.55 | 11.32R |
+| DH3 | 70 | -0.151 | -10.58 | -0.29 | -3.88 | -6.41 | 14.11R |
+KILLED on all six lines. The 8 inspiring days carried +13.79R; the rest lost. Idea 102, variants 288, second setups tried 15, none alive.

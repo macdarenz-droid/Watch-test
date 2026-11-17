@@ -61,3 +61,26 @@ Tool: `python bt/drive_hold.py 2015-07-11 count` and `... check 2015-06-04` (fac
   DH1 points the same way as A2 on 35 of 57 days. Judgeable by my line (>= 40 in all, >= 15 in P3): yes. P1 with 19 cases can kill, not prove.
 
 ## 6. Result (one run, after the lines above were pushed)
+Tool: `python bt/drive_hold.py 2015-07-11 test`. Mechanics: on the 79 days where my side equals A2's side, my trade equals the engine's
+A2 trade to 0.0000R. Hand check 06-04: BUY, closed 12:00, +2.95R = the engine's A2 trade of that day.
+
+| variant | judged | avg R | net R | wins | full stops | P1 (Jan-Feb) | P2 (03-02..04-06) | P3 (04-07..07-10) | side minus other (p) | stressed avg | max DD |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| DH1 drive>=30, kept>=0.5 | 58 | -0.135 | -7.81 | 43% | 40% | 19: +1.27 | 10: -1.75 | 29: -7.33 | -0.181 (0.43) | -0.182 | 11.34R |
+| DH2 drive>=50, kept>=0.5 | 40 | -0.130 | -5.19 | 42% | 40% | 9: +4.28 | 8: -2.92 | 23: -6.55 | -0.149 (0.60) | -0.170 | 11.32R |
+| DH3 drive>=30, any night | 70 | -0.151 | -10.58 | 41% | 39% | 22: -0.29 | 14: -3.88 | 34: -6.41 | -0.179 (0.36) | -0.206 | 14.11R |
+
+KILL LINES for DH1: K1 FAIL (-0.135R) | K2 FAIL (P3 -7.33R) | K3 FAIL (-13.48R without its best two) | K4 FAIL (worse than the other
+side, p 0.43) | K5 FAIL | K6 FAIL (11.34R). K7 dose PASS on paper (-0.151 -> -0.135 -> -0.130), which means nothing when all are negative.
+With A2 (35 days) -0.036R; against A2 (22 days) -0.354R.
+**DH IS KILLED.** No fourth variant, no re-cut.
+
+What I learned:
+1. The 8 inspiring days that are DH1 days made +13.79R. The other 58 DH1 days made -7.81R. The "shared trait" of my best days was
+   shared just as much by ordinary and losing days: I found it by choosing days on their result. Same lesson as BS and PZ, third time.
+2. In P3 (the months that count now) following yesterday's afternoon lost 0.25R a trade. That fits RG/WM/DF: since 04-07 nothing that
+   follows a direction into the London morning has paid.
+3. The other side of DH1 was better by 0.18R a trade, but p 0.43: not different from a coin. And coach 07-09: no mirror test on the same
+   data. I do not test "fade the drive". It is NOT a finding.
+4. Possible luck check the other way: none needed, nothing passed.
+Counts: idea 102; variants 286-288; second setups tried 15, none alive. Route B: still no setup past step B1.
