@@ -204,6 +204,27 @@ Coach 06-08: enough entry tweaks; the next backtest takes a different part of th
      FUNDED DAY 55 IS DONE: the 20-day hold on the 7% personal stop ends; its review is written now (journal/2015-06-11-review-of-the-7pct-stop.md).
      END OF RELEASED DATA (clock Fri 06-12 01:00 London).
 
+- **Fri 06-12 call, written 07:00 London (06:00 UTC), before the entry bar.** June goal read first: every figure below is from `python bt/call_numbers.py 2015-06-12`, `./look.sh` or a bar print. Yesterday's tag stands: VALID LOSS.
+  Coach 06-12: GB done right; +1.10R on 3 days is a hint, not proof; the trail stays a paper line, judged at 15 forward cases, no live change before.
+      Five valid losses in a row sit inside my written range: same rules, same size rule, no revenge.
+  D1 (London days): Tue 06-09 close 1.12822 (0.52); Wed 06-10 close 1.13237 (0.50); Thu 06-11 high 1.13315 low 1.11820 close 1.12573 (0.50, range 149.5):
+      a new 3-day low in the afternoon, bought back to the middle. A lower close than Wednesday's. Three wide days in a row that close in their middle.
+  H4 (UTC bars): Thu 08:00 bar 1.12623 -> 1.12337; 12:00 bar down to 1.11820, close 1.12365; 16:00 bar up to 1.12702; 20:00 bar back to 1.12458; tonight 00:00 bar 1.12429-1.12668; 04:00 bar down to 1.12218, last 1.12407.
+  H1: the night (00:00-07:00 London): open 1.12394, high 1.12668, low 1.12218, last 1.12407: range 45.0 pips (ratio 0.93), net +1.3 pips - flat on balance, a 43 pip drop in the 05:00 London hour and half of it back.
+  M15: low 1.12218 at 06:00 London, then four candles up to 1.12483.
+  Bias: SELL. 22:00 London closes: 06-11 1.12573 vs 06-08 1.12906 = -33 pips (3-day gap -33.3). Gap / ADR5 0.19: a small signal. FLIP DAY (three buys before it).
+  UN3 PAPER TAG (never live): 5-day gap +20 pips (19.8) -> BUY; DISAGREE: paper SKIPS. Forward day 39, disagree day 10 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 31.
+  MB1 PAPER TAG (never live, forward day 23): morning direction written at 12:00, before 13:25.
+  Levels: night low 1.12218; Thu low 1.11820; night high 1.12668; Thu high 1.13315.
+  Rejection-day check: for a sell, Thursday made the 3-day low (True) and closed at 0.50, not in the top third. Not a rejection day. 10-day trend: UP (1.12573 vs 05-28 1.09474); the sell is AGAINST it (counted).
+  SIZE RULE (the real safety rule): tracker balance $24,671.91, high-water $25,280.44, drawdown -2.41%; trigger 1 (half size) $24,522.03 not reached on a close -> FULL size, 0.31 lots. Trigger 2 (stop) $23,510.81.
+      The rule reads tonight's close: a full stop today most likely leaves the close above the line by a little; if it does not, Monday is half size. Neither changes today.
+  Five losses in a row behind me; the written normal worst is six. A sixth is AT the edge of the range, not outside it (written yesterday; the line does not move).
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade. Same size as every day: not bigger to get it back, not smaller to hide.
+  Friday: gates list read after the trade. No payout date (next Fri 06-19).
+  Worry: a small flip signal against the 10-day trend, after three wide days with no direction. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
