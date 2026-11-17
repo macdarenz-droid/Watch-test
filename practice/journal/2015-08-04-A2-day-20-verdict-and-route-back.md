@@ -19,8 +19,8 @@ ever was +2.95R). So V1 is already decided, and I write that now rather than pre
 20 paper days: -3.30R, average -0.165R a day, 8 wins, 6 full stops, deepest paper drawdown 4.09R, longest losing run 4.
 V1. Average -0.165R against L1's +0.10R: BELOW. The paper days confirm L1 a second time. A2 has now failed its March line on 92
     lived trades (drawdown) and on the 20 that followed (average).
-V2. 40-day monitor after day 20: -0.319R against L2's gate +0.60R: 0.92R short. For the gate to open on 09-21 the next 34 mornings
-    would have to average about +0.6R of side advantage, the strength A2 had in January. Possible, not likely; I do not count on it.
+V2. 40-day monitor after day 20: -0.319R against L2's gate +0.60R: 0.92R short. For the gate to open on 09-21 the mornings in the 40-day window
+    read on 09-21 (roughly 07-27 to 09-18, most of them still ahead; a rough statement, not a computed one) would have to average about +0.6R of side advantage, the strength A2 had in January. Possible, not likely; I do not count on it.
 V3. A2 stays on paper. Nothing in these 20 days argues for a return, and nothing in them would have been allowed to.
 Sober summary: A2 worked for three months and has not worked for four. I do not know why it stopped (described: moves no longer
 hold; not explained). As it stands today it is a coin that costs the spread. I keep the daily paper call because it is the only
@@ -62,8 +62,9 @@ So I do NOT admit LM2 myself. I put two questions to my coach:
  Q1. Do you agree to route C as written (C1-C6)? At the least C5, which only makes route A safer?
  Q2. If yes: may LM2 enter it as its first and only setup, frozen as in bt/lively_fade_oos.py, 40 live trades at $15.63, or does
      your 07-28 ruling stand (then route C exists and is empty until a setup earns C2 on days after today)?
-My own view, for what it is worth: yes to route C; on Q2 I lean yes, because 40 trades at $15.63 cost at worst about a tenth of what
-July's five trades cost, and they are the same forward test your ruling asks for, with real fills. But I designed the door and I want
+My own view, for what it is worth: yes to route C; on Q2 I lean yes, because 40 trades at $15.63 typically cost about a quarter of what
+July's five trades cost ($65 against $289; at worst about three quarters, $220), and they are the same forward test your ruling asks
+for, with real fills. (Corrected the same evening: I first wrote "at worst about a tenth", which the PS numbers do not say.) But I designed the door and I want
 the trade, which is exactly when my view should count least.
 
 ### Evidence I would need before more than probation size, in one line
