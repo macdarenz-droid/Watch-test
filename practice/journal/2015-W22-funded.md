@@ -139,6 +139,24 @@ Friday 05-29 is the last trading day of May: the month-end review is due on the 
      +80 pip trades (counts-only): none today (best +45.9); 0 of 15.
      END OF RELEASED DATA (clock Thu 05-28 01:00 London).
 
+- **Thu 05-28 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID WIN. Figures from `python bt/call_numbers.py 2015-05-28` and the bar prints.
+  D1 (London days): Mon 05-25 close 1.09766 (0.35); Tue 05-26 close 1.08719 (0.07); Wed 05-27 high 1.09290 low 1.08192 close 1.09038 (0.77, range 109.8):
+      after my noon exit it fell to a new low 1.08192 and then came back 85 pips to close in the top quarter. A new 3-day low and a close near the high.
+  H4 (UTC bars): Wed 12:00 bar 1.08192-1.09107 (close 1.08864); 16:00 bar up to 1.09075; tonight 00:00 bar 1.08899-1.09200; 04:00 bar high 1.09269.
+  H1: the night (00:00-07:00 London): open 1.09039, high 1.09269, low 1.08899, last 1.09189: range 37.0 pips (ratio 0.82), net +15.0 pips - a slightly rising night, against my side.
+  M15: 1.0907-1.0927, the last candle back from the high to 1.09189.
+  Bias: SELL. 22:00 London closes: 05-27 1.09038 vs 05-22 1.10074 = -104 pips (3-day gap -103.6). Gap / ADR5 0.88.
+  UN3 PAPER TAG (never live): 5-day gap -190 pips -> SELL; agree: paper TRADES. Forward day 28, disagree days 6 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 20.
+  MB1 PAPER TAG (never live, forward day 12): morning direction written at 12:00, before 13:25.
+  Levels: night high 1.09269; Wed high 1.09290; night low 1.08899; Wed low 1.08192.
+  Rejection-day check (parked observation, never a rule): for a sell, Wednesday made the 3-day low (True) AND closed in the top third (0.77): a REJECTION day.
+      The plan trades it at full size like any other; I note it for the count.
+  10-day-trend paper line: DOWN (1.09038 vs 05-13 1.13536); the sell is with it.
+  SIZE RULE: tracker balance $25,025.81, high-water $25,349.14, drawdown -1.28%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
+  Worry: yesterday the sellers were rejected at the low and the night is rising. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
