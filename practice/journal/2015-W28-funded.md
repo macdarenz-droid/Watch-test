@@ -17,6 +17,7 @@ Coach 07-06: next brick - position sizing math: how the half-size / full-size la
 | F73 | Tue 07-07 08:00 | buy | 0.16 (rule v3) | 1.10278 | 1.09869 | 1.09868 (stop, 09:24) | -1.00 | -$65.60 | VALID LOSS (valid setup, market disagreed) | a 3 pip flip signal against a 180 pip five-day fall; never 6 pips in profit; stopped in the 09:15 candle, 82 pips against at the worst; at the stop level at noon; size rule v3 written before the call; PH2 paper quiet; UN3 DISAGREE (paper skips); MO paper day 6: both monitors off |
 | (paper) | Wed 07-08 08:00 | sell | NO LIVE TRADE (rule alarm) | 1.10146 paper | 1.10546 | paper stop 08:5x | (-1.00 paper) | $0 | NO LIVE TRADE - BY RULE | A2 on paper day 1: stopped by a spike 5.4 pips through, back inside by noon; account flat and unchanged |
 | (paper) | Thu 07-09 08:00 | sell | NO LIVE TRADE (return rule: monitor -0.235R) | 1.10979 paper | 1.11379 | paper close 12:00 | (+1.39 paper) | $0 | NO LIVE TRADE - BY RULE | A2 on paper day 2: fell from the bell, best +73.3 pips; account flat and unchanged |
+| (paper) | Fri 07-10 08:00 | sell | NO LIVE TRADE (return rule: monitor -0.202R) | 1.10947 paper | 1.11347 | paper stop | (-1.00 paper) | $0 | NO LIVE TRADE - BY RULE | A2 on paper day 3: stopped; the price ran 105 pips against the sell by noon; account flat and unchanged |
 
 ## Daily calls - each written at 07:00 London and committed before the entry bar; then a note before every advance
 
@@ -227,6 +228,26 @@ Coach 07-06: next brick - position sizing math: how the half-size / full-size la
   Levels: night high 1.11336 (above Thu's high 1.11249); night low 1.10549; Thu low 1.09915.
   10-day trend: DOWN (1.10356 vs 06-25 1.12045); the paper sell is with it.
   PAPER plan: SELL at 08:00 London, stop 40 pips above the bid, close 12:00. No order in the account. Friday: gates list after the paper trade.
+  08:00 London Fri (PAPER): pre-entry hour 1.10902-1.11306 = 40.4 pips -> PH2 paper: LIVELY. Price 1.10947; night against the sell by 24.5 pips. PAPER order: SELL at 1.10947, stop 1.11347. NO ORDER IN THE ACCOUNT.
+  10:00 London (PAPER): the paper sell is 15 to 35 pips under water (worst -35.3, 4.7 from the paper stop), last -19.7. Nothing in the account. Next look 12:00.
+  12:00 London (PAPER): the paper sell was stopped in the 10:xx hour (the price ran 105 pips against it by noon).
+  -> Fri result, TAG FIRST: NO LIVE TRADE - BY RULE (return-to-live rule: monitor -0.202R -> paper). Checked: July goal read; paper call committed before
+     the bell; no order placed; the trade list still ends with #230 of 07-07; sim balance unchanged.
+     PAPER A2, day 3 (engine, `python bt/coin_control.py 2015-07-11 --check 2015-07-10`): sell, stopped, -1.00R; the other side +2.39R.
+     A2 paper running from 07-08: 3 days, -0.61R (-1.00, +1.39, -1.00).
+     Account: tracker balance $24,358.99 (sim $24,926.03 minus $567.04 paid out), unchanged; FLAT; high-water $25,256.94; drawdown -3.56%.
+     THE WEEK (W28): two live trades (Mon -1.00R at 0.16 lots, Tue -1.00R at 0.16 lots: -$130.08), then three days flat by rule (paper -0.61R).
+     Size rule v3 written Tue; rule alarm followed Wed; return-to-live rule written Thu. No trade mistake. The week's work was the three documents.
+     How it feels: yesterday's paper winner stung; today's paper stop did not please me either. Both are the same thing: not my money, and the
+     monitor's business.
+     Paper lines (units of a full trade's R): UN3 agreed, -1.00R (agree days -8.54R in 45; disagree days +2.88R in 14; n = 14 of 30).
+     PH2 (day 51): lively (40.4) -> half = -0.50R; tally 51 days, 36 lively (-4.81R, 17 full-stop mornings), 15 quiet (-2.39R, 6); PH2 about -4.78R against A2's -7.22R.
+     MO PAPER RULE (day 9 of 60): both monitors had A2 off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.00R (running -3.41R).
+     For Monday (tool): MO1 -0.227R -> paper; MO3 -0.166R -> paper.
+     FRIDAY GATES LIST READ (07-10): nothing due. Return-to-live rule: review day Mon 09-21; route A monitor -0.227R (needs +0.30R and MO's judging);
+     route B: no setup has passed a test (14 tried). MO day 9 of 60. UN3 14 of 30 disagree days / 59 of 200. PH2 36 of 60 lively / 51 of 200.
+     Live-trade counts frozen. Next payout date Fri 07-17 (balance under $25,000: $0 unless that changes). Month-end review: first trading day of August.
+     END OF RELEASED DATA (clock Fri 07-10 22:00 London; weekend).
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |

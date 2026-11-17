@@ -13,3 +13,4 @@ A2-always's and (b) A2 averaged below +0.10R on the days the variant had it off.
 | Tue 2015-07-07 (6) | -0.188R -> PAPER | -0.034R -> PAPER | -1.00 | 0.00 (0.00) | 0.00 (-1.80) | -1.00 (-2.80) |
 | Wed 2015-07-08 (7; A2 itself on paper from today) | -0.171R -> PAPER | -0.048R -> PAPER | (paper -1.00) | 0.00 (0.00) | 0.00 (-1.80) | -1.00 (-3.80) |
 | Thu 2015-07-09 (8; A2 on paper) | -0.235R -> PAPER | -0.105R -> PAPER | (paper +1.39) | 0.00 (0.00) | 0.00 (-1.80) | +1.39 (-2.41) |
+| Fri 2015-07-10 (9; A2 on paper) | -0.202R -> PAPER | -0.064R -> PAPER | (paper -1.00) | 0.00 (0.00) | 0.00 (-1.80) | -1.00 (-3.41) |
