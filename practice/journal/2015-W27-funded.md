@@ -79,6 +79,31 @@ Bookkeeping command this week: `python bt/daily_numbers.py 567.04 25256.94`.
      drawdown 5.27R (line 8.55R): NOT crossed, one loss away on the run. W5 fills -0.07R: no. W6: no trade mistake.
      END OF RELEASED DATA (clock Tue 06-30 01:00 London).
 
+- **Tue 06-30 call, written 07:00 London (06:00 UTC), before the entry bar.** June goal read first: every figure below is from `python bt/call_numbers.py 2015-06-30`, `./look.sh`, `python bt/side_monitor.py 2015-06-30 --state` or a bar print. Yesterday's tag stands: VALID LOSS.
+  Coach 06-30: MO is good work and keeping it paper-only is right. 7 in a row and the half-size trigger is close: follow the written sizing rule exactly,
+      no revenge sizing and no skipping valid setups. Next backtest: the daily and weekly stop rules against my worst historical streaks - breach risk if this continues.
+  Plan line read (BD): the only way to lose the best days is not to trade the day or not to hold it to 12:00.
+  SIZE RULE, READ WORD FOR WORD (plan section 2): "HALF size (0.16 lots) from a day's CLOSE at or below 3% under the high-water mark, until a new high-water."
+      Last close (tool, 06-29): tracker balance $24,586.41. Line: $24,499.23. $24,586.41 is ABOVE the line by $87.18 -> the trigger is NOT on ->
+      TODAY IS FULL SIZE, 0.31 lots. Not 0.16 because I am nervous (that would be skipping half a valid setup); not more than 0.31 to get anything back.
+      After today's close the same sentence is read again: a close at or under $24,499.23 -> tomorrow 0.16 lots, and it stays 0.16 until a new high-water ($25,256.94).
+  Streak against the written numbers (06-24): 7 losses in a row = AT the 95th percentile; 5.27R under the high (95th percentile 8.55R). An eighth loss
+      today is worry line W4: written up and sent to the coach today, and trading goes on by the plan.
+  D1 (London days): Thu 06-25 close 1.12045 (0.69); Fri 06-26 close 1.11625 (0.36); Mon 06-29 high 1.12783 low 1.09545 close 1.12356 (0.87, range 323.8
+      with the weekend gap inside it): opened 158 pips lower, and bought all day to a close 73 pips ABOVE Friday's. The gap is filled and more.
+  H4 (UTC bars): Mon 08:00 bar 1.10579-1.11409; 12:00 bar up to 1.12048; 16:00 bar high 1.12783, close 1.12440; 20:00 bar back to 1.12181; tonight 00:00 bar down to 1.11820; 04:00 bar 1.11810-1.12016, last 1.11841.
+  H1: the night (00:00-07:00 London): open 1.12159, high 1.12245, low 1.11810, last 1.11841: range 43.5 pips (ratio 0.84), net -31.8 pips - a falling night, AGAINST a buy.
+  M15: the last candle fell 14 pips to the night's low.
+  Bias: BUY. 22:00 London closes: 06-29 1.12356 vs 06-24 1.12040 = +32 pips (3-day gap +31.6). Gap / ADR5 0.20. FLIP DAY after four sells.
+  UN3 PAPER TAG (never live): 5-day gap -105 pips (-104.6) -> SELL; DISAGREE: paper SKIPS. Forward day 51, disagree day 12 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 43.
+  MB1 PAPER TAG (never live, forward day 35): morning direction written at 12:00, before 13:25. Kept drawdown 5.66R; early-close line 6R.
+  MO PAPER RULE (never live; day 1 of 60): MO1 (40 days) monitor -0.086R -> A2 would be on PAPER today. MO3 (60 days) monitor +0.011R -> A2 as usual.
+  Levels: night low 1.11810; Mon 12:00 open about 1.1108; night high 1.12245; Mon high 1.12783.
+  Rejection-day check: for a buy, Monday made the 3-day high (True) and closed at 0.87, not in the bottom third. Not a rejection day. 10-day trend: DOWN (1.12356 vs 06-15 1.12826); the buy is AGAINST it (counted).
+  Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
+  Worry: an eighth loss and the half-size line, both one stop away. Neither changes what I do at 08:00. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
