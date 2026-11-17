@@ -36,3 +36,13 @@ good the dropped window looks: that window is where I found it.
 My guess: judged days about zero (K1 fails); the dropped window clearly positive. If so, it was weather.
 
 ## 6. Counts and worked case (tool, before outcomes)
+Tool: `python bt/mid_morning_fade.py 2015-07-31 count` / `check 2015-07-28` (no outcomes).
+- 150 days; judged (before 06-05) 110; dropped window 40. MF1 judged 58 trades (30 before 04-07, 28 in 04-07..06-04); dropped window 18.
+  MF2 judged 28 (15 / 13); dropped 10. Judgeable (>= 40).
+- My eye against the tool on the 14 note days: 10:00-12:00 went against 08:00-10:00 on 10 of 14 (I had marked 8 "given back" plus the
+  stopped ones); on the 8 days with a move of 25+ pips, against on 5. So on the days the rule would actually trade, the picture is 5 of 8.
+- Worked case, no trade: Tue 07-28, 08:00 open 1.10562, 10:00 open 1.10646, move +8.4 -> under 25, nothing.
+- Worked case with a trade (in the dropped window; mechanics only): Mon 07-27, my walk had +49.8 pips at 10:00 and +39.2 at noon, the
+  high already behind. So MF1 SELLS at 10:00, stop 30 above, out 12:00, and should make about +10 pips less costs = about +0.3R.
+
+## 7. Result (one run)
