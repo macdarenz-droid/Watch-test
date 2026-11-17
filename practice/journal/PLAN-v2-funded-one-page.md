@@ -56,3 +56,8 @@ Today: tracker $24,358.99, high-water $25,256.94, drawdown -3.56%, FLAT since 07
 ## 9. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
 max 3 variants, costs on, everything counted in STATE.md (129 ideas, 352 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+- SAMPLE RULE (coach 08-12, option 2; written Wed 2015-08-12 evening): a setup that trades several times a day needs 120+ trades and
+  50+ from 04-07. A ONCE-A-DAY setup needs 80+ trades and 35+ from 04-07, and its pre-registration must state the weak power up front
+  (about +-0.22R on the average at 80 trades; a rule with no edge clears +0.10R about one time in four). Thresholds are chosen from counts
+  by a rule written before the count. ANY PASS IS PROVISIONAL until the same frozen rule also holds on lived days after the test
+  (a pre-registered forward count, one at a time, never route C before that). Max 3 variants, named up front. Costs on.
