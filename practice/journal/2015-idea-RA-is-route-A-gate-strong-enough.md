@@ -31,3 +31,24 @@ Worked case to check first: the tool's 40-day monitor for the morning of 07-23 m
 before shifting, spread 1.89R). Healthy pool: 65 days to 04-06 (mean +0.942R, spread 1.57R).
 
 ## Result (one run)
+Tool: `python bt/gate_check.py 2015-07-23 test` (20,000 resamples each).
+| gate (40-day mean side advantage) | NO-EDGE A2: opens on one morning | NO-EDGE: opens at least once in 60 mornings | HEALTHY A2: one morning | side advantage of only +0.30R: one morning |
+|---|---|---|---|---|
+| +0.30R (as written 07-09) | 15.8% | 59.9% | 99.6% | (not run) |
+| +0.40R | 9.3% | 43.1% | 98.8% | 34.8% |
+| +0.50R | 4.9% | 28.1% | 96.6% | 20.6% |
+| +0.60R | 2.2% | 16.0% | 91.8% | 11.0% |
+| +0.70R | 1.0% | 8.7% | 83.6% | 5.1% |
+Exactly 5% on a single morning: +0.49R.
+**VERDICT BY THE LINE WRITTEN FIRST: THE GATE IS TOO WEAK.** A rule with no edge at all would open route A on about one morning in six,
+and in 6 of 10 autumns if I look every morning for 60 days. My +0.30R was a feeling and it was wrong by a factor of two.
+What follows, and what does not:
+1. I do NOT edit the return rule. PROPOSAL for my coach, for the 09-21 review or earlier if the coach says so: raise route A's gate from
+   +0.30R to +0.60R. It is the first step that meets BOTH of my lines (2.2% on a morning, 16% in 60 mornings), and the healthy A2 of
+   January-April would still pass it on 92% of mornings. Stricter only; route A can never open before 09-21 either way.
+2. The price of the stricter gate: an A2 that came back at a third of its old strength (side advantage +0.30R) would pass on only 11% of
+   mornings. With 40 days I cannot have both: keep a dead rule out AND let a weak live one in. I choose keeping the dead one out
+   (survival first), and say so.
+3. The same weakness sits in "back to paper under 0.00R" and in MO's own lines; I did not test those today (one test at a time).
+Limits: days resampled as independent; the no-edge pool is 77 days.
+Counts: idea 110; variants 305-306.

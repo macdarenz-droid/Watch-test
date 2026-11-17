@@ -12,6 +12,7 @@ Today: tracker $24,358.99, high-water $25,256.94, drawdown -3.56%, FLAT since 07
 ## 2. What brings money back (return-to-live rule, 07-09; nothing else does)
 - ROUTE A: A2 at 0.16 lots, on or after Mon 2015-09-21, if the MO monitor passed its 60-day judging AND the 40-day side-advantage monitor
   reads >= +0.30R that morning. Back to paper when it reads under 0.00R.
+  (07-22, idea RA: a no-edge rule passes +0.30R on 1 morning in 6. Proposed to my coach: +0.60R. Not changed until the coach agrees.)
 - ROUTE B: a new setup with a passed pre-registered test incl. a never-seen part, then 40 forward paper trades (avg >= +0.10R, DD <= 6R,
   positive without its best two), then my coach's agreement. Tried: 18 setups, none alive.
 - REVIEW DAY Mon 2015-09-21, whatever happens.
@@ -51,4 +52,4 @@ Today: tracker $24,358.99, high-water $25,256.94, drawdown -3.56%, FLAT since 07
 
 ## 9. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
-max 3 variants, costs on, everything counted in STATE.md (109 ideas, 304 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+max 3 variants, costs on, everything counted in STATE.md (110 ideas, 306 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.

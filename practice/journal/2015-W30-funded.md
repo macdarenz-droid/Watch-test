@@ -90,3 +90,7 @@ WO1 (Tue-Fri 08:00 away from the weekly open, stop 40, out 20:00): 94 trades +0.
 ## 07-21 step back: 5 closest misses + BX2 out of sample (journal/2015-07-21-closest-misses-and-BX-out-of-sample.md)
 BX2, frozen since May, on unseen days 05-12..07-21: 43 trades +0.176R, both halves positive, independent of A2; but stressed +0.019R,
 -3.24R without its best 3, DD 5.32R. Fails O2 O3 O4: dead for good. Idea 109, variant 304.
+
+## 07-22: plan rewritten on one page + idea RA, route A's gate (journal/2015-idea-RA-is-route-A-gate-strong-enough.md)
+Weakest assumption: +0.30R on the 40-day monitor means the edge is back. Test: a no-edge A2 reads that on 15.8% of mornings, 59.9% of
+60-morning runs. Gate too weak. Proposal to the coach: +0.60R (2.2% / 16.0%; healthy A2 passes 92%). Rule not edited. Idea 110, variants 306.
