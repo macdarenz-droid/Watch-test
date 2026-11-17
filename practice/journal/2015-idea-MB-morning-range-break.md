@@ -23,3 +23,18 @@ of a quieter morning should carry better if the idea is right); MB0 (control) MB
 K1 average >= +0.10R after costs (1.0 + 0.1). K2 net above zero before 04-07 AND from 04-07. K3 stressed (2.0 + 0.5) average above zero.
 K4 MB1 minus MB0 above zero, sign-flip p < 0.05.
 My guess: a coin, positive before 04-07 and negative after, like every follow rule.
+
+## Step 1, counts only (tool `python bt/morning_break.py 2015-08-12 count`; no outcomes)
+| B (pips beyond, on a close) | trades | before 04-07 | from 04-07 | up / down | quieter-than-median morning |
+|---|---|---|---|---|---|
+| 0 | 125 | 55 | 70 | 55 / 70 | 59 |
+| 3 | 119 | 52 | 67 | 54 / 65 | 56 |
+| 6 | 109 | 50 | 59 | 49 / 60 | 51 |
+## Step 2, threshold fixed by the line written before the count
+Largest B with 120+ trades and 50+ from 04-07: **B = 0** (125 / 70); B = 3 has 119, one short. So MB1 = any M5 close beyond the
+range; MB2 = the same on the 59 quieter mornings; MB0 = fade.
+Worked case Tue 08-11: morning range 85.9 pips (07:00-11:00, the +82-pip A2 paper morning; not a quieter one); the first close above the
+morning high came at 13:10 -> MB1 BUYS at the 13:15 open, stop 25 below, out 17:00. DT's hand check today showed the price at 1.10708
+by 14:45 (the fade's stop) and 1.10633 at 14:45 for the break; today's last price 1.10416 is lower: I expect a modest result, sign unclear.
+
+## Step 3, result (one run: `test 0`)
