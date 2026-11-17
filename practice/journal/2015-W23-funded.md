@@ -226,6 +226,12 @@ Paper tags, never live: UN3 (07:00), PH2 (08:00, before the order), MB1 (12:00, 
       None due except the payout.
   Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade. The release ends at 22:00 London.
   Worry: yesterday's high was rejected and I am buying under it on a payout day. Written, not a rule.
+  08:00 London Fri: pre-entry hour 1.12181-1.12495 = 31.4 pips -> PH2 paper: LIVELY, paper half size (decided before the order). Price 1.12471, near the top of the hour: night with me by 44.4 pips (not counted); entry 27.1 pips worse than at 07:00. Order: BUY 0.31, stop 40 pips below the bid (1.12071).
+  08:15 London: filled BUY 1.12484, stop 1.12071 (41.3 pips from the fill). First candle read from the tool before this note. No call that matters; hands off.
+  09:00 London: first hour best +31.7, worst -9.7, last +26.4 pips. No call; hands off.
+  10:00 London: second hour best +29.7, worst +5.8, last +10.6 pips: drifting back from 1.1280. No call; hands off.
+  11:00 London: third hour best +19.5, worst -1.2, last +14.7 pips. A narrow range above my entry. One hour left; close at 12:00 whatever it shows.
+  12:05 London: closed at 12:00 @1.12221, -$81.53 (from the trade list): it fell 25 pips in the last quarter of an hour. A noon loss, not a stop. MB1 paper (forward day 18), written before 13:25: open 08:00 1.12473, open 12:00 1.12222 -> morning DOWN by 25.1 pips (large morning) -> only a DOWN break of the 12:00-13:25 box counts. Result from the tool afterwards. Payout: applied after the day's bookkeeping, on the tracker balance, by the rule copied into the call.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
