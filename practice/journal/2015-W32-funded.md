@@ -33,3 +33,7 @@ back to live trading safely: rule, sizing, the evidence I need. Today's test is 
      For Tuesday (tool): MO1 -0.338R -> paper; MO3 -0.285R -> paper.
 
 ## Forward tally
+
+## 08-03 test: idea PS, a probation size (journal/2015-idea-PS-probation-size.md)
+40 trades of a mildly losing setup (-0.10R) from today's balance: $62.50 a trade reaches my stop-trading line in 11% of runs; $31.25 breaks
+$435 in 11%; $15.63 (0.04 lots) never breaks $435; worst realistic cost about $220. Probation size $15.63. Idea 118, variants 328.

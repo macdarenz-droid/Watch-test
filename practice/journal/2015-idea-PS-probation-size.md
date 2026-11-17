@@ -31,3 +31,21 @@ Worked case first: the pool's size and its mean before shifting must match what 
 Pool: 85 trades (04-07..08-03), mean -0.065R, spread 1.02R. The part to 07-15 is 72 trades at -0.081R: the same as LR printed on 07-15.
 
 ## Result (one run)
+Tool: `python bt/probation_size.py 2015-08-04 test` (20,000 runs of 40 trades; pool 85 trades shifted to the stated edge).
+In R: with a true edge of -0.10R the 40-trade drawdown is 8.3R at the median, under 16.0R in 95% of runs, under 20.6R in 99.5%.
+| size | edge 0.00R: DD > $435 / > $870 | edge -0.10R: DD > $435 / > $870 | 5% worst 40-trade result at -0.10R | median result at -0.10R | lines |
+|---|---|---|---|---|---|
+| PS1 $62.50 (0.25%, 0.16 lots, today's rule v3) | 41.1% / 2.6% | 64.0% / 11.1% | -$889 | -$258 | FAIL / FAIL |
+| PS2 $31.25 (0.125%, 0.08 lots) | 2.6% / 0.0% | 11.1% / 0.0% | -$445 | -$129 | FAIL / pass |
+| PS3 $15.63 (0.0625%, 0.04 lots) | 0.0% / 0.0% | 0.0% / 0.0% | -$222 | -$65 | PASS / PASS |
+**BY THE LINES WRITTEN FIRST THE PROBATION SIZE IS $15.63 A TRADE (0.04 lots at a 40-pip stop).** My guess ($31.25) was wrong: it
+breaks the $435 line in 11% of runs for a mild loser.
+What I learned: 1. There IS a size at which 40 live trades of a setup with no edge, or a mildly losing one, cannot reach half my room:
+worst realistic cost about $220, typical cost $65. That is the price of 40 live data points. 2. A warning about my CURRENT rule: with
+only $870 of room left, the v3 size ($62.50) would take a mildly losing setup to my stop-trading line in 11% of 40-trade runs. Size v3
+was written for an account 3% under its high-water with A2 expected near zero; it is too big for a first return with an unproven
+rule. That goes into tomorrow's write-up as a fact, not as a rule change made tonight. 3. What probation size does NOT buy: evidence
+faster. 40 live trades at any size tell me exactly what 40 paper trades tell me about the edge. What it buys is real fills, real
+discipline under money, and an account that is not idle. Whether that is worth $65-$220 is my coach's call with me, not a test's.
+Limits: trades resampled as independent; pool spread 1.02R; a setup with fatter losses than A2's would need more room.
+Counts: idea 118; variants 326-328.
