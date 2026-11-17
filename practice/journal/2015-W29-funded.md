@@ -56,3 +56,7 @@ Size rule v3 (0.16 lots) applies only if a route of the return rule opens. Payou
 All 31 valid (market, not mistake). Repeating picture: the night against me. One filter (skip at 15+ pips against), pre-May first:
 skipped 24 days made +6.75R, Jan-Feb the skipped days were the better ones -> K1, K2 fail, KILLED (second time). Lived days not looked at.
 Idea 103, variant 289.
+
+## 07-14 study: how the 20 biggest days start (journal/2015-07-14-study-how-big-days-start.md)
+By eye: flat box before the move. Counted: wrong (15% of big days against 27% of other days). Only difference: the day before was above its
+10-day median range on 65% against 38%. Size, not direction. Nothing tested; no idea counted.

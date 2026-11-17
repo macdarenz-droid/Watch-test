@@ -458,6 +458,10 @@
 - Forward: A2 +0.35R. PM1 (half at +1R, runner to break-even) -1.40R vs A2: 8 small gains (+1.90R) against 7 cuts of big winners (-3.29R), drawdown 5.26R against 4.54R. PM2 -1.44R. PM3 (break-even after +1R) +0.07R on 2 changed days. All KILLED again.
 - 06-10 (+86 pips -> -0.14R) becomes +0.48R with a partial, and the same partial takes 0.99R off 06-04. The exit side has not moved once in two rounds on separate data.
 
+## Study 07-14: how the 20 biggest days start (journal/2015-07-14-study-how-big-days-start.md; bt/big_days.py START END list|grid|facts; study, no idea counted)
+- By eye: a flat box before, session-clock start, clusters, continuation. Count against the other 107 days: box WRONG (15% vs 27%; chart scale fooled me), clock same as any day, continuation 70% vs 52% (20 cases), previous day's range above its 10-day median 65% vs 38% (the one difference; size, not direction).
+- Untested candidate: both-ways breakout of the night range after an above-median day; needs 100+ cases and kill lines first.
+
 ## Idea NA night against me, second losers review (journal/2015-idea-NA-night-against-second-review.md; coach 07-13: every A2 loss since May by eye -> one pre-set filter, pre-May first; bt/loss_grid.py, bt/night_filter.py END count|check DATE|pre|lived)
 - 31 losses 05-04..07-13 (24 full stops): all rule-valid, market not mistake. By eye: night against me (~15 of 31; same picture as ON/NM in April) and a spike with me before the entry (PH2's ground).
 - ONE filter (= NM2 unchanged: skip when 00:00->08:00 is 15+ pips against me). Pre-May: skipped 24 of 83 days, they made +6.75R (+0.281R each; kept +0.495R); Jan-Feb the skipped days were better. K1, K2 FAIL. KILLED again; lived days not looked at.
