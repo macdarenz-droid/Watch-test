@@ -96,3 +96,7 @@ Forward count only with the coach's word. Ideas 138, variants 370.
 
 ## 08-18 test: idea UD, the 13:30 London candle (journal/2015-idea-UD-the-1330-candle.md)
 R after costs (1.0 + 0.1 pips). Follow: 123 trades -0.130R; fade control -0.083R. Killed on all four lines. Ideas 139, variants 373.
+
+## 08-19 test: idea TH, three hourly candles in a row (journal/2015-idea-TH-three-hours-in-a-row.md)
+R after costs (1.0 + 0.1). Following a 35+ pip three-hour run: 167 trades -0.264R, both periods; bigger runs worse. Fade +0.000R. Killed.
+Ideas 140, variants 376.

@@ -28,3 +28,20 @@ Worked case read from its own window (R after costs 1.0 + 0.1): Tue 08-18, three
 16:00 open 1.10334 + spread: about -3 pips = about -0.15R.
 
 ## Step 3, result (one run: `TH_M=35 TH_M2=45 python bt/three_hours.py 2015-08-20 test`)
+Hand check 08-18: TH1 sold 1.10314, out 16:00 at 1.10345, -0.155R (worked: about -0.15R). As written.
+| variant (R after costs: spread 1.0 + slippage 0.1 pips; stressed 2.0 + 0.5) | trades | wins | avg R | net | stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| TH1 with the run, M 35 (JUDGED) | 167 | 31% | -0.264 (+-0.17) | -44.10 | 94 | -22.14 | -21.96 | -0.352 |
+| TH2 with the run, M 45 | 121 | 28% | -0.327 (+-0.21) | -39.52 | 76 | -18.31 | -21.21 | -0.416 |
+| TH0 against TH1's signals (control) | 167 | 44% | +0.000 (+-0.18) | +0.07 | 73 | +8.72 | -8.65 | -0.078 |
+Kill lines, each against its written threshold:
+K1 TH1's average >= +0.10R: -0.264R. FAIL.
+K2 TH1's net above zero before AND from 04-07: -22.14R / -21.96R. FAIL.
+K3 TH1's stressed average above zero: -0.352R. FAIL.
+K4 TH1 minus TH0 above zero, p < 0.05: -0.265R (p 0.087, the wrong sign). FAIL.
+**TH IS KILLED.**
+What I learned: the clearest result in weeks, and it is a "don't": buying after three up hours (selling after three down) lost a quarter of
+R a trade in BOTH periods, and more for bigger runs (dose: -0.327R). The fade only breaks even (+0.000R), so the run is not followed by a
+tradable turn either: the price simply stops going, and the 20-pip stop plus costs eat the follower. It is the burst lesson again, now
+over three hours instead of fifteen minutes: entering after the move has happened is where my losses come from.
+Counts: idea 140; variants 374-376; second setups tried 35, none alive.
