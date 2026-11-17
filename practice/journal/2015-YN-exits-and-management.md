@@ -8,7 +8,7 @@ SW1 is closed by its own line; LM2 and BX2 are closed for good. That leaves YN1 
 when it was 20+ pips, at the next 08:00; stop 40, out 12:00): 114 trades +0.070R (+-0.17), +3.66R / +4.35R, stressed +0.028R,
 control -0.008R, p 0.66 (journal/2015-idea-YN-yesterdays-new-york-for-the-morning.md). It is the single best by that rule.
 THE ENTRY IS NOT TOUCHED: N = 20, 08:00 market against yesterday's NY move, 40-pip stop at the start. Only what happens after.
-Note: YN was run on history to 08-14; the days since (08-17..09-01) are new to it. This test uses all history to 09-01.
+Note: YN was run with END 2015-08-13 (history to 08-12; I first wrote 08-14, corrected below); the days since are new to it. This test uses all history to 09-01.
 
 ## Hypothesis
 YN is a fade of a move that went too far; a fade's profit, if any, comes early (the snap-back) and then the London morning's own trend
@@ -56,9 +56,11 @@ E3: K1 +0.050R FAIL | K2 +0.21 / +2.02 PASS | K3 -0.019 FAIL | K4 p 0.524 FAIL.
 VERDICT: no exit change passes; all three KILLED (idea 151; variants E1 E2 E3 counted).
 
 ## The bigger finding: YN itself on days it had not seen
-YN was tested on history to 08-14 (114 trades, +0.070R, +3.66R / +4.35R). The SAME frozen entry and exit now has 127 trades and +0.032R;
-from 04-07 +0.42R. So the 13 new trades (08-17..08-31) lost about 3.9R (net +8.01R -> +4.08R; from the two runs' printed nets).
+YN was tested with END 2015-08-13 (`ny_to_london.py 2015-08-13 test 20 30`, its journal line 40; 114 trades, +0.070R, +3.66R / +4.35R). The SAME frozen entry and exit now has 127 trades and +0.032R;
+from 04-07 +0.42R. So the 13 new trades (signal days 08-13..08-31) lost about 3.9R (net +8.01R -> +4.08R; from the two runs' printed nets).
 Stressed it is now below zero. The near miss did not hold on its first unseen days. 13 trades is small, but it is the direction that
 counts for a near miss: it moved away from the line, not toward it.
 Reading: exits cannot rescue an entry with no edge; the later clock (E2) only adds variance (DD 14.69R) and all its gain is before 04-07.
 The A2 lesson holds here too: management does not make an edge.
+CORRECTION (September correction 2, found before the coach read it, after the push of 27fa895): I wrote YN's test end as 08-14 from
+memory; its own journal says END 2015-08-13. Fixed in three places above. Trade counts and R were from tool output and stand.
