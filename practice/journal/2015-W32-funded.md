@@ -108,6 +108,12 @@ until something earns it." Recorded: LM2 CLOSED FOR GOOD. No shadow, no tally, n
      46 lively days -8.06R, 21 full-stop mornings; 24 quiet -1.65R; PH2 about -5.67R against A2's -9.73R.
      MO PAPER RULE (day 28 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.07R (running -5.92R).
      For Friday (tool): MO1 -0.283R -> paper; MO3 -0.295R -> paper.
+  TAG CHECK Thu 08-06 (coach: valid vs mistake): live trades 0 (trade list ends with #230 of 07-07). Day tag: NO LIVE TRADE - BY RULE.
+     VALID: the rule said paper (monitor -0.333R, route A closed, routes B and C empty) and I placed no order. Trade mistakes 0.
+     Process check: call and plan committed before the bell (8dd6f5d); walk windows read from the tool's header (8 and 16 candles);
+     every paper row written with read-back; "script reached its end" seen before the commit. Process mistakes 0.
+     Week 32 so far (Mon-Thu): 0 live trades, 4 days NO LIVE TRADE - BY RULE (all valid), 0 trade mistakes, 0 process mistakes.
+     Funded record unchanged: 73 trades, 73 valid, 0 trade mistakes; process mistakes 12 (last: P12, 07-27).
 
 ## Forward tally
 
