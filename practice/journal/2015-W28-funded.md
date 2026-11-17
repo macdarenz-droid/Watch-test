@@ -265,3 +265,11 @@ counted without outcomes (83 judged cases + 17 in the studied window), a hand-wo
 matched the hand case; one run. -0.405R / -0.379R / -0.217R a trade; three first touches in four go 30 pips beyond; negative in every part, the
 studied 30 days included. KILLED: the observation was wrong. The mirror is not tested on the same history; proposed as a forward-only paper line.
 Counts: 100 ideas, 282 variants; second setups tried 13, none alive. July corrections after a push: 1.
+
+## 07-09: (1) BEFORE the call: the RETURN-TO-LIVE RULE with its date (journal/2015-07-09-return-to-live-rule.md): route A (A2 at 0.16 lots on or after
+Mon 09-21 if MO passed and the 40-day monitor >= +0.30R), route B (a tested setup + 40 forward paper trades), review day Mon 2015-09-21. (2) Paper day 2:
++1.39R; the account flat by the rule. (3) One test, a different behaviour from the 30-day read (coach: not the mirror of PD): idea DF, "big days are not
+followed" (journal/2015-idea-DF-big-days-are-not-followed.md): fade yesterday's body at 08:00, out 21:00; cases counted before outcomes (109 / 72 / 38
+judged), a hand-worked case and kill lines K1-K7 pushed before the code; one run. -0.016R / -0.076R / -0.141R a trade; positive before April, negative
+April to early June, positive only again in the window I had looked at; the dose goes the wrong way. KILLED. Counts: 101 ideas, 285 variants; second
+setups tried 14, none alive. July corrections after a push: 1.

@@ -42,3 +42,39 @@ stop and a 13-hour hold I expect about 45-50% full stops, so the winners must av
 A survivor: a paper setup under ROUTE B of the return rule (40 forward paper trades, lines already written). Killed: 14 second setups, none alive.
 Worked expectation: before 04-07 negative (the days followed each other: that was the fall). 04-07 .. 06-05 about zero. No dose. KILLED on K1, K2, K7.
 Counts when run: idea 101, variants 283-285.
+
+## Mechanics check (cases and kill lines pushed first in commit 40d0387; `python bt/day_fade.py 2015-07-10 --check 2015-07-08`)
+Yesterday's body -44.9 pips -> BUY 1.10156, out at 21:00 at 1.10701, +1.36R (hand: about +1.37R).
+One slip of mine on the way, caught before any result: for the stressed-cost run I GUESSED the engine's parameter names and the script failed; I then
+read the real signature (as bt/ideas.py uses it) instead of guessing. No number came from the wrong call. The rule I broke for a minute is my
+oldest one: never invent what a tool takes; look.
+
+## RESULTS (one run: `python bt/day_fade.py 2015-07-10`; costs on; figures copied from the print)
+| variant | JUDGED trades (before 06-08) | avg R | net | wins | full stops | before 04-07 | 04-07 .. 06-05 | without 3 best | max DD | stressed avg | corr with A2 | the studied window (NOT judged) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| DF1 every day | 109 | -0.016 | -1.76R | 39% | 57% | 65: +0.120 | 44: -0.217 | -14.22R | 16.24R | -0.054 | -0.05 | 24: +0.181 |
+| DF2 body >= 40 pips | 72 | -0.076 | -5.46R | 38% | 58% | 42: +0.068 | 30: -0.277 | -17.16R | 16.17R | -0.114 | -0.16 | 13: +0.530 |
+| DF3 body >= 80 pips | 38 | -0.141 | -5.37R | 34% | 61% | 23: +0.263 | 15: -0.762 | -14.99R | 14.59R | -0.179 | -0.27 | 6: +0.397 |
+Kill lines: K1 (avg >= +0.10R) FAIL x3; K2 (both parts positive) FAIL x3; K3, K4, K5 FAIL x3; K6 sample PASS, PASS, FAIL (38);
+K7 dose FAIL: -0.016 -> -0.076 -> -0.141: the bigger the day, the WORSE the fade.
+VERDICT: all three KILLED. Second setups tried: 14, none alive.
+
+## Expectation against the run
+"Before 04-07 negative": WRONG - it is slightly positive there (+0.07R to +0.26R). "04-07 .. 06-05 about zero": WRONG - it is the bad part
+(-0.22R to -0.76R). "No dose": right, and worse than none. "Killed on K1, K2, K7": yes. Two of my three period guesses were wrong; I do not
+know this market's periods as well as I talk about them.
+
+## What I take from it
+- "Big days are not followed" is TRUE of the thirty days I looked at (+0.53R a trade after 40+ pip days, 13 trades) and FALSE of the two months
+  just before them (-0.28R, 30 trades). The sign changes from period to period: +, -, +. That is not a behaviour of the market; it is the
+  last month. A setup built on it would have been built on thirteen trades I had already seen.
+- Two observations from the same 30-day read, two tests: one was the opposite of the truth everywhere (PD), one was true only where I had looked
+  (DF). The method that caught both is the same: count the cases first, keep the looked-at days out of the judged set, write the lines before.
+  My eye is not an instrument. The count is.
+- Something the three period columns say across both tests, as a note and not a finding: the months flip. What follows through in one two-month
+  stretch reverses in the next. A2 (follow three days) had January to March; the fade had the last month; neither has the next one promised.
+  A setup that needs the regime to hold is a bet on the regime, and I have no way yet to know it in advance (EF).
+- Next, if the coach wants a third behaviour from the read: the only one left untested is the weekend gap of the two big weekends, and WG said what
+  15 weekends can say. I would rather the next brick came from somewhere other than my eye.
+Counts: ideas 101, variants 285 (DF1, DF2, DF3). Adopted trading ideas: 0. A2 on paper (2 days, +0.39R); account flat.
+July: numbers corrected after a push: 1; file errors found late: 0.
