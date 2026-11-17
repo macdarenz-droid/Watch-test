@@ -6,6 +6,7 @@ SW1 paper shadow: 1 of 20 done, trade 2 open. Payout date Fri 07-31 ($0 unless b
 | # | time (London) | side | lots | entry | stop | exit | R | $ | tag | note |
 |---|---|---|---|---|---|---|---|---|---|---|
 | (paper) | Mon 07-27 08:00 | buy | NO LIVE TRADE (monitor -0.351R) | paper | paper | paper clock exit | (+0.95 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 14; SW1 shadow trade 2 stopped (-1.04R net) |
+| (paper) | Tue 07-28 08:00 | buy | NO LIVE TRADE (monitor -0.267R) | paper | paper | paper clock exit | (-0.67 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 15; SW1 shadow trade 3 opened (buy 1.10562) |
 
 ## Mon 07-27
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-27`:
@@ -45,6 +46,20 @@ Coach 07-28: no LM2 shadow while SW1 is 2 of 20 ("one shadow at a time"). LM2 st
   open, stop 120 below, target 240 above, else out 12:00 Tue 08-04. Running -2.05R after 2 of 20.
 - Walk notes today with the tool's window line read first: 8 candles at 10:00, 16 at 12:00.
 - How I feel: fine. Mistake to avoid: P12's cousin, assuming a tool instead of reading its first line.
+  08:00 London (PAPER): pre-entry hour 1.10544-1.10842 = 29.8 pips (PH2 quiet by 0.2 pips: full unit on paper), all of it downward. A2 paper BUY near 1.10562 (engine fixes the fill), paper stop about 1.10162. SW1 shadow BUY at the same open, stop about 1.09362, target about 1.12962. No order.
+  10:00 London (PAPER; window 07:00-08:45 UTC read from the tool): A2 paper buy best +18.1, worst -4.0, last +8.5. Before advancing to noon: clock only.
+  12:00 London (PAPER; window 07:00-10:45 UTC read from the tool): A2 paper buy closed by the clock about 26 pips against (best +18.1, worst -29.6, last -25.7).
+  -> Tue result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.267R -> paper). Checked: call committed before the bell; no order; trade list
+     still ends with #230 of 07-07; sim balance $24,926.03 unchanged.
+     PAPER A2, day 15 (engine, `python bt/coin_control.py 2015-07-29 --check 2015-07-28`): buy, clock exit, -0.67R; the other side +0.61R.
+     A2 paper running from 07-08: 15 days, -2.81R.
+     SW1 SHADOW trade 3 (tool `bt/sw1_shadow.py 2015-07-29`): OPEN, buy 1.10562, stop 1.09362, target 1.12962, clock 12:00 Tue 08-04. Last price 1.10596. Running -2.05R (2 of 20 done).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     How it feels: ordinary. The paper record alternates; I have stopped expecting it to tell me something each day.
+     Paper lines: UN3 agreed, -0.67R (agree days -11.36R in 55; disagree +3.50R in 16; day 71). PH2 (day 63): quiet (29.8) -> full = -0.67R;
+     43 lively days -7.34R, 21 full-stop mornings; 20 quiet -2.06R; PH2 about -5.72R against A2's -9.42R.
+     MO PAPER RULE (day 21 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.67R (running -5.61R).
+     For Wednesday (tool): MO1 -0.363R -> paper; MO3 -0.256R -> paper.
 
 ## Forward tally
 
