@@ -34,3 +34,46 @@ Forward days only: every A2 day from 2015-04-20 (the first day after the April t
 A survivor gets the lived-days table (here: the same forward set, already lived) and then at most a forward PAPER tag; the live stop stays a hard
 40 pip order whatever comes out.
 My guess (kept to show I cannot guess): CS2 about +1R ahead on the forward days and failing K2 because 04-16-style days are rare; CS1 worse than CS2.
+
+## Mechanics check against the worked case (`python bt/cs_forward.py 2015-06-10 --check 2015-06-08`)
+06-08: A2 stopped 08:50, -1.00R. CS2 (15-minute close): held, exit 12:00 @1.11323, -0.02R - the worked case exactly. CS1 and CS3 (5-minute close): a
+5-minute candle DID close beyond the level; exit 08:55 @1.11742, -1.06R. (The rough expectation's 17 x 0.25R is 4.25R exactly; I wrote "about -4.3R".)
+
+## Results (run once; `python bt/cs_forward.py 2015-06-10`; costs on; figures copied from the print)
+A2 on the FORWARD days (37 days from 04-20): net -1.71R, max DD 4.54R, worst day -1.03R, 16 full stops; at stressed costs -3.19R.
+| variant | forward net (vs A2) | changed days | better / worse | without its best day | max DD | worst day | stressed vs A2 stressed | all days since January vs A2 (before 04-20) |
+|---|---|---|---|---|---|---|---|---|
+| CS1 5-min close, hard 60 | -3.08 (-1.37) | 11 | 0 / 11 (-1.33R) | -1.37 | 5.14R | -1.22R | -1.33 | +0.21 (+1.58) |
+| CS2 15-min close, hard 60 | -1.99 (-0.28) | 11 | 3 (+1.30R) / 8 (-1.53R) | -1.27 | 5.26R | -1.53R | -0.70 | +0.87 (+1.15) |
+| CS3 5-min close, hard 50 | -3.34 (-1.63) | 11 | 0 / 11 (-1.59R) | -1.63 | 5.28R | -1.28R | -1.73 | +0.01 (+1.65) |
+CS2's changed forward days (A2 -> CS2): 04-23 -1.00 -> -1.06 | 04-24 -1.03 -> -1.14 | 05-04 -1.03 -> -1.13 | 05-11 -1.03 -> -0.95 | 05-12 -1.00 -> -1.07 |
+05-15 -1.03 -> -1.39 | 05-18 -1.03 -> -1.15 | 05-21 -1.00 -> -1.23 | 06-03 -1.03 -> -1.53 | 06-08 -1.00 -> -0.02 | 06-09 -1.03 -> -0.79.
+
+## Kill lines (forward days)
+| line | CS1 | CS2 | CS3 |
+|---|---|---|---|
+| K1 at least +1.0R above A2 | FAIL (-1.37) | FAIL (-0.28) | FAIL (-1.63) |
+| K2 improved >= worsened, ahead without its best day | FAIL (0 / 11) | FAIL (3 / 8; -1.27 without 06-08) | FAIL (0 / 11) |
+| K3 drawdown not larger, no day worse than -1.55R | FAIL (5.14R) | FAIL (5.26R) | FAIL (5.28R) |
+| K4 not behind at stressed costs | FAIL | FAIL | FAIL |
+| K5 at least 10 changed days | PASS (11) | PASS (11) | PASS (11) |
+VERDICT: all three KILLED a second time, now on forward days that never shaped them. No tag. The stop stays a hard 40 pip order.
+
+## Worked expectation against the run
+I expected about +1.8R (gains about +6.1R on eight "poke" days, costs about -4.25R). The run: -0.28R for the best version; its gains are +1.30R on three days.
+The reason, found in the day list: my noon routine calls a stop a "poke" when the price is back inside the level BY NOON. That is not the same as "only a
+wick went through". On 05-18 a 15-minute candle CLOSED beyond the level (CS2 exits at -1.15R); 05-20 and 06-01 do not even appear among the changed days
+(the close-stop exits at about the same price); only 06-08 was a true wick. I counted eight pokes; by the rule's own definition there was one and two
+halves. My expectation was built on my own label, not on the candles. No pushed figure of record needed correcting; the label itself is corrected below.
+
+## What I learned
+- A stop on a close does not fix my "pokes", because most of them are not wicks: the market trades through the level, a candle closes there, and THEN
+  it comes back. A close-stop pays 0.1R to 0.5R more on every real break (11 of 11 worse on the 5-minute version) to save one day in five weeks.
+- April said 0 of 7 improved; the 37 forward days say 0 of 11 (5-minute) and 3 of 11 (15-minute), net negative, deeper drawdown, a worst day of -1.53R.
+  Same answer from data the idea had never seen. That is what a real kill looks like, and it took a frozen definition to get it.
+- My stop-day routine keeps its noon price (it is useful), but the word changes from today: "price back inside the stop by noon", not "poke". A poke
+  is a wick, and I have had about one.
+- Stop placement, summed up: tighter is leverage (06-03 look), wider loses 9.6R to 21.5R (SA), on a close loses on forward days (CS twice), time-decay
+  loses (TD). The hard 40 pip stop has now been attacked from all four sides.
+Counts: ideas 78, variants 219 (CS1 CS2 CS3 re-run forward, counted again). Adopted trading ideas: 0. On paper: UN3, PH2, MB1.
+Numbers or rules corrected after a push in June: 0.

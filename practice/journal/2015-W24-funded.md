@@ -139,3 +139,9 @@ Normal worst for 56 trades (bt/streak_check.py 2015-05-19, all 95 A2 trades resh
 worked expectation and kill lines pushed; one run. The day after a full stop averages +0.416R (24 trades), better than an average A2 day; sitting out
 costs 9.97R and deepens the drawdown. After two losing days: +0.481R. Killed on four lines. Stops cluster a little (29% against 23%) and it does not
 matter. Counts: 77 ideas, 216 variants. June corrections after a push: 0.
+
+## 06-09 research after funded day 53 (coach: ONE management thing; one test): the forward re-test of idea CS, a stop on a candle close
+(journal/2015-idea-CS-forward-close-stop.md). The three April definitions, frozen since 04-17, judged on the 37 days since. Worked case (06-08) and kill
+lines pushed first; the script reproduced the case; one run. Forward: -1.37R / -0.28R / -1.63R against A2; 0, 3 and 0 of 11 changed days improved;
+deeper drawdowns. Killed a second time. My rough expectation (+1.8R) was built on my own word "poke": most of those days a candle CLOSED beyond the
+level before the price came back; only 06-08 was a wick. The routine's wording is corrected. Counts: 78 ideas, 219 variants. June corrections after a push: 0.
