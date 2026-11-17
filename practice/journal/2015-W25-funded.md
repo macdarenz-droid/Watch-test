@@ -145,3 +145,10 @@ never used before). Look at the 15 best days against base rates counted without 
 days follow WIDE days: idea GA, known); busy hour 3 of 13 against 11%: picked by default, said so. Kill lines pushed first; one run with the 15 best
 dropped from both sides: busy-hour days are 0.23R to 0.41R WORSE than the rest, the sign flips between the periods: killed on four lines, not turned
 into a filter (it is PH again). By-product: the 15 best days are +32.51R of A2's +33.61R. Counts: 82 ideas, 231 variants. June corrections after a push: 1.
+
+## 06-16 research after funded day 58 (coach: what would make me skip or exit early on a best day? check that no current rule cuts them): idea BD, an audit
+(journal/2015-idea-BD-do-my-rules-cut-best-days.md). Six checks with alarm lines and worked cases pushed first; one run. Stop: 27 stop days, no hidden
+best day (best at noon without it +1.14R). Size rule: never on. Calendar: no hole in 116 weekdays. Me: 7 lived best days, all full size to 12:00,
+within 0.08R of the engine. No alarm; nothing changes. Price list of the things I want to do, on the 15 best days: partial -8.8R, lively-hour half size
+-6.5R, +80 target -4.1R, 10:00 lock -3.4R, UN3 skip -2.2R: one line in the plan. A parser miss raised a false calendar alarm (five rows written in an
+older format); fixed, said in the journal. Counts: 83 ideas, 232 variants. June corrections after a push: 1.
