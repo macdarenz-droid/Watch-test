@@ -27,3 +27,13 @@ K7 dose: EF2 >= EF1 (if the day's move carries, a bigger move should carry at le
 My guess: small and positive, under +0.10R (K1 fails); the follow was +0.099R on the biggest days.
 
 ## Counts and worked case (tool, before outcomes)
+Tool: `python bt/evening_follow.py 2015-08-07 count` / `check DATE` (no outcomes). The script loads bt/evening_fade.py's definitions byte
+for byte (first attempt failed on my own import slice; no outcome printed).
+- 152 days with the three candles (01-02..08-06). EF1 judged 56 days (21 before 04-07, 35 from; one of them is a 60+ day after 07-29:
+  07-31). EF2 32. EV's 51 days excluded: 51. Judgeable by my line (50), just.
+- Worked case Thu 07-30: 08:00 open 1.09650, 17:00 open 1.09144, move -50.6 pips -> EF1 SELLS at 17:00, stop 30 above, out 21:00
+  (also an EF2 day). Thursday's London close was 1.09310, so the evening rose from 1.0914 to about 1.0931: I expect a small loss here.
+- Second case Fri 07-31 (unseen by EV, after its end): move +74.1 -> BUY at 1.10276. Friday closed at 1.09830: I expect a loss of about 1.5R... no:
+  the stop is 30 pips, so a full stop (-1R) if 1.09976 was hit before 21:00, which a close at 1.0983 makes likely.
+
+## Result (one run)
