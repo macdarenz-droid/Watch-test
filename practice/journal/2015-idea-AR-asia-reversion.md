@@ -26,3 +26,12 @@ Pass = eligible for route C after my coach's word (probation $15.63 a trade = 0.
 My guess: a high win rate, a small average that the stressed spread wipes out: K3 fails.
 
 ## Counts and worked case (tool, before outcomes)
+Tool: `python bt/asia_reversion.py 2015-08-11 count` / `check DATE` (no outcomes).
+- AR1 (D = 15): 117 nights (48 before 04-07, 69 from; 58 departures up, 59 down). AR2 (D = 20): 85 nights (33 / 52). Judgeable (80 / 35).
+- Worked case, no trade: Mon 08-10's night (range 23.9, net +8.0 by my call) never closed 15 pips from midnight: no signal. (My first
+  check command asked for that night and failed on the empty list; no outcome was printed.)
+- Worked case with a trade: Wed 08-05, midnight 1.08893; the 01:40 candle closed 15+ pips below -> AR1 BUYS at the 01:45 open, target
+  1.08893, stop 15 below. My 07:00 call that day had the night's low at 1.08482 and its last price at 1.08723: the price went on down
+  about 25 pips after 01:45 before coming back, so I expect a full stop here unless the target came first.
+
+## Result (one run)
