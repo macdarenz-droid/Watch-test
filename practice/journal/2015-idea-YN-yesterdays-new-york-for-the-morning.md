@@ -25,3 +25,15 @@ one time in four to one in six. ANY PASS IS PROVISIONAL until it holds on lived 
 K1 average >= +0.10R after costs (1.0 + 0.1). K2 net above zero before 04-07 AND from 04-07. K3 stressed (2.0 + 0.5) average above zero.
 K4 YN1 minus YN0 above zero, sign-flip p < 0.10.
 My guess: positive after 04-07, negative before (K2 fails).
+
+## Step 1, counts only (tool `python bt/ny_to_london.py 2015-08-13 count`; no outcomes)
+158 days; median |NY move| 32.9 pips. N = 0: 158 trades (66 / 92), fade on A2's side 39%. N = 10: 143 (63 / 80), 37%. N = 20: 114 (51 / 63), 35%.
+## Step 2, by the lines written first
+Largest N with 80+ and 35+ from 04-07: **N = 20** (114 / 63). Disguise check: the fade is on A2's side 35% of the time, i.e. on A2's
+OPPOSITE side 65%: under the 70% line either way, so not A2 or its mirror in disguise (but leaning to the mirror: noted).
+So YN1 = fade at N 20 (judged); YN2 = fade at N 30 (the grid ended at 20; 30 as written); YN0 = follow at N 20.
+Worked cases: Wed 08-12, yesterday's NY move -0.9 pips -> no trade. Tue 08-11, 08-10's NY move +32.8 -> YN1 SELLS at 08:00 (A2 bought):
+that morning A2's paper buy made +1.66R, so the sell should be a full stop. Mon 08-10, Friday's NY +23.0 -> sell; A2's buy lost -0.80R
+there, so the sell should win about that much less costs.
+
+## Step 3, result (one run: `test 20 30`)
