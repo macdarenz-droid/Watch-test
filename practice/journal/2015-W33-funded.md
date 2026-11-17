@@ -8,6 +8,7 @@ the two are not confused.)
 ## Funded trades
 | # | time (London) | side | lots | entry | stop | exit | R | $ | tag | note |
 |---|---|---|---|---|---|---|---|---|---|---|
+| (paper) | Mon 08-10 08:00 | buy | NO LIVE TRADE (monitor -0.345R) | paper | paper | paper clock exit | (-0.80 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 24; SW1 shadow trade 5 opened (sell 1.09629) |
 
 ## Mon 08-10
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-10`:
@@ -18,5 +19,19 @@ the two are not confused.)
 - SW1 SHADOW trade 5 (tool `bt/sw1_shadow.py 2015-08-11 signal`): Fri close 1.09647 vs 07-24 close 1.09812 = -16.5 pips -> paper SELL at the
   08:00 open, stop 120 above, target 240 below, else out 12:00 Mon 08-17. (It sells while A2 buys.)
 - How I feel: fine.
+  08:00 London (PAPER): pre-entry hour 1.09570-1.09734 = 16.4 pips (PH2 quiet: full unit on paper). A2 paper BUY near 1.09629 (engine fixes the fill), paper stop about 1.09229. SW1 shadow SELL at the same open, stop about 1.10829, target about 1.07229. No order.
+  10:00 London (PAPER; window 07:00-08:45 UTC): A2 paper buy best +18.1, worst -4.7, last +1.3. Before advancing to noon: clock only.
+  12:00 London (PAPER; 16 candles, 08:00-12:00): A2 paper buy closed by the clock about 31 pips against, 5 pips from the stop at its worst (best +18.1, worst -35.0, last -30.7).
+  -> Mon result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.345R -> paper). VALID: no order placed. Checked: call committed before the bell;
+     trade list still ends with #230 of 07-07; sim balance $24,926.03 unchanged. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 24 (engine, `python bt/coin_control.py 2015-08-11 --check 2015-08-10`): buy, clock exit, -0.80R; the other side +0.74R.
+     A2 paper running from 07-08: 24 days, -4.24R.
+     SW1 SHADOW trade 5: OPEN (sell 1.09629, stop 1.10829, target 1.07229, clock 12:00 Mon 08-17); the afternoon rose to 1.10185, 56 pips against. Running -3.35R (4 of 20 done).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     How it feels: A2 paper fell then the afternoon went its way; old song.
+     Paper lines: UN3 DISAGREED (day 80): disagree days +3.43R in 18; agree days -12.72R in 62. PH2 (day 72): quiet (16.4) -> full = -0.80R;
+     46 lively days -8.06R, 21 full-stop mornings; 26 quiet -2.77R; PH2 about -6.79R against A2's -10.85R.
+     MO PAPER RULE (day 30 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.80R (running -7.04R).
+     For Tuesday (tool): MO1 -0.396R -> paper; MO3 -0.274R -> paper.
 
 ## Forward tally
