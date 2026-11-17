@@ -28,6 +28,14 @@ Size rule v3 (0.16 lots) applies only if a route of the return rule opens. Payou
      MO PAPER RULE (day 10 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.03R (running -4.44R).
      For Tuesday (tool): MO1 -0.302R -> paper; MO3 -0.188R -> paper.
 
+## Tue 07-14
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-14`:
+- 3-day gap -75.2 pips -> A2 side SELL. 5-day gap -55.0 -> UN3 agree. Night 00:00-07:00: 1.09740-1.10129, last 1.09962 (range 38.9, net -10.5).
+- Monday's London day: 1.09954-1.11968, close 1.10006 (range 201.4, closed at its low).
+- Monitor for today -0.302R (MO1), -0.188R (MO3) -> BOTH PAPER. Route A closed until 09-21; route B: no tested setup. NO ORDER.
+- Paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00. I do nothing in the account.
+- How I feel: calm. Mistake to avoid: reading yesterday's saved loss as proof of anything.
+
 ## Forward tally
 
 ## 07-13 research: all 31 A2 losses since May by eye -> idea NA (journal/2015-idea-NA-night-against-second-review.md)
