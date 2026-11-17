@@ -187,3 +187,7 @@ The follow control made +0.099R: noted, not promoted. Idea 115, variants 319.
 ## 07-30 test: idea MF, the first two hours given back by noon (journal/2015-idea-MF-mid-morning-fade.md)
 From three weeks of notes (8 of 14 mornings). Fade the 08-10 move at 10:00, judged before 06-05: 58 trades -0.040R; follow -0.063R.
 Even the weeks where I saw it: -0.008R. Killed. Idea 116, variants 322.
+
+## 07-31 (weekend) test: idea RB, the return rule's exit line (journal/2015-idea-RB-back-to-paper-line.md)
+Gate +0.60R with the written exit at 0.00R: a no-edge A2 is live on 8.6% of days (line 10%); a healthy A2 is never thrown out. The exit stands.
+Warning kept: a no-edge rule gets in at least once in 41% of 210-day runs and stays about 39 days. Idea 117, variants 325.

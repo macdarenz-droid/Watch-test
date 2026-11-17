@@ -28,3 +28,21 @@ Worked case first: the tool's last-40 mean for the morning of 08-03 must equal s
 my side -0.074R a day before shifting to zero). Healthy pool: 65 days to 04-06 (advantage +0.942R, my side +0.492R a day).
 
 ## Result (one run)
+Tool: `python bt/exit_line_check.py 2015-08-01 test` (5,000 runs of 250 days each; gate +0.60R throughout).
+| exit line | NO-EDGE A2: days live | gets in at all (in 210 days) | average live spell | HEALTHY A2: days live after its first entry | R while live |
+|---|---|---|---|---|---|
+| 0.00R (AS WRITTEN) | 8.6% | 41% of runs | 39 days | 100.0% | +102.8 |
+| +0.20R | 6.2% | 41% | 27 days | 99.6% | +102.6 |
+| +0.30R | 5.1% | 42% | 21 days | 98.8% | +101.5 |
+**BY THE LINES WRITTEN FIRST THE EXIT AT 0.00R STANDS**: a no-edge A2 is live on 8.6% of days (line 10%), and a healthy A2 is never
+thrown out (line 85%). I propose no change. My guess was right on both counts, including the warning:
+1. Over about ten months of looking, a no-edge A2 gets through the +0.60R gate at least once in 41% of runs. The gate's "2% of
+   mornings" and this "41% of runs" are the same fact seen over a longer time. Once in, it stays about 39 trading days.
+2. What such a lucky spell costs: nothing on average if the rule is a true coin (-0.09R per run here), about 39 trades of pure variance
+   at 0.16 lots, with the 7% stop-trading line and the size rule underneath. Survivable by design; not free of nerves.
+3. A tighter exit (+0.20R or +0.30R) would shorten the lucky spell to 27 or 21 days at almost no cost to a healthy rule. I write that
+   down for the 09-21 review as information. I do not propose it now: the written line passed its test, and changing a line that
+   passed is the goalpost-moving my coach stopped on 07-24.
+Limits: days resampled as independent; the no-edge pool is shifted to exactly zero (a real coin pays the spread and would lose a
+little while live); 65 healthy days.
+Counts: idea 117; variants 323-325.
