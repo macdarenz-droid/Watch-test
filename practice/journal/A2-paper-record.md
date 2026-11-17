@@ -16,3 +16,4 @@ A return to money: only by a restart rule written in advance and agreed with the
 | Tue 2015-07-21 (10) | sell | -0.74 | +0.68 | -2.68 | clock exit, 1 pip from the stop; monitor after the day -0.313R |
 | Wed 2015-07-22 (11) | buy | -1.03 | +0.76 | -3.71 | stopped just before noon; monitor after the day -0.406R |
 | Thu 2015-07-23 (12) | buy | +1.65 | -1.00 | -2.06 | clock exit; monitor after the day -0.346R |
+| Fri 2015-07-24 (13) | buy | -1.03 | +0.87 | -3.09 | stopped before 10:00; monitor after the day -0.351R |

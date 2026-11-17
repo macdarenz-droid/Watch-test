@@ -9,6 +9,7 @@ SW1 paper shadow from Mon 07-20 (journal/SW1-paper-shadow-rules.md): a count onl
 | (paper) | Tue 07-21 08:00 | sell | NO LIVE TRADE (monitor -0.299R) | paper | paper | paper clock exit | (-0.74 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 10; SW1 shadow trade 1 stopped -1.01R net |
 | (paper) | Wed 07-22 08:00 | buy | NO LIVE TRADE (monitor -0.313R) | paper | paper | paper stop | (-1.03 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 11: stopped; SW1 shadow trade 2 opened (sell 1.09560) |
 | (paper) | Thu 07-23 08:00 | buy | NO LIVE TRADE (monitor -0.406R) | paper | paper | paper clock exit | (+1.65 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 12: winner on paper; gate amendment written before the bell |
+| (paper) | Fri 07-24 08:00 | buy | NO LIVE TRADE (monitor -0.346R) | paper | paper | paper stop | (-1.03 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 13: stopped before 10:00 |
 
 ## Mon 07-20
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-20`:
@@ -117,6 +118,26 @@ BEFORE THE BELL: gate stays +0.60R (coach 07-24); the one condition that may cha
 - A2 paper plan: buy at the 08:00 open, stop 40 pips below, out 12:00.
 - SW1 shadow trade 2: open from Wed (sell 1.09560, stop 1.10760, target 1.07160, clock 12:00 Wed 07-29). Nothing to do.
 - How I feel: corrected, fairly. Wanting +0.80R the day after +0.60R was the same reflex as wanting a rule change after a loss, pointed the other way.
+  08:00 London (PAPER): pre-entry hour 1.09637-1.09957 = 32.0 pips (PH2 lively: half on paper). A2 paper BUY near 1.09906 (engine fixes the fill), paper stop about 1.09506. SW1 shadow untouched. No order.
+  10:00 London (PAPER): A2 paper buy best +5.1, worst -59.6: stopped on paper. Account untouched. Nothing to manage.
+  12:00 London (PAPER): the A2 paper buy was stopped before 10:00.
+  -> Fri result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.346R -> paper). Checked: call committed before the bell; no order; trade list
+     still ends with #230 of 07-07; sim balance $24,926.03 unchanged.
+     PAPER A2, day 13 (engine, `python bt/coin_control.py 2015-07-25 --check 2015-07-24`): buy, stopped, -1.03R; the other side +0.87R.
+     A2 paper running from 07-08: 13 days, -3.09R.
+     SW1 SHADOW trade 2: still OPEN (sell 1.09560, stop 1.10760, target 1.07160, clock 12:00 Wed 07-29); last price 1.09812. Held over the weekend on paper (3 nights of assumed financing).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     THE WEEK (W30): no live trade, by rule. Paper A2: +0.04, -0.74, -1.03, +1.65, -1.03 = -1.11R. SW1 shadow: 1 trade done (-1.01R), 1 open.
+     Written this week: SW1 shadow rules, the one-page plan, Amendment 1 (gate +0.60R). Tests: WO, BX2 out of sample, RA, QW. No trade or process mistake found.
+     How it feels: Thursday's paper winner followed by Friday's paper stop is the last three months in two days.
+     Paper lines: UN3 agreed, -1.03R (agree days -11.64R in 53; disagree +3.50R in 16; day 69). PH2 (day 61): lively (32.0) -> half = -0.52R;
+     42 lively days -8.29R, 21 full-stop mornings; 19 quiet -1.39R; PH2 about -5.53R against A2's -9.70R.
+     MO PAPER RULE (day 19 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.03R (running -5.89R).
+     For Monday (tool): MO1 -0.351R -> paper; MO3 -0.273R -> paper.
+     FRIDAY GATES LIST READ (07-24): nothing due. Return rule: review day Mon 09-21; route A gate +0.60R, monitor -0.351R; route B: no setup has
+     passed a test (18 tried). MO day 19 of 60. UN3 16 of 30 disagree days / 69 of 200. PH2 42 of 60 lively / 61 of 200. SW1 shadow 1 of 20.
+     Next payout date Fri 07-31 ($0 unless balance > $25,000). Month-end review: first trading day of August (Mon 08-03).
+     END OF RELEASED DATA (clock Fri 07-24 22:00 London; weekend).
 
 ## Forward tally
 
