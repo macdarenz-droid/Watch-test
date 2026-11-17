@@ -38,3 +38,18 @@ Worked case 08-28 (tool's check line; my hand reading of the hour was 1.12519-1.
 first M5 close above the box -> BUY, entry at the 08:20 London open; A2 sold that day. Note: 08-28 is the day that gave me the idea and it
 is inside this history (1 trade of 84); I do not drop it, and I name it here.
 One run next: `python bt/quiet_box.py 2015-08-29 run 30 20`.
+
+## Result (one run; `python bt/quiet_box.py 2015-08-29 run 30 20`; ALL R AFTER COSTS spread 1.0 + slippage 0.1; stressed 2.0 + 0.5)
+| variant | trades | wins | avg R | net R | stops | before 04-07 | from 04-07 | stressed avg | on A2's side |
+|---|---|---|---|---|---|---|---|---|---|
+| QB1 follow, box <= 30 | 84 | 42% | +0.035 (+-0.29) | +2.92 | 40 | +0.75 | +2.16 | -0.052 | 46% |
+| QB2 box <= 20 (dose) | 38 | 47% | +0.103 (+-0.43) | +3.93 | 16 | +5.73 | -1.80 | +0.028 | 45% |
+| QB0 fade (control) | 84 | 35% | -0.041 (+-0.36) | -3.44 | 47 | +1.26 | -4.70 | -0.121 | 51% |
+Kill lines, each value against its threshold (QB1):
+K1 average R >= +0.10R: +0.035R -> FAIL.
+K2 net R above zero before AND from 04-07: +0.75R and +2.16R -> PASS.
+K3 stressed average above zero: -0.052R -> FAIL.
+K4 QB1 minus QB0 above zero with p < 0.10: +0.076R, p 0.790 -> FAIL.
+VERDICT: KILLED (K1 K3 K4). Idea 149; variants QB1 QB2 QB0 counted.
+Reading: a quiet hour's break is a coin; the 20-pip stop's costs (1.1 pips = 0.055R) eat what little there is. QB2's dose is all before
+04-07 and negative after: the usual follow shape, not promoted. The day that gave me the idea (08-28) was one trade of 84.

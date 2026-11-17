@@ -193,3 +193,8 @@ K1-K3 pass, K4 FAILS -> KILLED. Ideas 147, variants 394. YM2 (+0.161R / 84) a hi
 
 Thu 08-27 late, idea 148 XD (follow yesterday's 3-day range break; from my call notes): prereg pushed first; counts 113 trades but 104 of 113
 (92%) on A2's side -> KILLED ON COUNTS (disguise line 70%), no outcome run. Ideas 148, variants 394.
+
+## 08-28 evening test: idea 149 QB, quiet pre-bell hour box break (journal/2015-idea-QB-quiet-pre-hour-break.md)
+Prereg pushed first; Q = 30 chosen from counts by the pre-written rule (84 trades, 38 from 04-07; 48% on A2's side). R after costs 1.0 + 0.1:
+QB1 +0.035R, stressed -0.052R, fade control -0.041R, p 0.79 -> KILLED (K1 K3 K4). Ideas 149, variants 397.
+Also 08-28: coach - YM is a near miss, not a dud; frozen, forward check written before the day (journal/2015-idea-YM-yesterdays-midpoint.md).
