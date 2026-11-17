@@ -17,3 +17,12 @@ MIN SAMPLE (several trades a week): 120+ trades and 50+ from 04-07, else killed 
 K1 average >= +0.10R after costs (1.1 pips = 5.5% of a 20-pip risk). K2 net above zero before 04-07 AND from 04-07.
 K3 stressed (2.0 + 0.5) average above zero. K4 IB1 minus IB0 above zero, sign-flip p < 0.05.
 My guess: a coin minus costs (about -0.06R), negative after 04-07.
+
+## Counts (tool `python bt/inside_bar.py 2015-08-14 count`; no outcomes)
+IB1: 131 trades (57 before 04-07, 74 from) on 97 days; 64 up, 67 down; 5 busiest days hold 10. Meets 120 / 50.
+IB2: 25 trades (14 / 11): far too few to say anything; reported as the dose line only.
+Worked case, today Thu 08-13: the 10:00 H1 candle was inside the 09:00 one; the first M5 close below the 09:00 low came at 12:30 ->
+IB1 SELLS at the 12:35 open, stop 20 above, out 14:35. Today's last price 1.11491 is above the A2 paper entry of 1.11272, so the
+afternoon rose: I expect a loss, likely a stop.
+
+## Result (one run)
