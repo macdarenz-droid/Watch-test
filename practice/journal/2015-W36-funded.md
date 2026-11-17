@@ -6,6 +6,7 @@ Next payout date Fri 09-11.
 ## Funded trades
 | # | time (London) | side | lots | entry | stop | exit | R | $ | tag | note |
 |---|---|---|---|---|---|---|---|---|---|---|
+| (paper) | Thu 09-03 08:00 | buy | NO LIVE TRADE (monitor -0.137R) | paper | paper | paper clock exit | (+0.06 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 42; YM1 DISAGREE; NC1 kept; EN2 forward trade 1 |
 | (paper) | Wed 09-02 08:00 | buy | NO LIVE TRADE (monitor -0.143R) | paper | paper | paper clock exit | (-0.36 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 41; YM1 agree; NC1 kept |
 | (paper) | Tue 09-01 08:00 | sell | NO LIVE TRADE (monitor -0.177R) | paper | paper | paper stop | (-1.00 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 40; YM1 day 2 DISAGREE (buy -0.32R); NC1 kept |
 | (paper) | Mon 08-31 08:00 | sell | NO LIVE TRADE (monitor -0.203R) | paper | paper | paper clock exit | (+0.31 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 39; NC1 day 1 = SKIP tag; YM1 day 1 agree |
@@ -130,3 +131,17 @@ Inactivity: count from 09-02 (coach); day 25 = Sun 09-27, first eligible Mon 09-
 - A2 paper plan: buy at the 08:00 open, stop 40 pips, out 12:00.
 - Forward counts (paper): EN2, YM1, NC1 from their tools after the day.
 - How I feel: fine.
+  08:00 London (PAPER): pre-entry hour 1.12141-1.12350 = 20.9 pips (quiet), net about -13 against the buy. A2 paper BUY near 1.12202, paper stop about 1.11802. No order.
+  10:00 London (PAPER; 8 candles): best +23.2, worst +0.0, last +20.0.
+  12:00 London (PAPER; 16 candles): clock exit about +3.7 (best +23.2, worst -4.9).
+  -> 09-03 result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor under the gate -> paper). VALID: no order placed. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 42 (engine, costs on 1.0 + 0.1; coin_control): buy, clock exit, +0.06R; the other side -0.12R. Running from 07-08: 42 days, -2.86R.
+     NC1 FORWARD (tool): hour -13.1 signed by A2 -> kept; NC0 no.
+     YM1 FORWARD (tool): 2015-09-03 YM1 side -1 | A2 side +1 | DISAGREE | YM1 -0.12R (close) | YM0 +0.06R | YM1 stressed -0.17R
+       YM1 FORWARD (R after costs 1.0 + 0.1; stressed 2.0 + 0.5): 4 of 80 trades | avg -0.122R | net -0.49 | disagree days 2 net -0.44 | agree days 2 net -0.04 | YM1 - YM0 +0.132R | stressed avg -0.167 | drawdown 0.80R (early close at 8R)
+     EN2 FORWARD (tool): EN2 forward from 2015-08-28 to 2015-09-04: 1 trades | net -1.01R | running max DD 1.01R (early-close line 8R) | no verdict before 120
+     Paper lines: UN3 DISAGREED (day 98): disagree days +4.42R in 24. PH2 (day 90): quiet (20.9) -> full = +0.06R;
+     51 lively -7.80R; 39 quiet -0.63R; PH2 about -5.04R against A2's -9.47R.
+     MO PAPER RULE (day 48 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.06R (running -5.66R).
+     For the next day (tool): MO1 -0.193R; MO3 -0.157R -> paper.
+     How it feels: a +23 morning faded to a few pips by noon. Ordinary.
