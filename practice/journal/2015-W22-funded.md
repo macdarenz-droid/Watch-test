@@ -187,3 +187,9 @@ mistake): journal/2015-ten-worst-losers-replay.md. Selection rule and questions 
 on all 102 A2 days. Result: 10 valid losses, 0 mistakes of mine; six would be the same trade for anyone; 2 pokes. The chart "mistakes" (chasing the hour,
 the falling knife) are not losing groups on all history. One repeat without a winner: a pre-entry hour of 60+ pips (4 cases, 0 wins, -3.18R; two of the
 ten worst). Four cases: no rule change; a counts-only line, look at 10. Counts: 67 ideas, 186 variants.
+
+## 05-27 research, second part (coach: the replay was study and earns no day; test the blind spot properly): idea BH, no trade after a big pre-entry hour
+(journal/2015-idea-BH-big-pre-hour.md). What I already knew stated; kill lines with a sample line and a neighbour line pushed; two days hand-checked; one
+run on all 102 days, costs on. At 60+ pips: 4 skipped trades, 0 wins, -3.18R, rule +3.18R above A2 - and KILLED: move the line to 50 pips and the skipped
+group wins (+0.115R in 14; the ten mornings at 50-59 pips made +4.79R), and 4 trades is under my sample line of 10. No rule, no tag. A flawed reading rule
+of mine logged as P9. Counts: 68 ideas, 189 variants; process mistakes 9.
