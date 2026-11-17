@@ -32,3 +32,48 @@ Distance to the stop from today: 1.52% to the half-size line at full size (2.9 d
 - If K2 or K3 fails: the guard stays (it is the coach's rule and my 20-day hold runs to funded day 55); the numbers go to the review after day 55.
 - No trading rule or size changes by this test.
 My guess = the worked table, with the stated lean that positive-edge stop odds will come out higher than the formula.
+
+## Hand-check before the run: regression (`python bt/guard_dead_edge.py 2015-05-16 0 0 0.18`)
+From a fresh start at +0.18R: own stop 1.6% plain / 0.2% block, lowest balance -6.94% / -6.38%, median payout 32.8% / 34.2% - exactly WS1's figures under
+real fills. The new script is the old machinery.
+
+## Results (run once; `python bt/guard_dead_edge.py 2015-06-03 -0.080 1.397`; 2,000 runs x 500 days; plain / block; figures copied from the print)
+Start: balance -0.080%, high-water +1.397% of $25,000 (my real state), 106-trade engine list with real fills.
+| true edge | account line breached | own 7% stop reached in two years | median day of the stop | still trading after 300 days | lowest balance of any run | result incl. payouts when stopped (median, from today) | median result after 500 days incl. payouts | days at half size (share of all run-days) |
+|---|---|---|---|---|---|---|---|---|
+| 0.00R (edge gone) | 0.0% / 0.0% | 72.8% / 67.5% | 224 / 235 | 50.8% / 56.6% | -6.88% / -6.69% | -4.85% / -5.06% | -3.38% / -3.07% | 51% / 55% |
+| -0.10R | 0.0% / 0.0% | 99.5% / 99.2% | 122 / 125 | 7.6% / 6.7% | -6.85% / -6.77% | -5.58% / -5.58% | -5.58% / -5.58% | 25% / 26% (runs end early) |
+| +0.10R (small real edge) | 0.0% / 0.0% | 15.1% / 10.8% | 253 / 263 | 91.0% / 93.7% | -6.65% / -6.49% | -1.47% / -0.89% | +13.01% / +13.30% | 58% / 58% |
+| +0.18R (planning edge, bridge to WS) | 0.0% / 0.0% | 1.8% / 0.8% | 252 / 255 | 98.9% / 99.6% | -5.99% / -6.26% | +4.81% / +3.82% | +32.67% / +33.32% | 39% / 35% |
+(The half-size share was computed in the run but not printed; I added the print and re-ran with the same seeds: every other figure identical.)
+
+## Kill lines
+| line | worked prediction | result | verdict |
+|---|---|---|---|
+| K1 safety at 0.00R and -0.10R: breached <= 1.0%, no run below -9% | floor above -7.77% | 0.0% breached; lowest -6.88% | PASS |
+| K2 a -0.10R rule is stopped within 500 days in >= 90% | about 96% | 99.2% | PASS |
+| K3 at +0.10R still trading after 300 days in >= 85% | stopped about 3% (understated) | 91.0% still trading (plain) | PASS |
+| K4 (reported): at exactly 0.00R | stopped about 42% | stopped 67.5% to 72.8%, median day about 230, half size on about half of all days | - |
+VERDICT: the claim "the guard is a real safety rule and a fair one" SURVIVES its three lines. Nothing changes; no tag.
+
+## Worked table against the run (more than 5 points apart -> reason before the verdict)
+- -0.10R: 96% worked, 99% run. +0.10R at 300 days: 3% stopped worked, 6% to 9% run. Close, and on the side I said the formula errs.
+- 0.00R: 42% worked, 68-73% run: 26 to 31 points apart. Reason, found before the verdict: my formula used a FIXED barrier 7% under today's high-water.
+  The real stop TRAILS: every new high in a run lifts it. With no drift a path wanders up as easily as down, and each wander up drags the stop
+  after it, so the stop is met far more often. (Real fills also take 0.015R a trade off a zero edge.) I flagged the formula's weakness for positive edges
+  only; it is largest at zero. A prediction that missed with its reason found - not a figure corrected after a push. June count stays 0.
+
+## What it means, said plainly (in money, python: 1% of $25,000 = $250)
+- If the edge is GONE: the guard never lets the account near the firm's line (lowest -6.9% of $25,000 in 8,000 runs). In about 7 runs of 10 it stops me
+  within two years, typically after about 230 trading days, with the account about 5% ($1,200 to $1,300) lower than today, payouts counted. In the
+  other 3 runs I am still trading a dead rule after two years, about 3% down, half the time at half size. Slow, cheap, and safe.
+- If the rule is clearly BAD (-0.10R): it is stopped in 99% of runs, half of them within six months (day 122), at a cost of about 5.6% (about $1,400).
+- If the edge is SMALL BUT REAL (+0.10R): 9 runs in 10 are still trading after 300 days - enough lived trades to judge, which is what the coach asked
+  of the guard - and the median two-year result is about +13% with payouts. One run in seven to nine is stopped wrongly.
+- If the edge is the planning edge: stopped wrongly in 1-2% of runs.
+- So the guard does what the alarm could not: it does not need to KNOW whether the edge is there. It caps what a dead edge can cost at about 5-6% of the
+  account and lets a live one run. The price is time: a dead edge takes most of a year to be stopped. That is the trade-off I am living in, with numbers on it.
+- One honest caveat: 500 days of reshuffled trades are not two real years; real bad stretches cluster more than 5-trade blocks.
+## What I do
+Nothing changes: 0.50%, half size at 3% under the high-water, stop at 7% under (hold to funded day 55, then the review, which gets this table).
+Counts: ideas 72, variants 201 (G0 Gm Gs; the +0.18R line is the regression). Adopted trading ideas: 0. On paper: UN3, PH2, MB1. June corrections after a push: 0.

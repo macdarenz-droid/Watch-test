@@ -145,3 +145,10 @@ for every kill line pushed first; one run of 20,000 futures appended to my 66 re
 passes 47% of the time; with the planning edge it fails 20% of the time (the drawdown line, because I stand 4.45R down). K1 passes barely, K2 and K3 fail:
 it is not a judge. The run differed from my worked table only where the pre-registration said it would (the drawdown half); reason found before the
 verdict. Alarm unchanged; the size rule is the protection; a question goes to the coach. Counts: 71 ideas, 198 variants. June corrections after a push: 0.
+
+## 06-02 research after funded day 48 (coach: the drawdown / breach guard is the real safety rule): idea GD, the guard when the edge is gone or small
+(journal/2015-idea-GD-guard-under-dead-edge.md). Worked predictions and a regression against WS pushed first; regression exact; one run from my real
+state. Edge gone: never near the firm's line (lowest -6.9%), stopped in about 70% of two-year runs around day 230 at a cost of about 5%. Edge -0.10R:
+stopped 99%, half within six months. Edge +0.10R: still trading after 300 days in 9 runs of 10. All three kill lines pass; nothing changes. My worked
+figure for the zero edge (42%) missed the run (68-73%) because a trailing stop is met more often than a fixed one; reason written before the verdict.
+Counts: 72 ideas, 201 variants. June corrections after a push: 0.
