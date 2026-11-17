@@ -28,6 +28,11 @@ Paper tags, never live: UN3 (07:00), PH2 (08:00, before the order), MB1 (12:00, 
   Monday, first trade of June, after a losing month: the plan, the same size. Month-end review: done on 05-29 before the last test, as the coach ordered.
   Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
   Worry: a flip day against the 10-day trend and against UN3. FL says flip days are ordinary. Written, not a rule.
+  08:00 London Mon: pre-entry hour 1.09346-1.09613 = 26.7 pips -> PH2 paper: QUIET, paper full size (decided before the order). Price 1.09382: night against me by 29.9 pips (counted); entry 16.0 pips better than at 07:00. Order: BUY 0.31, stop 40 pips below the bid (1.08982).
+  08:15 London: filled BUY 1.09392, stop 1.08982 (41.0 pips from the fill). First candle read from the tool. No call that matters; hands off.
+  09:00 London: first hour best +14.2, worst -34.8 (low 1.09044, 6.2 pips from the stop), last -32.8 pips: three falling candles after a first pop. Nothing to do; the stop is the stop. No call.
+  10:00 London: STOPPED in the 09:30 London candle (low 1.08953, 2.9 pips through my level). Sim balance from the tool $25,261.95. One trade a day: done. I watch to noon only for the stop-day routine.
+  12:00 London: price (bid, from the tool) 1.09225 = 16.7 pips under my entry and 24.3 pips ABOVE my stop; the morning low was 1.08915, 6.7 pips through my level. Without the stop about -0.41R at noon instead of -1.00R (python): a poke, the stop cost about 0.6R. Written, not a case for anything: SA priced wider stops on all history. MB1 paper (forward day 14), written before 13:25: open 08:00 1.09381, price at 12:00 1.09225 -> morning DOWN by about 16 pips (small morning) -> only a DOWN break of the 12:00-13:25 box counts. Exact figures from the tool afterwards.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
