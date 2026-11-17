@@ -43,3 +43,28 @@ Tool: `python bt/lively_fade_oos.py 2015-07-25 count` / `old` (no unseen outcome
   LM2 SELLS at 08:00, stop 40 above. The engine's "other side" of A2's paper buy today was +0.87R, so the tool must show sell, +0.87R.
 
 ## Result (one run)
+Tool: `python bt/lively_fade_oos.py 2015-07-25 test 2015-07-24`. Worked case 07-24: sell, clock exit, +0.87R: as written first.
+| LM2 on unseen lively mornings 05-07..07-24 | value | line | |
+|---|---|---|---|
+| trades / wins / full stops | 38 / 58% / 12 | >= 25 | judgeable |
+| average | +0.186R (+-0.37) | U1 >= +0.15R | PASS |
+| halves | +0.88R (22) / +6.19R (16) | U2 both > 0 | PASS |
+| net without best 3 | -1.22R (net +7.07R) | U3 > 0 | **FAIL** |
+| max drawdown | 5.40R | U4 <= 5R | **FAIL** |
+| stressed average (2.0 + 0.5) | +0.144R | U5 > 0 | PASS |
+| against the chase (LM1) on the same mornings | +0.186R vs -0.213R | U6 fade > chase | PASS |
+**LM2 FAILS U3 AND U4 ON THE UNSEEN MORNINGS. By the line I wrote first it is dead for good as a route B candidate.**
+What I learned, said straight:
+1. Two separate samples now say nearly the same thing: fade +0.203R (35 mornings to 05-06) and +0.186R (38 unseen); chase -0.223R and
+   -0.213R. A replication that close has not happened anywhere else in 112 ideas. It also survived the cost stress, which BX2 did not.
+2. And it still fails my lines for a reason that matters with real money: three mornings carry more than the whole profit, the first
+   half of the unseen period made +0.88R in 22 trades, and the drawdown passed 5R. A trader living it from 05-07 would have sat through
+   a flat-to-down six weeks before the good ones came. The +-0.37R error bar covers zero.
+3. So I have one more "small positive average, wide bar", exactly the pattern of the 07-21 step back; only better replicated.
+4. I do not re-cut, pool the two samples into a new verdict after the fact, or soften U3/U4. Pooling would be a new test written after
+   seeing both results.
+5. The chase side is the robust half: entering WITH a lively pre-bell hour lost 0.22R and 0.21R a trade in the two samples. That is
+   what PH2 measures from A2's side, and PH2 keeps its own gate.
+QUESTION FOR MY COACH (I start nothing): the line says dead as a candidate. Would a paper shadow like SW1's be allowed (fixed sample,
+kill line, never a pass), or is "dead for good" the end of it? I can argue both ways, which is why it is not my call.
+Counts: idea 112 (a re-test, counted); variants 310-311 (LM2 and the LM1 control); second setups tried stays 18, none alive.

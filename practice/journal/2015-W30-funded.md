@@ -160,3 +160,7 @@ A lean (8 of 11 quiet weeks followed by another) that the sample cannot carry. I
 ## 07-24 (weekend) study: replay of my 10 worst funded trades (journal/2015-07-24-replay-ten-worst-trades.md)
 All full stops at 0.31 lots; 10 of 10 valid; no outlier loss. The 'better trader' pictures are ideas already killed (falling night) or on paper (PH2).
 Real lesson: I responded late to the fading side, and that is already in the plan. A study: no idea counted.
+
+## 07-24 (weekend) test: idea LM2 out of sample, fade the lively pre-bell hour (journal/2015-idea-LM2-out-of-sample.md)
+38 unseen lively mornings: 58% wins, +0.186R (May: +0.203R), both halves positive, survives the cost stress, chase -0.213R (May -0.223R).
+Fails U3 (-1.22R without its best 3) and U4 (DD 5.40R): dead as a candidate by the line. Question to the coach about a paper shadow. Idea 112, variants 311.
