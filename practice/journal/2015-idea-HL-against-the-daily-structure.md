@@ -26,3 +26,12 @@ K3 HL1's kept-minus-skipped gap larger than HL0's.
 K4 label shuffle (10,000) of HL1's gap: p < 0.10.
 (No stressed-cost line: a filter only removes trades, each at A2's own costs; same frame as NC.)
 My guess: K1 fails - A2's skipped days look like everyone else's.
+
+## Counts (before outcomes; `python bt/daily_structure.py 2015-09-01 count`; 168 A2 days 01-08..08-31)
+N = 1: skip 50 = 30% (21 before 04-07, 29 from) | control (with) 118. N = 2: 12 = 7% (6 / 6) | control 78. N = 3: 3 | control 44.
+BY THE RULE WRITTEN FIRST: N = 1 (largest with 15%+ and 25+; N = 2 has 12). HL1 = 1, HL2 = 2 (12 days, dose only), HL0 = with >= 1.
+Noted before the run: HL0 skips 118 of 168 (falling lows behind a sell are the normal case), so K3 compares a 50-day skip with a 118-day
+skip. That is how it was written; I do not change it.
+Worked case 08-31 (my hand reading of the call numbers, then the tool): A2 SELL; lows Tue 1.13968 > Wed 1.12914 > Thu 1.12030 > Fri 1.11559
+= three falling lows, WITH the sell -> against 0, with 3 (tool: ag 0, wi 3). HL1 keeps the day.
+One run next: `python bt/daily_structure.py 2015-09-01 test 1 2`.
