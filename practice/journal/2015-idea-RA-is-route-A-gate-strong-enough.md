@@ -25,3 +25,9 @@ Two variants (single morning; 60 mornings). Limit: resampled days are independen
 - If both are under those lines: the gate stands as written.
 My guess: too weak. The daily advantage swings about 2R, so 40 days average to about +-0.3R by chance alone.
 Worked case to check first: the tool's 40-day monitor for the morning of 07-23 must equal side_monitor's -0.406R.
+
+## Facts and worked case (tool `python bt/gate_check.py 2015-07-23 facts`, before the resampling)
+142 days. Last-40 mean = -0.406R = side_monitor's monitor for 07-23: the series is the same. No-edge pool: 77 days from 04-07 (mean -0.141R
+before shifting, spread 1.89R). Healthy pool: 65 days to 04-06 (mean +0.942R, spread 1.57R).
+
+## Result (one run)
