@@ -31,6 +31,15 @@ SW1 paper shadow from Mon 07-20 (journal/SW1-paper-shadow-rules.md): a count onl
      MO PAPER RULE (day 15 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.04R (running -4.74R).
      For Tuesday (tool): MO1 -0.299R -> paper; MO3 -0.112R -> paper.
 
+## Tue 07-21
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-21`:
+- 3-day gap -123.5 pips -> A2 side SELL. 5-day gap -175.6 -> UN3 agree. Night 00:00-07:00: 1.08116-1.08347, last 1.08224 (range 23.1, net -6.8).
+- Monday's London day: 1.08086-1.08702, close 1.08250 (range 61.6, the smallest in weeks).
+- Monitor for today -0.299R (MO1), -0.112R (MO3) -> BOTH PAPER. Route A closed until 09-21; route B: no tested setup. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
+- SW1 shadow: open from Mon (sell 1.08414, stop 1.09614, target 1.06014, clock 12:00 Mon 07-27). Nothing to do.
+- How I feel: calm. Mistake to avoid: watching the shadow as if it were a position.
+
 ## Forward tally
 
 ## 07-20 test: idea WO, the weekly open (journal/2015-idea-WO-weekly-open.md)
