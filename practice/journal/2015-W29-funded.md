@@ -6,6 +6,7 @@ Size rule v3 (0.16 lots) applies only if a route of the return rule opens. Payou
 | # | time (London) | side | lots | entry | stop | exit | R | $ | tag | note |
 |---|---|---|---|---|---|---|---|---|---|---|
 | (paper) | Mon 07-13 08:00 | buy | NO LIVE TRADE (monitor -0.227R) | paper | paper | paper stop | (-1.03 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 4: stopped; 132 pips against within two hours |
+| (paper) | Tue 07-14 08:00 | sell | NO LIVE TRADE (monitor -0.302R) | paper | paper | paper stop | (-1.00 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 5: stopped before 10:00 |
 
 ## Mon 07-13
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-13`:
@@ -35,6 +36,19 @@ Size rule v3 (0.16 lots) applies only if a route of the return rule opens. Payou
 - Monitor for today -0.302R (MO1), -0.188R (MO3) -> BOTH PAPER. Route A closed until 09-21; route B: no tested setup. NO ORDER.
 - Paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00. I do nothing in the account.
 - How I feel: calm. Mistake to avoid: reading yesterday's saved loss as proof of anything.
+  08:00 London (PAPER): pre-entry hour 1.09653-1.10025 = 37.2 pips (PH2 lively: half on paper). Paper SELL near 1.09785 (last price; engine fixes the fill), paper stop about 1.10185. No order. Before advancing: nothing to do but watch.
+  10:00 London (PAPER): best +12.2, worst -60.7, last -48.8 pips: the paper sell is stopped. Account untouched. Nothing to manage.
+  12:00 London (PAPER): stopped before 10:00; day's last price 1.10083.
+  -> Tue result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.302R -> paper). Checked: call committed before the bell; no order; trade list
+     still ends with #230 of 07-07; sim balance $24,926.03 unchanged.
+     PAPER A2, day 5 (engine, `python bt/coin_control.py 2015-07-15 --check 2015-07-14`): sell, stopped, -1.00R; the other side +1.04R.
+     A2 paper running from 07-08: 5 days, -2.64R (-1.00, +1.39, -1.00, -1.03, -1.00).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     How it feels: flat. Three paper stops in a row would have been -$187 at 0.16 lots; I note it and do not count it as skill.
+     Paper lines: UN3 agreed, -1.00R (agree days -10.57R in 47; disagree +2.88R in 14; day 61). PH2 (day 53): lively (37.2) -> half = -0.50R;
+     38 lively days -6.84R, 19 full-stop mornings; 15 quiet -2.39R; PH2 about -5.80R against A2's -9.25R.
+     MO PAPER RULE (day 11 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.00R (running -5.44R).
+     For Wednesday (tool): MO1 -0.433R -> paper; MO3 -0.222R -> paper.
 
 ## Forward tally
 
