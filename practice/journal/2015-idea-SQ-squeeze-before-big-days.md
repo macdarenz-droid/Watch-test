@@ -26,3 +26,21 @@ My guess: Part A dies for sample; Part B shows a small expansion (ranges mean-re
 wider one simply by regression) - K1 may pass by that alone; K3 and K2 decide.
 NOTE on regression: a narrow day is below its median by definition; the NEXT day is measured against the same kind of median, so
 regression does not automatically lift the next ratio above 1 - but day-to-day correlation of range (quiet follows quiet) pulls it down.
+
+## PART A count (tool output pasted by this command)
+    days 155 (2015-01-30..2015-09-03) | NR5 days 42 | with a break 08:00-16:00 (= PART A trades): 29 | from 2015-04-07: 21
+    PART A sample line (80+ and 35+ from 04-07): FAIL -> killed for sample, no outcome run
+PART A: KILLED FOR SAMPLE (29 trades, 21 from 04-07), no outcome run. As expected on 09-02 (~30-35).
+
+## Worked case for PART B (tool check lines, before the run)
+    day  ratio  nr5   nr7   wr5  late   yhi  ylo  rng  prng
+    2015-08-17  0.642 True False False  True 1.119 1.11 66.1  90.9
+    2015-08-18  0.741 True True False  True 1.112 1.106 76.3  66.1
+    2015-08-19  1.202 False False False  True 1.109 1.102 116.4  76.3
+    2015-08-20  1.341 False False True  True 1.113 1.102 137.4 116.4
+    2015-08-21  1.466 False False True  True 1.124 1.111 159.5 137.4
+READ: my chart sighting does not match the rule. 08-17 and 08-18 came after NR5 days and were SMALL themselves (ratio 0.64, 0.74); the
+day before the 08-20 rise (08-19) was the WIDEST of five (08-20 is a WR5-follow day, ratio 1.34). I saw small BODIES on 08-14..08-18;
+the rule measures RANGES. The expansion came two to three days after compression, not the next day. Written before Part B's run; Part B
+is run as registered (next day only), not changed to fit this.
+One run next: `python bt/squeeze.py 2015-09-04 runB`.
