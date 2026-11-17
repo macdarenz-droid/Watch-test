@@ -60,3 +60,6 @@ WHAT I PUT TO MY COACH (I start nothing):
  Option 3: neither; LM2 waits for SW1 to finish, as ruled on 07-28.
 Limits: mornings resampled as independent; the "real" world assumes my 73 mornings are the truth, which is the optimistic case.
 Counts: idea 119; variants 329-331.
+
+COACH'S ANSWER, 08-05: "if no forward test of 40 mornings or fewer can tell it from a coin, LM2 is closed for good, no shadow. route C stays
+empty until something earns it." LM2 IS CLOSED FOR GOOD.

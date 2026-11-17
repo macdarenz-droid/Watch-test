@@ -59,6 +59,17 @@ BEFORE THE BELL: the yardstick for tonight's day-20 verdict is written and commi
      MO PAPER RULE (day 26 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.53R (running -6.10R).
      For Wednesday (tool): MO1 -0.319R -> paper; MO3 -0.257R -> paper.
 
+## Wed 08-05
+Coach 08-05: "if no forward test of 40 mornings or fewer can tell it from a coin, LM2 is closed for good, no shadow. route C stays empty
+until something earns it." Recorded: LM2 CLOSED FOR GOOD. No shadow, no tally, no re-test. Next test: a fresh idea with enough trades to judge.
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-05`:
+- 3-day gap -50.4 pips -> A2 side SELL. 5-day gap -179.0 -> UN3 agree. Night 00:00-07:00: 1.08482-1.08938, last 1.08723 (range 45.6, net -17.0).
+- Tuesday's London day: 1.08789-1.09875, closed on its low 1.08806 (range 108.6); it made the 3-day low.
+- Monitor for today -0.319R (MO1), -0.257R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); routes B and C empty. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
+- SW1 shadow trade 4: open (buy 1.09535, stop 1.08335); the night's low 1.08482 came within 15 pips of its stop. Nothing to do.
+- How I feel: fine with the ruling. LM2 was the one I wanted; that is the reason it needed someone else's no.
+
 ## Forward tally
 
 ## 08-03 test: idea PS, a probation size (journal/2015-idea-PS-probation-size.md)
