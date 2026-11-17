@@ -305,3 +305,9 @@ June 22 trades, -1.34R, 22 valid / 0 mistakes, 2 process mistakes; the market ke
 41%); July goal set. (2) Picked from it: idea EF (journal/2015-idea-EF-straightness-of-the-market.md): is the straightness of the last 10 / 20 / 40 days
 a readable condition for the signal's worth? Tested INSIDE each half of the history so that the calendar cannot help; kill lines pushed first;
 mechanics matched; one run. Pooled inside-half differences +0.38R (p 0.12), +0.12R, +0.19R: all killed. Counts: 95 ideas, 267 variants.
+
+## 07-02 research after funded day 70 (coach: replay the last 20 trades for their exits, one observation as a testable exit rule):
+journal/2015-07-02-replay-last-20-exits-and-idea-BE.md. Replay: 5 of the 8 full stops were never in profit; six trades had been +25 pips or more and
+ended at zero or worse. Rule from it: stop to the entry after +25 / +30 / +20 pips. Judged on the 108 days BEFORE the replayed twenty; four
+hand-worked cases matched; kill lines pushed first; one run. -3.87R / -3.60R / -6.88R against A2 (5 better, 10 worse for the +25 version); +2.37R on
+the twenty I had looked at. All killed. Break-even is closed at every level. Counts: 96 ideas, 270 variants.

@@ -59,3 +59,43 @@ A survivor: a paper count beside the daily trade, judged on forward days from 07
 Worked expectation: on the replayed twenty all three look good (that is why I saw it): about +2R to +3R. On the judged set I expect what January and
 February showed in small: a few saved losers against more winners cut at the entry before they run - net between -3R and 0: KILLED on K1, K3, probably K5.
 Counts when run: idea 96, variants 268-270 (BE1, BE2 new; BE3 = X1 re-run on all history).
+
+## Mechanics check (replay and kill lines pushed first in commit 0bdb0c9; `python bt/break_even.py 2015-07-03 --check DATE`)
+07-01: BE1 and BE3 out at the entry 09:55 (0.00R), BE2 still -1.00R. 06-29: all three out at the entry (0.00R). 06-30: all three out at the entry
+08:50 (0.00R instead of +0.49R). 07-02: BE1 and BE3 out at the entry 09:35 (0.00R), BE2 unchanged +0.08R. All four as worked by hand.
+
+## RESULTS (one run: `python bt/break_even.py 2015-07-03`; costs on; figures copied from the print)
+A2: 128 days +31.63R. JUDGED SET (108 days before 06-05): +36.39R, max drawdown 4.54R, 15 best days. The replayed twenty: -4.76R.
+| variant | JUDGED: vs A2 | before 03-02 | 03-02 .. 06-04 | changed days: better / worse | without best day | max DD (A2 4.54R) | on the 15 best days | the replayed twenty (NOT judged) |
+|---|---|---|---|---|---|---|---|---|
+| BE1 break-even after +25 | -3.87R | -1.28R | -2.59R | 15: 5 (+2.17R) / 10 (-6.05R) | -4.89R | 5.57R | 0.00R | +2.37R |
+| BE2 after +30 | -3.60R | +0.17R | -3.77R | 11: 3 (+0.98R) / 8 (-4.58R) | -4.11R | 5.57R | 0.00R | +1.45R |
+| BE3 after +20 (X1) | -6.88R | -1.12R | -5.76R | 22: 7 (+2.66R) / 15 (-9.56R) | -7.91R | 6.20R | -1.65R | +2.37R |
+| line | BE1 | BE2 | BE3 |
+|---|---|---|---|
+| K1 at least +1.0R above A2 | FAIL | FAIL | FAIL |
+| K2 ahead in both periods | FAIL | FAIL | FAIL |
+| K3 improved >= worsened, ahead without best day | FAIL | FAIL | FAIL |
+| K4 drawdown not larger | FAIL | FAIL | FAIL |
+| K5 gives back <= 1.0R on the best days | PASS | PASS | FAIL |
+VERDICT: all three KILLED. No paper count.
+
+## Expectation against the run
+"On the replayed twenty about +2R to +3R": +2.37R, +1.45R, +2.37R. "On the judged set between -3R and 0, killed on K1, K3, probably K5": -3.6R to
+-6.9R - a little worse than my range; K1-K4 fail; K5 passes for the two wider ones (the best days do not come back to their entry after +25).
+
+## What I take from it
+- The same rule is +2.4R on the twenty trades I replayed and -3.9R on the 108 before them. That is the whole lesson in one row: twenty trades
+  looked at by eye show me the two full stops a break-even would have saved, and not the ten days elsewhere on which a trade went +25, came back
+  through its entry and then made its money. For every loser saved there are two winners cut (5 better, 10 worse).
+- It is the FH study again from the exit side (04-09: "winners take their heat first and make their best price late"): a trade that returns to its
+  entry after +25 pips is more often a winner taking a breath than a loser turning.
+- Break-even has now been run at +20, +25, +30, +40 and +80 on all history: every level loses or does nothing. The lever is closed, this time on
+  all the data and with the months since April included (-2.6R to -5.8R there, worse than before March). I will not open it a sixth time.
+- What a better trader would have done with my last twenty exits, then? On the evidence: nothing systematic. He would have protected six trades
+  and the same hand would have cost him more elsewhere. The exits that looked bad were the price of the exits that paid.
+- The exit side as a whole, for the record: targets (+60, +80), trails (20 / 30 / 40 / 60 / 80), break-even (five levels), partials, adds, locks
+  at 10:00 and 11:00, time-decay stops, close-stops, clocks from 10:00 to 13:25: about fifty definitions. GB1 (trail 40 from +80) is the only one
+  not dead, and it waits for its fifteen cases (3 so far).
+Counts: ideas 96, variants 270 (BE1, BE2 new; BE3 = X1 re-run on all history). Adopted trading ideas: 0. July: file or number errors found later
+than the turn that made them: 0.
