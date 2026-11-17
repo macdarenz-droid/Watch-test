@@ -16,6 +16,7 @@ Coach 07-06: next brick - position sizing math: how the half-size / full-size la
 | F72 | Mon 07-06 08:00 | sell | 0.16 (HALF) | 1.10556 | 1.10958 | 1.10959 (stop, 09:01) | -1.00 | -$64.48 | VALID LOSS (valid setup, market disagreed) | first half-size day; after a 116 pip weekend gap down; the ask touched the stop by 0.6 pips at 09:01, then the morning fell: best +32.2, +23 at noon (+0.57R without the stop): a poke; PH2 paper half; UN3 agree; MO paper day 5: MO1 off, MO3 on |
 | F73 | Tue 07-07 08:00 | buy | 0.16 (rule v3) | 1.10278 | 1.09869 | 1.09868 (stop, 09:24) | -1.00 | -$65.60 | VALID LOSS (valid setup, market disagreed) | a 3 pip flip signal against a 180 pip five-day fall; never 6 pips in profit; stopped in the 09:15 candle, 82 pips against at the worst; at the stop level at noon; size rule v3 written before the call; PH2 paper quiet; UN3 DISAGREE (paper skips); MO paper day 6: both monitors off |
 | (paper) | Wed 07-08 08:00 | sell | NO LIVE TRADE (rule alarm) | 1.10146 paper | 1.10546 | paper stop 08:5x | (-1.00 paper) | $0 | NO LIVE TRADE - BY RULE | A2 on paper day 1: stopped by a spike 5.4 pips through, back inside by noon; account flat and unchanged |
+| (paper) | Thu 07-09 08:00 | sell | NO LIVE TRADE (return rule: monitor -0.235R) | 1.10979 paper | 1.11379 | paper close 12:00 | (+1.39 paper) | $0 | NO LIVE TRADE - BY RULE | A2 on paper day 2: fell from the bell, best +73.3 pips; account flat and unchanged |
 
 ## Daily calls - each written at 07:00 London and committed before the entry bar; then a note before every advance
 
@@ -190,6 +191,25 @@ Coach 07-06: next brick - position sizing math: how the half-size / full-size la
   Levels: night high 1.11146; Wed high 1.10927 (already passed in the night); night low 1.10629; Wed low 1.09743.
   10-day trend: DOWN (1.10758 vs 06-24 1.12040); the paper sell is with it.
   PAPER plan: SELL at 08:00 London, stop 40 pips above the bid, close 12:00. No order in the account.
+  08:00 London Thu (PAPER): pre-entry hour 1.10877-1.11249 = 37.2 pips -> PH2 paper: LIVELY. Price 1.10979; night against the sell by 22.6 pips. PAPER order: SELL at 1.10979, stop 1.11379. NO ORDER IN THE ACCOUNT (return-to-live rule: monitor -0.235R).
+  10:00 London (PAPER): the paper sell fell from the bell: best +69.3 pips at 09:00, last +52.6. It is a paper trade. The return rule was written two hours ago and says paper; a winner I am not in is the first test of whether I meant it. Nothing in the account. Next look 12:00.
+  12:00 London (PAPER): the paper sell closes by the clock at about +55.8 pips; best +73.3.
+  -> Thu result, TAG FIRST: NO LIVE TRADE - BY RULE (the return-to-live rule, written and pushed before the call: the monitor is -0.235R -> paper).
+     Checked: July goal read; return rule pushed before 07:00; paper call committed before the bell; no order placed; the trade list still ends with
+     #230 of 07-07; sim balance unchanged.
+     PAPER A2, day 2 (engine, `python bt/coin_control.py 2015-07-10 --check 2015-07-09`): sell, closed 12:00, +1.39R; the other side -1.03R.
+     A2 paper running from 07-08: 2 days, +0.39R.
+     Account: tracker balance $24,358.99 (sim $24,926.03 minus $567.04 paid out), unchanged; FLAT; high-water $25,256.94; drawdown -3.56%.
+     The honest part: the second day off money is a +1.39R winner, about $87 at 0.16 lots that I did not make. I felt it at 09:00. Two things
+     I wrote down for exactly this morning: BD ("the only way to lose the best days is not to trade the day") - and the alarm, which says the days
+     I trade this rule for money have been a coin's days since April. Both are true. One paper winner changes neither; the monitor needs +0.30R
+     over forty days, and it moved today from -0.235R to -0.202R. That is what one good day is worth.
+     How it feels: the first real test of the return rule came two hours after I wrote it. I am glad it was written first.
+     Paper lines (units of a full trade's R): UN3 DISAGREED (paper skipped +1.39R): disagree days 14 of 30, A2 on them +2.88R (14); agree days -7.54R in 44.
+     PH2 (day 50): lively (37.2) -> half = +0.70R; tally 50 days, 35 lively (-3.81R, 16 full-stop mornings), 15 quiet (-2.39R, 6); PH2 about -4.28R against A2's -6.22R.
+     MO PAPER RULE (day 8 of 60): both monitors had A2 off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +1.39R (running -2.41R).
+     For tomorrow (tool): MO1 -0.202R -> paper; MO3 -0.064R -> paper.
+     END OF RELEASED DATA (clock Fri 07-10 01:00 London).
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |

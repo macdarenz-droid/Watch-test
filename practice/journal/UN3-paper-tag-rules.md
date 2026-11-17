@@ -99,3 +99,4 @@ is to be written in the journal as a feeling, like every other such thought.
 | Mon 2015-07-06 | 55 | 12 | +2.49R (12 trades) | -6.54R (43 trades) | -6.54R / drawdown to be recomputed at the gate | -4.08R / 7.07R (Friday's figures minus 1.00) |
 | Tue 2015-07-07 | 56 | 13 | +1.49R (13 trades) | -6.54R (43 trades) | -6.54R / drawdown to be recomputed at the gate | -5.08R / 8.08R (yesterday's figures minus 1.00) |
 | Wed 2015-07-08 (A2 on paper) | 57 | 13 | +1.49R (13 trades) | -7.54R (44 trades) | -7.54R / drawdown to be recomputed at the gate | -6.08R (A2 incl. paper day) |
+| Thu 2015-07-09 (A2 on paper) | 58 | 14 | +2.88R (14 trades) | -7.54R (44 trades) | -7.54R / drawdown to be recomputed at the gate | -4.69R (A2 incl. paper days) |

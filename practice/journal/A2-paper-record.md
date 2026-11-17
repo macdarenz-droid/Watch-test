@@ -5,3 +5,4 @@ A return to money: only by a restart rule written in advance and agreed with the
 | day | side | paper R | other side R | running paper R | note |
 |---|---|---|---|---|---|
 | Wed 2015-07-08 (1) | sell | -1.00 | -0.11 | -1.00 | stopped by a spike 5.4 pips through; +2 pips at noon |
+| Thu 2015-07-09 (2) | sell | +1.39 | -1.03 | +0.39 | fell from the bell, best +73.3 pips; monitor after the day -0.202R |
