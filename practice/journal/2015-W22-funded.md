@@ -114,6 +114,12 @@ Friday 05-29 is the last trading day of May: the month-end review is due on the 
   SIZE RULE: tracker balance $24,912.97, high-water $25,349.14, drawdown -1.72%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
   Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
   Worry: the night has been rising for three hours into my sell. Written, not a rule.
+  08:00 London Wed: pre-entry hour 1.08993-1.09290 = 29.7 pips -> PH2 paper: QUIET by 0.3 pips, paper full size (decided before the order; the line is 30 and the tool says 29.7, I do not round). Price 1.09189: night against me by 32.9 pips (counted); entry 12.0 pips better than at 07:00. Order: SELL 0.31, stop 40 pips above the bid (1.09589).
+  08:15 London: filled SELL 1.09189, stop 1.09589 (40.0 pips). First candle: best +13.1, close +11.8 pips. No call that matters; hands off.
+  09:00 London: first hour best +17.0, worst -6.8, last -1.2 pips. Flat. No call; hands off.
+  10:00 London: second hour best +9.1, worst -5.0, last -1.8 pips. A 14 pip range around my entry. No call; hands off.
+  11:00 London: third hour best +24.5 (low 1.08934), worst -6.8, last +16.0 pips: it broke the range downward at 10:30. One hour left; close at 12:00 whatever it shows.
+  12:05 London: closed at 12:00 @1.08825, +$112.84 (from the trade list). MB1 paper (forward day 11), written before 13:25: open 08:00 1.09190, open 12:00 1.08814 -> morning DOWN by 37.6 pips (large morning) -> only a DOWN break of the 12:00-13:25 box counts. Result from the tool tomorrow.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
