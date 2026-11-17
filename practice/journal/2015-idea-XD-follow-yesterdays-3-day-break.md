@@ -26,3 +26,13 @@ K3 XD1's average R at stressed costs above zero.
 K4 XD1 minus XD0, trade by trade, above zero with sign-flip p < 0.10.
 Plus the sample line (80+ / 35+ from 04-07) and the disguise line (under 70% on A2's side), both checked on counts before the run.
 My guess: disguise (killed on counts) or the usual chase loss.
+
+## Counts (before outcomes; `python bt/three_day_break.py 2015-08-28 count`, history 2015-01-08..2015-08-27)
+XD1: 113 trades (40 before 04-07, 73 from) -> sample line PASSES (80+ / 35+); my estimate was ~110.
+XD2 (close pos >= 0.5): 83 trades (27 / 56).
+SAME SIDE AS A2: XD1 104 of 113 = 92%; XD2 80 of 83 = 96% -> DISGUISE LINE (70%) FAILS.
+Worked case 08-21 (tool's check line): Thu 08-20 broke only the 3-day high, closed at 0.97 toward it -> XD1 and XD2 BUY; A2 also BUY.
+VERDICT: KILLED ON COUNTS - A2 in disguise. No outcome run, so no R numbers exist for it. Idea 148; variants XD1 XD2 XD0 named but
+not run, so not added to the variant count (same as ND, CS, GC2, NR).
+Lesson: 'yesterday broke the 3-day high' and 'the 3-day close is up' are almost the same fact. A note written from the call line I
+already trade on is likely to be A2 again; the next idea from my notes should come from something A2 does not read (time of day, size).

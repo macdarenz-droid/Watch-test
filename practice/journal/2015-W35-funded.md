@@ -157,3 +157,6 @@ R after costs. 653 one-hour trades: -0.014R (+-0.08); against -0.098R. Killed on
 Thu 08-27 evening, backtest idea 147 YM (08:00 open vs yesterday's midpoint as direction; prereg pushed first, counts and worked case pushed
 before the run). R after costs 1.0 + 0.1. YM1 169 trades +0.113R, +7.78R / +11.25R, stressed +0.063R; control -0.105R; difference p 0.123:
 K1-K3 pass, K4 FAILS -> KILLED. Ideas 147, variants 394. YM2 (+0.161R / 84) a hint only.
+
+Thu 08-27 late, idea 148 XD (follow yesterday's 3-day range break; from my call notes): prereg pushed first; counts 113 trades but 104 of 113
+(92%) on A2's side -> KILLED ON COUNTS (disguise line 70%), no outcome run. Ideas 148, variants 394.
