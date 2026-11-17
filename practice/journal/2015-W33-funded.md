@@ -65,3 +65,7 @@ the two are not confused.)
 ## 08-10 test: idea AR, Asia-hours reversion to midnight's price (journal/2015-idea-AR-asia-reversion.md; 3 variants named up front)
 117 nights: -0.024R, and -0.170R at a 2.5-pip night spread; follow -0.157R. Killed on all four lines. Reversion lost before 04-07 and paid
 after, at night too: the regime, not a rule. Idea 124, variants 346.
+
+## 08-11 study: A2's last 10 paper losers by eye (journal/2015-08-11-review-A2-last-10-paper-losers.md)
+10 of 10 valid, 0 trade mistakes (P12 touched four days' notes, already corrected). Only 2 were full stops; 6 of 10 were mornings that went
+against the 3-day side from the bell. Nothing untested to change; A2 stays on paper.

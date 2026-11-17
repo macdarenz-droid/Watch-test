@@ -458,6 +458,9 @@
 - Forward: A2 +0.35R. PM1 (half at +1R, runner to break-even) -1.40R vs A2: 8 small gains (+1.90R) against 7 cuts of big winners (-3.29R), drawdown 5.26R against 4.54R. PM2 -1.44R. PM3 (break-even after +1R) +0.07R on 2 changed days. All KILLED again.
 - 06-10 (+86 pips -> -0.14R) becomes +0.48R with a partial, and the same partial takes 0.99R off 06-04. The exit side has not moved once in two rounds on separate data.
 
+## Study 08-11: A2's last 10 paper losers by eye (journal/2015-08-11-review-A2-last-10-paper-losers.md; coach 08-11; study, no idea counted)
+- 07-15..08-10: 10 of 10 VALID (call before the bell, side = engine, no order, engine R); 0 trade mistakes; P12 touched four days' notes only. 2 full stops, 8 clock exits, average -0.64R: the bleed is mornings drifting against the 3-day side (6 of 10), not stops. Nothing new to test; the rule already stopped money on 07-08.
+
 ## Idea AR Asia-hours reversion (journal/2015-idea-AR-asia-reversion.md; coach 08-10: max 3 variants named up front; bt/asia_reversion.py END count|check DATE [x]|test)
 - AR1 (15/15) 117 nights, 50% wins, -0.024R (+-0.16), stressed -0.170R. AR2 (20/20) +0.093R on 85, stressed -0.040R. AR0 follow -0.157R. KILLED (K1-K4).
 - The regime split again: reversion lost before 04-07 and paid after; following the reverse. Seen in A2, MC, burst chases and now the night. A calendar, not a rule. Second setups tried: 26, none alive.
