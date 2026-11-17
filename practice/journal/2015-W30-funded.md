@@ -8,6 +8,7 @@ SW1 paper shadow from Mon 07-20 (journal/SW1-paper-shadow-rules.md): a count onl
 | (paper) | Mon 07-20 08:00 | sell | NO LIVE TRADE (monitor -0.260R) | paper | paper | paper clock exit | (+0.04 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 9: flat morning; SW1 shadow opened (sell 1.08414) |
 | (paper) | Tue 07-21 08:00 | sell | NO LIVE TRADE (monitor -0.299R) | paper | paper | paper clock exit | (-0.74 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 10; SW1 shadow trade 1 stopped -1.01R net |
 | (paper) | Wed 07-22 08:00 | buy | NO LIVE TRADE (monitor -0.313R) | paper | paper | paper stop | (-1.03 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 11: stopped; SW1 shadow trade 2 opened (sell 1.09560) |
+| (paper) | Thu 07-23 08:00 | buy | NO LIVE TRADE (monitor -0.406R) | paper | paper | paper clock exit | (+1.65 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 12: winner on paper; gate amendment written before the bell |
 
 ## Mon 07-20
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-20`:
@@ -91,6 +92,21 @@ confirmed with a new seed: no-edge rule 2.2% on a single morning, 16.1% at least
 - A2 paper plan: buy at the 08:00 open, stop 40 pips below, out 12:00.
 - SW1 shadow trade 2: open from Wed (sell 1.09560, stop 1.10760, target 1.07160, clock 12:00 Wed 07-29). Nothing to do.
 - How I feel: good about the gate: a hole found on paper costs nothing. Mistake to avoid: none special today; the usual one, an order.
+  08:00 London (PAPER): pre-entry hour 1.09235-1.09409 = 17.4 pips (PH2 quiet: full unit on paper). A2 paper BUY near 1.09290 (engine fixes the fill), paper stop about 1.08890. SW1 shadow untouched. No order.
+  10:00 London (PAPER): A2 paper buy best +76.1, worst -5.5, last +62.3. A real run, on paper. Before advancing to noon: the rule holds to 12:00; I do not get to bank a paper winner early either.
+  12:00 London (PAPER): A2 paper buy closed by the clock about 67 pips ahead (walk: best +76.1, worst -7.4, last +67.3).
+  -> Thu result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.406R -> paper). Checked: amendment and call committed before the bell; no order;
+     trade list still ends with #230 of 07-07; sim balance $24,926.03 unchanged.
+     PAPER A2, day 12 (engine, `python bt/coin_control.py 2015-07-24 --check 2015-07-23`): buy, clock exit, +1.65R; the other side -1.00R (stopped).
+     A2 paper running from 07-08: 12 days, -2.06R.
+     SW1 SHADOW trade 2: still OPEN (sell 1.09560, stop 1.10760, target 1.07160, clock 12:00 Wed 07-29); last price 1.09827, about 27 pips against. Not managed.
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     How it feels: the best paper day since the alarm, about $103 at 0.16 lots that I did not earn. It stings less than 07-09 did. One good day
+     moves the 40-day monitor from -0.406R to -0.346R: that is how far one day goes, and why the gate is +0.60R.
+     Paper lines: UN3 DISAGREED (day 68): disagree days +3.50R in 16; agree days -10.61R in 52 (the tag has skipped the better days so far).
+     PH2 (day 60): quiet (17.4) -> full = +1.65R; 41 lively days -7.26R, 20 full-stop mornings; 19 quiet -1.39R; PH2 about -5.01R against A2's -8.67R.
+     MO PAPER RULE (day 18 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +1.65R (running -4.86R).
+     For Friday (tool): MO1 -0.346R -> paper; MO3 -0.226R -> paper.
 
 ## Forward tally
 
