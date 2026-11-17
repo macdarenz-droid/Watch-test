@@ -202,3 +202,8 @@ Counts: 72 ideas, 201 variants. June corrections after a push: 0.
 of March that were never judged: idea W "no Friday" and the N1 paper tag. Applied both by their written lines on lived days: W killed (first 8 unseen
 Fridays +5.64R, 2 losers), N1 killed at its 20-trade gate (all five lines fail). Process mistake P10 (missed gates), fixed in the gates list.
 Nothing adopted; the coach's brief is still open for a new idea tomorrow. Counts: 73 ideas, 204 variants; process mistakes 10.
+
+## 06-03 research, second part - the fresh idea the coach asked for: idea GA, no trade on the morning after an unusually wide day
+(journal/2015-idea-GA-morning-after-a-giant-day.md). From my two fastest stops (03-19, 06-03; both dropped). Sample counted without results (12 such
+mornings), worked cases and kill lines pushed, ratio hand-checked, one run. Killed on four lines: the mornings the filter would skip are A2's BEST group
+(+0.817R a trade in 10, against +0.316R), at every threshold and on lived days. Counts: 74 ideas, 207 variants. June corrections after a push: 0.
