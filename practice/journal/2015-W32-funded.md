@@ -32,6 +32,16 @@ back to live trading safely: rule, sizing, the evidence I need. Today's test is 
      MO PAPER RULE (day 25 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.73R (running -5.57R).
      For Tuesday (tool): MO1 -0.338R -> paper; MO3 -0.285R -> paper.
 
+## Tue 08-04 (A2 paper day 20)
+BEFORE THE BELL: the yardstick for tonight's day-20 verdict is written and committed (journal/2015-08-04-A2-day-20-verdict-and-route-back.md, Part 0).
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-04`:
+- 3-day gap -32.7 pips -> A2 side SELL. 5-day gap -138.0 -> UN3 agree. Night 00:00-07:00: 1.09324-1.09632, last 1.09576 (range 30.8, net +4.6).
+- Monday's London day: 1.09413-1.09957, close 1.09491 (range 54.4, the smallest since January by my eye; not checked, not used).
+- Monitor for today -0.338R (MO1), -0.285R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); route B: no tested setup. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
+- SW1 shadow trade 4: open (buy 1.09535, stop 1.08335, target 1.11935, clock 12:00 Fri 08-07). Nothing to do.
+- How I feel: clear. The verdict is decided by arithmetic before the day; the day is still walked properly.
+
 ## Forward tally
 
 ## 08-03 test: idea PS, a probation size (journal/2015-idea-PS-probation-size.md)
