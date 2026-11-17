@@ -34,3 +34,16 @@ Step 2, only after a pass: lived days 05-01..07-13, reported as CONTAMINATED (th
 - Pre-May: 83 A2 days, NA on 24 = 29%. From 05-01: 52 days, NA on 24 = 46%. (Nights against me became more frequent; a fact, no outcome.)
 
 ## 5. Result
+Tool: `python bt/night_filter.py 2015-07-14 pre` (one run).
+| part | A2 days | skipped: n, avg R, net | kept: n, avg R, net | gap kept - skipped |
+|---|---|---|---|---|
+| pre-May | 83 | 24, +0.281, +6.75 | 59, +0.495, +29.23 | +0.214 |
+| Jan-Feb | 39 | 10, +0.680, +6.80 | 29, +0.440, +12.76 | -0.240 |
+| Mar-Apr | 44 | 14, -0.004, -0.05 | 30, +0.549, +16.47 | +0.553 |
+K1 FAIL (gap +0.21R under the 0.30R line, and the skipped days EARNED +6.75R) | K2 FAIL (Jan-Feb the skipped days were the better
+ones) | K3 PASS. **NA IS KILLED, the second time.** Step 2 not run: I did not look at the lived days' outcomes by this feature.
+What I learned: 1. The picture is real in the charts of losers and useless as a filter: before May the same nights held +6.75R of
+profit. 2. A loss review shows what losses look like, not what separates them from wins; my April method rule said so and I needed
+the test to believe it again. 3. All 31 losses were the market's, none mine: there is no mistake to remove, the signal's side is the
+problem (RG). 4. Fact kept: nights against me rose from 29% to 46% of mornings; that is RG seen from another side, not a rule.
+Counts: idea 103, variant 289 (one). No fourth look at "night against" before 40 live/paper cases from 04-23, as written in April.

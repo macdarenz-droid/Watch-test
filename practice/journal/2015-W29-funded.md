@@ -29,3 +29,8 @@ Size rule v3 (0.16 lots) applies only if a route of the return rule opens. Payou
      For Tuesday (tool): MO1 -0.302R -> paper; MO3 -0.188R -> paper.
 
 ## Forward tally
+
+## 07-13 research: all 31 A2 losses since May by eye -> idea NA (journal/2015-idea-NA-night-against-second-review.md)
+All 31 valid (market, not mistake). Repeating picture: the night against me. One filter (skip at 15+ pips against), pre-May first:
+skipped 24 days made +6.75R, Jan-Feb the skipped days were the better ones -> K1, K2 fail, KILLED (second time). Lived days not looked at.
+Idea 103, variant 289.
