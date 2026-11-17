@@ -40,3 +40,24 @@ not run its results table (three import attempts failed on my wrapper's own plum
   If the tool shows a different side or stop, the tool or my reading is wrong and I stop.
 
 ## Result (one run)
+Tool: `python bt/box_break_oos.py 2015-07-22 test 2015-07-21`. Worked case 07-21: BUY, not stopped, +1.99R at 17:00: side and mechanics as I wrote them first.
+| BX2, unseen days 05-12..07-21 | value | line | |
+|---|---|---|---|
+| trades / wins / stops | 43 / 44% / 18 (15 ups, 28 downs) | >= 25 | judgeable |
+| average | +0.176R (+-0.42) | O1 >= +0.15R | PASS |
+| stressed average (3.0 + 1.0) | +0.019R | O2 >= +0.05R | **FAIL** |
+| net without best 3 | -3.24R (net +7.59R) | O3 > 0 | **FAIL** |
+| max drawdown / worst 10 in a row | 5.32R / -4.13R | O4 <= 5R and >= -4R | **FAIL** (both, narrowly) |
+| correlation with A2 | +0.05 | O5 <= 0.30 | PASS |
+| halves | +4.71R (22) / +2.87R (21) | O6 both > 0 | PASS |
+**BX2 FAILS three of six lines on the unseen days. By what I wrote first it is dead for good: no further re-test, no shadow.**
+What I learned:
+1. The most interesting number in six weeks: on days it had never seen, the frozen rule made +0.176R a trade, close to May's +0.227R,
+   positive in both halves, and it has nothing to do with A2. The average did not fall apart out of sample. That is rare in my log.
+2. And it is still not tradable as written: three trades are more than the whole profit (-3.24R without them), the +-0.42R error bar
+   covers zero, and with a stop of about 25 pips a 3-pip spread eats nearly all of it. The same three weaknesses as in May. An edge that
+   lives in three trades out of 43 is what luck looks like too, and my power note said a no-edge rule passes O1 one time in four.
+3. Step-back lesson: my near misses are near for the same reason: a small positive average with a wide error bar. Six months of
+   one pair cannot separate +0.15R from zero for anything that trades once a day. More ideas on this history will keep producing
+   "almost"; what separates them is forward time, which is what the return rule and the 09-21 review are for.
+Counts: idea 109 (a re-test of BX, counted); variant 304; second setups tried stays 18, none alive.

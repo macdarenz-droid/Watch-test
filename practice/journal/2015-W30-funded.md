@@ -61,3 +61,7 @@ SW1 paper shadow from Mon 07-20 (journal/SW1-paper-shadow-rules.md): a count onl
 ## 07-20 test: idea WO, the weekly open (journal/2015-idea-WO-weekly-open.md)
 WO1 (Tue-Fri 08:00 away from the weekly open, stop 40, out 20:00): 94 trades +0.205R, but +24.18R before 04-07 and -4.91R after; DD 16.72R;
 78% on A2's side. KILLED (K2, K4, K6). Idea 108, variants 303.
+
+## 07-21 step back: 5 closest misses + BX2 out of sample (journal/2015-07-21-closest-misses-and-BX-out-of-sample.md)
+BX2, frozen since May, on unseen days 05-12..07-21: 43 trades +0.176R, both halves positive, independent of A2; but stressed +0.019R,
+-3.24R without its best 3, DD 5.32R. Fails O2 O3 O4: dead for good. Idea 109, variant 304.
