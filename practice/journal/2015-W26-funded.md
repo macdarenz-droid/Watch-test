@@ -269,3 +269,9 @@ share at entry, one trait as a rule with a kill test): journal/2015-idea-PZ-winn
 entry-time lines: one stood out (08:00 price in the outer quarter of yesterday's range on my side: 11 winners of 14 days). Kill test on the 58 days before
 funding, lines K1-K4 pushed first: funded days +0.65R for the zone, held-out days -0.07R (wider zones -0.10R, -0.08R): all killed. My winners share
 nothing at entry that my losers do not. Counts: 89 ideas, 250 variants. June corrections after a push: 3.
+
+## 06-25 research after funded day 65 (coach: live funded results against what the backtest said to expect; inside the normal range? the check and what
+would make me worried): journal/2015-idea-LX-live-against-expectation.md. Lists, reading lines, a worked case and six worry lines pushed before any number;
+one run, 20,000 draws of 65 trades. Live (+0.039R, 47.7% wins, 36.9% full stops) is OUTSIDE the raw pre-funding backtest (+0.531R, 67%, 10%) on every
+figure; INSIDE the planning edge on average and win rate; not told apart from a zero edge; trade count 65 of 65. Worry lines frozen with numbers; W3
+(full-stop share) is crossed and reported to the coach with a question. Counts: 90 ideas, 252 variants. June corrections after a push: 3.
