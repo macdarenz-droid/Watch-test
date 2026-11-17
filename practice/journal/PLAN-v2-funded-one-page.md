@@ -55,4 +55,4 @@ Today: tracker $24,358.99, high-water $25,256.94, drawdown -3.56%, FLAT since 07
 
 ## 9. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
-max 3 variants, costs on, everything counted in STATE.md (125 ideas, 346 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+max 3 variants, costs on, everything counted in STATE.md (126 ideas, 349 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.

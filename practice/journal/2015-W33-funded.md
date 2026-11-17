@@ -72,3 +72,7 @@ against the 3-day side from the bell. Nothing untested to change; A2 stays on pa
 
 ## 08-11 test: idea GC, fade the night toward yesterday's close (journal/2015-idea-GC-back-to-yesterdays-close.md)
 73 cases at a 20-pip night, under my pre-written 80: not judgeable, killed for sample, outcomes not run and still unseen. Idea 125.
+
+## 08-11 evening test: idea DT, the second test of the day's extreme (journal/2015-idea-DT-retest-of-the-days-extreme.md)
+Counted first, P fixed by a pre-written rule (15 pips, 127 trades). Fading the retest: -0.186R, negative in both periods; break control a coin.
+Killed on all four lines. Idea 126, variants 349.

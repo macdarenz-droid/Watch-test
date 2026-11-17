@@ -44,3 +44,17 @@ candle came back within 3 pips -> DT1 SELLS at the 12:45 open, stop 25 above, ou
 so I expect a small result either way.
 
 ## Step 3, result (one run: `test 15 20`)
+Tool: `python bt/retest_extreme.py 2015-08-12 test 15 20`. Hand check 08-11: the fade sold 1.10456 at 12:45 and was stopped at 1.10708,
+-1.01R; the break bought 1.10468, out 14:45 at 1.10633, +0.66R. I had written "a small result either way": wrong, it was a full stop.
+| variant | trades | wins | avg R | net | stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| DT1 fade the retest, P 15 (JUDGED) | 127 | 36% | -0.186 (+-0.19) | -23.62 | 60 | -15.50 | -8.12 | -0.254 |
+| DT2 fade the retest, P 20 | 117 | 38% | -0.180 (+-0.20) | -21.02 | 56 | -10.85 | -10.18 | -0.242 |
+| DT0 break on DT1's signals (control) | 127 | 42% | -0.003 (+-0.23) | -0.32 | 58 | +5.63 | -5.95 | -0.081 |
+DT1 minus DT0 -0.183R (sign-flip p 0.31). DT1: all four kill lines FAIL. **DT IS KILLED.**
+What I learned: 1. The "double top" lost in both periods (-15.50R before 04-07, -8.12R after), the first fade of mine that lost even in
+the reverting months. A second test of the day's extreme goes through more often than it turns: half the fades were full stops (60 of 127).
+2. With RT (round numbers) and PD (yesterday's extreme) this is the third "level holds" idea killed: in my data, levels that are watched
+are levels that break. 3. The break side is a coin (-0.003R). Nothing to promote, nothing to re-cut. 4. Process: counting first and
+fixing P by a rule written before the count worked as intended; the only free choice left was the grid itself.
+Counts: idea 126; variants 347-349; second setups tried 27, none alive.
