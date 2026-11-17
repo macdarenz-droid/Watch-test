@@ -126,3 +126,4 @@ NOTE, not a rule (coach 05-26: one year of data; relabelled the day after it was
 | Wed 2015-08-19 (A2 on paper) | 79 | 47 | -8.43R / 21 | +1.38R / 6 (32 quiet days) | about -2.83R | -7.07R (A2 incl. paper days) |
 | Thu 2015-08-20 (A2 on paper) | 80 | 47 | -8.43R / 21 | +2.39R / 6 (33 quiet days) | about -1.82R | -6.06R (A2 incl. paper days) |
 | Fri 2015-08-21 (A2 on paper) | 81 | 47 | -8.43R / 21 | +1.36R / 6 (34 quiet days) | about -2.85R | -7.09R (A2 incl. paper days) |
+| Mon 2015-08-24 (A2 on paper) | 82 | 48 | -7.81R / 21 | +1.36R / 6 (34 quiet days) | about -2.54R | -6.47R (A2 incl. paper days) |
