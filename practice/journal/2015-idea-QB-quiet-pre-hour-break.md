@@ -28,3 +28,13 @@ K3 QB1's average R at stressed costs above zero.
 K4 QB1 minus QB0, trade by trade, above zero with sign-flip p < 0.10.
 Plus the sample line (above) and the disguise line (QB1 on A2's side 70%+ -> killed), both on counts before the run.
 My guess: a coin minus costs (a 20-pip stop pays 1.1 pips of costs = 0.055R a trade before anything else).
+
+## Counts (before outcomes; `python bt/quiet_box.py 2015-08-29 count`, history 2015-01-02..2015-08-28)
+171 days; quiet (box <= 30): 89; of those, broke by 10:00: 84.
+Q = 20: 38 trades (23 / 15) | Q = 25: 63 (36 / 27) | Q = 30: 84 (46 / 38).
+BY THE RULE WRITTEN FIRST: Q = 30 (smallest with 80+ and 35+ from 04-07). QB2 = 2/3 x 30 = 20 -> 38 trades (dose only).
+DISGUISE: QB1 on A2's side 39 of 82 = 48% -> passes (under 70%). Not A2.
+Worked case 08-28 (tool's check line; my hand reading of the hour was 1.12519-1.12701 = 18.2 pips, the same): box 18.2 -> quiet;
+first M5 close above the box -> BUY, entry at the 08:20 London open; A2 sold that day. Note: 08-28 is the day that gave me the idea and it
+is inside this history (1 trade of 84); I do not drop it, and I name it here.
+One run next: `python bt/quiet_box.py 2015-08-29 run 30 20`.
