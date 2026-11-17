@@ -60,6 +60,25 @@ Coach 06-15: enough forward re-tests of killed ideas (LK is dead twice). Next te
      +80 pip trades: none (3 of 15). 80+ pip pre-entry hours: none (4 of 10).
      END OF RELEASED DATA (clock Tue 06-16 01:00 London).
 
+- **Tue 06-16 call, written 07:00 London (06:00 UTC), before the entry bar.** June goal read first: every figure below is from `python bt/call_numbers.py 2015-06-16`, `./look.sh` or a bar print. Yesterday's tag stands: VALID WIN.
+  Coach 06-16: BS was an honest kill; the by-product matters: if a few best days carry most of my R, my job is never to miss them. Next test: what would
+      make me skip or exit early on one of those days? Check that none of my current rules cuts them.
+  D1 (London days): Thu 06-11 close 1.12573 (0.50); Fri 06-12 close 1.12648 (0.78); Mon 06-15 high 1.12944 low 1.11891 close 1.12826 (0.89, range 105.3):
+      down in my morning, then bought all afternoon to a close near the high. Third higher close in a row, each inside last Wednesday's range.
+  H4 (UTC bars): Mon 08:00 bar 1.12341 -> 1.12113; 12:00 bar up to 1.12658; 16:00 bar high 1.12944, close 1.12834; tonight 00:00 bar 1.12622-1.12797; 04:00 bar 1.12681-1.12831, last 1.12797.
+  H1: the night (00:00-07:00 London): open 1.12765, high 1.12831, low 1.12622, last 1.12797: range 20.9 pips (ratio 0.43: a dead night), net +3.2 pips - flat.
+  M15: 1.1268-1.1282 for two hours.
+  Bias: SELL. 22:00 London closes: 06-15 1.12826 vs 06-10 1.13237 = -41 pips (3-day gap -41.1). Gap / ADR5 0.31. Third sell in a row.
+  UN3 PAPER TAG (never live): 5-day gap -8 pips (-8.0) -> SELL; agree: paper TRADES. Forward day 41, disagree days 11 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 33.
+  MB1 PAPER TAG (never live, forward day 25): morning direction written at 12:00, before 13:25.
+  Levels: night high 1.12831; Mon high 1.12944; Fri high 1.12965; night low 1.12622; Mon low 1.11891.
+  Rejection-day check: for a sell, Monday did not make the 3-day low. Not a rejection day. Monday closed at 0.89, against a sell (the "closed against me" group, which earned more than average in RV).
+  10-day trend: UP (1.12826 vs 06-01 1.09259); the sell is AGAINST it (counted).
+  SIZE RULE (the real safety rule): tracker balance $24,807.07, high-water $25,280.44, drawdown -1.87%; trigger 1 (half size) $24,522.03 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,510.81.
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
+  Worry: selling under a double top (Fri and Mon highs) after an afternoon that bought everything back; a dead night says nothing. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
