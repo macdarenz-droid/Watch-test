@@ -23,3 +23,9 @@ K7 dose: BK2's average >= BK1's.
 Pass = route B step B1 candidate, then 40 forward paper trades. Fail = killed, no fourth variant. Idea 104 on the same six months: a lone pass could be luck.
 
 ## Counts and worked case (tool, before the outcome run)
+Tool: `python bt/breakout_big.py 2015-07-15 count` / `check 2015-06-03` (facts only).
+- 128 days with a flag (01-16..07-14): big 61, big x1.3 33; a close outside the box in 08:00-12:00 on 109 days.
+- Trades: BK1 50 (24 before 04-07, 26 from), BK0 59 (23 / 36), BK2 30 (14 / 16). Judgeable by my line.
+- Worked case 06-03: yesterday's range 278.3 > median 101.4 -> big. Box 1.11341-1.11896. The 08:10 candle closed under the box -> SELL at the 08:15 open, stop 40 pips, out 20:00.
+
+## Result (one run)
