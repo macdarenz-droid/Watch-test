@@ -251,3 +251,8 @@ older format); fixed, said in the journal. Counts: 83 ideas, 232 variants. June 
 by how often I stop myself: at +0.18R 3% / 22% / 57%, for a median payout to me of $6,037 / $7,782 / $7,565; at +0.10R the bigger sizes pay nothing more.
 0.75% and 1.00% killed; 0.50% stays; no trigger written. One correction counted: a test line's label called a hypothetical jump day (3.07R) a
 real fill (the worst real fill is 1.33R); the line was applied as worked, the stricter way. Counts: 84 ideas, 235 variants. June corrections after a push: 2.
+
+## 06-18 after funded day 60 (coach: replay the worst week by eye; a test only if a mistake repeats): journal/2015-06-18-replay-of-week-24.md. Six M15
+charts (06-05 .. 06-12). My mistakes: none. What a better trader would have done: stood aside on Mon, Tue and Thu (a sharp last move before the bell,
+then an entry on the side the day refused), banked part of Wednesday's spike (GB1, parked). The pattern has four winning twins in the very next week,
+06-16 an exact one (+1.60R). No mistake repeats: NO TEST, nothing changes. Counts unchanged: 84 ideas, 235 variants. June corrections after a push: 2.

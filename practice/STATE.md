@@ -457,6 +457,10 @@
 - Forward: A2 +0.35R. PM1 (half at +1R, runner to break-even) -1.40R vs A2: 8 small gains (+1.90R) against 7 cuts of big winners (-3.29R), drawdown 5.26R against 4.54R. PM2 -1.44R. PM3 (break-even after +1R) +0.07R on 2 changed days. All KILLED again.
 - 06-10 (+86 pips -> -0.14R) becomes +0.48R with a partial, and the same partial takes 0.99R off 06-04. The exit side has not moved once in two rounds on separate data.
 
+## Replay of week 24 and the 5-loss run (journal/2015-06-18-replay-of-week-24.md; coach 06-18: by eye, what a better trader would have done, a test only if a mistake repeats; STUDY, not counted)
+- My mistakes on the six days: none. Pattern by eye: on Mon, Tue, Thu I entered right after a sharp last move before the bell, on a side the day refused; all four losing entries of W24 had the pre-entry hour against my side. Twins: in W25 four of four such entries WON (06-16: the same vertical candle at the bell, +1.60R). No mistake repeats -> no test.
+- One-off: Thu 06-11 third buy at the same price under falling highs (one case). Wed 06-10 give-back = GB1, parked. The noon exit kept me out of the two largest moves on the charts (06-05 13:30, 06-17 evening).
+
 ## Idea SG size for growth (journal/2015-idea-SG-size-for-growth.md; coach 06-17: what risk per trade gives the best growth with tiny breach odds over 2 years; lines S1-S5, worked cases, regression pushed before the code; bt/sizing_growth.py END BAL0 HW0 [risks] [edges])
 - 2,000 x 500 days from my real state, all money rules on, plain / block. Breach 0.00% at every size and edge (lowest -7.05%): the 7% stop makes the firm's line unreachable, so the size is chosen by my OWN stop.
 - +0.18R: own stop 3.2 / 1.1% at 0.50%, 21.8 / 16.1% at 0.75%, 56.9 / 45.1% at 1.00%; my median payout $6,037 / $7,782 / $7,565 (plain). +0.10R: $2,514 / $2,492 / $1,686, own stop 19 / 60 / 88%. Dead edge: -3.3% at every size.
