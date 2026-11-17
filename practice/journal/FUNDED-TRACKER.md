@@ -49,12 +49,14 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | 43 | Tue 2015-05-26 | sell | 0.31 | -0.45 | -56.73 | 24,912.97 (sim 25,387.81) | 25,349.14 | -1.72% | -2.01 (May, from the log) | valid setup, market disagreed | - |
 | 44 | Wed 2015-05-27 | sell | 0.31 | +0.91 | +112.84 | 25,025.81 (sim 25,500.65) | 25,349.14 | -1.28% | -1.10 (May, from the log) | valid win | - |
 | 45 | Thu 2015-05-28 | sell | 0.31 | +0.10 | +13.02 | 25,038.83 (sim 25,513.67) | 25,349.14 | -1.22% | -1.00 (May, from the log) | valid win (scratch) | - |
+| 46 | Fri 2015-05-29 | sell | 0.31 | -1.00 | -124.31 | 24,914.52 (sim 25,389.36) | 25,349.14 | -1.71% | -2.00 (May, complete) | valid setup, market disagreed | - |
 
 ## Monthly summary
 | Month | Trades | Wins | Net R | $ P&L | Worst day | Deepest drawdown | Valid / mistake tags | Payouts requested | My 80% |
 |---|---|---|---|---|---|---|---|---|---|
 | Mar 2015 (from 03-27) | 3 | 2 | +0.98 | +124.31 | -0.49% | -0.49% | 3 valid / 0 mistake (process mistakes: 1) | 0 | 0 |
 | Apr 2015 | 22 | 11 | +4.17 | +517.39 | -0.52% | -1.63% | 22 valid / 0 mistake (process mistakes: 2) | 125.70 | 100.56 |
+| May 2015 | 21 | 11 | -2.00 | -252.34 | -0.50% | -1.83% | 21 valid / 0 mistake (process mistakes: 6) | 349.14 | 279.31 |
 
 ## Payout ledger
 | Date | Balance before | Requested | My 80% | Balance after | Note |
@@ -80,4 +82,4 @@ Earlier record-keeping slips, for completeness (challenge stage, none changed a 
 pre-registration; worst losing run overstated as -2.17R (was -1.86R); a journal edit on 03-25 cut out a section (restored from git on 03-26).
 
 ## Status line (update every day)
-After funded day 45 (05-28; figures from bt/daily_numbers.py 474.84 25349.14): tracker balance $25,038.83 (sim $25,513.67 minus $474.84 paid out) | high-water $25,349.14 | drawdown -1.22% (deepest so far -1.83% on 05-22; SIZE RULE: trigger 1 half size at $24,588.67; trigger 2 stop trading at 7% under the high-water = $23,574.70, fixed for funded days 36-55; account line $22,500) | funded total +4.15R in 45 trades (24 wins, 21 valid losses) | March +0.97R (3) | April +4.17R (22) | May MTD -1.00R (20 trades) | TRADE tags: 45 valid, 0 my mistake | PROCESS mistakes: 9 | payouts: 4 dates, 3 paid: $474.84 requested, $379.87 mine | next payout date Fri 06-05 | normal worst for 56 trades by reshuffle: 6 losses in a row, about 5.9R drawdown (95th pct); now 0 in a row, 2.45R under the high.
+After funded day 46 (05-29; figures from bt/daily_numbers.py 474.84 25349.14): tracker balance $24,914.52 (sim $25,389.36 minus $474.84 paid out) | high-water $25,349.14 | drawdown -1.71% (deepest so far -1.83% on 05-22; SIZE RULE: trigger 1 half size at $24,588.67; trigger 2 stop trading at 7% under the high-water = $23,574.70, fixed for funded days 36-55; account line $22,500) | funded total +3.14R in 46 trades (24 wins, 22 valid losses) | March +0.97R (3) | April +4.17R (22) | May -2.00R (21 trades, complete) | TRADE tags: 46 valid, 0 my mistake | PROCESS mistakes: 9 | payouts: 4 dates, 3 paid: $474.84 requested, $379.87 mine | next payout date Fri 06-05 | normal worst for 56 trades by reshuffle: 6 losses in a row, about 5.9R drawdown (95th pct); now 1 in a row, 3.45R under the high.
