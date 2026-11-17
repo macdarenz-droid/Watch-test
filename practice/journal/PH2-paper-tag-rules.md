@@ -1,2 +1,2 @@
 
-| Wed 2015-06-17 | 34 | 27 | -1.61R / 12 | +1.05R / 2 (7 quiet days) | about +0.26R | -0.58R / 4.85R (yesterday's figures plus 0.14) |
+| Thu 2015-06-18 | 35 | 27 | -1.61R / 12 | +2.25R / 2 (8 quiet days) | about +1.46R | +0.62R / 4.85R (yesterday's figures plus 1.20) |
