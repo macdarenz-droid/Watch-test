@@ -126,3 +126,6 @@ R after costs (1.0 + 0.1 pips). Follow: 123 trades -0.130R; fade control -0.083R
 ## 08-19 test: idea TH, three hourly candles in a row (journal/2015-idea-TH-three-hours-in-a-row.md)
 R after costs (1.0 + 0.1). Following a 35+ pip three-hour run: 167 trades -0.264R, both periods; bigger runs worse. Fade +0.000R. Killed.
 Ideas 140, variants 376.
+
+## 08-20 test: idea MG, the round-number magnet (journal/2015-idea-MG-round-number-magnet.md)
+R after costs (1.0 + 0.1). Toward the nearer 00 level: 81 trades -0.067R; away from it -0.065R; the same trade. Killed. Ideas 141, variants 379.

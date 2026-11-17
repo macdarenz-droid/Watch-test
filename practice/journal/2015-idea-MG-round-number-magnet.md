@@ -34,3 +34,19 @@ down to about 1.1056, last about 1.1063 at noon: the target is not reached, the 
 about -0.37R. The control (sell, target 27 below at about 1.1046) is not reached either: about +0.30R.
 
 ## Step 3, result (one run: `test 30 20`)
+Hand check 08-18: toward -0.39R (worked about -0.37R); away +0.31R (worked about +0.30R). As written.
+| variant (R after costs: spread 1.0 + slippage 0.1 pips; stressed 2.0 + 0.5) | trades | wins | avg R | net | targets / stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| MG1 toward the 00 level, d 5-30 (JUDGED) | 81 | 59% | -0.067 (+-0.17) | -5.41 | 44 / 28 | -0.47 | -4.94 | -0.132 |
+| MG2 toward, d 5-20 | 50 | 60% | -0.161 (+-0.20) | -8.03 | 29 / 19 | -3.98 | -4.05 | -0.232 |
+| MG0 away from it, d 5-30 (control) | 81 | 59% | -0.065 (+-0.16) | -5.27 | 45 / 25 | -3.92 | -1.35 | -0.103 |
+Kill lines, each against its written threshold:
+K1 MG1's average >= +0.10R: -0.067R. FAIL.
+K2 MG1's net above zero before AND from 04-07: -0.47R / -4.94R. FAIL.
+K3 MG1's stressed average above zero: -0.132R. FAIL.
+K4 MG1 minus MG0 above zero, p < 0.10: -0.002R (p 0.99). FAIL.
+**MG IS KILLED.**
+What I learned: toward the level and away from it are the SAME trade in my data (both -0.07R, 59% wins, difference -0.002R): a 00 level
+neither pulls nor pushes the London morning. The nearer version (MG2) is worse, the opposite of a magnet. With RN and RT, round numbers
+are now finished as an idea in my record: they are labels on the chart, nothing more.
+Counts: idea 141; variants 377-379; second setups tried 36, none alive.
