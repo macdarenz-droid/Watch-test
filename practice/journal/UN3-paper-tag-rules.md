@@ -96,3 +96,4 @@ is to be written in the journal as a feeling, like every other such thought.
 | Wed 2015-07-01 | 52 | 12 | +2.49R (12 trades) | -5.26R (40 trades) | -5.26R / drawdown to be recomputed at the gate | -2.80R / 5.80R (yesterday's figures minus 1.00) |
 | Thu 2015-07-02 | 53 | 12 | +2.49R (12 trades) | -5.18R (41 trades) | -5.18R / drawdown to be recomputed at the gate | -2.72R / 5.80R (yesterday's figures plus 0.08) |
 | Fri 2015-07-03 | 54 | 12 | +2.49R (12 trades) | -5.54R (42 trades) | -5.54R / drawdown to be recomputed at the gate | -3.08R / 6.07R (yesterday's figures minus 0.36) |
+| Mon 2015-07-06 | 55 | 12 | +2.49R (12 trades) | -6.54R (43 trades) | -6.54R / drawdown to be recomputed at the gate | -4.08R / 7.07R (Friday's figures minus 1.00) |
