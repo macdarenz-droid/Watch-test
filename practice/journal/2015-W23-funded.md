@@ -201,6 +201,32 @@ Paper tags, never live: UN3 (07:00), PH2 (08:00, before the order), MB1 (12:00, 
      nothing at or below; none while a size trigger is on. Tonight $25,218.94: as it stands the request would be $109.47 (python). Friday's trade decides.
      END OF RELEASED DATA (clock Fri 06-05 01:00 London).
 
+- **Fri 06-05 call, written 07:00 London (06:00 UTC), before the entry bar.** June goal read first: every figure below is from `python bt/call_numbers.py 2015-06-05`, `./look.sh` or a bar print. Yesterday's tag stands: VALID WIN.
+  D1 (London days): Tue 06-02 close 1.11504 (0.84, range 278.3); Wed 06-03 close 1.12740 (0.95, range 205.6); Thu 06-04 high 1.13798 low 1.12222 close 1.12375
+      (0.10, range 157.6): a new 3-day high at 1.13798 in my morning, then 158 pips down to close near the low. The first lower close after two big up days.
+  H4 (UTC bars): Thu 12:00 bar 1.13308 -> 1.12698; 16:00 bar low 1.12222; 20:00 bar down to 1.11798; tonight 00:00 bar 1.11936-1.12223; 04:00 bar 1.12102-1.12243.
+  H1: the night (00:00-07:00 London): open 1.12027, high 1.12243, low 1.11798, last 1.12200: range 44.5 pips (ratio 1.32), net +17.3 pips - a slightly rising night, with my side.
+  M15: a 13 pip band 1.1211-1.1224 for the last hour and a half.
+  Bias: BUY. 22:00 London closes: 06-04 1.12375 vs 06-01 1.09259 = +312 pips (3-day gap +311.6). Gap / ADR5 1.89: stretched.
+  UN3 PAPER TAG (never live): 5-day gap +290 pips -> BUY; agree: paper TRADES. Forward day 34, disagree days 8 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 26.
+  MB1 PAPER TAG (never live, forward day 18): morning direction written at 12:00, before 13:25.
+  Levels: night high 1.12243; Thu high 1.13798; night low 1.11798; Thu evening low 1.11798.
+  Rejection-day check (parked observation, never a rule): for a buy, Thursday made the 3-day high (True) AND closed in the bottom third (0.10): a REJECTION day.
+      The plan trades it at full size like any other; noted for the count.
+  10-day-trend paper line: UP (1.12375 vs 05-21 1.11117); the buy is with it.
+  SIZE RULE (the real safety rule): tracker balance $25,218.94, high-water $25,349.14, drawdown -0.51%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
+  PAYOUT DATE today (fifth). The rule, copied from the plan, section 4: "On the payout date, after the day's trade, on the tracker balance: below $26,000 ->
+      request HALF of what is above $25,000; at or above $26,000 -> request everything above $26,000. No request while a brake is on. After a payout the
+      high-water mark is lowered by the amount paid out." Coach 06-05: exactly as written, no exceptions either way. Balance now $25,218.94; no brake on.
+      The payout does not touch the trade: same size, same stop, same clock. I do not skip the trade to protect the payout and I do not round the request.
+  FRIDAY GATES (list read): A2 at 100 live trades 69 / 100 (lived average +0.241R +-0.262R; not a judge alone, coach 06-02); UN3 8 / 30 disagree days;
+      PH2 20 / 60 lively days; night count 19 / 40; up-trend line 12 / 40; MB1 7 / 100 kept (early-close lines not reached: kept DD 4.00R of 6R);
+      +80 pip trades 2 / 15; 80+ pip pre-entry hours 4 / 10; personal stop held 15 of 20 days (review after funded day 55); W and N1 closed 06-03.
+      None due except the payout.
+  Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade. The release ends at 22:00 London.
+  Worry: yesterday's high was rejected and I am buying under it on a payout day. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
