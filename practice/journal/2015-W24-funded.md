@@ -118,6 +118,12 @@ Coach 06-08: enough entry tweaks; the next backtest takes a different part of th
       Three losses in a row behind me; normal worst is six. Two more full stops would bring the close to about the half-size line; the rule reads the close, I do not anticipate it.
   Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
   Worry: the same picture as yesterday - a small buy signal after a night that already rose. Written, not a rule.
+  08:00 London Wed: pre-entry hour 1.12761-1.13159 = 39.8 pips -> PH2 paper: LIVELY, paper half size (decided before the order). Price 1.12982: night with me by 24.9 pips (not counted); entry 10.3 pips better than at 07:00. Order: BUY 0.31, stop 40 pips below the bid (1.12582).
+  08:15 London: filled BUY 1.13002 (the bid moved up in the fill minute), stop 1.12582 (42.0 pips from the fill). First candle read from the tool before this note: high 1.13417. No call that matters; hands off.
+  09:00 London: first hour best +73.5 (high 1.13737), worst -1.1, last +60.2 pips. Straight up from the entry, above yesterday's high. No target; the clock is noon. Hands off.
+  10:00 London: second hour best +86.3 (high 1.13865), then 77 pips straight back: worst +9.7, last +17.9 pips. I watched 68 pips of open profit go and did nothing, as the plan says. This is case 3 of the +80 count, and this time the trail would have kept more; the count will say so. Hands off.
+  11:00 London: third hour best +35.5, worst -11.3, last 0.0 pips: all 86 pips given back; I am at my entry. Yes, it stings. One hour left; close at 12:00 or the stop, whichever comes.
+  12:05 London: closed at 12:00 @1.12944, -$17.98 (from the trade list): from +86.3 pips to a small loss. MB1 paper (forward day 21), written before 13:25: open 08:00 1.12991, open 12:00 1.12945 -> morning DOWN by 4.6 pips (small morning) -> only a DOWN break of the 12:00-13:25 box counts. Result from the tool tomorrow.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
