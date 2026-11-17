@@ -20,3 +20,9 @@ Observed = longest losing run and max drawdown of the real window 04-07..07-15.
 - If both are 5% or more: INSIDE NORMAL. Even then nothing changes before 09-21: the return rule is written and I do not edit rules off one test.
 My guess: the drawdown is outside (well under 5%), the longest run (7) is borderline.
 Worked case to check first: my journal says 7 losses in a row to 06-30; the tool's longest run in the window must show 7 or more.
+
+## Facts and worked case (tool `python bt/losing_runs.py 2015-07-16 facts`, before the resampling)
+Healthy pool 65 trades (01-06..04-06). Window 72 trades (04-07..07-15). Losing runs in the window, in order: 2 1 1 6 1 2 2 3 1 2 1 5 7 1 4 4.
+The 7 is there (06-19..06-29), as my journal says. Current run at the end: 4 losses (07-10, 07-13, 07-14, 07-15).
+
+## Result (one run)
