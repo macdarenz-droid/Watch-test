@@ -9,6 +9,7 @@ the two are not confused.)
 | # | time (London) | side | lots | entry | stop | exit | R | $ | tag | note |
 |---|---|---|---|---|---|---|---|---|---|---|
 | (paper) | Mon 08-10 08:00 | buy | NO LIVE TRADE (monitor -0.345R) | paper | paper | paper clock exit | (-0.80 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 24; SW1 shadow trade 5 opened (sell 1.09629) |
+| (paper) | Tue 08-11 08:00 | buy | NO LIVE TRADE (monitor -0.396R) | paper | paper | paper clock exit | (+1.66 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 25; SW1 shadow trade 5 stopped (-1.01R net) |
 
 ## Mon 08-10
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-10`:
@@ -43,6 +44,21 @@ the two are not confused.)
 - SW1 shadow trade 5: open (sell 1.09629, stop 1.10829, target 1.07229, clock 12:00 Mon 08-17); the night brought it back near its entry. Nothing to do.
 - Coach 08-11: "a2 paper is bleeding, review its last 10 losers by eye and tag each valid vs mistake" - done after the close today.
 - How I feel: a falling night under a buy signal; I tested that picture twice (ON, NA) and it was a story both times.
+  08:00 London (PAPER): pre-entry hour 1.09632-1.09839 = 20.7 pips (PH2 quiet: full unit on paper). A2 paper BUY near 1.09667 (engine fixes the fill), paper stop about 1.09267. SW1 shadow untouched. No order.
+  10:00 London (PAPER; window 07:00-08:45 UTC): A2 paper buy best +82.4, worst -1.7, last +70.6. The falling night turned at the bell. Before advancing to noon: clock only.
+  12:00 London (PAPER; 16 candles, 08:00-12:00): A2 paper buy closed by the clock about 68 pips ahead (best +82.4, worst -1.7, last +67.6).
+  -> Tue result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.396R -> paper). VALID: no order placed. Checked: call committed before the bell;
+     trade list still ends with #230 of 07-07; sim balance $24,926.03 unchanged. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 25 (engine, `python bt/coin_control.py 2015-08-12 --check 2015-08-11`): buy, clock exit, +1.66R; the other side -1.00R (stopped).
+     A2 paper running from 07-08: 25 days, -2.58R.
+     SW1 SHADOW trade 5 (tool `bt/sw1_shadow.py 2015-08-12`): sell 1.09629 (Mon) -> STOPPED 1.10830 at 14:20 Tue, -1.00R, 1 night, financing -0.008R,
+     net -1.01R. Running -4.36R after 5 of 20 (max DD 4.36R; early-close line 6R: 1.64R of room left).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     How it feels: the picture I distrusted at 07:00 (falling night under a buy) was the best paper morning in weeks. Good reminder that the ON/NA kills were right.
+     Paper lines: UN3 agreed, +1.66R (agree days -11.06R in 63; disagree +3.43R in 18; day 81). PH2 (day 73): quiet (20.7) -> full = +1.66R;
+     46 lively days -8.06R, 21 full-stop mornings; 27 quiet -1.11R; PH2 about -5.13R against A2's -9.19R.
+     MO PAPER RULE (day 31 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +1.66R (running -5.38R).
+     For Wednesday (tool): MO1 -0.395R -> paper; MO3 -0.283R -> paper.
 
 ## Forward tally
 

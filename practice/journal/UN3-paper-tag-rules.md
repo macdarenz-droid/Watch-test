@@ -122,3 +122,4 @@ is to be written in the journal as a feeling, like every other such thought.
 | Thu 2015-08-06 (A2 on paper) | 78 | 17 | +4.23R (17 trades) | -12.40R (61 trades) | -12.40R / drawdown to be recomputed at the gate | -8.20R (A2 incl. paper days) |
 | Fri 2015-08-07 (A2 on paper) | 79 | 17 | +4.23R (17 trades) | -12.72R (62 trades) | -12.72R / drawdown to be recomputed at the gate | -8.52R (A2 incl. paper days) |
 | Mon 2015-08-10 (A2 on paper; DISAGREE) | 80 | 18 | +3.43R (18 trades) | -12.72R (62 trades) | -12.72R / drawdown to be recomputed at the gate | -9.32R (A2 incl. paper days) |
+| Tue 2015-08-11 (A2 on paper) | 81 | 18 | +3.43R (18 trades) | -11.06R (63 trades) | -11.06R / drawdown to be recomputed at the gate | -7.66R (A2 incl. paper days) |
