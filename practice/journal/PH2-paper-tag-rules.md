@@ -72,3 +72,4 @@ NOTE, not a rule (coach 05-26: one year of data; relabelled the day after it was
 | Thu 2015-06-04 | 25 | 20 | +0.34R / 9 | +0.06R / 2 (5 quiet days) | about +0.24R | +0.38R / 4.45R (from the trade list) |
 | Fri 2015-06-05 | 26 | 21 | -0.30R / 9 | +0.06R / 2 (5 quiet days) | about -0.08R | -0.26R / 4.45R (from the trade list) |
 | Mon 2015-06-08 | 27 | 22 | -1.30R / 10 | +0.06R / 2 (5 quiet days) | about -0.58R | -1.26R / 4.45R (from the trade list) |
+| Tue 2015-06-09 | 28 | 23 | -2.30R / 11 | +0.06R / 2 (5 quiet days) | about -1.08R | -2.26R / 4.45R (from the trade list) |
