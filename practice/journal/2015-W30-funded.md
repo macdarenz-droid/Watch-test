@@ -156,3 +156,7 @@ Weakest assumption: +0.30R on the 40-day monitor means the edge is back. Test: a
 ## 07-23 test: idea QW, volatility after a quiet week (journal/2015-idea-QW-after-a-quiet-week.md)
 28 weeks. Week range against the next week's: rank correlation +0.094 (p 0.32). Persistence killed by the line; no expansion after quiet either.
 A lean (8 of 11 quiet weeks followed by another) that the sample cannot carry. Idea 111, variants 309.
+
+## 07-24 (weekend) study: replay of my 10 worst funded trades (journal/2015-07-24-replay-ten-worst-trades.md)
+All full stops at 0.31 lots; 10 of 10 valid; no outlier loss. The 'better trader' pictures are ideas already killed (falling night) or on paper (PH2).
+Real lesson: I responded late to the fading side, and that is already in the plan. A study: no idea counted.

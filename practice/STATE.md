@@ -458,6 +458,10 @@
 - Forward: A2 +0.35R. PM1 (half at +1R, runner to break-even) -1.40R vs A2: 8 small gains (+1.90R) against 7 cuts of big winners (-3.29R), drawdown 5.26R against 4.54R. PM2 -1.44R. PM3 (break-even after +1R) +0.07R on 2 changed days. All KILLED again.
 - 06-10 (+86 pips -> -0.14R) becomes +0.48R with a partial, and the same partial takes 0.99R off 06-04. The exit side has not moved once in two rounds on separate data.
 
+## Study 07-24: replay of the 10 worst funded trades (journal/2015-07-24-replay-ten-worst-trades.md; coach 07-24; study, no idea counted)
+- All 10 are full stops at 0.31 lots (-$127 to -$131); no outlier loss exists. 10 of 10 VALID by the trade list. By eye: 4 falling nights (ON/NA, killed twice), 4 pre-hour spikes (PH2, on paper), 2 nothing. 9 of 10 buys, but all funded full stops are 16 buys / 12 sells: a lean, not tested.
+- The real lesson is timing of the response (side stopped winning mid-April; measured 06-26; stopped 07-08; half size 07-07), already in the plan.
+
 ## Idea QW after a quiet week (journal/2015-idea-QW-after-a-quiet-week.md; coach 07-23; bt/quiet_week.py END count|test; no trades)
 - 28 full weeks, median range 324 pips. QW1 rank correlation week -> next week +0.094 (p 0.32): persistence KILLED by the line (+0.20, p < 0.10). QW3 shifted cut +0.201 (p 0.15). QW2 after quiet weeks next/median 0.83 (8 of 11 again under) vs 1.35 after others (4 of 12). No expansion after quiet. Nothing a rule could use.
 
