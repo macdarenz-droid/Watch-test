@@ -76,3 +76,7 @@ against the 3-day side from the bell. Nothing untested to change; A2 stays on pa
 ## 08-11 evening test: idea DT, the second test of the day's extreme (journal/2015-idea-DT-retest-of-the-days-extreme.md)
 Counted first, P fixed by a pre-written rule (15 pips, 127 trades). Fading the retest: -0.186R, negative in both periods; break control a coin.
 Killed on all four lines. Idea 126, variants 349.
+
+## 08-11 evening test: idea MB2, the afternoon break of the morning range (journal/2015-idea-MB-morning-range-break.md)
+Counted first, B fixed by a pre-written rule (0, 125 trades). Follow the break: -0.117R, mostly lost after 04-07. Killed on all four lines.
+Quieter mornings +0.195R on 59, all of it before 04-07: not promoted. Idea 127, variants 352.

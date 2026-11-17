@@ -38,3 +38,18 @@ morning high came at 13:10 -> MB1 BUYS at the 13:15 open, stop 25 below, out 17:
 by 14:45 (the fade's stop) and 1.10633 at 14:45 for the break; today's last price 1.10416 is lower: I expect a modest result, sign unclear.
 
 ## Step 3, result (one run: `test 0`)
+Tool: `python bt/morning_break.py 2015-08-12 test 0`. Hand check 08-11: the break bought 1.10563 at 13:15, out 17:00 at 1.10409, -0.62R; the
+fade sold 1.10551 and was stopped at 1.10803, -1.01R. ("Modest, sign unclear": it was -0.62R.)
+| variant | trades | wins | avg R | net | stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| MB1 break of the morning range (JUDGED) | 125 | 32% | -0.117 (+-0.27) | -14.60 | 78 | -1.99 | -12.61 | -0.196 |
+| MB2 the same, quieter mornings only | 59 | 41% | +0.195 (+-0.45) | +11.50 | 32 | +13.56 | -2.06 | +0.135 |
+| MB0 fade on MB1's signals (control) | 125 | 38% | +0.013 (+-0.26) | +1.67 | 69 | -6.58 | +8.25 | -0.047 |
+MB1 minus MB0 -0.130R (sign-flip p 0.56). MB1: all four kill lines FAIL. **MB2 (the idea) IS KILLED.**
+What I learned: 1. "Watched levels break" is true as a description (PD, RT, DT) and not tradable as a follow: the afternoon break of
+the morning range lost -0.117R, mostly after 04-07, with 78 full stops in 125. A level breaking is not the same as a move carrying on
+past the break by more than my stop.
+2. MB2 (+0.195R on 59 quieter mornings) is the dose line, not the judged rule: all its profit is before 04-07 (+13.56R) and it is
+negative after (-2.06R); the error bar is +-0.45R. Same shape as every follow rule. Not promoted, not re-cut.
+3. The fade control lost before 04-07 and made money after: the regime split a seventh time.
+Counts: idea 127; variants 350-352; second setups tried 28, none alive.
