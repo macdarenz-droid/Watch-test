@@ -10,3 +10,4 @@ A return to money: only by a restart rule written in advance and agreed with the
 | Mon 2015-07-13 (4) | buy | -1.03 | +2.95 | -1.64 | stopped; 132 pips against within two hours; monitor after the day -0.302R |
 | Tue 2015-07-14 (5) | sell | -1.00 | +1.04 | -2.64 | stopped before 10:00; monitor after the day -0.433R |
 | Wed 2015-07-15 (6) | sell | -0.48 | +0.42 | -3.12 | clock exit; within 5 pips of the stop; monitor after the day -0.425R |
+| Thu 2015-07-16 (7) | sell | +1.09 | -1.03 | -2.03 | clock exit; monitor after the day -0.308R |
