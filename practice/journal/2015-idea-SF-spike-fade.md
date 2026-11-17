@@ -44,3 +44,20 @@ Tool: `python bt/spike_fade.py 2015-08-06 count` / `check 2015-07-13` (no outcom
   this one should be a large winner for the fade (several R, since the stop is 20 pips and there is no target) and a full stop for the follow.
 
 ## Result (one run)
+Tool: `python bt/spike_fade.py 2015-08-06 test`. Hand check 07-13: the fade sold 1.11862 at 08:00, out 09:00 at 1.10992, +4.35R; the follow
+bought 1.11874 and was stopped at 1.11662, -1.06R. As I wrote first.
+| variant | trades | wins | avg R | net | full stops | before 04-07 | from 04-07 | without best 5 | without the 5 busiest days | stressed avg | max DD |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| SF1 fade (JUDGED) | 409 | 44% | -0.048 (+-0.12) | -19.61 | 170 | -10.63 | -8.98 | -44.13 | -12.15 | -0.132 | 34.11R |
+| SF2 fade, bigger spikes | 179 | 39% | -0.089 (+-0.21) | -15.88 | 90 | -0.77 | -15.11 | -40.40 | -12.16 | -0.167 | 30.37R |
+| SF0 follow (control) | 409 | 42% | -0.039 (+-0.12) | -15.89 | 164 | -12.38 | -3.51 | -39.19 | -20.41 | -0.140 | 24.48R |
+Fade minus follow -0.009R (sign-flip p 0.93). SF1: all seven kill lines FAIL. **SF IS KILLED.**
+What I learned: 1. For once the sample could answer, and the answer is clean: after a sharp 15-minute candle the next hour is a coin,
+and both sides lose roughly the cost (1.1 pips on a 20-pip risk is 5.5% of R; fade -0.048R, follow -0.039R). No lean either way.
+2. The spikes in my notes that came back (07-13: +4.35R) are the ones I remember. 409 cases say they are balanced by the ones that
+did not. The pre-bell version (LM2) may still be different, or may have been two lucky samples; that question is closed.
+3. A tight stop does not make an edge; it makes costs a bigger share of every trade. Any many-trades-a-day idea of mine starts
+5% of R behind, and needs a real reason to be ahead.
+4. Method: this is what a judgeable test looks like: +-0.12R on the average, a p-value that means something. Worth the design even
+though the answer is no.
+Counts: idea 120; variants 332-334; second setups tried 22, none alive.

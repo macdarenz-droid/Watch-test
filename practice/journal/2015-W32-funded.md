@@ -95,3 +95,7 @@ $435 in 11%; $15.63 (0.04 lots) never breaks $435; worst realistic cost about $2
 Coach: route C yes in principle, live only for a setup that passed its own kill line on lived days; not A2. Written as Amendment 2; route C empty.
 FD: can a forward re-test let LM2 earn the slot? 40 mornings pass the real pool 54.7% and a coin 16.1%: no usable design by my line (15% / 50%).
 Three options put to the coach; nothing started. Idea 119, variants 331.
+
+## 08-05 test: idea SF, fade a sharp 15-minute spike (journal/2015-idea-SF-spike-fade.md)
+409 trades: fade -0.048R, follow -0.039R, difference p 0.93; negative in both periods. Killed on all seven lines.
+A sample that could judge, and a clean no: a coin minus costs. Idea 120, variants 334.
