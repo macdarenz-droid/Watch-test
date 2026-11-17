@@ -9,6 +9,7 @@ SW1 paper shadow: 1 of 20 done, trade 2 open. Payout date Fri 07-31 ($0 unless b
 | (paper) | Tue 07-28 08:00 | buy | NO LIVE TRADE (monitor -0.267R) | paper | paper | paper clock exit | (-0.67 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 15; SW1 shadow trade 3 opened (buy 1.10562) |
 | (paper) | Wed 07-29 08:00 | buy | NO LIVE TRADE (monitor -0.363R) | paper | paper | paper clock exit | (+0.10 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 16: flat morning |
 | (paper) | Thu 07-30 08:00 | buy | NO LIVE TRADE (monitor -0.302R) | paper | paper | paper clock exit | (-0.11 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 17; SW1 shadow trade 3 stopped (-1.03R net) |
+| (paper) | Fri 07-31 08:00 | sell | NO LIVE TRADE (monitor -0.405R) | paper | paper | paper clock exit | (-0.68 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 18; SW1 shadow trade 4 opened (buy 1.09535); payout date $0 |
 
 ## Mon 07-27
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-27`:
@@ -125,6 +126,28 @@ under 0.00R. I will write the day-20 verdict (Tue 08-04) against exactly these a
   open, stop 120 below, target 240 above, else out 12:00 Fri 08-07. Running -3.08R after 3 of 20. (It buys while A2 sells.)
 - Payout date: tracker $24,358.99 is under $25,000 -> request $0. July month-end check after the close.
 - How I feel: fine. Mistake to avoid: rushing the month-end numbers; every one from a tool or the trade list.
+  08:00 London (PAPER): pre-entry hour 1.09292-1.09674 = 38.2 pips (PH2 lively: half on paper), upward. A2 paper SELL near 1.09535 (engine fixes the fill), paper stop about 1.09935. SW1 shadow BUY at the same open, stop about 1.08335, target about 1.11935. No order.
+  10:00 London (PAPER; window 07:00-08:45 UTC): A2 paper sell best +31.4, worst -4.4, last +16.0. Before advancing to noon: clock only.
+  12:00 London (PAPER; 16 candles, 08:00-12:00): A2 paper sell closed by the clock about 27 pips against, 4 pips from the stop at its worst (best +31.4, worst -36.1, last -26.9).
+  -> Fri result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.405R -> paper). Checked: call committed before the bell; no order; trade list
+     still ends with #230 of 07-07; sim balance $24,926.03 unchanged.
+     PAPER A2, day 18 (engine, `python bt/coin_control.py 2015-08-01 --check 2015-07-31`): sell, clock exit, -0.68R; the other side +0.62R.
+     A2 paper running from 07-08: 18 days, -3.50R.
+     SW1 SHADOW trade 4 (tool `bt/sw1_shadow.py 2015-08-01`): OPEN, buy 1.09535, stop 1.08335, target 1.11935, clock 12:00 Fri 08-07. Last price 1.09830. Running -3.08R (3 of 20 done).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     PAYOUT DATE (ninth): balance $24,358.99 is not above $25,000 -> request $0. Totals unchanged: $567.04 requested, $453.63 mine. Next date Fri 08-14.
+     THE WEEK (W31): no live trade, by rule. Paper A2: +0.95, -0.67, +0.10, -0.11, -0.68 = -0.41R. SW1 shadow: trades 2 and 3 stopped (-1.04R, -1.03R).
+     Tests: BS2, SR, EV, MF: all killed or dismissed. Process mistake P12 found and corrected on Monday. No trade mistake.
+     JULY MONTH-END REVIEW written: journal/2015-07-month-end-review.md (live -3.28R / -$288.80 in 5 trades; 18 days flat; A2 paper -3.50R; gate re-checked: stands).
+     How it feels: July was the month the rule stopped and I did what I had written. Not proud, not ashamed; it cost $289 and the alarm kept about $219 more from going.
+     Paper lines: UN3 agreed, -0.68R (agree days -12.05R in 58; disagree +3.50R in 16; day 74). PH2 (day 66): lively (38.2) -> half = -0.34R;
+     45 lively days -8.13R, 21 full-stop mornings; 21 quiet -1.96R; PH2 about -6.02R against A2's -10.11R.
+     MO PAPER RULE (day 24 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.68R (running -6.30R).
+     For Monday (tool): MO1 -0.406R -> paper; MO3 -0.347R -> paper.
+     FRIDAY GATES LIST READ (07-31): payout $0 (done); month-end review (done, a day early at the coach's word); gate re-check (done: 2.0%).
+     Day-20 A2 verdict due Tue 08-04. Review day Mon 09-21. MO day 24 of 60. UN3 16 of 30 / 74 of 200. PH2 45 of 60 / 66 of 200. SW1 shadow 3 of 20.
+     AUGUST PROCESS GOAL: READ A TOOL'S OWN HEADER LINE BEFORE WRITING ANY NUMBER FROM IT, AND SEE "script reached its end" BEFORE EVERY COMMIT.
+     END OF RELEASED DATA (clock Fri 07-31 22:00 London; weekend).
 
 ## Forward tally
 
