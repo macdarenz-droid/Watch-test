@@ -30,3 +30,10 @@ Three looks at the same days: a single pass at p just under 0.10 is about what l
 IS A HINT ONLY: it could become a frozen forward count (one at a time, coach's word), never a rule or money.
 Worked case (base mechanics, from the window, before outcomes): to be written from the tool's check line after the code, before the run.
 My guess: E1 and E3 cut winners the way they did for A2; E2 adds noise.
+
+## Worked case (written from my 08-28 walk notes BEFORE the tool shows that day's exits)
+Fri 08-28: NY on Thu 08-27 moved -68.7 pips (tool's signal list) -> YN fades it = BUY at the 08:00 open (~1.1264 in my walk).
+My walk (sell-side numbers, so turned over for a buy): the 07:00-07:45 UTC candles went to about +46.7 for a buy; at 10:00 London about
++25.4; at noon about +16.6. So: base (noon) ~ +16.6 pips = about +0.4R; E1 (10:00) ~ +25.4 = about +0.6R; E2 unknown (after my walk);
+E3: +20 reached in the 07:15 UTC candle -> stop to entry; never came back to entry by noon in my notes -> same as base.
+Tool check next: `python bt/yn_exits.py 2015-09-02 check 2015-08-28 x`; then one run.
