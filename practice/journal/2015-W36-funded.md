@@ -73,3 +73,20 @@ NC1 1 skip of 30, EN2 0; August goal: 3 numbers corrected after a push; and the 
 (September correction 1).
 YN exits (coach: best near miss, exits not entries): out 10:00 / 16:00 / break-even at +20 all KILLED against base (R after costs 1.0 + 0.1).
 YN's own 13 unseen trades since its test lost ~3.9R: +0.070R -> +0.032R. Ideas 151, variants 403.
+
+## Wed 09-02
+07:00 London PAPER CALL (written before the bell). Tool lines, printed and written by this same command:
+    London day 2015-08-28 high 1.13097 low 1.11559 close 1.118 close position 0.16 range 153.8
+    London day 2015-08-31 high 1.12624 low 1.11693 close 1.12099 close position 0.44 range 93.1
+    London day 2015-09-01 high 1.1332 low 1.12082 close 1.13131 close position 0.85 range 123.8
+    yesterday made the 3-day high: True | the 3-day low: False
+    night 00:00-07:00 London: open 1.12981 high 1.13005 low 1.12606 last 1.12847 | range 39.9 | net -13.4
+    3-day gap 67.3 | 5-day gap -201.0 | ADR5 160.3 | gap / ADR5 0.42 | 10-day trend: UP (1.13131 vs 2015-08-18 1.10216)
+    MO1 N=40 pause: monitor for the NEXT day after 2015-09-01 = -0.143R -> PAUSE (paper) | last 5 monitors: 08-26:
+    MO3 N=60 pause: monitor for the NEXT day after 2015-09-01 = -0.165R -> PAUSE (paper) | last 5 monitors: 08-26:
+- A2 side BUY (3-day gap +67.3). UN3 DISAGREE (disagree day 23 of 30) (5-day gap -201.0).
+- Both monitors under +0.60R -> PAPER. Route A closed until 09-21; routes B and C empty. INACTIVITY: 57 calendar days since 07-07, start-date
+  question with the coach; both readings say no live trade today (plan section 9). NO ORDER.
+- A2 paper plan: buy at the 08:00 open, stop 40 pips, out 12:00.
+- Forward counts (paper): EN2, YM1 day 3, NC1 day 3 - from their tools after the day.
+- How I feel: fine.
