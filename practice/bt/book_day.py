@@ -17,7 +17,9 @@ ym = run(f"python bt/ym_forward.py {NXT} forward 2015-08-31").splitlines(); yl =
 en = run(f"python bt/en2_forward.py 2015-08-28 {NXT}").strip().splitlines()[-1]
 mo = [l for l in run(f"python bt/side_monitor.py {NXT} --state").splitlines() if l.startswith(("MO1", "MO3"))]
 mv = [float(re.search(r"= ([+-]\d\.\d+)R", m).group(1)) for m in mo]
-s = open(W).read()
+import glob
+wk = sorted(glob.glob("journal/2015-W*-funded.md"), key=lambda p: int(re.search(r"W(\d+)", p).group(1))); i_ = wk.index(W)
+s = "".join(open(p).read() for p in wk[max(0, i_ - 1):i_ + 1])  # previous week + this week, so running tallies carry over
 gap5 = float(re.findall(r"5-day gap ([+-]?\d+\.\d+)", s)[-1]); un_dis = (side > 0) != (gap5 > 0)
 un = re.findall(r"disagree days ([+-]\d+\.\d+)R in (\d+)", s)[-1]
 ag = re.findall(r"agree days ([+-]\d+\.\d+)R in (\d+)", s); ag = [a for a in ag][-1] if ag else None
