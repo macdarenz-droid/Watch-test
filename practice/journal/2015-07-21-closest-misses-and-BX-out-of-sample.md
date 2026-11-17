@@ -32,3 +32,11 @@ trades of B2 plus the coach's word (B3) are the real gate. A fail = dead for goo
 My guess: the average is positive but under +0.15R; O1 or O4 fails.
 
 ## Counts and worked case (tool, before outcomes)
+Tool: `python bt/box_break_oos.py 2015-07-22 count` / `facts 2015-07-21`. The wrapper loads box_break.py's definitions byte for byte and does
+not run its results table (three import attempts failed on my wrapper's own plumbing before this; no outcome was printed in any of them).
+- Unseen A2 days 05-12..07-21: 51. BX2 trades: 43 (22 before 06-16, 21 from); 8 days without a trade (no break, or a box over 60 pips). Judgeable.
+- Worked case, today Tue 07-21: box 12:00-13:25 = 1.08561-1.08786 (22.5 pips, 17 candles). The afternoon went up, so by the rule the first
+  touch of 1.08786 in 13:25-14:30 is a BUY at about 1.08797 (edge + 1.0 spread + 0.1 slip), stop 1.08561 (risk about 23.6 pips), flat 17:00.
+  If the tool shows a different side or stop, the tool or my reading is wrong and I stop.
+
+## Result (one run)
