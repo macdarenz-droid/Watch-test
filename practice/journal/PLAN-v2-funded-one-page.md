@@ -14,7 +14,7 @@ Goal: steady monthly profit, safe payouts, never a breach.
 - Full size: 0.50% of $25,000 = $125 = 0.31 lots. Not raised after wins, not raised to win a loss back, not cut on a feeling.
 - HALF size (0.16 lots) from a day's CLOSE at or below 3% under the high-water mark, until a new high-water.
 - STOP TRADING from a day's close at or below 7% under the high-water mark: written review, restart only with my coach.
-- The high-water moves up with new highs and down only by a payout. Today: high-water $25,280.44; half size at $24,522.03; stop at $23,510.81.
+- The high-water moves up with new highs and down only by a payout. After the 06-19 payout: high-water $25,256.94; half size at $24,499.23; stop at $23,488.95.
 - Size changes ONLY by a trigger written in advance. None is written. Sizing test 06-17 (idea SG): no size breaches (the 7% stop sees to it); at the planning
   edge 0.75% pays 28% more and meets my own stop in 22% of two-year runs against 3%; at +0.10R it pays nothing more. 0.50% stays.
 
@@ -22,11 +22,11 @@ Goal: steady monthly profit, safe payouts, never a breach.
 - One trade, one stop: the planned worst day is -1R = -$125 = -0.5% (the firm allows 5%). Seen worst with a jump through the stop: about 3R = 1.5%.
 - After the trade is closed - win, loss or stop - the day is over. No re-entry. No afternoon trade.
 
-## 4. Payout rule (every 14 days from 03-27; next Fri 06-19)
+## 4. Payout rule (every 14 days from 03-27; next Fri 07-03)
 - On the date, after the day's trade, on the tracker balance (sim balance minus everything paid out):
   below $26,000 -> request HALF of what is above $25,000 (half-cents rounded down); at or above $26,000 -> request everything above $26,000.
 - No request while half size or the stop is on. The high-water is lowered by the amount requested. I keep 80%.
-- Applied exactly as written, no exceptions either way. So far: $543.54 requested on 5 dates, $434.83 mine.
+- Applied exactly as written, no exceptions either way. So far: $567.04 requested on 6 dates, $453.63 mine.
 
 ## 5. What I never do
 - Never trade without the committed call. Never skip a weekday. Never move, widen or remove the stop. Never close before 12:00 by choice. Never hold past 12:00.
