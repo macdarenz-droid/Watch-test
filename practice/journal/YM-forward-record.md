@@ -7,3 +7,4 @@ Tool (frozen copy, mechanics checked on 08-27/08-28 against engine A2: +1.05R / 
 Results are read from the tool each evening, never written from memory. No live money until it passes AND the coach agrees.
 | day | YM1 side | A2 side | agree? | YM1 R | YM0 R | YM1 stressed | running YM1 net |
 |---|---|---|---|---|---|---|---|
+| Mon 2015-08-31 | -1 | -1 | agree | +0.31 | -0.37 | +0.27 | +0.31 |

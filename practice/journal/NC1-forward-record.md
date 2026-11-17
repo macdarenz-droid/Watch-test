@@ -10,3 +10,4 @@ means forward (e.g. first and second half of the forward days). Until answered I
 Daily tool: `python bt/no_chase_hour.py END check DATE` (hour column = signed move). The control NC0 (hour >= 15 AGAINST A2) is logged too.
 | day | A2 side | hour signed (pips) | NC1 | NC0 | A2 paper R |
 |---|---|---|---|---|---|
+| Mon 2015-08-31 | -1 | +27.2 | SKIP (1 of 30) | no | +0.31 |
