@@ -25,3 +25,4 @@ A return to money: only by a restart rule written in advance and agreed with the
 | Mon 2015-08-03 (19) | sell | +0.73 | -1.03 | -2.77 | clock exit; monitor after the day -0.338R |
 | Tue 2015-08-04 (20) | sell | -0.53 | +0.47 | -3.30 | clock exit; DAY 20: avg -0.165R, 8 wins, 6 full stops, DD 4.09R; verdict: stays on paper; monitor -0.319R |
 | Wed 2015-08-05 (21) | sell | +0.11 | -0.17 | -3.19 | clock exit; monitor after the day -0.333R |
+| Thu 2015-08-06 (22) | sell | +0.07 | -0.13 | -3.12 | clock exit; monitor after the day -0.283R |

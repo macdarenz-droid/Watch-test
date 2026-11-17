@@ -8,6 +8,7 @@ SW1 paper shadow: 3 of 20 done (-3.08R), trade 4 open. Day-20 A2 verdict due Tue
 | (paper) | Mon 08-03 08:00 | sell | NO LIVE TRADE (monitor -0.406R) | paper | paper | paper clock exit | (+0.73 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 19; SW1 shadow trade 4 open |
 | (paper) | Tue 08-04 08:00 | sell | NO LIVE TRADE (monitor -0.338R) | paper | paper | paper clock exit | (-0.53 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 20: verdict written, A2 stays on paper; route C proposed |
 | (paper) | Wed 08-05 08:00 | sell | NO LIVE TRADE (monitor -0.319R) | paper | paper | paper clock exit | (+0.11 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 21; LM2 closed for good (coach) |
+| (paper) | Thu 08-06 08:00 | sell | NO LIVE TRADE (monitor -0.333R) | paper | paper | paper clock exit | (+0.07 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 22 |
 
 ## Mon 08-03
 Coach 08-03, straight talk: "careful is good, frozen isn't." At the day-20 verdict (tomorrow) I also write what it would take to get
@@ -93,6 +94,20 @@ until something earns it." Recorded: LM2 CLOSED FOR GOOD. No shadow, no tally, n
 - A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
 - SW1 shadow trade 4: open (buy 1.09535, stop 1.08335, target 1.11935, clock 12:00 Fri 08-07). Nothing to do.
 - How I feel: steady.
+  08:00 London (PAPER): pre-entry hour 1.09080-1.09439 = 35.9 pips (PH2 lively: half on paper), up then back down. A2 paper SELL near 1.09104 (engine fixes the fill), paper stop about 1.09504. SW1 shadow untouched. No order.
+  10:00 London (PAPER; window 07:00-08:45 UTC): A2 paper sell best +23.4, worst -7.0, last +22.7. Before advancing to noon: clock only.
+  12:00 London (PAPER; 16 candles, 08:00-12:00): A2 paper sell closed by the clock about 3 pips ahead (best +25.1, worst -7.0, last +3.4).
+  -> Thu result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.333R -> paper). Checked: call committed before the bell; no order; trade list
+     still ends with #230 of 07-07; sim balance $24,926.03 unchanged.
+     PAPER A2, day 22 (engine, `python bt/coin_control.py 2015-08-07 --check 2015-08-06`): sell, clock exit, +0.07R; the other side -0.13R.
+     A2 paper running from 07-08: 22 days, -3.12R.
+     SW1 SHADOW trade 4: still OPEN (buy 1.09535, stop 1.08335, target 1.11935, clock 12:00 Fri 08-07); last price 1.09240. Running -3.08R (3 of 20 done).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     How it feels: the third morning running that reached +20 and came back to nothing by noon. Noted, not counted: MF tested that and killed it.
+     Paper lines: UN3 agreed, +0.07R (agree days -12.40R in 61; disagree +4.23R in 17; day 78). PH2 (day 70): lively (35.9) -> half = +0.04R;
+     46 lively days -8.06R, 21 full-stop mornings; 24 quiet -1.65R; PH2 about -5.67R against A2's -9.73R.
+     MO PAPER RULE (day 28 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.07R (running -5.92R).
+     For Friday (tool): MO1 -0.283R -> paper; MO3 -0.295R -> paper.
 
 ## Forward tally
 
