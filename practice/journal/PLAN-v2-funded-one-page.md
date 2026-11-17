@@ -10,17 +10,17 @@ Goal: steady monthly profit, safe payouts, never a breach.
 - 08:00: market order. Stop 40 pips from the bid at 08:00. Never moved. No target, no partial, no break-even, no trail.
 - 12:00: close at market. Flat every afternoon, night and weekend.
 
-## 2. Size rule (the real safety rule)
-- Full size: 0.50% of $25,000 = $125 = 0.31 lots. Not raised after wins, not raised to win a loss back, not cut on a feeling.
-- HALF size (0.16 lots) from a day's CLOSE at or below 3% under the high-water mark, until a new high-water.
-- STOP TRADING from a day's close at or below 7% under the high-water mark: written review, restart only with my coach.
-- The high-water moves up with new highs and down only by a payout. After the 06-19 payout: high-water $25,256.94; half size at $24,499.23; stop at $23,488.95.
-- Ladder against flat (idea LF, 07-06): the half step cuts my own-stop odds from about 23% to 2% at the planning edge for a fifth of the income; the
-  way back to a new high-water from here is a median 70 trading days at +0.18R, about 100 at +0.10R. Expect months at half size. (Open question with
-  the coach: a pre-written condition for returning to full size.)
-- >>> HALF SIZE IS ON since the close of Fri 2015-07-03 ($24,489.07, $10.16 under the line): 0.16 lots from Mon 07-06 until the balance is above $25,256.94.
-- Size changes ONLY by a trigger written in advance. None is written. Sizing test 06-17 (idea SG): no size breaches (the 7% stop sees to it); at the planning
-  edge 0.75% pays 28% more and meets my own stop in 22% of two-year runs against 3%; at +0.10R it pays nothing more. 0.50% stays.
+## 2. Size rule v3 (the real safety rule; in force from Tue 2015-07-07; decision and reasons: journal/2015-07-07-size-rule-v3-decision.md)
+- The size is 0.25% of $25,000 = $62.50 = 0.16 lots on EVERY trade. It is the base size, not a brake. Not raised after wins, not raised to win a loss
+  back, not cut on a feeling. It does NOT return to 0.31 lots at a new high-water.
+- STOP TRADING from a day's close at or below 7% under the high-water mark: written review, restart only with my coach. Today: high-water $25,256.94; stop at $23,488.95.
+- The high-water moves up with new highs and down only by a payout.
+- A return to 0.31 lots: only by a rule written and tested in advance with its kill lines, and only on a day the account stands at a high-water.
+  Never in a drawdown. No switching back and forth.
+- Why (idea LF, 07-06, my own kill line K5): at the edge I can honestly claim today (0.00R to +0.10R) the old ladder (0.50%, half from 3% under) reached
+  my own stop 10-16 points more often than a flat 0.16 lots for little or no more income. Survival beats income. Cost if the edge is +0.18R: about a
+  third of the income.
+- History: 03-27 .. 07-03 full size 0.31 lots with the ladder; the ladder's half step came on at the 07-03 close; v3 replaced it on 07-07.
 
 ## 3. Daily stop
 - One trade, one stop: the planned worst day is -1R = -$125 = -0.5% (the firm allows 5%). Seen worst with a jump through the stop: about 3R = 1.5%.
@@ -31,12 +31,12 @@ Goal: steady monthly profit, safe payouts, never a breach.
 ## 4. Payout rule (every 14 days from 03-27; next Fri 07-17)
 - On the date, after the day's trade, on the tracker balance (sim balance minus everything paid out):
   below $26,000 -> request HALF of what is above $25,000 (half-cents rounded down); at or above $26,000 -> request everything above $26,000.
-- No request while half size or the stop is on. The high-water is lowered by the amount requested. I keep 80%.
+- No request while the stop is on, and none unless the balance is above $25,000. The high-water is lowered by the amount requested. I keep 80%.
 - Applied exactly as written, no exceptions either way. So far: $567.04 requested on 7 dates (07-03: $0), $453.63 mine.
 
 ## 5. What I never do
 - Never trade without the committed call. Never skip a weekday. Never move, widen or remove the stop. Never close before 12:00 by choice. Never hold past 12:00.
-- Never add, average, re-enter or take a second trade. Never change the size except by rule 2.
+- Never add, average, re-enter or take a second trade. Never change the size: it is 0.16 lots (rule 2).
 - Never change a rule because of a losing day, week or month, or because of a big win. Never change a rule from fewer than a few hundred lived trades
   unless the idea has beaten A2 on history AND on lived forward days, with its kill lines written first, and the coach has agreed.
 - Never let a paper tag (UN3, PH2, MB1, the +80 trail count, the MO monitor) touch a live trade.

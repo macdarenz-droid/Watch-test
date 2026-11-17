@@ -73,6 +73,28 @@ Coach 07-06: next brick - position sizing math: how the half-size / full-size la
      +80 pip trades: none (3 of 15). 80+ pip pre-entry hours: none (5 of 10).
      END OF RELEASED DATA (clock Tue 07-07 01:00 London).
 
+- **Tue 07-07 call, written 07:00 London (06:00 UTC), before the entry bar.** JULY GOAL read first. Figures from `python bt/call_numbers.py 2015-07-07`, `./look.sh`, `python bt/side_monitor.py 2015-07-07 --state` or a bar print. Yesterday's tag stands: VALID LOSS.
+  Coach 07-07: on LF my own kill lines decide; a switch is written with its start date before the next live day; never back and forth mid-drawdown;
+      survival beats income. Then the next backtest: something new about the market, not sizing again.
+  SIZE RULE v3, DECIDED AND WRITTEN BEFORE THIS CALL (journal/2015-07-07-size-rule-v3-decision.md), starts today: the size is 0.16 lots ($62.50, 0.25%)
+      on every trade, as the base size; it no longer returns to 0.31 at a new high-water; stop trading at 7% under the high-water as before. Today's
+      order is the same under the old rule and the new: 0.16 lots.
+  Plan line read (BD): the only way to lose the best days is not to trade the day or not to hold it to 12:00.
+  D1 (London days): Thu 07-02 close 1.10832 (0.57); Fri 07-03 close 1.11092 (0.84); Mon 07-06 high 1.10954 low 1.09690 close 1.10556 (0.69, range 126.4
+      with the gap inside it): opened 116 pips lower, back to 1.1095 in my morning, down to 1.1002, up again: a close 54 pips under Friday's.
+  H4 (UTC bars): Mon 08:00 bar 1.10954 / 1.10083; 12:00 bar up to 1.10846; 16:00 bar 1.10912 / 1.10403; 20:00 bar flat; tonight 00:00 bar down to 1.10256; 04:00 bar 1.10272-1.10416, last 1.10414.
+  H1: the night (00:00-07:00 London): open 1.10546, high 1.10561, low 1.10256, last 1.10414: range 30.5 pips (ratio 0.70), net -13.2 pips - slightly down, against a buy.
+  M15: the last candle rose 11 pips.
+  Bias: BUY. 22:00 London closes: 07-06 1.10556 vs 07-01 1.10523 = +3 pips (3-day gap +3.3). Gap / ADR5 0.03: the smallest kind of signal. FLIP DAY after four sells. The rule says any gap counts.
+  UN3 PAPER TAG (never live): 5-day gap -180 pips (-180.0) -> SELL; DISAGREE: paper SKIPS. Forward day 56, disagree day 13 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 48.
+  MO PAPER RULE (never live; day 6 of 60): MO1 monitor -0.188R -> A2 would be on PAPER today. MO3 monitor -0.034R -> on PAPER too (its first off day).
+  Levels: night low 1.10256; Mon low 1.09690; night high 1.10561; Mon high 1.10954.
+  Rejection-day check: for a buy, Monday did not make the 3-day high. Not a rejection day. 10-day trend: DOWN (1.10556 vs 06-22 1.13402); the buy is AGAINST it (counted).
+  Account: tracker balance $24,424.59, high-water $25,256.94, drawdown -3.30%; stop-trading line $23,488.95 ($935.64 away).
+  Plan: BUY 0.16 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
+  Worry: a 3 pip signal against a 180 pip five-day fall; both monitors would have me on paper. Paper lines are paper. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
