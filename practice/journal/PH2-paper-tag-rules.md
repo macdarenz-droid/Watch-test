@@ -93,3 +93,4 @@ NOTE, not a rule (coach 05-26: one year of data; relabelled the day after it was
 | Fri 2015-07-03 | 46 | 32 | -3.20R / 14 | -1.39R / 5 (14 quiet days) | about -2.98R | -4.61R / 6.07R (yesterday's figures minus 0.36) |
 | Mon 2015-07-06 | 47 | 33 | -4.20R / 15 | -1.39R / 5 (14 quiet days) | about -3.48R | -5.61R / 7.07R (Friday's figures minus 1.00) |
 | Tue 2015-07-07 | 48 | 33 | -4.20R / 15 | -2.39R / 6 (15 quiet days) | about -4.48R | -6.61R / 8.08R (yesterday's figures minus 1.00) |
+| Wed 2015-07-08 (A2 on paper) | 49 | 34 | -5.20R / 16 | -2.39R / 6 (15 quiet days) | about -4.98R | -7.61R (A2 incl. paper day) |

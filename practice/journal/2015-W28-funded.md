@@ -15,6 +15,7 @@ Coach 07-06: next brick - position sizing math: how the half-size / full-size la
 |---|---|---|---|---|---|---|---|---|---|---|
 | F72 | Mon 07-06 08:00 | sell | 0.16 (HALF) | 1.10556 | 1.10958 | 1.10959 (stop, 09:01) | -1.00 | -$64.48 | VALID LOSS (valid setup, market disagreed) | first half-size day; after a 116 pip weekend gap down; the ask touched the stop by 0.6 pips at 09:01, then the morning fell: best +32.2, +23 at noon (+0.57R without the stop): a poke; PH2 paper half; UN3 agree; MO paper day 5: MO1 off, MO3 on |
 | F73 | Tue 07-07 08:00 | buy | 0.16 (rule v3) | 1.10278 | 1.09869 | 1.09868 (stop, 09:24) | -1.00 | -$65.60 | VALID LOSS (valid setup, market disagreed) | a 3 pip flip signal against a 180 pip five-day fall; never 6 pips in profit; stopped in the 09:15 candle, 82 pips against at the worst; at the stop level at noon; size rule v3 written before the call; PH2 paper quiet; UN3 DISAGREE (paper skips); MO paper day 6: both monitors off |
+| (paper) | Wed 07-08 08:00 | sell | NO LIVE TRADE (rule alarm) | 1.10146 paper | 1.10546 | paper stop 08:5x | (-1.00 paper) | $0 | NO LIVE TRADE - BY RULE | A2 on paper day 1: stopped by a spike 5.4 pips through, back inside by noon; account flat and unchanged |
 
 ## Daily calls - each written at 07:00 London and committed before the entry bar; then a note before every advance
 
@@ -150,6 +151,25 @@ Coach 07-06: next brick - position sizing math: how the half-size / full-size la
   Levels: night high 1.10175; Tue evening high 1.10517; night low 1.09743; Tue low 1.09163.
   10-day trend: DOWN (1.10107 vs 06-23 1.11677); the paper sell is with it.
   PAPER plan: SELL at 08:00 London, stop 40 pips above the bid, close 12:00. No order in the account. The walk is written as on a live day.
+  08:00 London Wed (PAPER): pre-entry hour 1.09996-1.10309 = 31.3 pips -> PH2 paper: LIVELY. Price 1.10146; night against the sell by 10.1 pips. PAPER order: SELL at 1.10146, stop 1.10546. NO ORDER IN THE ACCOUNT (rule alarm).
+  09:00 London (PAPER): the paper sell is STOPPED in the 08:45 candle (high 1.10590, 5.4 pips through 1.10546). Paper -1.00R. Account untouched: balance from the tool $24,926.03 (sim), no position. I watch to noon for the routine.
+  12:00 London (PAPER): price 2.4 pips in the paper sell's favour, back inside the stop: the 08:45 candle's spike was a poke (without the stop about +0.06R).
+  -> Wed result, TAG FIRST: NO LIVE TRADE - BY RULE. The rule alarm was crossed and A2 is not traded for money (decision written and pushed before the
+     call). That is not a skipped day: a skip is my choice against the plan; this is the plan. Checked: July goal read; alarm report and plan status
+     pushed before 07:00; paper call committed before the bell; no order placed; the trade list ends with yesterday's trade (#230); sim balance unchanged.
+     PAPER A2, day 1 (engine, `python bt/coin_control.py 2015-07-09 --check 2015-07-08`): sell, stopped 08:5x, -1.00R; the other side -0.11R.
+     Account: tracker balance $24,358.99 (sim $24,926.03 minus $567.04 paid out), unchanged; high-water $25,256.94; drawdown -3.56%; FLAT.
+     Funded totals unchanged: 73 trades, 33 wins, 40 valid losses, -1.48R. Trade tags: 73 valid, 0 my mistake.
+     For the record and without reading anything into one day: the first morning the alarm kept me out was a full stop.
+     How it feels: strange to watch the bell without an order. Lighter than I expected, and a little ashamed of being lighter.
+     Paper lines (all in units of a full trade's R): A2 PAPER running from 07-08: 1 day, -1.00R.
+     UN3 agreed, -1.00R (agree days -7.54R in 44; disagree days +1.49R in 13; n = 13 of 30). PH2 (day 49): lively (31.3) -> half = -0.50R; tally 49 days,
+     34 lively (-5.20R, 16 full-stop mornings), 15 quiet (-2.39R, 6); PH2 about -4.98R against A2's -7.61R.
+     MO PAPER RULE (day 7 of 60): both monitors had A2 off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.00R (running -3.80R).
+     For tomorrow (tool): MO1 -0.235R -> paper; MO3 -0.105R -> paper.
+     The counts-only lines of LIVE trades (night-against 33 of 40, 10-day trend, +80 pip trades 3 of 15, 80+ pip pre-entry hours 5 of 10) are FROZEN while
+     A2 is on paper: they were defined on live trades. They resume if A2 returns to money; they are not continued on paper trades.
+     END OF RELEASED DATA (clock Thu 07-09 01:00 London).
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
