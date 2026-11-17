@@ -320,3 +320,9 @@ idea GB, the give-back after +80 pips (journal/2015-idea-GB-giveback-after-80.md
 first; one run of the build. Trail 40 from +80: +1.10R on 3 changed days, none worse, fails only the sample line. Target +80: -2.91R, cuts my best day
 by 2.30R: dead. Break-even from +80: changes nothing in 97 days. No rule from the build; the trail is carried forward as a count with a written
 judging rule at 15 cases (3 so far, +0.83R, not judged). Nothing live changes. Counts: 80 ideas, 225 variants. June corrections after a push: 0.
+
+## 06-12 after funded day 56: one test - the forward re-test of idea LK, the late profit lock (journal/2015-idea-LK-forward-late-lock.md). The three
+definitions frozen since 05-01, judged on the 31 days since; worked cases (06-12, 06-10) and kill lines pushed first; the engine matched the worked cases;
+one run. LK1 -0.60R, LK2 -1.79R, LK3 +0.92R against A2: all killed a second time (LK3 by 0.08R on K1 and on the drawdown line; it is 5.84R behind noon
+since January, so the forward plus is a sign flip, not an edge). The lock would not have touched Wednesday's give-back; banking at 10:00, which I wanted
+today, was worse on 3 days of 3. Counts: 81 ideas, 228 variants. June corrections after a push: 1 (the stale label, found in today's bookkeeping).
