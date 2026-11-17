@@ -33,3 +33,11 @@ on, for my coach to choose; I change nothing myself:
  (b) allow once-a-day ideas at 80+ trades with the weaker power stated in each file (about +-0.22R; a no-edge rule clears +0.10R about
      one time in four), knowing a pass there is weak evidence and could only lead to a forward count, never to route C directly.
 Counts: idea 129 (killed for sample); variants none run.
+
+## CORRECTION, written Wed 2015-08-12 evening (found while searching for the next idea): NR WAS NOT NEW
+Idea N (January, journal/2015-idea-N-second-setup.md, bt/ny_fade.py), variant N1: "fade the London morning in NY: if price moved >= 30
+pips since 08:00, trade against it, 13:00-17:00": Jan 15 trades +0.42R, Feb 9 trades +0.43R; failed independence from A2 (correlation
++0.31); not adopted. NR is that idea with a different stop and a counted threshold. My search for NR used "fade the morning" and "against
+the morning" and missed the wording "Fade the London morning". No outcome of NR was run, so no number is wrong; the claim "never tested
+as a rule" in NR's file was wrong. NR's count stays as idea 129 (it was registered and counted), marked here as a repeat of N.
+Habit, tightened: search with SHORT key words in several forms (e.g. "fade", "morning", "NY", "13:00") and read the hits, not one phrase.

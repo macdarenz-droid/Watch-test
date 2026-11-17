@@ -466,6 +466,7 @@
 - EN2 (strong: range >= 1.5x the previous hour) +0.182R (+-0.31) on 116, +13.27R / +7.84R, stressed +0.085R: the first variant in a long while to hold across 04-07. Dose line, under 120, already seen: NOT promoted. Possible later: a forward pre-registered count on lived days, only with the coach's word and not while SW1's shadow runs.
 
 ## Idea NR New York turns the morning (journal/2015-idea-NR-new-york-turns-the-morning.md; bt/ny_turn.py END count|check N DATE [x]|test N1 N2)
+- CORRECTION 08-12: NR repeats idea N (January, N1 fade the London morning in NY, +0.42R/+0.43R on 15/9 trades, failed independence); my search missed it. No outcome was run.
 - Counts N = 20/30/40: 102/85/72 days; none meets 120: KILLED FOR SAMPLE, outcomes unseen. STRUCTURAL: 159 weekdays -> the 120 line rules out nearly every once-a-day idea with a condition. COACH 08-12 CHOSE (b): once-a-day ideas at 80+ trades (35+ from 04-07), weak power stated up front, any pass provisional until it holds on lived days. Written into the plan's section 9.
 
 ## Idea GC2 night faded at the bell, counted first (journal/2015-idea-GC2-back-to-close-counted-first.md; bt/back_to_close2.py END count|test N1 N2)
