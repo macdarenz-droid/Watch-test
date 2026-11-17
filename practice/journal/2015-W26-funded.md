@@ -88,3 +88,9 @@ Live minus backtest: -0.32R per trade (noise band +-0.41R) -> inside the noise. 
 Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 81 done, avg +0.18R, max DD 4.85R. Planning edge +0.18R: live is +0.00R above it.
 Counts only: live trades after a night (00:00->08:00) against my side, from 04-23: 25 (+2.47R; look at 40). 10-day-trend direction, paper line from 05-06: trend UP 24 trades +0.59R; trend DOWN 10 trades -2.24R (look at 40 up-trend trades). MB1 paper from 05-13: 29 days, kept 10 trades (-4.87R, DD 5.63R); removed 17 (+10.96R); no break 2. +80 pip trades from 05-22: 3 of 15 (net trail +0.82R). Pre-entry hour 80+ pips: 4 of 10 (0 wins, -3.18R).
 Normal worst for 56 trades (bt/streak_check.py 2015-05-19, all 95 A2 trades reshuffled): longest losing run median 4, 95th pct 6; max drawdown median 3.09R, 95th pct 5.92R. Live worst: 6 in a row (April), 4.85R (06-11). Now: 2 in a row, 2.83R under the high.
+
+## 06-22 research after funded day 62 (coach: 3 ideas from my notes for a second setup, pick the best, prereg, max 3 variants): journal/2015-idea-WG-weekend-gap-second-setup.md.
+Three ideas written with their samples counted without outcomes (weekend gap 17 cases; late-day move 58, no side in my notes; 13:30 candle 12); the weekend
+gap picked; its two inspiring weekends hand-worked first (-1.00R and -0.10R) and dropped; rules and kill lines K1-K7 pushed before the code; the
+simulator matched the hand-worked cases; one run. 15 judged weekends: +0.087R / -0.018R / +0.022R a trade by deadline; negative at a 3 pip Sunday
+spread; correlation with A2 +0.02. All killed (K1, K5). Second setups tried: 11, none alive. Counts: 87 ideas, 244 variants. June corrections after a push: 3.

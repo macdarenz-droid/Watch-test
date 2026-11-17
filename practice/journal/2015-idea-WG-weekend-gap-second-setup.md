@@ -54,3 +54,44 @@ A survivor: a PAPER line noted every Monday (never live; two trades in one day w
 Worked expectation, written now: my guess is that a gap fills before the stop about half the time; at 1 : 1 less costs that is about -0.05R to -0.10R
 a trade. WG1 about -0.1R (many time exits near zero); WG3 near 0. All three killed on K1. If so: second setups tried 11, none alive, and I say so.
 Counts when run: idea 87, variants 242-244. Ideas B and D are written here and NOT tested: not counted as variants.
+
+## Mechanics check (rules pushed first in commit 046fef6; `python bt/weekend_gap.py 2015-06-23 --check SUNDAY`)
+06-21: all three variants stopped Mon 07:00, -1.00R (hand: -1.00R). 06-14: WG1 time exit -0.10R (hand about -0.10R); WG2 +0.05R (hand about +0.05R);
+WG3 target +0.92R (hand about +0.92R). The simulator does what I worked by hand.
+
+## RESULTS (one run: `python bt/weekend_gap.py 2015-06-23`; 25 weekends, 17 with a gap of 10+ pips, 2 inspiring ones dropped -> 15 judged; figures from the print)
+| variant | trades | avg R | net | targets / stops / time exits | without best | first half / second half | max DD | stressed avg (3.0 + 1.0) | corr with A2's Monday |
+|---|---|---|---|---|---|---|---|---|---|
+| WG1 deadline Mon 07:45 | 15 | +0.087 | +1.31 | 8 / 5 / 2 | +0.39 | +0.31 / +1.00 | 1.50R | -0.125 | +0.02 |
+| WG2 deadline Mon 12:00 | 15 | -0.018 | -0.27 | 8 / 6 / 1 | -1.19 | -1.26 / +1.00 | 2.32R | -0.222 | +0.05 |
+| WG3 deadline Mon 21:00 | 15 | +0.022 | +0.34 | 8 / 6 / 1 | -0.58 | -0.66 / +1.00 | 2.32R | -0.182 | +0.05 |
+| line | WG1 | WG2 | WG3 |
+|---|---|---|---|
+| K1 average >= +0.20R | FAIL (+0.087) | FAIL | FAIL |
+| K2 positive without best trade | PASS | FAIL | FAIL |
+| K3 both halves positive | PASS | FAIL | FAIL |
+| K4 max DD <= 4R | PASS | PASS | PASS |
+| K5 stressed >= +0.10R | FAIL (-0.125) | FAIL | FAIL |
+| K6 at least 12 trades | PASS | PASS | PASS |
+| K7 correlation with A2 <= +0.30 | PASS (+0.02) | PASS | PASS |
+The two dropped weekends (not judged): WG1 -0.10R and -1.00R; with them WG1 would be +0.21R in 17 trades = +0.01R a trade.
+VERDICT: all three KILLED. No paper line. Second setups tried: 11, none alive (MB1 still on paper, near its early-close line).
+
+## Expectation against the run
+"A gap fills before the stop about half the time": 8 of 15. "WG1 about -0.1R": +0.087R - a little better than I guessed, not enough. "WG3 near 0": +0.02R.
+"All killed on K1": yes.
+
+## What I take from it
+- The idea is not nonsense: 8 targets against 5 stops before Monday's bell, and it is as independent of A2 as a setup can be (correlation +0.02,
+  no overlap in time). That is exactly what the coach asked a second setup to be.
+- It is also not an edge I can show: +0.087R a trade is +1.3R in five and a half months, the whole of it disappears at a Sunday-night spread of 3
+  pips (-0.125R), and the two weekends that made me think of it lose 1.10R between them. With targets of 10-25 pips the cost is a tenth to a
+  quarter of the prize. A setup whose profit is smaller than a plausible error in its costs is not a setup.
+- Longer deadlines do not help: the same 8 targets, one more stop. What fills, fills overnight.
+- What my notes got wrong: "both Mondays traded back through Friday's close" described where the price went, not what a trade with a stop would have
+  done. The hand-worked cases showed that before a line of code was written - the worked-case rule again.
+- The sample: 15. I said before the run that this test could only kill or earn a paper line. It killed, by the lines as written. I do not keep
+  a paper line for a +0.09R idea that fails its cost line; one near-dead paper setup (MB1) is enough to carry.
+- On the coach's aim, honestly: after 11 tries I have no second setup. Steadier months will not come from this account's research soon; they come,
+  if they come, from A2's sample growing. Ideas B (late day) and D (13:30 candle) are written above, untested, if the coach wants one of them next.
+Counts: ideas 87, variants 244 (WG1, WG2, WG3). Adopted trading ideas: 0. Numbers or rules corrected after a push in June: 3 (none today).
