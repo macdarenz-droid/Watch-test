@@ -36,3 +36,8 @@ Pending this week: MPG's outcome run (pre-registered and counted 08-17 before th
 ## 08-17 test: idea MPG, the moving-average pullback with a count grid (journal/2015-idea-MPG-moving-average-pullback-counted.md)
 Pre-registered and counted before the call; outcome run after the day was journaled. MPG1 145 trades +0.011R, stressed -0.092R: killed.
 Dose line (steep trends, 41 trades) +0.399R: a hint, not promoted. Ideas 137, variants 367.
+
+## 08-17 evening: replay of week 17 + idea NC (journal/2015-08-17-replay-week-17-and-idea-NC.md)
+Worst week: 5 valid trades, -3.07R; the full stops followed a pre-bell hour that had already run A2's way. NC1 (skip those days, X 15) PASSES
+all four lines (gap +0.306R, p 0.068) - provisional and fragile: without the inspiring week gap +0.259R, p 0.11; dose the wrong way.
+Forward count only with the coach's word. Ideas 138, variants 370.

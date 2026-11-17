@@ -55,3 +55,25 @@ the run so I cannot pretend the rule saw all three.
 Note on the before-04-07 part: only 11 skipped days there; K2's first half rests on 11 trades.
 
 ## Step 3, result (one run: `test 15 20`)
+Tool: `python bt/no_chase_hour.py 2015-08-18 test 15 20` (A2 engine list, 160 days before 08-18).
+| variant | skipped: n, avg, net | kept: n, avg, net | gap (kept - skipped) | before 04-07 (skipped n) | from 04-07 (skipped n) |
+|---|---|---|---|---|---|
+| NC1 skip when the hour ran A2's way >= 15 (JUDGED) | 33, -0.068, -2.25 | 127, +0.238, +30.17 | +0.306 | +0.245 (11) | +0.265 (22) |
+| NC2 the same at >= 20 | 24, -0.030, -0.71 | 136, +0.211, +28.63 | +0.240 | +0.433 (7) | +0.052 (17) |
+| NC0 skip when the hour ran AGAINST A2 >= 15 (control) | 37, +0.177, +6.56 | 123, +0.174, +21.36 | -0.004 | +0.059 (12) | -0.125 (25) |
+NC1 shuffle p 0.068. A2 on all 160 days +27.92R; with NC1 +30.17R.
+NC1: K1 PASS (skipped -0.068R, gap +0.306R) | K2 PASS (+0.245 / +0.265) | K3 PASS (NC0's gap -0.004) | K4 PASS (p 0.068).
+**BY THE LINES WRITTEN FIRST, NC1 PASSES. THE PASS IS PROVISIONAL (plan section 9), AND IT IS FRAGILE. Said in full:**
+1. POST-HOC (not pre-written; computed after the run because two skipped days are the very days of this replay): with the five week-17
+   days removed, skipped 31 avg -0.007R, kept 124 avg +0.252R, gap +0.259R, shuffle p 0.110. That is K1 FAIL (not below zero, gap under
+   0.30) and K4 FAIL (p over 0.10). The pass rests on Thu 04-23 and Fri 04-24, the days that gave me the idea.
+2. The dose goes the WRONG way: skipping only the bigger runs (20+) gives a SMALLER gap (+0.240R; +0.052R from 04-07). A real "do not
+   chase" effect should grow with the chase.
+3. Contamination declared before the run: LM's May description saw the same thing on part of these days.
+4. Multiple looks: this is idea 138. A pass at p 0.068 is what about one idea in fifteen would show by luck.
+5. Before 04-07 the skipped group is 11 days.
+What a provisional pass allows (plan section 9): at most a pre-registered forward count on lived days, NC1 frozen (X = 15), as a paper
+tag on A2's paper call (no money is affected: A2 is on paper). It would be a second paper line beside SW1's shadow, and EN2 is waiting
+for its turn. My coach decides whether NC1 gets a forward count, and when. I start nothing. My own view: weakest kind of pass; if it gets
+a slot it should be judged on at least 30 forward skip days with the same four lines, which at about one skip a week is about 7 months.
+Counts: idea 138; variants 368-370.
