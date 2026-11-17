@@ -171,3 +171,7 @@ Round numbers are information in my calls, not walls. Idea 121, variants 337.
 ## 08-06 evening test: idea EF, evening follow on days EV never used (journal/2015-idea-EF-evening-follow-unseen.md)
 FB retracted before code (a re-cut of PD3). EF: 56 unseen days, follow -0.187R, negative in both periods; EV's +0.099R control did not
 replicate. Killed on all seven lines. Idea 122, variants 340.
+
+## 08-07 (weekend) test: idea FX, the four o'clock turn (journal/2015-idea-FX-the-four-oclock-turn.md)
+Fade the 15:30-16:00 move at 16:00: 83 trades -0.035R, positive before 04-07, negative after. Follow control -0.220R. Killed.
+Chasing short bursts loses in three windows; fading them pays about zero. Idea 123, variants 343.

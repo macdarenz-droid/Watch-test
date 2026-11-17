@@ -36,3 +36,18 @@ Tool: `python bt/four_oclock.py 2015-08-08 count` / `check DATE` (no outcomes).
   this is a full stop for the fade and a winner for the follow.
 
 ## Result (one run)
+Tool: `python bt/four_oclock.py 2015-08-08 test`. Hand check 08-07: the fade sold 1.09382 at 16:00 and was stopped at 1.09584, -1.01R; the
+follow bought 1.09394, out 17:00 at 1.09564, +0.85R. As I wrote first.
+| variant | trades | wins | avg R | net | full stops | before 04-07 | from 04-07 | without best 3 | stressed avg | max DD |
+|---|---|---|---|---|---|---|---|---|---|---|
+| FX1 fade, move >= 10 (JUDGED) | 83 | 51% | -0.035 (+-0.18) | -2.89 | 26 | +5.04 | -7.93 | -7.79 | -0.113 | 14.43R |
+| FX2 fade, move >= 20 | 34 | 53% | +0.106 (+-0.30) | +3.62 | 9 | +1.37 | +2.24 | -1.00 | +0.027 | 3.73R |
+| FX0 follow on FX1's days (control) | 83 | 36% | -0.220 (+-0.18) | -18.25 | 26 | -11.84 | -6.41 | -23.87 | -0.300 | 20.01R |
+Fade minus follow +0.185R (sign-flip p 0.28). FX1: K1-K6 FAIL, K7 pass. **FX IS KILLED.**
+What I learned: 1. The fade itself is a coin minus costs (-0.035R; positive before 04-07, negative after). 2. The CHASE of the
+15:30-16:00 move lost -0.220R, negative in both periods: the same shape as chasing a lively pre-bell hour (LM1 -0.22R twice). That is
+now three windows where following a short burst loses (pre-bell hour, 15-minute spike: -0.04R, half hour before 16:00). It is a
+lesson about what not to do, never a rule to trade: every "fade the burst" version I have tested paid about zero after costs.
+3. FX2 (+0.106R on 34) is the dose line, not the judged rule; 34 trades with an error of +-0.30R, positive in both periods but
+-1.00R without its best three. I do not promote it and I do not re-cut FX around it: that would be choosing the threshold after seeing it.
+Counts: idea 123; variants 341-343; second setups tried 25, none alive.
