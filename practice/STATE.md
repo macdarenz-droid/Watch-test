@@ -442,6 +442,7 @@
 ## SCHEDULED GATES (added 05-06 after P5; check this list every Friday; last read Fri 05-29: none due)
 - PERSONAL STOP changed 05-15 to 7% under the high-water (was 5%; coach: pick one and hold 20 live days): fixed for funded days 36-55 (12 done); review after day 55, not before. Size 0.50% and the half-size step at 3% unchanged.
 - MB1 (paper, from 05-13): first look at 100 forward kept trades (5 done after 14 forward days: -3.24R, DD 4.00R; removed 8: +7.64R; no break 1; about 285 trading days needed at the history rate of 0.35 kept trades a day, roughly mid 2016); interim early-close look at 40. Early close: kept DD > 6R; net < -3R after 20 kept; avg < 0 at 40.
+- HOW A2 IS JUDGED (coach 06-02): not from the alarm alone; planned size stays; the drawdown / breach guard (half size 3%, stop 7%, account line) is the real safety rule; the edge is judged after a few hundred lived trades over 2-3 years; lived average with its error band written at every month-end and every 50th lived trade (next: trade 100).
 - A2 rule alarm: next look at 100 live trades (66 done; +0.20R avg, max DD 4.45R): avg >= +0.10R, max DD <= 8R.
 - UN3: first look at 30 forward disagree days AND 200 forward days from 04-21 (7 / 30 done). Early close if A2 makes +5R on the first 15 disagree days.
 - PH2: first look at 60 forward lively days AND 200 forward days from 05-01 (17 / 22 done). Early close after 40 lively days if they are not below the quiet days.
