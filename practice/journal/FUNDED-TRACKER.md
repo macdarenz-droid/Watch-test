@@ -86,6 +86,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | May 2015 | 21 | 11 | -2.00 | -252.34 | -0.50% | -1.83% | 21 valid / 0 mistake (process mistakes: 6) | 349.14 | 279.31 |
 | Jun 2015 | 22 | 8 | -1.34 | -174.53 | -0.53% | -2.65% | 22 valid / 0 mistake (process mistakes: 2) | 92.20 | 73.76 |
 | Jul 2015 | 5 (flat by rule from 07-08: 18 days) | 1 | -3.28 | -288.80 | -0.50% (-$124.62, from the trade list; I first wrote -0.52% from memory and corrected it the same evening) | -3.56% | 5 valid / 0 mistake; 18 days NO LIVE TRADE - BY RULE (process mistakes: 1, P12) | 0 | 0 |
+| Aug 2015 | 0 (flat by rule all 21 weekdays; A2 paper +1.94R) | 0 | 0.00 | 0.00 | none | -3.56% (unchanged) | 21 days NO LIVE TRADE - BY RULE, all valid (process mistakes: 0 new P-entries; 3 numbers corrected after a push, see journal/2015-08-month-end-review.md) | 0 | 0 |
 
 ## Payout ledger
 | Date | Balance before | Requested | My 80% | Balance after | Note |
