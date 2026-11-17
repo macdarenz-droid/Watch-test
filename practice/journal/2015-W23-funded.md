@@ -91,3 +91,9 @@ Live minus backtest: -0.30R per trade (noise band +-0.42R) -> inside the noise. 
 Rule alarm (40 live trades: avg >= +0.10R, max DD <= 8R): 66 done, avg +0.20R, max DD 4.45R. Planning edge +0.18R: live is +0.02R above it.
 Counts only: live trades after a night (00:00->08:00) against my side, from 04-23: 18 (+0.63R; look at 40). 10-day-trend direction, paper line from 05-06: trend UP 10 trades +0.48R; trend DOWN 9 trades -3.75R (look at 40 up-trend trades). MB1 paper from 05-13: 14 days, kept 5 trades (-3.24R, DD 4.00R); removed 8 (+7.64R); no break 1. +80 pip trades from 05-22: 0 of 15. Pre-entry hour 80+ pips: 4 of 10 (0 wins, -3.18R).
 Normal worst for 56 trades (bt/streak_check.py 2015-05-19, all 95 A2 trades reshuffled): longest losing run median 4, 95th pct 6; max drawdown median 3.09R, 95th pct 5.92R. Live worst: 6 in a row (April), 4.45R (06-01, now). Now: 2 in a row, 4.45R under the high.
+
+## 06-01 research after funded day 47: idea AL, can my alarm tell a dead edge from a live one? (journal/2015-idea-AL-alarm-power.md). Worked predictions
+for every kill line pushed first; one run of 20,000 futures appended to my 66 real trades. With the edge gone from today the alarm at 100 trades still
+passes 47% of the time; with the planning edge it fails 20% of the time (the drawdown line, because I stand 4.45R down). K1 passes barely, K2 and K3 fail:
+it is not a judge. The run differed from my worked table only where the pre-registration said it would (the drawdown half); reason found before the
+verdict. Alarm unchanged; the size rule is the protection; a question goes to the coach. Counts: 71 ideas, 198 variants. June corrections after a push: 0.

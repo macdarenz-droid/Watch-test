@@ -33,3 +33,45 @@ Reported beside, same three numbers for AL2 and AL3, and the number of trades a 
   telling myself it protects me from a dead edge, and I bring the coach the table and one question: which judge do we use for the next 100 trades.
 - No trading rule, size or stop changes by this test, whatever comes out.
 My guess = the worked table. If the run differs from it by more than 5 points anywhere, I look for the reason before I write the verdict.
+
+## Results (run once; `python bt/alarm_power.py 2015-06-02`; 20,000 runs per scenario; figures copied from the print)
+Live: 66 trades, sum +13.24R, average +0.201R; 34 to come; engine list 105 trades, sd 1.052R.
+| true edge of the 34 trades to come | AL1 as written PASSES | its average half alone | its drawdown half alone | AL2 (new trades avg >= 0) passes | AL3 (new trades avg >= +0.10R) passes |
+|---|---|---|---|---|---|
+| 0.00R (edge gone) | 47.3% | 69.3% | 47.6% | 49.3% | 28.5% |
+| -0.10R | 29.0% | 48.4% | 29.2% | 28.5% | 13.2% |
+| +0.18R (planning edge) | 79.7% | 93.8% | 79.8% | 84.1% | 66.3% |
+
+## Run against the worked table (the rule I set: more than 5 points apart -> find the reason before the verdict)
+- Average half of AL1: 69.3 / 48.4 / 93.8% against worked 70 / 49 / 94%. AL2: 49.3 / 28.5 / 84.1% against 50 / 29 / 84%. AL3: 28.5 / 13.2 / 66.3%
+  against 29 / 13 / 67%. Within a point everywhere.
+- AL1 as a whole is 15 to 23 points BELOW the worked figures. Reason, found before writing the verdict: the worked case left out the drawdown half and said
+  so; that half is the one that binds. I stand 4.45R under my equity high today, so "max drawdown <= 8R" leaves only 3.55R of room, and a sum of 34 trades
+  has an sd of 6.14R. A python line with the reflection rule gives about 44% for the drawdown half at zero edge; the run says 47.6%. The run is right and
+  the reason is understood. (Not a number corrected after a push: the pre-registration named the gap. June count stays 0.)
+
+## Kill lines (AL1)
+| line | worked | result | verdict |
+|---|---|---|---|
+| K1: edge gone -> the alarm fails in at least 50% of runs | fails about 30% | fails 52.7% | PASS (barely, and only because of the drawdown half) |
+| K2: edge -0.10R -> fails in at least 80% | fails about 51% | fails 71.0% | FAIL |
+| K3: edge +0.18R -> passes in at least 90% | passes about 94% | passes 79.7% | FAIL |
+VERDICT: the claim "the alarm as written is a real judge of the edge from here" is DEAD on K2 and K3.
+
+## What it means, said plainly
+- If A2's edge died today, my alarm would still PASS at trade 100 in almost half the runs (47%). If the edge is exactly what I plan with, the alarm
+  would FAIL in one run in five (20%) - a false alarm, caused by nothing but the 4.45R I am already down. It is close to a coin on the first question and
+  a leaky judge on the second.
+- No alarm on 34 trades can do the job: AL2 fails a dead edge half the time and wrongly fails a live one 16% of the time; AL3 catches a dead edge 71% of
+  the time and wrongly fails a live one a third of the time. One trade has an sd of about 1.05R; 34 of them cannot separate 0.00R from +0.18R.
+  The worked figure: about 154 trades for a 10% false alarm and 80% power. That is seven months of trading.
+- So the honest statement about my situation: at 66 live trades (+0.20R, +-0.26R) I do not know whether the edge is +0.18R, +0.30R or zero, and I will
+  not know at 100 either. What protects the account in the meantime is not the alarm; it is the size rule (half size at 3% under the high-water, stop
+  at 7%), which acts on money, not on statistics. TS and WS tested that part.
+## What I do (as written before the run)
+- The alarm at 100 trades STAYS exactly as written. I do not loosen it because it might fail me unfairly, and I do not tighten it in a drawdown.
+- I stop writing "the alarm judges A2" as if that settled anything. From today the daily note reads the alarm's two numbers and nothing more.
+- QUESTION FOR THE COACH (a proposal, not acted on): for the 100 trades AFTER the alarm, which judge do we use? My table says a fair one needs about
+  150 trades and should not have a drawdown line anchored to wherever I happen to stand. I would propose: a rolling look every 50 trades at the average
+  of ALL lived trades with its error band written beside it, and the money rule as the only automatic brake. I change nothing until told.
+Counts: ideas 71, variants 198 (AL1 AL2 AL3). Adopted trading ideas: 0. On paper: UN3, PH2, MB1. Numbers or rules corrected after a push in June: 0.
