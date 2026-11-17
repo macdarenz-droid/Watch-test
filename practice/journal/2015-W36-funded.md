@@ -6,6 +6,7 @@ Next payout date Fri 09-11.
 ## Funded trades
 | # | time (London) | side | lots | entry | stop | exit | R | $ | tag | note |
 |---|---|---|---|---|---|---|---|---|---|---|
+| (paper) | Tue 09-01 08:00 | sell | NO LIVE TRADE (monitor -0.177R) | paper | paper | paper stop | (-1.00 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 40; YM1 day 2 DISAGREE (buy -0.32R); NC1 kept |
 | (paper) | Mon 08-31 08:00 | sell | NO LIVE TRADE (monitor -0.203R) | paper | paper | paper clock exit | (+0.31 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 39; NC1 day 1 = SKIP tag; YM1 day 1 agree |
 
 ## Mon 08-31
@@ -48,3 +49,20 @@ costs 1.0 + 0.1: skipped days +0.212R vs kept +0.121R, gap -0.091R, p 0.71 -> KI
 - A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
 - Forward counts (paper): EN2, YM1 day 2, NC1 day 2 - read from their tools after the day. NC1's K2 forward reading written into the plan this morning (coach).
 - How I feel: fine. Second morning running with a 60-pip night against the sell.
+  08:00 London (PAPER): pre-entry hour 1.12766-1.12984 = 21.8 pips (quiet: PH2 full), net about +4 against the sell. A2 paper SELL near 1.12830
+     (engine fixes the fill), paper stop about 1.13230. NC1: hour about 4 pips AGAINST A2 -> kept (tool after the day: -4.1). No order.
+  10:00 London (PAPER; 8 candles, 07:00-08:45 UTC): best +19.1 (first 15 minutes), worst -50.0 -> the paper stop was reached in the 07:45 UTC
+     candle (high 1.13320); price then came all the way back (last +6.7). Stopped first: the comeback does not count.
+  -> Tue result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.177R -> paper). VALID: no order placed. Checked: call committed before the bell (069cfb5);
+     sim balance $24,926.03 unchanged, trading days 73. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 40 (engine, costs on 1.0 + 0.1; `python bt/coin_control.py 2015-09-02 --check 2015-09-01`): sell, STOPPED, -1.00R; the other side -0.32R.
+     A2 paper running from 07-08: 40 days, -2.56R.
+     NC1 FORWARD day 2 (tool): hour -4.1 (against A2) -> KEPT; NC0 no. Skip days 1 of 30.
+     YM1 FORWARD day 2 (`python bt/ym_forward.py 2015-09-02 forward 2015-08-31`): BUY, DISAGREE with A2 -> YM1 -0.32R, YM0 -1.00R, stressed -0.37R.
+       2 of 80, net -0.01R; disagree days 1 (net -0.32R), agree days 1 (+0.31R).
+     EN2 FORWARD (tool): 0 trades so far.
+     Paper lines: UN3 agreed (day 96): agree days -12.33R in 74; disagree days +4.72R in 22. PH2 (day 88): quiet (21.8) -> full = -1.00R;
+     51 lively -7.80R; 37 quiet -0.33R; PH2 about -4.74R against A2's -9.17R.
+     MO PAPER RULE (day 46 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.00R (running -5.36R).
+     For Wednesday (tool): MO1 -0.143R -> paper; MO3 -0.165R -> paper.
+     How it feels: a stop by 10 pips, then the price came back to the entry by 10:00. The stop is the rule; noted, not acted on.
