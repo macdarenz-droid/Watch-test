@@ -39,3 +39,12 @@ Next payout date Fri 09-11.
 ## 08-31 evening test: idea 150 HL, skip A2 against the daily lows/highs (journal/2015-idea-HL-against-the-daily-structure.md)
 From my W06 note ("sold into higher lows"). Prereg, counts (N = 1 by rule, 50 skips) and worked case pushed before the run. R = engine A2 after
 costs 1.0 + 0.1: skipped days +0.212R vs kept +0.121R, gap -0.091R, p 0.71 -> KILLED on all four lines. Ideas 150, variants 400.
+
+## Tue 09-01
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-09-01`:
+- 3-day gap -102.7 pips -> A2 side SELL. 5-day gap -407.7 -> UN3 agree. Night 00:00-07:00: 1.12150-1.12815, last 1.12789 (range 66.5, net +61.0, against the sell).
+- Monday's London day: 1.11693-1.12624, close 1.12099 (range 93.1, close position 0.44); no 3-day extreme. ADR5 180.6 (tool). 10-day trend UP.
+- Monitor for today -0.177R (MO1), -0.183R (MO3) -> BOTH PAPER. Route A closed until 09-21; routes B and C empty. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
+- Forward counts (paper): EN2, YM1 day 2, NC1 day 2 - read from their tools after the day. NC1's K2 forward reading written into the plan this morning (coach).
+- How I feel: fine. Second morning running with a 60-pip night against the sell.
