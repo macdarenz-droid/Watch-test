@@ -7,6 +7,7 @@ Pending this week: MPG's outcome run (pre-registered and counted 08-17 before th
 | # | time (London) | side | lots | entry | stop | exit | R | $ | tag | note |
 |---|---|---|---|---|---|---|---|---|---|---|
 | (paper) | Mon 08-17 08:00 | buy | NO LIVE TRADE (monitor -0.342R) | paper | paper | paper clock exit | (-0.32 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 29 |
+| (paper) | Tue 08-18 08:00 | sell | NO LIVE TRADE (monitor -0.300R) | paper | paper | paper clock exit | (+0.23 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 30 |
 
 ## Mon 08-17
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-17`:
@@ -40,6 +41,21 @@ Pending this week: MPG's outcome run (pre-registered and counted 08-17 before th
 - NC1 (provisional, NOT a line yet; coach not asked to start it): for the record only, I note at 08:00 whether the hour ran 15+ pips A2's way.
 - SW1 shadow trade 7: open (buy 1.11272, stop 1.10072, target 1.13672, clock 12:00 Thu 08-20). Nothing to do.
 - How I feel: fine.
+  08:00 London (PAPER): pre-entry hour 1.10531-1.10746 = 21.5 pips (PH2 quiet: full unit on paper); net about +15 pips UP, i.e. AGAINST the sell (NC1 for the record: no skip; the tool fixes the exact figure). A2 paper SELL near 1.10731 (engine fixes the fill), paper stop about 1.11131. SW1 shadow untouched. No order.
+  10:00 London (PAPER; window 07:00-08:45 UTC): A2 paper sell best +9.1, worst -21.7, last -3.4. Before advancing to noon: clock only.
+  12:00 London (PAPER; 16 candles, 08:00-12:00): A2 paper sell closed by the clock about 10 pips ahead (best +16.7, worst -21.7, last +9.5).
+  -> Tue result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.300R -> paper). VALID: no order placed. Checked: call committed before the bell;
+     trade list still ends with #230 of 07-07; sim balance $24,926.03 unchanged. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 30 (engine, costs on 1.0 + 0.1; `python bt/coin_control.py 2015-08-19 --check 2015-08-18`): sell, clock exit, +0.23R; the other side -0.29R.
+     A2 paper running from 07-08: 30 days, -1.10R.
+     NC1, for the record only (not a running line): the hour ran -15.2 pips (against the sell; tool `bt/no_chase_hour.py ... check`): no skip.
+     SW1 SHADOW trade 7: still OPEN (buy 1.11272, stop 1.10072, target 1.13672, clock 12:00 Thu 08-20); last price 1.10216, 14 pips above its stop. Running -5.36R (6 of 20).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     How it feels: fine. The shadow's stop is close; if it goes tomorrow, SW1 is closed by its own line.
+     Paper lines: UN3 DISAGREED (day 86): disagree days +3.66R in 19; agree days -9.81R in 67. PH2 (day 78): quiet (21.5) -> full = +0.23R;
+     47 lively days -8.43R, 21 full-stop mornings; 31 quiet +0.74R; PH2 about -3.47R against A2's -7.71R.
+     MO PAPER RULE (day 36 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.23R (running -3.90R).
+     For Wednesday (tool): MO1 -0.234R -> paper; MO3 -0.163R -> paper.
 
 ## Forward tally
 
