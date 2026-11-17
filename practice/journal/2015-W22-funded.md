@@ -289,3 +289,8 @@ Log of all 103 trades written (journal/mfe-mae-log.csv). Reading: full stops are
 of heat, +30 almost never comes back, and half the winners make their best price in the last hour. From that last fact one idea: a later exit clock.
 Pre-registered, 12:00 version checked against A2, one run: 12:30 / 13:00 / 13:25 keep 93% / 83% / 73% of A2's net, behind in both halves, and trades in
 profit at noon get worse with more time. All killed; noon stays. Counts: 69 ideas, 192 variants.
+
+## 05-29 MAY MONTH-END REVIEW written before any new test (journal/2015-05-month-end-review.md): 21 trades, 52% wins, -2.00R, -$252.34 (-0.99%); worst day
+-0.50%; deepest drawdown -1.83% (3.69R, inside the written normal range); 21 valid tags, 0 trade mistakes; payouts $349.14 on 05-08 and $0 on 05-22;
+6 process mistakes, 5 of one species. June process goal: every number and every test rule gets one worked case before it is pushed (target: 0 corrections
+after a push; May had 5).

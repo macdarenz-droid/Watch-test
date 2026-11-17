@@ -460,6 +460,9 @@
 - The mirror of a losing trade is not a winning trade once both have stops: NT2 + NF1 lose 0.18R a night together (0.07R costs + 0.10R whipsaw). Never again "the mirror would make about X" without running it.
 - Second setups tried: 7, none alive. The one edge on record: the 3-day direction, 08:00-12:00 London.
 
+## May 2015 review (journal/2015-05-month-end-review.md): 21 trades, 11 wins (52%), -2.00R, -$252.34 (-0.99%): first losing funded month; 9 full stops; best day 05-19 +2.17R (one jump candle; without it -4.17R); worst day -$128.34 (-0.50%); deepest drawdown -1.83% (3.69R, inside the written normal range of 6 losses / 5.9R); payouts $349.14 requested on 05-08 ($279.31 mine), $0 on 05-22; 21 valid tags, 0 trade mistakes; 6 process mistakes, 5 of one species. Research: ideas 48 -> 69, variants 131 -> 192, 0 adopted.
+## JUNE PROCESS GOAL (one): every number and every test rule gets one worked case before it is pushed; measured by the count of numbers or rules corrected after a push (May 5, target 0), reported in the June review.
+
 ## April 2015 FINAL review (journal/2015-04-month-end-review-final.md): 22 trades, 11 wins, +4.17R, +$517.39 (+2.07%); 6 full stops; deepest drawdown -1.63% (six losses in a row), closed in 8 days; 2 payouts ($125.70 requested, $100.56 mine); 0 trade mistakes, 2 process mistakes. From May: a number written from memory and corrected later is logged as a process mistake.
 
 ## LIVE vs BACKTEST, running (coach 04-20; `python bt/live_vs_bt.py END`; updated after every live day; the live column is the real out-of-sample)
