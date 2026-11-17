@@ -148,6 +148,28 @@ What bigger ranges would mean for stop and risk, said before anything changes:
 - YM: frozen near miss; forward check written this morning, NOT started (coach's word needed). I do not note YM's side today.
 - Payout date: balance $24,926.03 sim / tracker $24,358.99 is under $25,000 -> $0 expected.
 - How I feel: fine. A 372-pip 3-day fall after a 500-pip rise: the signal swung hard. The rule does not change with the weather.
+  08:00 London (PAPER): pre-entry hour 1.12519-1.12701 = 18.2 pips (quiet: PH2 full), net about +7.5 against the sell. A2 paper SELL near 1.12640 (engine fixes the fill), paper stop about 1.13040. No order.
+  10:00 London (PAPER; 8 candles, 07:00-08:45 UTC): best +6.0, worst -46.7 -> the paper stop was reached in the 07:45 UTC candle (high 1.13048). Last -25.4.
+  12:00 London (PAPER; 16 candles): best +6.0, worst -46.7, last -16.6: stopped first, the rest does not count.
+  -> Fri result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.185R -> paper). VALID: no order placed. Checked: call committed before the bell (435dd8a);
+     sim balance $24,926.03 unchanged, trading days 73. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 38 (engine, costs on 1.0 + 0.1; `python bt/coin_control.py 2015-08-31 --check 2015-08-28`): sell, STOPPED, -1.00R; the other side +0.37R.
+     A2 paper running from 07-08: 38 days, -1.87R.
+     PAYOUT DATE (eleventh): tracker $24,358.99 is under $25,000 -> $0. High-water $25,256.94; drawdown -3.56%.
+     EN2 FORWARD COUNT day 1 (`python bt/en2_forward.py 2015-08-28 2015-08-29`): 0 trades. 0 of 120.
+     YM: forward check written this morning (frozen, F1-F4, disagree-day line F2); not started, waits for the coach.
+     Paper lines: UN3 DISAGREED (day 94): disagree days +4.72R in 22; agree days -11.64R in 72. PH2 (day 86): quiet (18.2) -> full = -1.00R;
+     51 lively -7.80R; 35 quiet +0.36R; PH2 about -4.05R against A2's -8.48R.
+     MO PAPER RULE (day 44 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.00R (running -4.67R).
+     For Monday 08-31 (tool): MO1 -0.203R -> paper; MO3 -0.211R -> paper. NOTE: I believe Monday 08-31 is a UK bank holiday (not checked from any source here); the feed decides whether there are candles, I trade what it shows.
+     How it feels: a 40-pip stop inside the first 45 minutes on a quiet pre-hour. Third stopped paper A2 this week (Tue, Wed, Fri; from the record file). Paper costs nothing; noted.
+
+## Week 35 summary (Mon 08-24 .. Fri 08-28)
+- Live: 0 trades, $0 (flat by rule since 07-08). Payout date 08-28: $0.
+- Paper A2 (record file, costs on 1.0 + 0.1): 5 days +0.62 -1.03 -1.03 +1.05 -1.00 = -1.39R, other side +1.98R; 3 of 5 stopped. Running 38 days -1.87R.
+- SW1 shadow closed by its 6R line (08-27). EN2 forward count started 08-28 (0 trades). YM frozen as a near miss with a forward plan.
+- Research: FH, ND, WN, SH killed; YM near miss (K4 p 0.123); XD killed on counts (A2 in disguise). Ideas 148, variants 394.
+- Corrections after a push this week: 2 (range remark, SW1 financing); both numbers written from memory.
 
 ## Forward tally
 
