@@ -198,6 +198,32 @@ Coach 06-15: enough forward re-tests of killed ideas (LK is dead twice). Next te
      Tomorrow Fri 06-19: PAYOUT DATE (rule applied after the day's trade, on the tracker balance, exactly as written) and the Friday gates list.
      END OF RELEASED DATA (clock Fri 06-19 01:00 London).
 
+- **Fri 06-19 call, written 07:00 London (06:00 UTC), before the entry bar.** June goal read first: every figure below is from `python bt/call_numbers.py 2015-06-19`, `./look.sh` or a bar print. Yesterday's tag stands: VALID WIN.
+  Coach 06-19: RC was a clean kill, 12:00 stays. Friday is a payout day: follow the payout rule exactly and log it. Next brick: volatility - do my A2
+      results change with the size of the prior days' ranges? One test, kill line first.
+  Plan line read (BD): the only way to lose the best days is not to trade the day or not to hold it to 12:00.
+  D1 (London days): Tue 06-16 close 1.12471 (0.34); Wed 06-17 close 1.13372 (0.86); Thu 06-18 high 1.14364 low 1.13302 close 1.13600 (0.28, range 106.2):
+      a new high for the month in the evening (1.14364) and then 95 pips back down inside one H4 bar. A higher close than Wednesday's, but near the day's low.
+  H4 (UTC bars): Thu 08:00 bar up to 1.14201; 12:00 bar high 1.14281; 16:00 bar 1.14364 -> low 1.13407, close 1.13759; 20:00 bar 1.13554-1.13992; tonight 00:00 bar 1.13664-1.13872; 04:00 bar down to 1.13398, last 1.13475.
+  H1: the night (00:00-07:00 London): open 1.13723, high 1.13872, low 1.13398, last 1.13475: range 47.4 pips (ratio 1.39), net -24.8 pips - a falling night, against a buy.
+  M15: falling since 05:00 London; low 1.13398, last 1.13475.
+  Bias: BUY. 22:00 London closes: 06-18 1.13600 vs 06-15 1.12826 = +77 pips (3-day gap +77.4). Gap / ADR5 0.61. Second buy.
+  UN3 PAPER TAG (never live): 5-day gap +103 pips (102.7) -> BUY; agree: paper TRADES. Forward day 44, disagree days 11 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 36.
+  MB1 PAPER TAG (never live, forward day 28): morning direction written at 12:00, before 13:25. Kept drawdown 5.63R; early-close line 6R.
+  Levels: night low 1.13398; Thu low 1.13302; night high 1.13872; Thu high 1.14364.
+  Rejection-day check: for a buy, Thursday made the 3-day high (True) AND closed at 0.28, in the bottom third: a REJECTION day by my old note
+      (6 cases in history then, 4 losers; parked, not a rule). A2 has no skips.
+  10-day trend: UP (1.13600 vs 06-04 1.12375); the buy is WITH it.
+  SIZE RULE (the real safety rule): tracker balance $25,174.42, high-water $25,280.44, drawdown -0.42%; trigger 1 (half size) $24,522.03 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,510.81.
+  PAYOUT DATE today (plan section 4): after the trade, on the tracker balance from the tool: below $26,000 -> half of what is above $25,000, half-cents
+      rounded down; nothing if the balance is at or under $25,000; nothing while half size is on (it is not). The high-water is lowered by the amount requested.
+      Worked case before the day, so that the rule is fixed before I know the result: balance $25,174.42 unchanged would give $87.21; a full stop
+      (about -$127) would leave about $25,047 and give about $23.50; a balance at or under $25,000 gives $0. The figure is computed by python after the trade.
+  Friday: gates list read after the trade.
+  Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
+  Worry: a rejection day, a falling night, five wins behind me. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
