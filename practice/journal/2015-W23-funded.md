@@ -167,6 +167,12 @@ Paper tags, never live: UN3 (07:00), PH2 (08:00, before the order), MB1 (12:00, 
   SIZE RULE (the real safety rule): tracker balance $24,852.83, high-water $25,349.14, drawdown -1.96%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
   Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
   Worry: buying the top of a two-day rally. Written, not a rule.
+  08:00 London Thu: pre-entry hour 1.12339-1.12737 = 39.8 pips -> PH2 paper: LIVELY, paper half size (decided before the order). Price 1.12391: the hour fell 40 pips to its low; night against me by 26.5 pips (counted); entry 28.3 pips better than at 07:00. Order: BUY 0.31, stop 40 pips below the bid (1.11991).
+  08:15 London: filled BUY 1.12402, stop 1.11991 (41.1 pips from the fill). First candle read from the tool before this note. No call that matters; hands off.
+  09:00 London: first hour best +29.2, worst -9.9, last +18.4 pips. No call; hands off.
+  10:00 London: second hour best +139.6 (high 1.13798), worst +14.8, last +96.4 pips: a 125 pip run in 45 minutes, then 43 pips back in one candle. About +2.3R open and the wish to close is loud. The plan has no target; TW says a trail is too thin to judge; this becomes case 2 of the +80 count whatever happens. Stop stays at 1.11991. Hands off until 12:00.
+  11:00 London: third hour best +121.0, worst +92.6, last +115.9 pips: holding near the highs. One hour left; close at 12:00 whatever it shows.
+  12:05 London: closed at 12:00 @1.13583, +$366.11 (from the trade list). MB1 paper (forward day 17), written before 13:25: open 08:00 1.12391, open 12:00 1.13584 -> morning UP by 119.3 pips (large morning) -> only an UP break of the 12:00-13:25 box counts. Result from the tool tomorrow.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
