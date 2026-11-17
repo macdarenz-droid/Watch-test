@@ -145,6 +145,30 @@ Bookkeeping command this week: `python bt/daily_numbers.py 567.04 25256.94`.
      appended with append mode, and the file's line count is printed after every append. June process mistakes: 2 (P10 a missed gate, P11 this).
      END OF RELEASED DATA (clock Wed 07-01 01:00 London).
 
+- **Wed 07-01 call, written 07:00 London (06:00 UTC), before the entry bar.** FIRST LIVE DAY OF JULY. Every figure below is from `python bt/call_numbers.py 2015-07-01`, `./look.sh`, `python bt/side_monitor.py 2015-07-01 --state` or a bar print. Yesterday's tag stands: VALID WIN.
+  JULY PROCESS GOAL (set now, before the first July call; the reasons are in the June review written today): THE JUNE RULE STAYS (a worked case before
+      every pushed number or test rule) AND: AFTER EVERY WRITE TO A FILE I READ BACK WHAT I WROTE - the file's line count and its last row - in the same command.
+      Measured by: errors in a file or a number found LATER than the turn that made them (June: 3 numbers + the truncated files).
+  Coach 07-01: good streak math and good catch on the truncated files. June is done: a one-page month review first (R, trades, valid vs mistake, what
+      changed in the market), then the next backtest picked from that review.
+  Plan line read (BD): the only way to lose the best days is not to trade the day or not to hold it to 12:00.
+  SIZE RULE, read word for word: "HALF size from a day's CLOSE at or below 3% under the high-water mark, until a new high-water." Last close (tool, 06-30):
+      $24,647.79; line $24,499.23; above by $148.56 -> the trigger is NOT on -> FULL size, 0.31 lots. Trigger 2 (stop) $23,488.95.
+  D1 (London days): Fri 06-26 close 1.11625 (0.36); Mon 06-29 close 1.12356 (0.87); Tue 06-30 high 1.12435 low 1.11124 close 1.11445 (0.24, range 131.1):
+      up in my morning and in the early afternoon to 1.1244, then 130 pips down and a close near the low. Monday's whole rise from 1.1110 is given back.
+  H4 (UTC bars): Tue 08:00 bar 1.11341-1.12065; 12:00 bar 1.12435 / 1.11124, close 1.11515; 16:00 bar flat; 20:00 bar down to 1.11261; tonight 00:00 bar 1.11265-1.11427; 04:00 bar 1.11291-1.11422, last 1.11291.
+  H1: the night (00:00-07:00 London): open 1.11291, high 1.11427, low 1.11261, last 1.11291: range 16.6 pips (ratio 0.40: a dead night), net 0.0 pips.
+  M15: the last candle fell 8 pips to the bottom of the night's band.
+  Bias: SELL. 22:00 London closes: 06-30 1.11445 vs 06-25 1.12045 = -60 pips (3-day gap -60.0). Gap / ADR5 0.43. FLIP DAY (yesterday was a buy).
+  UN3 PAPER TAG (never live): 5-day gap -23 pips (-23.2) -> SELL; agree: paper TRADES. Forward day 52, disagree days 12 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 44.
+  MO PAPER RULE (never live; day 2 of 60): MO1 (40 days) monitor -0.095R -> A2 would be on PAPER today. MO3 (60 days) monitor +0.078R -> A2 as usual.
+  (MB1 was closed yesterday by its early-close line: no MB1 line any more.)
+  Levels: night low 1.11261; Tue low 1.11124; Mon 12:00 open about 1.1108; night high 1.11427; Tue high 1.12435.
+  Rejection-day check: for a sell, Tuesday did not make the 3-day low. Not a rejection day. 10-day trend: DOWN (1.11445 vs 06-16 1.12471); the sell is WITH it.
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
+  Worry: none that is new. A dead night under a 130 pip fall. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
