@@ -22,3 +22,16 @@ K2 SH1's net R above zero BOTH before 04-07 AND from 04-07.
 K3 SH1's average R at stressed costs above zero.
 K4 SH1 minus SH0, trade by trade, above zero with sign-flip p < 0.05.
 My guess: a coin minus costs (-0.06R).
+
+## Step 1, counts only (tool `python bt/same_hour.py 2015-08-27 grid`)
+1,506 day-hours (01-05..08-26); median |yesterday's same-hour move| 12.8 pips. X = 5: 1,173 trades (452 / 721). X = 10: 888 (352 / 536).
+X = 15: 653 (249 / 404).
+## Step 2: largest X with 120+ and 50+ from 04-07 = **X = 15** (653 / 404). SH1 = 15, SH2 = 20, SH0 = against at 15.
+Note before the run: the hours of one day are not independent (a trending day moves several hours the same way), so 653 trades are fewer
+independent cases than they look; the sign-flip p will be too optimistic. I say so now, not after the result.
+Worked cases, Wed 08-26, read from the candles (R after costs 1.0 + 0.1):
+- 08:00 hour: 08-25's 08:00 hour moved -39.9 -> SH1 SELLS at 1.14968, stop 20 above (about 1.15168 on the ask). The hour's high 1.15192 (+1 pip
+  spread) passes it: FULL STOP, about -1.0R.
+- 09:00 hour: 08-25's moved +27.3 -> SH1 BUYS at about 1.15144 (ask), stop about 1.14944. The hour's low 1.14713 passes it: FULL STOP, about -1.0R.
+
+## Step 3, result (one run: `test 15 20`)
