@@ -35,6 +35,17 @@ Coach 08-21 on RS: "RS1 flipped from losing to winning across your two halves, t
      MO PAPER RULE (day 40 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.62R (running -2.66R).
      For Tuesday (tool): MO1 -0.067R -> paper; MO3 -0.076R -> paper.
 
+## Tue 08-25
+STATE.md now opens with "WHAT MUST CHANGE BEFORE A LIVE TRADE" (coach 08-25): routes A, B, C with today's readings; earliest live trade Mon 09-21.
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-25`:
+- 3-day gap +497.8 pips -> A2 side BUY. 5-day gap +539.9 -> UN3 agree. Night 00:00-07:00: 1.15252-1.15992, last 1.15690 (range 74.0, net -28.3).
+- Monday's London day: 1.13692-1.17139, close 1.16176 (range 344.7: the widest London day in this record by the tool's numbers I have seen).
+- Monitor for today -0.067R (MO1), -0.076R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); routes B and C empty. NO ORDER.
+- A2 paper plan: buy at the 08:00 open, stop 40 pips below, out 12:00.
+- SW1 SHADOW trade 9 (tool `bt/sw1_shadow.py 2015-08-25 signal`): Mon close 1.16176 vs 08-10 close 1.10185 = +599.1 pips -> paper BUY at the
+  08:00 open, stop 120 below, target 240 above, else out 12:00 Tue 09-01. Running -3.06R after 8 of 20.
+- How I feel: a 345-pip day yesterday; today's 40-pip stop is a small target inside that. The rule does not change with the weather.
+
 ## Forward tally
 
 ## 08-24 test: idea FH, the 07:00-08:00 hour with the night (journal/2015-idea-FH-the-frankfurt-hour.md)
