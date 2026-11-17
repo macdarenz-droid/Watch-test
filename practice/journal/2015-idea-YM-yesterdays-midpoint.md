@@ -27,3 +27,20 @@ YM1: 169 trades (66 before 04-07, 103 from) | buys 84 sells 85 | same side as A2
 YM2 (dist >= 0.25): 84 trades (29 / 55) -> clears 80 | same side as A2 56 of 83 = 67%.
 Worked case 08-26 (from the tool's check line, no outcome): open 08:00 sits 0.056 of 08-25's range BELOW the mid -> YM1 SELL; YM2 skips (0.056 < 0.25); A2 was a buy that day.
 One run next: `python bt/yesterday_mid.py 2015-08-28 run 0.0 0.25`.
+
+## Result (one run; `python bt/yesterday_mid.py 2015-08-28 run 0.0 0.25`; ALL R AFTER COSTS spread 1.0 + slippage 0.1; stressed 2.0 + 0.5)
+| variant | trades | wins | avg R | net R | before 04-07 | from 04-07 | stressed avg | on A2's side |
+|---|---|---|---|---|---|---|---|---|
+| YM1 every day | 169 | 51% | +0.113 (+-0.16) | +19.03 | +7.78 | +11.25 | +0.063 | 65% |
+| YM2 dist >= 0.25 | 84 | 55% | +0.161 (+-0.24) | +13.55 | +6.64 | +6.90 | +0.115 | 67% |
+| YM0 control (against) | 169 | 40% | -0.105 (+-0.14) | -17.67 | -4.92 | -12.75 | -0.146 | 34% |
+Kill lines, each value against its threshold (YM1):
+K1 average R >= +0.10R: +0.113R -> PASS (by 0.013R, well inside the +-0.16 noise).
+K2 net R above zero before AND from 04-07: +7.78R and +11.25R -> PASS.
+K3 stressed average above zero: +0.063R -> PASS.
+K4 YM1 minus YM0 above zero with sign-flip p < 0.10: +0.217R, p 0.1229 -> FAIL.
+VERDICT: KILLED by K4 (idea 147; variants YM1 YM2 YM0 counted).
+Notes, not promoted: positive in both periods, the first follow rule I have seen hold across 04-07, but 65% of its days are A2's side
+(where A2 itself lives), so part of this is A2 seen again. YM2 is a dose hint (+0.161R on 84); by the 08-13 rule a hint is not a result.
+The script prints 'void at 80%+' for disguise; my prereg line was 70% - 65% is under both, so no conflict in this result.
+
