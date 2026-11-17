@@ -294,3 +294,8 @@ profit at noon get worse with more time. All killed; noon stays. Counts: 69 idea
 -0.50%; deepest drawdown -1.83% (3.69R, inside the written normal range); 21 valid tags, 0 trade mistakes; payouts $349.14 on 05-08 and $0 on 05-22;
 6 process mistakes, 5 of one species. June process goal: every number and every test rule gets one worked case before it is pushed (target: 0 corrections
 after a push; May had 5).
+
+## 05-29 research after the May review: idea CL, A2 on my lived days under worse costs (journal/2015-idea-CL-costs-on-lived-days.md). First test under the
+June goal: one live trade worked by hand at each cost level and a predicted result for every kill line, in the pushed pre-registration; the script then
+reproduced the worked case to the last digit. Lived average +0.221R -> +0.180R at double costs (predicted +0.175R) -> +0.134R at triple (predicted
++0.125R); no extra full stops; all four lines pass. Break-even 8.9 pips of extra round-trip cost. A health check: nothing changes. Counts: 70 ideas, 195 variants.
