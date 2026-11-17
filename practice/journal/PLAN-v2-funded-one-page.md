@@ -20,7 +20,7 @@ A raise needs BOTH the 40-trade forward test passed (33 done) AND a re-run of th
 - BRAKE 1: balance 3% below the high-water mark (now $24,657.75) -> half size ($62.50) until a new high-water.
 - BRAKE 2: balance 5% below the high-water mark (now $24,149.34) -> stop trading, full review, restart only with my coach.
 - BRAKE 2, CHANGED 2015-05-15 (coach: "your personal stop is too tight for your size - pick one, write why, stick with it for 20 live days before judging"):
-  my choice is the WIDER PERSONAL STOP: balance 7% below the high-water mark (today $23,574.70) -> stop trading, written review, restart only with my coach.
+  my choice is the WIDER PERSONAL STOP: balance 7% below the high-water mark ($23,574.70 on 05-15; $23,510.81 after the 06-05 payout) -> stop trading, written review, restart only with my coach.
   Size stays 0.50%; half size from 3% under the high-water as before. The old 5% line above is retired from today.
   Why the stop and not the size: (1) idea TS: no run in 16,000 got below -5.7% and no day cost more than 1.54%, so the firm's line ($22,500 = -10%) was never
   near; the thing being hit was my own line. (2) Between -3% and -5% I trade half size: that is only about 16 half-size stops of room, and one jump day uses 3
@@ -33,7 +33,7 @@ A raise needs BOTH the 40-trade forward test passed (33 done) AND a re-run of th
 ## 4. Payout plan (dates every 14 days from 03-27: 04-10 done, 04-24, 05-08, ...)
 On the payout date, after the day's trade, on the tracker balance: below $26,000 -> request HALF of what is above $25,000; at or above $26,000 -> request everything above
 $26,000 (the $1,000 buffer stays). No request while a brake is on. After a payout the high-water mark is lowered by the amount paid out (corrected 04-24; never reset to the balance while in a drawdown). I keep 80% of what is requested.
-So far (to 05-08, from the tracker's ledger): 3 payouts, $68.82 + $56.88 + $349.14 = $474.84 requested, $379.87 mine. (Unknown to me: whether the firm has a minimum payout amount.)
+So far (to 06-05, from the tracker's ledger): 4 payouts on 5 dates, $68.82 + $56.88 + $349.14 + $0 + $68.70 = $543.54 requested, $434.83 mine. Half-cents are rounded DOWN. (Unknown to me: whether the firm has a minimum payout amount.)
 
 ## 5. What counts as a mistake
 TRADE MISTAKE (tag "my mistake"; the trade's R is then my fault, not the market's) - any ONE of:

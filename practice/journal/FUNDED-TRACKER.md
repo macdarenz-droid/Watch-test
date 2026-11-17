@@ -54,6 +54,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | 48 | Tue 2015-06-02 | buy | 0.31 | +1.51 | +192.82 | 24,979.93 (sim 25,454.77) | 25,349.14 | -1.46% | +0.51 (June, from the log) | valid win | - |
 | 49 | Wed 2015-06-03 | buy | 0.31 | -1.00 | -127.10 | 24,852.83 (sim 25,327.67) | 25,349.14 | -1.96% | -0.50 (June, from the log) | valid setup, market disagreed | - |
 | 50 | Thu 2015-06-04 | buy | 0.31 | +2.87 | +366.11 | 25,218.94 (sim 25,693.78) | 25,349.14 | -0.51% | +2.38 (June, from the log) | valid win | - |
+| 51 | Fri 2015-06-05 | buy | 0.31 | -0.64 | -81.53 | 25,137.41 before the payout; 25,068.71 after (sim 25,612.25) | 25,349.14 -> 25,280.44 | -0.84% | +1.74 (June, from the log) | valid setup, market disagreed | payout $68.70 |
 
 ## Monthly summary
 | Month | Trades | Wins | Net R | $ P&L | Worst day | Deepest drawdown | Valid / mistake tags | Payouts requested | My 80% |
@@ -69,6 +70,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | Fri 2015-04-24 | 25,113.77 | 56.88 (half of the $113.77 above $25,000) | 45.50 | 25,056.89 | second payout date; account in a -1.55% drawdown: high-water LOWERED BY THE PAYOUT to 25,451.83 (not reset to the balance - that would have erased the drawdown and loosened the brakes); sim balance 25,182.59 (offset -125.70) |
 | Fri 2015-05-08 | 25,698.28 | 349.14 (half of the $698.28 above $25,000) | 279.31 | 25,349.14 | third payout date; account at its high: high-water lowered by the payout to 25,349.14 (= balance); sim balance 25,823.98 (offset -474.84) |
 | Fri 2015-05-22 | 24,884.45 | 0.00 (balance not above $25,000: the rule gives nothing) | 0.00 | 24,884.45 | fourth payout date; account in a -1.83% drawdown, no size trigger on; high-water unchanged 25,349.14; next date Fri 06-05 |
+| Fri 2015-06-05 | 25,137.41 | 68.70 (half of the $137.41 above $25,000, cents rounded down) | 54.96 | 25,068.71 | fifth payout date; account in a -0.84% drawdown, no size trigger on; high-water LOWERED BY THE PAYOUT to 25,280.44; new triggers 24,522.03 (half size) and 23,510.81 (stop); sim balance stays 25,612.25 (offset -543.54); next date Fri 06-19 |
 
 ## Process mistakes log (separate from trade tags; a process mistake is something I did wrong AROUND a trade)
 | # | Date | What happened | Effect on the trade | Fix |
@@ -87,4 +89,4 @@ Earlier record-keeping slips, for completeness (challenge stage, none changed a 
 pre-registration; worst losing run overstated as -2.17R (was -1.86R); a journal edit on 03-25 cut out a section (restored from git on 03-26).
 
 ## Status line (update every day)
-After funded day 50 (06-04; figures from bt/daily_numbers.py 474.84 25349.14): tracker balance $25,218.94 (sim $25,693.78 minus $474.84 paid out) | high-water $25,349.14 | drawdown -0.51% (deepest so far -2.22% on 06-01, 4.45R; SIZE RULE = the real safety rule: trigger 1 half size at $24,588.67; trigger 2 stop trading at 7% under the high-water = $23,574.70, fixed for funded days 36-55; account line $22,500) | funded total +5.52R in 50 trades (26 wins, 24 valid losses) | March +0.97R (3) | April +4.17R (22) | May -2.00R (21) | June MTD +2.38R (4 trades) | lived average +0.241R +-0.262R at 69 lived trades | TRADE tags: 50 valid, 0 my mistake | PROCESS mistakes: 10 (June: 1, a missed gate; numbers corrected after a push: 0) | payouts: 4 dates, 3 paid: $474.84 requested, $379.87 mine | next payout date Fri 06-05 (rule read 06-04).
+After funded day 51 and the payout of 06-05 (figures from bt/daily_numbers.py 474.84 25349.14 and a python line; from 06-08 use bt/daily_numbers.py 543.54 25280.44): tracker balance $25,068.71 (sim $25,612.25 minus $543.54 paid out) | high-water $25,280.44 | drawdown -0.84% (deepest so far -2.22% on 06-01, 4.45R; SIZE RULE = the real safety rule: trigger 1 half size at $24,522.03; trigger 2 stop trading at 7% under the high-water = $23,510.81, fixed for funded days 36-55; account line $22,500) | funded total +4.88R in 51 trades (26 wins, 25 valid losses) | March +0.97R (3) | April +4.17R (22) | May -2.00R (21) | June MTD +1.74R (5 trades) | lived average +0.23R +-0.26R at 70 lived trades | TRADE tags: 51 valid, 0 my mistake | PROCESS mistakes: 10 (June: 1, a missed gate; numbers corrected after a push: 0) | payouts: 5 dates, 4 paid: $543.54 requested, $434.83 mine | next payout date Fri 06-19.
