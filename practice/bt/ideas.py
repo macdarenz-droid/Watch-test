@@ -266,6 +266,8 @@ VARIANTS = {
  "TW1": dict(entry_h=8, exit_h=12, sl=40, trail=(60, 40)),   # idea TW: wide trail for big mornings: once +60 pips, 40 behind the best
  "TW2": dict(entry_h=8, exit_h=12, sl=40, trail=(60, 30)),
  "TW3": dict(entry_h=8, exit_h=12, sl=40, trail=(80, 40)),
+ "GB2": dict(entry_h=8, exit_h=12, sl=40, tp=80),              # idea GB: take the whole position off at +80 pips (GB1 = TW3)
+ "GB3": dict(entry_h=8, exit_h=12, sl=40, be=80),              # idea GB: stop to break-even once +80 pips
  "GAP25": dict(entry_h=8, exit_h=12, sl=40, mingap=25),            # idea GAP: skip small 3-day gaps
  "GAP50": dict(entry_h=8, exit_h=12, sl=40, mingap=50),
  "GAPR": dict(entry_h=8, exit_h=12, sl=40, mingap=("rel", 0.25)),

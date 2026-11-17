@@ -254,3 +254,10 @@ level before the price came back; only 06-08 was a wick. The routine's wording i
 (journal/2015-idea-PM-forward-partials.md). April definitions frozen since 04-15, judged on the 41 days since; worked cases (06-10, 06-04) and kill lines
 pushed first; engine day totals matched the worked cases; one run. PM1 -1.40R, PM2 -1.44R, PM3 +0.07R (two days) against A2: killed a second time.
 The partial turns yesterday's -0.14R into +0.48R and pays for it three times over on the big winners. Counts: 79 ideas, 222 variants. June corrections after a push: 0.
+
+## 06-11 after funded day 55: (1) the review of the 7% personal stop after its 20-day hold (journal/2015-06-11-review-of-the-7pct-stop.md): neither the old
+5% line nor the new 7% line was touched in the 20 days, so the lived record is silent; the simulations stand; KEPT. (2) One test, the coach's brief:
+idea GB, the give-back after +80 pips (journal/2015-idea-GB-giveback-after-80.md). Worked cases, build kill lines and a forward judging rule pushed
+first; one run of the build. Trail 40 from +80: +1.10R on 3 changed days, none worse, fails only the sample line. Target +80: -2.91R, cuts my best day
+by 2.30R: dead. Break-even from +80: changes nothing in 97 days. No rule from the build; the trail is carried forward as a count with a written
+judging rule at 15 cases (3 so far, +0.83R, not judged). Nothing live changes. Counts: 80 ideas, 225 variants. June corrections after a push: 0.
