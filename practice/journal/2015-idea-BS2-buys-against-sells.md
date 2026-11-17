@@ -30,3 +30,8 @@ never "sells only": that would be a bet on the direction of the euro, not a rule
 My guess: sells better in January-February by a lot (the fall), not in March or Q; K2 fails.
 
 ## Counts and worked case (tool, before outcomes)
+Tool: `python bt/buys_sells.py 2015-07-28 count` (no outcomes).
+- P (01-06..03-26): 58 trades, 22 buys, 36 sells. Q (07-08..07-27): 14 trades, 5 buys, 9 sells. P+Q: 72 trades, 27 buys, 45 sells. Judgeable.
+- Worked check: the engine's list for the funded span has 35 buys and 38 sells, the same as my own trade list of 73 funded trades.
+
+## Result (one run)
