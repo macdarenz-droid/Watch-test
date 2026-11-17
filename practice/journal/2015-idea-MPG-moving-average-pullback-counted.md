@@ -27,3 +27,15 @@ candle touched a rising SMA20 and closed above it -> MPG1 BUYS at the 08:00 open
 The window 08:00-11:00 had a low of 1.11242, below the stop: a FULL STOP, about -1.0R. (A2's 40-pip paper stop that morning survived by 1.3 pips.)
 
 ## Step 3, result (one run: `MPG_S=3 python bt/ma_pullback_grid.py 2015-08-15 test`)
+Hand check 08-14: MPG1 bought 1.11641 and was stopped at 1.11429, -1.06R, as worked out from the window; the control sold 1.11629, out 11:00 at 1.11511, +0.59R.
+| variant | trades | wins | avg R | net | stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| MPG1 pullback to a rising SMA20, slope 3 (JUDGED) | 145 | 35% | +0.011 (+-0.24) | +1.62 | 74 | -0.08 | +1.70 | -0.092 |
+| MPG2 the same, slope 15 | 41 | 46% | +0.399 (+-0.54) | +16.35 | 19 | +1.67 | +14.67 | +0.316 |
+| MPG0 against MPG1's signals (control) | 145 | 34% | -0.119 (+-0.25) | -17.29 | 78 | +11.97 | -29.27 | -0.224 |
+MPG1 minus MPG0 +0.130R (sign-flip p 0.51). MPG1: all four kill lines FAIL. **MPG IS KILLED.**
+What I learned: 1. Buying the touch of a gently rising average is a coin (+0.011R) that loses at stressed costs. 2. MPG2 (+0.399R on 41
+steep-trend pullbacks) is the dose line and the second "hint" in a week (after EN2). 41 trades, an error of +-0.54R, almost all after
+04-07: it says almost nothing. I note it and do NOT start a second forward line: EN2 is waiting its turn behind SW1, one line at a time.
+3. The fixed data end and the order (prereg, count, fix the key bug, journal Monday, then run) worked as written.
+Counts: idea 137; variants 365-367; second setups tried 33, none alive.

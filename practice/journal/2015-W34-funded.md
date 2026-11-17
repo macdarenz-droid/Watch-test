@@ -32,3 +32,7 @@ Pending this week: MPG's outcome run (pre-registered and counted 08-17 before th
      For Tuesday (tool): MO1 -0.300R -> paper; MO3 -0.186R -> paper.
 
 ## Forward tally
+
+## 08-17 test: idea MPG, the moving-average pullback with a count grid (journal/2015-idea-MPG-moving-average-pullback-counted.md)
+Pre-registered and counted before the call; outcome run after the day was journaled. MPG1 145 trades +0.011R, stressed -0.092R: killed.
+Dose line (steep trends, 41 trades) +0.399R: a hint, not promoted. Ideas 137, variants 367.
