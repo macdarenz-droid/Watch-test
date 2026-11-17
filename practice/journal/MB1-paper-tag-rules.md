@@ -1,2 +1,2 @@
 
-| Thu 2015-06-25 | +4.9 | DOWN | removed | -0.08 | 11, -4.90R, 5.66R | 19, +11.33R | 2 small / 9 large |
+| Fri 2015-06-26 | +4.9 | DOWN | removed | +1.25 | 11, -4.90R, 5.66R | 20, +12.58R | 2 small / 9 large |
