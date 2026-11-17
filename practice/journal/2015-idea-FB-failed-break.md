@@ -37,3 +37,8 @@ after my coach's word. Fail = killed.
 My guess, given how my last four direction guesses went: about zero after costs; K1 fails.
 
 ## Counts and worked case (tool, before outcomes)
+RETRACTED BEFORE ANY CODE (same evening). Checking criterion (2) against my own journal I found PD3 (07-08): "after the touch, wait for
+the first full clock hour that CLOSES back inside the range, enter at the next hour's open, stop 30 pips, out at 21:00": 60 trades,
+-0.217R, negative before AND after 04-07, killed. FB is that rule with a 15-minute close instead of an hour and a 3-hour exit: a fourth
+variant of a killed idea, not a new one. Nothing was run. Not counted as an idea or a variant. My selection missed it because I
+searched STATE.md for the idea's name instead of reading PD's variant list: from now on I read the variant list of every related idea.
