@@ -75,6 +75,10 @@ Coach 06-08: enough entry tweaks; the next backtest takes a different part of th
   SIZE RULE (the real safety rule): tracker balance $24,945.02, high-water $25,280.44, drawdown -1.33%; trigger 1 (half size) $24,522.03 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,510.81.
   Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
   Worry: the signal has flipped twice in two days and I buy after a night that already ran. Written, not a rule.
+  08:00 London Tue: pre-entry hour 1.12905-1.13390 = 48.5 pips -> PH2 paper: LIVELY, paper half size (decided before the order). Price 1.12960: the hour fell 48 pips straight from the night high; night still with me by 15.5 pips (not counted); entry 43.1 pips better than at 07:00. Order: BUY 0.31, stop 40 pips below the bid (1.12560).
+  08:15 London: filled BUY 1.12970, stop 1.12560 (41.0 pips from the fill). First candle read from the tool before this note. No call that matters; hands off.
+  09:00 London: STOPPED in the 08:30 London candle: its low was 1.12558, my stop 1.12560 - taken by 0.2 pips - and the next candle closed back at 1.12914. Sim balance from the tool $25,361.15. One trade a day: done; no re-entry exists in my plan. I watch to noon only for the stop-day routine.
+  12:00 London: price (bid, from the tool) 1.12655 = 31.5 pips under my entry, 9.5 pips above the stop. The 0.2 pip poke at 08:38 was followed by a rally to 1.13105 - and then by a second fall: the 11:00 hour's low was 1.12482, 7.8 pips THROUGH my level. So a stop a few pips wider would have been hit anyway before noon: the first touch was a poke, the morning was a real loss. MB1 paper (forward day 20), written before 13:25: open 08:00 1.12959, price at 12:00 1.12655 -> morning DOWN by about 30 pips (large morning) -> only a DOWN break of the 12:00-13:25 box counts. Exact figures from the tool afterwards.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
