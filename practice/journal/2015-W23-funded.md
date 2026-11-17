@@ -124,6 +124,9 @@ Paper tags, never live: UN3 (07:00), PH2 (08:00, before the order), MB1 (12:00, 
   SIZE RULE (the real safety rule): tracker balance $24,979.93, high-water $25,349.14, drawdown -1.46%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
   Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
   Worry: the day after the widest day I have seen; the morning after 03-18's spike was a full stop in 15 minutes. One case. Written, not a rule.
+  08:00 London Wed: pre-entry hour 1.11542-1.11896 = 35.4 pips -> PH2 paper: LIVELY, paper half size (decided before the order). Price 1.11686: night with me by 17.6 pips (not counted); entry 6.7 pips better than at 07:00. Order: BUY 0.31, stop 40 pips below the bid (1.11286).
+  08:15 London: filled BUY 1.11695 and STOPPED at 08:11 @1.11285 (from the trade list), -$127.10. The first 5-minute candle fell 32 pips (1.11684 -> 1.11363), the third reached 1.11227. Eleven minutes: my fastest stop. One trade a day: done. I watch to noon only for the stop-day routine.
+  12:00 London: price (bid, from the tool) 1.11214 = 48.1 pips under my entry, 7.2 pips beyond the stop: a REAL stop (about -1.18R at noon without it, by python). MB1 paper (forward day 16), written before 13:25: open 08:00 1.11684, price at 12:00 1.11214 -> morning DOWN by about 47 pips (large morning) -> only a DOWN break of the 12:00-13:25 box counts. Exact figures from the tool afterwards.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
