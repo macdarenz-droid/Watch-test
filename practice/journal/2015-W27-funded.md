@@ -296,7 +296,8 @@ Bookkeeping command this week: `python bt/daily_numbers.py 567.04 25256.94`.
      FROM MONDAY 07-06: 0.16 LOTS (0.25% = $62.50 a trade), every day, UNTIL THE TRACKER BALANCE MAKES A NEW HIGH-WATER (above $25,256.94).
      Ten dollars under the line is under the line, as twenty-four dollars above it was above. No rounding in either direction.
      What this means, from the tests I have already run (SZ 05-05, GD, ST): the way back to full size is long - $767.87 at half size is about
-     12 full-size R. Restoring earlier was tested and rejected; "until a new high-water" stays. Trigger 2 (stop trading) $23,488.95 is $1,000.12 away:
+     12 half-size R (767.87 / 62.50 = 12.3), that is about 6 R in full-size units. [CORRECTED the same evening: I first wrote "12 full-size R"; the python
+     line said 12.3 at $62.50 and I put the wrong unit on it. July: numbers corrected after a push: 1.] Restoring earlier was tested and rejected; "until a new high-water" stays. Trigger 2 (stop trading) $23,488.95 is $1,000.12 away:
      about 15 half-size full stops in a row (ST's ladder).
      PAYOUT (plan section 4, as written before the trade): tracker balance $24,489.07 is not above $25,000 -> REQUEST $0. (And from tonight no
      request is made while half size is on.) High-water unchanged. Payouts so far: 5 paid on 7 dates, $567.04 requested, $453.63 mine. Next date Fri 07-17.
