@@ -22,8 +22,8 @@ Full-stop share: my 08-27 range check said 17% up to then; the four stops of 08-
 true for its window only; I write it here so it is not quoted again as August's.
 
 ## Was sitting out right?
-August's paper A2 made +1.94R, about $121 at 0.16 lots (or $30 at route C's $15.63): sitting out cost a little this month. The rule
-said sit, and the rule's gate (40-day monitor >= +0.60R) read between -0.07R and -0.23R every morning of the month. It was not close.
+August's paper A2 made +1.94R, about $124 at 0.16 lots (1.94 x $64.00 a full R: 0.16 lots x 40 pips x $10) or $30.32 at route C's $15.63: sitting out cost a little this month. The rule
+said sit, and the rule's gate (40-day monitor >= +0.60R) read between -0.409R (08-03) and -0.067R on the 21 August mornings (from the call lines in the week files). It was not close.
 
 ## Paper lines, read at month-end (tools)
 - Route A: monitor for 09-02 -0.143R (gate +0.60R; earliest 09-21). MO day 46 of 60: MO1 0.00R vs A2 -5.36R since 06-30 (A1 on track).
@@ -52,6 +52,9 @@ YM1 (K4 p 0.123, now forward), YN (+0.070R across 04-07). Hints, not results: EN
 - Verdict: the commit check worked; the "header line" half did not stop memory numbers, because the slip is writing without opening a tool.
 SEPTEMBER PROCESS GOAL: NO NUMBER IN ANY NOTE, CALL OR REPORT UNLESS THE SAME COMMAND THAT WRITES IT PRINTS IT FROM A TOOL OR A FILE.
 Report at the September review: numbers corrected after a push.
+CORRECTION 1 OF SEPTEMBER (found the same evening, after the push of e2fe09a): this review first said "$121" (I multiplied by $62.50, the
+old planning R) and "the monitor read between -0.07R and -0.23R every morning" (only the last days I remembered). Tools: $124.16;
+-0.409R..-0.067R. Two memory numbers in the very review that set the goal against them.
 
 ## September, stated plainly
 Flat by rule until at least 09-21 (route A), and route A needs +0.60R, which the monitor has not been near since early July. Routes B
