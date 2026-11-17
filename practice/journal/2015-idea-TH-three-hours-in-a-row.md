@@ -19,3 +19,12 @@ K2 TH1's net R above zero BOTH before 04-07 AND from 04-07.
 K3 TH1's average R at stressed costs above zero.
 K4 TH1 minus TH0, trade by trade, above zero with sign-flip p < 0.05.
 My guess: positive before 04-07, negative after (K2 fails).
+
+## Step 1, counts only (tool `python bt/three_hours.py 2015-08-20 grid`)
+M = 15: 235 trades (95 before 04-07, 140 from). M = 25: 205 (84 / 121). M = 35: 167 (65 / 102).
+## Step 2: largest M with 120+ and 50+ from 04-07 = **M = 35** (167 / 102). TH1 = 35, TH2 = 45 (as written), TH0 = fade at 35.
+Worked case read from its own window (R after costs 1.0 + 0.1): Tue 08-18, three down hours ending with the 13:00 candle -> TH1 SELLS at the
+14:00 open (bid 1.10315), stop 20 above (about 1.10515 on the ask). The window's high 1.10467 (+1 pip spread) stays under it; out at the
+16:00 open 1.10334 + spread: about -3 pips = about -0.15R.
+
+## Step 3, result (one run: `TH_M=35 TH_M2=45 python bt/three_hours.py 2015-08-20 test`)
