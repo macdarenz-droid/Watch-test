@@ -9,6 +9,7 @@ SW1 paper shadow: 3 of 20 done (-3.08R), trade 4 open. Day-20 A2 verdict due Tue
 | (paper) | Tue 08-04 08:00 | sell | NO LIVE TRADE (monitor -0.338R) | paper | paper | paper clock exit | (-0.53 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 20: verdict written, A2 stays on paper; route C proposed |
 | (paper) | Wed 08-05 08:00 | sell | NO LIVE TRADE (monitor -0.319R) | paper | paper | paper clock exit | (+0.11 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 21; LM2 closed for good (coach) |
 | (paper) | Thu 08-06 08:00 | sell | NO LIVE TRADE (monitor -0.333R) | paper | paper | paper clock exit | (+0.07 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 22 |
+| (paper) | Fri 08-07 08:00 | sell | NO LIVE TRADE (monitor -0.283R) | paper | paper | paper clock exit | (-0.32 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 23; SW1 shadow trade 4 clock exit (-0.28R net) |
 
 ## Mon 08-03
 Coach 08-03, straight talk: "careful is good, frozen isn't." At the day-20 verdict (tomorrow) I also write what it would take to get
@@ -124,6 +125,29 @@ until something earns it." Recorded: LM2 CLOSED FOR GOOD. No shadow, no tally, n
 - SW1 shadow trade 4: open (buy 1.09535, stop 1.08335, target 1.11935); its clock exit is 12:00 today. Not managed.
 - Round numbers (since RT, 08-06): 1.0900 below and 1.0950 above are information only, not walls.
 - How I feel: steady; a quiet night after a quiet week.
+  08:00 London (PAPER): pre-entry hour 1.09071-1.09205 = 13.4 pips (PH2 quiet: full unit on paper). A2 paper SELL near 1.09163 (engine fixes the fill), paper stop about 1.09563. SW1 shadow untouched. No order.
+  10:00 London (PAPER; window 07:00-08:45 UTC): A2 paper sell best +0.7, worst -34.0 (6 pips from the paper stop), last -8.2. Before advancing to noon: clock only.
+  12:00 London (PAPER; 16 candles, 08:00-12:00): A2 paper sell closed by the clock about 13 pips against, 6 pips from the stop at its worst (best +1.1, worst -34.0, last -12.8).
+  -> Fri result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.283R -> paper). VALID: no order placed. Checked: call committed before the bell;
+     trade list still ends with #230 of 07-07; sim balance $24,926.03 unchanged. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 23 (engine, `python bt/coin_control.py 2015-08-08 --check 2015-08-07`): sell, clock exit, -0.32R; the other side +0.26R.
+     A2 paper running from 07-08: 23 days, -3.44R.
+     SW1 SHADOW trade 4 (tool `bt/sw1_shadow.py 2015-08-08`): buy 1.09535 (Fri 07-31) -> CLOCK EXIT 1.09280 at 12:00 Fri 08-07, -0.22R, 7 nights,
+     financing -0.058R, net -0.28R. Running -3.35R after 4 of 20 (max DD 3.35R; early-close line 6R). Next entry Mon 08:00: Fri close 1.09647 vs
+     07-24 close 1.09812 = -16.5 pips -> SELL.
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     THE WEEK (W32): no live trade on any day, by rule (5 days, all valid; 0 trade mistakes, 0 process mistakes). Paper A2: +0.73, -0.53, +0.11,
+     +0.07, -0.32 = +0.06R. SW1 shadow: trade 4 closed -0.28R. Written: the day-20 verdict (A2 stays on paper), route C (adopted by my coach with
+     the lived-day evidence line; EMPTY), LM2 closed for good. Tests: PS, FD, SF, RT, EF (FB retracted before code). All killed or no-go.
+     How it feels: a flat week in every sense. The work that mattered was written, not traded.
+     Paper lines: UN3 agreed, -0.32R (agree days -12.72R in 62; disagree +4.23R in 17; day 79). PH2 (day 71): quiet (13.4) -> full = -0.32R;
+     46 lively days -8.06R, 21 full-stop mornings; 25 quiet -1.97R; PH2 about -5.99R against A2's -10.05R.
+     MO PAPER RULE (day 29 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.32R (running -6.24R).
+     For Monday (tool): MO1 -0.345R -> paper; MO3 -0.265R -> paper.
+     FRIDAY GATES LIST READ (08-07): nothing due today. Next payout date Fri 08-14 ($0 unless balance > $25,000). Review day Mon 09-21 (gate +0.60R;
+     monitor -0.345R). MO day 29 of 60. UN3 17 of 30 disagree days / 79 of 200. PH2 46 of 60 lively / 71 of 200. SW1 shadow 4 of 20.
+     August month-end review: first trading day of September. Routes B and C empty.
+     END OF RELEASED DATA (clock Fri 08-07 22:00 London; weekend).
 
 ## Forward tally
 
