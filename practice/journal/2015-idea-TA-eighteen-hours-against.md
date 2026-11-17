@@ -19,3 +19,23 @@ K3 TA1's kept-minus-skipped gap larger than TA0's.
 K4 label shuffle (10,000) of TA1's gap: p < 0.10.
 Plus the REPEAT line (checked on counts, before the run).
 My guess: it fails K2 like NA did (the trend months paid A2 for buying dips), or it is NA again.
+
+## Counts and worked cases (tool output pasted by this command; before outcomes)
+    A2 days with both candles: 173 (2015-01-06..2015-09-04)
+    X = 20: skip 47 = 27% (before 2015-04-07 16, from 31) | also NA skip days (night <= -15): 29 = 62% | control skip 75
+    X = 30: skip 36 = 21% (before 2015-04-07 12, from 24) | also NA skip days (night <= -15): 23 = 64% | control skip 61
+    X = 40: skip 27 = 16% (before 2015-04-07 7, from 20) | also NA skip days (night <= -15): 16 = 59% | control skip 51
+    X = 50: skip 22 = 13% (before 2015-04-07 5, from 17) | also NA skip days (night <= -15): 13 = 59% | control skip 40
+    day    R  side   m18    na  late
+    2015-07-08 -1.0    -1 -85.8 -10.0  True
+    2015-07-10 -1.0    -1 -59.8 -25.0  True
+    2015-08-25 -1.03     1 19.1 -29.3  True
+    2015-08-26 -1.03     1 23.0 -31.9  True
+    2015-09-01 -1.0    -1 -56.5 -65.1  True
+    2015-07-24 -1.03     1 25.7 6.4  True
+BY THE RULE WRITTEN FIRST: X = 40 (largest with 15%+ and 25+: 27 days, 7 / 20). TA1 = 40, TA2 = 50 (22 days), TA0 = with A2 >= 40.
+REPEAT LINE: 16 of 27 (59%) are NA skip days -> under 70% -> TA goes on.
+Worked cases against my eye: of the six lesson-[A] days, TA skips 07-08 (-85.8), 07-10 (-59.8), 09-01 (-56.5); it KEEPS 08-25 (+19.1),
+08-26 (+23.0), 07-24 (+25.7): on those three the 18-hour NET ran with A2; what I saw was lower highs inside it, not a net move against.
+So the rule catches 3 of my 6. Written before the run; the rule is not changed.
+One run next: `python bt/eighteen_hours.py 2015-09-05 test 40 50`.
