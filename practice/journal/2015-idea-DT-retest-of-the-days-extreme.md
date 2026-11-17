@@ -25,3 +25,22 @@ DT0 (control) DT1's signals traded THROUGH the extreme (a break), same stop and 
 Kill lines for DT1 (four, all must pass): K1 average >= +0.10R after costs (1.0 + 0.1). K2 net above zero before 04-07 AND from 04-07.
 K3 stressed average (2.0 + 0.5) above zero. K4 DT1 minus DT0 above zero, sign-flip p < 0.05.
 My guess: a coin minus costs, positive only after 04-07.
+
+## Step 1, counts only (tool `python bt/retest_extreme.py 2015-08-12 count`; no outcomes)
+| P (pullback) | trades | before 04-07 | from 04-07 | retests of a high / of a low |
+|---|---|---|---|---|
+| 15 | 127 | 54 | 73 | 57 / 70 |
+| 20 | 117 | 46 | 71 | 53 / 64 |
+| 30 | 79 | 30 | 49 | 34 / 45 |
+| 40 | 59 | 24 | 35 | 23 / 36 |
+## Step 2, thresholds fixed by the line written before the count
+Largest P with 120+ trades and 50+ from 04-07: **P = 15** (127 / 73). So DT1 = P 15 (judged), DT2 = P 20 (the next larger), DT0 = break on DT1's signals.
+How the code reads my rule, said before any outcome: the "retest" is the first M5 candle from 11:00 whose high comes within 3 pips of the
+morning's high, INCLUDING a candle that goes through it; entry is at the next open whatever that candle did. (A branch meant to drop
+days that break the extreme before retesting never fires, because a candle above the extreme is also within 3 pips of it. I keep the
+rule as coded and say so, rather than edit it now.) One trade a day: the first retest of either side.
+Worked case Tue 08-11: the morning high 1.10491 (from 07:00 to 11:00, after the +82-pip A2 paper morning); pulled back 15+; the 12:40
+candle came back within 3 pips -> DT1 SELLS at the 12:45 open, stop 25 above, out 14:45. Today's close was 1.10416, near that high,
+so I expect a small result either way.
+
+## Step 3, result (one run: `test 15 20`)
