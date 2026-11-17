@@ -74,7 +74,7 @@ NC1: K1 PASS (skipped -0.068R, gap +0.306R) | K2 PASS (+0.245 / +0.265) | K3 PAS
 5. Before 04-07 the skipped group is 11 days.
 What a provisional pass allows (plan section 9): at most a pre-registered forward count on lived days, NC1 frozen (X = 15), as a paper
 tag on A2's paper call (no money is affected: A2 is on paper). It would be a second paper line beside SW1's shadow, and EN2 is waiting
-for its turn. My coach decides whether NC1 gets a forward count, and when. I start nothing. My own view: weakest kind of pass; if it gets
+for its turn. My coach decides whether NC1 gets a forward count, and when. [Coach 08-28 evening: yes, paper only; STARTED Mon 2015-08-31, record journal/NC1-forward-record.md.] I start nothing. My own view: weakest kind of pass; if it gets
 a slot it should be judged on at least 30 forward skip days with the same four lines, which at about one skip a week is about 7 months.
 Counts: idea 138; variants 368-370.
 

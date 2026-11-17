@@ -51,6 +51,7 @@ WHAT STAYS FROZEN: YM1 exactly as tested (08:00 open vs yesterday's London-day m
 No new distance cut, no YM2 promotion (its +0.161R is a hint seen on this data), no other stop or exit. The 169 days to 08-27 are spent:
 nothing more is computed on them for YM (not even the disagree-day split, which I have not looked at and will not now).
 
+STARTED Mon 2015-08-31 on the coach's word (08-28 evening), unchanged; record journal/YM-forward-record.md.
 HOW TO CHECK IT ON DAYS I HAVE NOT LIVED (a forward count; it STARTS ONLY WITH MY COACH'S WORD: one paper line at a time, EN2 runs now):
 - From the first weekday after the coach's word, each evening: YM1's side and its engine result (costs on 1.0 + 0.1, also 2.0 + 0.5),
   YM0 (the other side), and A2's side that day. Tool: a frozen copy of bt/yesterday_mid.py with a START date, written and pushed before day 1.
