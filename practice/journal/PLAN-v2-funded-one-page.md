@@ -66,4 +66,9 @@ max 3 variants, costs on, everything counted in STATE.md (150 ideas, 400 variant
 - EVERY TEST REPORT lists each kill line in full with its threshold BEFORE the results, then each line's value against it (coach 08-19).
 - ONCE-A-DAY PRE-REGISTRATIONS START WITH the expected share of days the condition holds, from its definition, before any count (needs about 55%+ of
   the days to reach 80 trades on this history). Added 08-25 after ND was registered without it.
+- NC1 FORWARD K2 (coach 09-01, written Tue 2015-09-01 01:00 London before any 09-01 candle and before any NC1 forward result is judged;
+  1 forward skip day so far, 08-31): K2 forward = "skipped days' A2 average below the kept days' average in the FIRST HALF of the forward
+  skip days AND in the SECOND HALF". Split by date at the 15th forward skip day (of 30): half 1 = all forward days up to and including that
+  day (its 15 skips + the kept days among them), half 2 = all later days up to the 30th skip. K1, K3, K4 unchanged. Same line is in
+  journal/NC1-forward-record.md.
 - A RANGE OR VOLATILITY NUMBER goes into a call only if it came from a tool (08-27, after a by-eye "twice July" that was true of three days only).
