@@ -217,3 +217,11 @@ line crossed (8.08R), reported the same day. (3) One test about the market (coac
 has the 3-day direction moved to another part of the day? The CO control run for windows 04-08, 12-16, 16-20 against 08-12; kill lines pushed first;
 mechanics exact; one run. Second half of the history: -0.02R (my window), +0.05R, -0.12R, -0.21R: all killed. It did not move; it went.
 Counts: 99 ideas, 279 variants. July corrections after a push: 1.
+
+## 07-08: (1) BEFORE the call: the rule alarm reported and followed - A2 is not traded for money from today; on paper; the account is flat
+(journal/2015-07-08-rule-alarm-A2-stops-for-money.md). (2) The coach's brick: the last 30 days by eye on D1 / H4 / H1, three observations, the best one
+("new extremes are rejected") as a setup: fade the first touch of yesterday's high or low (journal/2015-07-08-thirty-days-by-eye-and-idea-PD.md). Sample
+counted without outcomes (83 judged cases + 17 in the studied window), a hand-worked case, kill lines K1-K7 pushed before the code; the simulator
+matched the hand case; one run. -0.405R / -0.379R / -0.217R a trade; three first touches in four go 30 pips beyond; negative in every part, the
+studied 30 days included. KILLED: the observation was wrong. The mirror is not tested on the same history; proposed as a forward-only paper line.
+Counts: 100 ideas, 282 variants; second setups tried 13, none alive. July corrections after a push: 1.

@@ -67,6 +67,6 @@ Goal: steady monthly profit, safe payouts, never a breach.
 
 ## 8. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
-max 3 variants, costs on, everything counted in STATE.md (99 ideas, 279 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+max 3 variants, costs on, everything counted in STATE.md (100 ideas, 282 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
 Closed, so that I do not reopen it on a bad day: entry filters from chart reading, entry time and price, the lookback, every exit except noon,
 second setups, day filters. The list with results is in the long version, section 7.

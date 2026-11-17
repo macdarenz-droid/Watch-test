@@ -56,3 +56,38 @@ restart rule exists. Killed: second setups tried 13, none alive, said plainly.
 Worked expectation: before 04-07 a fade of yesterday's low in a market falling 1,200 pips loses (the breaks RAN there: that was A2's money): negative.
 From 04-07 to 06-05 about zero to slightly positive. In the 30 days I looked at: positive, because I looked. KILLED on K2 and K1.
 Counts when run: idea 100, variants 280-282.
+
+## Mechanics check (setup and kill test pushed first in commit 32d9eee; `python bt/prev_day_fade.py 2015-07-09 --check 2015-07-07`)
+PD1 and PD2: touch 09:45, BUY 1.09690, stopped 13:00 at 1.09389, -1.00R: exactly the hand-worked case. PD3: entered after the 10:00 hour closed
+back inside, stopped 11:30, -1.00R.
+
+## RESULTS (one run: `python bt/prev_day_fade.py 2015-07-09`; costs on; figures copied from the print)
+| variant | JUDGED trades (before 06-08) | avg R | net | wins | stopped | before 04-07 | 04-07 .. 06-05 | without 3 best | max DD | stressed avg | corr with A2 | the studied 30 days (not judged) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| PD1 fade at the touch, out 21:00 | 83 | -0.405 | -33.59R | 20% | 76% | 43: -0.411 | 40: -0.397 | -46.98R | 33.59R | -0.422 | -0.17 | 16: -0.484 |
+| PD2 with a 30 pip target | 83 | -0.379 | -31.48R | 30% | 66% | 43: -0.213 | 40: -0.557 | -34.48R | 31.48R | -0.438 | +0.02 | 16: -0.325 |
+| PD3 after an hour closes back inside | 60 | -0.217 | -13.00R | 30% | 65% | 29: -0.166 | 31: -0.264 | -25.35R | 14.88R | -0.233 | -0.24 | 13: +0.186 |
+Kill lines: K1 (avg >= +0.10R) FAIL, K2 (both parts positive) FAIL, K3 FAIL, K4 (DD <= 8R) FAIL, K5 FAIL for all three; K6 (sample) and K7 (independence) pass.
+VERDICT: all three KILLED - and not narrowly. Second setups tried: 13, none alive.
+
+## Expectation against the run
+"Before 04-07 negative": yes. "From 04-07 to 06-05 about zero to slightly positive": WRONG - it is the WORSE half for PD2 (-0.56R) and as bad for
+PD1 (-0.40R). "In the 30 days I looked at: positive, because I looked": WRONG TOO - at the touch it loses there as well (-0.48R, -0.33R); only the
+confirmation variant is positive there (+0.19R on 13 trades).
+
+## What I take from it - the observation was wrong, and how wrong is the finding
+- I looked at thirty days of charts and saw wicks: extremes poked and rejected. The count says: when the price first touches yesterday's high or
+  low, it goes 30 pips BEYOND it before 21:00 three times in four (76% of 83 cases), in the falling months and in the box months alike - and in
+  the very thirty days in which I "saw" the rejections. My eye kept the three or four big wicks at the turning points of the month and did not
+  see the dozens of ordinary days on which the level simply gave way. This is the same lesson as the weekend gaps ("both filled") and the busy
+  hours of the best days, at larger size: A PICTURE IS THE DAYS I REMEMBER.
+- That is the most useful thing I have learned about the market this week, and it is the opposite of what I set out to show.
+- THE TEMPTATION, named before I do anything with it: if fading the touch loses 0.4R a trade, FOLLOWING it should win. A rule read off the
+  mirror of a failed test is the most over-fitted object there is: I have now seen every one of these 100 days through it, and "the other side of
+  a 30 / 30 bracket" is not even the same trade (a stop order filled in a fast market, with slippage where it hurts; the fade's 66% stops are not
+  66% clean targets). I do NOT run it on this history as a test - the answer is already on this page, turned inside out.
+- What can be done honestly with it, and only this: write the following-the-break setup down NOW with fixed rules, record its history figures
+  as a DESCRIPTION labelled "seen in the mirror, not evidence", and let FORWARD days judge it on paper with lines written before the first one.
+  That is a proposal for the next brick, for the coach to accept or not; it is not started today (one test at a time).
+Counts: ideas 100, variants 282 (PD1, PD2, PD3). Adopted trading ideas: 0. A2 on paper since 07-08; the account is flat.
+July: numbers corrected after a push: 1; file errors found late: 0.
