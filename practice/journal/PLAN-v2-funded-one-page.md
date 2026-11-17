@@ -1,7 +1,10 @@
 # TRADING PLAN v2 - FUNDED - ONE PAGE (rewritten Wed 2015-06-17 after funded day 59; coach's brick)
 >>> STATUS FROM WED 2015-07-08: THE RULE ALARM IS CROSSED (drawdown 8.08R at 92 lived trades; line 8R; written in March: "if it averages below +0.10R or
 >>> its drawdown passes 8R, I stop trading the rule for money"). A2 IS NOT TRADED FOR MONEY. It continues ON PAPER every weekday (call, walk, result).
->>> THE FUNDED ACCOUNT IS FLAT until a restart rule, written in advance and agreed with my coach, says otherwise. journal/2015-07-08-rule-alarm-A2-stops-for-money.md
+>>> THE FUNDED ACCOUNT IS FLAT until the RETURN-TO-LIVE RULE (written 07-09, journal/2015-07-09-return-to-live-rule.md) opens a route:
+>>>   ROUTE A: A2 back at 0.16 lots on or after Mon 2015-09-21 if the MO monitor passed its judging lines AND the 40-day monitor is >= +0.30R that morning (back to paper under 0.00R).
+>>>   ROUTE B: a new setup after a passed pre-registered test + 40 forward paper trades (avg >= +0.10R, max DD <= 6R, positive without its best two) + my coach's agreement.
+>>>   REVIEW DAY: Mon 2015-09-21, whatever happens. Alarm report: journal/2015-07-08-rule-alarm-A2-stops-for-money.md
 The long version with every "why" and date is journal/PLAN-v2-funded-long-history-to-2015-06-16.md. Nothing in the rules changed in this rewrite.
 Account: FundedNext funded $25,000. Firm's lines: 5% daily loss, 10% max loss ($22,500), 3% max risk open, 80% split, payout every 14 days.
 Goal: steady monthly profit, safe payouts, never a breach.
