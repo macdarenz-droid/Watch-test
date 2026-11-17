@@ -101,6 +101,24 @@ Coach 06-08: enough entry tweaks; the next backtest takes a different part of th
      +80 pip trades: none (2 of 15). 80+ pip pre-entry hours: none (4 of 10).
      END OF RELEASED DATA (clock Wed 06-10 01:00 London).
 
+- **Wed 06-10 call, written 07:00 London (06:00 UTC), before the entry bar.** June goal read first: every figure below is from `python bt/call_numbers.py 2015-06-10`, `./look.sh` or a bar print. Yesterday's tag stands: VALID LOSS.
+  Coach 06-10: before the next test, my last 10 losses on the chart, each tagged valid or mistake, and one line on what they share.
+  D1 (London days): Fri 06-05 close 1.11124 (0.27, range 230.6); Mon 06-08 close 1.12906 (0.93, range 222.6); Tue 06-09 high 1.13454 low 1.12140 close 1.12822
+      (0.52, range 131.4): a new 3-day high in the night, then down 130 pips through my stop to 1.12140 in the afternoon, and back to the middle.
+  H4 (UTC bars): Tue 08:00 bar 1.13105 -> 1.12394; 12:00 bar low 1.12140, close 1.12814; 16:00 and 20:00 bars 1.1261-1.1299; tonight 00:00 bar 1.12758-1.13075; 04:00 bar high 1.13218.
+  H1: the night (00:00-07:00 London): open 1.12733, high 1.13218, low 1.12733, last 1.13085: range 48.5 pips (ratio 1.05), net +35.2 pips - a rising night, with my side.
+  M15: a band 1.1284-1.1302 for an hour, then a last candle up to 1.13218, closing 1.13085.
+  Bias: BUY. 22:00 London closes: 06-09 1.12822 vs 06-04 1.12375 = +45 pips (3-day gap +44.7). Gap / ADR5 0.24: a small signal.
+  UN3 PAPER TAG (never live): 5-day gap +132 pips -> BUY; agree: paper TRADES. Forward day 37, disagree days 9 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 29.
+  MB1 PAPER TAG (never live, forward day 21): morning direction written at 12:00, before 13:25.
+  Levels: night high 1.13218; Tue high 1.13454; night low 1.12733; Tue low 1.12140.
+  Rejection-day check: for a buy, Tuesday made the 3-day high (True) but closed at 0.52, not in the bottom third. Not a rejection day. 10-day trend: UP (1.12822 vs 05-26 1.08719); the buy is with it.
+  SIZE RULE (the real safety rule): tracker balance $24,817.61, high-water $25,280.44, drawdown -1.83%; trigger 1 (half size) $24,522.03 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,510.81.
+      Three losses in a row behind me; normal worst is six. Two more full stops would bring the close to about the half-size line; the rule reads the close, I do not anticipate it.
+  Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
+  Worry: the same picture as yesterday - a small buy signal after a night that already rose. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
