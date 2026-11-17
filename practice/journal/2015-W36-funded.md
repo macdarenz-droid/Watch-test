@@ -114,3 +114,19 @@ YN's own 13 unseen trades since its test lost ~3.9R: +0.070R -> +0.032R. Ideas 1
 Compression (H1) and Monday (H3) fail the sample by definition; H2 picked by a written rule. FM: fade the first 45 minutes (X = 15 by counts,
 83 trades): -0.053R, stressed -0.140R, against follow +0.109R, p 0.52 -> KILLED on all four (R after costs 1.0 + 0.1). Ideas 152, variants 406.
 Inactivity: count from 09-02 (coach); day 25 = Sun 09-27, first eligible Mon 09-28.
+
+## Thu 09-03
+07:00 London PAPER CALL (written before the bell). Tool lines, printed and written by this same command:
+    London day 2015-08-31 high 1.12624 low 1.11693 close 1.12099 close position 0.44 range 93.1
+    London day 2015-09-01 high 1.1332 low 1.12082 close 1.13131 close position 0.85 range 123.8
+    London day 2015-09-02 high 1.13191 low 1.12164 close 1.12256 close position 0.09 range 102.7
+    yesterday made the 3-day high: False | the 3-day low: False
+    night 00:00-07:00 London: open 1.12211 high 1.12342 low 1.12052 last 1.12334 | range 29.0 | net 12.3
+    3-day gap 45.6 | 5-day gap -87.0 | ADR5 127.0 | gap / ADR5 0.36 | 10-day trend: UP (1.12256 vs 2015-08-19 1.11198)
+    MO1 N=40 pause: monitor for the NEXT day after 2015-09-02 = -0.137R -> PAUSE (paper) | last 5 monitors: 08-27:
+    MO3 N=60 pause: monitor for the NEXT day after 2015-09-02 = -0.191R -> PAUSE (paper) | last 5 monitors: 08-27:
+- A2 side BUY (3-day gap +45.6). UN3 DISAGREE (disagree day 24 of 30) (5-day gap -87.0).
+- Both monitors under +0.60R -> PAPER. Routes A (from 09-21), B, C closed/empty. Inactivity: day 1 of the count from 09-02. NO ORDER.
+- A2 paper plan: buy at the 08:00 open, stop 40 pips, out 12:00.
+- Forward counts (paper): EN2, YM1, NC1 from their tools after the day.
+- How I feel: fine.
