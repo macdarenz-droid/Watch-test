@@ -1,2 +1,2 @@
 
-| Wed 2015-06-24 | 47 | 11 | +2.01R (11 trades) | -2.96R (36 trades) | -2.96R / 5.75R | -0.98R / 4.85R (yesterday's figures minus 0.13) |
+| Thu 2015-06-25 | 48 | 11 | +2.01R (11 trades) | -3.11R (37 trades) | -3.11R / 5.75R | -1.13R / 4.85R (yesterday's figures minus 0.15) |
