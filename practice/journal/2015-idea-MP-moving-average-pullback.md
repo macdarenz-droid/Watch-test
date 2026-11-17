@@ -17,3 +17,11 @@ MIN SAMPLE: MP1 120+ trades and 50+ from 04-07; else killed for sample, no outco
 K1 average >= +0.10R after costs (1.1 pips = 5.5% of a 20-pip risk). K2 net above zero before 04-07 AND from 04-07.
 K3 stressed (2.0 + 0.5) average above zero. K4 MP1 minus MP0 above zero, sign-flip p < 0.05.
 Worked case read from its own window's candles. My guess: positive before 04-07, negative after (K2 fails).
+
+## Counts (tool `python bt/ma_pullback.py 2015-08-15 count`; no outcomes)
+MP1 (slope >= 5): 115 trades (41 before 04-07, 74 from) on 86 days. MP2 (slope >= 15): 41 trades (10 / 31).
+## MP1 is under 120 trades: KILLED FOR SAMPLE, `test` NOT run, outcomes unseen. I do not lower the slope to 0 or 3 after seeing 115.
+MY MISTAKE IN THE DESIGN: I fixed S = 5 by feel instead of using a count grid with a pre-written choosing rule, which DT and MB2 did and GC
+taught me. With a grid (S = 0, 3, 5) and "the largest S with 120+", the test would have run. The idea's outcomes are still unseen, so it
+can be re-registered properly once, with the grid, if my coach allows; I do not do that on my own in the same evening.
+Counts: idea 136 (killed for sample); variants none run.

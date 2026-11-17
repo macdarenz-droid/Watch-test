@@ -189,3 +189,6 @@ IB: 131 trades, -0.026R; fade control -0.128R. Killed on all four lines. Ideas 1
 
 ## 08-14 (weekend) test: idea PN, the hourly pin bar (journal/2015-idea-PN-hourly-pin-bar.md)
 223 trades: away from the wick -0.133R, negative in both periods; with the wick +0.059R. Killed on all four lines. Ideas 135, variants 364.
+
+## 08-14 (weekend) test: idea MP, pullback to a rising hourly average (journal/2015-idea-MP-moving-average-pullback.md)
+115 trades, under 120: killed for sample, outcomes unseen. My slip: the slope was fixed by feel, not by a count grid. Idea 136.
