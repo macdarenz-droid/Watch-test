@@ -181,3 +181,9 @@ is nearly "March-May against January-February"; a reading rule for PH2's first l
 its kill test), lines and consequences pushed first, one run (journal/2015-MB1-lived-days-check.md). Lived days 03-02..05-26: kept 21 trades at +0.213R
 (+0.141R at triple costs) against A2's +0.232R; kept minus removed +0.191R. Two of four lines fail by a hair: the claim "holds on lived days" is dead.
 Backtest +0.695R became +0.213R on the days I lived. MB1 stays on paper under its own rules; A2 unchanged. Counts: 66 ideas, 186 variants.
+
+## 05-27 research after funded day 44 (coach's brick: my 10 worst losing trades replayed by eye; valid loss or mistake; change a rule only for a repeated
+mistake): journal/2015-ten-worst-losers-replay.md. Selection rule and questions pushed before the charts; ten charts read; every observation then counted
+on all 102 A2 days. Result: 10 valid losses, 0 mistakes of mine; six would be the same trade for anyone; 2 pokes. The chart "mistakes" (chasing the hour,
+the falling knife) are not losing groups on all history. One repeat without a winner: a pre-entry hour of 60+ pips (4 cases, 0 wins, -3.18R; two of the
+ten worst). Four cases: no rule change; a counts-only line, look at 10. Counts: 67 ideas, 186 variants.
