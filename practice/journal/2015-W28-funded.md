@@ -211,6 +211,23 @@ Coach 07-06: next brick - position sizing math: how the half-size / full-size la
      For tomorrow (tool): MO1 -0.202R -> paper; MO3 -0.064R -> paper.
      END OF RELEASED DATA (clock Fri 07-10 01:00 London).
 
+- **Fri 07-10 call, written 07:00 London (06:00 UTC), before the entry bar.** JULY GOAL read first. Figures from `python bt/call_numbers.py 2015-07-10`, `./look.sh`, `python bt/side_monitor.py 2015-07-10 --state` or a bar print. Yesterday: NO LIVE TRADE BY RULE (paper +1.39R).
+  Coach 07-10: DF earned the day. The return rule is solid, but the account is flat till late September, so ROUTE B IS MY JOB NOW: every backtest hunts a
+      setup that can earn its way back. Next: my biggest winners from March to June by eye, what they shared, one testable rule, cases counted before outcomes.
+  RETURN-TO-LIVE RULE read: route A needs MO's judging (09-21) and a monitor of +0.30R; today the monitor is -0.202R -> A2 ON PAPER. NO ORDER IN THE ACCOUNT.
+  PAPER call for A2 (paper day 3):
+  D1 (London days): Tue 07-07 close 1.10107 (0.66); Wed 07-08 close 1.10758 (0.86); Thu 07-09 high 1.11249 low 1.09915 close 1.10356 (0.33, range 133.4):
+      a new 3-day high before the bell, then 130 pips down into the evening, a close in the lower third.
+  H4 (UTC bars): Thu 08:00 bar 1.10236-1.10622; 12:00 bar down to 1.10182; 16:00 bar low 1.09915; 20:00 bar UP to 1.10832; tonight 00:00 bar up to 1.10993; 04:00 bar up to 1.11336, last 1.11165.
+  H1: the night (00:00-07:00 London): open 1.10702, high 1.11336, low 1.10549, last 1.11165: range 78.7 pips (ratio 1.64), net +46.3 pips - a rising night, against a paper sell.
+  Bias (paper): SELL. 22:00 London closes: 07-09 1.10356 vs 07-06 1.10556 = -20 pips (3-day gap -20.0). Gap / ADR5 0.17. The price is already 80 pips above the close the signal was read from.
+  UN3 PAPER TAG: 5-day gap -48 pips (-47.6) -> SELL; agree. Forward day 59, disagree days 14 of 30.
+  PH2 PAPER TAG: decided at 08:00. Forward day 51.
+  MO PAPER RULE (day 9 of 60): MO1 monitor -0.202R -> paper; MO3 monitor -0.064R -> paper.
+  Levels: night high 1.11336 (above Thu's high 1.11249); night low 1.10549; Thu low 1.09915.
+  10-day trend: DOWN (1.10356 vs 06-25 1.12045); the paper sell is with it.
+  PAPER plan: SELL at 08:00 London, stop 40 pips above the bid, close 12:00. No order in the account. Friday: gates list after the paper trade.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
