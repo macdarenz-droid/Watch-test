@@ -168,6 +168,10 @@ Coach 06-08: enough entry tweaks; the next backtest takes a different part of th
   Four losses in a row behind me; the written normal worst is six.
   Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
   Worry: third buy in a row at these prices; the last two failed. Written, not a rule.
+  08:00 London Thu: pre-entry hour 1.12924-1.13315 = 39.1 pips -> PH2 paper: LIVELY, paper half size (decided before the order). Price 1.12990: the hour went up to 1.13315 and came all the way back; night against me by 24.6 pips (counted); entry 4.2 pips better than at 07:00. Order: BUY 0.31, stop 40 pips below the bid (1.12590).
+  08:15 London: filled BUY 1.13001, stop 1.12590 (41.1 pips from the fill). First candle (from the tool): down to 1.12805, close 1.12818: -18 pips at once. No call that matters; hands off.
+  09:00 London: STOPPED in the 08:45 London candle (low 1.12503, 8.7 pips through my level). Never in profit. Sim balance from the tool $25,215.45. One trade a day: done. I watch to noon only for the stop-day routine.
+  12:00 London: price (bid, from the tool) 1.12668 = 33.3 pips under my entry, 7.8 pips above the stop; the morning low was 1.12408, 18.2 pips through my level. Without the stop about -0.81R at noon. A real loss either way. MB1 paper (forward day 22), written before 13:25: open 08:00 1.12990, price at 12:00 1.12668 -> morning DOWN by about 32 pips (large morning) -> only a DOWN break of the 12:00-13:25 box counts. Exact figures from the tool afterwards.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
