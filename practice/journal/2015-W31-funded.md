@@ -61,6 +61,19 @@ Coach 07-28: no LM2 shadow while SW1 is 2 of 20 ("one shadow at a time"). LM2 st
      MO PAPER RULE (day 21 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.67R (running -5.61R).
      For Wednesday (tool): MO1 -0.363R -> paper; MO3 -0.256R -> paper.
 
+## Wed 07-29
+Coach 07-29: at 20 paper days write a sober verdict on A2 "using the kill line you set, no moving it". Checked my files BEFORE the day:
+I set NO separate 20-day line for the paper record. The lines that exist and apply: (1) the March alarm, already crossed 07-07 (drawdown
+over 8R, or average under +0.10R) -> A2 off money; (2) the return rule: not before 09-21, MO judged, 40-day monitor >= +0.60R; back to paper
+under 0.00R. I will write the day-20 verdict (Tue 08-04) against exactly these and invent no new line at day 20. Said to the coach today.
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-29`:
+- 3-day gap +76.9 pips -> A2 side BUY. 5-day gap +125.4 -> UN3 agree. Night 00:00-07:00: 1.10461-1.10840, last 1.10504 (range 37.9, net -12.0).
+- Tuesday's London day: 1.10221-1.10996, close 1.10596 (range 77.5).
+- Monitor for today -0.363R (MO1), -0.256R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); route B: no tested setup. NO ORDER.
+- A2 paper plan: buy at the 08:00 open, stop 40 pips below, out 12:00.
+- SW1 shadow trade 3: open from Tue (buy 1.10562, stop 1.09362, target 1.12962, clock 12:00 Tue 08-04). Nothing to do.
+- How I feel: steady. Mistake to avoid: making up a line for A2 because one was asked for.
+
 ## Forward tally
 
 ## CORRECTION written Mon 2015-07-27 (PROCESS MISTAKE P12; found by me on 07-27 when the walk tool and the engine disagreed)
