@@ -30,6 +30,10 @@ Coach 06-08: enough entry tweaks; the next backtest takes a different part of th
   SIZE RULE: tracker balance $25,068.71, high-water $25,280.44, drawdown -0.84%; trigger 1 (half size) $24,522.03 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,510.81.
   Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
   Worry: a small flip signal, against UN3 and the 10-day trend, into a night closing on its high. Written, not a rule.
+  08:00 London Mon: pre-entry hour 1.10870-1.11656 = 78.6 pips -> PH2 paper: LIVELY, paper half size (decided before the order). 78.6 is under the 80 pip line of my counts-only list, so it is NOT a case of that count (not rounded up); a very wide hour all the same: it ran up 44 pips and fell back. Price 1.11314: night against me by 23.3 pips (counted); entry 9.5 pips better than at 07:00. The rule has no skip. Order: SELL 0.31, stop 40 pips above the bid (1.11714).
+  08:15 London: filled SELL 1.11316, stop 1.11714 (39.8 pips). First candle (from the tool): bid high 1.11694, worst -39.0 pips on the ask - about a pip from the stop - close -21.1. Nothing to do. No call.
+  09:00 London: STOPPED in the 08:45 London candle (bid high 1.11782). Never in profit. Sim balance from the tool $25,488.56. One trade a day: done. I watch to noon only for the stop-day routine.
+  12:00 London: price (bid, from the tool) 1.11311, ask about 1.11321 = 0.5 pips against my entry and 39.3 pips INSIDE my stop: NOT a real stop, a poke. The ask went 7.8 pips through my level at 08:50 and the price then fell 63 pips. At noon the trade would have been a scratch (about -0.02R by python). The poke cost about 1R. Third poke in three weeks (05-18, 06-01, today); SA priced the cure on all history and it costs more. Written. MB1 paper (forward day 19), written before 13:25: open 08:00 1.11317, price at 12:00 1.11311 -> morning flat, about -0.6 pips; the sign from the tool's 12:00 open decides (DOWN if below 1.11317), I do not pick.
 
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
