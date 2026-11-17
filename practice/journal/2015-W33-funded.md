@@ -69,3 +69,6 @@ after, at night too: the regime, not a rule. Idea 124, variants 346.
 ## 08-11 study: A2's last 10 paper losers by eye (journal/2015-08-11-review-A2-last-10-paper-losers.md)
 10 of 10 valid, 0 trade mistakes (P12 touched four days' notes, already corrected). Only 2 were full stops; 6 of 10 were mornings that went
 against the 3-day side from the bell. Nothing untested to change; A2 stays on paper.
+
+## 08-11 test: idea GC, fade the night toward yesterday's close (journal/2015-idea-GC-back-to-yesterdays-close.md)
+73 cases at a 20-pip night, under my pre-written 80: not judgeable, killed for sample, outcomes not run and still unseen. Idea 125.

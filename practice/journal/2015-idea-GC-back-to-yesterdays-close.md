@@ -25,3 +25,16 @@ Pass = eligible for route C after my coach's word. Fail = killed.
 My guess: positive after 04-07, negative before (K2 fails), like AR.
 
 ## Counts and worked case (tool, before outcomes)
+Tool: `python bt/back_to_close.py 2015-08-12 count` / `check 2015-08-11` (no outcomes).
+- 157 days (01-05..08-11); median |night| 18.4 pips. GC1 (>= 20): 73 days (30 before 04-07, 43 from). GC2 (>= 30): 52 days (20 / 32).
+- Worked case, today Tue 08-11: yesterday's close 1.10185, 08:00 open 1.09667, night -51.8 pips -> GC1 would BUY at 08:00 toward 1.10185.
+
+## Result: NOT JUDGEABLE, KILLED FOR SAMPLE, NO OUTCOME RUN
+My line, written before the count: "Under 80 GC1 trades ... -> not judgeable -> killed." GC1 has 73. I do not lower the line to 70
+after seeing 73, and I did not run `test`. GC's outcomes on these days stay unseen, so a later version with a sample that can answer
+(more days of history) is still possible without contamination by this file.
+Why I set 80: with about 80 trades the error on the average is about +-0.22R; under that the test cannot tell +0.10R from a coin.
+The count itself is information: a 20-pip night happens on under half of all days (73 of 157), so this is a 2-3 times a week setup.
+What I would do differently: count the cases BEFORE writing the rule's thresholds (I set 20 pips from feel, then found the median
+night is 18.4). The order matters only for the threshold choice, which is why it must come first next time.
+Counts: idea 125 (killed for sample); variants: none run, none counted.
