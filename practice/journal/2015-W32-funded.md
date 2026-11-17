@@ -115,6 +115,16 @@ until something earns it." Recorded: LM2 CLOSED FOR GOOD. No shadow, no tally, n
      Week 32 so far (Mon-Thu): 0 live trades, 4 days NO LIVE TRADE - BY RULE (all valid), 0 trade mistakes, 0 process mistakes.
      Funded record unchanged: 73 trades, 73 valid, 0 trade mistakes; process mistakes 12 (last: P12, 07-27).
 
+## Fri 08-07
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-07`:
+- 3-day gap -25.1 pips -> A2 side SELL. 5-day gap -7.0 -> UN3 agree. Night 00:00-07:00: 1.09105-1.09306, last 1.09171 (range 20.1, net -9.3).
+- Thursday's London day: 1.08737-1.09439, close 1.09240 (range 70.2).
+- Monitor for today -0.283R (MO1), -0.295R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); routes B and C empty. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
+- SW1 shadow trade 4: open (buy 1.09535, stop 1.08335, target 1.11935); its clock exit is 12:00 today. Not managed.
+- Round numbers (since RT, 08-06): 1.0900 below and 1.0950 above are information only, not walls.
+- How I feel: steady; a quiet night after a quiet week.
+
 ## Forward tally
 
 ## 08-03 test: idea PS, a probation size (journal/2015-idea-PS-probation-size.md)
