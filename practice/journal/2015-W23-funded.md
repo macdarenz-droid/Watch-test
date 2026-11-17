@@ -324,3 +324,9 @@ my full stops are wrong from the first minute, so enter only once the price has 
 prediction pushed before the simulator; regression difference explained (R unit) before any total; one run. At +10 pips: 11 full stops instead of 24 and
 a lower drawdown, but 2.88R behind A2 - it taxes every winner by 10 pips. Behind before March (-6.12R), ahead on lived days (+3.25R). Killed on four
 lines; no tag. Counts: 75 ideas, 210 variants. June corrections after a push: 0.
+
+## 06-05 research after funded day 51 (one test): idea FS, a fresher direction signal (journal/2015-idea-FS-fresh-signal.md). The 07:00 price instead of
+last night's close as the near end of the 3-day signal. Worked case and worked expectation pushed before the script; the script reproduced the case to
+the pip; one run. The direction changes on only 3 days in 109 (9 when both ends move to 07:00): +1.14R on three trades and -3.22R on nine. Killed on
+K1, K2, the sample line and the neighbour. My expectation of 10-20 differing days was three times too high; written before, compared after.
+Every part of A2 has now been moved on all history; none of the moves beats it. Counts: 76 ideas, 213 variants. June corrections after a push: 0.
