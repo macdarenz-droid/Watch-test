@@ -28,3 +28,29 @@ Worked case (written before the run from my M15 chart of 09-01): sell ~1.1283, b
 not reached (high about 1.1332); at 09:00 price about 1.1300-1.1310, inside 40 -> stop moves to 1.1323 and is not hit again; noon about
 1.1275 -> GS1 about +0.2R where base lost -1.0R. To be checked with the tool before the run.
 My guess: GS1 saves the [C] days and loses more on the days that keep going; K5 fails.
+
+## Worked cases from the tool (pasted by this command; before the run)
+    2015-09-01 side -1 | engine A2 R -1.00
+    base A2 (stop 40 from 08:00) (-1.0033920000000336, 'sl', 1.12829, 1.1323100000000001, '08:45')
+    GS1 grace to 09:00, disaster 80 (-1.0008960000000173, 'sl', 1.12829, 1.1323, '09:00')
+    GS2 grace to 10:00, disaster 80 (0.26207999999999887, 'close', 1.12829, 1.12724, '12:00')
+    GS3 grace to 09:00, disaster 60 (-1.0008960000000173, 'sl', 1.12829, 1.1323, '09:00')
+    2015-07-08 side -1 | engine A2 R -1.00
+    base A2 (stop 40 from 08:00) (-1.0033920000000336, 'sl', 1.10144, 1.10546, '08:55')
+    GS1 grace to 09:00, disaster 80 (-1.0008960000000173, 'sl', 1.10144, 1.10545, '10:10')
+    GS2 grace to 10:00, disaster 80 (-1.0008960000000173, 'sl', 1.10144, 1.10545, '10:10')
+    GS3 grace to 09:00, disaster 60 (-1.0008960000000173, 'sl', 1.10144, 1.10545, '10:10')
+    2015-08-21 side +1 | engine A2 R -1.03
+    base A2 (stop 40 from 08:00) (-1.0283520000000308, 'sl', 1.12825, 1.1241299999999999, '09:05')
+    GS1 grace to 09:00, disaster 80 (-1.0008960000000173, 'sl', 1.12825, 1.12424, '09:00')
+    GS2 grace to 10:00, disaster 80 (0.26207999999999887, 'close', 1.12825, 1.1293, '12:00')
+    GS3 grace to 09:00, disaster 60 (-1.0008960000000173, 'sl', 1.12825, 1.12424, '09:00')
+    2015-08-28 side -1 | engine A2 R -1.00
+    base A2 (stop 40 from 08:00) (-1.0033920000000336, 'sl', 1.12638, 1.1304, '08:55')
+    GS1 grace to 09:00, disaster 80 (-1.0008960000000173, 'sl', 1.12638, 1.13039, '09:00')
+    GS2 grace to 10:00, disaster 80 (-0.42681600000002506, 'close', 1.12638, 1.12809, '12:00')
+    GS3 grace to 09:00, disaster 60 (-1.0008960000000173, 'sl', 1.12638, 1.13039, '09:00')
+MY WORKED CASE WAS WRONG: on 09-01 price was still 40+ pips against at 09:00 London, so GS1 closes it at 09:00 (-1.00R), not +0.2R.
+I misread my own M15 chart. On the four [C] days GS1 saves NONE (all still beyond 40 at 09:00, or stopped later: 07-08 at 10:10);
+GS2 (grace to 10:00) saves 09-01 and 08-21 (+0.26R each) and cuts 08-28 to -0.43R. The judged rule stays GS1 as registered.
+One run next: `python bt/grace_stop.py 2015-09-05 run` (history to 09-04; the base line must match the engine's A2 list).
