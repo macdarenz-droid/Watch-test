@@ -21,3 +21,15 @@ K2 FH1's net R above zero BOTH before 04-07 AND from 04-07.
 K3 FH1's average R at stressed costs above zero.
 K4 FH1 minus FH0, trade by trade, above zero with sign-flip p < 0.10.
 My guess: negative, like every follow-after-a-move rule.
+Search also found G1 (January): A2 skipped when 07:00-08:00 broke the Asia range against it: an A2 filter, not a trade in the hour. FH stays new.
+
+## Step 1, counts only (tool `python bt/frankfurt_hour.py 2015-08-25 count`; its header label "NY move" is inherited from the YN script it was
+built from: here it is the NIGHT move 00:00 -> 07:00)
+166 days; median |night move| 14.3 pips. N = 10: 106 trades (39 before 04-07, 67 from), follow side = A2's side 52%. N = 20: 61 (20 / 41), 42%.
+N = 30: 33 (11 / 22), 50%.
+## Step 2: largest N with 80+ and 35+ from 04-07 = **N = 10** (106 / 67). Not A2 in disguise (52%). FH1 = 10, FH2 = 20, FH0 = fade at 10.
+Worked case, Mon 08-24 (read from today's call and 08:00 note, same window): night +45.0 -> FH1 BUYS at the 07:00 open (1.14363 bid + spread),
+stop 20 below (about 1.14173). The hour's low 1.14202 stays 3 pips above the stop; out at the 08:00 open about 1.14650: about +27 pips =
+about +1.35R. The fade would be stopped? Its stop about 20 above 1.14353 = 1.14553 on the ask; the hour's high 1.14733: yes, a full stop.
+
+## Step 3, result (one run: `test 10 20`)
