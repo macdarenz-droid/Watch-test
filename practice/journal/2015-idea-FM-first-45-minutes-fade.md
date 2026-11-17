@@ -18,3 +18,23 @@ K2 FM1's net R above zero BOTH before 04-07 AND from 04-07.
 K3 FM1's average R at stressed costs above zero.
 K4 FM1 minus FM0, trade by trade, above zero with sign-flip p < 0.10.
 My guess: a coin, like SF/FX/MF; the two mornings that gave me the idea are 2 trades.
+
+## Counts (before outcomes; tool output pasted by this same command)
+    days 174 (2015-01-02..2015-09-02) | median |move| 13.3 pips
+    X = 15: 83 trades | before 2015-04-07: 25 | from: 58 | buys 48 sells 35 | fade on A2's side: 42 of 83
+    X = 20: 60 trades | before 2015-04-07: 17 | from: 43 | buys 36 sells 24 | fade on A2's side: 31 of 60
+    X = 25: 42 trades | before 2015-04-07: 12 | from: 30 | buys 26 sells 16 | fade on A2's side: 19 of 42
+    X = 30: 31 trades | before 2015-04-07: 10 | from: 21 | buys 17 sells 14 | fade on A2's side: 12 of 31
+BY THE RULE WRITTEN FIRST: X = 15 (largest with 80+ and 35+ from 04-07; X = 20 has 60). FM1 = 15, FM2 = 20 (60 trades, dose only),
+FM0 = with the move at 15. DISGUISE: the fade is on A2's side 42 of 83 (51%) -> passes.
+My expected share was wrong: I guessed 40-50% of days at X = 20; the tool says 60 of 174 (34%). Noted, not acted on.
+Before 04-07 FM1 has only 25 trades: K2's first half rests on them.
+Worked case 09-01 (tool check line, matches my walk: 08:00 open about 1.1283, 08:30 London candle closes about 1.1318):
+    day                    2015-09-01
+    move                         35.1
+    side                           -1
+    t0      2015-09-01 08:45:00+00:00
+    late                         True
+    a2                             -1
+-> the first 45 minutes ran +35.1 pips -> FM1 and FM2 SELL at the 08:45 open (A2 also sold that day).
+One run next: `python bt/first45.py 2015-09-03 run 15 20`.
