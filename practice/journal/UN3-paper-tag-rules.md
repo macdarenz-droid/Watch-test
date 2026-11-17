@@ -1,2 +1,2 @@
 
-| Fri 2015-06-26 | 49 | 11 | +2.01R (11 trades) | -3.26R (38 trades) | -3.26R / 5.75R | -1.28R / 4.85R (yesterday's figures minus 0.15) |
+| Mon 2015-06-29 | 50 | 11 | +2.01R (11 trades) | -4.26R (39 trades) | -4.26R / drawdown to be recomputed at the gate | -2.28R / 5.27R (Friday's figures minus 1.00) |

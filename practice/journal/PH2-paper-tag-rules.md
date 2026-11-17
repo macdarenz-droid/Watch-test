@@ -1,2 +1,2 @@
 
-| Fri 2015-06-26 | 41 | 29 | -2.76R / 13 | -0.03R / 4 (12 quiet days) | about -1.40R | -2.81R / 4.85R (yesterday's figures minus 0.15) |
+| Mon 2015-06-29 | 42 | 30 | -3.76R / 14 | -0.03R / 4 (12 quiet days) | about -1.90R | -3.81R / 5.27R (Friday's figures minus 1.00) |
