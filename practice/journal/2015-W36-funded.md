@@ -189,3 +189,4 @@ day wider. My chart sighting was small bodies, not small ranges. Ideas 153, vari
   my own line edit); caught by the missing "script reached its end" before any commit, finished in the next command.
 
 09-04 evening: H3 = idea 154 MA (Monday weekend fade) KILLED FOR SAMPLE at the count (35 Mondays, 21 from 04-07). Ideas 154, variants 409.
+09-04 evening: idea 155 NP (night position filter, from the 08-11 losers review) KILLED AS A REPEAT of NC at the count (85% overlap); no run. Ideas 155, variants 409.

@@ -23,3 +23,20 @@ K3 NP1's kept-minus-skipped gap larger than NP0's.
 K4 label shuffle (10,000) of NP1's gap: p < 0.10.
 Plus the REPEAT line above (checked on counts, before the run).
 My guess: killed by the repeat line, or K2 (chasing paid in the trend months).
+
+## Counts (tool output pasted by this command; before outcomes)
+    A2 days with both candles: 174 (2015-01-06..2015-09-04)
+    Q = 0.10: skip 14 = 8% (before 2015-04-07 5, from 9) | also NC1 skip days (hour >= +15): 12 = 86% | control skip 17
+    Q = 0.15: skip 19 = 11% (before 2015-04-07 7, from 12) | also NC1 skip days (hour >= +15): 17 = 89% | control skip 28
+    Q = 0.20: skip 27 = 16% (before 2015-04-07 8, from 19) | also NC1 skip days (hour >= +15): 23 = 85% | control skip 38
+    Q = 0.25: skip 37 = 21% (before 2015-04-07 13, from 24) | also NC1 skip days (hour >= +15): 29 = 78% | control skip 57
+    day     R  side  pos  hour  late
+    2015-07-21 -0.74    -1 0.22  -7.3  True
+    2015-08-04 -0.53    -1 0.29   1.5  True
+    2015-07-22 -1.03     1 0.75  21.7  True
+    2015-07-24 -1.03     1 0.84  15.3  True
+BY THE RULE WRITTEN FIRST: Q = 0.20 (smallest with 15%+ and 25+: 27 days). REPEAT LINE: 23 of 27 (85%) are also NC1 skip days -> 70%+
+-> KILLED AS A REPEAT OF NC (idea 155), no outcome run, variants not counted. NC1 is already being judged forward; NP adds nothing.
+The review's own cases do not even fit: 07-21 and 08-04 ("sold the bottom / the low") had the open at pos 0.22 and 0.29 on A2's side -
+the NEAR edge, not the far one; 07-22 and 07-24 at 0.75 and 0.84, inside the range. My words in the review described the hour (NC's
+ground), not the night's range. Two reviews in a row (SQ, NP) where my eye's description did not survive the tool's first count.
