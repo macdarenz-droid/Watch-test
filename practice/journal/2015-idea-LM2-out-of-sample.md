@@ -34,3 +34,12 @@ A pass = route B step B1 (a pre-registered rule passing on a never-seen part), n
 My guess: positive but under +0.15R; U1 fails.
 
 ## Counts and mechanics (tool, before the unseen outcomes)
+Tool: `python bt/lively_fade_oos.py 2015-07-25 count` / `old` (no unseen outcome).
+- Unseen lively mornings 05-07..07-24: 38 (22 before 06-16, 16 from); the hour went up on 19 and down on 19. Judgeable (>= 25).
+  Cross-check: my PH2 tally has 42 lively days from 05-01; 4 of them are 05-01..05-06. Same 38.
+- Mechanics on the May sample: 35 trades, net +7.15R, +0.204R a trade. May's journal: 35 trades, +7.11R, +0.203R. Same trades; the
+  0.04R is a rounding difference between the two scripts that I have not traced (about 0.001R a trade). Stated, not hidden.
+- Worked case, today Fri 07-24: pre-bell hour 1.09637-1.09957 (32.0 pips), net up (07:00 open near 1.0975, 08:00 open near 1.0991) ->
+  LM2 SELLS at 08:00, stop 40 above. The engine's "other side" of A2's paper buy today was +0.87R, so the tool must show sell, +0.87R.
+
+## Result (one run)
