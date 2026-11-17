@@ -98,6 +98,23 @@ Friday 05-29 is the last trading day of May: the month-end review is due on the 
      +80 pip trades (counts-only): none today; 0 of 15.
      END OF RELEASED DATA (clock Wed 05-27 01:00 London).
 
+- **Wed 05-27 call, written 07:00 London (06:00 UTC), before the entry bar.** Yesterday's tag stands: VALID LOSS. Figures from `python bt/call_numbers.py 2015-05-27` and the bar prints.
+  D1 (London days): Fri 05-22 close 1.10074 (0.02); Mon 05-25 close 1.09766 (0.35, range 50.5); Tue 05-26 high 1.09810 low 1.08633 close 1.08719 (0.07, range
+      117.7): after my noon exit it rose to 1.09401 and then fell 67 pips to close near the low. Third lower close, new 3-day low.
+  H4 (UTC bars): Tue 12:00 bar 1.09401 -> 1.08757; 16:00 bar low 1.08633; tonight 00:00 bar 1.08650-1.08893; 04:00 bar up to 1.09160.
+  H1: the night (00:00-07:00 London): open 1.08860, high 1.09160, low 1.08650, last 1.09069: range 51.0 pips (ratio 1.12), net +20.9 pips - a rising night, against my side.
+  M15: five rising candles from 1.08756 to 1.09160, the last one back to 1.09069.
+  Bias: SELL. 22:00 London closes: 05-26 1.08719 vs 05-21 1.11117 = -240 pips (3-day gap -239.8). Gap / ADR5 2.12: stretched.
+  UN3 PAPER TAG (never live): 5-day gap -277 pips -> SELL; agree: paper TRADES. Forward day 27, disagree days 6 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 19.
+  MB1 PAPER TAG (never live, forward day 11; does not hold on lived days, 05-26 check): morning direction written at 12:00, before 13:25.
+  Levels: night high 1.09160; Tue afternoon high 1.09401; night low 1.08650; Tue low 1.08633.
+  Rejection-day check: for a sell, Tuesday would need the 3-day low (True) AND a close in the top third; it closed at 0.07. Not a rejection day.
+  10-day-trend paper line: DOWN (1.08719 vs 05-12 1.12127); the sell is with it.
+  SIZE RULE: tracker balance $24,912.97, high-water $25,349.14, drawdown -1.72%; trigger 1 (half size) $24,588.67 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,574.70.
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
+  Worry: the night has been rising for three hours into my sell. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
