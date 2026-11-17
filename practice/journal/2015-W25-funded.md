@@ -1,6 +1,6 @@
 # Journal - FUNDED ACCOUNT, week of 2015-06-15 (W25). Plan: journal/PLAN-v2-funded-one-page.md. Tracker: journal/FUNDED-TRACKER.md. Size 0.50% = $125 = 0.31 lots. All times London.
 JUNE PROCESS GOAL (in front of every call): EVERY NUMBER AND EVERY TEST RULE GETS ONE WORKED CASE BEFORE IT IS PUSHED. No figure without a tool print or a
-python line behind it. Numbers or rules corrected after a push in June so far: 2 (06-12: a stale paid-out label in STATE; 06-17: a wrong label on a test line; May: 5). One test earns one day; one at a time (coach 06-04).
+python line behind it. Numbers or rules corrected after a push in June so far: 3 (06-12: a stale paid-out label in STATE; 06-17: a wrong label on a test line; 06-18: "85 ideas" for 84 in the replay; May: 5). One test earns one day; one at a time (coach 06-04).
 Start of week (from the tool, 06-12): tracker balance $24,777.93 (sim $25,321.47 minus $543.54 paid out), high-water $25,280.44, drawdown -1.99% (4.00R under the equity high). Last week -2.29R. PAYOUT DATE this week: Fri 06-19 (rule applied exactly as written).
 SIZE RULE = the real safety rule (coach 06-02): half size from a day's close at or below 3% under the high-water ($24,522.03) until a new high-water; STOP at 7% under ($23,510.81; reviewed and kept 06-11).
 A2 is judged on a few hundred lived trades, not on the alarm alone. Lived average +0.18R +-0.25R at 75 lived trades.
@@ -255,4 +255,4 @@ real fill (the worst real fill is 1.33R); the line was applied as worked, the st
 ## 06-18 after funded day 60 (coach: replay the worst week by eye; a test only if a mistake repeats): journal/2015-06-18-replay-of-week-24.md. Six M15
 charts (06-05 .. 06-12). My mistakes: none. What a better trader would have done: stood aside on Mon, Tue and Thu (a sharp last move before the bell,
 then an entry on the side the day refused), banked part of Wednesday's spike (GB1, parked). The pattern has four winning twins in the very next week,
-06-16 an exact one (+1.60R). No mistake repeats: NO TEST, nothing changes. Counts unchanged: 84 ideas, 235 variants. June corrections after a push: 2.
+06-16 an exact one (+1.60R). No mistake repeats: NO TEST, nothing changes. Counts unchanged: 84 ideas, 235 variants. June corrections after a push: 3 (one in the replay file itself).

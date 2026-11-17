@@ -38,10 +38,10 @@ better than my rule does - not one who knows the afternoon.
 ## Verdict
 No mistake repeats. As the coach wrote, no test. Nothing changes.
 What the better trader had and I do not: on Monday, Tuesday and Thursday he would have been right to stand aside, and on Tuesday 06-16 he would have
-stood aside from +1.60R for the same reason. I cannot tell his good reading from his bad one at 08:00, and 85 ideas say I cannot learn to from this data.
+stood aside from +1.60R for the same reason. I cannot tell his good reading from his bad one at 08:00, and 84 ideas say I cannot learn to from this data.
 What I keep from the week, for myself and not as a rule:
 - The week cost 2.29R and every day of it was traded as written. That is the result I can control, and it was 5 of 5.
 - The noon exit took me out before Friday 06-05's 170 pip candle and before Wednesday 06-17's 110 pip evening. In a week when I looked hard at what
   the rule does badly, the two largest moves on the charts were ones it kept me out of.
 - My worry line was right on Thursday 06-11 and wrong on Tuesday 06-16. It stays a line in the call and never becomes an order.
-Counts: unchanged (84 ideas, 235 variants). This is a replay: study, no kill line, no run. Numbers or rules corrected after a push in June: 2.
+Counts: unchanged (84 ideas, 235 variants). This is a replay: study, no kill line, no run. Numbers or rules corrected after a push in June: 3 (the third is in this file: I wrote "85 ideas" and pushed it; the count is 84. Found on re-reading, corrected the same hour. Cause: a number typed from memory in a sentence, the exact thing the June goal is about).
