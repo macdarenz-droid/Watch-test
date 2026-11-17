@@ -15,6 +15,9 @@ Today: tracker $24,358.99, high-water $25,256.94, drawdown -3.56%, FLAT since 07
   +0.60R: 2.2% of mornings, 16% at least once in 60 mornings). Back to paper when it reads under 0.00R.
 - ROUTE B: a new setup with a passed pre-registered test incl. a never-seen part, then 40 forward paper trades (avg >= +0.10R, DD <= 6R,
   positive without its best two), then my coach's agreement. Tried: 18 setups, none alive.
+- ROUTE C, PROBATION (Amendment 2, 08-04): a setup that has passed its own pre-registered kill line on lived days trades 40 live trades at
+  $15.63 (0.04 lots at 40 pips), closed for good at an 8R drawdown or any trade mistake. A2 is not eligible. Route A's first 40 trades are
+  also at $15.63. EMPTY today.
 - REVIEW DAY Mon 2015-09-21, whatever happens.
 
 ## 3. When I do not trade (all of these, always)
@@ -52,4 +55,4 @@ Today: tracker $24,358.99, high-water $25,256.94, drawdown -3.56%, FLAT since 07
 
 ## 9. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
-max 3 variants, costs on, everything counted in STATE.md (118 ideas, 328 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+max 3 variants, costs on, everything counted in STATE.md (119 ideas, 331 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.

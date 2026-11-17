@@ -64,3 +64,8 @@ BEFORE THE BELL: the yardstick for tonight's day-20 verdict is written and commi
 ## 08-03 test: idea PS, a probation size (journal/2015-idea-PS-probation-size.md)
 40 trades of a mildly losing setup (-0.10R) from today's balance: $62.50 a trade reaches my stop-trading line in 11% of runs; $31.25 breaks
 $435 in 11%; $15.63 (0.04 lots) never breaks $435; worst realistic cost about $220. Probation size $15.63. Idea 118, variants 328.
+
+## 08-04 evening (no new day): Amendment 2 + idea FD (journal/2015-idea-FD-forward-design-for-LM2.md)
+Coach: route C yes in principle, live only for a setup that passed its own kill line on lived days; not A2. Written as Amendment 2; route C empty.
+FD: can a forward re-test let LM2 earn the slot? 40 mornings pass the real pool 54.7% and a coin 16.1%: no usable design by my line (15% / 50%).
+Three options put to the coach; nothing started. Idea 119, variants 331.
