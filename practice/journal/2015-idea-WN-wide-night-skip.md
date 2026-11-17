@@ -37,3 +37,19 @@ Worked cases (tool `check`, ratio = night range / its 20-night median): 08-24 ra
 -1.03R), 08-11 2.47 (skipped; +1.66R). All three of my note's days are skip days; together +1.25R: the note's own days argue AGAINST the idea.
 
 ## Step 3, result (one run: `test 1.3 1.5`)
+Tool: `python bt/wide_night.py 2015-08-26 test 1.3 1.5` (A2 engine list; R after costs: spread 1.0 + slippage 0.1 pips).
+| variant | skipped: n, avg, net | kept: n, avg, net | gap (kept - skipped) | before 04-07 (skipped n) | from 04-07 (skipped n) |
+|---|---|---|---|---|---|
+| WN1 skip after a night >= 1.3 x median (JUDGED) | 37, +0.108, +4.00 | 111, +0.085, +9.45 | -0.023 | -0.631 (16) | +0.464 (21) |
+| WN2 skip at >= 1.5 | 24, +0.018, +0.42 | 124, +0.105, +13.03 | +0.088 | -0.223 (9) | +0.308 (15) |
+| WN0 skip the 37 narrowest nights (control) | 37, +0.068, +2.52 | 111, +0.098, +10.93 | +0.030 | +0.494 (13) | -0.181 (24) |
+Kill lines, each against its written threshold:
+K1 skipped average below zero AND at least 0.30R below kept: skipped +0.108R, gap -0.023R. FAIL.
+K2 skipped below kept before AND from 04-07: gap -0.631R before, +0.464R from. FAIL.
+K3 WN1's gap larger than WN0's: -0.023R vs +0.030R. FAIL.
+K4 shuffle p < 0.10: p 0.55. FAIL.
+**WN IS KILLED.**
+What I learned: my note was a feeling, not a fact. Over 148 days A2 did slightly BETTER after a wide night (+0.108R) than after the rest
+(+0.085R). Before 04-07 wide nights were A2's good days by 0.63R; after, its bad days by 0.46R: the regime split again, with the sign
+flipping. The three note days themselves made +1.25R. A wide night does not make a 40-pip stop a coin.
+Counts: idea 145; variants 386-388; second setups tried stays 38 (WN is an A2 filter, not a second setup).

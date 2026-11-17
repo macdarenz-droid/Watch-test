@@ -70,3 +70,7 @@ Killed on all four lines. Ideas 143, variants 385.
 
 ## 08-25 test: idea ND, breakout after a narrow day (journal/2015-idea-ND-narrow-day-breakout.md)
 Counts 17/30/46 at Q 0.7/0.8/0.9: under 80, killed for sample, outcomes unseen. My slip: skipped the paper frequency check; now a plan rule. Idea 144.
+
+## 08-25 evening test: idea WN, skip A2 after a wide night, from my 08-24 note (journal/2015-idea-WN-wide-night-skip.md)
+R after costs. A2 after a wide night +0.108R (37 days) vs the rest +0.085R; the sign flips at 04-07. Killed on all four lines.
+The note was a feeling, not a fact. Ideas 145, variants 388.
