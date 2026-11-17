@@ -7,6 +7,7 @@ Size rule v3 (0.16 lots) applies only if a route of the return rule opens. Payou
 |---|---|---|---|---|---|---|---|---|---|---|
 | (paper) | Mon 07-13 08:00 | buy | NO LIVE TRADE (monitor -0.227R) | paper | paper | paper stop | (-1.03 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 4: stopped; 132 pips against within two hours |
 | (paper) | Tue 07-14 08:00 | sell | NO LIVE TRADE (monitor -0.302R) | paper | paper | paper stop | (-1.00 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 5: stopped before 10:00 |
+| (paper) | Wed 07-15 08:00 | sell | NO LIVE TRADE (monitor -0.433R) | paper | paper | paper clock exit | (-0.48 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 6: within 5 pips of the stop, out at noon |
 
 ## Mon 07-13
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-13`:
@@ -57,6 +58,19 @@ Size rule v3 (0.16 lots) applies only if a route of the return rule opens. Payou
 - Monitor for today -0.433R (MO1), -0.222R (MO3) -> BOTH PAPER. Route A closed until 09-21; route B: no tested setup. NO ORDER.
 - Paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00. I do nothing in the account.
 - How I feel: calm, a little bored; boredom is when I would invent a trade. I will not.
+  08:00 London (PAPER): pre-entry hour 1.09907-1.10267 = 36.0 pips (PH2 lively: half on paper). Paper SELL near 1.10015 (last price; engine fixes the fill), paper stop about 1.10415. No order. Before advancing: watch only.
+  10:00 London (PAPER): best +13.8, worst -35.0 (5 pips from the paper stop), last -27.1. Still open on paper. Before advancing to noon: the stop is not mine to move, not even on paper.
+  12:00 London (PAPER): closed by the clock about 19 pips against (walk: best +13.8, worst -35.0, last -19.0). The afternoon fell 50 pips: after my exit, not my business.
+  -> Wed result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.433R -> paper). Checked: call committed before the bell; no order; trade list
+     still ends with #230 of 07-07; sim balance $24,926.03 unchanged.
+     PAPER A2, day 6 (engine, `python bt/coin_control.py 2015-07-16 --check 2015-07-15`): sell, clock exit, -0.48R; the other side +0.42R.
+     A2 paper running from 07-08: 6 days, -3.12R (-1.00, +1.39, -1.00, -1.03, -1.00, -0.48).
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     How it feels: nothing much. Four paper losses in a row.
+     Paper lines: UN3 agreed, -0.48R (agree days -11.05R in 48; disagree +2.88R in 14; day 62). PH2 (day 54): lively (36.0) -> half = -0.24R;
+     39 lively days -7.32R, 19 full-stop mornings; 15 quiet -2.39R; PH2 about -6.04R against A2's -9.73R.
+     MO PAPER RULE (day 12 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.48R (running -5.92R).
+     For Thursday (tool): MO1 -0.425R -> paper; MO3 -0.237R -> paper.
 
 ## Forward tally
 

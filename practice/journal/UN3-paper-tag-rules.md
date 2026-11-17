@@ -103,3 +103,4 @@ is to be written in the journal as a feeling, like every other such thought.
 | Fri 2015-07-10 (A2 on paper) | 59 | 14 | +2.88R (14 trades) | -8.54R (45 trades) | -8.54R / drawdown to be recomputed at the gate | -5.69R (A2 incl. paper days) |
 | Mon 2015-07-13 (A2 on paper) | 60 | 14 | +2.88R (14 trades) | -9.57R (46 trades) | -9.57R / drawdown to be recomputed at the gate | -6.72R (A2 incl. paper days) |
 | Tue 2015-07-14 (A2 on paper) | 61 | 14 | +2.88R (14 trades) | -10.57R (47 trades) | -10.57R / drawdown to be recomputed at the gate | -7.72R (A2 incl. paper days) |
+| Wed 2015-07-15 (A2 on paper) | 62 | 14 | +2.88R (14 trades) | -11.05R (48 trades) | -11.05R / drawdown to be recomputed at the gate | -8.20R (A2 incl. paper days) |
