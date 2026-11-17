@@ -149,6 +149,26 @@ Coach 06-08: enough entry tweaks; the next backtest takes a different part of th
      Tomorrow, Thu 06-11, is funded day 55: the last day of the 20-day hold on the 7% personal stop; its review is written after that day's trade.
      END OF RELEASED DATA (clock Thu 06-11 01:00 London).
 
+- **Thu 06-11 call, written 07:00 London (06:00 UTC), before the entry bar.** June goal read first: every figure below is from `python bt/call_numbers.py 2015-06-11`, `./look.sh` or a bar print. Yesterday's tag stands: VALID LOSS.
+  Coach 06-11: nothing live changes off 3 cases; the +80 pip give-back is my most promising management question: hypothesis and kill line, test on all
+      history first (max 3 variants), then judge it on forward days.
+  D1 (London days): Mon 06-08 close 1.12906 (0.93); Tue 06-09 close 1.12822 (0.52); Wed 06-10 high 1.13865 low 1.12600 close 1.13237 (0.50, range 126.5):
+      a new 3-day high in my morning, the whole move given back, a close in the middle. A higher close than Tuesday's.
+  H4 (UTC bars): Wed 08:00 bar 1.13865 -> 1.12853 (low 1.12600); 12:00 bar 1.12732-1.13507; 16:00 bar up to 1.13296; tonight 00:00 bar down to 1.12834; 04:00 bar 1.12946-1.13137.
+  H1: the night (00:00-07:00 London): open 1.13236, high 1.13236, low 1.12834, last 1.13032: range 40.2 pips (ratio 0.89), net -20.4 pips - a falling night, against my side.
+  M15: a 19 pip band 1.1295-1.1314 for the last hour and a half.
+  Bias: BUY. 22:00 London closes: 06-10 1.13237 vs 06-05 1.11124 = +211 pips (3-day gap +211.3). Gap / ADR5 1.22: stretched.
+  UN3 PAPER TAG (never live): 5-day gap +50 pips -> BUY; agree: paper TRADES. Forward day 38, disagree days 9 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 30.
+  MB1 PAPER TAG (never live, forward day 22): morning direction written at 12:00, before 13:25.
+  Levels: night high 1.13236; Wed high 1.13865; night low 1.12834; Wed low 1.12600.
+  Rejection-day check: for a buy, Wednesday made the 3-day high (True) and closed at 0.50, not in the bottom third. Not a rejection day. 10-day trend: UP (1.13237 vs 05-27 1.09038); the buy is with it.
+  SIZE RULE (the real safety rule): tracker balance $24,799.63, high-water $25,280.44, drawdown -1.90%; trigger 1 (half size) $24,522.03 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,510.81.
+  FUNDED DAY 55 today: the last day of the 20-day hold on the 7% personal stop (coach 05-15). Its review is written after today's trade, before the test.
+  Four losses in a row behind me; the written normal worst is six.
+  Plan: BUY 0.31 at 08:00 London, stop 40 pips below the bid, never moved, close 12:00. One trade.
+  Worry: third buy in a row at these prices; the last two failed. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
