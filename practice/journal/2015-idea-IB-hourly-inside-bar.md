@@ -26,3 +26,17 @@ IB1 SELLS at the 12:35 open, stop 20 above, out 14:35. Today's last price 1.1149
 afternoon rose: I expect a loss, likely a stop.
 
 ## Result (one run)
+Tool: `python bt/inside_bar.py 2015-08-14 test`. Hand check 08-13: IB1 sold 1.11053 at 12:35, out 14:35 at 1.10963, +0.45R; the control was
+stopped at 1.10853, -1.06R. MY WORKED GUESS WAS WRONG: I reasoned from the day's 22:00 price that the afternoon rose; it fell first and rose
+after 14:35. A worked case has to be read from the candles in the window, not from the day's last price. Noted as a method slip, not a mistake
+in any number.
+| variant | trades | wins | avg R | net | stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| IB1 follow the break of the mother hour (JUDGED) | 131 | 41% | -0.026 (+-0.21) | -3.35 | 57 | +2.10 | -5.45 | -0.109 |
+| IB2 tight inside hour | 25 | 48% | -0.058 (+-0.44) | -1.46 | 10 | -2.28 | +0.82 | -0.142 |
+| IB0 against IB1's signals (control) | 131 | 41% | -0.128 (+-0.20) | -16.77 | 61 | -7.82 | -8.95 | -0.218 |
+IB1 minus IB0 +0.102R (sign-flip p 0.59). IB1: all four kill lines FAIL. **IB IS KILLED.**
+What I learned: the break of an inside hour is a coin minus costs (-0.026R), the same as every break and burst I have tested. Fading it is
+worse (-0.128R). A 20-pip stop with 1.1 pips of cost starts every trade 5.5% behind; a pattern needs a real edge to beat that, and this one
+has none I can see.
+Counts: idea 134; variants 359-361; second setups tried 31, none alive.

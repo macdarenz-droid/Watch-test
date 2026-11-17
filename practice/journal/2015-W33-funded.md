@@ -148,3 +148,7 @@ CS, the first once-a-day idea under it: 78 trades at its loosest threshold, unde
 ## 08-12 evening: correction (NR repeated January's idea N) + idea YN (journal/2015-idea-YN-yesterdays-new-york-for-the-morning.md)
 YN: fade yesterday's NY afternoon at the next 08:00: 114 trades +0.070R, positive before and after 04-07 and at stressed costs, but under
 +0.10R and no better than its control (p 0.66). Killed; nearest miss in weeks; not promoted. Ideas 132, variants 358.
+
+## 08-13: EN2 pre-registered for a forward count (journal/EN2-forward-count-rules.md) + idea IB, hourly inside bar (journal/2015-idea-IB-hourly-inside-bar.md)
+EN2: frozen exactly, judged only on signals from its start, 120 trades; starts after SW1's shadow unless the coach says both may run.
+IB: 131 trades, -0.026R; fade control -0.128R. Killed on all four lines. Ideas 134, variants 361.
