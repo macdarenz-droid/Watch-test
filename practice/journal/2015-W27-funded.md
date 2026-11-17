@@ -249,3 +249,9 @@ kill lines K1-K4 and a regression pushed before the code; regression exact; one 
 above the firm's line. 24,000 two-year runs at a coin's edge, at -0.10R and at -0.20R, with and without jump days: no breach, lowest -7.09%, worst
 day 1.57%. All four lines hold. What is not negligible: at -0.10R my own 7% stop ends the account's trading in 99.7% of runs, half of them within
 113 days. No weekly stop proposed; the size rule is followed exactly as written. Counts: 94 ideas, 264 variants. June corrections after a push: 3.
+
+## 07-01 after funded day 69 (coach: a one-page month review first, then the next backtest picked from it): (1) journal/2015-06-month-end-review.md:
+June 22 trades, -1.34R, 22 valid / 0 mistakes, 2 process mistakes; the market kept its range and lost its direction (signal right about the morning
+41%); July goal set. (2) Picked from it: idea EF (journal/2015-idea-EF-straightness-of-the-market.md): is the straightness of the last 10 / 20 / 40 days
+a readable condition for the signal's worth? Tested INSIDE each half of the history so that the calendar cannot help; kill lines pushed first;
+mechanics matched; one run. Pooled inside-half differences +0.38R (p 0.12), +0.12R, +0.19R: all killed. Counts: 95 ideas, 267 variants.

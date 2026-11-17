@@ -39,3 +39,42 @@ No live rule changes either way.
 Worked expectation: the whole-history correlation will be clearly positive for N = 20 and 40 (the trap). Inside the halves I expect small differences of
 mixed sign: all three KILLED on K1 or K3; EF3 also on K4 (the first half keeps only about 22 days after 40 are used up).
 Counts when run: idea 95, variants 265-267.
+
+## Mechanics check (kill lines pushed first in commit 385e07c; `python bt/straightness.py 2015-07-02 --check 2015-07-01`)
+My side against the engine's A2: largest difference per day 0.000R on 127 days. 07-01: straightness over 10 days 0.075 (hand: 0.075); side advantage -0.60R (as logged).
+
+## RESULTS (one run: `python bt/straightness.py 2015-07-02`; halves 01-06 .. 04-02 / 04-03 .. 07-01; 20,000 within-half re-orderings; figures copied from the print)
+| variant | half | STRAIGHT days: n, side advantage | CROOKED days: n, side advantage | difference | pooled | p | whole-history correlation |
+|---|---|---|---|---|---|---|---|
+| EF1 N=10 | first | 27, +0.804R | 27, +0.750R | +0.054R | | | |
+| | second | 32, +0.367R | 32, -0.294R | +0.660R | +0.383R | 0.1195 | +0.14 |
+| EF2 N=20 | first | 22, +1.254R | 22, +0.374R | +0.880R | | | |
+| | second | 32, -0.164R | 32, +0.238R | -0.402R | +0.120R | 0.3616 | +0.15 |
+| EF3 N=40 | first | 12, +1.010R | 12, +1.109R | -0.099R | | | |
+| | second | 32, +0.185R | 32, -0.112R | +0.297R | +0.189R | 0.3161 | +0.13 |
+| line | EF1 | EF2 | EF3 |
+|---|---|---|---|
+| K1 positive inside BOTH halves | PASS | FAIL | FAIL |
+| K2 pooled at least +0.30R | PASS (+0.383) | FAIL | FAIL |
+| K3 within-half p < 0.05 | FAIL (0.12) | FAIL | FAIL |
+| K4 15 days in every group | PASS | PASS | FAIL (12) |
+VERDICT: all three KILLED. Straightness of the last 10, 20 or 40 days does not sort my days inside the halves in any way I can tell from chance.
+
+## Expectation against the run
+"Whole-history correlation clearly positive for N = 20 and 40": WRONG - it is weak everywhere (+0.13 to +0.15). I had expected the trap to look
+tempting; it does not even do that. "Inside the halves small differences of mixed sign, all killed, EF3 also on sample": yes (EF2 has the two halves
+pointing opposite ways by 0.9R and 0.4R - that is what noise at 22-32 days a group looks like).
+
+## What I take from it
+- The answer I wrote down for a kill: the change in spring is, as far as I can measure, a DATE and not a condition I can read off the chart at 07:00.
+  The review's sentence "A2 pays when a multi-week move is under way" describes the two periods; a 10-, 20- or 40-day straightness number does not
+  turn that description into something that sorts days.
+- The one row that leans the right way (EF1 inside the second half: +0.37R on the straighter days, -0.29R on the crooked ones) fails its line at
+  p = 0.12 and is one of three looks; in the first half the same measure shows nothing (+0.05R). I do not keep it as a paper line: three near-misses
+  kept "just in case" are how a journal fills with noise. Written here; not revisited unless a new, different reason appears.
+- So the instruments for a fading edge remain the ones I have: MO on paper (slow, results-based, judged at 60 lived days), the worry lines, and the
+  size rule, which is the only one of them that is live and the only one the account needs to survive.
+- 95 ideas. The useful ones this month were not the ones that tried to improve the rule: BD (nothing cuts the best days), LX / CO / RG (what
+  actually happened to the edge), SG / ST (what the size rule does). The next test should come from that side again.
+Counts: ideas 95, variants 267 (EF1, EF2, EF3). Adopted trading ideas: 0. July: numbers or files found wrong later than the turn that made them: 0
+(one missing file caught by the read-back within the same turn-pair and committed with a plain message).
