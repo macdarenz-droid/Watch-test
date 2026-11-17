@@ -7,6 +7,7 @@ SW1 paper shadow: 1 of 20 done, trade 2 open. Payout date Fri 07-31 ($0 unless b
 |---|---|---|---|---|---|---|---|---|---|---|
 | (paper) | Mon 07-27 08:00 | buy | NO LIVE TRADE (monitor -0.351R) | paper | paper | paper clock exit | (+0.95 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 14; SW1 shadow trade 2 stopped (-1.04R net) |
 | (paper) | Tue 07-28 08:00 | buy | NO LIVE TRADE (monitor -0.267R) | paper | paper | paper clock exit | (-0.67 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 15; SW1 shadow trade 3 opened (buy 1.10562) |
+| (paper) | Wed 07-29 08:00 | buy | NO LIVE TRADE (monitor -0.363R) | paper | paper | paper clock exit | (+0.10 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 16: flat morning |
 
 ## Mon 07-27
 07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-07-27`:
@@ -73,6 +74,20 @@ under 0.00R. I will write the day-20 verdict (Tue 08-04) against exactly these a
 - A2 paper plan: buy at the 08:00 open, stop 40 pips below, out 12:00.
 - SW1 shadow trade 3: open from Tue (buy 1.10562, stop 1.09362, target 1.12962, clock 12:00 Tue 08-04). Nothing to do.
 - How I feel: steady. Mistake to avoid: making up a line for A2 because one was asked for.
+  08:00 London (PAPER): pre-entry hour 1.10369-1.10554 = 18.5 pips (PH2 quiet: full unit on paper). A2 paper BUY near 1.10470 (engine fixes the fill), paper stop about 1.10070. SW1 shadow untouched. No order.
+  10:00 London (PAPER; window 07:00-08:45 UTC): A2 paper buy best +21.0, worst -16.9, last +15.7. Before advancing to noon: clock only.
+  12:00 London (PAPER; window 07:00-10:45 UTC): A2 paper buy closed by the clock about 5 pips ahead (best +25.3, worst -16.9, last +4.8).
+  -> Wed result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.363R -> paper). Checked: call committed before the bell; no order; trade list
+     still ends with #230 of 07-07; sim balance $24,926.03 unchanged.
+     PAPER A2, day 16 (engine, `python bt/coin_control.py 2015-07-30 --check 2015-07-29`): buy, clock exit, +0.10R; the other side -0.16R.
+     A2 paper running from 07-08: 16 days, -2.71R.
+     SW1 SHADOW trade 3: still OPEN (buy 1.10562, stop 1.09362, target 1.12962, clock 12:00 Tue 08-04); the evening fell to 1.09818, about 74 pips against. Not managed.
+     Account: tracker $24,358.99; FLAT; high-water $25,256.94; drawdown -3.56%.
+     How it feels: nothing to report; a flat paper morning.
+     Paper lines: UN3 agreed, +0.10R (agree days -11.26R in 56; disagree +3.50R in 16; day 72). PH2 (day 64): quiet (18.5) -> full = +0.10R;
+     43 lively days -7.34R, 21 full-stop mornings; 21 quiet -1.96R; PH2 about -5.62R against A2's -9.32R.
+     MO PAPER RULE (day 22 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.10R (running -5.51R).
+     For Thursday (tool): MO1 -0.302R -> paper; MO3 -0.280R -> paper.
 
 ## Forward tally
 
