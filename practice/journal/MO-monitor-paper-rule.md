@@ -6,3 +6,4 @@ A2-always's and (b) A2 averaged below +0.10R on the days the variant had it off.
 | day | MO1 monitor -> state | MO3 monitor -> state | A2 live R | MO1 R (running) | MO3 R (running) | A2 R (running) |
 |---|---|---|---|---|---|---|
 | Tue 2015-06-30 (1) | -0.086R -> PAPER | +0.011R -> as usual | +0.48 | 0.00 (0.00) | +0.48 (+0.48) | +0.48 (+0.48) |
+| Wed 2015-07-01 (2) | -0.095R -> PAPER | +0.078R -> as usual | -1.00 | 0.00 (0.00) | -1.00 (-0.52) | -1.00 (-0.52) |
