@@ -45,11 +45,12 @@ Goal: steady monthly profit, safe payouts, never a breach.
 - Lived: +0.20R a trade, known only to +-0.24R, on 78 trades; about one trade in three is a full stop. Planning number: +0.18R.
 - 15 days of 116 made +32.51R of A2's +35.21R; nothing at 08:00 tells me which. A partial at +1R costs 8.8R on those days, half size on a lively
   hour 6.5R, a +80 target 4.1R, a 10:00 lock 3.4R; a skipped day 2.2R on average. The only way to lose them is not to trade the day or not to hold it to 12:00.
+- 42% of my trades reach +1R open; only 2 of those 50 ever closed at or below zero. Closing at 11:00 or 11:30 instead of 12:00 costs 8-9R of 36.6R (idea RC).
 - Normal worst (written 05-19): six losses in a row; about 5.9R of drawdown. Deepest lived: 4.85R (-2.41%), five in a row (06-11).
 - The edge is judged after a few hundred lived trades over 2-3 years (coach 06-02), not from an alarm at 100 and not from any one month.
 
 ## 8. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
-max 3 variants, costs on, everything counted in STATE.md (84 ideas, 235 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+max 3 variants, costs on, everything counted in STATE.md (85 ideas, 238 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
 Closed, so that I do not reopen it on a bad day: entry filters from chart reading, entry time and price, the lookback, every exit except noon,
 second setups, day filters. The list with results is in the long version, section 7.

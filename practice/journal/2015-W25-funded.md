@@ -256,3 +256,8 @@ real fill (the worst real fill is 1.33R); the line was applied as worked, the st
 charts (06-05 .. 06-12). My mistakes: none. What a better trader would have done: stood aside on Mon, Tue and Thu (a sharp last move before the bell,
 then an entry on the side the day refused), banked part of Wednesday's spike (GB1, parked). The pattern has four winning twins in the very next week,
 06-16 an exact one (+1.60R). No mistake repeats: NO TEST, nothing changes. Counts unchanged: 84 ideas, 235 variants. June corrections after a push: 3 (one in the replay file itself).
+
+## 06-18, second piece (coach: the replay was study; one honest test earns Friday): idea RC (journal/2015-idea-RC-ran-and-came-back-clock.md). Count
+definitions, worked cases and kill lines K1-K6 pushed first; the loop's 12:00 version reproduces the engine exactly; one run on 118 days. 42% of A2
+trades reach +1R open (50 trades, +64.54R); 34 of them still close at +1R or more and only 2 at or below zero. A fixed exit at 11:00 / 11:30 / 12:30:
+-8.03R / -8.96R / -3.02R against 12:00, behind in both periods: all killed. Noon stays. Counts: 85 ideas, 238 variants. June corrections after a push: 3.
