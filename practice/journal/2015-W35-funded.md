@@ -62,6 +62,16 @@ STATE.md now opens with "WHAT MUST CHANGE BEFORE A LIVE TRADE" (coach 08-25): ro
      MO PAPER RULE (day 41 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.03R (running -3.69R).
      For Wednesday (tool): MO1 -0.175R -> paper; MO3 -0.166R -> paper.
 
+## Wed 08-26
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-26`:
+- 3-day gap +274.1 pips -> A2 side BUY. 5-day gap +492.5 -> UN3 agree. Night 00:00-07:00: 1.14715-1.15609, last 1.14748 (range 89.4, net -53.9, against the buy).
+- Tuesday's London day: 1.13968-1.16218, close 1.15141 (range 225.0). ADR5 196.6 pips: the five-day average range is about twice its July level (my reading of earlier calls; not re-checked).
+- Monitor for today -0.175R (MO1), -0.166R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); routes B and C empty. NO ORDER.
+- A2 paper plan: buy at the 08:00 open, stop 40 pips below, out 12:00.
+- SW1 SHADOW trade 10 (tool `bt/sw1_shadow.py 2015-08-26 signal`): Tue close 1.15141 vs 08-11 close 1.10416 = +472.5 pips -> paper BUY at the
+  08:00 open, stop 120 below, target 240 above, else out 12:00 Wed 09-02. Running -4.07R after 9 of 20.
+- How I feel: steady.
+
 ## Forward tally
 
 ## 08-24 test: idea FH, the 07:00-08:00 hour with the night (journal/2015-idea-FH-the-frankfurt-hour.md)
