@@ -29,3 +29,13 @@ Worked cases read from their own windows (R after costs 1.0 + 0.1):
 - Mon 08-17: candle +16.8 -> UD1 BUYS at 13:45 (ask about 1.11171), stop about 1.10921. The window's low 1.10770 is below it: a full stop, about -1.0R.
 
 ## Step 3, result (one run: `test 5 10`)
+Tool: `python bt/candle_1330.py 2015-08-19 test 5 10`. Hand checks: 08-18 follow -0.54R (worked: about -0.53R); 08-17 follow stopped -1.05R (worked: full stop). Both as written.
+| variant (R after costs: spread 1.0 + slippage 0.1 pips; stressed 2.0 + 0.5) | trades | wins | avg R | net | stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| UD1 follow the 13:30 candle, |move| >= 5 (JUDGED) | 123 | 41% | -0.130 (+-0.21) | -15.95 | 59 | -0.28 | -15.68 | -0.204 |
+| UD2 follow, |move| >= 10 | 76 | 43% | -0.041 (+-0.29) | -3.15 | 36 | +8.62 | -11.77 | -0.105 |
+| UD0 fade, |move| >= 5 (control) | 123 | 38% | -0.083 (+-0.23) | -10.21 | 59 | +2.78 | -13.00 | -0.150 |
+UD1 minus UD0 -0.047R (sign-flip p 0.80). UD1: all four kill lines FAIL. **UD IS KILLED.**
+What I learned: after the 13:30 candle, neither following nor fading pays; both lose, almost all of it after 04-07. The afternoon after the
+US-figures minute is a coin with a 25-pip stop that costs the spread. The June note "D" can be crossed off.
+Counts: idea 139; variants 371-373; second setups tried 34, none alive.

@@ -67,3 +67,6 @@ Dose line (steep trends, 41 trades) +0.399R: a hint, not promoted. Ideas 137, va
 Worst week: 5 valid trades, -3.07R; the full stops followed a pre-bell hour that had already run A2's way. NC1 (skip those days, X 15) PASSES
 all four lines (gap +0.306R, p 0.068) - provisional and fragile: without the inspiring week gap +0.259R, p 0.11; dose the wrong way.
 Forward count only with the coach's word. Ideas 138, variants 370.
+
+## 08-18 test: idea UD, the 13:30 London candle (journal/2015-idea-UD-the-1330-candle.md)
+R after costs (1.0 + 0.1 pips). Follow: 123 trades -0.130R; fade control -0.083R. Killed on all four lines. Ideas 139, variants 373.
