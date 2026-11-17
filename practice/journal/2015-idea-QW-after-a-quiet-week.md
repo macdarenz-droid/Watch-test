@@ -32,3 +32,19 @@ Tool: `python bt/quiet_week.py 2015-07-24 count` (no outcomes).
 - Worked case: the first full week, Mon 01-05 .. Fri 01-09, range 221.9 pips (high minus low of the whole week).
 
 ## Result (one run)
+Tool: `python bt/quiet_week.py 2015-07-24 test`. Week ranges in order (pips): 222 411 565 325 242 172 171 220 401 444 556 285 314 468 328
+240 471 325 336 447 190 493 302 247 280 324 299 369. Median week 324 pips.
+| measure | cases | result | one-sided p, persistence | p, expansion |
+|---|---|---|---|---|
+| QW1 Mon-Fri weeks, rank correlation with the next week (JUDGED) | 27 pairs | +0.094 | 0.32 | 0.68 |
+| QW3 Wed-Tue weeks (shifted cut, same days) | 27 pairs | +0.201 | 0.15 | 0.85 |
+| QW2 next week / 4-week median: after QUIET weeks | 11 | 0.83 (median 0.75); again under the median 8 of 11 | | |
+| QW2 the same after OTHER weeks | 12 | 1.35 (median 1.10); under the median 4 of 12 | | |
+**BY THE LINE WRITTEN FIRST: PERSISTENCE IS KILLED** (QW1 +0.094, line above +0.20 with p < 0.10). The folklore is not supported either:
+no sign of expansion after quiet (after 11 quiet weeks only 3 next weeks were above the median).
+Honest reading: 1. In 28 weeks I can see no relation between one week's range and the next that I could defend. 2. QW2 leans toward
+persistence (8 of 11 against 4 of 12) and QW3 is right at +0.20; I wrote that a mild persistence would not show at this sample, and
+this is what "would not show" looks like. I do not promote the lean: QW1 was the judged measure and it failed. 3. The daily clustering
+of 07-14 (big day after big day) does not carry up to weeks in any way I can measure. 4. No rule could use this even if it were true:
+it is about size, and none of my tests found a way to earn from size without direction (BK).
+Counts: idea 111; variants 307-309.

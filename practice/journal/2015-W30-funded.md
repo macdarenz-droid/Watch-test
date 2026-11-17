@@ -121,3 +121,7 @@ BX2, frozen since May, on unseen days 05-12..07-21: 43 trades +0.176R, both halv
 ## 07-22: plan rewritten on one page + idea RA, route A's gate (journal/2015-idea-RA-is-route-A-gate-strong-enough.md)
 Weakest assumption: +0.30R on the 40-day monitor means the edge is back. Test: a no-edge A2 reads that on 15.8% of mornings, 59.9% of
 60-morning runs. Gate too weak. Proposal to the coach: +0.60R (2.2% / 16.0%; healthy A2 passes 92%). Rule not edited. Idea 110, variants 306.
+
+## 07-23 test: idea QW, volatility after a quiet week (journal/2015-idea-QW-after-a-quiet-week.md)
+28 weeks. Week range against the next week's: rank correlation +0.094 (p 0.32). Persistence killed by the line; no expansion after quiet either.
+A lean (8 of 11 quiet weeks followed by another) that the sample cannot carry. Idea 111, variants 309.
