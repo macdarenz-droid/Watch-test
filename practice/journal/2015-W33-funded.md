@@ -106,3 +106,6 @@ Killed on all four lines. Idea 126, variants 349.
 ## 08-11 evening test: idea MB2, the afternoon break of the morning range (journal/2015-idea-MB-morning-range-break.md)
 Counted first, B fixed by a pre-written rule (0, 125 trades). Follow the break: -0.117R, mostly lost after 04-07. Killed on all four lines.
 Quieter mornings +0.195R on 59, all of it before 04-07: not promoted. Idea 127, variants 352.
+
+## 08-12 test: idea GC2, the night faded at the bell, counted first (journal/2015-idea-GC2-back-to-close-counted-first.md)
+Counts at N = 10/15/20: 115/93/74 days; none reaches the pre-written 120. Killed for sample, outcomes never run. Idea 128.
