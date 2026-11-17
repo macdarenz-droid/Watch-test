@@ -149,3 +149,18 @@ Inactivity: count from 09-02 (coach); day 25 = Sun 09-27, first eligible Mon 09-
 ## 09-03 evening test: idea 153 SQ, compression before big days (H1; journal/2015-idea-SQ-squeeze-before-big-days.md)
 Trade form killed for sample (29 trades). Size claim killed on all four lines: the day after a narrow day is smaller than usual, after a wide
 day wider. My chart sighting was small bodies, not small ranges. Ideas 153, variants 409.
+
+## Fri 09-04 (not a payout date; next Fri 09-11)
+07:00 London PAPER CALL (written before the bell). Tool lines, printed and written by this same command:
+    London day 2015-09-01 high 1.1332 low 1.12082 close 1.13131 close position 0.85 range 123.8
+    London day 2015-09-02 high 1.13191 low 1.12164 close 1.12256 close position 0.09 range 102.7
+    London day 2015-09-03 high 1.12434 low 1.10873 close 1.11228 close position 0.23 range 156.1
+    yesterday made the 3-day high: False | the 3-day low: True
+    night 00:00-07:00 London: open 1.11201 high 1.11392 low 1.11161 last 1.11363 | range 23.1 | net 16.2
+    3-day gap -87.1 | 5-day gap -123.0 | ADR5 125.9 | gap / ADR5 0.69 | 10-day trend: DOWN (1.11228 vs 2015-08-20 1.12400)
+    MO1 N=40 pause: monitor for the NEXT day after 2015-09-03 = -0.193R -> PAUSE (paper) | last 5 monitors: 08-28:
+    MO3 N=60 pause: monitor for the NEXT day after 2015-09-03 = -0.157R -> PAUSE (paper) | last 5 monitors: 08-28:
+- A2 side SELL (3-day gap -87.1). UN3 agree (5-day gap -123.0).
+- Both monitors under +0.60R -> PAPER. Routes closed/empty. Inactivity: day 2 of the count from 09-02. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips, out 12:00.
+- How I feel: fine.
