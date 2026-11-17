@@ -193,3 +193,9 @@ matter. Counts: 77 ideas, 216 variants. June corrections after a push: 0.
 lines pushed first; the script reproduced the case; one run. Forward: -1.37R / -0.28R / -1.63R against A2; 0, 3 and 0 of 11 changed days improved;
 deeper drawdowns. Killed a second time. My rough expectation (+1.8R) was built on my own word "poke": most of those days a candle CLOSED beyond the
 level before the price came back; only 06-08 was a wick. The routine's wording is corrected. Counts: 78 ideas, 219 variants. June corrections after a push: 0.
+
+## 06-10 after funded day 54: (1) the coach's review first - my last 10 losses on the chart (journal/2015-06-10-last-ten-losses-on-the-chart.md): 10 valid,
+0 mistakes; one line on what they share, with base rates. (2) Then one test: the forward re-test of idea PM, partials and break-even
+(journal/2015-idea-PM-forward-partials.md). April definitions frozen since 04-15, judged on the 41 days since; worked cases (06-10, 06-04) and kill lines
+pushed first; engine day totals matched the worked cases; one run. PM1 -1.40R, PM2 -1.44R, PM3 +0.07R (two days) against A2: killed a second time.
+The partial turns yesterday's -0.14R into +0.48R and pays for it three times over on the big winners. Counts: 79 ideas, 222 variants. June corrections after a push: 0.
