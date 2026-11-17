@@ -77,3 +77,7 @@ tag on A2's paper call (no money is affected: A2 is on paper). It would be a sec
 for its turn. My coach decides whether NC1 gets a forward count, and when. I start nothing. My own view: weakest kind of pass; if it gets
 a slot it should be judged on at least 30 forward skip days with the same four lines, which at about one skip a week is about 7 months.
 Counts: idea 138; variants 368-370.
+
+COST BASIS, confirmed 08-18 from the code (coach asked): NC's R numbers are COSTS ON. bt/no_chase_hour.py takes A2's R from
+`ideas.run("A2", ...)` with no cost argument, which builds `Account()` with its defaults (backtest.py lines 49-51): spread 1.0 pip,
+slippage 0.1 pip against me on market and stop fills, commission 0. No stressed-cost run was in NC's lines (it is a filter on A2's own trades).

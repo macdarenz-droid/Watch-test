@@ -61,3 +61,5 @@ max 3 variants, costs on, everything counted in STATE.md (138 ideas, 370 variant
   (about +-0.22R on the average at 80 trades; a rule with no edge clears +0.10R about one time in four). Thresholds are chosen from counts
   by a rule written before the count. ANY PASS IS PROVISIONAL until the same frozen rule also holds on lived days after the test
   (a pre-registered forward count, one at a time, never route C before that). Max 3 variants, named up front. Costs on.
+- EVERY RESULTS TABLE states its cost basis in its header (coach 08-18), e.g. "R after costs: spread 1.0 + slippage 0.1 pips, no commission"
+  and, where run, "stressed: 2.0 + 0.5". The engine's default account is 1.0 + 0.1 (backtest.py, Account).
