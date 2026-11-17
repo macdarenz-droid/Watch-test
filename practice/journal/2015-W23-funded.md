@@ -195,3 +195,10 @@ state. Edge gone: never near the firm's line (lowest -6.9%), stopped in about 70
 stopped 99%, half within six months. Edge +0.10R: still trading after 300 days in 9 runs of 10. All three kill lines pass; nothing changes. My worked
 figure for the zero edge (42%) missed the run (68-73%) because a trailing stop is met more often than a fixed one; reason written before the verdict.
 Counts: 72 ideas, 201 variants. June corrections after a push: 0.
+
+## 06-03 research after funded day 49 (coach: one idea to make A2 itself better): journal/2015-06-03-two-forgotten-gates-and-a-leverage-look.md.
+(1) I began with a tighter stop at the same $ risk, worked it on the MFE / MAE log, then read my own March notes before pre-registering: it is leverage
+(same pips, 1.33 times the lots), not management. Stopped at the look; 3 looks counted; nothing run. (2) Reading the record I found two forward kill tests
+of March that were never judged: idea W "no Friday" and the N1 paper tag. Applied both by their written lines on lived days: W killed (first 8 unseen
+Fridays +5.64R, 2 losers), N1 killed at its 20-trade gate (all five lines fail). Process mistake P10 (missed gates), fixed in the gates list.
+Nothing adopted; the coach's brief is still open for a new idea tomorrow. Counts: 73 ideas, 204 variants; process mistakes 10.
