@@ -66,3 +66,10 @@ costs 1.0 + 0.1: skipped days +0.212R vs kept +0.121R, gap -0.091R, p 0.71 -> KI
      MO PAPER RULE (day 46 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.00R (running -5.36R).
      For Wednesday (tool): MO1 -0.143R -> paper; MO3 -0.165R -> paper.
      How it feels: a stop by 10 pips, then the price came back to the entry by 10:00. The stop is the rule; noted, not acted on.
+
+## 09-01 evening: August month-end review (journal/2015-08-month-end-review.md) and YN exits (journal/2015-YN-exits-and-management.md)
+Review: 0 live trades, 21 valid days flat by rule, A2 paper August +1.94R (9 of 21 stopped), gate re-check +0.60R = 1.8% (stands), YM1 2 of 80,
+NC1 1 skip of 30, EN2 0; August goal: 3 numbers corrected after a push; and the review itself had 2 memory numbers, corrected after its push
+(September correction 1).
+YN exits (coach: best near miss, exits not entries): out 10:00 / 16:00 / break-even at +20 all KILLED against base (R after costs 1.0 + 0.1).
+YN's own 13 unseen trades since its test lost ~3.9R: +0.070R -> +0.032R. Ideas 151, variants 403.
