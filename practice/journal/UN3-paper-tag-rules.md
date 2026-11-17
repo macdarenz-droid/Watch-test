@@ -68,3 +68,4 @@ is to be written in the journal as a feeling, like every other such thought.
 | Fri 2015-05-22 | 24 | 6 | +1.42R (6 trades) | -2.11R (18 trades) | -2.11R / 5.00R | -0.70R / 3.69R (from the trade list) |
 | Mon 2015-05-25 | 25 | 6 | +1.42R (6 trades) | -1.42R (19 trades) | -1.42R / 5.00R | -0.02R / 3.69R (from the trade list) |
 | Tue 2015-05-26 | 26 | 6 | +1.42R (6 trades) | -1.87R (20 trades) | -1.87R / 5.00R | -0.47R / 3.69R (from the trade list) |
+| Wed 2015-05-27 | 27 | 6 | +1.42R (6 trades) | -0.96R (21 trades) | -0.96R / 5.00R | +0.44R / 3.69R (from the trade list) |
