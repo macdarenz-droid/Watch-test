@@ -203,6 +203,27 @@ Bookkeeping command this week: `python bt/daily_numbers.py 567.04 25256.94`.
      +80 pip trades: none (3 of 15). 80+ pip pre-entry hours: none (5 of 10).
      END OF RELEASED DATA (clock Thu 07-02 01:00 London).
 
+- **Thu 07-02 call, written 07:00 London (06:00 UTC), before the entry bar.** JULY GOAL read first: a worked case before every pushed number or rule; every file write read back in the same command. Figures from `python bt/call_numbers.py 2015-07-02`, `./look.sh`, `python bt/side_monitor.py 2015-07-02 --state` or a bar print. Yesterday's tag stands: VALID LOSS.
+  Coach 07-02: EF killed cleanly. $24 above the half-size line: tomorrow's size is set by the written rule, not by feel. Next brick: study how my exits
+      behave - replay my last 20 trades by eye, note where a better trader would have managed differently, then one observation as a testable exit rule.
+  Plan line read (BD): the only way to lose the best days is not to trade the day or not to hold it to 12:00.
+  SIZE RULE, read word for word: "HALF size from a day's CLOSE at or below 3% under the high-water mark, until a new high-water." Last close (tool, 07-01):
+      $24,523.17; line $24,499.23; the close is ABOVE the line by $23.94 -> the trigger is NOT on -> TODAY IS FULL SIZE, 0.31 lots. By the rule, not by feel.
+      Tonight the same sentence is read on tonight's close: at or under $24,499.23 -> 0.16 lots from tomorrow until a new high-water ($25,256.94). Trigger 2 (stop) $23,488.95.
+  D1 (London days): Mon 06-29 close 1.12356 (0.87); Tue 06-30 close 1.11445 (0.24); Wed 07-01 high 1.11713 low 1.10426 close 1.10523 (0.08, range 128.7):
+      a spike up in my morning, then down all day to a close on the low. Second lower close; 180 pips under Monday's.
+  H4 (UTC bars): Wed 08:00 bar 1.11713 / 1.10953; 12:00 bar down to 1.10588; 16:00 bar down to 1.10426; 20:00 bar low 1.10321; tonight 00:00 bar UP to 1.10772, close 1.10707; 04:00 bar 1.10640-1.10748, last 1.10725.
+  H1: the night (00:00-07:00 London): open 1.10442, high 1.10772, low 1.10321, last 1.10725: range 45.1 pips (ratio 1.28), net +28.3 pips - a rising night, against a sell.
+  M15: 1.1064-1.1074 for two hours.
+  Bias: SELL. 22:00 London closes: 07-01 1.10523 vs 06-26 1.11625 = -110 pips (3-day gap -110.2). Gap / ADR5 0.74. Second sell.
+  UN3 PAPER TAG (never live): 5-day gap -152 pips (-151.7) -> SELL; agree: paper TRADES. Forward day 53, disagree days 12 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 45.
+  MO PAPER RULE (never live; day 3 of 60): MO1 (40 days) monitor -0.152R -> A2 would be on PAPER today. MO3 (60 days) monitor +0.096R -> A2 as usual.
+  Levels: night high 1.10772; Wed 12:00 open about 1.1104; night low 1.10321 (= Wed's late low); Mon 06-29 low 1.09545.
+  Rejection-day check: for a sell, Wednesday did not make the 3-day low (Monday's 1.09545 is lower). Not a rejection day. 10-day trend: DOWN (1.10523 vs 06-17 1.13372); the sell is WITH it.
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
+  Worry: none that changes anything. A bounce in the night after a close on the low. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
