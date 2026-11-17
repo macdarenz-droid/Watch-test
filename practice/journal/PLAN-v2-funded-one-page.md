@@ -49,10 +49,12 @@ Goal: steady monthly profit, safe payouts, never a breach.
 - Normal worst (written 05-19 for 56 trades): six losses in a row; about 5.9R of drawdown. Re-read 06-24 for 82 trades: worst run median 4, 95th pct 7; worst drawdown median 4.5R, 95th pct 8.5R. Deepest lived: 4.85R (-2.41%), five in a row (06-11).
 - Live against expectation (06-25, idea LX): funded +0.04R a trade is OUTSIDE what the Jan-Mar backtest said (+0.53R), inside the planning edge, and
   not yet distinguishable from zero. Worry lines W1-W6 are in STATE (gates list) and are read at every month-end.
+- Full stops (06-25, idea CO): before funding my side was stopped 10% of the time and the other side 48%; since funding 37% and 38%. The stops are
+  the direction being wrong as often as a coin's, not the stop or the entry. Watched monthly; the worry lines and the size rule are the response.
 - The edge is judged after a few hundred lived trades over 2-3 years (coach 06-02), not from an alarm at 100 and not from any one month.
 
 ## 8. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
-max 3 variants, costs on, everything counted in STATE.md (90 ideas, 252 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+max 3 variants, costs on, everything counted in STATE.md (91 ideas, 255 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
 Closed, so that I do not reopen it on a bad day: entry filters from chart reading, entry time and price, the lookback, every exit except noon,
 second setups, day filters. The list with results is in the long version, section 7.

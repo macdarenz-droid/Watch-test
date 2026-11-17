@@ -275,3 +275,10 @@ would make me worried): journal/2015-idea-LX-live-against-expectation.md. Lists,
 one run, 20,000 draws of 65 trades. Live (+0.039R, 47.7% wins, 36.9% full stops) is OUTSIDE the raw pre-funding backtest (+0.531R, 67%, 10%) on every
 figure; INSIDE the planning edge on average and win rate; not told apart from a zero edge; trade count 65 of 65. Worry lines frozen with numbers; W3
 (full-stop share) is crossed and reported to the coach with a question. Counts: 90 ideas, 252 variants. June corrections after a push: 3.
+
+## 06-25, second piece (coach: LX was a live review; one honest backtest earns 06-26 - a hypothesis about the full stops): idea CO, the coin as a
+control (journal/2015-idea-FS2-why-full-stops.md). Hypothesis "the mornings did not get more dangerous; the signal stopped choosing the safe side",
+kill lines K1-K4 and worked cases pushed first; the control reproduces engine A2 exactly; one run on 123 days, both sides from 08:00. Coin's stop rate
+29.3% -> 37.7% (K1 fails by 0.4 points: the mornings did get harder); my side 10.3% -> 36.9%; the other side 48.3% -> 38.5%. Two thirds of the rise
+is the signal; in May and June my side is no safer than a coin's. Hypothesis as written KILLED on K1; no live rule changes; W3's redraw proposed
+to the coach. Counts: 91 ideas, 255 variants. June corrections after a push: 3.

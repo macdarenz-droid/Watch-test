@@ -45,3 +45,55 @@ Worked expectation, written now: the coin's rate about 25-30% in both periods (t
 A2 funded about 37% against a coin near 30%: about 7 points ABOVE the coin - K3 passes narrowly or fails narrowly. I expect the hypothesis to survive,
 with the uncomfortable detail that since funding my side has been stopped slightly MORE often than the other side.
 Counts when run: idea 91, variants 253-255.
+
+## Mechanics check (hypothesis and kill test pushed first in commit 50d045f)
+The control's A2 side against the engine's A2 at 40 pips: largest difference per day 0.000R, stop days identical, 123 days.
+06-23: my buy stopped (-1.03R), the sell not (+1.08R): 1 of 2, as worked. 06-25: neither side stopped (the buy +0.09R): the edge case fell on "not stopped".
+
+## RESULTS (one run: `python bt/coin_control.py 2015-06-26`; both sides from the 08:00 open, noon exit, costs on; figures copied from the print)
+| stop | period | days | COIN's stop rate | A2's side | the other side | avg R: A2's side / other side / coin |
+|---|---|---|---|---|---|---|
+| CO1 40 pips | BEFORE funding | 58 | 29.3% | 10.3% (6) | 48.3% (28) | +0.531 / -0.467 / +0.032 |
+| CO1 40 pips | FUNDED | 65 | 37.7% | 36.9% (24) | 38.5% (25) | +0.037 / -0.055 / -0.009 |
+| CO2 30 pips | BEFORE | 58 | 38.8% | 20.7% (12) | 56.9% (33) | +0.663 / -0.495 / +0.084 |
+| CO2 30 pips | FUNDED | 65 | 47.7% | 49.2% (32) | 46.2% (30) | +0.054 / -0.007 / +0.024 |
+| CO3 50 pips | BEFORE | 58 | 24.1% | 8.6% (5) | 39.7% (23) | +0.423 / -0.414 / +0.004 |
+| CO3 50 pips | FUNDED | 65 | 26.2% | 24.6% (16) | 27.7% (18) | +0.042 / -0.070 / -0.014 |
+By month at 40 pips, A2's stop rate / the coin's: Jan 11% / 32% | Feb 5% / 18% | Mar 18% / 41% | Apr 27% / 34% | May 43% / 40% | Jun 42% / 37%.
+| kill line (CO1) | figures | result |
+|---|---|---|
+| K1 the coin's rate changed by 8 points or less | 29.3% -> 37.7%: +8.4 points | FAIL, by 0.4 |
+| K2 before funding A2 at least 10 points under the coin | 10.3% against 29.3%: -19.0 | PASS |
+| K3 funded: A2 within 8 points of the coin | 36.9% against 37.7%: -0.8 | PASS |
+| K4 the same picture at 30 and 50 pips | 20.7 / 38.8 -> 49.2 / 47.7; 8.6 / 24.1 -> 24.6 / 26.2 | PASS |
+VERDICT, by the test as written: the hypothesis is KILLED on K1. I wrote "the mornings did NOT become more dangerous" and the coin's own stop rate
+rose by 8.4 points, 0.4 more than the line allowed. I do not round that away. The hypothesis as a whole - "it is ONLY the signal" - is wrong.
+
+## What the table says, both halves
+My stop rate rose by 26.6 points (10.3% -> 36.9%). The control splits that rise in two:
+- 8.4 points: the mornings. A trader with no signal at all is stopped more often since 03-27 at a 40 pip stop (and at 30: +8.9; at 50 only +2.1).
+- 18.2 points: the signal. Before funding my side was stopped 10% of the time and the OTHER side 48%: the 3-day direction kept me off the stopped side
+  on almost every dangerous morning. On the funded account: mine 36.9%, the other side 38.5%. The difference is gone. In average R: my side +0.037,
+  the other side -0.055 - nine hundredths apart, of which costs are a part.
+- By month it is not a step on 03-27 but a slide: 11% / 32% in January, 27% / 34% in April, and in May and June my side is stopped slightly MORE
+  often than a coin's (43% / 40%, 42% / 37%).
+My expectation was wrong twice: I said the coin's rate would be the same in both periods (it rose), and that my side would sit about 7 points above
+the coin since funding (it sits 0.8 under). I was right only about the size of the old advantage.
+
+## What this means, and what I do NOT do with it
+- "Why so many full stops?" has an answer now, in two unequal parts: one third is harder mornings, two thirds is that the signal has stopped
+  choosing the safe side. Neither part is about where my stop is or how I enter: at 30, 40 and 50 pips the picture is the same. That is why SA, CS, CF,
+  ET, the filters and the price zone all found nothing - they were looking for a bad stop or a bad entry, and the stop days are simply the days the
+  direction was wrong, of which there are now as many as a coin has.
+- This is the most serious result I have written about A2. In May and June - 40 trades - the rule's side has been no safer than the other side.
+  It is the same fact as LX's "not told apart from zero", seen from the stop side, and it is two months, 40 trades: 43% against 40% is noise around
+  "equal", and equal is the finding.
+- What I do not do: change a live rule. The coach said not until a test says so, and this test does not say what to change - it says what is
+  NOT the cause. The plan already has the instrument for "the edge may be gone": the worry lines (W1: lived average under -0.019R at 100 trades,
+  under +0.015R at 150) and behind them the size rule, which caps a dead edge at about 5-6% of the account (idea GD). Trading continues at 0.50%.
+- As written before the run for a kill on K1: stop size against the morning's volatility is a question I put to the coach rather than answer myself.
+  My own reading is that it is the small part: at 50 pips the coin's rate hardly moved (+2.1) and my side's rise was the same story (8.6% -> 24.6%).
+- W3 (yesterday's question): this table gives the better line. "A2's stop rate within 5 points of the coin's, or above it, over the last 60 trades"
+  measures the thing that actually changed. It would have been crossed since May. I propose it to the coach; I do not adopt it on my own.
+- For the month-end review next week: the monthly row "A2's stop rate / the coin's" goes into it, every month from now on.
+Counts: ideas 91, variants 255 (CO1, CO2, CO3). Adopted trading ideas: 0. Numbers or rules corrected after a push in June: 3 (none today).
