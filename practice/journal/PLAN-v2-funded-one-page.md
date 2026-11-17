@@ -21,6 +21,8 @@ Goal: steady monthly profit, safe payouts, never a breach.
 ## 3. Daily stop
 - One trade, one stop: the planned worst day is -1R = -$125 = -0.5% (the firm allows 5%). Seen worst with a jump through the stop: about 3R = 1.5%.
 - After the trade is closed - win, loss or stop - the day is over. No re-entry. No afternoon trade.
+- There is no weekly stop: the size rule does that job. Stress test 06-30 (idea ST): from -2.4% under the high-water it takes 16 full stops in a row to
+  reach my own stop, $933 above the firm's line; no breach in 24,000 two-year runs down to a -0.20R edge, with jump days; worst day 1.57%.
 
 ## 4. Payout rule (every 14 days from 03-27; next Fri 07-03)
 - On the date, after the day's trade, on the tracker balance (sim balance minus everything paid out):
@@ -58,6 +60,6 @@ Goal: steady monthly profit, safe payouts, never a breach.
 
 ## 8. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
-max 3 variants, costs on, everything counted in STATE.md (93 ideas, 261 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+max 3 variants, costs on, everything counted in STATE.md (94 ideas, 264 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
 Closed, so that I do not reopen it on a bad day: entry filters from chart reading, entry time and price, the lookback, every exit except noon,
 second setups, day filters. The list with results is in the long version, section 7.

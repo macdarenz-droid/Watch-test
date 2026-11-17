@@ -184,3 +184,10 @@ before any code; the rolling function hand-checked; one run. Real history: +1.10
 60-day one. Built worlds: alive keeps 96-99% of A2's R; dead halves the drawdown but still loses 19R; switch +11 to +13R. MO1 and MO3 pass all four
 lines; the half-size variant fails. NOTHING LIVE: both run on paper from 06-30 and are judged after 60 lived days. The survival rule stays the size
 rule. Counts: 93 ideas, 261 variants. June corrections after a push: 3.
+
+## 06-30 research after funded day 68 (coach: daily and weekly stop rules against my worst streaks - breach risk if this continues): idea ST
+(journal/2015-idea-ST-stop-rules-against-worst-streaks.md). Said first: I have no weekly stop rule; the size rule does that job. The ladder worked by hand,
+kill lines K1-K4 and a regression pushed before the code; regression exact; one run from today's state. 16 full stops in a row reach my own stop, $933
+above the firm's line. 24,000 two-year runs at a coin's edge, at -0.10R and at -0.20R, with and without jump days: no breach, lowest -7.09%, worst
+day 1.57%. All four lines hold. What is not negligible: at -0.10R my own 7% stop ends the account's trading in 99.7% of runs, half of them within
+113 days. No weekly stop proposed; the size rule is followed exactly as written. Counts: 94 ideas, 264 variants. June corrections after a push: 3.
