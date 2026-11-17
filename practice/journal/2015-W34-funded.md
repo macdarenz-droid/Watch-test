@@ -57,6 +57,17 @@ Pending this week: MPG's outcome run (pre-registered and counted 08-17 before th
      MO PAPER RULE (day 36 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.23R (running -3.90R).
      For Wednesday (tool): MO1 -0.234R -> paper; MO3 -0.163R -> paper.
 
+## Wed 08-19
+Coach 08-19: write the kill lines out in full before the results in every report (they are in each pre-registration file already; from now
+the report also lists every line with its threshold before the table, and each line's value against it after).
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-19`:
+- 3-day gap -127.5 pips -> A2 side SELL. 5-day gap -20.0 -> UN3 agree. Night 00:00-07:00: 1.10256-1.10594, last 1.10581 (range 33.8, net +32.4, against the sell).
+- Tuesday's London day: 1.10175-1.10938, close 1.10216 (range 76.3); it made the 3-day low.
+- Monitor for today -0.234R (MO1), -0.163R (MO3) -> BOTH PAPER. Route A closed until 09-21 (gate +0.60R); routes B and C empty. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
+- SW1 shadow trade 7: open (buy 1.11272, stop 1.10072, target 1.13672, clock 12:00 Thu 08-20). The night rose away from its stop. Nothing to do.
+- How I feel: fine.
+
 ## Forward tally
 
 ## 08-17 test: idea MPG, the moving-average pullback with a count grid (journal/2015-idea-MPG-moving-average-pullback-counted.md)

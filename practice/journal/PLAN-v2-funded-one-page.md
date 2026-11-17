@@ -63,3 +63,4 @@ max 3 variants, costs on, everything counted in STATE.md (139 ideas, 373 variant
   (a pre-registered forward count, one at a time, never route C before that). Max 3 variants, named up front. Costs on.
 - EVERY RESULTS TABLE states its cost basis in its header (coach 08-18), e.g. "R after costs: spread 1.0 + slippage 0.1 pips, no commission"
   and, where run, "stressed: 2.0 + 0.5". The engine's default account is 1.0 + 0.1 (backtest.py, Account).
+- EVERY TEST REPORT lists each kill line in full with its threshold BEFORE the results, then each line's value against it (coach 08-19).
