@@ -80,6 +80,7 @@ Payout dates (every 14 days): 04-10, 04-24, 05-08, 05-22, ...   Split 80%.   R =
 | Mar 2015 (from 03-27) | 3 | 2 | +0.98 | +124.31 | -0.49% | -0.49% | 3 valid / 0 mistake (process mistakes: 1) | 0 | 0 |
 | Apr 2015 | 22 | 11 | +4.17 | +517.39 | -0.52% | -1.63% | 22 valid / 0 mistake (process mistakes: 2) | 125.70 | 100.56 |
 | May 2015 | 21 | 11 | -2.00 | -252.34 | -0.50% | -1.83% | 21 valid / 0 mistake (process mistakes: 6) | 349.14 | 279.31 |
+| Jun 2015 | 22 | 8 | -1.34 | -174.53 | -0.53% | -2.65% | 22 valid / 0 mistake (process mistakes: 2) | 92.20 | 73.76 |
 
 ## Payout ledger
 | Date | Balance before | Requested | My 80% | Balance after | Note |
