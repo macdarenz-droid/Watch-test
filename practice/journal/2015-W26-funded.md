@@ -169,6 +169,27 @@ Coach 06-22: A2 has been filtered enough. Next brick: from my own chart notes, 3
      +80 pip trades: none (3 of 15). 80+ pip pre-entry hours: none (4 of 10).
      END OF RELEASED DATA (clock Thu 06-25 01:00 London).
 
+- **Thu 06-25 call, written 07:00 London (06:00 UTC), before the entry bar.** June goal read first: every figure below is from `python bt/call_numbers.py 2015-06-25`, `./look.sh` or a bar print. Yesterday's tag stands: VALID LOSS.
+  Coach 06-25: PZ killed by the held-out days - the process working. Next brick: compare my live funded results for the main setup (R per trade, win rate,
+      trade count) with what the backtest said to expect. Is live inside the normal range? Write the check and what would make me worried.
+  Plan line read (BD): the only way to lose the best days is not to trade the day or not to hold it to 12:00.
+  Streak, against yesterday's written numbers: 4 losses in a row, 3.96R under the high: at the median worst case (4; 4.52R), 95th percentile 7 and 8.55R.
+  D1 (London days): Mon 06-22 close 1.13402 (0.29); Tue 06-23 close 1.11677 (0.15); Wed 06-24 high 1.12347 low 1.11544 close 1.12040 (0.62, range 80.3):
+      an inside day after the 212 pip fall, both ends tried, a close a little above the middle. A higher close than Tuesday's.
+  H4 (UTC bars): Wed 08:00 bar high 1.12347; 12:00 bar down to 1.11689; 16:00 bar back to 1.12185; 20:00 bar flat; tonight 00:00 bar 1.11960-1.12198; 04:00 bar back to 1.11950, last 1.12008.
+  H1: the night (00:00-07:00 London): open 1.12059, high 1.12199, low 1.11950, last 1.12008: range 24.9 pips (ratio 0.46: a dead night), net -5.1 pips - flat.
+  M15: 1.1195-1.1205 for the last hour.
+  Bias: SELL. 22:00 London closes: 06-24 1.12040 vs 06-19 1.13487 = -145 pips (3-day gap -144.7). Gap / ADR5 1.20. Second sell.
+  UN3 PAPER TAG (never live): 5-day gap -133 pips (-133.2) -> SELL; agree: paper TRADES. Forward day 48, disagree days 11 of 30.
+  PH2 PAPER TAG (never live): decided at 08:00. Forward day 40.
+  MB1 PAPER TAG (never live, forward day 32): morning direction written at 12:00, before 13:25. Kept drawdown 5.66R; early-close line 6R.
+  Levels: night high 1.12199; Wed high 1.12347; night low 1.11950; Wed low 1.11544; Tue low 1.11351.
+  Rejection-day check: for a sell, Wednesday did not make the 3-day low. Not a rejection day. 10-day trend: DOWN (1.12040 vs 06-10 1.13237); the sell is WITH it.
+  SIZE RULE (the real safety rule): tracker balance $24,749.47, high-water $25,256.94, drawdown -2.01%; trigger 1 (half size) $24,499.23 not reached -> FULL size, 0.31 lots. Trigger 2 (stop) $23,488.95.
+      The rule reads tonight's close: a full stop today leaves about $123 above the line - full size tomorrow as well unless the close is at or under it.
+  Plan: SELL 0.31 at 08:00 London, stop 40 pips above the bid, never moved, close 12:00. One trade.
+  Worry: an inside day yesterday and a dead night: no sign of the fall continuing. Written, not a rule.
+
 ## Forward tally of the rule (unseen data only, from 03-02)
 | Rule | Trades | Wins | Net R | Avg R | Max DD | Note |
 |---|---|---|---|---|---|---|
