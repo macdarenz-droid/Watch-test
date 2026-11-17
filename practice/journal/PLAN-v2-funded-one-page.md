@@ -15,7 +15,8 @@ Goal: steady monthly profit, safe payouts, never a breach.
 - HALF size (0.16 lots) from a day's CLOSE at or below 3% under the high-water mark, until a new high-water.
 - STOP TRADING from a day's close at or below 7% under the high-water mark: written review, restart only with my coach.
 - The high-water moves up with new highs and down only by a payout. Today: high-water $25,280.44; half size at $24,522.03; stop at $23,510.81.
-- Size changes ONLY by a trigger written in advance. None is written today (see the sizing test of 06-17).
+- Size changes ONLY by a trigger written in advance. None is written. Sizing test 06-17 (idea SG): no size breaches (the 7% stop sees to it); at the planning
+  edge 0.75% pays 28% more and meets my own stop in 22% of two-year runs against 3%; at +0.10R it pays nothing more. 0.50% stays.
 
 ## 3. Daily stop
 - One trade, one stop: the planned worst day is -1R = -$125 = -0.5% (the firm allows 5%). Seen worst with a jump through the stop: about 3R = 1.5%.
@@ -49,6 +50,6 @@ Goal: steady monthly profit, safe payouts, never a breach.
 
 ## 8. How I work
 One live day at a time; the result is tagged first. One honest test earns the next day: hypothesis, worked case and kill lines pushed before the run,
-max 3 variants, costs on, everything counted in STATE.md (83 ideas, 232 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
+max 3 variants, costs on, everything counted in STATE.md (84 ideas, 235 variants, no trading idea adopted). A survivor earns a paper line, never a rule change.
 Closed, so that I do not reopen it on a bad day: entry filters from chart reading, entry time and price, the lookback, every exit except noon,
 second setups, day filters. The list with results is in the long version, section 7.

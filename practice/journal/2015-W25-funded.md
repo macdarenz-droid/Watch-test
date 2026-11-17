@@ -1,6 +1,6 @@
 # Journal - FUNDED ACCOUNT, week of 2015-06-15 (W25). Plan: journal/PLAN-v2-funded-one-page.md. Tracker: journal/FUNDED-TRACKER.md. Size 0.50% = $125 = 0.31 lots. All times London.
 JUNE PROCESS GOAL (in front of every call): EVERY NUMBER AND EVERY TEST RULE GETS ONE WORKED CASE BEFORE IT IS PUSHED. No figure without a tool print or a
-python line behind it. Numbers or rules corrected after a push in June so far: 1 (06-12: a stale paid-out label in STATE; May: 5). One test earns one day; one at a time (coach 06-04).
+python line behind it. Numbers or rules corrected after a push in June so far: 2 (06-12: a stale paid-out label in STATE; 06-17: a wrong label on a test line; May: 5). One test earns one day; one at a time (coach 06-04).
 Start of week (from the tool, 06-12): tracker balance $24,777.93 (sim $25,321.47 minus $543.54 paid out), high-water $25,280.44, drawdown -1.99% (4.00R under the equity high). Last week -2.29R. PAYOUT DATE this week: Fri 06-19 (rule applied exactly as written).
 SIZE RULE = the real safety rule (coach 06-02): half size from a day's close at or below 3% under the high-water ($24,522.03) until a new high-water; STOP at 7% under ($23,510.81; reviewed and kept 06-11).
 A2 is judged on a few hundred lived trades, not on the alarm alone. Lived average +0.18R +-0.25R at 75 lived trades.
@@ -198,3 +198,11 @@ best day (best at noon without it +1.14R). Size rule: never on. Calendar: no hol
 within 0.08R of the engine. No alarm; nothing changes. Price list of the things I want to do, on the 15 best days: partial -8.8R, lively-hour half size
 -6.5R, +80 target -4.1R, 10:00 lock -3.4R, UN3 skip -2.2R: one line in the plan. A parser miss raised a false calendar alarm (five rows written in an
 older format); fixed, said in the journal. Counts: 83 ideas, 232 variants. June corrections after a push: 1.
+
+## 06-17 after funded day 59 (coach: plan v2 on one page, then one test of position sizing math): (1) the plan rewritten on one page
+(journal/PLAN-v2-funded-one-page.md: the trade, the size rule, the daily stop, the payout rule, what I never do; no rule changed; long version archived).
+(2) Idea SG, size for growth (journal/2015-idea-SG-size-for-growth.md): lines S1-S5, worked cases and a regression pushed before the code; one run,
+2,000 two-year runs from my real state at 0.50 / 0.75 / 1.00%. No size breaches - my 7% stop stands in front of the firm's line - so the size is chosen
+by how often I stop myself: at +0.18R 3% / 22% / 57%, for a median payout to me of $6,037 / $7,782 / $7,565; at +0.10R the bigger sizes pay nothing more.
+0.75% and 1.00% killed; 0.50% stays; no trigger written. One correction counted: a test line's label called a hypothetical jump day (3.07R) a
+real fill (the worst real fill is 1.33R); the line was applied as worked, the stricter way. Counts: 84 ideas, 235 variants. June corrections after a push: 2.
