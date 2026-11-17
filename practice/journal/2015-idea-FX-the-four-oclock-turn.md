@@ -28,3 +28,11 @@ Pass = eligible for route C after my coach's word (probation $15.63 a trade, 0.0
 My guess: about zero, then minus costs (-0.06R); K1 fails.
 
 ## Counts and worked case (tool, before outcomes)
+Tool: `python bt/four_oclock.py 2015-08-08 count` / `check DATE` (no outcomes).
+- 156 days with the candles (01-02..08-07); median |move| 11.1 pips. FX1 (>= 10): 83 days (40 before 04-07, 43 from; 46 up, 37 down).
+  FX2 (>= 20): 34 days (17 / 17). Judgeable by my line (80 / 35), just.
+- Worked case, today Fri 08-07: 15:30 open 1.08847, 16:00 open 1.09383, move +53.6 pips (a big half hour) -> FX1 SELLS at 16:00, stop 20
+  pips above (about 1.0958), out 17:00. Today's last price was 1.09647, above that stop, so unless it fell first and rose after 17:00,
+  this is a full stop for the fade and a winner for the follow.
+
+## Result (one run)
