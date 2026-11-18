@@ -1,0 +1,52 @@
+# Idea MG: is the London morning pulled toward the nearest 00 level? (idea 141; coach 08-20: next backtest)
+Written Thu 2015-08-20 22:00 London, before any count or outcome.
+Searched ("magnet", "toward the level", "round number"): RN (January) used 00 levels AHEAD of A2 as a skip filter (19 trades, nothing);
+RT (08-06) traded the FIRST TOUCH of a 50-pip level (the bounce lost, the break was a coin): it told me levels are not walls. Never asked:
+is the price drawn TOWARD a 00 level it has not reached yet? MG is that. A once-a-day idea under the 80 rule.
+
+## Hypothesis
+Many orders are said to sit at round numbers (background, no source I can cite). If so, a 00 level a short way off attracts the morning's price.
+
+## Rule (London time, one trade a day)
+At 08:00, nearest 00 level (1.xx00) above and below the 08:00 open; take the nearer one if its distance d is inside the window [5, W] pips.
+Market order TOWARD it, target = the level, stop 30, out 12:00.
+## Order of work: step 1 counts only for W = 20, 30, 40 (and the share of trades on A2's side, for the disguise check). Step 2: W = the
+SMALLEST grid value with 80+ trades and 35+ from 04-07 (the tightest "near" that can be judged); none -> killed for sample. If the chosen W
+has 70%+ of its trades on A2's side or on A2's opposite side, it is A2 or its mirror in disguise: killed before any outcome. Step 3 one run.
+THE THREE VARIANTS (named now): MG1 (judged) the chosen W; MG2 (dose) the next SMALLER W on the grid (or 15 if the chosen is 20): a nearer
+level should pull harder; MG0 (control) MG1's days traded AWAY from the level (target the same distance beyond).
+Power, stated up front (once-a-day): about +-0.2R on the average at 80-120 trades; a no-edge rule clears +0.10R about one time in four.
+ANY PASS IS PROVISIONAL (plan section 9).
+## KILL LINES (four, all must pass, for MG1). All R after costs: spread 1.0 + slippage 0.1 pips (engine default); stressed 2.0 + 0.5.
+K1 MG1's average R >= +0.10R.
+K2 MG1's net R above zero BOTH before 04-07 AND from 04-07.
+K3 MG1's average R at stressed costs above zero.
+K4 MG1 minus MG0, trade by trade, above zero with sign-flip p < 0.10.
+My guess: a coin (the target is close, so wins are small and stops are big): K1 fails.
+
+## Step 1, counts only (tool `python bt/magnet.py 2015-08-21 count`)
+165 days. W = 15: 35 trades (16 / 19), 51% on A2's side. W = 20: 50 (20 / 30), 56%. W = 30: 81 (34 / 47), 52%. W = 40: 108 (45 / 63), 55%.
+## Step 2: smallest W with 80+ and 35+ from 04-07 = **W = 30** (81 / 47). Disguise check: 52% on A2's side -> not A2 or its mirror.
+MG1 = W 30; MG2 = W 20 (the next smaller); MG0 = away at W 30.
+Worked case, Tue 08-18 (read from that morning's A2 walk, which used the same 08:00-12:00 window): 08:00 open 1.10730, nearest 00 level 1.1100,
+27.0 pips above -> MG1 BUYS, target 1.1100, stop 30 below. The window went up to about 1.1095 (A2's sell had a worst of -21.7 pips) and
+down to about 1.1056, last about 1.1063 at noon: the target is not reached, the stop not hit; out at noon about -10 pips less costs =
+about -0.37R. The control (sell, target 27 below at about 1.1046) is not reached either: about +0.30R.
+
+## Step 3, result (one run: `test 30 20`)
+Hand check 08-18: toward -0.39R (worked about -0.37R); away +0.31R (worked about +0.30R). As written.
+| variant (R after costs: spread 1.0 + slippage 0.1 pips; stressed 2.0 + 0.5) | trades | wins | avg R | net | targets / stops | before 04-07 | from 04-07 | stressed avg |
+|---|---|---|---|---|---|---|---|---|
+| MG1 toward the 00 level, d 5-30 (JUDGED) | 81 | 59% | -0.067 (+-0.17) | -5.41 | 44 / 28 | -0.47 | -4.94 | -0.132 |
+| MG2 toward, d 5-20 | 50 | 60% | -0.161 (+-0.20) | -8.03 | 29 / 19 | -3.98 | -4.05 | -0.232 |
+| MG0 away from it, d 5-30 (control) | 81 | 59% | -0.065 (+-0.16) | -5.27 | 45 / 25 | -3.92 | -1.35 | -0.103 |
+Kill lines, each against its written threshold:
+K1 MG1's average >= +0.10R: -0.067R. FAIL.
+K2 MG1's net above zero before AND from 04-07: -0.47R / -4.94R. FAIL.
+K3 MG1's stressed average above zero: -0.132R. FAIL.
+K4 MG1 minus MG0 above zero, p < 0.10: -0.002R (p 0.99). FAIL.
+**MG IS KILLED.**
+What I learned: toward the level and away from it are the SAME trade in my data (both -0.07R, 59% wins, difference -0.002R): a 00 level
+neither pulls nor pushes the London morning. The nearer version (MG2) is worse, the opposite of a magnet. With RN and RT, round numbers
+are now finished as an idea in my record: they are labels on the chart, nothing more.
+Counts: idea 141; variants 377-379; second setups tried 36, none alive.
