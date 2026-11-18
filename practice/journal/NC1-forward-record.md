@@ -18,3 +18,4 @@ Daily tool: `python bt/no_chase_hour.py END check DATE` (hour column = signed mo
 | Thu 2015-09-03 | +1 | -13.1 | kept | no | +0.06 |
 | Fri 2015-09-04 | -1 | +4.7 | kept | no | -0.14 |
 | Mon 2015-09-07 | -1 | +5.5 | kept | no | -1.00 |
+| Tue 2015-09-08 | -1 | +4.5 | kept | no | +1.07 |

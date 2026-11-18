@@ -13,3 +13,4 @@ Results are read from the tool each evening, never written from memory. No live 
 | Thu 2015-09-03 | -1 | +1 | DISAGREE | -0.12 | +0.06 | -0.17 | -0.49 |
 | Fri 2015-09-04 | -1 | -1 | agree | -0.14 | +0.08 | -0.19 | -0.63 |
 | Mon 2015-09-07 | -1 | -1 | agree | -1.00 | +0.25 | -1.02 | -1.63 |
+| Tue 2015-09-08 | +1 | -1 | DISAGREE | -1.03 | +1.07 | -1.07 | -2.66 |

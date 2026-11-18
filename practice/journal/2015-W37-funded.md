@@ -56,3 +56,18 @@ against A2 on 174 days: GS1 -0.017R, GS2 -0.007R, GS3 -0.010R, all deeper drawdo
 - Both monitors under +0.60R -> PAPER. NO ORDER. Inactivity: day 6 of the count from 09-02.
 - A2 paper plan: sell at the 08:00 open, stop 40 pips, out 12:00.
 - How I feel: fine; first day in a new session, so every step is read from STATE and the tools, nothing from memory.
+  08:00 London (PAPER), tool lines: pre-entry hour high 1.12296 low 1.11953 = 34.3 pips -> PH2: LIVELY (paper half size) | last 1.11997 || night 00:00 open 1.11708 -> 1.11997: -28.9 pips for my side (AGAINST me -> counted) | vs 07:00 price 1.12042: entry is -4.5 pips better(+)/worse(-) | stop 1.12397. A2 paper SELL near the 08:00 price, no order.
+  10:00 London (PAPER; 8 candles), tool:   WINDOW: 8 M15 candles = 120 minutes, 07:00..08:45 UTC (candle open times). Use 8 for 08:00-10:00, 16 for 08:00-12:00.   over these 8: best +27.8 | worst -1.0 | last +15.7 | stop distance from fill 40.0 | worst-to-stop 39.0 pips left 
+  12:00 London (PAPER; 16 candles), tool:   WINDOW: 16 M15 candles = 240 minutes, 07:00..10:45 UTC (candle open times). Use 8 for 08:00-10:00, 16 for 08:00-12:00.   over these 16: best +46.2 | worst -1.0 | last +42.4 | stop distance from fill 40.0 | worst-to-stop 39.0 pips left 
+  (walk notes above are tool lines; worst -1.0, last beyond +40.)
+  -> 09-08 result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor under the gate -> paper). VALID: no order placed. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 45 (engine, costs on 1.0 + 0.1; coin_control): sell, clock exit, +1.07R; the other side -1.03R. Running from 07-08: 45 days, -2.93R.
+     NC1 FORWARD (tool): hour +4.5 signed by A2 -> kept; NC0 no.
+     YM1 FORWARD (tool): 2015-09-08 YM1 side +1 | A2 side -1 | DISAGREE | YM1 -1.03R (sl) | YM0 +1.07R | YM1 stressed -1.07R
+       YM1 FORWARD (R after costs 1.0 + 0.1; stressed 2.0 + 0.5): 7 of 80 trades | avg -0.380R | net -2.66 | disagree days 3 net -1.47 | agree days 4 net -1.19 | YM1 - YM0 -0.435R | stressed avg -0.422 | drawdown 2.98R (early close at 8R)
+     EN2 FORWARD (tool): EN2 forward from 2015-08-28 to 2015-09-09: 3 trades | net -0.51R | running max DD 1.01R (early-close line 8R) | no verdict before 120
+     Paper lines: UN3 agreed (day 101): disagree days +4.42R in 24. PH2 (day 93): lively (34.3) -> half = +0.54R;
+     52 lively -6.73R; 41 quiet -1.77R; PH2 about -5.64R against A2's -9.54R.
+     MO PAPER RULE (day 51 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +1.07R (running -5.73R).
+     For the next day (tool): MO1 +0.058R; MO3 -0.231R -> paper.
+     How it feels: a sell after a night that ran against it, and it paid from the first candle; on paper only, and it changes no rule.
