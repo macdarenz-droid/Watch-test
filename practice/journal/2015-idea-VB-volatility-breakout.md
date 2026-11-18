@@ -32,3 +32,17 @@ K5 max drawdown <= 6R.
 K6 sign-flip test on VB1's trades (10,000 flips, seed 58): p < 0.10 with a positive average.
 Pass = route B step B1 candidate (then 40 forward paper trades and the coach's word). Fail = killed, no fourth variant.
 My guess: about 80-90 trades, a small plus before 04-07, a minus after; killed on K1 and K2.
+
+## Counts and worked cases from the tool (pasted by this command; before the outcome run)
+`python bt/vol_breakout.py 2015-09-09 count` / `check 2015-09-08` / `check 2015-09-03`
+    VB1 k=0.5: days 177 (2015-01-05..2015-09-08) | touched in the night 31 | both levels in one candle 0 | no touch 08-16 55 | TRADES 91 (buys 41, sells 50) | before 2015-04-07: 37 | from: 54 | on A2's side 53 of 91 = 58%
+    VB2 k=0.7: days 177 (2015-01-05..2015-09-08) | touched in the night 14 | both levels in one candle 0 | no touch 08-16 100 | TRADES 63 (buys 29, sells 34) | before 2015-04-07: 23 | from: 40 | on A2's side 31 of 63 = 49%
+    (counts only, no outcomes) script reached its end
+    VB1 {'day': '2015-09-08', 'anchor': np.float64(1.11693), 'yr': np.float64(56.5), 'up': np.float64(1.11976), 'dn': np.float64(1.1141), 'night': np.True_, 'both': np.False_, 'side': np.int64(0), 'a2': np.float64(-1.0)} touch nan entry bar None
+    VB2 {'day': '2015-09-08', 'anchor': np.float64(1.11693), 'yr': np.float64(56.5), 'up': np.float64(1.12088), 'dn': np.float64(1.11298), 'night': np.True_, 'both': np.False_, 'side': np.int64(0), 'a2': np.float64(-1.0)} touch nan entry bar None
+    VB1 {'day': '2015-09-03', 'anchor': np.float64(1.12256), 'yr': np.float64(102.7), 'up': np.float64(1.1277), 'dn': np.float64(1.11742), 'night': np.False_, 'both': np.False_, 'side': np.int64(-1), 'a2': np.float64(1.0)} touch 13:35 entry bar 13:40
+    VB2 {'day': '2015-09-03', 'anchor': np.float64(1.12256), 'yr': np.float64(102.7), 'up': np.float64(1.12975), 'dn': np.float64(1.11537), 'night': np.False_, 'both': np.False_, 'side': np.int64(-1), 'a2': np.float64(1.0)} touch 13:40 entry bar 13:45
+Read from the lines above: VB1 is over both sample lines and under the repeat line -> JUDGEABLE, the outcome run is allowed.
+Worked cases: 09-08 (today) no trade, a level was touched in the night; 09-03 the DOWN level was touched by the 13:35 candle -> sell at
+the 13:40 open, stop 40, out 20:00 (levels match bt/call_numbers.py's close and range for 09-02; the M5 candles were read by hand).
+One run next: `python bt/vol_breakout.py 2015-09-09 test`.
