@@ -46,3 +46,16 @@ Read from the lines above: VB1 is over both sample lines and under the repeat li
 Worked cases: 09-08 (today) no trade, a level was touched in the night; 09-03 the DOWN level was touched by the 13:35 candle -> sell at
 the 13:40 open, stop 40, out 20:00 (levels match bt/call_numbers.py's close and range for 09-02; the M5 candles were read by hand).
 One run next: `python bt/vol_breakout.py 2015-09-09 test`.
+
+## Result (one run; ALL R AFTER COSTS spread 1.0 + slippage 0.1; stressed 2.0 + 0.5; tool output pasted by this command)
+    VB1 k=0.5 (judged): trades 91 | avg +0.036R | net +3.27 | wins 38 | full stops 43 | before 2015-04-07: +0.38 in 37 | from: +2.89 in 54 | without best 2 -7.59 | stressed avg -0.003 | max DD 13.52R | p 0.8102
+    VB2 k=0.7 (dose): trades 63 | avg -0.000R | net -0.03 | wins 23 | full stops 30 | before 2015-04-07: +0.37 in 23 | from: -0.40 in 40 | without best 2 -10.82 | stressed avg -0.039 | max DD 7.43R | p 0.9979
+    VB0 = VB1 faded (control): trades 91 | avg -0.137R | net -12.47 | wins 32 | full stops 45 | before 2015-04-07: -5.02 in 37 | from: -7.44 in 54 | without best 2 -19.85 | stressed avg -0.181 | max DD 13.06R | p 0.2625
+    VB1 kill lines: K1 FAIL K2 PASS K3 FAIL K4 FAIL K5 FAIL K6 FAIL -> KILLED
+    (all R after costs 1.0 + 0.1; stressed 2.0 + 0.5; 1R = $125 = 40 pips) script reached its end
+Hand check 09-03 (tool): trade: (1.1481599999999843, 'close', 1.11628, 1.11168, '20:00') = sell at the 13:40 open, held to the 20:00 clock exit; the entry candle matches the M5 candles read before the run.
+VERDICT: KILLED. VB1 kill lines: K1 FAIL K2 PASS K3 FAIL K4 FAIL K5 FAIL K6 FAIL -> KILLED. Only K2 passes, and it passes on two trades: without its best two VB1 is -7.59R.
+What it says: following the break pays a little (+0.036R) and fading it loses (-0.137R), so the direction is not nothing, but the average
+is inside the noise (p 0.8102), dies at stressed costs (-0.003R) and the drawdown (13.52R) is more than twice the 6R line. The dose goes the
+wrong way (VB2 -0.000R): a bigger push before entry leaves less to earn. My guess was wrong in the detail (the weak half is BEFORE 04-07,
+not after) and right in the verdict. No fourth variant. Route B stays empty. Ideas 158, variants 418.

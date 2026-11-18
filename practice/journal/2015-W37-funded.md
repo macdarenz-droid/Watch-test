@@ -71,3 +71,7 @@ against A2 on 174 days: GS1 -0.017R, GS2 -0.007R, GS3 -0.010R, all deeper drawdo
      MO PAPER RULE (day 51 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +1.07R (running -5.73R).
      For the next day (tool): MO1 +0.058R; MO3 -0.231R -> paper.
      How it feels: a sell after a night that ran against it, and it paid from the first candle; on paper only, and it changes no rule.
+
+## 09-08 evening test: idea 158 VB, daily volatility breakout from last night's close (journal/2015-idea-VB-volatility-breakout.md; route B hunt)
+Counts and two worked cases before the run. R after costs 1.0 + 0.1: VB1 91 trades +0.036R (net +3.27; without best two -7.59; stressed -0.003;
+DD 13.52R; p 0.8102); VB2 -0.000R; fade control -0.137R -> KILLED (K1 K3 K4 K5 K6). Ideas 158, variants 418.
