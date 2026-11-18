@@ -40,3 +40,19 @@ Payout date Fri 09-11.
 ## 09-07 evening test: idea 157 GS, a grace period for A2's stop (journal/2015-idea-GS-grace-stop.md; coach: one exit rule from lesson C)
 My chart-read worked case was wrong (GS1 saves none of the four C days; the tool showed it before the run). R after costs 1.0 + 0.1, paired
 against A2 on 174 days: GS1 -0.017R, GS2 -0.007R, GS3 -0.010R, all deeper drawdowns -> KILLED on all five lines. Ideas 157, variants 415.
+
+## Tue 09-08
+07:00 London PAPER CALL (written before the bell; new chat session, work merged from the old branch). Tool lines, printed and written by this same command:
+    London day 2015-09-03 high 1.12434 low 1.10873 close 1.11228 close position 0.23 range 156.1
+    London day 2015-09-04 high 1.11895 low 1.10898 close 1.11499 close position 0.6 range 99.7
+    London day 2015-09-07 high 1.11778 low 1.11213 close 1.11693 close position 0.85 range 56.5
+    yesterday made the 3-day high: False | the 3-day low: False
+    night 00:00-07:00 London: open 1.11708 high 1.12232 low 1.11535 last 1.12042 | range 69.7 | net 33.4
+    3-day gap -56.3 | 5-day gap -40.6 | ADR5 107.8 | gap / ADR5 0.52 | 10-day trend: DOWN (1.11693 vs 2015-08-24 1.16176)
+    MO1 N=40 pause: monitor for the NEXT day after 2015-09-07 = -0.046R -> PAUSE (paper) | last 5 monitors: 09-01:-0.18 09
+    MO3 N=60 pause: monitor for the NEXT day after 2015-09-07 = -0.222R -> PAUSE (paper) | last 5 monitors: 09-01:-0.18 09
+- A2 side SELL (3-day gap -56.3). UN3 agree (5-day gap -40.6).
+- Night range 69.7, net 33.4 AGAINST the sell (a night against my side; the count line in STATE applies, no rule skips it).
+- Both monitors under +0.60R -> PAPER. NO ORDER. Inactivity: day 6 of the count from 09-02.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips, out 12:00.
+- How I feel: fine; first day in a new session, so every step is read from STATE and the tools, nothing from memory.
