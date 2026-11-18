@@ -1,0 +1,197 @@
+# Week 36 (Mon 2015-08-31 .. Fri 09-04), funded account. A2 ON PAPER (alarm 07-08; return rule 07-09, gate +0.60R). Account FLAT.
+AUGUST GOAL (closes at the 09-01 review): READ A TOOL'S OWN HEADER LINE BEFORE WRITING ANY NUMBER FROM IT, AND SEE "script reached its end" BEFORE EVERY COMMIT.
+Routes B and C empty. Paper forward counts (no money): EN2 (from 08-28), YM1 and NC1 (from 08-31, coach 08-28). August month-end review Tue 09-01.
+Next payout date Fri 09-11.
+
+## Funded trades
+| # | time (London) | side | lots | entry | stop | exit | R | $ | tag | note |
+|---|---|---|---|---|---|---|---|---|---|---|
+| (paper) | Fri 09-04 08:00 | sell | NO LIVE TRADE (monitor -0.193R) | paper | paper | paper clock exit | (-0.14 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 43; YM1 agree; NC1 kept |
+| (paper) | Thu 09-03 08:00 | buy | NO LIVE TRADE (monitor -0.137R) | paper | paper | paper clock exit | (+0.06 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 42; YM1 DISAGREE; NC1 kept; EN2 forward trade 1 |
+| (paper) | Wed 09-02 08:00 | buy | NO LIVE TRADE (monitor -0.143R) | paper | paper | paper clock exit | (-0.36 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 41; YM1 agree; NC1 kept |
+| (paper) | Tue 09-01 08:00 | sell | NO LIVE TRADE (monitor -0.177R) | paper | paper | paper stop | (-1.00 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 40; YM1 day 2 DISAGREE (buy -0.32R); NC1 kept |
+| (paper) | Mon 08-31 08:00 | sell | NO LIVE TRADE (monitor -0.203R) | paper | paper | paper clock exit | (+0.31 paper) | $0 | NO LIVE TRADE - BY RULE | A2 paper day 39; NC1 day 1 = SKIP tag; YM1 day 1 agree |
+
+## Mon 08-31
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-08-31`:
+- 3-day gap -334.1 pips -> A2 side SELL. 5-day gap -202.8 -> UN3 agree. Night 00:00-07:00: 1.11970-1.12624, last 1.12503 (range 65.4, net +52.6, against the sell).
+- Friday's London day: 1.11559-1.13097, close 1.11800 (range 153.8, close position 0.16); it made the 3-day low. ADR5 230.9 (tool). 10-day trend UP.
+- Monitor for today -0.203R (MO1), -0.211R (MO3) -> BOTH PAPER. Route A closed until 09-21; routes B and C empty. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
+- Forward counts (paper): YM1 day 1 and NC1 day 1 - both read from their tools at 08:00 / after the day; EN2 after the day.
+- How I feel: fine; three new paper lines at once, so I read each from its tool and write nothing from memory.
+  08:00 London (PAPER): pre-entry hour 1.12236-1.12535 = 29.9 pips (just under 30: PH2 quiet, full), net -27.2 = WITH the sell (ran A2's way).
+     NC1 (paper tag, frozen X = 15): the hour ran ~27 pips A2's way -> NC1 would SKIP. Tool confirms after the day: hour +27.2 signed, skip True.
+     A2 paper SELL near 1.12236 (engine fixes the fill), paper stop about 1.12636. No order.
+  10:00 London (PAPER; 8 candles, 07:00-08:45 UTC): best +22.2, worst -5.8, last +22.2. Stop 34.2 pips away at the worst.
+  12:00 London (PAPER; 16 candles, 08:00-12:00): clock exit about +12.7 (best +26.0, worst -5.8).
+  -> Mon result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.203R -> paper). VALID: no order placed. Checked: call committed before the bell (dc91692);
+     sim balance $24,926.03 unchanged, trading days 73. Trade mistakes 0; process mistakes 0. (The feed had normal London candles on 08-31.)
+     PAPER A2, day 39 (engine, costs on 1.0 + 0.1; `python bt/coin_control.py 2015-09-01 --check 2015-08-31`): sell, clock exit, +0.31R; the other side -0.37R.
+     A2 paper running from 07-08: 39 days, -1.56R.
+     NC1 FORWARD day 1 (`python bt/no_chase_hour.py 2015-09-01 check 2015-08-31`): hour +27.2 A2's way -> SKIP day 1 of 30; A2 on that day +0.31R
+       (a skip that would have missed a winner). NC0 (hour 15+ against): no.
+     YM1 FORWARD day 1 (`python bt/ym_forward.py 2015-09-01 forward 2015-08-31`): SELL, AGREE with A2; YM1 +0.31R, YM0 -0.37R, stressed +0.27R.
+       1 of 80; disagree days 0 of 25.
+     EN2 FORWARD (`python bt/en2_forward.py 2015-08-28 2015-09-01`): 0 trades so far.
+     Paper lines: UN3 agreed (day 95): agree days -11.33R in 73; disagree days +4.72R in 22. PH2 (day 87): quiet (29.9) -> full = +0.31R;
+     51 lively -7.80R; 36 quiet +0.67R; PH2 about -3.74R against A2's -8.17R.
+     MO PAPER RULE (day 45 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.31R (running -4.36R).
+     For Tuesday (tool): MO1 -0.177R -> paper; MO3 -0.183R -> paper. Tuesday 09-01: August month-end review.
+     How it feels: calm. First NC1 skip tag was a winner; one day says nothing.
+
+## 08-31 evening test: idea 150 HL, skip A2 against the daily lows/highs (journal/2015-idea-HL-against-the-daily-structure.md)
+From my W06 note ("sold into higher lows"). Prereg, counts (N = 1 by rule, 50 skips) and worked case pushed before the run. R = engine A2 after
+costs 1.0 + 0.1: skipped days +0.212R vs kept +0.121R, gap -0.091R, p 0.71 -> KILLED on all four lines. Ideas 150, variants 400.
+
+## Tue 09-01
+07:00 London PAPER CALL (written before the bell). Numbers from `bt/call_numbers.py 2015-09-01`:
+- 3-day gap -102.7 pips -> A2 side SELL. 5-day gap -407.7 -> UN3 agree. Night 00:00-07:00: 1.12150-1.12815, last 1.12789 (range 66.5, net +61.0, against the sell).
+- Monday's London day: 1.11693-1.12624, close 1.12099 (range 93.1, close position 0.44); no 3-day extreme. ADR5 180.6 (tool). 10-day trend UP.
+- Monitor for today -0.177R (MO1), -0.183R (MO3) -> BOTH PAPER. Route A closed until 09-21; routes B and C empty. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips above, out 12:00.
+- Forward counts (paper): EN2, YM1 day 2, NC1 day 2 - read from their tools after the day. NC1's K2 forward reading written into the plan this morning (coach).
+- How I feel: fine. Second morning running with a 60-pip night against the sell.
+  08:00 London (PAPER): pre-entry hour 1.12766-1.12984 = 21.8 pips (quiet: PH2 full), net about +4 against the sell. A2 paper SELL near 1.12830
+     (engine fixes the fill), paper stop about 1.13230. NC1: hour about 4 pips AGAINST A2 -> kept (tool after the day: -4.1). No order.
+  10:00 London (PAPER; 8 candles, 07:00-08:45 UTC): best +19.1 (first 15 minutes), worst -50.0 -> the paper stop was reached in the 07:45 UTC
+     candle (high 1.13320); price then came all the way back (last +6.7). Stopped first: the comeback does not count.
+  -> Tue result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.177R -> paper). VALID: no order placed. Checked: call committed before the bell (069cfb5);
+     sim balance $24,926.03 unchanged, trading days 73. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 40 (engine, costs on 1.0 + 0.1; `python bt/coin_control.py 2015-09-02 --check 2015-09-01`): sell, STOPPED, -1.00R; the other side -0.32R.
+     A2 paper running from 07-08: 40 days, -2.56R.
+     NC1 FORWARD day 2 (tool): hour -4.1 (against A2) -> KEPT; NC0 no. Skip days 1 of 30.
+     YM1 FORWARD day 2 (`python bt/ym_forward.py 2015-09-02 forward 2015-08-31`): BUY, DISAGREE with A2 -> YM1 -0.32R, YM0 -1.00R, stressed -0.37R.
+       2 of 80, net -0.01R; disagree days 1 (net -0.32R), agree days 1 (+0.31R).
+     EN2 FORWARD (tool): 0 trades so far.
+     Paper lines: UN3 agreed (day 96): agree days -12.33R in 74; disagree days +4.72R in 22. PH2 (day 88): quiet (21.8) -> full = -1.00R;
+     51 lively -7.80R; 37 quiet -0.33R; PH2 about -4.74R against A2's -9.17R.
+     MO PAPER RULE (day 46 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -1.00R (running -5.36R).
+     For Wednesday (tool): MO1 -0.143R -> paper; MO3 -0.165R -> paper.
+     How it feels: a stop by 10 pips, then the price came back to the entry by 10:00. The stop is the rule; noted, not acted on.
+
+## 09-01 evening: August month-end review (journal/2015-08-month-end-review.md) and YN exits (journal/2015-YN-exits-and-management.md)
+Review: 0 live trades, 21 valid days flat by rule, A2 paper August +1.94R (9 of 21 stopped), gate re-check +0.60R = 1.8% (stands), YM1 2 of 80,
+NC1 1 skip of 30, EN2 0; August goal: 3 numbers corrected after a push; and the review itself had 2 memory numbers, corrected after its push
+(September correction 1).
+YN exits (coach: best near miss, exits not entries): out 10:00 / 16:00 / break-even at +20 all KILLED against base (R after costs 1.0 + 0.1).
+YN's own 13 unseen trades since its test lost ~3.9R: +0.070R -> +0.032R. Ideas 151, variants 403.
+
+## Wed 09-02
+07:00 London PAPER CALL (written before the bell). Tool lines, printed and written by this same command:
+    London day 2015-08-28 high 1.13097 low 1.11559 close 1.118 close position 0.16 range 153.8
+    London day 2015-08-31 high 1.12624 low 1.11693 close 1.12099 close position 0.44 range 93.1
+    London day 2015-09-01 high 1.1332 low 1.12082 close 1.13131 close position 0.85 range 123.8
+    yesterday made the 3-day high: True | the 3-day low: False
+    night 00:00-07:00 London: open 1.12981 high 1.13005 low 1.12606 last 1.12847 | range 39.9 | net -13.4
+    3-day gap 67.3 | 5-day gap -201.0 | ADR5 160.3 | gap / ADR5 0.42 | 10-day trend: UP (1.13131 vs 2015-08-18 1.10216)
+    MO1 N=40 pause: monitor for the NEXT day after 2015-09-01 = -0.143R -> PAUSE (paper) | last 5 monitors: 08-26:
+    MO3 N=60 pause: monitor for the NEXT day after 2015-09-01 = -0.165R -> PAUSE (paper) | last 5 monitors: 08-26:
+- A2 side BUY (3-day gap +67.3). UN3 DISAGREE (disagree day 23 of 30) (5-day gap -201.0).
+- Both monitors under +0.60R -> PAPER. Route A closed until 09-21; routes B and C empty. INACTIVITY: 57 calendar days since 07-07, start-date
+  question with the coach; both readings say no live trade today (plan section 9). NO ORDER.
+- A2 paper plan: buy at the 08:00 open, stop 40 pips, out 12:00.
+- Forward counts (paper): EN2, YM1 day 3, NC1 day 3 - from their tools after the day.
+- How I feel: fine.
+  08:00 London (PAPER): pre-entry hour 1.12668-1.12876 = 20.8 pips (quiet: PH2 full), net about -4 against the buy. A2 paper BUY near 1.12807,
+     paper stop about 1.12407. NC1: hour -4.5 (tool, signed by A2) -> kept. No order.
+  10:00 London (PAPER; 8 candles): best +10.0, worst -38.4 (1.6 pips from the stop), last -0.5.
+  12:00 London (PAPER; 16 candles): clock exit about -13.7 (best +13.3, worst -38.4).
+  -> Wed result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor -0.143R -> paper; inactivity start-date question open). VALID: no order placed.
+     Checked: call committed before the bell (16e594a); sim balance unchanged, trading days 73. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 41 (engine, costs on 1.0 + 0.1; coin_control): buy, clock exit, -0.36R; the other side +0.30R. Running from 07-08: 41 days, -2.92R.
+     NC1 FORWARD day 3: kept (hour -4.5); skip days 1 of 30.
+     YM1 FORWARD (tool): 2015-09-02 YM1 side +1 | A2 side +1 | AGREE | YM1 -0.36R (close) | YM0 +0.30R | YM1 stressed -0.40R
+       YM1 FORWARD (R after costs 1.0 + 0.1; stressed 2.0 + 0.5): 3 of 80 trades | avg -0.122R | net -0.37 | disagree days 1 net -0.32 | agree days 2 net -0.04 | YM1 - YM0 +0.237R | stressed avg -0.167 | drawdown 0.68R (early close at 8R)
+     EN2 FORWARD (tool): 0 trades so far.
+     Paper lines: UN3 DISAGREED (day 97): disagree days +4.36R in 23. PH2 (day 89): quiet (20.8) -> full = -0.36R;
+     38 quiet -0.69R; PH2 about -5.10R against A2's -9.53R.
+     MO PAPER RULE (day 47 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.36R (running -5.72R).
+     For Thursday (tool): MO1 -0.137R -> paper; MO3 -0.191R -> paper.
+     How it feels: the paper buy came within 1.6 pips of its stop and closed small. Nothing to act on.
+  Evening: near-miss rule re-applied (journal/2015-YN-exits-and-management.md): no candidate left outside the forward counts; question to the coach
+  (an exit twin for YM1 judged on forward days only?). No test run, nothing counted today.
+
+## 09-02 evening: three hypotheses from two months of journal and charts -> idea 152 FM (journal/2015-09-02-three-hypotheses-from-two-months.md)
+Compression (H1) and Monday (H3) fail the sample by definition; H2 picked by a written rule. FM: fade the first 45 minutes (X = 15 by counts,
+83 trades): -0.053R, stressed -0.140R, against follow +0.109R, p 0.52 -> KILLED on all four (R after costs 1.0 + 0.1). Ideas 152, variants 406.
+Inactivity: count from 09-02 (coach); day 25 = Sun 09-27, first eligible Mon 09-28.
+
+## Thu 09-03
+07:00 London PAPER CALL (written before the bell). Tool lines, printed and written by this same command:
+    London day 2015-08-31 high 1.12624 low 1.11693 close 1.12099 close position 0.44 range 93.1
+    London day 2015-09-01 high 1.1332 low 1.12082 close 1.13131 close position 0.85 range 123.8
+    London day 2015-09-02 high 1.13191 low 1.12164 close 1.12256 close position 0.09 range 102.7
+    yesterday made the 3-day high: False | the 3-day low: False
+    night 00:00-07:00 London: open 1.12211 high 1.12342 low 1.12052 last 1.12334 | range 29.0 | net 12.3
+    3-day gap 45.6 | 5-day gap -87.0 | ADR5 127.0 | gap / ADR5 0.36 | 10-day trend: UP (1.12256 vs 2015-08-19 1.11198)
+    MO1 N=40 pause: monitor for the NEXT day after 2015-09-02 = -0.137R -> PAUSE (paper) | last 5 monitors: 08-27:
+    MO3 N=60 pause: monitor for the NEXT day after 2015-09-02 = -0.191R -> PAUSE (paper) | last 5 monitors: 08-27:
+- A2 side BUY (3-day gap +45.6). UN3 DISAGREE (disagree day 24 of 30) (5-day gap -87.0).
+- Both monitors under +0.60R -> PAPER. Routes A (from 09-21), B, C closed/empty. Inactivity: day 1 of the count from 09-02. NO ORDER.
+- A2 paper plan: buy at the 08:00 open, stop 40 pips, out 12:00.
+- Forward counts (paper): EN2, YM1, NC1 from their tools after the day.
+- How I feel: fine.
+  08:00 London (PAPER): pre-entry hour 1.12141-1.12350 = 20.9 pips (quiet), net about -13 against the buy. A2 paper BUY near 1.12202, paper stop about 1.11802. No order.
+  10:00 London (PAPER; 8 candles): best +23.2, worst +0.0, last +20.0.
+  12:00 London (PAPER; 16 candles): clock exit about +3.7 (best +23.2, worst -4.9).
+  -> 09-03 result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor under the gate -> paper). VALID: no order placed. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 42 (engine, costs on 1.0 + 0.1; coin_control): buy, clock exit, +0.06R; the other side -0.12R. Running from 07-08: 42 days, -2.86R.
+     NC1 FORWARD (tool): hour -13.1 signed by A2 -> kept; NC0 no.
+     YM1 FORWARD (tool): 2015-09-03 YM1 side -1 | A2 side +1 | DISAGREE | YM1 -0.12R (close) | YM0 +0.06R | YM1 stressed -0.17R
+       YM1 FORWARD (R after costs 1.0 + 0.1; stressed 2.0 + 0.5): 4 of 80 trades | avg -0.122R | net -0.49 | disagree days 2 net -0.44 | agree days 2 net -0.04 | YM1 - YM0 +0.132R | stressed avg -0.167 | drawdown 0.80R (early close at 8R)
+     EN2 FORWARD (tool): EN2 forward from 2015-08-28 to 2015-09-04: 1 trades | net -1.01R | running max DD 1.01R (early-close line 8R) | no verdict before 120
+     Paper lines: UN3 DISAGREED (day 98): disagree days +4.42R in 24. PH2 (day 90): quiet (20.9) -> full = +0.06R;
+     51 lively -7.80R; 39 quiet -0.63R; PH2 about -5.04R against A2's -9.47R.
+     MO PAPER RULE (day 48 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 +0.06R (running -5.66R).
+     For the next day (tool): MO1 -0.193R; MO3 -0.157R -> paper.
+     How it feels: a +23 morning faded to a few pips by noon. Ordinary.
+
+## 09-03 evening test: idea 153 SQ, compression before big days (H1; journal/2015-idea-SQ-squeeze-before-big-days.md)
+Trade form killed for sample (29 trades). Size claim killed on all four lines: the day after a narrow day is smaller than usual, after a wide
+day wider. My chart sighting was small bodies, not small ranges. Ideas 153, variants 409.
+
+## Fri 09-04 (not a payout date; next Fri 09-11)
+07:00 London PAPER CALL (written before the bell). Tool lines, printed and written by this same command:
+    London day 2015-09-01 high 1.1332 low 1.12082 close 1.13131 close position 0.85 range 123.8
+    London day 2015-09-02 high 1.13191 low 1.12164 close 1.12256 close position 0.09 range 102.7
+    London day 2015-09-03 high 1.12434 low 1.10873 close 1.11228 close position 0.23 range 156.1
+    yesterday made the 3-day high: False | the 3-day low: True
+    night 00:00-07:00 London: open 1.11201 high 1.11392 low 1.11161 last 1.11363 | range 23.1 | net 16.2
+    3-day gap -87.1 | 5-day gap -123.0 | ADR5 125.9 | gap / ADR5 0.69 | 10-day trend: DOWN (1.11228 vs 2015-08-20 1.12400)
+    MO1 N=40 pause: monitor for the NEXT day after 2015-09-03 = -0.193R -> PAUSE (paper) | last 5 monitors: 08-28:
+    MO3 N=60 pause: monitor for the NEXT day after 2015-09-03 = -0.157R -> PAUSE (paper) | last 5 monitors: 08-28:
+- A2 side SELL (3-day gap -87.1). UN3 agree (5-day gap -123.0).
+- Both monitors under +0.60R -> PAPER. Routes closed/empty. Inactivity: day 2 of the count from 09-02. NO ORDER.
+- A2 paper plan: sell at the 08:00 open, stop 40 pips, out 12:00.
+- How I feel: fine.
+  08:00 London (PAPER): pre-entry hour 1.11230-1.11384 = 15.4 pips (quiet), net about -5 with the sell. A2 paper SELL near 1.11312, paper stop about 1.11712. No order.
+  10:00 London (PAPER; 8 candles): best +1.5, worst -30.8 (9.2 pips from the stop), last -10.4.
+  12:00 London (PAPER; 16 candles): clock exit about -6.0 (best +1.5, worst -30.8).
+  -> 09-04 result, TAG FIRST: NO LIVE TRADE - BY RULE (monitor under the gate -> paper). VALID: no order placed. Trade mistakes 0; process mistakes 0.
+     PAPER A2, day 43 (engine, costs on 1.0 + 0.1; coin_control): sell, clock exit, -0.14R; the other side +0.08R. Running from 07-08: 43 days, -3.00R.
+     NC1 FORWARD (tool): hour +4.7 signed by A2 -> kept; NC0 no.
+     YM1 FORWARD (tool): 2015-09-04 YM1 side -1 | A2 side -1 | AGREE | YM1 -0.14R (close) | YM0 +0.08R | YM1 stressed -0.19R
+       YM1 FORWARD (R after costs 1.0 + 0.1; stressed 2.0 + 0.5): 5 of 80 trades | avg -0.126R | net -0.63 | disagree days 2 net -0.44 | agree days 3 net -0.19 | YM1 - YM0 +0.060R | stressed avg -0.171 | drawdown 0.94R (early close at 8R)
+     EN2 FORWARD (tool): EN2 forward from 2015-08-28 to 2015-09-07: 2 trades | net -0.42R | running max DD 1.01R (early-close line 8R) | no verdict before 120
+     Paper lines: UN3 agreed (day 99): disagree days +4.42R in 24. PH2 (day 91): quiet (15.4) -> full = -0.14R;
+     51 lively -7.80R; 40 quiet -0.77R; PH2 about -5.18R against A2's -9.61R.
+     MO PAPER RULE (day 49 of 60): both off: MO1 0.00R (running 0.00R), MO3 0.00R (running -1.80R); A2 -0.14R (running -5.80R).
+     For the next day (tool): MO1 -0.114R; MO3 -0.193R -> paper.
+     How it feels: a paper sell that never went my way and closed small. Ordinary.
+
+## Week 36 summary (Mon 08-31 .. Fri 09-04), every number read from the record files by this command
+- Live: 0 trades, $0 (flat by rule). Inactivity count from 09-02 (coach): day 2. No payout date this week (next Fri 09-11).
+- Paper A2 (engine, costs on 1.0 + 0.1): 5 days +0.31 -1.00 -0.36 +0.06 -0.14 = -1.13R; 1 stopped.
+- Forward counts (paper): YM1 net -0.63R after 5 of 80; NC1 skips 1 of 30; EN2 2 trades -0.42R (tool line above).
+- August review done 09-01. Research: HL, YN exits, FM, SQ killed; ideas 153, variants 409.
+- Process: September corrections after a push so far 2 (both 09-01). One booking script stopped halfway tonight (book_day.py pattern after
+  my own line edit); caught by the missing "script reached its end" before any commit, finished in the next command.
+
+09-04 evening: H3 = idea 154 MA (Monday weekend fade) KILLED FOR SAMPLE at the count (35 Mondays, 21 from 04-07). Ideas 154, variants 409.
+09-04 evening: idea 155 NP (night position filter, from the 08-11 losers review) KILLED AS A REPEAT of NC at the count (85% overlap); no run. Ideas 155, variants 409.
+
+## 09-04 evening (coach: replay + one rule earns Mon 09-07): replay of A2's 11 worst paper days (journal/2015-09-04-replay-11-worst-paper-days.md)
+11 of 11 VALID (tie at 10th place, all 11 replayed); lessons: [A] against the last 18 hours 6, [B] pre-bell spike 4, [C] stop then back 4.
+Rule from [A] = idea 156 TA: X = 40 by counts, 27 skips, 59% NA overlap; R = engine A2 after costs 1.0 + 0.1: skipped +0.107R vs kept
++0.160R, sign flips at 04-07, p 0.41 -> KILLED (K1 K2 K4). Ideas 156, variants 412. My eye's lesson fitted 3 of its own 6 cases.
